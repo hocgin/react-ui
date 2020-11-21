@@ -17,6 +17,7 @@
     "**/*.test.ts",
     "**/*.e2e.ts",
     "**/fixtures/**",
-    "**/test/**"
+    "**/test/**",
+    ".github/**"
   ]
 }
