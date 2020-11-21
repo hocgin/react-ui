@@ -1,0 +1,42 @@
+{
+  "name": "@hocgin/gin-tpl",
+  "version": "1.0.0",
+  "keywords": [
+    "hocgin",
+    "gin"
+  ],
+  "sideEffects": [
+    "*.less"
+  ],
+  "bugs": "http://github.com/hocgin/gin-components/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hocgin/gin-components"
+  },
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
+  "files": [
+    "lib",
+    "es",
+    "dist"
+  ],
+  "browserslist": [
+    "last 2 versions",
+    "Firefox ESR",
+    "> 1%",
+    "ie >= 11"
+  ],
+  "dependencies": {
+    "classnames": "^2.2.6"
+  },
+  "peerDependencies": {
+    "react": "^16.x"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "authors": [
+    "hocgin <hocgin@gmail.com> (https://github.com/hocgin)"
+  ]
+}
