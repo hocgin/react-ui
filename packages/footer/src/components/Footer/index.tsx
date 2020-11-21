@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import styles from './index.less';
 
@@ -97,12 +96,6 @@ class Index extends React.Component {
     );
   }
 
-  static defaultProps = {
-    children: null,
-  };
-  static propTypes = {
-    children: PropTypes.string,
-  };
 }
 
 export default Index;

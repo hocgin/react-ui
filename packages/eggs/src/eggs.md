@@ -1,15 +1,15 @@
 ---
-title: GinFooter
+title: GinEggs
 nav:
   title: 组件
   path: /components
 group:
   path: /
 ---
-
-# GinFooter
+# GinEggs
 
 这是一个组件的基础描述
+
 
 ## 代码演示
 
@@ -17,4 +17,4 @@ group:
 
 Demo:
 
-<code src="./demos/Footer.tsx"  background="#f0f2f5" />
+<code src="./demos/Eggs.tsx"  background="#f0f2f5" />
