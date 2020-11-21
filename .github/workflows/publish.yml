@@ -22,6 +22,6 @@ jobs:
           node-version: ${{ matrix.node_version }}
 
       - name: Publish package
-        run: npm install && lerna publish --canary --yes
+        run: npm install && npm install --g lerna && lerna publish --canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
