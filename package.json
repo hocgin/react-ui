@@ -7,6 +7,7 @@
     "bootstrap": "node ./scripts/bootstrap.js",
     "start": "dumi dev",
     "build": "dumi build",
+    "update:deps": "yarn upgrade-interactive --latest",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
   },
   "gitHooks": {
@@ -21,10 +22,12 @@
     ]
   },
   "devDependencies": {
+    "@umijs/utils": "^3.2.11",
     "dumi": "^1.0.9",
+    "lerna": "^3.22.1",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
-    "yorkie": "^2.0.0",
-    "@umijs/utils": "^3.2.11"
-  }
+    "yorkie": "^2.0.0"
+  },
+  "name": "gin-components"
 }
