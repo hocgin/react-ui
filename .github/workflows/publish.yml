@@ -35,4 +35,4 @@ jobs:
         run: |
           npm install
           npm install --g lerna
-          lerna publish --yes --message "chore: release new versions"
+          lerna publish --npm-tag=next --yes --canary --message "chore: release new versions"
