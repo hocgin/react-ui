@@ -12,6 +12,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
 
+      - run: yarn
+
       - name: Publish package
           run: lerna publish --yes
           env:
