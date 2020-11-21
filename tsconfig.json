@@ -12,7 +12,8 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
-      "@hocgin/gin-tpl": ["./packages/tpl/src/index.tsx"]
+      "@hocgin/gin-tpl": ["./packages/tpl/src/index.tsx"],
+      "@hocgin/gin-footer": ["./packages/footer/src/index.tsx"]
     },
     "allowSyntheticDefaultImports": true
   },

@@ -1,9 +1,9 @@
 ---
 nav:
-  title: Getting Started
+  title: 快速上手
   order: 1
 ---
 
-# Getting Started
+# 快速上手
 
-Balabala...
+> 并没有..
