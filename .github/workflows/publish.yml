@@ -1,0 +1,21 @@
+name: Deploy CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+
+      - name: Publish package
+          run: |
+            lerna publish --yes --message 'chore: release new versions'
+          env:
+            GH_TOKEN: ${{ secrets.GITHUB_PAT }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_PAT }}
+            NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
