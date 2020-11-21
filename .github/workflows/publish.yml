@@ -32,4 +32,7 @@ jobs:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
       - name: Publish package
-        run: npm install && npm install --g lerna && lerna publish --yes
+        run: |
+          npm install
+          npm install --g lerna
+          lerna publish --yes --message "chore: release new versions"
