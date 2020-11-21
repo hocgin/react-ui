@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@umijs/utils": "^3.2.11",
+    "@types/classnames": "^2.2.7",
     "dumi": "^1.0.9",
     "lerna": "^3.22.1",
     "lint-staged": "^10.0.7",

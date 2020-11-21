@@ -34,4 +34,5 @@ export default defineConfig({
       path: 'https://github.com/hocgin/gin-components',
     },
   ],
+  exportStatic: {},
 });
