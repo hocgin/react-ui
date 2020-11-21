@@ -16,6 +16,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE_BRANCH: main
           BRANCH: gh-pages
           FOLDER: dist
           BUILD_SCRIPT: yarn && npm run build
