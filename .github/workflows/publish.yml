@@ -21,10 +21,7 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: Yarn
-        run: yarn
-
       - name: Publish package
-        run: lerna publish --canary --yes
+        run: npm install && lerna publish --canary --yes
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
