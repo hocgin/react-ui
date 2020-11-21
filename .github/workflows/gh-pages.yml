@@ -17,5 +17,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: 'dist/'
+          FOLDER: dist
           BUILD_SCRIPT: yarn && npm run build
