@@ -14,7 +14,9 @@
       "@@/*": ["src/.umi/*"],
       "@hocgin/gin-tpl": ["./packages/tpl/src/index.tsx"],
       "@hocgin/gin-footer": ["./packages/footer/src/index.tsx"],
-      "@hocgin/gin-eggs": ["./packages/footer/src/index.tsx"]
+      "@hocgin/gin-eggs": ["./packages/footer/src/index.tsx"],
+      "@hocgin/gin-featbar": ["./packages/featbar/src/index.tsx"],
+      "@hocgin/gin-logo": ["./packages/logo/src/index.tsx"]
     },
     "allowSyntheticDefaultImports": true
   },
