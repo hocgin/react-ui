@@ -77,7 +77,7 @@ class Index extends React.Component<FeatbarProps, FeatbarState> {
   };
   state = {
     visible: true,
-    open: true,
+    open: false,
   };
 
   render() {
