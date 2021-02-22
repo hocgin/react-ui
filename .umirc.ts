@@ -26,6 +26,7 @@ export default defineConfig({
   mode: 'site',
   // more config: https://d.umijs.org/config
   alias,
+  logo: 'http://cdn.hocgin.top/uPic/mp_logo.png',
   resolve: { includes: [...tailPkgList, 'docs'] },
   navs: [
     null,
