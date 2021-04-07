@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"
+    />
+    <link rel="stylesheet" href="/umi.css" />
+    <script>
+      window.routerBase = "/";
+    </script>
+    <script>
+      //! umi version: 3.4.8
+    </script>
+    <script>
+      !(function () {
+        var e = localStorage.getItem("dumi:prefers-color"),
+          t = window.matchMedia("(prefers-color-scheme: dark)").matches,
+          r = ["light", "dark", "auto"];
+        document.documentElement.setAttribute(
+          "data-prefers-color",
+          e === r[2] ? (t ? r[1] : r[0]) : r.includes(e) ? e : r[0]
+        );
+      })();
+    </script>
+    <title>Featbar - 功能栏</title>
+  </head>
+  <body>
+    <div id="root"><div class="__dumi-default-layout" data-route="/components/featbar" data-show-sidemenu="true" data-show-slugs="true" data-site-mode="true" data-gapless="false"><div class="__dumi-default-navbar" data-mode="site"><button class="__dumi-default-navbar-toggle"></button><a class="__dumi-default-navbar-logo" style="background-image:url(&#x27;http://cdn.hocgin.top/uPic/mp_logo.png&#x27;)" href="/">Gin 组件库</a><nav><div class="__dumi-default-search"><input type="search" class="__dumi-default-search-input" value=""/><ul></ul></div><span><a href="/getting-started">快速上手</a></span><span><a href="/help">帮助</a></span><span><a aria-current="page" class="active" href="/components">组件</a></span><span><a target="_blank" rel="noopener noreferrer" href="https://github.com/hocgin/gin-components">GitHub<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="__dumi-default-external-link-icon"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></span></nav></div><div class="__dumi-default-menu" data-mode="site"><div class="__dumi-default-menu-inner"><div class="__dumi-default-menu-header"><a class="__dumi-default-menu-logo" style="background-image:url(&#x27;http://cdn.hocgin.top/uPic/mp_logo.png&#x27;)" href="/"></a><h1>Gin 组件库</h1><p></p></div><div class="__dumi-default-menu-mobile-area"><ul class="__dumi-default-menu-nav-list"><li><a href="/getting-started">快速上手</a></li><li><a href="/help">帮助</a></li><li><a aria-current="page" class="active" href="/components">组件</a></li><li><a target="_blank" rel="noopener noreferrer" href="https://github.com/hocgin/gin-components">GitHub<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="__dumi-default-external-link-icon"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></li></ul></div><ul class="__dumi-default-menu-list"><li><a aria-current="page" class="active" href="/components/"></a><ul><li><a href="/components/eggs"><span>GinEggs</span></a></li><li><a aria-current="page" class="active" href="/components/featbar"><span>Featbar - 功能栏</span></a></li><li><a href="/components/footer"><span>GinFooter</span></a></li><li><a href="/components/logo"><span>Logo - LOGO</span></a></li><li><a href="/components/snow"><span>GinSnow</span></a></li><li><a href="/components/sponsor"><span>Sponsor - 赞助</span></a></li><li><a href="/components/tpl"><span>Tpl - 模版文件</span></a></li></ul></li></ul></div></div><ul role="slug-list" class="__dumi-default-layout-toc"><li title="代码演示" data-depth="2"><a href="/components/featbar#代码演示"><span>代码演示</span></a></li><li title="基础用法" data-depth="3"><a href="/components/featbar#基础用法"><span>基础用法</span></a></li></ul><div class="__dumi-default-layout-content"><div class="markdown"><h1 id="featbar---功能栏"><a aria-hidden="true" tabindex="-1" href="/components/featbar#featbar---功能栏"><span class="icon icon-link"></span></a>Featbar - 功能栏</h1><p>这是一个组件的基础描述</p><h2 id="代码演示"><a aria-hidden="true" tabindex="-1" href="/components/featbar#代码演示"><span class="icon icon-link"></span></a>代码演示</h2><h3 id="基础用法"><a aria-hidden="true" tabindex="-1" href="/components/featbar#基础用法"><span class="icon icon-link"></span></a>基础用法</h3><p>Demo:</p></div><div class="__dumi-default-previewer" id="featbar-featbar"><div class="__dumi-default-previewer-demo" style="background:#f0f2f5"><div>请看下面的按钮 👇<div class="featbar___2RvzM visible___zfcAy"><button class="toggle___HIKHT">+</button><div class="container___2dpFx"><div class="body___1R-X2"><div class="title___1cR8g">Hi, 你好! 👏</div><div class="lbl___1WQck"><div class="dil___3MQCj"><div><a href="https://www.yuque.com/gin/topics?label_ids=13074">建议反馈</a></div><div><a href="https://www.yuque.com/gin/changelog">更新日志</a></div><div><a href="https://www.yuque.com/gin/help">帮助文档</a></div><div><a href="http://projects.hocg.in">项目列表</a></div><div><a href="https://www.yuque.com/gin/feature">新功能</a></div><div><a href="mailto:hocgin@gmail.com">联系我</a></div></div></div></div><div class="footer___2f6XK"><div><div class="logo___1gmK8"><div class="heart___2VDX-"><svg role="img" viewBox="0 0 1205 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M602.435622 1023.943683C598.795944 1023.943683 595.131449 1022.95075 591.903993 1020.929079 47.519856 679.58468 5.380932 420.335577 2.465054 371.820963 0.82582 358.316528 0 345.270684 0 333.126883 0 149.439827 148.111451 0 330.140841 0 439.560038 0 541.067068 54.667767 602.306026 144.623896 663.56015 54.669143 765.093376 0 874.486378 0 1056.541963 0 1204.639627 149.439827 1204.639627 333.126883 1204.639627 344.838258 1203.955807 356.834703 1202.549572 369.803423 1200.340946 419.61257 1160.861473 675.83054 613.01826 1020.901537 609.792181 1022.938357 606.127689 1023.943683 602.435622 1023.943683ZM327.191473 242.513144 327.191473 236.782124C327.191473 211.325797 311.27445 189.453118 288.817787 180.695944 219.824883 195.615991 165.502589 249.936508 150.579953 318.928447 159.321083 341.343772 181.136255 357.308937 206.664661 357.308937L210.040872 357.308937C222.388624 302.009319 268.071576 257.714282 327.191473 242.513144L327.191473 242.513144Z"></path></svg></div> <a class="text___2khXE" href="https://hocg.in" target="_blank" rel="noopener noreferrer">HOCGIN</a></div></div><div class="btn___QuXlO">关闭</div></div></div></div></div></div><div class="__dumi-default-previewer-desc"></div><div class="__dumi-default-previewer-actions"><a target="_blank" rel="noopener noreferrer" href=""><button title="Open demo in new tab" class="__dumi-default-icon" role="open-demo" type="button"></button></a><span></span><button title="Copy source code" class="__dumi-default-icon" role="copy" data-status="ready"></button><button title="Toggle source code panel" class="__dumi-default-icon" role="source" type="button"></button></div></div><div class="__dumi-default-layout-footer-meta"><span data-updated-text="Last update: ">4/7/2021 13:19:07</span></div></div></div></div>
+	<script>
+  window.g_useSSR = true;
+  window.g_initialProps = {};
+	</script>
+
+    <script src="/umi.js"></script>
+  </body>
+</html>
