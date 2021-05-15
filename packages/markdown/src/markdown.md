@@ -1,5 +1,5 @@
 ---
-title: Snow - 雪花
+title: Markdown - 编辑器
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# GinSnow
+# Tpl - 模版文件
 
 这是一个组件的基础描述
 
@@ -17,4 +17,4 @@ group:
 
 Demo:
 
-<code src="./demos/Snow.tsx"  background="#f0f2f5" />
+<code src="./demos/Markdown.tsx"  background="#f0f2f5" />

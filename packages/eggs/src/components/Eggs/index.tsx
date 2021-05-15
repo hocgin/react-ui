@@ -9,8 +9,7 @@ interface EggsProps {
   doc?: boolean;
 }
 
-interface EggsState {
-}
+interface EggsState {}
 
 class Index extends Component<EggsProps, EggsState> {
   private static defaultProps = {
@@ -29,24 +28,20 @@ class Index extends Component<EggsProps, EggsState> {
   componentDidMount() {
     this.u = document.title;
     this.getOrCreateIcon();
-    window.addEventListener('visibilitychange', this.onChangeTitle);
+    window?.addEventListener('visibilitychange', this.onChangeTitle);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('visibilitychange', this.onChangeTitle);
+    window?.removeEventListener('visibilitychange', this.onChangeTitle);
   }
 
   render() {
     let { children } = this.props;
-    return (<>
-      {children}
-    </>);
+    return <>{children}</>;
   }
 
   onChangeTitle = () => {
-    const {
-      doc,
-    } = this.props;
+    const { doc } = this.props;
     if (doc) {
       let link = this.getOrCreateIcon();
       if (document.hidden) {
@@ -64,7 +59,7 @@ class Index extends Component<EggsProps, EggsState> {
   };
 
   getOrCreateIcon = () => {
-    let link: any = document.querySelector('link[rel*=\'icon\']');
+    let link: any = document.querySelector("link[rel*='icon']");
     if (link === null) {
       link = document.createElement('link');
       link.type = 'image/x-icon';
@@ -80,13 +75,33 @@ class Index extends Component<EggsProps, EggsState> {
    */
   egg1 = () => {
     let hours = [
-      '🕐', '🕑', '🕒', '🕓', '🕔', '🕕', '🕖', '🕗',
-      '🕘', '🕙', '🕚', '🕛', '🕜', '🕝', '🕞', '🕟',
-      '🕠', '🕡', '🕢', '🕣', '🕤', '🕥', '🕦', '🕧',
+      '🕐',
+      '🕑',
+      '🕒',
+      '🕓',
+      '🕔',
+      '🕕',
+      '🕖',
+      '🕗',
+      '🕘',
+      '🕙',
+      '🕚',
+      '🕛',
+      '🕜',
+      '🕝',
+      '🕞',
+      '🕟',
+      '🕠',
+      '🕡',
+      '🕢',
+      '🕣',
+      '🕤',
+      '🕥',
+      '🕦',
+      '🕧',
     ];
     let date = new Date();
-    let location = window.location;
-
+    let location = window?.location;
 
     let text = `${hours[date.getHours()]} ${date}
    _                     _
@@ -95,7 +110,9 @@ class Index extends Component<EggsProps, EggsState> {
   | | | | (_) | (_| (_| | | | | |
   |_| |_|\\___/ \\___\\__, |_|_| |_|
                    |___/
->> ${location.protocol}//${location.hostname}${location.port ? `:${location.port}` : ''}`;
+>> ${location.protocol}//${location.hostname}${
+      location.port ? `:${location.port}` : ''
+    }`;
     let commentEl = document.createComment(text);
     document.insertBefore(commentEl, document.documentElement);
   };
@@ -104,9 +121,11 @@ class Index extends Component<EggsProps, EggsState> {
     let { csl } = this.props;
 
     if (csl) {
-      console.log('\n %c HOCGIN %c https://hocg.in \n\n',
+      console.log(
+        '\n %c HOCGIN %c https://hocg.in \n\n',
         'color: #fff; background: #030307; padding:5px 0;',
-        'background: #fadfa3; padding:5px 0;');
+        'background: #fadfa3; padding:5px 0;',
+      );
     }
   };
 }

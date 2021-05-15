@@ -1,5 +1,5 @@
 ---
-title: GinFooter
+title: Footer - 底部
 nav:
   title: 组件
   path: /components

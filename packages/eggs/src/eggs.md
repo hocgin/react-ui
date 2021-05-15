@@ -1,15 +1,15 @@
 ---
-title: GinEggs
+title: Eggs - 彩蛋
 nav:
   title: 组件
   path: /components
 group:
   path: /
 ---
+
 # GinEggs
 
 这是一个组件的基础描述
-
 
 ## 代码演示
 
