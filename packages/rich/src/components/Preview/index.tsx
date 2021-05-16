@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import 'braft-extensions/dist/code-highlighter.css';
 import styles from './index.less';
 
 interface EditorProps {

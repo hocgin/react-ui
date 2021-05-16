@@ -35,6 +35,8 @@
     "access": "public"
   },
   "dependencies": {
-    "braft-editor": "^2.3.9"
+    "braft-editor": "^2.3.9",
+    "braft-extensions": "^0.1.1",
+    "draft-js-prism": "^1.0.6"
   }
 }
