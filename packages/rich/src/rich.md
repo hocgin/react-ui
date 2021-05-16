@@ -1,15 +1,15 @@
 ---
-title: Markdown - .md 编辑器
+title: Rich - 富文本编辑器
 nav:
   title: 组件
   path: /components
 group:
   path: /
 ---
+# Rich
 
-# Markdown
+基于 [BRAFT EDITOR](https://braft.margox.cn/demos/basic)
 
-基于 [@uiw/react-md-editor](https://github.com/uiwjs/react-md-editor)
 
 ## 代码演示
 
@@ -18,7 +18,6 @@ group:
 Editor:
 
 <code src="./demos/Editor.tsx"  background="#f0f2f5" />
-
 
 Preview:
 

@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MDEditor from '@uiw/react-md-editor';
 import styles from './index.less';
 
 interface EditorProps {
@@ -24,8 +23,8 @@ class Index extends Component<EditorProps, EditorState> {
 
   render() {
     let { children } = this.props;
-    return <div className={styles.markdownPreview}>
-      <MDEditor.Markdown source={children} />
+    return <div className={styles.richPreview}>
+      <div dangerouslySetInnerHTML={{ __html: `${children}` }} />
     </div>;
   }
 

@@ -1,7 +1,7 @@
 {
-  "name": "@hocgin/gin-markdown",
+  "name": "@hocgin/gin-editor",
   "version": "1.0.0",
-  "description": "@hocgin/gin-markdown",
+  "description": "@hocgin/gin-editor",
   "module": "es/index.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -35,6 +35,6 @@
     "access": "public"
   },
   "dependencies": {
-    "@uiw/react-md-editor": "^3.0.8"
+    "braft-editor": "^2.3.9"
   }
 }

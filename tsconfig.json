@@ -13,6 +13,7 @@
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
       "@hocgin/gin-tpl": ["./packages/tpl/src/index.tsx"],
+      "@hocgin/gin-rich": ["./packages/rich/src/index.tsx"],
       "@hocgin/gin-markdown": ["./packages/markdown/src/index.tsx"],
       "@hocgin/gin-snow": ["./packages/snow/src/index.tsx"],
       "@hocgin/gin-footer": ["./packages/footer/src/index.tsx"],

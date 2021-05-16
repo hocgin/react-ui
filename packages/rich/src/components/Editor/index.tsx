@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import MDEditor from '@uiw/react-md-editor';
+import 'braft-editor/dist/index.css';
+import RichEditor from 'braft-editor';
 import styles from './index.less';
 
 interface EditorProps {
-  children?: string;
+  value?: string;
+  onChange?: (value?: string) => void;
 }
 
 interface EditorState {
@@ -23,9 +25,9 @@ class Index extends Component<EditorProps, EditorState> {
   }
 
   render() {
-    let { children } = this.props;
-    return <div className={styles.markdownPreview}>
-      <MDEditor.Markdown source={children} />
+    let { value, onChange } = this.props;
+    return <div className={styles.rich}>
+      <RichEditor value={RichEditor.createEditorState(`${value}`)} onChange={onChange} />
     </div>;
   }
 

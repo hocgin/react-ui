@@ -2,9 +2,7 @@ import React from 'react';
 import Editor from './components/Editor';
 import Preview from './components/Preview';
 
-const Markdown = {
+export default {
   Editor: Editor,
   Preview: Preview,
 };
-
-export default Markdown;
