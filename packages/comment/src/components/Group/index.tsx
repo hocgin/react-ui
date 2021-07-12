@@ -33,11 +33,16 @@ class Index extends Component<GroupProps, GroupState> {
     return (
       <div className={classNames(styles.commentGroup)}>
         {' '}
-        Group
-        {dataSource?.map((item, index) => {
-          let key = (rowKey && rowKey(item)) || `comment-item-${index}`;
-          return <div key={key}>{renderItem && renderItem(item)}</div>;
-        })}
+        <ul className={styles.listItems}>
+          {dataSource?.map((item, index) => {
+            let key = (rowKey && rowKey(item)) || `comment-item-${index}`;
+            return (
+              <li className={styles.listItem}>
+                <div key={key}>{renderItem && renderItem(item)}</div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }
