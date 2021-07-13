@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-editor",
-  "version": "1.0.0",
+  "version": "3.0.2",
   "description": "@hocgin/gin-editor",
   "module": "es/index.js",
   "main": "lib/index.js",
