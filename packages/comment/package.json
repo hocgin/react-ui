@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-comment",
-  "version": "3.0.8-alpha.0+575f1e3",
+  "version": "3.0.8",
   "description": "@hocgin/gin-comment",
   "module": "es/index.js",
   "main": "lib/index.js",
