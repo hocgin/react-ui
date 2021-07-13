@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-markdown",
-  "version": "3.0.7",
+  "version": "3.0.8-alpha.0+575f1e3",
   "description": "@hocgin/gin-markdown",
   "module": "es/index.js",
   "main": "lib/index.js",
@@ -36,5 +36,6 @@
   },
   "dependencies": {
     "@uiw/react-md-editor": "^3.0.8"
-  }
+  },
+  "gitHead": "575f1e383bcf9a70dbfa8b6e4244fae62a612abf"
 }
