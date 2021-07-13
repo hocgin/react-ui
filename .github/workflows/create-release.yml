@@ -1,7 +1,7 @@
-name: create release
+name: Create Release
 on:
   release:
-    types: [published]
+    types: [ published ]
     branches:
       - main
 
