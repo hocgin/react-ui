@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-comment",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "description": "@hocgin/gin-comment",
   "module": "es/index.js",
   "main": "lib/index.js",
@@ -37,5 +37,5 @@
   "dependencies": {
     "antd": "^4.15.5"
   },
-  "gitHead": "421eca805b2207890405026ac27ed67ae316727a"
+  "gitHead": "3660e61db099f180be9205f67111e24cdbfe2b74"
 }

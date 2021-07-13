@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-tpl",
-  "version": "3.0.10",
+  "version": "3.0.11",
   "keywords": [
     "hocgin",
     "gin"
@@ -39,5 +39,5 @@
   "authors": [
     "hocgin <hocgin@gmail.com> (https://github.com/hocgin)"
   ],
-  "gitHead": "421eca805b2207890405026ac27ed67ae316727a"
+  "gitHead": "3660e61db099f180be9205f67111e24cdbfe2b74"
 }
