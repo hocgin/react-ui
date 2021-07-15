@@ -1,14 +1,16 @@
 {
   "name": "gin-components",
-  "private": true,
+  "private": false,
   "workspaces": [
     "packages/*"
   ],
   "scripts": {
     "bootstrap": "node ./scripts/bootstrap.js",
     "createRelease": "node ./scripts/createRelease.js",
-    "start": "dumi dev",
-    "build": "dumi build",
+    "start:doc": "dumi dev",
+    "build:doc": "dumi build",
+    "clean": "lerna clean --yes",
+    "build": "lerna run build",
     "update:deps": "yarn upgrade-interactive --latest",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
   },
@@ -23,15 +25,21 @@
       "prettier --parser=typescript --write"
     ]
   },
+  "dependencies": {
+    "react": "^16.x"
+  },
   "devDependencies": {
-    "@umijs/utils": "^3.2.11",
     "@types/classnames": "^2.2.7",
+    "@umijs/utils": "^3.2.11",
     "dumi": "^1.0.9",
+    "father-build": "^1.17.2",
     "github": "^9.2.0",
     "lerna": "^3.22.1",
     "lint-staged": "^10.0.7",
     "prettier": "^1.19.1",
-    "yorkie": "^2.0.0",
-    "typescript": "^4.1.2"
-  }
+    "rollup-plugin-commonjs": "^10.1.0",
+    "typescript": "^4.1.2",
+    "yorkie": "^2.0.0"
+  },
+  "version": "0.0.0"
 }

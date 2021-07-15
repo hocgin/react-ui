@@ -19,3 +19,7 @@
 .env.local
 
 .idea/
+lib/
+es/
+dist/
+node_modules/

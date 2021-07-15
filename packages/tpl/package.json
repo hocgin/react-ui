@@ -18,8 +18,7 @@
   "types": "lib/index.d.ts",
   "files": [
     "lib",
-    "es",
-    "dist"
+    "es"
   ],
   "browserslist": [
     "last 2 versions",
@@ -31,7 +30,8 @@
     "classnames": "^2.2.6"
   },
   "peerDependencies": {
-    "react": "^16.x"
+    "react": "^16.x",
+    "umi": "3.x"
   },
   "publishConfig": {
     "access": "public"

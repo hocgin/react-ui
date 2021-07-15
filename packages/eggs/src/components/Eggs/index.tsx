@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import styles from './index.less';
+// @ts-ignore
 import failure from '../../assets/failure.ico';
+// @ts-ignore
 import favicon from '../../assets/favicon.ico';
 
 interface EggsProps {
@@ -9,7 +10,8 @@ interface EggsProps {
   doc?: boolean;
 }
 
-interface EggsState {}
+interface EggsState {
+}
 
 class Index extends Component<EggsProps, EggsState> {
   private static defaultProps = {
@@ -59,7 +61,7 @@ class Index extends Component<EggsProps, EggsState> {
   };
 
   getOrCreateIcon = () => {
-    let link: any = document.querySelector("link[rel*='icon']");
+    let link: any = document.querySelector('link[rel*=\'icon\']');
     if (link === null) {
       link = document.createElement('link');
       link.type = 'image/x-icon';

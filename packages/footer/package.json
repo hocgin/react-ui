@@ -7,8 +7,6 @@
   "types": "lib/index.d.ts",
   "files": [
     "lib",
-    "src",
-    "dist",
     "es"
   ],
   "repository": {
@@ -32,6 +30,7 @@
     "classnames": "^2.2.6"
   },
   "peerDependencies": {
+    "react": "^16.x",
     "umi": "3.x"
   },
   "publishConfig": {

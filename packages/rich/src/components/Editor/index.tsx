@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import 'braft-editor/dist/index.css';
 import 'braft-extensions/dist/code-highlighter.css';
 import 'braft-extensions/dist/table.css';
+// @ts-ignore
 import CodeHighlighter from 'braft-extensions/dist/code-highlighter';
+// @ts-ignore
 import Table from 'braft-extensions/dist/table';
+// @ts-ignore
 import Markdown from 'braft-extensions/dist/markdown';
 import RichEditor from 'braft-editor';
 import styles from './index.less';

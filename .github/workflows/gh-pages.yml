@@ -13,7 +13,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - run: |
-          yarn && npm run build
+          yarn && npm run build:doc
 
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
