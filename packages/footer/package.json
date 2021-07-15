@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-footer",
-  "version": "3.0.12",
+  "version": "3.0.13",
   "description": "@hocgin/gin-footer",
   "module": "es/index.js",
   "main": "lib/index.js",
