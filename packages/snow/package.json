@@ -1,13 +1,12 @@
 {
   "name": "@hocgin/gin-snow",
-  "version": "3.0.18",
+  "version": "3.0.19",
   "description": "@hocgin/gin-snow",
   "module": "es/index.js",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "files": [
     "lib",
-
     "dist",
     "es"
   ],
