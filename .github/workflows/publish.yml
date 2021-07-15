@@ -46,4 +46,4 @@ jobs:
           npm install
           npm install --g lerna
           npm run build
-          lerna publish --npm-tag=latest --cd-version=patch --canary '--force-publish=*' --yes --message "chore: release new versions"
+          lerna publish --npm-tag=latest --cd-version=patch '--force-publish=*' --yes --message "chore: release new versions"

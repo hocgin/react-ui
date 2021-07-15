@@ -11,7 +11,7 @@
     "build:doc": "dumi build",
     "clean": "lerna clean --yes",
     "build": "lerna run build",
-    "update:deps": "yarn upgrade-interactive --latest",
+    "update:deps": "yarn upgrade-interactive -m run bu-latest",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
   },
   "gitHooks": {
