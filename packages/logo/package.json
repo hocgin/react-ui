@@ -7,7 +7,7 @@
   "types": "lib/index.d.ts",
   "files": [
     "lib",
-    "src",
+
     "dist",
     "es"
   ],
