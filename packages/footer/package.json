@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-footer",
-  "version": "3.0.17",
+  "version": "3.0.18",
   "description": "@hocgin/gin-footer",
   "module": "es/index.js",
   "main": "lib/index.js",
@@ -29,8 +29,8 @@
     "hocgin <hocgin@gmail.com> (https://github.com/hocgin)"
   ],
   "dependencies": {
-    "classnames": "^2.2.6",
-    "@hocgin/gin-logo": "latest"
+    "@hocgin/gin-logo": "latest",
+    "classnames": "^2.2.6"
   },
   "peerDependencies": {
     "react": "^16.x",
