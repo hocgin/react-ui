@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-// @ts-ignore
-import failure from '../../assets/failure.ico';
-// @ts-ignore
-import favicon from '../../assets/favicon.ico';
+
+const failure: string = 'http://cdn.hocgin.top/file/failure.ico';
+const favicon: string = 'http://cdn.hocgin.top/file/favicon.ico';
 
 interface EggsProps {
   children?: string;

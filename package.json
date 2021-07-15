@@ -29,6 +29,7 @@
     "react": "^16.x"
   },
   "devDependencies": {
+    "@rollup/plugin-image": "^2.0.6",
     "@types/classnames": "^2.2.7",
     "@umijs/utils": "^3.2.11",
     "dumi": "^1.0.9",
