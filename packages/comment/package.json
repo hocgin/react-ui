@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-comment",
-  "version": "3.0.11",
+  "version": "3.0.12",
   "description": "@hocgin/gin-comment",
   "module": "es/index.js",
   "main": "lib/index.js",
@@ -34,8 +34,8 @@
     "access": "public"
   },
   "dependencies": {
-    "classnames": "^2.3.1",
-    "antd": "^4.15.5"
+    "antd": "^4.15.5",
+    "classnames": "^2.3.1"
   },
   "gitHead": "3660e61db099f180be9205f67111e24cdbfe2b74"
 }
