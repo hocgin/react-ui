@@ -45,5 +45,6 @@ jobs:
         run: |
           npm install
           npm install --g lerna
+          npm install --g father
           npm run build
           lerna publish --npm-tag=latest --cd-version=patch '--force-publish=*' --yes --message "chore: release new versions"
