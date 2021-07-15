@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-eggs",
-  "version": "3.0.16",
+  "version": "3.0.17",
   "description": "@hocgin/gin-eggs",
   "module": "es/index.js",
   "main": "lib/index.js",
