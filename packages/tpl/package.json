@@ -6,7 +6,8 @@
     "gin"
   ],
   "sideEffects": [
-    "*.less"
+    "*.less",
+    "*.css"
   ],
   "bugs": "http://github.com/hocgin/gin-components/issues",
   "repository": {
