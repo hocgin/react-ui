@@ -5,7 +5,8 @@ export default {
   disableTypeCheck: true,
   cjs: { type: 'babel', lazy: true },
   esm: { type: 'babel' },
-  // lessInBabelMode: true,
+  extractCSS: false,
+  lessInBabelMode: true,
   extraRollupPlugins: [image()],
   // extraBabelPlugins: [
   //   ['babel-plugin-import', {
