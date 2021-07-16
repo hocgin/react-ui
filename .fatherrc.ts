@@ -5,5 +5,16 @@ export default {
   disableTypeCheck: true,
   cjs: { type: 'babel', lazy: true },
   esm: { type: 'babel' },
+  cssModules: true,
+  extractCSS: true,
+  lessInBabelMode: true,
+  runtimeHelpers: true,
   extraRollupPlugins: [image()],
+  // extraBabelPlugins: [
+  //   ['babel-plugin-import', {
+  //     libraryName: 'antd',
+  //     libraryDirectory: 'es',
+  //     style: true,
+  //   }],
+  // ],
 };
