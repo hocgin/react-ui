@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-snow",
-  "version": "3.0.22",
+  "version": "3.0.23",
   "description": "@hocgin/gin-snow",
   "module": "es/index.js",
   "main": "lib/index.js",
