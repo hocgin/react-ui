@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/gin-sponsor",
-  "version": "3.0.26",
+  "version": "3.0.27",
   "description": "@hocgin/gin-sponsor",
   "module": "es/index.js",
   "main": "lib/index.js",
