@@ -8,7 +8,7 @@ export default {
   cssModules: true,
   extractCSS: true,
   lessInBabelMode: true,
-  runtimeHelpers: true,
+  // runtimeHelpers: true,
   extraRollupPlugins: [image()],
   // extraBabelPlugins: [
   //   ['babel-plugin-import', {
