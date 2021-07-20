@@ -10,10 +10,7 @@
     "dist",
     "es"
   ],
-  "sideEffects": [
-    "*.less",
-    "*.css"
-  ],
+  "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/hocgin/gin-components"

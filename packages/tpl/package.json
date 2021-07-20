@@ -5,10 +5,7 @@
     "hocgin",
     "gin"
   ],
-  "sideEffects": [
-    "*.less",
-    "*.css"
-  ],
+  "sideEffects": false,
   "bugs": "http://github.com/hocgin/gin-components/issues",
   "repository": {
     "type": "git",
