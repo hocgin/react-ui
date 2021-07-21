@@ -1,8 +1,18 @@
 // @ts-ignore
-
 export default {
   disableTypeCheck: true,
-  esm: 'babel',
-  cjs: 'babel',
+  cjs: { type: 'babel', lazy: true },
+  esm: {
+    type: 'babel',
+    importLibToEs: true,
+  },
   lessInBabelMode: true,
+  extraBabelPlugins: [
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        corejs: 3,
+      },
+    ],
+  ],
 };

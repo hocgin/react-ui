@@ -35,6 +35,7 @@
     "access": "public"
   },
   "dependencies": {
+    "@babel/runtime-corejs3": "^7.14.8",
     "@uiw/react-md-editor": "^3.0.8"
   },
   "gitHead": "15fc9421d3b2e6ca17edcb2395404a93705a3e62"

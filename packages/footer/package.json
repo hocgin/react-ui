@@ -29,6 +29,7 @@
     "hocgin <hocgin@gmail.com> (https://github.com/hocgin)"
   ],
   "dependencies": {
+    "@babel/runtime-corejs3": "^7.14.8",
     "@hocgin/gin-logo": "latest",
     "classnames": "^2.2.6"
   },

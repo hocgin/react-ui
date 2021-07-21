@@ -26,6 +26,7 @@
     "ie >= 11"
   ],
   "dependencies": {
+    "@babel/runtime-corejs3": "^7.14.8",
     "classnames": "^2.2.6"
   },
   "peerDependencies": {

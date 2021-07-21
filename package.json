@@ -10,7 +10,7 @@
     "start:doc": "dumi dev",
     "build:doc": "dumi build",
     "clean": "lerna clean --yes",
-    "build": "father build",
+    "build": "father-build",
     "update:deps": "yarn upgrade-interactive -m run bu-latest",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
   },

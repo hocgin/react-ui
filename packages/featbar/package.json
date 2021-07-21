@@ -32,6 +32,7 @@
     "umi": "3.x"
   },
   "dependencies": {
+    "@babel/runtime-corejs3": "^7.14.8",
     "classnames": "^2.3.1"
   },
   "publishConfig": {
