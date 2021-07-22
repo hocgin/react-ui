@@ -12,18 +12,19 @@
     "paths": {
       "@/*": ["src/*"],
       "@@/*": ["src/.umi/*"],
-      "@hocgin/gin-tpl": ["./packages/tpl/src/index.tsx"],
-      "@hocgin/gin-rich": ["./packages/rich/src/index.tsx"],
-      "@hocgin/gin-comment": ["./packages/comment/src/index.tsx"],
-      "@hocgin/gin-markdown": ["./packages/markdown/src/index.tsx"],
-      "@hocgin/gin-snow": ["./packages/snow/src/index.tsx"],
-      "@hocgin/gin-footer": ["./packages/footer/src/index.tsx"],
-      "@hocgin/gin-eggs": ["./packages/footer/src/index.tsx"],
-      "@hocgin/gin-featbar": ["./packages/featbar/src/index.tsx"],
-      "@hocgin/gin-sponsor": ["./packages/sponsor/src/index.tsx"],
-      "@hocgin/gin-logo": ["./packages/logo/src/index.tsx"]
+      "@hocgin/ui": ["src/index.tsx"]
     },
     "allowSyntheticDefaultImports": true
   },
-  "exclude": ["node_modules", "dist", "typings"]
+  "exclude": [
+    "node_modules",
+    "lib",
+    "es",
+    "dist",
+    "typings",
+    "**/__test__",
+    "test",
+    "docs",
+    "tests"
+  ]
 }

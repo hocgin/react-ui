@@ -3,31 +3,29 @@ import chalk from 'chalk';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 
-const headPkgList: any[] = [];
-const pkgList = readdirSync(join(__dirname, 'packages')).filter(
-  (pkg: string) => pkg.charAt(0) !== '.' && !headPkgList.includes(pkg),
+const ignorePkgList: any[] = ['index.tsx'];
+const pkgList = readdirSync(join(__dirname, 'src')).filter(
+  (pkg: string) => pkg.charAt(0) !== '.' && !ignorePkgList.includes(pkg),
 );
-
-const alias = pkgList.reduce((pre: any, pkg: string) => {
-  pre[`@hocgin/gin-${pkg}`] = join(__dirname, 'packages', pkg, 'src');
-  return {
-    ...pre,
-  };
-}, {});
-
-console.log(`🌼 alias list \n${chalk.blue(Object.keys(alias).join('\n'))}`);
+let path = join(__dirname, 'src', 'index.tsx');
 
 const tailPkgList = pkgList
-  .map(path => [join('packages', path, 'src')])
+  .filter(
+    (pkg: string) => pkg.charAt(0) !== '.' && !ignorePkgList.includes(pkg),
+  )
+  .map((path) => [join('src', path)])
   .reduce((acc, val) => acc.concat(val), []);
 
+console.log(tailPkgList);
+
 export default defineConfig({
-  title: 'Gin 组件库',
+  title: 'HOCGIN x UI',
   mode: 'site',
+  alias: {
+    '@hocgin/ui': path,
+  },
   // more config: https://d.umijs.org/config
-  alias,
   logo: 'http://cdn.hocgin.top/uPic/mp_logo.png',
-  resolve: { includes: [...tailPkgList, 'docs'] },
   navs: [
     null,
     {
@@ -35,6 +33,7 @@ export default defineConfig({
       path: 'https://github.com/hocgin/gin-components',
     },
   ],
-  // ssr: {},
+  resolve: { includes: [...tailPkgList, 'docs'] },
+  ssr: {},
   exportStatic: {},
 });

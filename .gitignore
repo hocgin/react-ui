@@ -9,17 +9,17 @@
 
 # production
 /dist
+/docs-dist
 
 # misc
 .DS_Store
 
 # umi
-.umi/
+.umi
 .umi-production
+.umi-test
 .env.local
 
-.idea/
-lib/
-es/
-dist/
-node_modules/
+# ide
+/.vscode
+/.idea
