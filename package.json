@@ -1,6 +1,7 @@
 {
   "name": "@hocgin/ui",
-  "version": "4.0.0",
+  "version": "4.0.2",
+  "sideEffects": [".less", ".css"],
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",
@@ -15,6 +16,11 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "typings": "dist/index.d.ts",
+  "files": [
+    "lib",
+    "dist",
+    "es"
+  ],
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
