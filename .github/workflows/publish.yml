@@ -45,4 +45,4 @@ jobs:
       - name: Publish package
         run: |
           npm install
-          npm release
+          npm run release
