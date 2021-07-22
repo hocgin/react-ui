@@ -1,0 +1,28 @@
+.commentGroup {
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ebedf1;
+}
+
+.listItems {
+  margin: 0;
+  padding: 0;
+
+  .listItem {
+    padding: 0;
+    border-bottom: none;
+    list-style: none;
+    position: relative;
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 18px;
+      top: 40px;
+      bottom: 8px;
+      width: 0;
+      border-left: 1px dashed #e8e8e8;
+    }
+  }
+}
