@@ -1,19 +1,21 @@
 {
-  "name": "gin-components",
   "private": true,
-  "workspaces": [
-    "packages/*"
-  ],
+  "name": "@hocgin/ui",
+  "version": "4.0.0",
   "scripts": {
-    "bootstrap": "node ./scripts/bootstrap.js",
-    "createRelease": "node ./scripts/createRelease.js",
-    "start:doc": "dumi dev",
-    "build:doc": "dumi build",
-    "clean": "lerna clean --yes",
+    "start": "dumi dev",
+    "docs:build": "dumi build",
+    "docs:deploy": "gh-pages -d docs-dist",
     "build": "father-build",
-    "update:deps": "yarn upgrade-interactive -m run bu-latest",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
+    "deploy": "npm run docs:build && npm run docs:deploy",
+    "release": "npm run build && npm publish",
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
+    "test": "umi-test",
+    "test:coverage": "umi-test --coverage"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "typings": "dist/index.d.ts",
   "gitHooks": {
     "pre-commit": "lint-staged"
   },
@@ -26,21 +28,16 @@
     ]
   },
   "dependencies": {
-    "react": "^16.x"
+    "react": "^16.12.0"
   },
   "devDependencies": {
-    "@rollup/plugin-image": "^2.0.6",
-    "@types/classnames": "^2.2.7",
-    "@umijs/utils": "^3.2.11",
-    "dumi": "^1.0.34",
+    "@umijs/test": "^3.0.5",
+    "dumi": "^1.0.16",
     "father-build": "^1.17.2",
-    "github": "^9.2.0",
-    "lerna": "^3.22.1",
+    "gh-pages": "^3.0.0",
+    "lerna": "^4.0.0",
     "lint-staged": "^10.0.7",
-    "prettier": "^1.19.1",
-    "rollup-plugin-commonjs": "^10.1.0",
-    "typescript": "^4.1.2",
+    "prettier": "^2.2.1",
     "yorkie": "^2.0.0"
-  },
-  "version": "0.0.0"
+  }
 }
