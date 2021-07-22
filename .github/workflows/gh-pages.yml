@@ -14,7 +14,7 @@ jobs:
         uses: actions/checkout@master
       - run: |
           yarn
-          npm run build:doc
+          npm run docs:build
 
       - name: Build and Deploy
         uses: JamesIves/github-pages-deploy-action@3.7.1
