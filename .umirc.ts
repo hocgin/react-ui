@@ -34,6 +34,6 @@ export default defineConfig({
     },
   ],
   resolve: { includes: [...tailPkgList, 'docs'] },
-  // ssr: {},
+  ssr: {},
   exportStatic: {},
 });
