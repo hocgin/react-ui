@@ -1,4 +1,4 @@
-# gin-components
+# react-ui
 
 ## Getting Started
 
