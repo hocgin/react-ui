@@ -33,7 +33,7 @@ export default defineConfig({
       path: 'https://github.com/hocgin/react-ui',
     },
   ],
-  resolve: { includes: [...tailPkgList, 'docs'] },
+  resolve: { includes: ['docs', ...tailPkgList] },
   ssr: {},
   exportStatic: {},
   extraBabelPlugins: [

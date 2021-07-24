@@ -1,1 +1,0 @@
-# @hocgin/gin-tpl
