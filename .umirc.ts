@@ -30,10 +30,20 @@ export default defineConfig({
     null,
     {
       title: 'GitHub',
-      path: 'https://github.com/hocgin/gin-components',
+      path: 'https://github.com/hocgin/react-ui',
     },
   ],
-  resolve: { includes: [...tailPkgList, 'docs'] },
+  resolve: { includes: ['docs', ...tailPkgList] },
   ssr: {},
   exportStatic: {},
+  extraBabelPlugins: [
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
+  ],
 });

@@ -17,4 +17,4 @@ group:
 
 Demo:
 
-<code src="./demos/index.tsx"  background="#f0f2f5" />
+<code src="./demos/index.tsx"  />
