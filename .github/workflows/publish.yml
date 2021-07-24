@@ -3,8 +3,8 @@ name: Publish Package
 on:
   workflow_dispatch:
   push:
-    branches:
-      - main
+    tags:
+      - 'v*'
     paths-ignore:
       - '_docs/**'
       - '*.md'
