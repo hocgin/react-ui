@@ -71,7 +71,7 @@ class Index extends React.Component {
         <div className={styles.copytitle}>
           © 2013-2021{' '}
           <a href="http://www.hocgin.top/" target="_blank">
-            兔游工作室
+            土红色
           </a>{' '}
           |{' '}
           <a href="https://beian.miit.gov.cn/" target="_blank">
