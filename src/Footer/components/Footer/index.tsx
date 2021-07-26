@@ -69,9 +69,9 @@ class Index extends React.Component {
           <SocialLinks className={styles.links} />
         </div>
         <div className={styles.copytitle}>
-          © 2013-2021{' '}
+          © 2013-2021 |{' '}
           <a href="http://www.hocgin.top/" target="_blank">
-            土红色
+            🧱 红砖块
           </a>{' '}
           |{' '}
           <a href="https://beian.miit.gov.cn/" target="_blank">
