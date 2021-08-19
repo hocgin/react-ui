@@ -23,6 +23,7 @@ export default defineConfig({
   mode: 'site',
   alias: {
     '@hocgin/ui': path,
+    '~@/': 'src',
   },
   // more config: https://d.umijs.org/config
   logo: 'http://cdn.hocgin.top/uPic/mp_logo.png',
@@ -34,16 +35,13 @@ export default defineConfig({
     },
   ],
   resolve: { includes: ['docs', ...tailPkgList] },
-  ssr: {},
+  // ssr: {},
   exportStatic: {},
   extraBabelPlugins: [
-    [
-      'babel-plugin-import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: true,
-      },
-    ],
+    ['babel-plugin-import', {
+      libraryName: 'antd',
+      libraryDirectory: 'es',
+      style: true,
+    }],
   ],
 });
