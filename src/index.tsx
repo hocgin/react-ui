@@ -8,3 +8,4 @@ export { default as Markdown } from './Markdown';
 export { default as Featbar } from './Featbar';
 export { default as Eggs } from './Eggs';
 export { default as Footer } from './Footer';
+export { default as Header } from './Header';
