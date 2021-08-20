@@ -1,14 +1,17 @@
-@import '../../style/common.less';
+@import '/src/mixin.less';
 
 .featbar {
   position: fixed;
   width: 300px;
-  bottom: -220px;
+  bottom: -210px;
   font-size: 13px !important;
   right: 100px;
   display: none;
   z-index: 2147483640;
-  .mobile({right: 0; width: 100%;});
+  .mobile({
+    right: 0;
+    width: 100%;
+  });
 
   &.open {
     bottom: 0;
