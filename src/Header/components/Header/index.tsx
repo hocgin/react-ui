@@ -5,6 +5,7 @@ import styles from './index.less';
 
 interface LogoProps {
   menus?: any[];
+  className?: string | undefined;
 }
 
 interface LogoState {
@@ -21,8 +22,8 @@ class Index extends React.Component<LogoProps, LogoState> {
 
   render() {
     let { isOpenMenu } = this.state;
-    let { menus } = this.props;
-    return (<header className={styles.topHeader}>
+    let { menus, className } = this.props;
+    return (<header className={classnames(styles.topHeader, className)}>
       <a href='http://www.hocgin.top/' className={styles.logo}>HOCGIN<span className={styles.suffix}>
         <span className={styles.dot}>.</span>top</span></a>
       <div className={classnames(styles.toggle, { [styles.active]: isOpenMenu })}
