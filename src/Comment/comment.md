@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# Tpl - 模版文件
+# Comment
 
 这是一个组件的基础描述
 
