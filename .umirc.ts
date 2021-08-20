@@ -23,7 +23,6 @@ export default defineConfig({
   mode: 'site',
   alias: {
     '@hocgin/ui': path,
-    '~@/': 'src',
   },
   // more config: https://d.umijs.org/config
   logo: 'http://cdn.hocgin.top/uPic/mp_logo.png',
