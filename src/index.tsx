@@ -9,3 +9,4 @@ export { default as Featbar } from './Featbar';
 export { default as Eggs } from './Eggs';
 export { default as Footer } from './Footer';
 export { default as Header } from './Header';
+export { default as Money } from './Money';

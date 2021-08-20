@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# GinEggs
+# Eggs
 
 这是一个组件的基础描述
 

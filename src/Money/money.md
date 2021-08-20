@@ -1,5 +1,5 @@
 ---
-title: Footer - 底部
+title: Money - 金额
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# Footer
+# Money
 
 这是一个组件的基础描述
 

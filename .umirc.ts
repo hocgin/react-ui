@@ -35,7 +35,7 @@ export default defineConfig({
     },
   ],
   resolve: { includes: ['docs', ...tailPkgList] },
-  // ssr: {},
+  ssr: {},
   exportStatic: {},
   extraBabelPlugins: [
     ['babel-plugin-import', {
