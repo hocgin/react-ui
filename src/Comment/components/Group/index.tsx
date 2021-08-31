@@ -6,16 +6,25 @@ import Editor from '../Editor';
 import { Utils } from '@hocgin/ui';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Pagination, List, Skeleton, Affix, Avatar } from 'antd';
+import { DateFormat } from '@/Utils/format';
 
 // 加载下一页。分页子
 interface GroupProps {
+  // 请求头
   headers?: any;
+  // 请求路径
   url?: string;
+  // 每页数量
   size?: number;
+  // 默认请求体
   body?: any;
+  // 用户名
   author?: string;
+  // 用户头像
   avatar?: string;
+  // 是否登陆
   landed?: boolean;
+  // 默认提示语
   placeholder?: string;
 }
 
@@ -56,12 +65,12 @@ class Index extends Component<GroupProps, GroupState> {
         <List className={styles.comments} loading={loading}
               itemLayout='horizontal' header={`${total} 评论`} dataSource={dataSource}
               renderItem={(item: any) => (<List.Item>
-                <Comment className={styles.ske} title={item?.author?.title} href={item?.author?.href}
+                <Comment className={styles.ske} title={item?.author?.nickname} href={item?.author?.href}
                          content={`${item?.content}`} avatar={(<Avatar size={45} src={`${item?.author?.avatarUrl}`} />)}
                          id={item?.id} onChangeReply={this.onChangeReply.bind(this)} landed={landed}
                          onClickLike={this.onClickLike.bind(this)} onClickDisliked={this.onClickDisliked.bind(this)}
                          likes={item?.likes} disliked={item?.disliked} action={item?.action}
-                         datetime={`${item?.datetime}`}>
+                         datetime={`${DateFormat.defRelativeFromNow(item?.datetime)}`}>
                   {item?.hasReply && (<SubComments parentId={item?.id} url={this.url} headers={this.headers}
                                                    onClickLike={this.onClickLike.bind(this)}
                                                    onClickDisliked={this.onClickDisliked.bind(this)}
@@ -184,12 +193,13 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
       <List className={styles.subComments} loading={loading} loadMore={true}
             itemLayout='horizontal' dataSource={dataSource} renderItem={(item: any) => (<List.Item>
         <Skeleton avatar loading={item?.loading} active>
-          <Comment type='small' title={item?.author?.title} href={item?.author?.href}
+          <Comment type='small' title={item?.author?.nickname} href={item?.author?.href}
                    id={item?.id} onChangeReply={onChangeReply}
                    onClickDisliked={onClickDisliked} onClickLike={onClickLike} landed={landed}
-                   replyId={item?.replyId} replyAvatar={item?.replier?.avatarUrl} replyTitle={item?.replier?.title}
+                   replyId={item?.replyId} replyAvatar={item?.replier?.avatarUrl} replyTitle={item?.replier?.nickname}
                    content={<> {item?.content} </>} avatar={(<Avatar size={30} src={`${item?.author?.avatarUrl}`} />)}
-                   likes={item?.likes} disliked={item?.disliked} action={item?.action} datetime={`${item?.datetime}`} /></Skeleton>
+                   likes={item?.likes} disliked={item?.disliked} action={item?.action}
+                   datetime={`${DateFormat.defRelativeFromNow(item?.datetime)}`} /></Skeleton>
       </List.Item>)} />
       <Pagination className={styles.pagination} hideOnSinglePage size='small' total={total}
                   defaultCurrent={1} current={current}

@@ -34,7 +34,5 @@ let root = {
 // 子级评论 POST {url}/comment/1/_paging
 // 评论 POST {url}/comment
 // 点赞 POST {url}/comment/1/like
-// 点赞 POST {url}/comment/1/unlike
 // 倒赞 POST {url}/comment/1/dislike
-// 倒赞 POST {url}/comment/1/undislike
 // 举报 POST {url}/comment/1/report

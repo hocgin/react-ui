@@ -35,5 +35,5 @@ let dataSource = {
 
 
 export default () => {
-  return (<Comment.Group landed={true} url={'http://gx.com/test/xx/xx'} headers={{ ['X-Username']: 'hocgin' }} />);
+  return (<Comment.Group landed={true} url={'https://gx.com/test/xx/xx'} headers={{ ['X-Username']: 'hocgin' }} />);
 };

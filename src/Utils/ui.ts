@@ -1,12 +1,12 @@
 import { message } from 'antd';
 
-export class UiUtils {
+export class Ui {
   static isSuccess(result?: any) {
     return result && result.success;
   }
 
   showErrorMessageIfExits(result?: any) {
-    if (UiUtils.isSuccess(result)) {
+    if (Ui.isSuccess(result)) {
       return true;
     }
     console.debug('请求发生错误:', result);
