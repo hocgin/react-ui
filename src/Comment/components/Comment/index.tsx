@@ -9,7 +9,6 @@ import {
   LikeFilled,
   RetweetOutlined,
 } from '@ant-design/icons';
-import 'antd/dist/antd.css';
 
 interface CommentProps {
   // 评论的ID
@@ -38,9 +37,11 @@ interface CommentProps {
   action?: string;
   likes?: number;
   disliked?: number;
-  onChangeReply?: (cid?: number, title?: string) => void;
+  onChangeReply?: (cid?: number, title?: string, callback?: () => void) => void;
   onClickDisliked?: (cid?: number) => void;
   onClickLike?: (cid?: number) => void;
+  onJump?: (flag: any) => void;
+  jumpFlag?: any;
 }
 
 interface CommentState {
@@ -66,7 +67,7 @@ class Index extends Component<CommentProps, CommentState> {
   render() {
     let {
       id, className, title, href, avatar, datetime, content, children, type,
-      replyId, replyAvatar, replyTitle,
+      replyId, replyAvatar, replyTitle, onJump, jumpFlag,
     } = this.props;
     let { action, likes, disliked } = this.state;
 
@@ -89,11 +90,12 @@ class Index extends Component<CommentProps, CommentState> {
     ];
 
     return (<div id={`c_${id}`} className={classnames(
-      styles.component, { [styles.small]: type === 'small' }, className)}>
+      styles.component, { [styles.small]: type === 'small', [styles.activeComment]: jumpFlag === id }, className)}>
       <Comment avatar={avatar} datetime={<>{datetime} {replyId && (
-        <a href={`#c_${replyId || ''}`} className={styles.reply}>
+        <a href={`#c_${replyId || ''}`} className={styles.reply} onClick={() => onJump && onJump(replyId)}>
           <RetweetOutlined /> <Avatar size={15} src={replyAvatar} /> <span>{replyTitle}</span>
-        </a>)}</>} author={<a href={href}>{title}</a>}
+        </a>)}</>}
+               author={<a href={href}>{title}</a>}
                content={<p className={styles.content}>{content}</p>} actions={actions}>
         {children}
       </Comment>
@@ -122,9 +124,7 @@ class Index extends Component<CommentProps, CommentState> {
       return { likes, disliked, action };
     }), () => {
       let { id, onClickLike } = this.props;
-      if (onClickLike) {
-        onClickLike(id);
-      }
+      onClickLike && onClickLike(id);
     });
   };
 
@@ -149,17 +149,13 @@ class Index extends Component<CommentProps, CommentState> {
       return { likes, disliked, action };
     }), () => {
       let { id, onClickDisliked } = this.props;
-      if (onClickDisliked) {
-        onClickDisliked(id);
-      }
+      onClickDisliked && onClickDisliked(id);
     });
   };
 
   onClickReply = () => {
     let { onChangeReply, id, title } = this.props;
-    if (onChangeReply) {
-      onChangeReply(id, title);
-    }
+    onChangeReply && onChangeReply(id, title, console.debug);
   };
 }
 

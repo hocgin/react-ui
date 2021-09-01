@@ -1,5 +1,7 @@
 import moment from 'moment';
 
+moment.locale('zh-CN');
+
 export class DateFormat {
   static FORMAT_1 = 'YYYY-MM-DD HH:mm:ss';
   static FORMAT_2 = 'YYYY-MM-DD HH:mm';

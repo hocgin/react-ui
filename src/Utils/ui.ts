@@ -5,7 +5,7 @@ export class Ui {
     return result && result.success;
   }
 
-  showErrorMessageIfExits(result?: any) {
+  static showErrorMessageIfExits(result?: any) {
     if (Ui.isSuccess(result)) {
       return true;
     }
