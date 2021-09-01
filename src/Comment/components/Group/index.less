@@ -1,27 +1,61 @@
 .commentGroup {
   background-color: #fff;
-  padding: 8px;
-  border: 1px solid #ebedf1;
-}
 
-.listItems {
-  margin: 0;
-  padding: 0;
+  :global {
+    .ant-list-header {
+      padding-left: 10px;
+    }
 
-  .listItem {
-    padding: 0;
-    border-bottom: none;
-    list-style: none;
-    position: relative;
-
-    &::before {
-      content: '';
-      position: absolute;
-      left: 18px;
-      top: 40px;
-      bottom: 8px;
-      width: 0;
-      border-left: 1px dashed #e8e8e8;
+    .ant-avatar {
+      border: 1px solid rgba(218, 218, 223, .8);
     }
   }
+}
+
+.comments {
+  min-height: 300px;
+
+  .ske {
+    flex: 1 1;
+  }
+
+  :global {
+    .ant-list-item {
+      padding: 0 10px;
+
+    }
+
+    .ant-list-item:hover {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+  }
+
+}
+
+.subComments {
+  flex: 1 1;
+
+  :global {
+    .ant-list-item {
+      padding: 5px 0;
+      border: none;
+
+    }
+
+    .ant-list-items .ant-list-item:last-child {
+      border-bottom: none !important;
+    }
+
+    .ant-comment-avatar {
+      margin-right: 4px;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.editor {
 }

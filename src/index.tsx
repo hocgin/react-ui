@@ -10,3 +10,5 @@ export { default as Eggs } from './Eggs';
 export { default as Footer } from './Footer';
 export { default as Header } from './Header';
 export { default as Money } from './Money';
+export { default as Stretch } from './Stretch';
+export { default as Utils } from './Utils';

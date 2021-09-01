@@ -1,7 +1,4 @@
-import React from 'react';
-import { Comment } from '@hocgin/ui';
-
-let dataSource = {
+let root = {
   current: 10,
   total: 10,
   size: 10,
@@ -33,7 +30,9 @@ let dataSource = {
   }],
 };
 
-
-export default () => {
-  return (<Comment.Group landed={true} url={'https://gx.com/test/xx/xx'} headers={{ ['X-Username']: 'hocgin' }} />);
-};
+// 顶级评论 POST {url}/_paging
+// 子级评论 POST {url}/comment/1/_paging
+// 评论 POST {url}/comment
+// 点赞 POST {url}/comment/1/like
+// 倒赞 POST {url}/comment/1/dislike
+// 举报 POST {url}/comment/1/report

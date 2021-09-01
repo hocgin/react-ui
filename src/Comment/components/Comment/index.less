@@ -1,53 +1,36 @@
-.commentListItem {
-  display: flex;
-  //justify-content: space-between;
-  padding-bottom: 32px;
+.component {
+  flex: 1 1;
 
-  .avatar {
-    margin-right: 12px;
+  .reply {
+    color: rgba(0, 0, 0, 0.45);
+
+    &:hover {
+      color: rgba(0, 0, 0, 0.55);
+    }
   }
 }
 
-.comment {
-  flex: 1 1;
+.commentAction {
+  padding-left: 8px;
+  cursor: auto;
+}
 
-  .floor {
-    .header {
-      .nickname {
-        font-size: 14px;
-        color: #595959;
-        height: 18px;
-        line-height: 18px;
-        padding-right: 8px;
-      }
+.content {
+  word-break: break-all;
+}
 
-      .time {
-        font-size: 12px;
-        color: #bfbfbf;
-        white-space: nowrap;
-      }
+.activeComment {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.small {
+  :global {
+    .ant-comment-inner {
+      padding: 0;
     }
 
-    .content {
-      min-height: 24px;
-
-      .contentDetail {
-        word-break: break-all;
-      }
-
-      .actions {
-        margin-top: 16px;
-        font-size: 14px;
-
-        span {
-          color: #8c8c8c;
-          cursor: pointer;
-
-          &:hover {
-            color: #595959;
-          }
-        }
-      }
+    .ant-comment-avatar {
+      margin-right: 2px;
     }
   }
 }

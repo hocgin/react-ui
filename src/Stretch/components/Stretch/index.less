@@ -1,0 +1,31 @@
+
+.stretch {
+  padding: 8px;
+  background-color: #fff;
+}
+
+.content {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-wrap: break-word;
+  word-break: break-all;
+  transition: all 1s ease;
+}
+
+.toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+
+  .resize, .copy {
+    cursor: pointer;
+    margin-right: 6px;
+    opacity: .5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
