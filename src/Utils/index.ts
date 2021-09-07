@@ -1,15 +1,21 @@
 import Request from './request';
+import Lang from './lang';
 import { Ui } from './ui';
 import { DateFormat } from './format';
+import { Config } from './config';
+import { Model } from './model';
 
-let index: any = {};
-index.Request = Request;
-index.Ui = Ui;
-index.Format = {
-  DateFormat,
+let index = {
+  Request: Request,
+  Config: Config,
+  Lang: Lang,
+  Model: Model,
+  Ui: Ui,
+  Format: {
+    DateFormat,
+  },
+  POST: (url: string, body: any, headers?: any) => {
+    return Request(`${url}`, { method: 'POST', body: body || {}, headers: headers });
+  },
 };
-index.POST = (url: string, body: any, headers?: any) => {
-  return Request(`${url}`, { method: 'POST', body: body || {}, headers: headers });
-};
-
 export default index;

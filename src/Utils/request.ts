@@ -1,4 +1,5 @@
 import hash from 'hash.js';
+import { Config } from '@/Utils/config';
 
 export default function Request(url: string, options?: any) {
   const defaultOptions = {
@@ -57,12 +58,8 @@ export default function Request(url: string, options?: any) {
     .then(response => cachedSave(response, hashcode))
     // 响应状态检查
     .then((response) => {
-
-      if (response.status === 401) {
-        response.json().then(({ redirectUrl }: any) => {
-          window.location.href = `${options?.ssoServerUrl()}?redirectUrl=${redirectUrl ?? window.location.href}`;
-        });
-      }
+      let hookResponse = Config.get(Config.ConfigKeys.hookResponse);
+      hookResponse && hookResponse(response);
 
       if (response.status >= 200 && response.status <= 500) {
         return response;

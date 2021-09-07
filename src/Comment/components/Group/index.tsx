@@ -7,6 +7,7 @@ import { Utils } from '@hocgin/ui';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Pagination, List, Skeleton, Affix, Avatar, message } from 'antd';
 import { DateFormat } from '@/Utils/format';
+import { HttpRequestHeader } from '@/Utils/interface';
 
 let mockSubComments = () => {
   return {
@@ -21,9 +22,9 @@ let mockSubComments = () => {
 // 加载下一页。分页子
 interface GroupProps {
   // 请求头
-  headers?: any;
+  headers?: HttpRequestHeader;
   // 请求路径
-  url?: string;
+  action?: string,
   // 每页数量
   size?: number;
   // 默认请求体
@@ -38,7 +39,8 @@ interface GroupProps {
   placeholder?: string;
 }
 
-interface GroupState {}
+interface GroupState {
+}
 
 class Index extends Component<GroupProps, GroupState> {
   private static defaultProps = {
@@ -84,7 +86,7 @@ class Index extends Component<GroupProps, GroupState> {
             className={styles.comments}
             loading={loading}
             locale={{ emptyText: '赶快来评论一下吧～' }}
-            itemLayout="horizontal"
+            itemLayout='horizontal'
             header={`${total} 评论`}
             dataSource={dataSource}
             renderItem={(item: any) => {
@@ -325,7 +327,7 @@ class Index extends Component<GroupProps, GroupState> {
   }
 
   get url() {
-    return this.props?.url;
+    return this.props?.action;
   }
 
   get size() {
@@ -351,7 +353,8 @@ interface SubCommentsProps {
   jumpFlag?: any;
 }
 
-interface SubCommentsState {}
+interface SubCommentsState {
+}
 
 class SubComments extends Component<SubCommentsProps, SubCommentsState> {
   private static defaultProps = {
@@ -388,13 +391,13 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
           className={styles.subComments}
           loading={dataSource?.loading}
           loadMore={true}
-          itemLayout="horizontal"
+          itemLayout='horizontal'
           dataSource={dataSource?.dataSource}
           renderItem={(item: any) => (
             <List.Item>
               <Skeleton avatar loading={item?.loading} active>
                 <Comment
-                  type="small"
+                  type='small'
                   title={item?.author?.nickname}
                   href={item?.author?.href}
                   id={item?.id}
@@ -427,7 +430,7 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
         <Pagination
           className={styles.pagination}
           hideOnSinglePage
-          size="small"
+          size='small'
           total={dataSource?.total}
           defaultCurrent={1}
           current={dataSource?.current}
@@ -474,7 +477,8 @@ interface AffixEditorProps {
   onJump?: (flag: any) => void;
 }
 
-interface AffixEditorState {}
+interface AffixEditorState {
+}
 
 class AffixEditor extends Component<AffixEditorProps, AffixEditorState> {
   render() {

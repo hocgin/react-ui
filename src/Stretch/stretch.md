@@ -1,5 +1,5 @@
 ---
-title: Stretch 
+title: Stretch - 伸展文字
 nav:
   title: 组件
   path: /components

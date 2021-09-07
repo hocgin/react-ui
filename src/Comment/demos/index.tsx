@@ -36,12 +36,9 @@ let dataSource = {
 };
 
 export default () => {
-  return (
-    <Comment.Group
-      landed={true}
-      url={'https://api-dev.hocgin.top/com/client/comment/article/1'}
-      author={'善良的用户'}
-      headers={{ ['X-Username']: 'hocgin', ['X-Source']: 'react-ui' }}
-    />
-  );
+  return (<Comment.Group landed={true}
+                         action={'https://api-dev.hocgin.top/com/client/comment/article/1'}
+                         author={'hocgin'}
+                         headers={{ ['X-Username']: 'hocgin', ['X-Source']: 'react-ui' }}
+  />);
 };

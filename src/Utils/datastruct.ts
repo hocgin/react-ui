@@ -1,3 +1,0 @@
-interface Result {
-  data: any;
-}
