@@ -18,7 +18,7 @@ export default class Lang {
    * @param length
    * @returns {Array}
    */
-  static chunk(array: [], length: number) {
+  static chunk(array: any[], length: number) {
     let index = 0;
     let newArray = [];
 
@@ -41,7 +41,7 @@ export default class Lang {
    * @param max
    * @returns {*}
    */
-  static slice(array: [], max: number) {
+  static slice(array: any[], max: number) {
     if (array.length < max) {
       max = array.length;
     }
@@ -54,7 +54,7 @@ export default class Lang {
    * @param array
    * @return {*[]}
    */
-  static distinct(array = []) {
+  static distinct(array: any[] = []) {
     return Array.from(new Set(array));
   }
 
@@ -63,7 +63,7 @@ export default class Lang {
    * @param array
    * @param index
    */
-  static delete(array = [], index: number) {
+  static delete(array: any[] = [], index: number) {
     array.splice(index, 1);
     return array;
   }

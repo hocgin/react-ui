@@ -28,7 +28,7 @@ class Index extends PureComponent<SearchBarProps, SearchBarState> {
   render() {
     const { children, className } = this.props;
     let { isExpand } = this.state;
-    let ele: React.ReactElement[] = children || [];
+    let ele: any[] = children || [];
     let rowStyle = { width: '100%' };
     return (
       <div className={classnames(styles.tableListForm, className)}>
@@ -56,7 +56,7 @@ class Index extends PureComponent<SearchBarProps, SearchBarState> {
                 </div>
               </div>))
             : (<Row style={rowStyle} gutter={{ md: 24, lg: 24, xl: 24 }}>
-              {Utils.slice(ele, 2)
+              {Utils.Lang.slice(ele, 2)
                 .map((item: ReactNode, index: number) => (
                   <Col key={index} md={8} sm={24}>
                     {item}

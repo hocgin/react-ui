@@ -1,5 +1,5 @@
 ---
-title: Tpl - 模版文件
+title: FileUpload - 文件上传
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# Tpl - 模版文件
+# FileUpload - 模版文件
 
 这是一个组件的基础描述
 

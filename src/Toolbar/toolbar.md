@@ -1,5 +1,5 @@
 ---
-title: PhotoWall - 图片墙
+title: Toolbar - Toolbar
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# PhotoWall
+# Toolbar - 模版文件
 
 这是一个组件的基础描述
 

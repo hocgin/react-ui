@@ -1,8 +1,30 @@
-export default class Config {
+import { Ui } from '@/Utils/ui';
+
+const ConfigKeys = {
+  // hook 响应处理
+  hookResponse: 'hookResponse',
+  // sso 服务地址
+  ssoServerUrl: 'ssoServerUrl',
+  // api 服务地址
+  baseServerUrl: 'baseServerUrl',
+};
+
+export class Config {
+  static ConfigKeys = ConfigKeys;
   // 默认配置
-  static defaultConfig: { [key: string]: any } = {};
+  static defaultConfig: { [key: string]: any } = {
+    [ConfigKeys.ssoServerUrl]: `${Ui.getDomain()}/login`,
+    [ConfigKeys.baseServerUrl]: `${Ui.getDomain()}/api`,
+    [ConfigKeys.hookResponse]: (response: any) => {
+      if (response.status === 401) {
+        response.json().then(({ redirectUrl }: any) => {
+          window.location.href = `${Config.get(ConfigKeys.ssoServerUrl)}?redirectUrl=${redirectUrl ?? window.location.href}`;
+        });
+      }
+    },
+  };
   // 自定义配置
-  static customConfig: { [key: string]: any } = {};
+  static customConfig: { [key: string]: any; } = {};
 
   /**
    * 设置配置
@@ -11,6 +33,14 @@ export default class Config {
    */
   static set(key: string, value: any) {
     this.customConfig[key] = value;
+  }
+
+  /**
+   * 获取配置
+   * @param key
+   */
+  static get(key: string) {
+    return Config.getConfigs()[key];
   }
 
   /**

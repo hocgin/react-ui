@@ -1,5 +1,5 @@
 ---
-title: PhotoWall - 图片墙
+title: Promise - 契约
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# PhotoWall
+# Promise - Promise
 
 这是一个组件的基础描述
 
@@ -15,6 +15,6 @@ group:
 
 ### 基础用法
 
-Demo:
+PromiseTable:
 
-<code src="./demos/index.tsx"  background="#f0f2f5" />
+<code src="./demos/promise-table.tsx"  background="#f0f2f5" />

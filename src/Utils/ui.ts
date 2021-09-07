@@ -1,17 +1,18 @@
 import { message } from 'antd';
 import memoizeOne from 'memoize-one';
+import { HttpResult, IPage } from '@/Utils/interface';
 
 export class Ui {
-  static isSuccess(result?: any) {
+  static isSuccess(result?: HttpResult<any>) {
     return result && result.success;
   }
 
-  static showErrorMessageIfExits(result?: any) {
+  static showErrorMessageIfExits(result?: HttpResult<any>) {
     if (Ui.isSuccess(result)) {
       return true;
     }
     console.debug('请求发生错误:', result);
-    if (result.message) {
+    if (result?.message) {
       message.error(result.message).then(console.debug);
     }
     return false;
@@ -23,7 +24,7 @@ export class Ui {
    * @param paging
    * @return {*|*[]}
    */
-  static getPagingList(paging: any) {
+  static getPagingList(paging: IPage) {
     if (!paging) {
       return [];
     }
@@ -37,7 +38,7 @@ export class Ui {
    * @param paging
    * @return {{}}
    */
-  static getPagingPagination(paging: any) {
+  static getPagingPagination(paging: IPage) {
     if (!paging) {
       return {};
     }
@@ -50,7 +51,7 @@ export class Ui {
 
   static fastPagingPagination = memoizeOne(this.getPagingPagination);
 
-  static getTableData(paging: any) {
+  static getTableData(paging: IPage) {
     return {
       list: Ui.fastGetPagingList(paging),
       pagination: Ui.fastPagingPagination(paging),
@@ -59,4 +60,10 @@ export class Ui {
 
   static fastGetTableData = memoizeOne(this.getTableData);
 
+  /**
+   * 获取域名
+   */
+  static getDomain() {
+    return `${window.location.protocol}//${window.location.host}`;
+  }
 }

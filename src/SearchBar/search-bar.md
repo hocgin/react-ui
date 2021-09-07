@@ -1,5 +1,5 @@
 ---
-title: PhotoWall - 图片墙
+title: SearchBar - SearchBar
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# PhotoWall
+# SearchBar - 模版文件
 
 这是一个组件的基础描述
 

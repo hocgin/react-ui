@@ -2,12 +2,14 @@ import Request from './request';
 import Lang from './lang';
 import { Ui } from './ui';
 import { DateFormat } from './format';
-import Config from './config';
+import { Config } from './config';
+import { Model } from './model';
 
 let index = {
   Request: Request,
   Config: Config,
   Lang: Lang,
+  Model: Model,
   Ui: Ui,
   Format: {
     DateFormat,
