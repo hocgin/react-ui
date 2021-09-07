@@ -6,18 +6,24 @@ interface TextRowProps {
   title?: string;
   children?: React.ReactNode | string;
   bordered?: boolean;
+  // format?: string;
 }
 
-interface TextRowState {
-}
+interface TextRowState {}
 
 class Index extends React.PureComponent<TextRowProps, TextRowState> {
   render() {
     let { title, children, bordered } = this.props;
-    return (<div className={classnames(styles.component, { [styles.borderTop]: bordered })}>
-      <span className={styles.title}>{title}</span>
-      <span className={styles.text}>{children}</span>
-    </div>);
+    return (
+      <div
+        className={classnames(styles.component, {
+          [styles.borderTop]: bordered,
+        })}
+      >
+        <span className={styles.title}>{title}</span>
+        <span className={styles.text}>{children}</span>
+      </div>
+    );
   }
 }
 

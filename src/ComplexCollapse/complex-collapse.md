@@ -1,5 +1,5 @@
 ---
-title: Toolbar - Toolbar
+title: ComplexCollapse - ComplexCollapse
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# Toolbar - 模版文件
+# Tpl - 模版文件
 
 这是一个组件的基础描述
 
