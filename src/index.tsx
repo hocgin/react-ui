@@ -13,6 +13,7 @@ export { default as Money } from './Money';
 export { default as Stretch } from './Stretch';
 export { default as ComplexTable } from './ComplexTable';
 export { default as ComplexCollapse } from './ComplexCollapse';
+export { default as Exhibit } from './Exhibit';
 export { default as SearchBar } from './SearchBar';
 export { default as Promise } from './Promise';
 export { default as FileUpload } from './FileUpload';

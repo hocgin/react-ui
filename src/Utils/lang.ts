@@ -68,4 +68,78 @@ export default class Lang {
     return array;
   }
 
+  /**
+   * 调整默认值
+   * @param o
+   * @param def
+   */
+  static nullToDefault(o: any, def: any) {
+    return Lang.isNull(o) ? def : o;
+  }
+
+  /**
+   * 是否为null
+   * @param o
+   */
+  static isNull(o: any) {
+    return (o === null || o === undefined);
+  }
+
+  /**
+   * 转为数值
+   * @param val
+   */
+  static toNumber(val?: any) {
+    if (Lang.isNull(val)) {
+      return val;
+    }
+    if (typeof val === 'string') {
+      val.replaceAll(' ', '');
+      if (val.includes(',')) {
+        return val.replaceAll(',', '');
+      }
+      return val;
+    }
+    return val;
+  }
+
+  /**
+   * 是否图片的url
+   * @param url
+   */
+  static isImgUrl(url?: string) {
+    return `${url}`.endsWith('.png')
+      || `${url}`.endsWith('.jpeg')
+      || `${url}`.endsWith('.svg');
+  }
+
+  /**
+   * 补充协议
+   * @param url
+   */
+  static suppleUrlPrefix(url?: string) {
+    if (Lang.nullToDefault(url, '').trim() === '') {
+      return null;
+    }
+    if (url?.startsWith('http://') || url?.startsWith('https://')) {
+      return url;
+    }
+    return `http://${url}`;
+  }
+
+  /**
+   * 获取图片后缀
+   * @param url
+   */
+  static getSuffix(url?: string) {
+    let suffix = `${url}`;
+    if (suffix.includes('.')) {
+      let lastIndex = suffix.lastIndexOf('.');
+      suffix = suffix.substr(lastIndex + 1);
+    }
+    if (suffix.length > 4) {
+      suffix = 'N/A';
+    }
+    return suffix.toUpperCase();
+  };
 }
