@@ -8,27 +8,25 @@ interface EditorProps {
   onChange?: (value?: string) => void;
 }
 
-interface EditorState {
-
-}
+interface EditorState {}
 
 class Index extends Component<EditorProps, EditorState> {
-  private static defaultProps = {};
+  static defaultProps = {};
 
   constructor(props: any, context: any) {
     super(props, context);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     let { children, value, height, onChange } = this.props;
-    return <>
-      <MDEditor value={value} height={height} onChange={onChange} />
-    </>;
+    return (
+      <>
+        <MDEditor value={value} height={height} onChange={onChange} />
+      </>
+    );
   }
-
 }
 
 export default Index;

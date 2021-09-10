@@ -1,10 +1,13 @@
 ---
+# @formatter:off
 title: Promise - 契约
+order: 1000
 nav:
   title: 组件
   path: /components
 group:
   path: /
+# @formatter:on
 ---
 
 # Promise - Promise
@@ -15,6 +18,11 @@ group:
 
 ### 基础用法
 
-PromiseTable:
+Archive:
+<code src="./demos/archive.tsx"  background="#f0f2f5" />
 
+FileUpload:
+<code src="./demos/file-upload.tsx"  background="#f0f2f5" />
+
+PromiseTable:
 <code src="./demos/promise-table.tsx"  background="#f0f2f5" />

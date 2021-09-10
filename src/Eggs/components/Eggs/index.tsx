@@ -9,11 +9,10 @@ interface EggsProps {
   doc?: boolean;
 }
 
-interface EggsState {
-}
+interface EggsState {}
 
 class Index extends Component<EggsProps, EggsState> {
-  private static defaultProps = {
+  static defaultProps = {
     csl: true,
     doc: true,
   };
@@ -60,7 +59,7 @@ class Index extends Component<EggsProps, EggsState> {
   };
 
   getOrCreateIcon = () => {
-    let link: any = document.querySelector('link[rel*=\'icon\']');
+    let link: any = document.querySelector("link[rel*='icon']");
     if (link === null) {
       link = document.createElement('link');
       link.type = 'image/x-icon';

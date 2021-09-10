@@ -1,19 +1,22 @@
 import React from 'react';
 import styles from './index.less';
+import classnames from 'classnames';
 
-interface TplProps {
+export interface TplProps {
+  /**
+   * 设置样式名
+   */
+  className?: string;
 }
 
-interface TplState {
-}
+interface TplState {}
 
 class Index extends React.Component<TplProps, TplState> {
-  private static defaultProps = {};
+  static defaultProps = {};
 
-  render() {
-    let {} = this.props;
-    return (<div className={styles.logo}>
-    </div>);
+  render(): JSX.Element {
+    let { className } = this.props;
+    return <div className={classnames(styles.component, className, {})}></div>;
   }
 }
 

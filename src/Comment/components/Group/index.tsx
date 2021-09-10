@@ -24,7 +24,7 @@ interface GroupProps {
   // 请求头
   headers?: HttpRequestHeader;
   // 请求路径
-  action?: string,
+  action?: string;
   // 每页数量
   size?: number;
   // 默认请求体
@@ -39,11 +39,10 @@ interface GroupProps {
   placeholder?: string;
 }
 
-interface GroupState {
-}
+interface GroupState {}
 
 class Index extends Component<GroupProps, GroupState> {
-  private static defaultProps = {
+  static defaultProps = {
     headers: {},
     body: {},
     size: 10,
@@ -86,7 +85,7 @@ class Index extends Component<GroupProps, GroupState> {
             className={styles.comments}
             loading={loading}
             locale={{ emptyText: '赶快来评论一下吧～' }}
-            itemLayout='horizontal'
+            itemLayout="horizontal"
             header={`${total} 评论`}
             dataSource={dataSource}
             renderItem={(item: any) => {
@@ -353,11 +352,10 @@ interface SubCommentsProps {
   jumpFlag?: any;
 }
 
-interface SubCommentsState {
-}
+interface SubCommentsState {}
 
 class SubComments extends Component<SubCommentsProps, SubCommentsState> {
-  private static defaultProps = {
+  static defaultProps = {
     dataSource: {
       loading: false,
       total: 0,
@@ -391,13 +389,13 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
           className={styles.subComments}
           loading={dataSource?.loading}
           loadMore={true}
-          itemLayout='horizontal'
+          itemLayout="horizontal"
           dataSource={dataSource?.dataSource}
           renderItem={(item: any) => (
             <List.Item>
               <Skeleton avatar loading={item?.loading} active>
                 <Comment
-                  type='small'
+                  type="small"
                   title={item?.author?.nickname}
                   href={item?.author?.href}
                   id={item?.id}
@@ -430,7 +428,7 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
         <Pagination
           className={styles.pagination}
           hideOnSinglePage
-          size='small'
+          size="small"
           total={dataSource?.total}
           defaultCurrent={1}
           current={dataSource?.current}
@@ -477,8 +475,7 @@ interface AffixEditorProps {
   onJump?: (flag: any) => void;
 }
 
-interface AffixEditorState {
-}
+interface AffixEditorState {}
 
 class AffixEditor extends Component<AffixEditorProps, AffixEditorState> {
   render() {
