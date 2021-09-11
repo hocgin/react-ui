@@ -2,7 +2,6 @@ import React from 'react';
 import { Button, message, Modal } from 'antd';
 import { Config } from '@/Utils/config';
 import { Utils, Archive } from '@hocgin/ui';
-import { Result } from '@/Utils/interface';
 import { ArchiveColumn } from '@/Archive/components/interface';
 
 interface ArchiveProps {
@@ -70,13 +69,9 @@ class Index extends React.PureComponent<ArchiveProps> {
     const isUpdate = id !== null;
     this.setState({ submitLoading: true }, () => {
       let url = isUpdate ? this.putUrl : this.postUrl;
-      Utils.POST(`${url}`, { ...values })
-        .then((result: Result) => {
-          if (Utils.Ui.showErrorMessageIfExits(result)) {
-            return;
-          }
-        })
-        .finally(() => this.setState({ submitLoading: false }));
+      Utils.Request.post(`${url}`, { data: { ...values } }).finally(() =>
+        this.setState({ submitLoading: false }),
+      );
     });
   };
 
@@ -84,13 +79,9 @@ class Index extends React.PureComponent<ArchiveProps> {
     let { id } = this.props;
     if (!id) return;
     this.setState({ getLoading: true }, () => {
-      Utils.POST(`${this.getUrl}`, {})
-        .then((result: Result) => {
-          if (Utils.Ui.showErrorMessageIfExits(result)) {
-            return;
-          }
-        })
-        .finally(() => this.setState({ getLoading: false }));
+      Utils.Request.post(`${this.getUrl}`).finally(() =>
+        this.setState({ getLoading: false }),
+      );
     });
   };
 

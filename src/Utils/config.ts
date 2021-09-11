@@ -75,6 +75,13 @@ export class Config {
   }
 
   /**
+   * 获取认证地址
+   */
+  static getSsoServerUrl() {
+    return Config.get(Config.ConfigKeys.ssoServerUrl);
+  }
+
+  /**
    * 请求头部信息
    */
   static getHeaders() {

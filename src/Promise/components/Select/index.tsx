@@ -1,9 +1,8 @@
 import React from 'react';
 import { Select } from 'antd';
-import { Config } from '@/Utils/config';
-import { Utils } from '@hocgin/ui';
-import { Result } from '@/Utils/interface';
 import { Option } from '@/Archive/components/interface';
+import Service from './service';
+import { Utils } from '@hocgin/ui';
 
 interface TreeSelectProps {
   /**
@@ -23,39 +22,39 @@ interface TreeSelectProps {
 class Index extends React.PureComponent<TreeSelectProps> {
   static defaultProps = {
     multiple: false,
+    placeholder: '请选择',
   };
   state = {
     data: [],
   };
 
   render() {
-    let { multiple, placeholder } = this.props;
+    let { multiple, placeholder, action, ...rest } = this.props;
     let { data } = this.state;
     return (
       <Select
         allowClear
+        style={{ minWidth: '5em' }}
         mode={multiple ? 'multiple' : undefined}
         placeholder={placeholder}
-      >
-        {data.map(({ key, value }: Option) => (
-          <Select.Option value={value}>{key}</Select.Option>
-        ))}
+        {...rest}>
+        {(data || []).map(({ key, value }: Option) =>
+          <Select.Option key={`${value}`} value={value}>{key}</Select.Option>)}
       </Select>
     );
   }
 
   componentDidMount() {
-    Utils.POST(`${this.url}`, {}).then((result: Result) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        this.setState({ data: result?.data });
-        return;
-      }
-    });
+    this.initialValues();
   }
 
-  get url() {
+  initialValues() {
     let { action } = this.props;
-    return `${Config.getBaseServerUrl()}${action}`;
+    Service.initialValues(action).then((result) => {
+      if (Utils.Ui.isSuccess(result)) {
+        this.setState({ data: result?.data });
+      }
+    });
   }
 }
 

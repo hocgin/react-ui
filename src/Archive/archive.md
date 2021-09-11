@@ -3,10 +3,10 @@
 title: Archive - 存档
 order: 1000
 nav:
-  title: 组件
+  title: 高级组件
   path: /components
 group:
-  path: /
+  path: /complex
 # @formatter:on
 ---
 

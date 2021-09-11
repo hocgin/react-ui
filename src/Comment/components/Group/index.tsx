@@ -7,7 +7,7 @@ import { Utils } from '@hocgin/ui';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Pagination, List, Skeleton, Affix, Avatar, message } from 'antd';
 import { DateFormat } from '@/Utils/format';
-import { HttpRequestHeader } from '@/Utils/interface';
+import { HttpRequestHeader, IPage, Result } from '@/Utils/interface';
 
 let mockSubComments = () => {
   return {
@@ -178,29 +178,11 @@ class Index extends Component<GroupProps, GroupState> {
   }
 
   onClickLike(cid?: number) {
-    Utils.POST(
-      `${this.url}/comment/${cid}/like`,
-      { ...this.body },
-      this.headers,
-    ).then((result: any) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        // success
-        return;
-      }
-    });
+    Utils.Request.post(`${this.url}/comment/${cid}/like`);
   }
 
   onClickDisliked(cid?: number) {
-    Utils.POST(
-      `${this.url}/comment/${cid}/dislike`,
-      { ...this.body },
-      this.headers,
-    ).then((result: any) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        // success
-        return;
-      }
-    });
+    Utils.Request.post(`${this.url}/comment/${cid}/dislike`);
   }
 
   onClickReply(cid?: number, content?: string) {
@@ -208,36 +190,33 @@ class Index extends Component<GroupProps, GroupState> {
       message.warn('请输入评论内容');
       return;
     }
-
-    let callback = (result: any) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        // @ts-ignore
-        this.setState(({ dataSource, replyTopId }) => {
-          if (replyTopId) {
-            let topComment =
-              (dataSource || []).find(({ id }: any) => id === replyTopId) || {};
-            topComment.hasReply = true;
-            topComment.dataSource = topComment.dataSource || mockSubComments();
-            topComment.dataSource.dataSource = [
-              ...topComment?.dataSource?.dataSource,
-              result?.data,
-            ];
-          } else {
-            dataSource = [...dataSource, result?.data];
-          }
-          return { dataSource };
-        });
-      }
-    };
-    Utils.POST(
-      `${this.url}/comment`,
-      {
+    Utils.Request.post(`${this.url}/comment`, {
+      data: {
         id: cid,
         content,
         ...this.body,
       },
-      this.headers,
-    ).then(callback);
+    }).then((result) => {
+      if (!Utils.Ui.isSuccess(result)) {
+        return;
+      }
+      let data = result?.data;
+      this.setState(({ dataSource, replyTopId }: any) => {
+        if (replyTopId) {
+          let topComment =
+            (dataSource || []).find(({ id }: any) => id === replyTopId) || {};
+          topComment.hasReply = true;
+          topComment.dataSource = topComment.dataSource || mockSubComments();
+          topComment.dataSource.dataSource = [
+            ...topComment?.dataSource?.dataSource,
+            data,
+          ];
+        } else {
+          dataSource = [...dataSource, data];
+        }
+        return { dataSource };
+      });
+    });
   }
 
   /**
@@ -251,21 +230,20 @@ class Index extends Component<GroupProps, GroupState> {
         loading: true,
       },
       () => {
-        Utils.POST(
-          `${this.url}/_paging`,
-          { page, size, ...this.body },
-          this.headers,
-        )
-          .then((result: any) => {
-            if (Utils.Ui.showErrorMessageIfExits(result)) {
-              let { records = [], total = 0, pages, current } = result?.data;
-              this.setState(({ dataSource }: any) => ({
-                hasMore: current < pages,
-                total,
-                dataSource: [...dataSource, ...records],
-              }));
+        Utils.Request.post(`${this.url}/_paging`, {
+          data: { page, size, ...this.body },
+        })
+          .then((result) => {
+            if (!Utils.Ui.isSuccess(result)) {
               return;
             }
+            let data = result?.data;
+            let { records = [], total = 0, pages, current } = data;
+            this.setState(({ dataSource }: any) => ({
+              hasMore: current < pages,
+              total,
+              dataSource: [...dataSource, ...records],
+            }));
           })
           .finally(() => this.setState({ loading: false }));
       },
@@ -291,21 +269,20 @@ class Index extends Component<GroupProps, GroupState> {
       },
       () => {
         // 发起请求
-        Utils.POST(
-          `${this.url}/comment/${parentId}/_paging`,
-          { page, size },
-          this.headers,
-        )
-          .then((result: any) => {
-            if (Utils.Ui.showErrorMessageIfExits(result)) {
-              let { records = [], total = 0, current, pages } = result?.data;
-              subComment.dataSource = [...records];
-              subComment.hasMore = current < pages;
-              subComment.total = total;
-              subComment.current = current;
-              this.setState({ dataSource });
+        Utils.Request.post(`${this.url}/comment/${parentId}/_paging`, {
+          data: { page, size },
+        })
+          .then((result) => {
+            if (!Utils.Ui.isSuccess(result)) {
               return;
             }
+            let data = result?.data;
+            let { records = [], total = 0, current, pages } = data;
+            subComment.dataSource = [...records];
+            subComment.hasMore = current < pages;
+            subComment.total = total;
+            subComment.current = current;
+            this.setState({ dataSource });
           })
           .finally(() =>
             this.setState(() => {

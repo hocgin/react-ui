@@ -37,7 +37,11 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.3",
+    "@ant-design/pro-field": "^1.22.1",
+    "@ant-design/pro-form": "^1.40.0",
     "@uiw/react-md-editor": "^3.0.8",
+    "@umijs/plugin-request": "^2.7.0",
+    "ahooks": "^2.10.9",
     "antd": "^4.15.5",
     "braft-editor": "^2.3.9",
     "braft-extensions": "^0.1.1",

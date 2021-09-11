@@ -1,8 +1,7 @@
 import React from 'react';
 import { TreeSelect } from 'antd';
-import { Config } from '@/Utils/config';
 import { Utils } from '@hocgin/ui';
-import { Result } from '@/Utils/interface';
+import Service from '@/Promise/components/Select/service';
 
 interface TreeSelectProps {
   /**
@@ -22,20 +21,22 @@ interface TreeSelectProps {
 class Index extends React.PureComponent<TreeSelectProps> {
   static defaultProps = {
     multiple: false,
+    placeholder: '请选择',
   };
   state = {
     data: [],
   };
 
   render() {
-    let { multiple, placeholder } = this.props;
+    let { multiple, placeholder, ...rest } = this.props;
     let { data } = this.state;
     return (
       <TreeSelect
         allowClear
-        treeCheckable
+        treeCheckable={multiple}
         multiple={multiple}
         placeholder={placeholder}
+        {...rest}
       >
         {Utils.Ui.renderTreeSelectNodes(data)}
       </TreeSelect>
@@ -43,17 +44,16 @@ class Index extends React.PureComponent<TreeSelectProps> {
   }
 
   componentDidMount() {
-    Utils.POST(`${this.url}`, {}).then((result: Result) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        this.setState({ data: result?.data });
-        return;
-      }
-    });
+    this.initialValues();
   }
 
-  get url() {
+  async initialValues() {
     let { action } = this.props;
-    return `${Config.getBaseServerUrl()}${action}`;
+    Service.initialValues(action).then((result) => {
+      if (Utils.Ui.isSuccess(result)) {
+        this.setState({ data: result?.data });
+      }
+    });
   }
 }
 

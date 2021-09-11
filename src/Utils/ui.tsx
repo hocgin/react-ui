@@ -1,9 +1,24 @@
 import React from 'react';
 import { message, Tree, TreeSelect } from 'antd';
 import memoizeOne from 'memoize-one';
-import { HttpResult, IPage, TreeNode } from '@/Utils/interface';
+import { FileInfo, HttpResult, IPage, TreeNode } from '@/Utils/interface';
 
 export class Ui {
+  /**
+   * 转为 Upload 文件
+   * @param url
+   * @param filename
+   * @param index
+   */
+  static asFile({ url, filename }: FileInfo, index: number) {
+    return {
+      uid: index,
+      url,
+      status: 'done',
+      name: filename,
+    };
+  };
+
   /**
    * 树型选择器
    * <Tree.Select/>
@@ -44,10 +59,11 @@ export class Ui {
   static renderTreeNodes(data: TreeNode[]) {
     return (data || []).map((item: TreeNode) => {
       if (item.children && item.children.length > 0) {
-        // @ts-ignore
+
         return (
           <Tree.TreeNode
             key={`${item.id}`}
+            // @ts-ignore
             value={item.id}
             title={item.title}
             dataRef={item}
@@ -56,9 +72,9 @@ export class Ui {
           </Tree.TreeNode>
         );
       }
-      // @ts-ignore
       return (
         <Tree.TreeNode
+          // @ts-ignore
           value={item.id}
           key={`${item.id}`}
           title={item.title}

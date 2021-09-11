@@ -72,14 +72,10 @@ class Index extends PureComponent<TableProps, TableState> {
     let { action } = this.props;
     let { searchValue } = this.state;
     this.setState({ pagingLoading: true }, () => {
-      Utils.POST(
-        `${Config.get(Config.ConfigKeys.baseServerUrl)}${action}/_paging`,
-        { ...searchValue },
-      )
-        .then((result: HttpResult<any>) => {
-          if (Utils.Ui.showErrorMessageIfExits(result)) {
+      Utils.Request.post(`${action}/_paging`, { data: { ...searchValue } })
+        .then((result) => {
+          if (Utils.Ui.isSuccess(result)) {
             this.setState({ data: result?.data });
-            return;
           }
         })
         .finally(() => this.setState({ pagingLoading: false }));
@@ -140,8 +136,7 @@ class Index extends PureComponent<TableProps, TableState> {
   };
 
   get tableColumns() {
-    let { tableColumns, rowMenus = [] } = this.props;
-    // @ts-ignore
+    let { tableColumns = [], rowMenus = [] } = this.props;
     return [
       ...tableColumns,
       {

@@ -27,7 +27,7 @@ let columns: ArchiveColumn[] = [
 export default () => {
   return (
     <>
-      <Promise.ArchiveModal visible={true} action={'/xx'} columns={columns} />
+      <Promise.ArchiveModal visible={false} action={'/xx'} columns={columns} />
     </>
   );
 };

@@ -3,10 +3,10 @@
 title: Promise - 契约
 order: 1000
 nav:
-  title: 组件
+  title: 高级组件
   path: /components
 group:
-  path: /
+  path: /complex
 # @formatter:on
 ---
 
@@ -18,11 +18,21 @@ group:
 
 ### 基础用法
 
+Scheme:
+<code src="./demos/scheme.tsx"  background="#f0f2f5" />
+
+Basic:
+
+<code src="./demos/basic.tsx"  background="#f0f2f5" />
+
 Archive:
+
 <code src="./demos/archive.tsx"  background="#f0f2f5" />
 
 FileUpload:
+
 <code src="./demos/file-upload.tsx"  background="#f0f2f5" />
 
 PromiseTable:
+
 <code src="./demos/promise-table.tsx"  background="#f0f2f5" />

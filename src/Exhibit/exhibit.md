@@ -3,10 +3,10 @@
 title: Exhibit - 展览
 order: 1000
 nav:
-  title: 组件
+  title: 高级组件
   path: /components
 group:
-  path: /
+  path: /complex
 # @formatter:on
 ---
 
@@ -15,6 +15,10 @@ group:
 这是一个组件的基础描述
 
 ## 代码演示
+
+### Exhibit:
+
+<code src="./demos/exhibit.tsx"  background="#f0f2f5"></code>
 
 ### Exhibit.Array:
 
