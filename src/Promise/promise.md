@@ -18,6 +18,10 @@ group:
 
 ### 基础用法
 
+Promise.PageLayout:
+
+<code src="./demos/page-layout.tsx"  background="#f0f2f5" transform="true" iframe />
+
 Promise.SchemeTable:
 
 <code src="./demos/scheme-table.tsx"  background="#f0f2f5" />

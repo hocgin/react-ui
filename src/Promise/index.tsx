@@ -14,6 +14,8 @@ import RadioButton from './components/RadioButton';
 import Radio from './components/Radio';
 import Checkbox from './components/Checkbox';
 import DeleteSchemaConfig from '@/Promise/components/DeleteSchemaConfig';
+import PageLayout from '@/Promise/components/PageLayout';
+import PageContainer from '@/Promise/components/PageContainer';
 
 Promise.Table = Table;
 Promise.FileUpload = FileUpload;
@@ -29,4 +31,6 @@ Promise.DeleteSchemaConfig = DeleteSchemaConfig;
 Promise.RadioButton = RadioButton;
 Promise.Radio = Radio;
 Promise.Checkbox = Checkbox;
+Promise.PageLayout = PageLayout;
+Promise.PageContainer = PageContainer;
 export default Promise;
