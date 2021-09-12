@@ -2,8 +2,22 @@ import React from 'react';
 import { message, Tree, TreeSelect } from 'antd';
 import memoizeOne from 'memoize-one';
 import { FileInfo, HttpResult, IPage, TreeNode } from '@/Utils/interface';
+import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
 export class Ui {
+  /**
+   * 获取图标
+   * @param name
+   */
+  static getIcon(name?: string): JSX.Element {
+    const IconMap: Record<string, any> = {
+      SmileOutlined: <SmileOutlined />,
+      HeartOutlined: <HeartOutlined />,
+      HomeOutlined: <HomeOutlined />,
+    };
+    return IconMap[name || 'default'];
+  }
+
   /**
    * 转为 Upload 文件
    * @param url

@@ -11,7 +11,9 @@ import TableSchema from './TableSchema';
 import ExhibitSchemaConfig from './ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './ArchiveSchemaConfig';
 import TableSchemaConfig from './TableSchemaConfig';
-import DeleteSchemaConfig from '@/Promise/components/DeleteSchemaConfig';
+import DeleteSchemaConfig from './DeleteSchemaConfig';
+import PageLayout from './PageLayout';
+import PageContainer from './PageContainer';
 
 export default class Promise {
   static Table: typeof Table;
@@ -28,4 +30,6 @@ export default class Promise {
   static ArchiveSchemaConfig: typeof ArchiveSchemaConfig;
   static TableSchemaConfig: typeof TableSchemaConfig;
   static DeleteSchemaConfig: typeof DeleteSchemaConfig;
+  static PageLayout: typeof PageLayout;
+  static PageContainer: typeof PageContainer;
 }

@@ -17,4 +17,4 @@ group:
 
 Demo:
 
-<code src="./demos/index.tsx"  background="#f0f2f5" transform="true"/>
+<code src="./demos/index.tsx"  background="#f0f2f5" transform="true" iframe/>
