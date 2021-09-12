@@ -37,6 +37,7 @@
   },
   "dependencies": {
     "@ant-design/icons": "^4.6.3",
+    "@ant-design/pro-descriptions": "^1.9.13",
     "@ant-design/pro-field": "^1.22.1",
     "@ant-design/pro-form": "^1.40.0",
     "@uiw/react-md-editor": "^3.0.8",

@@ -4,7 +4,7 @@ import React from 'react';
  * 文件信息
  */
 export interface FileInfo {
-  url?: string,
+  url: string,
   filename?: string;
 }
 

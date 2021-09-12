@@ -13,6 +13,8 @@ export default class Index extends React.PureComponent<{}> {
   render() {
     return (
       <>
+        <Promise.ExhibitSchemaConfig config={{ ...config, action: `${config.action}/1` }} />
+        <Divider />
         <Promise.ArchiveSchemaConfig config={{ ...config, id: 1, layoutType: 'Form' }} />
         <Divider />
         <Promise.ArchiveSchemaConfig config={config} />

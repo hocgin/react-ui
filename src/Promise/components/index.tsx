@@ -7,6 +7,8 @@ import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import ArchiveSchema from './ArchiveSchema';
+import ExhibitSchema from './ExhibitSchema';
+import ExhibitSchemaConfig from './ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './ArchiveSchemaConfig';
 
 export default class Promise {
@@ -20,4 +22,6 @@ export default class Promise {
   static RadioButton: typeof RadioButton;
   static Radio: typeof Radio;
   static Checkbox: typeof Checkbox;
+  static ExhibitSchema: typeof ExhibitSchema;
+  static ExhibitSchemaConfig: typeof ExhibitSchemaConfig;
 }
