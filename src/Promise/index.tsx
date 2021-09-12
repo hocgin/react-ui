@@ -1,6 +1,32 @@
 import React from 'react';
-import PromiseTable from './components/PromiseTable';
+import Promise from './components';
+import Table from './components/Table';
+import FileUpload from './components/FileUpload';
+import Select from './components/Select';
+import TreeSelect from './components/TreeSelect';
+import ArchiveSchema from './components/ArchiveSchema';
+import ExhibitSchema from './components/ExhibitSchema';
+import TableSchema from './components/TableSchema';
+import ArchiveSchemaConfig from './components/ArchiveSchemaConfig';
+import ExhibitSchemaConfig from './components/ExhibitSchemaConfig';
+import TableSchemaConfig from './components/TableSchemaConfig';
+import RadioButton from './components/RadioButton';
+import Radio from './components/Radio';
+import Checkbox from './components/Checkbox';
+import DeleteSchemaConfig from '@/Promise/components/DeleteSchemaConfig';
 
-export default {
-  PromiseTable,
-};
+Promise.Table = Table;
+Promise.FileUpload = FileUpload;
+Promise.TreeSelect = TreeSelect;
+Promise.Select = Select;
+Promise.ArchiveSchema = ArchiveSchema;
+Promise.ExhibitSchema = ExhibitSchema;
+Promise.TableSchema = TableSchema;
+Promise.ArchiveSchemaConfig = ArchiveSchemaConfig;
+Promise.ExhibitSchemaConfig = ExhibitSchemaConfig;
+Promise.TableSchemaConfig = TableSchemaConfig;
+Promise.DeleteSchemaConfig = DeleteSchemaConfig;
+Promise.RadioButton = RadioButton;
+Promise.Radio = Radio;
+Promise.Checkbox = Checkbox;
+export default Promise;

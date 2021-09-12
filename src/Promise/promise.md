@@ -1,10 +1,13 @@
 ---
+# @formatter:off
 title: Promise - 契约
+order: 1000
 nav:
-  title: 组件
+  title: 高级组件
   path: /components
 group:
-  path: /
+  path: /complex
+# @formatter:on
 ---
 
 # Promise - Promise
@@ -15,6 +18,26 @@ group:
 
 ### 基础用法
 
-PromiseTable:
+Promise.SchemeTable:
 
-<code src="./demos/promise-table.tsx"  background="#f0f2f5" />
+<code src="./demos/scheme-table.tsx"  background="#f0f2f5" />
+
+Promise.SchemeArchive:
+
+<code src="./demos/scheme-archive.tsx"  background="#f0f2f5" />
+
+Promise.SchemeExhibit:
+
+<code src="./demos/scheme-exhibit.tsx"  background="#f0f2f5" />
+
+Promise.Table:
+
+<code src="./demos/table.tsx"  background="#f0f2f5" />
+
+Basic:
+
+<code src="./demos/basic.tsx"  background="#f0f2f5" />
+
+FileUpload:
+
+<code src="./demos/file-upload.tsx"  background="#f0f2f5" />

@@ -4,7 +4,7 @@ import styles from './index.less';
 
 function initTotalList(columns: any[]) {
   const totalList: [] = [];
-  columns.forEach(column => {
+  columns.forEach((column) => {
     if (column.needTotal) {
       // @ts-ignore
       totalList.push({ ...column, total: 0 });
@@ -27,12 +27,15 @@ interface StandardTableProps {
 }
 
 interface StandardTableState {
-  selectedRowKeys: any[],
-  needTotalList: any[]
+  selectedRowKeys: any[];
+  needTotalList: any[];
 }
 
-class StandardTable extends PureComponent<StandardTableProps, StandardTableState> {
-  private static defaultProps = {
+class StandardTable extends PureComponent<
+  StandardTableProps,
+  StandardTableState
+> {
+  static defaultProps = {
     hiddenAlert: false,
     selectedRows: [],
   };
@@ -64,7 +67,10 @@ class StandardTable extends PureComponent<StandardTableProps, StandardTableState
     let { needTotalList } = this.state;
     let updateNeedTotalList: any[] = (needTotalList || []).map((item: any) => ({
       ...item,
-      total: selectedRows.reduce((sum: number, val: string[]) => sum + parseFloat(val[item.dataIndex]), 0),
+      total: selectedRows.reduce(
+        (sum: number, val: string[]) => sum + parseFloat(val[item.dataIndex]),
+        0,
+      ),
     }));
     const { onSelectRow } = this.props;
     onSelectRow && onSelectRow(selectedRows);
@@ -108,36 +114,52 @@ class StandardTable extends PureComponent<StandardTableProps, StandardTableState
       }),
     };
 
-    return (<div className={styles.standardTable}>
-      {hiddenAlert ? null : <div className={styles.tableAlert}>
-        <Alert message={<Fragment>
-          已选择 <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a> 项&nbsp;&nbsp;
-          {needTotalList.map(item => (<span style={{ marginLeft: 8 }} key={item.dataIndex}>
-                    {item.title} 总计&nbsp;
-            <span style={{ fontWeight: 600 }}>
-                      {item.render ? item.render(item.total) : item.total}
+    return (
+      <div className={styles.standardTable}>
+        {hiddenAlert ? null : (
+          <div className={styles.tableAlert}>
+            <Alert
+              message={
+                <Fragment>
+                  已选择{' '}
+                  <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>{' '}
+                  项&nbsp;&nbsp;
+                  {needTotalList.map((item) => (
+                    <span style={{ marginLeft: 8 }} key={item.dataIndex}>
+                      {item.title} 总计&nbsp;
+                      <span style={{ fontWeight: 600 }}>
+                        {item.render ? item.render(item.total) : item.total}
+                      </span>
                     </span>
-                  </span>))}
-          <a onClick={this.cleanSelectedKeys} style={{ marginLeft: 24 }}>
-            清空
-          </a>
-        </Fragment>}
-               type='info'
-               showIcon />
-      </div>}
-      <Table rowKey={rowKey || 'key'}
-             scroll={{ x: 1500 }}
-             loading={loading}
-             expandable={expandable}
-             rowSelection={rowSelection}
-             dataSource={list}
-             columns={columns}
-             expandedRowRender={expandedRowRender}
-             pagination={paginationProps}
-             onChange={this.handleTableChange} />
-    </div>);
+                  ))}
+                  <a
+                    onClick={this.cleanSelectedKeys}
+                    style={{ marginLeft: 24 }}
+                  >
+                    清空
+                  </a>
+                </Fragment>
+              }
+              type="info"
+              showIcon
+            />
+          </div>
+        )}
+        <Table
+          rowKey={rowKey || 'key'}
+          scroll={{ x: 1500 }}
+          loading={loading}
+          expandable={expandable}
+          rowSelection={rowSelection}
+          dataSource={list}
+          columns={columns}
+          expandedRowRender={expandedRowRender}
+          pagination={paginationProps}
+          onChange={this.handleTableChange}
+        />
+      </div>
+    );
   }
-
 }
 
 export default StandardTable;

@@ -8,7 +8,7 @@ interface SnowProps {
 interface SnowState {}
 
 class Index extends Component<SnowProps, SnowState> {
-  private static defaultProps = {
+  static defaultProps = {
     isShow: true,
   };
 

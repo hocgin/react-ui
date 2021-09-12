@@ -7,12 +7,7 @@ interface ComplexCollapseProps {
   defaultActiveKey?: Array<string | number> | string | number;
 }
 
-interface ComplexCollapseState {}
-
-class Index extends React.PureComponent<
-  ComplexCollapseProps,
-  ComplexCollapseState
-> {
+class Index extends React.PureComponent<ComplexCollapseProps> {
   static Panel = Collapse.Panel;
 
   render() {

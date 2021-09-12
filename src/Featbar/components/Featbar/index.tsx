@@ -66,7 +66,7 @@ const DefaultContent = (props: any) => {
 };
 
 class Index extends React.Component<FeatbarProps, FeatbarState> {
-  private static defaultProps = {
+  static defaultProps = {
     title: 'Hi, 你好! 👏',
     feedbackUrl: 'https://www.yuque.com/gin/topics?label_ids=13074',
     changeLogUrl: 'https://www.yuque.com/gin/changelog',

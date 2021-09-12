@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component } from 'react';
 import styles from './index.less';
 import classNames from 'classnames';
 import Comment from '../Comment';
@@ -24,7 +24,7 @@ interface GroupProps {
   // 请求头
   headers?: HttpRequestHeader;
   // 请求路径
-  action?: string,
+  action?: string;
   // 每页数量
   size?: number;
   // 默认请求体
@@ -39,11 +39,10 @@ interface GroupProps {
   placeholder?: string;
 }
 
-interface GroupState {
-}
+interface GroupState {}
 
 class Index extends Component<GroupProps, GroupState> {
-  private static defaultProps = {
+  static defaultProps = {
     headers: {},
     body: {},
     size: 10,
@@ -86,7 +85,7 @@ class Index extends Component<GroupProps, GroupState> {
             className={styles.comments}
             loading={loading}
             locale={{ emptyText: '赶快来评论一下吧～' }}
-            itemLayout='horizontal'
+            itemLayout="horizontal"
             header={`${total} 评论`}
             dataSource={dataSource}
             renderItem={(item: any) => {
@@ -179,29 +178,11 @@ class Index extends Component<GroupProps, GroupState> {
   }
 
   onClickLike(cid?: number) {
-    Utils.POST(
-      `${this.url}/comment/${cid}/like`,
-      { ...this.body },
-      this.headers,
-    ).then((result: any) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        // success
-        return;
-      }
-    });
+    Utils.Request.post(`${this.url}/comment/${cid}/like`);
   }
 
   onClickDisliked(cid?: number) {
-    Utils.POST(
-      `${this.url}/comment/${cid}/dislike`,
-      { ...this.body },
-      this.headers,
-    ).then((result: any) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        // success
-        return;
-      }
-    });
+    Utils.Request.post(`${this.url}/comment/${cid}/dislike`);
   }
 
   onClickReply(cid?: number, content?: string) {
@@ -209,36 +190,33 @@ class Index extends Component<GroupProps, GroupState> {
       message.warn('请输入评论内容');
       return;
     }
-
-    let callback = (result: any) => {
-      if (Utils.Ui.showErrorMessageIfExits(result)) {
-        // @ts-ignore
-        this.setState(({ dataSource, replyTopId }) => {
-          if (replyTopId) {
-            let topComment =
-              (dataSource || []).find(({ id }: any) => id === replyTopId) || {};
-            topComment.hasReply = true;
-            topComment.dataSource = topComment.dataSource || mockSubComments();
-            topComment.dataSource.dataSource = [
-              ...topComment?.dataSource?.dataSource,
-              result?.data,
-            ];
-          } else {
-            dataSource = [...dataSource, result?.data];
-          }
-          return { dataSource };
-        });
-      }
-    };
-    Utils.POST(
-      `${this.url}/comment`,
-      {
+    Utils.Request.post(`${this.url}/comment`, {
+      data: {
         id: cid,
         content,
         ...this.body,
       },
-      this.headers,
-    ).then(callback);
+    }).then((result) => {
+      if (!Utils.Ui.isSuccess(result)) {
+        return;
+      }
+      let data = result?.data;
+      this.setState(({ dataSource, replyTopId }: any) => {
+        if (replyTopId) {
+          let topComment =
+            (dataSource || []).find(({ id }: any) => id === replyTopId) || {};
+          topComment.hasReply = true;
+          topComment.dataSource = topComment.dataSource || mockSubComments();
+          topComment.dataSource.dataSource = [
+            ...topComment?.dataSource?.dataSource,
+            data,
+          ];
+        } else {
+          dataSource = [...dataSource, data];
+        }
+        return { dataSource };
+      });
+    });
   }
 
   /**
@@ -252,21 +230,20 @@ class Index extends Component<GroupProps, GroupState> {
         loading: true,
       },
       () => {
-        Utils.POST(
-          `${this.url}/_paging`,
-          { page, size, ...this.body },
-          this.headers,
-        )
-          .then((result: any) => {
-            if (Utils.Ui.showErrorMessageIfExits(result)) {
-              let { records = [], total = 0, pages, current } = result?.data;
-              this.setState(({ dataSource }: any) => ({
-                hasMore: current < pages,
-                total,
-                dataSource: [...dataSource, ...records],
-              }));
+        Utils.Request.post(`${this.url}/_paging`, {
+          data: { page, size, ...this.body },
+        })
+          .then((result) => {
+            if (!Utils.Ui.isSuccess(result)) {
               return;
             }
+            let data = result?.data;
+            let { records = [], total = 0, pages, current } = data;
+            this.setState(({ dataSource }: any) => ({
+              hasMore: current < pages,
+              total,
+              dataSource: [...dataSource, ...records],
+            }));
           })
           .finally(() => this.setState({ loading: false }));
       },
@@ -292,21 +269,20 @@ class Index extends Component<GroupProps, GroupState> {
       },
       () => {
         // 发起请求
-        Utils.POST(
-          `${this.url}/comment/${parentId}/_paging`,
-          { page, size },
-          this.headers,
-        )
-          .then((result: any) => {
-            if (Utils.Ui.showErrorMessageIfExits(result)) {
-              let { records = [], total = 0, current, pages } = result?.data;
-              subComment.dataSource = [...records];
-              subComment.hasMore = current < pages;
-              subComment.total = total;
-              subComment.current = current;
-              this.setState({ dataSource });
+        Utils.Request.post(`${this.url}/comment/${parentId}/_paging`, {
+          data: { page, size },
+        })
+          .then((result) => {
+            if (!Utils.Ui.isSuccess(result)) {
               return;
             }
+            let data = result?.data;
+            let { records = [], total = 0, current, pages } = data;
+            subComment.dataSource = [...records];
+            subComment.hasMore = current < pages;
+            subComment.total = total;
+            subComment.current = current;
+            this.setState({ dataSource });
           })
           .finally(() =>
             this.setState(() => {
@@ -353,11 +329,10 @@ interface SubCommentsProps {
   jumpFlag?: any;
 }
 
-interface SubCommentsState {
-}
+interface SubCommentsState {}
 
 class SubComments extends Component<SubCommentsProps, SubCommentsState> {
-  private static defaultProps = {
+  static defaultProps = {
     dataSource: {
       loading: false,
       total: 0,
@@ -391,13 +366,13 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
           className={styles.subComments}
           loading={dataSource?.loading}
           loadMore={true}
-          itemLayout='horizontal'
+          itemLayout="horizontal"
           dataSource={dataSource?.dataSource}
           renderItem={(item: any) => (
             <List.Item>
               <Skeleton avatar loading={item?.loading} active>
                 <Comment
-                  type='small'
+                  type="small"
                   title={item?.author?.nickname}
                   href={item?.author?.href}
                   id={item?.id}
@@ -430,7 +405,7 @@ class SubComments extends Component<SubCommentsProps, SubCommentsState> {
         <Pagination
           className={styles.pagination}
           hideOnSinglePage
-          size='small'
+          size="small"
           total={dataSource?.total}
           defaultCurrent={1}
           current={dataSource?.current}
@@ -477,8 +452,7 @@ interface AffixEditorProps {
   onJump?: (flag: any) => void;
 }
 
-interface AffixEditorState {
-}
+interface AffixEditorState {}
 
 class AffixEditor extends Component<AffixEditorProps, AffixEditorState> {
   render() {

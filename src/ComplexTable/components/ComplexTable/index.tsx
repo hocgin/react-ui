@@ -32,7 +32,7 @@ class ComplexTable extends React.Component<
 > {
   static StandardTable: typeof StandardTable;
 
-  private static defaultProps = {
+  static defaultProps = {
     tableLoading: false,
     toolbarEnabled: true,
     toolbarTitle: null,

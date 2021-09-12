@@ -1,15 +1,15 @@
 export default class Lang {
-
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
    * @param url
    * @return {string[]}
    */
   static urlToList(url: string) {
-    const urllist = url.split('/').filter(i => i);
-    return urllist.map((urlItem, index) => `/${urllist.slice(0, index + 1).join('/')}`);
+    const urllist = url.split('/').filter((i) => i);
+    return urllist.map(
+      (urlItem, index) => `/${urllist.slice(0, index + 1).join('/')}`,
+    );
   }
-
 
   /**
    * 拆分数组
@@ -23,11 +23,10 @@ export default class Lang {
     let newArray = [];
 
     while (index < array.length) {
-      newArray.push(array.slice(index, index += length));
+      newArray.push(array.slice(index, (index += length)));
     }
     return newArray;
   }
-
 
   /**
    * 切割数据
@@ -47,7 +46,6 @@ export default class Lang {
     }
     return array.slice(0, max);
   }
-
 
   /**
    * 去重
@@ -82,7 +80,15 @@ export default class Lang {
    * @param o
    */
   static isNull(o: any) {
-    return (o === null || o === undefined);
+    return o === null || o === undefined;
+  }
+
+  /**
+   * 是否非null
+   * @param o
+   */
+  static isNotNull(o: any) {
+    return !Lang.isNull(o);
   }
 
   /**
@@ -108,9 +114,11 @@ export default class Lang {
    * @param url
    */
   static isImgUrl(url?: string) {
-    return `${url}`.endsWith('.png')
-      || `${url}`.endsWith('.jpeg')
-      || `${url}`.endsWith('.svg');
+    return (
+      `${url}`.endsWith('.png') ||
+      `${url}`.endsWith('.jpeg') ||
+      `${url}`.endsWith('.svg')
+    );
   }
 
   /**
@@ -141,5 +149,5 @@ export default class Lang {
       suffix = 'N/A';
     }
     return suffix.toUpperCase();
-  };
+  }
 }

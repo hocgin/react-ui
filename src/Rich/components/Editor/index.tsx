@@ -22,12 +22,10 @@ interface EditorProps {
   onChange?: (value?: string) => void;
 }
 
-interface EditorState {
-
-}
+interface EditorState {}
 
 class Index extends Component<EditorProps, EditorState> {
-  private static defaultProps = {
+  static defaultProps = {
     children: '',
   };
 
@@ -35,18 +33,20 @@ class Index extends Component<EditorProps, EditorState> {
     super(props, context);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     let { value, onChange } = this.props;
-    return <div className={styles.rich}>
-      <RichEditor id={ID}
-                  value={RichEditor.createEditorState(`${value}`)}
-                  onChange={onChange} />
-    </div>;
+    return (
+      <div className={styles.rich}>
+        <RichEditor
+          id={ID}
+          value={RichEditor.createEditorState(`${value}`)}
+          onChange={onChange}
+        />
+      </div>
+    );
   }
-
 }
 
 export default Index;

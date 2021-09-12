@@ -10,28 +10,25 @@ function getBase64(file: any) {
     const reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = () => resolve(reader.result);
-    reader.onerror = error => reject(error);
+    reader.onerror = (error) => reject(error);
   });
 }
 
 interface PhotoWallProps {
-  headers?: HttpRequestHeader,
-  action?: string,
-  maxLength: number,
-  onChange?: (values: []) => void,
-  defaultFileList?: Array<UploadFile>,
+  headers?: HttpRequestHeader;
+  action?: string;
+  maxLength: number;
+  onChange?: (values: []) => void;
+  defaultFileList?: Array<UploadFile>;
 }
 
-interface PhotoWallState {
-}
-
+interface PhotoWallState {}
 
 class Index extends React.Component<PhotoWallProps, PhotoWallState> {
-  private static defaultProps = {
+  static defaultProps = {
     maxLength: 1000,
     defaultFileList: [],
-    onChange: (values = []) => {
-    },
+    onChange: (values = []) => {},
   };
   state = {
     previewVisible: false,
@@ -42,22 +39,34 @@ class Index extends React.Component<PhotoWallProps, PhotoWallState> {
   render() {
     let { maxLength, defaultFileList, headers, action } = this.props;
     let { previewVisible, fileList, previewImage } = this.state;
-    const uploadButton = (<div>
-      <PlusOutlined />
-      <div>上传</div>
-    </div>);
+    const uploadButton = (
+      <div>
+        <PlusOutlined />
+        <div>上传</div>
+      </div>
+    );
     return (
       <div>
-        <Upload action={action}
-                headers={headers}
-                defaultFileList={defaultFileList}
-                listType='picture-card'
-                onPreview={this.handlePreview}
-                onChange={this.handleChange}>
+        <Upload
+          action={action}
+          headers={headers}
+          defaultFileList={defaultFileList}
+          listType="picture-card"
+          onPreview={this.handlePreview}
+          onChange={this.handleChange}
+        >
           {fileList.length >= maxLength ? null : uploadButton}
         </Upload>
-        <Modal visible={previewVisible} footer={null} onCancel={this.handleCancel}>
-          <img style={{ width: '100%' }} src={previewImage || ''} alt={'图片'} />
+        <Modal
+          visible={previewVisible}
+          footer={null}
+          onCancel={this.handleCancel}
+        >
+          <img
+            style={{ width: '100%' }}
+            src={previewImage || ''}
+            alt={'图片'}
+          />
         </Modal>
       </div>
     );
@@ -89,11 +98,15 @@ class Index extends React.Component<PhotoWallProps, PhotoWallState> {
       return file;
     });
     this.setState({ fileList });
-    onChange && onChange(fileList.filter(({ url }: any) => url).map(({ url, name }: any) => ({ url, name })));
+    onChange &&
+      onChange(
+        fileList
+          .filter(({ url }: any) => url)
+          .map(({ url, name }: any) => ({ url, name })),
+      );
   };
 
   handleCancel = () => this.setState({ previewVisible: false });
-
 }
 
 export default Index;

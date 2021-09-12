@@ -10,11 +10,10 @@ interface MoneyProps {
   value?: number | string;
 }
 
-interface MoneyState {
-}
+interface MoneyState {}
 
 class Index extends React.Component<MoneyProps, MoneyState> {
-  private static defaultProps = {
+  static defaultProps = {
     precision: 2,
     value: '-.--',
   };
@@ -23,11 +22,17 @@ class Index extends React.Component<MoneyProps, MoneyState> {
   render() {
     let {} = this.state;
     let { precision, value } = this.props;
-    return (<div className={styles.component}>
-      <Statistic valueStyle={{ color: '#E86A5E' }} prefix={'¥'} value={value} precision={precision} />
-    </div>);
+    return (
+      <div className={styles.component}>
+        <Statistic
+          valueStyle={{ color: '#E86A5E' }}
+          prefix={'¥'}
+          value={value}
+          precision={precision}
+        />
+      </div>
+    );
   }
-
 }
 
 export default Index;

@@ -6,12 +6,10 @@ interface EditorProps {
   children?: string;
 }
 
-interface EditorState {
-
-}
+interface EditorState {}
 
 class Index extends Component<EditorProps, EditorState> {
-  private static defaultProps = {
+  static defaultProps = {
     children: '',
   };
 
@@ -19,16 +17,16 @@ class Index extends Component<EditorProps, EditorState> {
     super(props, context);
   }
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
 
   render() {
     let { children } = this.props;
-    return <div className={styles.markdownPreview}>
-      <MDEditor.Markdown source={children} />
-    </div>;
+    return (
+      <div className={styles.markdownPreview}>
+        <MDEditor.Markdown source={children} />
+      </div>
+    );
   }
-
 }
 
 export default Index;

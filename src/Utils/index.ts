@@ -5,17 +5,20 @@ import { DateFormat } from './format';
 import { Config } from './config';
 import { Model } from './model';
 
-let index = {
-  Request: Request,
-  Config: Config,
-  Lang: Lang,
-  Model: Model,
-  Ui: Ui,
-  Format: {
-    DateFormat,
-  },
-  POST: (url: string, body: any, headers?: any) => {
-    return Request(`${url}`, { method: 'POST', body: body || {}, headers: headers });
-  },
+const Utils = class {
+  static Request: typeof Request;
+  static Config: typeof Config;
+  static Lang: typeof Lang;
+  static Model: typeof Model;
+  static Ui: typeof Ui;
+  static Format: any;
 };
-export default index;
+Utils.Request = Request;
+Utils.Config = Config;
+Utils.Lang = Lang;
+Utils.Model = Model;
+Utils.Ui = Ui;
+Utils.Format = {
+  DateFormat,
+};
+export default Utils;

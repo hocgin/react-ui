@@ -40,7 +40,7 @@ interface SponsorState {
 }
 
 class Index extends React.Component<SponsorProps, SponsorState> {
-  private static defaultProps = {
+  static defaultProps = {
     alipay: 'https://via.placeholder.com/125',
     wechat: 'https://via.placeholder.com/125',
   };

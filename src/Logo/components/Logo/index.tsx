@@ -27,7 +27,7 @@ interface LogoProps {
 interface LogoState {}
 
 class Index extends React.Component<LogoProps, LogoState> {
-  private static defaultProps = {
+  static defaultProps = {
     href: 'https://hocg.in',
     text: 'HOCGIN',
   };

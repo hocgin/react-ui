@@ -2,12 +2,20 @@ import React from 'react';
 import classnames from 'classnames';
 import styles from './index.less';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import { FullscreenOutlined, FullscreenExitOutlined, CopyOutlined } from '@ant-design/icons';
+import {
+  FullscreenOutlined,
+  FullscreenExitOutlined,
+  CopyOutlined,
+} from '@ant-design/icons';
 
-interface StretchProps {
+export interface StretchProps {
+  /**
+   * 设置样式名
+   */
   className?: string;
   children?: string | Node;
   maxRow?: number;
+  bordered: boolean;
 }
 
 interface StretchState {
@@ -15,26 +23,47 @@ interface StretchState {
 }
 
 class Index extends React.Component<StretchProps, StretchState> {
-  private static defaultProps = {};
+  static defaultProps = {
+    bordered: true,
+  };
   state = {
     fullSize: true,
   };
 
-  render() {
+  render(): JSX.Element {
     let { fullSize } = this.state;
-    let { children, className, maxRow } = this.props;
+    let { children, className, maxRow, bordered } = this.props;
     let contentStyle = fullSize ? {} : { WebkitLineClamp: maxRow };
-    let sizeIcon = fullSize ? <FullscreenExitOutlined /> : <FullscreenOutlined />;
-    return (<div className={classnames(styles.stretch, className)}>
-      <div className={styles.content} style={{ ...contentStyle }}>{children}</div>
-      <div className={styles.toolbar}>
-        <span className={styles.copy}><CopyToClipboard text={`${children}`}><CopyOutlined /></CopyToClipboard></span>
-        <span onClick={this.onClickResize} className={styles.resize}>{sizeIcon}</span>
+    let sizeIcon = fullSize ? (
+      <FullscreenExitOutlined />
+    ) : (
+      <FullscreenOutlined />
+    );
+    return (
+      <div
+        className={classnames(styles.stretch, className, {
+          [styles.bordered]: bordered,
+        })}
+      >
+        <div className={styles.content} style={{ ...contentStyle }}>
+          {children}
+        </div>
+        <div className={styles.toolbar}>
+          <span className={styles.copy}>
+            <CopyToClipboard text={`${children}`}>
+              <CopyOutlined />
+            </CopyToClipboard>
+          </span>
+          <span onClick={this.onClickResize} className={styles.resize}>
+            {sizeIcon}
+          </span>
+        </div>
       </div>
-    </div>);
+    );
   }
 
-  onClickResize = () => this.setState(({ fullSize }) => ({ fullSize: !fullSize }));
+  onClickResize = () =>
+    this.setState(({ fullSize }) => ({ fullSize: !fullSize }));
 }
 
 export default Index;

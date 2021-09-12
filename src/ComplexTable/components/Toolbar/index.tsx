@@ -19,7 +19,7 @@ export default class Toolbar extends React.PureComponent<
   ToolbarProps,
   ToolbarState
 > {
-  private static defaultProps = {
+  static defaultProps = {
     children: null,
   };
 
