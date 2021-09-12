@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "start": "dumi dev",
-    "docs:build": "UMI_ENV=prod dumi build",
+    "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
     "build": "father-build",
     "deploy": "npm run docs:build && npm run docs:deploy",
