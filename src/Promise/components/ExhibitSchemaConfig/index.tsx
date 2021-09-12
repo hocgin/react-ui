@@ -19,6 +19,10 @@ type ConfigType = {
    * 标题
    */
   title?: string;
+  /**
+   * 触发
+   */
+  trigger?: JSX.Element;
 };
 
 export interface ExhibitSchemaConfigProps {
@@ -29,22 +33,27 @@ export interface ExhibitSchemaConfigProps {
 }
 
 // @formatter: off
-const ExhibitSchemaConfig: React.FC<ExhibitSchemaConfigProps> = ({ config = {} }) => {
-// @formatter: on
+const ExhibitSchemaConfig: React.FC<ExhibitSchemaConfigProps> = ({
+  config,
+}) => {
+  // @formatter: on
+  let { action, title, trigger, columns = [], ...rest } = config;
   let initialValues = async () => {
-    let resp = await Service.initialValues(config?.action);
+    let resp = await Service.initialValues(action);
     let result = {};
     if (Utils.Ui.isSuccess(resp)) {
-      result = {  ...resp?.data };
+      result = { ...resp?.data };
     }
-    console.log('result', result);
     return resp;
   };
 
   return (
-    <Promise.ExhibitSchema title={config?.title}
+    <Promise.ExhibitSchema
+      title={title}
+      trigger={trigger}
       request={initialValues}
-      columns={config.columns || []}
+      columns={columns}
+      {...rest}
     />
   );
 };

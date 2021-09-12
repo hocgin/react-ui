@@ -1,7 +1,18 @@
 import React from 'react';
 import { Promise, Exhibit } from '@hocgin/ui';
-import { FileInfo } from '@/Utils/interface';
+import { FileInfo, IPage, Result } from '@/Utils/interface';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
+import { TableSchemaDataResult } from '@/Promise/components/TableSchema';
+
+export const asTableDataResult = (
+  result: Result<IPage>,
+): TableSchemaDataResult => {
+  return {
+    success: result?.success,
+    data: result?.data?.records ?? [],
+    total: result?.data?.total || 0,
+  };
+};
 
 export const handleSchemeColumns = (columns: any[]): any[] => {
   return columns.map(handleSchemeColumn);
@@ -46,9 +57,9 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
   [prefix('upload')]: {
     render: (record: FileInfo | FileInfo[]) => {
       if (record instanceof Array) {
-        return (<Exhibit.Array.Image src={record.map((({ url }) => url))} />);
+        return <Exhibit.Array.Image src={record.map(({ url }) => url)} />;
       }
-      return (<Exhibit.Image src={record.url} />);
+      return <Exhibit.Image src={record.url} />;
     },
     renderFormItem: (text: any, props: any) => {
       // @ts-ignore
@@ -98,10 +109,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       // @ts-ignore
       let params: GinCheckboxParam = props?.params || {};
-      return (
-        <Promise.Checkbox action={params.action}
-                          {...props?.fieldProps} />
-      );
+      return <Promise.Checkbox action={params.action} {...props?.fieldProps} />;
     },
   },
   [prefix('radio')]: {
@@ -109,9 +117,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       // @ts-ignore
       let params: GinRadioParam = props?.params || {};
-      return (
-        <Promise.Radio action={params.action} {...props?.fieldProps} />
-      );
+      return <Promise.Radio action={params.action} {...props?.fieldProps} />;
     },
   },
   [prefix('radioButton')]: {

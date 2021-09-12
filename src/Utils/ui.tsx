@@ -17,7 +17,7 @@ export class Ui {
       status: 'done',
       name: filename,
     };
-  };
+  }
 
   /**
    * 树型选择器
@@ -59,7 +59,6 @@ export class Ui {
   static renderTreeNodes(data: TreeNode[]) {
     return (data || []).map((item: TreeNode) => {
       if (item.children && item.children.length > 0) {
-
         return (
           <Tree.TreeNode
             key={`${item.id}`}

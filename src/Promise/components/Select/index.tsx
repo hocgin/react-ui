@@ -37,9 +37,13 @@ class Index extends React.PureComponent<TreeSelectProps> {
         style={{ minWidth: '5em' }}
         mode={multiple ? 'multiple' : undefined}
         placeholder={placeholder}
-        {...rest}>
-        {(data || []).map(({ key, value }: Option) =>
-          <Select.Option key={`${value}`} value={value}>{key}</Select.Option>)}
+        {...rest}
+      >
+        {(data || []).map(({ key, value }: Option) => (
+          <Select.Option key={`${value}`} value={value}>
+            {key}
+          </Select.Option>
+        ))}
       </Select>
     );
   }
@@ -50,11 +54,13 @@ class Index extends React.PureComponent<TreeSelectProps> {
 
   initialValues() {
     let { action } = this.props;
-    Service.initialValues(action).then((result) => {
-      if (Utils.Ui.isSuccess(result)) {
-        this.setState({ data: result?.data });
-      }
-    });
+    if (action) {
+      Service.initialValues(action).then((result) => {
+        if (Utils.Ui.isSuccess(result)) {
+          this.setState({ data: result?.data });
+        }
+      });
+    }
   }
 }
 

@@ -31,6 +31,10 @@ type ConfigType = {
    * 标题
    */
   title?: string;
+  /**
+   * 触发
+   */
+  trigger?: JSX.Element;
 };
 
 export interface ArchiveSchemaConfigProps {
@@ -41,17 +45,28 @@ export interface ArchiveSchemaConfigProps {
 }
 
 // @formatter: off
-const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({ config = {} }) => {
-// @formatter: on
-  let isUpdate = Utils.Lang.isNotNull(config?.id);
+const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
+  config = {},
+}) => {
+  // @formatter: on
+  let {
+    id,
+    action,
+    title,
+    layoutType = 'ModalForm',
+    trigger,
+    columns = [],
+    ...rest
+  } = config;
+  let isUpdate = Utils.Lang.isNotNull(id);
   let onFinish = async (values: any) => {
-    useRequest(() => Service.submit(isUpdate, config.action, config.id, values));
+    await Service.submit(isUpdate, action, id, values);
   };
   let initialValues = async () => {
     let init = config?.init ?? true;
     let result = {};
     if (isUpdate && init) {
-      let resp = await Service.initialValues(config?.action, config?.id);
+      let resp = await Service.initialValues(action, id);
       if (Utils.Ui.isSuccess(resp)) {
         result = { ...result, ...resp?.data };
       }
@@ -59,26 +74,26 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({ config = {} }
     return result;
   };
 
+  let triggerEl = trigger ? (
+    trigger
+  ) : isUpdate ? (
+    <Button type="primary" icon={<PlusOutlined />}>
+      修改
+    </Button>
+  ) : (
+    <Button type="primary" icon={<PlusOutlined />}>
+      新建
+    </Button>
+  );
   return (
     <Promise.ArchiveSchema
-      layoutType={config?.layoutType || 'ModalForm'}
-      title={config?.title}
-      trigger={
-        isUpdate ? (
-          <Button type='primary'>
-            <PlusOutlined />
-            修改
-          </Button>
-        ) : (
-          <Button type='primary'>
-            <PlusOutlined />
-            新建
-          </Button>
-        )
-      }
+      layoutType={layoutType}
+      title={title}
+      trigger={triggerEl}
       onFinish={onFinish}
       request={initialValues}
-      columns={config.columns || []}
+      columns={columns}
+      {...rest}
     />
   );
 };

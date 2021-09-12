@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from 'react';
+import React, { Component } from 'react';
 import styles from './index.less';
 import classNames from 'classnames';
 import Comment from '../Comment';
@@ -7,7 +7,7 @@ import { Utils } from '@hocgin/ui';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Pagination, List, Skeleton, Affix, Avatar, message } from 'antd';
 import { DateFormat } from '@/Utils/format';
-import { HttpRequestHeader, IPage, Result } from '@/Utils/interface';
+import { HttpRequestHeader } from '@/Utils/interface';
 
 let mockSubComments = () => {
   return {

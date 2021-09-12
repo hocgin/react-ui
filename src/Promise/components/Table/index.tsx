@@ -1,20 +1,33 @@
-import React, { PureComponent, ReactNode } from 'react';
+import React, { PureComponent } from 'react';
 import { ComplexTable, Utils } from '@hocgin/ui';
-import { Config } from '@/Utils/config';
 import { EventInfo, TableColumns, TableData } from './interface';
 import { HttpResult, IPage, OverlayFunc } from '@/Utils/interface';
 import { Menu, Divider, Dropdown } from 'antd';
+import Service from './service';
 import { DownOutlined } from '@ant-design/icons';
 
 interface TableProps {
+  /**
+   * 请求地址
+   */
   action: string;
   title?: string;
   batchMenus?: React.ReactElement[];
   rowMenus: React.ReactElement[];
   tableColumns?: TableColumns<any>;
+  addColumns?: any[];
   onSelectRow?: (values: any[]) => void;
-  // 单条操作: 返回 true 允许进行默认操作
+  /**
+   * 单行操作: 返回 true 允许进行默认操作
+   * @param event
+   * @param record
+   */
   onClickOperateRow?: (event: EventInfo, record: TableData) => boolean;
+  /**
+   * 多行操作: 返回 true 允许进行默认操作
+   * @param event
+   * @param values
+   */
   onClickOperateRows?: (event: EventInfo, values: any[]) => boolean;
   buttons?: React.ReactNode;
   // 搜索项
@@ -72,7 +85,7 @@ class Index extends PureComponent<TableProps, TableState> {
     let { action } = this.props;
     let { searchValue } = this.state;
     this.setState({ pagingLoading: true }, () => {
-      Utils.Request.post(`${action}/_paging`, { data: { ...searchValue } })
+      Service.paging(action, { ...searchValue })
         .then((result) => {
           if (Utils.Ui.isSuccess(result)) {
             this.setState({ data: result?.data });

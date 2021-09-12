@@ -54,7 +54,7 @@ export default () => {
   return (
     <Promise.Table
       title={'分组列表'}
-      action={'/mina/mobile-wallpaper'}
+      action={'https://api-dev.hocgin.top/api/mina/mobile-wallpaper'}
       tableColumns={tableColumns}
       batchMenus={batchMenus}
       rowMenus={rowMenus}
