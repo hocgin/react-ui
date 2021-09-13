@@ -2,7 +2,7 @@ import React from 'react';
 import { Checkbox as AntdCheckbox } from 'antd';
 import Service from './service';
 import { Option } from '@/Archive/components/interface';
-import { useRequest } from '@@/plugin-request/request';
+import { useRequest } from 'ahooks';
 
 interface CheckboxProps {
   /**
@@ -13,9 +13,16 @@ interface CheckboxProps {
 
 // @formatter: off
 const Checkbox: React.FC<CheckboxProps> = ({ action, ...rest }) => {
-// @formatter: on
+  // @formatter: on
   let { data = [] } = useRequest(() => Service.initialValues(action));
-  return (<AntdCheckbox.Group options={(data || []).map(({ key, value }: Option) => ({ label: key, value }))}
-                              {...rest} />);
+  return (
+    <AntdCheckbox.Group
+      options={(data || []).map(({ key, value }: Option) => ({
+        label: key,
+        value,
+      }))}
+      {...rest}
+    />
+  );
 };
 export default Checkbox;

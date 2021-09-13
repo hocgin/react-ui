@@ -1,9 +1,5 @@
 import React from 'react';
-import { Button } from 'antd';
 import { Promise, Utils } from '@hocgin/ui';
-import { PlusOutlined } from '@ant-design/icons';
-import { useRequest } from '@@/plugin-request/request';
-import { ProFormLayoutType } from '@ant-design/pro-form/lib/components/SchemaForm';
 import Service from './service';
 
 type ConfigType = {
