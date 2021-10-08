@@ -2,8 +2,6 @@ import React from 'react';
 import { Radio as AntdRadio, Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import Service from './service';
-import { Option } from '@/Archive/components/interface';
-import { useRequest } from '@@/plugin-request/request';
 
 interface DeleteSchemaConfigProps {
   /**

@@ -1,5 +1,4 @@
-import { RequestConfig, ErrorShowType } from '@@/plugin-request/request';
-import { RequestOptionsInit } from 'umi-request';
+import { RequestConfig, ErrorShowType } from 'dumi';
 import { Config } from '@/Utils/config';
 import { message } from 'antd';
 import moment from 'moment';
@@ -40,7 +39,7 @@ export const request: RequestConfig = {
   ],
   requestInterceptors: [
     // 默认请求头
-    (url: string, options: RequestOptionsInit) => {
+    (url: string, options: any) => {
       console.debug('[请求拦截器]::', '附带请求头');
       const defaultOptions = {
         credentials: 'include',
@@ -48,7 +47,7 @@ export const request: RequestConfig = {
       const newOptions = {
         ...defaultOptions,
         ...options,
-      } as RequestOptionsInit;
+      } as any;
       newOptions.headers = {
         'X-Page-Url': window.location.href,
         'X-Requested-With': 'XMLHttpRequest',
@@ -61,11 +60,11 @@ export const request: RequestConfig = {
     },
   ],
   responseInterceptors: [
-    (response: Response, options: RequestOptionsInit) => {
+    (response: Response, options: any) => {
       return response;
     },
     // 认证检查
-    async (response: Response, options: RequestOptionsInit) => {
+    async (response: Response, options: any) => {
       console.debug('[响应拦截器]::', '认证检查');
       if (response.status === 401) {
         response.json().then(({ redirectUrl }: any) => {
@@ -76,7 +75,7 @@ export const request: RequestConfig = {
       }
       return response;
     },
-    async (response: Response, options: RequestOptionsInit) => {
+    async (response: Response, options: any) => {
       try {
         await response.clone().json();
       } catch (e) {

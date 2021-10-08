@@ -1,4 +1,4 @@
-import { request as umiRequest } from '@@/plugin-request/request';
+import { request as umiRequest } from '@umijs/plugin-request/src/request';
 
 const extendRequest = (url: any, options: any) => {
   return umiRequest(url, options).catch(console.debug);
