@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { Avatar, Button, Tooltip, Input, Popover, Divider } from 'antd';
 import { UserOutlined, ClearOutlined, SmileOutlined } from '@ant-design/icons';
 import 'emoji-mart/css/emoji-mart.css';
+// @ts-ignore
 import { Picker } from 'emoji-mart';
 
 const { TextArea } = Input;

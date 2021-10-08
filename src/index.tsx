@@ -11,4 +11,7 @@ export { default as Footer } from './Footer';
 export { default as Header } from './Header';
 export { default as Money } from './Money';
 export { default as Stretch } from './Stretch';
+export { default as ComplexTable } from './ComplexTable';
+export { default as FileUpload } from './FileUpload';
+export { default as PhotoWall } from './PhotoWall';
 export { default as Utils } from './Utils';
