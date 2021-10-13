@@ -1,16 +1,16 @@
 ---
 
 # @formatter:off
-title: Tpl - 模版文件
+title: Beta - Beta 版
 nav:
-  title: 组件
+  title: 实验中 🧪
   path: /components
 group:
-  path: /
+  path: /beta
 # @formatter:on
 ---
 
-# Tpl - 模版文件
+# Beta - 模版文件
 
 这是一个组件的基础描述
 
@@ -18,17 +18,9 @@ group:
 
 ### 基础用法
 
-Request2:
+演示 use-request 的用法:
 
-<code src="./demos/request2.tsx"  background="#f0f2f5" />
-
-Demo:
-
-<code src="./demos/index.tsx"  background="#f0f2f5" />
-
-Request:
-
-<code src="./demos/request.tsx"  background="#f0f2f5" />
+<code src="./demos/request-mock.tsx"  background="#f0f2f5" />
 
 ## API
 

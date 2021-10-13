@@ -3,11 +3,11 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import Request from './components/Request';
-import Request2 from './components/Request2';
-import Tpl from './components/Tpl';
+
+class Beta {
+  static Request: typeof Request
+}
 
 export default {
   Request: Request,
-  Request2: Request2,
-  Tpl: Tpl,
-};
+} as Beta;

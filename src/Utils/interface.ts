@@ -20,8 +20,9 @@ export interface HttpRequestHeader {
  */
 export interface Result<T = any> {
   success: boolean;
-  message: string;
+  message?: string;
   data?: T;
+  [key: string]: any;
 }
 
 /**
