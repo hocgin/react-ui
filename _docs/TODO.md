@@ -6,3 +6,15 @@
   -> SchemaModal [增加/修改]
   -> SchemaStepModal [增加/修改]
 ```
+
+
+
+-> request
+  -> xxRequest
+-> initialValues
+
+
+- submitRequest
+- finishRequest
+- initialRequest
+- pagingRequest

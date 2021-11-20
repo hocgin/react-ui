@@ -9,7 +9,7 @@ import styles from './index.less';
 export default () => {
   return (
     <>
-      <Tpl title="Demo" className={styles.ok} />
+      <Tpl.Tpl className={styles.ok} />
     </>
   );
 };

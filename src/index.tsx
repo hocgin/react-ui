@@ -21,4 +21,5 @@ export { default as Promise } from './Promise';
 export { default as FileUpload } from './FileUpload';
 export { default as PhotoWall } from './PhotoWall';
 export { default as TextRow } from './TextRow';
+export { default as Beta } from './Beta';
 export { default as Utils } from './Utils';

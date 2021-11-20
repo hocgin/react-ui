@@ -150,4 +150,14 @@ export default class Lang {
     }
     return suffix.toUpperCase();
   }
+
+  /**
+   * await sleep(5000)
+   * @param time
+   */
+  static sleep(time: number = 3 * 1000) {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(true), time);
+    });
+  };
 }
