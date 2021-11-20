@@ -8,6 +8,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { Pagination, List, Skeleton, Affix, Avatar, message } from 'antd';
 import { DateFormat } from '@/Utils/format';
 import { HttpRequestHeader } from '@/Utils/interface';
+import { ListLocale } from 'antd/lib/list';
 
 let mockSubComments = () => {
   return {
@@ -84,7 +85,7 @@ class Index extends Component<GroupProps, GroupState> {
           <List
             className={styles.comments}
             loading={loading}
-            locale={{ emptyText: '赶快来评论一下吧～' }}
+            locale={{ emptyText: '赶快来评论一下吧～' } as ListLocale}
             itemLayout="horizontal"
             header={`${total} 评论`}
             dataSource={dataSource}
