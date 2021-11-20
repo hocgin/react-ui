@@ -3,7 +3,9 @@ import { Config } from '@/Utils/config';
 import { message } from 'antd';
 import moment from 'moment';
 
-moment.locale('zh-cn');
+if (moment) {
+  moment.locale('zh-cn');
+}
 
 // => 正常
 // => 分页数据
