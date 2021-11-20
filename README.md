@@ -1,6 +1,9 @@
 # react-ui
 
+> React UI 组件库，基于 React 和 Ant Design
+
 ## 目录
+
 ```shell
 .
 ├── _docs
