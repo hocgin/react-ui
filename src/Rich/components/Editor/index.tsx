@@ -1,21 +1,8 @@
 import React, { Component } from 'react';
-import 'braft-editor/dist/index.css';
-import 'braft-extensions/dist/code-highlighter.css';
-import 'braft-extensions/dist/table.css';
-// @ts-ignore
-import CodeHighlighter from 'braft-extensions/dist/code-highlighter';
-// @ts-ignore
-import Table from 'braft-extensions/dist/table';
-// @ts-ignore
-import Markdown from 'braft-extensions/dist/markdown';
 import RichEditor from 'braft-editor';
 import styles from './index.less';
 
 const ID = 'rich-editor';
-
-RichEditor.use(CodeHighlighter({}));
-RichEditor.use(Table({}));
-RichEditor.use(Markdown({}));
 
 interface EditorProps {
   value?: string;
@@ -33,7 +20,19 @@ class Index extends Component<EditorProps, EditorState> {
     super(props, context);
   }
 
-  componentDidMount() {}
+  componentDidMount() {
+    import('braft-editor/dist/index.css');
+    import('braft-extensions/dist/code-highlighter.css');
+    import('braft-extensions/dist/table.css');
+
+    let CodeHighlighter = require('braft-extensions/dist/code-highlighter');
+    let Table = require('braft-extensions/dist/table');
+    let Markdown = require('braft-extensions/dist/markdown');
+
+    RichEditor.use(CodeHighlighter({}));
+    RichEditor.use(Table({}));
+    RichEditor.use(Markdown({}));
+  }
 
   render() {
     let { value, onChange } = this.props;
