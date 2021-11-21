@@ -159,5 +159,19 @@ export default class Lang {
     return new Promise((resolve) => {
       setTimeout(() => resolve(true), time);
     });
-  };
+  }
+
+  /**
+   * 是否是浏览器端渲染
+   */
+  static isBrowser() {
+    return typeof window !== 'undefined';
+  }
+
+  /**
+   * 是否后端渲染
+   */
+  static isServer() {
+    return typeof window === 'undefined';
+  }
 }

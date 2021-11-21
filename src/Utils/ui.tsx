@@ -3,6 +3,7 @@ import { message, Tree, TreeSelect } from 'antd';
 import memoizeOne from 'memoize-one';
 import { FileInfo, HttpResult, IPage, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
+import { Utils } from '@/index';
 
 export class Ui {
   /**
@@ -185,8 +186,8 @@ export class Ui {
    * 获取域名
    */
   static getDomain() {
-    if (!window) {
-      return '';
+    if (Utils.Lang.isServer()) {
+      return '/';
     }
     return `${window.location.protocol}//${window.location.host}`;
   }
