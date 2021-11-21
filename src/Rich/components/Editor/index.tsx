@@ -3,6 +3,7 @@ import 'braft-editor/dist/index.css';
 import 'braft-extensions/dist/code-highlighter.css';
 import 'braft-extensions/dist/table.css';
 import styles from './index.less';
+import { Utils } from '@hocgin/ui';
 
 let RichEditor: any = null;
 
@@ -29,7 +30,7 @@ class Index extends Component<EditorProps, EditorState> {
   }
 
   componentDidMount() {
-    if (!window) {
+    if (Utils.Lang.isServer()) {
       return;
     }
 
