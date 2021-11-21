@@ -42,8 +42,8 @@ class Index extends React.Component<LogoProps, LogoState> {
             [styles.active]: isOpenMenu,
           })}
         >
-          {(menus || []).map(({ href, title }) => (
-            <li>
+          {(menus || []).map(({ href, title }, index) => (
+            <li key={index}>
               <a href={href}>{title}</a>
             </li>
           ))}
