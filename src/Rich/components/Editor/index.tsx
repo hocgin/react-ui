@@ -3,7 +3,7 @@ import 'braft-editor/dist/index.css';
 import 'braft-extensions/dist/code-highlighter.css';
 import 'braft-extensions/dist/table.css';
 import styles from './index.less';
-import { Utils } from '@/index';
+import { Utils } from '@hocgin/ui';
 
 let RichEditor: any = null;
 
