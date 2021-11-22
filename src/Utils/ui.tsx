@@ -186,7 +186,7 @@ export class Ui {
    * 获取域名
    */
   static getDomain() {
-    if (Utils.Lang.isServer()) {
+    if (typeof window === 'undefined') {
       return '/';
     }
     return `${window.location.protocol}//${window.location.host}`;

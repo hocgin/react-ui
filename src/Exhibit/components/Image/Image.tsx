@@ -30,9 +30,9 @@ class Index extends React.Component<ImageProps> {
           <div className={styles.photoImg}>
             <Img
               src={[src]}
-              loader={<SyncOutlined spin style={{ fontSize: '32px' }} />}
+              loader={<SyncOutlined spin style={this.iconStyle} />}
               unloader={
-                <FileExclamationOutlined style={{ fontSize: '32px' }} />
+                <FileExclamationOutlined style={this.iconStyle} />
               }
               className={styles.photo}
               alt={alt || src}
@@ -42,6 +42,10 @@ class Index extends React.Component<ImageProps> {
         {suffix !== '' && <div className={styles.indicator}>{suffix}</div>}
       </div>
     );
+  }
+
+  get iconStyle() {
+    return { fontSize: '32px' };
   }
 
   get suffix() {

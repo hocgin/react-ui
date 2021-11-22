@@ -33,12 +33,8 @@ class Index extends React.Component<FileProps> {
     let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
     return (
       <div>
-        <a href={fullUrl} className={styles.link} target="_blank">
-          <Popover
-            content={
-              <Avatar size={200} icon={<FileUnknownOutlined />} src={fullUrl} />
-            }
-          >
+        <a href={fullUrl} className={styles.link} target='_blank'>
+          <Popover content={<Avatar size={200} icon={<FileUnknownOutlined />} src={fullUrl} />}>
             <FileImageOutlined />
           </Popover>
           &nbsp;{title || url}

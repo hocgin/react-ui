@@ -1,5 +1,5 @@
 ---
-title: SearchBar - SearchBar
+title: SearchBar - 搜索条
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# SearchBar - 模版文件
+# SearchBar - 搜索条
 
 这是一个组件的基础描述
 

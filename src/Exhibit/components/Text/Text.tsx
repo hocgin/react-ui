@@ -25,7 +25,7 @@ class Text extends React.Component<TextProps> {
 
   render(): JSX.Element {
     let {} = this.props;
-    return <div></div>;
+    return (<div></div>);
   }
 }
 

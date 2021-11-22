@@ -1,5 +1,5 @@
 ---
-title: ComplexTable - 复杂的表格
+title: ComplexTable - 表格
 nav:
   title: 组件
   path: /components
