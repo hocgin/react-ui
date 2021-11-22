@@ -24,18 +24,19 @@ const ArchiveSchema: React.FC<TableSchemaProps> = ({
 }) => {
   // @formatter: on
   const values = useContext(ProProvider);
+  let value = {
+    ...values,
+    valueTypeMap: {
+      ...SchemeColumns,
+    },
+  };
+  let search = {};
+
   return (
-    <ProProvider.Provider
-      value={{
-        ...values,
-        valueTypeMap: {
-          ...SchemeColumns,
-        },
-      }}
-    >
+    <ProProvider.Provider value={value}>
       <ProTable
         rowKey={rowKey || 'id'}
-        search={{ labelWidth: 'auto' }}
+        search={search}
         columns={handleSchemeColumns(columns || [])}
         {...rest}
       >

@@ -15,14 +15,10 @@ interface RadioProps {
 const Radio: React.FC<RadioProps> = ({ action, ...rest }) => {
   // @formatter: on
   let { data = [] } = useRequest(() => Service.initialValues(action));
-  return (
-    <AntdRadio.Group
-      options={(data || []).map(({ key, value }: Option) => ({
-        label: key,
-        value,
-      }))}
-      {...rest}
-    />
-  );
+  let options = (data || []).map(({ key, value }: Option) => ({
+    label: key,
+    value,
+  }));
+  return <AntdRadio.Group options={options} {...rest} />;
 };
 export default Radio;

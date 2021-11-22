@@ -59,9 +59,11 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     return defaultMenuData;
   };
 
+  let menu = { request: requestProxy };
+
   return (
     <ProLayout
-      menu={{ request: requestProxy }}
+      menu={menu}
       location={{ pathname }}
       fixSiderbar
       fixedHeader

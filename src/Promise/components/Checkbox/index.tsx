@@ -15,14 +15,10 @@ interface CheckboxProps {
 const Checkbox: React.FC<CheckboxProps> = ({ action, ...rest }) => {
   // @formatter: on
   let { data = [] } = useRequest(() => Service.initialValues(action));
-  return (
-    <AntdCheckbox.Group
-      options={(data || []).map(({ key, value }: Option) => ({
-        label: key,
-        value,
-      }))}
-      {...rest}
-    />
-  );
+  let options = (data || []).map(({ key, value }: Option) => ({
+    label: key,
+    value,
+  }));
+  return <AntdCheckbox.Group options={options} {...rest} />;
 };
 export default Checkbox;

@@ -31,10 +31,12 @@ class Index extends React.PureComponent<TreeSelectProps> {
   render() {
     let { multiple, placeholder, action, ...rest } = this.props;
     let { data } = this.state;
+    let style = { minWidth: '5em' };
+
     return (
       <Select
         allowClear
-        style={{ minWidth: '5em' }}
+        style={style}
         mode={multiple ? 'multiple' : undefined}
         placeholder={placeholder}
         {...rest}

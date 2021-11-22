@@ -44,6 +44,12 @@ const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
     return asTableDataResult(resp);
   };
 
+  let style = { marginLeft: 8 };
+  let rowSelection = {
+    selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+  };
+  let pagination = { pageSize: 10 };
+
   return (
     <Promise.TableSchema
       headerTitle={title}
@@ -57,18 +63,16 @@ const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
         <Space size={24}>
           <span>
             已选 {selectedRowKeys.length} 项
-            <a style={{ marginLeft: 8 }} onClick={onCleanSelected}>
+            <a style={style} onClick={onCleanSelected}>
               取消选择
             </a>
           </span>
         </Space>
       )}
-      rowSelection={{
-        selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
-      }}
+      rowSelection={rowSelection}
       search={{}}
       toolBarRender={toolBarRender}
-      pagination={{ pageSize: 10 }}
+      pagination={pagination}
       columns={columns}
       {...rest}
     />
