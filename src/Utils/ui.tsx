@@ -3,7 +3,6 @@ import { message, Tree, TreeSelect } from 'antd';
 import memoizeOne from 'memoize-one';
 import { FileInfo, HttpResult, IPage, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
-import { Utils } from '@/index';
 
 export class Ui {
   /**
