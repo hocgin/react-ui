@@ -4,8 +4,15 @@ import { Ui } from './ui';
 import { DateFormat } from './format';
 import { Config } from './config';
 import { Model } from './model';
+import { Struct } from './result';
 
 const Utils = class {
+  static Struct: typeof Struct = Struct;
+
+  /**
+   * @deprecated 废弃
+   * @替换方案 /Utils/request/request.ts
+   */
   static Request: typeof Request = Request;
   static Config: typeof Config = Config;
   static Lang: typeof Lang = Lang;

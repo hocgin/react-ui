@@ -3,13 +3,12 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Promise, Utils } from '@hocgin/ui';
+import { Promise } from '@hocgin/ui';
 import styles from './index.less';
-import { TableColumns } from '@/Promise/components/Table/interface';
+import { TableColumns } from '@/Promise/components/Table/type';
 import { Menu, Button, Form, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-
-const Config = Utils.Config;
+import data from './table';
 
 const tableColumns: TableColumns<any> = [
   {
@@ -30,31 +29,39 @@ const tableColumns: TableColumns<any> = [
   },
 ];
 
-Config.set(Config.ConfigKeys.baseServerUrl, 'https://api-dev.hocgin.top');
 export default () => {
+  let styles = { width: '100%' };
+
   let buttons = (
     <>
-      <Button htmlType="button" icon={<PlusOutlined />} type="primary">
+      <Button htmlType='button' icon={<PlusOutlined />} type='primary'>
         新建
       </Button>
     </>
   );
   let searchItems = [
-    <Form.Item label="关键词搜索" key="keyword" name="keyword">
-      <Input style={{ width: '100%' }} placeholder="请输入关键词" />
+    <Form.Item label='关键词搜索' key='keyword' name='keyword'>
+      <Input style={styles} placeholder='请输入关键词' />
     </Form.Item>,
   ];
-  const batchMenus = [<Menu.Item key="rowsDelete">批量移出</Menu.Item>];
+  const batchMenus = [<Menu.Item key='rowsDelete'>批量移出</Menu.Item>];
   let rowMenus = [
-    <Menu.Item key="rowUpdate">修改</Menu.Item>,
-    <Menu.Item key="rowGrant">赋予权限</Menu.Item>,
-    <Menu.Divider key="divider" />,
-    <Menu.Item key="rowDelete">删除</Menu.Item>,
+    <Menu.Item key='rowUpdate'>修改</Menu.Item>,
+    <Menu.Item key='rowGrant'>赋予权限</Menu.Item>,
+    <Menu.Divider key='divider' />,
+    <Menu.Item key='rowDelete'>删除</Menu.Item>,
   ];
+
+  let useAction = {
+    paging: async (args: any) => {
+      return data;
+    },
+  };
+
   return (
     <Promise.Table
       title={'分组列表'}
-      action={'https://api-dev.hocgin.top/api/mina/mobile-wallpaper'}
+      useAction={useAction}
       tableColumns={tableColumns}
       batchMenus={batchMenus}
       rowMenus={rowMenus}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { message, Tree, TreeSelect } from 'antd';
-import memoizeOne from 'memoize-one';
+import { Struct } from './result';
 import { FileInfo, HttpResult, IPage, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
@@ -97,89 +97,15 @@ export class Ui {
     });
   }
 
-  /**
-   * 响应是否成功
-   * @param result
-   */
-  static isSuccess(result?: HttpResult<any>) {
-    return result && result.success;
-  }
-
-  /**
-   * 响应失败自动弹出提示
-   * @param result
-   */
-  static showErrorMessageIfExits(result?: HttpResult<any>) {
-    if (Ui.isSuccess(result)) {
-      return true;
-    }
-    console.debug('请求发生错误:', result);
-    if (result?.message) {
-      message.error(result.message).then(console.debug);
-    }
-    return false;
-  }
-
-  /**
-   * 获取 FORM 提交表单的错误信息
-   * @param errors
-   */
-  static getErrorMessage(errors: any) {
-    if (errors.errorFields && errors.errorFields.length > 0) {
-      return errors.errorFields[0].errors[0];
-    }
-
-    console.log(errors);
-    let keys = Object.keys(errors || {});
-    if (keys.length > 0) {
-      return errors[keys[0]].message;
-    }
-  }
-
-  /**
-   * 获取 paging 对象的列表数据
-   * @param paging
-   * @return {*|*[]}
-   */
-  static getPagingList(paging: IPage) {
-    if (!paging) {
-      return [];
-    }
-    return paging.records || [];
-  }
-
-  static fastGetPagingList = memoizeOne(this.getPagingList);
-
-  /**
-   * 获取分页的设置对象
-   * @param paging
-   * @return {{}}
-   */
-  static getPagingPagination(paging: IPage) {
-    if (!paging) {
-      return {};
-    }
-    return {
-      total: paging.total,
-      pageSize: paging.size,
-      current: paging.current,
-    };
-  }
-
-  static fastPagingPagination = memoizeOne(this.getPagingPagination);
-
-  /**
-   * 获取表单分页数据结构
-   * @param paging
-   */
-  static getTableData(paging: IPage) {
-    return {
-      list: Ui.fastGetPagingList(paging),
-      pagination: Ui.fastPagingPagination(paging),
-    };
-  }
-
-  static fastGetTableData = memoizeOne(this.getTableData);
+  static isSuccess = Struct.isSuccess;
+  static showErrorMessageIfExits = Struct.showErrorMessageIfExits;
+  static getErrorMessage = Struct.getErrorMessage;
+  static getPagingList = Struct.getPagingList;
+  static fastGetPagingList = Struct.fastGetPagingList;
+  static getPagingPagination = Struct.getPagingPagination;
+  static fastPagingPagination = Struct.fastPagingPagination;
+  static getTableData = Struct.getTableData;
+  static fastGetTableData = Struct.fastGetTableData;
 
   /**
    * 获取域名

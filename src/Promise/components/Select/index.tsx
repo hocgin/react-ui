@@ -1,14 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Select } from 'antd';
-import { Option } from '@/Archive/components/interface';
-import Service from './service';
-import { Utils } from '@hocgin/ui';
+import { Option } from '@/Utils/types/rt-grass';
+import { UseAction } from '@/Promise/components/Select/type';
+import { useMount, useRequest } from 'ahooks';
 
 interface TreeSelectProps {
   /**
-   * 请求地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
   /**
    * 是否多选
    */
@@ -19,51 +19,39 @@ interface TreeSelectProps {
   placeholder?: string;
 }
 
-class Index extends React.PureComponent<TreeSelectProps> {
-  static defaultProps = {
-    multiple: false,
-    placeholder: '请选择',
-  };
-  state = {
-    data: [],
-  };
+const Index: React.FC<TreeSelectProps> = ({
+                                            multiple = true,
+                                            placeholder = '请选择',
+                                            useAction,
+                                            ...rest
+                                          }) => {
 
-  render() {
-    let { multiple, placeholder, action, ...rest } = this.props;
-    let { data } = this.state;
-    let style = { minWidth: '5em' };
+  let [data, setData] = useState<Option[]>([]);
+  let style = { minWidth: '5em' };
 
-    return (
-      <Select
-        allowClear
-        style={style}
-        mode={multiple ? 'multiple' : undefined}
-        placeholder={placeholder}
-        {...rest}
-      >
-        {(data || []).map(({ key, value }: Option) => (
-          <Select.Option key={`${value}`} value={value}>
-            {key}
-          </Select.Option>
-        ))}
-      </Select>
-    );
-  }
+  let { run, loading } = useRequest(useAction.initialValues, {
+    manual: true,
+    onSuccess: (data: Option[]) => setData(data),
+  });
 
-  componentDidMount() {
-    this.initialValues();
-  }
+  useMount(() => run());
 
-  initialValues() {
-    let { action } = this.props;
-    if (action) {
-      Service.initialValues(action).then((result) => {
-        if (Utils.Ui.isSuccess(result)) {
-          this.setState({ data: result?.data });
-        }
-      });
-    }
-  }
-}
+  return (
+    <Select loading={loading}
+            allowClear
+            style={style}
+            mode={multiple ? 'multiple' : undefined}
+            placeholder={placeholder}
+            {...rest}
+    >
+      {data.map(({ key, value }: Option) => (
+        <Select.Option key={`${value}`} value={value}>
+          {key}
+        </Select.Option>
+      ))}
+    </Select>
+  );
+
+};
 
 export default Index;

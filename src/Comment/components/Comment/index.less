@@ -34,3 +34,39 @@
     }
   }
 }
+
+.comment {
+  :global {
+    .ant-list-item {
+      padding: 0 10px;
+    }
+
+    .ant-list-item:hover {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+  }
+}
+
+.subComments {
+  flex: 1 1;
+
+  :global {
+    .ant-list-item {
+      padding: 5px 0;
+      border: none;
+    }
+
+    .ant-list-items .ant-list-item:last-child {
+      border-bottom: none !important;
+    }
+
+    .ant-comment-avatar {
+      margin-right: 4px;
+    }
+  }
+}
+
+.pagination {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}

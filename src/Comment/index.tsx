@@ -1,11 +1,4 @@
 import React from 'react';
-import Comment from './components/Comment';
-import Editor from './components/Editor';
-import Group from './components/Group';
+import Comment from './components';
 
-let index = {
-  Group,
-  Editor,
-  Comment,
-};
-export default index;
+export default Comment;

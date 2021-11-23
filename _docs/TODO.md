@@ -6,18 +6,24 @@
   -> SchemaModal [增加/修改]
   -> SchemaStepModal [增加/修改]
 ```
+### 代办组件
+- 气泡组件(类似直播间的左下角的气泡)
 
 
+[comment]: <> (-> request)
 
--> request
-  -> xxRequest
--> initialValues
+[comment]: <> (  -> xxRequest)
+
+[comment]: <> (-> initialValues)
 
 
-- submitRequest
-- finishRequest
-- initialRequest
-- pagingRequest
+[comment]: <> (- submitRequest)
+
+[comment]: <> (- finishRequest)
+
+[comment]: <> (- initialRequest)
+
+[comment]: <> (- pagingRequest)
 
 
 

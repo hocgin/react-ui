@@ -3,8 +3,6 @@ import classnames from 'classnames';
 import { Statistic } from 'antd';
 import styles from './index.less';
 
-let { Countdown } = Statistic;
-
 interface MoneyProps {
   precision?: number;
   value?: number | string;
@@ -25,13 +23,17 @@ class Index extends React.Component<MoneyProps, MoneyState> {
     return (
       <div className={styles.component}>
         <Statistic
-          valueStyle={{ color: '#E86A5E' }}
+          valueStyle={this.valueStyle}
           prefix={'¥'}
           value={value}
           precision={precision}
         />
       </div>
     );
+  }
+
+  get valueStyle() {
+    return { color: '#E86A5E' };
   }
 }
 

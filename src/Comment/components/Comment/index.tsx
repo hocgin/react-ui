@@ -1,205 +1,332 @@
-import React, { createElement, Component, useState } from 'react';
-import styles from './index.less';
-import classnames from 'classnames';
-import { Avatar, Mentions, message, Comment, Tooltip } from 'antd';
+import React, { useState, createElement } from 'react';
+import { Utils } from '@hocgin/ui';
+import { useMount, useRequest } from 'ahooks';
+import { UserType } from '@/Utils/interface';
 import {
-  DislikeOutlined,
-  LikeOutlined,
+  CommentType as CommentType,
+  DislikeDataType,
+  LikeDataType, PagingDataType, PagingParamsType,
+  UseAction,
+} from '../type';
+import styles from './index.less';
+import {
   DislikeFilled,
+  DislikeOutlined,
   LikeFilled,
+  LikeOutlined,
   RetweetOutlined,
+  UserOutlined,
 } from '@ant-design/icons';
+import {
+  Avatar,
+  Comment as AntdComment,
+  Tooltip,
+  List,
+  Pagination,
+  Skeleton,
+  Affix,
+} from 'antd';
+import { ID } from '@/Utils/interface';
+import classnames from 'classnames';
+import Editor from '../Editor';
+import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 
-interface CommentProps {
-  // 评论的ID
-  id: number;
-  // [评论人] 名称
-  title?: string;
-  // [评论人] 用户信息链接
-  href?: string;
-  // 被评论的评论ID
-  replyId?: number;
-  // [被评论人] 头像
-  replyAvatar?: string;
-  // [被评论人] 名称
-  replyTitle?: string;
-  // 登陆状态
-  landed?: boolean;
+export const AffixEditor: React.FC<{
+  reply$: EventEmitter<CommentType | undefined>;
+  replied$: EventEmitter<CommentType>;
+  useAction: UseAction;
+}> = ({ reply$, replied$, useAction }) => {
+  return (
+    <div className={styles.editor}>
+      <Affix offsetBottom={0}>
+        <Editor reply$={reply$} replied$={replied$} useAction={useAction} />
+      </Affix>
+    </div>
+  );
+};
 
-  actions?: Array<React.ReactNode>;
-  content?: React.ReactNode;
-  children?: React.ReactNode;
-  author?: React.ReactNode;
-  datetime?: React.ReactNode;
-  avatar?: React.ReactNode;
-  className?: string;
-  type?: 'normal' | 'small';
-  action?: string;
-  likes?: number;
-  disliked?: number;
-  onChangeReply?: (cid?: number, title?: string, callback?: () => void) => void;
-  onClickDisliked?: (cid?: number) => void;
-  onClickLike?: (cid?: number) => void;
-  onJump?: (flag: any) => void;
-  jumpFlag?: any;
-}
+const UserOptions: React.FC<{
+  reply$: EventEmitter<CommentType | undefined>;
+  comment: CommentType;
+  useAction: UseAction;
+  userAction?: string;
+  likesCount?: number;
+  dislikedCount?: number;
+}> = (props, ref) => {
+  let { useAction, comment } = props;
+  let [userAction, setUserAction] = useState(props?.userAction);
+  let [likesCount, setLikesCount] = useState(props?.likesCount || 0);
+  let [dislikedCount, setDislikedCount] = useState(props?.dislikedCount || 0);
 
-interface CommentState {}
-
-class Index extends Component<CommentProps, CommentState> {
-  static defaultProps = {
-    type: 'normal',
-    disliked: 0,
-    likes: 0,
+  let commentId = comment.id;
+  let options = {
+    manual: true,
+    defaultParams: { commentId } as any,
+    onSuccess: ({
+                  likes = 0,
+                  disliked = 0,
+                  action,
+                }: DislikeDataType | LikeDataType) => {
+      setLikesCount(likes);
+      setDislikedCount(disliked);
+      setUserAction(action);
+    },
   };
 
-  state = {
-    likes: this.props?.likes,
-    disliked: this.props?.disliked,
-    action: this.props?.action,
+
+  let likeRequest = useRequest(useAction.like, options);
+  let dislikeRequest = useRequest(useAction.dislike, options);
+  let onAction = (type: 'like' | 'dislike', commentId: ID) => {
+    if (type === 'like') {
+      likeRequest.run({ commentId });
+    } else {
+      dislikeRequest.run({ commentId });
+    }
+  };
+  let onClickReply = () => {
+    props.reply$.emit(comment);
   };
 
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
-
-  render() {
-    let {
-      id,
-      className,
-      title,
-      href,
-      avatar,
-      datetime,
-      content,
-      children,
-      type,
-      replyId,
-      replyAvatar,
-      replyTitle,
-      onJump,
-      jumpFlag,
-    } = this.props;
-    let { action, likes, disliked } = this.state;
-
-    const actions = [
-      <Tooltip title="Like">
-        <span onClick={this.onClickLike}>
-          {createElement(action === 'liked' ? LikeFilled : LikeOutlined)}
-          <span className={styles.commentAction}>{likes}</span>
+  return (
+    <>
+      <Tooltip title='Like'>
+        <span onClick={onAction.bind(this, 'like', commentId)}>
+          {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
+          <span className={styles.commentAction}>{likesCount}</span>
         </span>
-      </Tooltip>,
-      <Tooltip title="Dislike">
-        <span onClick={this.onDislike}>
+      </Tooltip>
+      <Tooltip title='Dislike'>
+        <span onClick={onAction.bind(this, 'dislike', commentId)}>
           {React.createElement(
-            action === 'disliked' ? DislikeFilled : DislikeOutlined,
+            userAction === 'dislike' ? DislikeFilled : DislikeOutlined,
           )}
-          <span className={styles.commentAction}>{disliked}</span>
+          <span className={styles.commentAction}>{dislikedCount}</span>
         </span>
-      </Tooltip>,
-      <span onClick={this.onClickReply}>回复</span>,
-    ];
+      </Tooltip>
+      <span onClick={onClickReply}>回复</span>
+    </>
+  );
+};
 
-    return (
-      <div
-        id={`c_${id}`}
-        className={classnames(
-          styles.component,
-          {
-            [styles.small]: type === 'small',
-            [styles.activeComment]: jumpFlag === id,
-          },
-          className,
-        )}
+const SubComment: React.FC<{
+  reply$: EventEmitter<CommentType | undefined>;
+  comment: CommentType;
+  useAction: UseAction;
+}> = (props) => {
+  let { comment, useAction, reply$ } = props;
+  let {
+    author,
+    replier,
+    content,
+    replyId,
+    datetime,
+    action: userAction,
+  } = comment;
+  let id = comment.id;
+  return (
+    <Comment
+      type={'small'}
+      id={id}
+      replyId={replyId}
+      author={author}
+      replier={replier}
+      datetime={datetime}
+      content={content}
+      actions={[
+        <UserOptions
+          reply$={reply$}
+          useAction={useAction}
+          userAction={userAction}
+          comment={comment}
+        />,
+      ]}
+    />
+  );
+};
+
+const Comment: React.FC<{
+  id: ID;
+  replyId?: ID;
+  datetime?: string;
+  content?: React.ReactNode;
+  author: UserType;
+  replier?: UserType;
+  type?: 'small' | 'none';
+  className?: string;
+  active?: boolean;
+  children?: React.ReactNode;
+  actions?: React.ReactNode[];
+}> = ({
+        id,
+        type = 'none',
+        active = false,
+        datetime,
+        content,
+        replyId,
+        author,
+        replier,
+        children,
+        actions = [],
+        className,
+      }) => {
+  let hasReply = replyId !== undefined;
+
+  return (
+    <div
+      id={`c_${id}`}
+      className={classnames(
+        styles.component,
+        {
+          [styles.small]: type === 'small',
+          [styles.activeComment]: active,
+        },
+        className,
+      )}
+    >
+      <AntdComment
+        avatar={
+          <Avatar src={author?.avatarUrl} size={32} icon={<UserOutlined />} />
+        }
+        author={author?.title}
+        datetime={
+          <>
+            {datetime}{' '}
+            {hasReply && (
+              <a
+                href={`#c_${replyId || ''}`}
+                className={styles.reply}
+                onClick={() => {
+                  // onJump && onJump(replyId);
+                }}
+              >
+                <RetweetOutlined />{' '}
+                <Avatar size={15} src={replier?.avatarUrl} />{' '}
+                <span>{replier?.title}</span>
+              </a>
+            )}
+          </>
+        }
+        content={<p className={styles.content}>{content}</p>}
+        actions={actions}
       >
-        <Comment
-          avatar={avatar}
-          datetime={
-            <>
-              {datetime}{' '}
-              {replyId && (
-                <a
-                  href={`#c_${replyId || ''}`}
-                  className={styles.reply}
-                  onClick={() => onJump && onJump(replyId)}
-                >
-                  <RetweetOutlined /> <Avatar size={15} src={replyAvatar} />{' '}
-                  <span>{replyTitle}</span>
-                </a>
-              )}
-            </>
-          }
-          author={<a href={href}>{title}</a>}
-          content={<p className={styles.content}>{content}</p>}
-          actions={actions}
-        >
-          {children}
-        </Comment>
-      </div>
-    );
-  }
+        {children}
+      </AntdComment>
+    </div>
+  );
+};
 
-  onClickLike = () => {
-    let { landed } = this.props;
-    if (!landed) {
-      message.warn('请先进行登陆');
+const Index: React.FC<{
+  reply$: EventEmitter<CommentType | undefined>;
+  replied$: EventEmitter<CommentType>;
+  initialLoad: boolean;
+  comment: CommentType;
+  useAction: UseAction;
+}> = (props, ref) => {
+  let { comment, useAction, initialLoad, reply$, replied$ } = props;
+  let { author, replier, replyId, datetime, action: userAction } = comment;
+  let id = comment.id;
+  let hasReply = comment.hasReply;
+  let content = comment?.content;
+  let defaultParams: any = {
+    parentId: id,
+  };
+
+  let [dataSource, setDataSource] = useState([] as CommentType[]);
+  let [total, setTotal] = useState(0);
+  let [current, setCurrent] = useState(0);
+
+  replied$.useSubscription((comment: CommentType) => {
+    let replyId = comment?.replyId;
+    let isReplyCommend = !!replyId;
+    if (!isReplyCommend || replyId !== id) {
       return;
     }
+    setDataSource([...dataSource, comment] as CommentType[]);
+  });
 
-    this.setState(
-      ({ likes, disliked, action }: any) => {
-        if (action === 'disliked') {
-          likes += 1;
-          disliked -= 1;
-          action = 'liked';
-        } else if (action === 'liked') {
-          likes -= 1;
-          action = null;
-        } else {
-          likes += 1;
-          action = 'liked';
-        }
-        return { likes, disliked, action };
-      },
-      () => {
-        let { id, onClickLike } = this.props;
-        onClickLike && onClickLike(id);
-      },
-    );
-  };
 
-  onDislike = () => {
-    let { landed } = this.props;
-    if (!landed) {
-      message.warn('请先进行登陆');
-      return;
+  let { loading, run } = useRequest<PagingDataType, [PagingParamsType]>(useAction.paging, {
+    defaultParams,
+    manual: true,
+    retryCount: 3,
+    debounceWait: 300,
+    onSuccess: (data: PagingDataType) => {
+      let tableData = Utils.Struct.getTableData(data);
+      let pagination = tableData?.pagination;
+      let total: number = pagination?.total || 0;
+      let current: number = pagination?.current || 0;
+      let records: CommentType[] = tableData?.list || [];
+
+      setCurrent(current);
+      setTotal(total);
+      setDataSource([...records] as CommentType[]);
+    },
+  });
+
+  useMount(() => {
+    if (hasReply && initialLoad) {
+      run({ ...defaultParams, page: 1 } as PagingParamsType);
     }
-    this.setState(
-      ({ likes, disliked, action }: any) => {
-        if (action === 'disliked') {
-          disliked -= 1;
-          action = null;
-        } else if (action === 'liked') {
-          likes -= 1;
-          disliked += 1;
-          action = 'disliked';
-        } else {
-          disliked += 1;
-          action = 'disliked';
-        }
-        return { likes, disliked, action };
-      },
-      () => {
-        let { id, onClickDisliked } = this.props;
-        onClickDisliked && onClickDisliked(id);
-      },
-    );
+  });
+
+  let onPageChange = (page?: number, pageSize?: number) => {
+    run({ ...defaultParams, page, pageSize });
   };
 
-  onClickReply = () => {
-    let { onChangeReply, id, title } = this.props;
-    onChangeReply && onChangeReply(id, title, console.debug);
-  };
-}
+  return (
+    <Comment
+      className={styles.comment}
+      id={id}
+      replyId={replyId}
+      datetime={datetime}
+      author={author}
+      replier={replier}
+      content={<p className={styles.content}>{content}</p>}
+      actions={[
+        <UserOptions
+          reply$={reply$}
+          useAction={useAction}
+          userAction={userAction}
+          comment={comment}
+        />,
+      ]}
+    >
+      {dataSource.length > 0 ? (
+        <>
+          <List
+            loading={loading}
+            className={styles.subComments}
+            loadMore={true}
+            renderItem={(item: CommentType, index: number) => {
+              return (
+                <List.Item key={index}>
+                  <Skeleton avatar loading={loading} active>
+                    <SubComment
+                      reply$={reply$}
+                      comment={item}
+                      useAction={useAction}
+                    />
+                  </Skeleton>
+                </List.Item>
+              );
+            }}
+            itemLayout='horizontal'
+            dataSource={dataSource}
+          />
+          <Pagination
+            hideOnSinglePage
+            className={styles.pagination}
+            size='small'
+            total={total}
+            defaultCurrent={1}
+            current={current}
+            onChange={onPageChange}
+            showTotal={(total) => `共 ${total} 条`}
+          />
+        </>
+      ) : null}
+    </Comment>
+  );
+};
 
 export default Index;

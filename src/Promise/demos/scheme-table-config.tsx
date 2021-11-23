@@ -4,7 +4,6 @@ import { Space } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
 import { Promise } from '@hocgin/ui';
-import DeleteSchemaConfig from '@/Promise/components/DeleteSchemaConfig';
 
 export const config: any = {
   action: 'https://api-dev.hocgin.top/api/mina/mobile-wallpaper/_paging',
@@ -42,7 +41,7 @@ export const config: any = {
           config={{
             ...viewConfig,
             trigger: (
-              <a key="view" rel="noopener noreferrer">
+              <a key='view' rel='noopener noreferrer'>
                 详情
               </a>
             ),
@@ -53,14 +52,14 @@ export const config: any = {
             ...addConfig,
             id: record.id,
             trigger: (
-              <a key="update" rel="noopener noreferrer">
+              <a key='update' rel='noopener noreferrer'>
                 修改
               </a>
             ),
           }}
         />,
         <TableDropdown
-          key="actionGroup"
+          key='actionGroup'
           onSelect={() => action?.reload()}
           menus={[
             {

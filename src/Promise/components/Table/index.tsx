@@ -1,16 +1,17 @@
-import React, { PureComponent } from 'react';
+import React, { useState } from 'react';
 import { ComplexTable, Utils } from '@hocgin/ui';
-import { EventInfo, TableColumns, TableData } from './interface';
-import { HttpResult, IPage, OverlayFunc } from '@/Utils/interface';
+import { EventInfo, TableColumns, TableData } from './type';
+import { IPage, PageRo } from '@/Utils/interface';
 import { Menu, Divider, Dropdown } from 'antd';
-import Service from './service';
 import { DownOutlined } from '@ant-design/icons';
+import { useMount, useRequest } from 'ahooks';
+import { UseAction } from './type';
 
 interface TableProps {
   /**
    * 请求地址
    */
-  action: string;
+  useAction: UseAction;
   title?: string;
   batchMenus?: React.ReactElement[];
   rowMenus: React.ReactElement[];
@@ -42,114 +43,47 @@ interface TableState {
   data: IPage;
 }
 
-class Index extends PureComponent<TableProps, TableState> {
-  static defaultProps = {
-    tableColumns: [],
-    toolbarTitle: null,
-  };
-  state = {
-    pagingLoading: false,
-    selectedRows: [],
-    operateRow: null,
-    searchValue: {},
-    data: {} as IPage,
-  };
+// @formatter: off
+const Index: React.FC<TableProps> = ({
+                                       tableColumns = [],
+                                       rowMenus = [],
+                                       useAction,
+                                       title,
+                                       onSelectRow,
+                                       onClickOperateRow,
+                                       onClickOperateRows,
+                                       batchMenus, buttons, searchItems = [], ...rest
+                                     }) => {
+  // @formatter: on
+  let [data, setData] = useState<IPage>();
+  let [defaultParams, setDefaultParams] = useState<PageRo>({});
+  let [selectedRows, setSelectedRows] = useState<any[]>([]);
+  let [operateRow, setOperateRow] = useState<any>();
 
-  componentDidMount() {
-    this.paging();
-  }
+  let { run, loading } = useRequest<IPage, any[]>(useAction.paging, {
+    manual: true,
+    onSuccess: (data: IPage) => setData(data),
+  });
 
-  render() {
-    let { title, batchMenus, buttons, searchItems = [] } = this.props;
-    let { selectedRows, data, pagingLoading } = this.state;
-
-    return (
-      <ComplexTable
-        title={title}
-        tableLoading={pagingLoading}
-        batchMenus={batchMenus}
-        buttons={buttons}
-        searchItems={searchItems}
-        tableData={Utils.Ui.fastGetTableData(data)}
-        selectedRows={selectedRows}
-        onSelectRow={this.onChangeSelectRow}
-        onClickSearch={this.onClickSearch}
-        onClickToolbarMenu={this.onClickOperateRows}
-        onChangeStandardTable={this.onChangeStandardTable}
-        tableColumns={this.tableColumns}
-      />
-    );
-  }
-
-  paging = () => {
-    let { action } = this.props;
-    let { searchValue } = this.state;
-    this.setState({ pagingLoading: true }, () => {
-      Service.paging(action, { ...searchValue })
-        .then((result) => {
-          if (Utils.Ui.isSuccess(result)) {
-            this.setState({ data: result?.data });
-          }
-        })
-        .finally(() => this.setState({ pagingLoading: false }));
-    });
-  };
-
-  onClickOperateRow = (event: EventInfo, record: TableData) => {
-    console.debug('单行操作', event, record);
-    let { onClickOperateRow } = this.props;
-    let returnFlag = onClickOperateRow && onClickOperateRow(event, record);
-    if (returnFlag === undefined || !returnFlag) {
-      return;
-    }
-    console.debug('-> 进行默认操作');
-  };
-
-  onClickOperateRows = (menuInfo: any) => {
-    let { onClickOperateRows } = this.props;
-    let { selectedRows } = this.state;
-    console.debug('多行操作', menuInfo, selectedRows);
-    let returnFlag =
-      onClickOperateRows && onClickOperateRows(menuInfo, selectedRows);
-    if (returnFlag === undefined || !returnFlag) {
-      return;
-    }
-    console.debug('-> 进行默认操作');
-  };
-
-  onChangeStandardTable = (
-    { pageSize, current }: any,
-    filtersArg: any,
-    sorter: any,
-  ) => {
-    let { searchValue } = this.state;
-    this.setState(
-      {
-        searchValue: {
-          ...searchValue,
-          size: pageSize,
-          page: current,
-        },
-      },
-      this.paging,
-    );
-  };
-
-  onChangeSelectRow = (rows: any) => {
-    let { onSelectRow } = this.props;
+  // 选择多行事件
+  let onChangeSelectRow = (rows: any) => {
     let selectedRows = rows.map(({ id }: TableData) => id);
-    this.setState(
-      { selectedRows: selectedRows },
-      () => onSelectRow && onSelectRow(selectedRows),
-    );
+    setSelectedRows(selectedRows);
+    onSelectRow && onSelectRow(selectedRows);
   };
 
-  onClickSearch = (values: any) => {
-    this.setState({ searchValue: { ...values } }, this.paging);
+  // 某行操作事件
+  let _onClickOperateRows = (menuInfo: any) => {
+    onClickOperateRows && onClickOperateRows(menuInfo, selectedRows);
   };
 
-  get tableColumns() {
-    let { tableColumns = [], rowMenus = [] } = this.props;
+  // 表单变更事件
+  let onChangeStandardTable = ({ pageSize, current }: any, filtersArg: any, sorter: any) => {
+    setDefaultParams({ ...defaultParams, page: current, pageSize });
+  };
+
+  // 生成表单列数组
+  let listTableColumns = () => {
     return [
       ...tableColumns,
       {
@@ -158,13 +92,12 @@ class Index extends PureComponent<TableProps, TableState> {
         fixed: 'right',
         width: 200,
         render: (text: string, record: TableData) => {
-          const onClickOperateRow = (record: TableData, event: EventInfo) => {
-            this.setState({ operateRow: record?.id }, () =>
-              this.onClickOperateRow(event, record),
-            );
+          const _onClickOperateRow = (record: TableData, event: EventInfo) => {
+            setOperateRow(record?.id);
+            onClickOperateRow && onClickOperateRow(event, record);
           };
           const RowMenus = (
-            <Menu onClick={onClickOperateRow.bind(this, record)}>
+            <Menu onClick={_onClickOperateRow.bind(this, record)}>
               {rowMenus}
             </Menu>
           );
@@ -172,16 +105,16 @@ class Index extends PureComponent<TableProps, TableState> {
           return (
             <>
               <a
-                rel="noopener noreferrer"
-                onClick={onClickOperateRow.bind(this, record, {
+                rel='noopener noreferrer'
+                onClick={_onClickOperateRow.bind(this, record, {
                   key: 'rowDetail',
                 })}
               >
                 查看详情
               </a>
-              <Divider type="vertical" />
+              <Divider type='vertical' />
               <Dropdown overlay={RowMenus} disabled={rowMenus.length === 0}>
-                <a rel="noopener noreferrer">
+                <a rel='noopener noreferrer'>
                   更多操作 <DownOutlined />
                 </a>
               </Dropdown>
@@ -190,7 +123,25 @@ class Index extends PureComponent<TableProps, TableState> {
         },
       },
     ];
-  }
-}
+  };
 
+  useMount(() => run([defaultParams]));
+
+  return (
+    <ComplexTable
+      title={title}
+      tableLoading={loading}
+      batchMenus={batchMenus}
+      buttons={buttons}
+      searchItems={searchItems}
+      tableData={Utils.Ui.fastGetTableData(data)}
+      selectedRows={selectedRows}
+      onSelectRow={onChangeSelectRow}
+      onClickSearch={(values: any) => setDefaultParams(values)}
+      onClickToolbarMenu={_onClickOperateRows}
+      onChangeStandardTable={onChangeStandardTable}
+      tableColumns={listTableColumns()}
+    />
+  );
+};
 export default Index;

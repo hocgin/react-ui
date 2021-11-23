@@ -1,24 +1,32 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Radio as AntdRadio } from 'antd';
-import Service from './service';
-import { Option } from '@/Archive/components/interface';
-import { useRequest } from 'ahooks';
+import { Option } from '@/Utils/types/rt-grass';
+import { useMount, useRequest } from 'ahooks';
+import { UseAction } from '@/Promise/components/Select/type';
 
 interface RadioProps {
   /**
-   * 请求地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
 }
 
 // @formatter: off
-const Radio: React.FC<RadioProps> = ({ action, ...rest }) => {
+const Radio: React.FC<RadioProps> = ({ useAction, ...rest }) => {
   // @formatter: on
-  let { data = [] } = useRequest(() => Service.initialValues(action));
-  let options = (data || []).map(({ key, value }: Option) => ({
-    label: key,
-    value,
-  }));
+  let [options, setOptions] = useState<{ label: string, value: string; }[]>([]);
+
+  let { run, loading } = useRequest(useAction.initialValues, {
+    manual: true,
+    onSuccess: (data: Option[]) => {
+      setOptions(data.map(({ key, value }: Option) => ({
+        label: key,
+        value,
+      })));
+    },
+  });
+
+  useMount(() => run());
   return <AntdRadio.Group options={options} {...rest} />;
 };
 export default Radio;

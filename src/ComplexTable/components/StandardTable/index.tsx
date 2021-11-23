@@ -122,19 +122,19 @@ class StandardTable extends PureComponent<
               message={
                 <Fragment>
                   已选择{' '}
-                  <a style={{ fontWeight: 600 }}>{selectedRowKeys.length}</a>{' '}
+                  <a className={styles.fontStyle}>{selectedRowKeys.length}</a>{' '}
                   项&nbsp;&nbsp;
                   {needTotalList.map((item) => (
-                    <span style={{ marginLeft: 8 }} key={item.dataIndex}>
+                    <span className={styles.totalSpan} key={item.dataIndex}>
                       {item.title} 总计&nbsp;
-                      <span style={{ fontWeight: 600 }}>
+                      <span className={styles.fontStyle}>
                         {item.render ? item.render(item.total) : item.total}
                       </span>
                     </span>
                   ))}
                   <a
                     onClick={this.cleanSelectedKeys}
-                    style={{ marginLeft: 24 }}
+                    className={styles.clearBtn}
                   >
                     清空
                   </a>
@@ -147,7 +147,7 @@ class StandardTable extends PureComponent<
         )}
         <Table
           rowKey={rowKey || 'key'}
-          scroll={{ x: 1500 }}
+          scroll={this.tableScroll}
           loading={loading}
           expandable={expandable}
           rowSelection={rowSelection}
@@ -159,6 +159,10 @@ class StandardTable extends PureComponent<
         />
       </div>
     );
+  }
+
+  get tableScroll() {
+    return { x: 1500 };
   }
 }
 

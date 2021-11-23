@@ -3,29 +3,63 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Promise, Logo } from '@hocgin/ui';
+import { Promise, useGet } from '@hocgin/ui';
 import localRoutes from './page-layout-config';
-import { Divider, Avatar } from 'antd';
+import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { PageContainer } from '@ant-design/pro-layout';
+
+let useAction = {
+  initialValues: async () => {
+    // let data = await useGet('https://api-dev.hocgin.top/api/authority').then(res => {
+    //   return res?.data;
+    // });
+    return [
+      'access.role',
+      'devtools.short_url',
+      'devtools.request_log',
+      'devtools.data_dict',
+      'com.project',
+      'mina.nes_game',
+      'mina.toolset',
+      'payment.notify',
+      'payment.trade.detail',
+      'payment.trade',
+      'payment.access_app',
+      'access.user_group',
+      'home',
+      'access.authority',
+      'access.api',
+      'ums.user',
+      'home.dashboard',
+      'devtools',
+      'com',
+      'mina',
+      'payment',
+      'access',
+      'ums',
+    ];
+  },
+};
 
 export default class Index extends React.PureComponent<{}> {
   state = {};
 
   render() {
+    let style = { height: '100vh' };
+    let waterMark = { content: 'HOCGIN' };
+
     return (
-      <div style={{ height: '100vh' }}>
+      <div style={style}>
         <Promise.PageLayout
           {...localRoutes}
-          action={'https://api-dev.hocgin.top/api/authority'}
+          useAction={useAction}
           rightContentRender={() => (
             <div>
-              <Avatar shape="square" size="small" icon={<UserOutlined />} />
+              <Avatar shape='square' size='small' icon={<UserOutlined />} />
             </div>
-          )}
-        >
-          <Promise.PageContainer waterMarkProps={{ content: 'HOCGIN' }}>
-            <div style={{ height: '110vh' }}>内容</div>
+          )}>
+          <Promise.PageContainer waterMarkProps={waterMark}>
+            <div style={style}>内容</div>
           </Promise.PageContainer>
         </Promise.PageLayout>
       </div>

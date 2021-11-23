@@ -12,7 +12,8 @@ group:
 
 # Archive - 存档
 
-这是一个组件的基础描述
+用来配置化展示表单的组件。发现了 antd-pro 有类似的组件，暂时废弃，考虑同等替换。
+参考替代方案: [Schema Form](https://procomponents.ant.design/components/schema-form)
 
 ## 代码演示
 

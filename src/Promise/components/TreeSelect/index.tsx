@@ -1,13 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
 import { Utils } from '@hocgin/ui';
-import Service from '@/Promise/components/Select/service';
+import { UseAction } from './type';
+import { useMount, useRequest } from 'ahooks';
+import { TreeNode } from '@/Utils/interface';
 
 interface TreeSelectProps {
   /**
-   * 请求地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
   /**
    * 是否多选
    */
@@ -18,43 +20,32 @@ interface TreeSelectProps {
   placeholder?: string;
 }
 
-class Index extends React.PureComponent<TreeSelectProps> {
-  static defaultProps = {
-    multiple: false,
-    placeholder: '请选择',
-  };
-  state = {
-    data: [],
-  };
+const Index: React.FC<TreeSelectProps> = ({
+                                            multiple = true,
+                                            placeholder = '请选择',
+                                            useAction,
+                                            ...rest
+                                          }) => {
 
-  render() {
-    let { multiple, placeholder, ...rest } = this.props;
-    let { data } = this.state;
-    return (
-      <TreeSelect
-        allowClear
-        treeCheckable={multiple}
-        multiple={multiple}
-        placeholder={placeholder}
-        {...rest}
-      >
-        {Utils.Ui.renderTreeSelectNodes(data)}
-      </TreeSelect>
-    );
-  }
+  let [data, setData] = useState<TreeNode[]>([]);
+  let { run, loading } = useRequest(useAction.initialValues, {
+    manual: true,
+    onSuccess: (data: TreeNode[]) => setData(data),
+  });
 
-  componentDidMount() {
-    this.initialValues();
-  }
+  useMount(() => run());
 
-  async initialValues() {
-    let { action } = this.props;
-    Service.initialValues(action).then((result) => {
-      if (Utils.Ui.isSuccess(result)) {
-        this.setState({ data: result?.data });
-      }
-    });
-  }
-}
+  return (
+    <TreeSelect loading={loading}
+                allowClear
+                treeCheckable={multiple}
+                multiple={multiple}
+                placeholder={placeholder}
+                {...rest}
+    >
+      {Utils.Ui.renderTreeSelectNodes(data)}
+    </TreeSelect>
+  );
+};
 
 export default Index;

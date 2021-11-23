@@ -62,11 +62,7 @@ class Index extends React.Component<PhotoWallProps, PhotoWallState> {
           footer={null}
           onCancel={this.handleCancel}
         >
-          <img
-            style={{ width: '100%' }}
-            src={previewImage || ''}
-            alt={'图片'}
-          />
+          <img style={this.imgStyle} src={previewImage || ''} alt={'图片'} />
         </Modal>
       </div>
     );
@@ -107,6 +103,10 @@ class Index extends React.Component<PhotoWallProps, PhotoWallState> {
   };
 
   handleCancel = () => this.setState({ previewVisible: false });
+
+  get imgStyle() {
+    return { width: '100%' };
+  }
 }
 
 export default Index;
