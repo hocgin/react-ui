@@ -1,8 +1,17 @@
 import React from 'react';
+import { UseAction } from '@/Promise/components/ExhibitSchemaConfig/type';
 
 export const config: any = {
-  action: 'https://api-dev.hocgin.top/api/xx/1',
   layoutType: 'ModalForm',
+  useAction: {
+    initialValues: async (params: Record<string, any>) => {
+      console.log(params, 'scheme-exhibit-config.tsx');
+      return {
+        title: '这是标题',
+        state: 'vx',
+      };
+    },
+  } as UseAction,
   columns: [
     {
       title: '标题',

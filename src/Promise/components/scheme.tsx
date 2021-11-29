@@ -32,25 +32,25 @@ export interface GinUploadParam {
 }
 
 export interface GinSelectParam {
-  action: string;
+  useAction: string;
   multiple?: boolean;
 }
 
 export interface GinTreeSelectParam {
-  action: string;
+  useAction: string;
   multiple?: boolean;
 }
 
 export interface GinCheckboxParam {
-  action: string;
+  useAction: string;
 }
 
 export interface GinRadioParam {
-  action: string;
+  useAction: string;
 }
 
 export interface GinRadioButtonParam {
-  action: string;
+  useAction: string;
 }
 
 export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
@@ -84,7 +84,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return (
         <Promise.Select
           multiple={params?.multiple || false}
-          action={params.action}
+          useAction={params.useAction}
           {...props?.fieldProps}
         />
       );
@@ -98,7 +98,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return (
         <Promise.TreeSelect
           multiple={params?.multiple || false}
-          action={params.action}
+          useAction={params.useAction}
           {...props?.fieldProps}
         />
       );
@@ -109,7 +109,9 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       // @ts-ignore
       let params: GinCheckboxParam = props?.params || {};
-      return <Promise.Checkbox action={params.action} {...props?.fieldProps} />;
+      return (
+        <Promise.Checkbox useAction={params.useAction} {...props?.fieldProps} />
+      );
     },
   },
   [prefix('radio')]: {
@@ -117,7 +119,9 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       // @ts-ignore
       let params: GinRadioParam = props?.params || {};
-      return <Promise.Radio action={params.action} {...props?.fieldProps} />;
+      return (
+        <Promise.Radio useAction={params.useAction} {...props?.fieldProps} />
+      );
     },
   },
   [prefix('radioButton')]: {
@@ -126,7 +130,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       // @ts-ignore
       let params: GinRadioButtonParam = props?.params || {};
       return (
-        <Promise.RadioButton action={params.action} {...props?.fieldProps} />
+        <Promise.RadioButton
+          useAction={params.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },

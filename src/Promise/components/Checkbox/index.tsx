@@ -1,28 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Checkbox as AntdCheckbox } from 'antd';
-import Service from './service';
-import { Option } from '@/Archive/components/interface';
-import { useRequest } from 'ahooks';
+import { Option } from '@/Utils/types/rt-grass';
+import { useMount, useRequest } from 'ahooks';
+import { UseAction } from './type';
 
 interface CheckboxProps {
   /**
-   * 请求地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
 }
 
 // @formatter: off
-const Checkbox: React.FC<CheckboxProps> = ({ action, ...rest }) => {
+const Checkbox: React.FC<CheckboxProps> = ({ useAction, ...rest }) => {
   // @formatter: on
-  let { data = [] } = useRequest(() => Service.initialValues(action));
-  return (
-    <AntdCheckbox.Group
-      options={(data || []).map(({ key, value }: Option) => ({
-        label: key,
-        value,
-      }))}
-      {...rest}
-    />
-  );
+  let [options, setOptions] = useState<{ label: string; value: string }[]>([]);
+
+  let { run, loading } = useRequest(useAction.initialValues, {
+    manual: true,
+    onSuccess: (data: Option[]) => {
+      setOptions(
+        data.map(({ key, value }: Option) => ({
+          label: key,
+          value,
+        })),
+      );
+    },
+  });
+
+  useMount(() => run());
+
+  return <AntdCheckbox.Group options={options} {...rest} />;
 };
 export default Checkbox;

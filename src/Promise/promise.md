@@ -30,18 +30,18 @@ Promise.SchemeArchive:
 
 <code src="./demos/scheme-archive.tsx"  background="#f0f2f5" />
 
-Promise.SchemeExhibit:
+JSON 展示方案 (Promise.SchemeExhibit):
 
 <code src="./demos/scheme-exhibit.tsx"  background="#f0f2f5" />
 
-Promise.Table:
+高级表格 (Promise.Table):
 
 <code src="./demos/table.tsx"  background="#f0f2f5" />
 
-Basic:
+基础网络组件 (Basic):
 
 <code src="./demos/basic.tsx"  background="#f0f2f5" />
 
-FileUpload:
+文件上传组件 (FileUpload):
 
 <code src="./demos/file-upload.tsx"  background="#f0f2f5" />

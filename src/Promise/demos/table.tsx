@@ -3,13 +3,11 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Promise, Utils } from '@hocgin/ui';
-import styles from './index.less';
-import { TableColumns } from '@/Promise/components/Table/interface';
+import { Promise } from '@hocgin/ui';
+import { TableColumns } from '@/Promise/components/Table/type';
 import { Menu, Button, Form, Input } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-
-const Config = Utils.Config;
+import data from './table-config';
 
 const tableColumns: TableColumns<any> = [
   {
@@ -30,8 +28,9 @@ const tableColumns: TableColumns<any> = [
   },
 ];
 
-Config.set(Config.ConfigKeys.baseServerUrl, 'https://api-dev.hocgin.top');
 export default () => {
+  let styles = { width: '100%' };
+
   let buttons = (
     <>
       <Button htmlType="button" icon={<PlusOutlined />} type="primary">
@@ -41,7 +40,7 @@ export default () => {
   );
   let searchItems = [
     <Form.Item label="关键词搜索" key="keyword" name="keyword">
-      <Input style={{ width: '100%' }} placeholder="请输入关键词" />
+      <Input style={styles} placeholder="请输入关键词" />
     </Form.Item>,
   ];
   const batchMenus = [<Menu.Item key="rowsDelete">批量移出</Menu.Item>];
@@ -51,10 +50,17 @@ export default () => {
     <Menu.Divider key="divider" />,
     <Menu.Item key="rowDelete">删除</Menu.Item>,
   ];
+
+  let useAction = {
+    paging: async (args: any) => {
+      return data;
+    },
+  };
+
   return (
     <Promise.Table
       title={'分组列表'}
-      action={'https://api-dev.hocgin.top/api/mina/mobile-wallpaper'}
+      useAction={useAction}
       tableColumns={tableColumns}
       batchMenus={batchMenus}
       rowMenus={rowMenus}

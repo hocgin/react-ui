@@ -1,4 +1,17 @@
 import React from 'react';
+import { CommentType } from '@/Comment/components/type';
+
+export interface UserType {
+  id: ID;
+  title: string;
+  avatarUrl?: string;
+  href?: string;
+}
+
+/**
+ * ID 类型
+ */
+export declare type ID = string | number;
 
 /**
  * 文件信息
@@ -22,6 +35,7 @@ export interface Result<T = any> {
   success: boolean;
   message?: string;
   data?: T;
+
   [key: string]: any;
 }
 
@@ -33,6 +47,20 @@ export interface ExceptionResult<T = any> extends Result<T> {
   timestamp: number;
 }
 
+// [网络] 滚动拉取
+export interface IScroll<D = any> {
+  nextId?: ID;
+  hasMore: boolean;
+  records: D[];
+}
+
+export interface ScrollRo {
+  nextId?: ID;
+  size?: number;
+
+  [key: string]: any;
+}
+
 /**
  * [网络]分页数据
  */
@@ -42,6 +70,13 @@ export interface IPage<D = any> {
   size: number;
   pages: number;
   records: D[];
+}
+
+export interface PageRo {
+  page?: number;
+  size?: number;
+
+  [key: string]: any;
 }
 
 /**

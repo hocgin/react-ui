@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Beta - Beta 版
 nav:
@@ -18,9 +17,18 @@ group:
 
 ### 基础用法
 
-演示 use-request 的用法:
+-> Request
 
 <code src="./demos/request-mock.tsx"  background="#f0f2f5" />
+
+-> N2Request
+
+<code src="./demos/request-n2.tsx"  background="#f0f2f5" />
+
+-> N3Request
+: 基于 ahook 的封装
+
+<code src="./demos/request-n3.tsx"  background="#f0f2f5" />
 
 ## API
 

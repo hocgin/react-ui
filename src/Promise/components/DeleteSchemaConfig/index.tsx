@@ -1,17 +1,18 @@
 import React from 'react';
-import { Radio as AntdRadio, Modal } from 'antd';
+import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
-import Service from './service';
+import { UseAction } from './type';
+import { ID } from '@/Utils/interface';
 
 interface DeleteSchemaConfigProps {
   /**
-   * 请求地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
   /**
    * 删除数据
    */
-  id: any;
+  id: ID[];
   /**
    * 触发点
    */
@@ -21,7 +22,7 @@ interface DeleteSchemaConfigProps {
 // @formatter: off
 const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
   id,
-  action,
+  useAction,
   trigger = <a rel="noopener noreferrer">删除</a>,
   ...rest
 }) => {
@@ -31,7 +32,7 @@ const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
       icon: <ExclamationCircleOutlined />,
       content: `请确认是否删除 ${id.length} 条数据(无法恢复)?`,
       onOk: async () => {
-        let resp = await Service.deletes(action, id);
+        await useAction!.delete(id);
       },
     });
   };

@@ -1,14 +1,13 @@
 import React from 'react';
 import { Table, Space } from 'antd';
-import { Promise, Utils } from '@hocgin/ui';
-import Service from './service';
-import { asTableDataResult } from '@/Promise/components/scheme';
+import { Promise } from '@hocgin/ui';
+import { UseAction } from '@/Promise/components/TableSchemaConfig/type';
 
 type ConfigType = {
   /**
-   * 地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
   /**
    * 字段
    */
@@ -30,24 +29,36 @@ export interface TableSchemaConfigProps {
 // @formatter: off
 const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
   // @formatter: on
-  let { action, title, toolBarRender, columns = [], ...rest } = config;
-  let paging = async (
+  let { useAction, title, toolBarRender, columns = [], ...rest } = config;
+  let defaultParams = {};
+
+  let request = async (
     { pageSize, current, ...params }: any = {},
     sorter: any,
     filter: any,
   ) => {
-    let resp = await Service.paging(action, {
-      ...params,
-      size: pageSize,
+    let ro = {
+      ...defaultParams,
       page: current,
-    });
-    return asTableDataResult(resp);
+      size: pageSize,
+    };
+    return useAction.paging(ro).then((data) => ({
+      success: true,
+      data: data?.records ?? [],
+      total: data?.total || 0,
+    }));
   };
+
+  let style = { marginLeft: 8 };
+  let rowSelection = {
+    selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
+  };
+  let pagination = { pageSize: 10 };
 
   return (
     <Promise.TableSchema
       headerTitle={title}
-      request={paging}
+      request={request}
       cardBordered
       tableAlertRender={({
         selectedRowKeys,
@@ -57,18 +68,16 @@ const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
         <Space size={24}>
           <span>
             已选 {selectedRowKeys.length} 项
-            <a style={{ marginLeft: 8 }} onClick={onCleanSelected}>
+            <a style={style} onClick={onCleanSelected}>
               取消选择
             </a>
           </span>
         </Space>
       )}
-      rowSelection={{
-        selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
-      }}
+      rowSelection={rowSelection}
       search={{}}
       toolBarRender={toolBarRender}
-      pagination={{ pageSize: 10 }}
+      pagination={pagination}
       columns={columns}
       {...rest}
     />

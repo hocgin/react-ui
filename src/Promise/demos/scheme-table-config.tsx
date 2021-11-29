@@ -3,11 +3,24 @@ import { TableDropdown } from '@ant-design/pro-table';
 import { Space } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
-import { Promise } from '@hocgin/ui';
-import DeleteSchemaConfig from '@/Promise/components/DeleteSchemaConfig';
+import { Promise, useGet } from '@hocgin/ui';
 
+let deleteConfig = {
+  delete: async (id: any[]) => {
+    console.log('删除', id);
+  },
+};
+
+/// <reference types="react" />
 export const config: any = {
-  action: 'https://api-dev.hocgin.top/api/mina/mobile-wallpaper/_paging',
+  useAction: {
+    paging: async () => {
+      console.log('请求', 'scheme-table-config.tsx');
+      return useGet(
+        'https://api-dev.hocgin.top/api/mina/mobile-wallpaper/_paging',
+      ).then(({ data }) => data);
+    },
+  },
   title: '高级表格',
   pagination: {
     pageSize: 10,
@@ -65,7 +78,9 @@ export const config: any = {
           menus={[
             {
               key: 'delete',
-              name: <Promise.DeleteSchemaConfig action={'/xxsd'} id={[1]} />,
+              name: (
+                <Promise.DeleteSchemaConfig useAction={deleteConfig} id={[1]} />
+              ),
             },
           ]}
         />,
@@ -78,7 +93,7 @@ export const config: any = {
   tableAlertOptionRender: ({ selectedRowKeys }: any) => (
     <Space size={16}>
       <Promise.DeleteSchemaConfig
-        action={'/xxsd'}
+        useAction={deleteConfig}
         id={selectedRowKeys}
         trigger={<a>批量删除</a>}
       />

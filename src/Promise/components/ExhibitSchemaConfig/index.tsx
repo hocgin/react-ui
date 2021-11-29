@@ -1,12 +1,12 @@
 import React from 'react';
-import { Promise, Utils } from '@hocgin/ui';
-import Service from './service';
+import { Promise } from '@hocgin/ui';
+import { UseAction } from './type';
 
 type ConfigType = {
   /**
-   * 地址
+   * 请求
    */
-  action: string;
+  useAction: UseAction;
   /**
    * 字段
    */
@@ -33,21 +33,20 @@ const ExhibitSchemaConfig: React.FC<ExhibitSchemaConfigProps> = ({
   config,
 }) => {
   // @formatter: on
-  let { action, title, trigger, columns = [], ...rest } = config;
-  let initialValues = async () => {
-    let resp = await Service.initialValues(action);
-    let result = {};
-    if (Utils.Ui.isSuccess(resp)) {
-      result = { ...resp?.data };
-    }
-    return resp;
+  let { useAction, title, trigger, columns = [], ...rest } = config;
+
+  let request = async (params: Record<string, any>) => {
+    return useAction?.initialValues(params).then((data: any) => ({
+      success: true,
+      data,
+    }));
   };
 
   return (
     <Promise.ExhibitSchema
       title={title}
       trigger={trigger}
-      request={initialValues}
+      request={request}
       columns={columns}
       {...rest}
     />

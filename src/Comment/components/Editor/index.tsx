@@ -1,136 +1,135 @@
-import React, { Component } from 'react';
-import styles from './index.less';
+import React, { useState } from 'react';
 import classNames from 'classnames';
-import { Avatar, Button, Tooltip, Input, Popover, Divider } from 'antd';
-import { UserOutlined, ClearOutlined, SmileOutlined } from '@ant-design/icons';
-import 'emoji-mart/css/emoji-mart.css';
+import styles from './index.less';
+import { EventEmitter } from 'ahooks/lib/useEventEmitter';
+import { Avatar, Button, Divider, Popover, Tooltip, Input } from 'antd';
+import { ClearOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  CommentType,
+  ReplyDataType,
+  ReplyParamsType, UseAction,
+  UserDataType,
+} from '../type';
 // @ts-ignore
 import { Picker } from 'emoji-mart';
+import { useMount, useRequest } from 'ahooks';
 
 const { TextArea } = Input;
 
-interface EditorProps {
-  title?: string;
+const Editor: React.FC<{
+  reply$: EventEmitter<CommentType | undefined>;
+  replied$: EventEmitter<CommentType>;
   placeholder?: string;
-  avatar?: string;
-  landed?: boolean;
-  replyId?: any;
-  replyTitle?: any;
-  onClickReply?: (cid?: number, text?: string) => void;
-  onClearReply?: () => void;
-  onJump?: (flag?: string) => void;
-}
+  useAction: UseAction;
+}> = (props, ref) => {
+  let {
+    useAction,
+    placeholder = '写下尊重、理性、友好的评论，让彼此更友好地交流～',
+    reply$,
+    replied$,
+  } = props;
+  let [reply, setReply] = useState<CommentType | undefined>(undefined);
+  let [content, setContent] = useState<string | undefined>('');
+  reply$.useSubscription((comment?: CommentType) => {
+    setReply(comment);
+  });
 
-interface EditorState {
-  content?: string;
-}
+  let [user, setUser] = useState<UserDataType | undefined>(undefined);
+  let landed = user !== undefined;
 
-class Index extends Component<EditorProps, EditorState> {
-  static defaultProps = {
-    title: '未登陆',
-    placeholder: '写下尊重、理性、友好的评论，让彼此更友好地交流～',
+  let userRequest = useRequest<UserDataType, any>(useAction.user, {
+    manual: true,
+    retryCount: 3,
+    debounceWait: 300,
+    onSuccess: (data?: UserDataType) => {
+      setUser(data as UserDataType);
+    },
+  });
+
+  let replyRequest = useRequest(useAction.reply, {
+    manual: true,
+    retryCount: 3,
+    debounceWait: 300,
+    onSuccess: (data: ReplyDataType) => {
+      replied$.emit(data);
+    },
+  });
+
+  let onSubmitReply = () => {
+    replyRequest.run({
+      commentId: reply?.id,
+      content,
+    } as ReplyParamsType);
+    reply$.emit(undefined);
   };
 
-  state = {
-    content: '',
+  let onSelectEmoji = (emoji: any) => {
+    setContent(content + emoji.native);
   };
 
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
+  useMount(() => {
+    userRequest.run({});
+  });
 
-  render() {
-    let {
-      landed,
-      title,
-      placeholder,
-      avatar,
-      replyId,
-      replyTitle,
-      onClearReply,
-      onJump,
-    } = this.props;
-    let { content } = this.state;
-    return (
-      <div className={classNames(styles.editor)}>
-        <div className={styles.left}>
-          <Avatar size={40} icon={<UserOutlined />} src={avatar} />
+  let userName = user?.title;
+  let hasBeReply = reply !== undefined;
+
+  let replyUsername = reply?.author?.title;
+  let replyId = reply?.id;
+
+  return (
+    <div className={classNames(styles.editor)}>
+      <div className={styles.left}>
+        <Avatar size={40} icon={<UserOutlined />} src={user?.avatarUrl} />
+      </div>
+      <div className={styles.right}>
+        <div className={styles.header}>
+          {userName}{' '}
+          {hasBeReply && (
+            <>
+              <a href={`#c_${replyId}`} className={styles.reply}>
+                回复&nbsp;@{replyUsername}
+              </a>
+              &nbsp;
+              <Tooltip title="取消回复">
+                <Button
+                  size="small"
+                  shape="circle"
+                  icon={<ClearOutlined />}
+                  onClick={() => setReply(undefined)}
+                />
+              </Tooltip>
+            </>
+          )}
         </div>
-        <div className={styles.right}>
-          <div className={styles.header}>
-            {title}{' '}
-            {replyId && (
-              <>
-                <a
-                  href={`#c_${replyId}`}
-                  className={styles.reply}
-                  onClick={() => onJump && onJump(replyId)}
-                >
-                  回复&nbsp;@{replyTitle}
-                </a>
-                &nbsp;
-                <Tooltip title="取消回复">
-                  <Button
-                    size="small"
-                    shape="circle"
-                    icon={<ClearOutlined />}
-                    onClick={onClearReply}
-                  />
-                </Tooltip>
-              </>
-            )}
-          </div>
-          <div>
-            <TextArea
-              rows={2}
-              disabled={!landed}
-              bordered={false}
-              value={content}
-              placeholder={
-                landed ? placeholder : `检测到暂未登陆，请先进行登陆哈 😄`
-              }
-              onChange={this.onChangeContent.bind(this)}
-            />
-          </div>
-          <div>
-            <Button
-              size="small"
-              disabled={!landed}
-              onClick={this.onClickReply.bind(this)}
+        <div>
+          <TextArea
+            rows={2}
+            disabled={!landed}
+            bordered={false}
+            value={content}
+            placeholder={landed ? placeholder : `请先进行登陆哈 😄`}
+            onChange={(e) => setContent(e?.target?.value || undefined)}
+          />
+        </div>
+        <div>
+          <Button size="small" disabled={!landed} onClick={onSubmitReply}>
+            评论
+          </Button>
+          <Divider type="vertical" />
+          <div className={styles.emojiBox}>
+            <Popover
+              placement="top"
+              content={<Picker onSelect={onSelectEmoji} />}
+              trigger="click"
             >
-              评论
-            </Button>
-            <Divider type="vertical" />
-            <div style={{ display: 'inline-block' }}>
-              <Popover
-                placement="top"
-                content={<Picker onSelect={this.onSelectEmoji.bind(this)} />}
-                trigger="click"
-              >
-                <Button size="small" shape="circle" icon={<SmileOutlined />} />
-              </Popover>
-            </div>
+              <Button size="small" shape="circle" icon={<SmileOutlined />} />
+            </Popover>
           </div>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
+};
 
-  onChangeContent(e: any) {
-    this.setState({ content: e?.target?.value });
-  }
-
-  onClickReply() {
-    let { onClickReply, replyId } = this.props;
-    onClickReply && onClickReply(replyId, this.state?.content);
-    this.setState({ content: '' });
-  }
-
-  onSelectEmoji(emoji: any) {
-    this.setState(({ content }) => ({
-      content: `${content}${emoji.native}`,
-    }));
-  }
-}
-
-export default Index;
+export default Editor;

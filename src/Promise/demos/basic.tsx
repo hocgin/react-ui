@@ -7,18 +7,32 @@ import { Divider } from 'antd';
 import { Promise } from '@hocgin/ui';
 
 export default () => {
+  let useAction = {
+    initialValues: async () => {
+      return [{
+        key: 'a1',
+        value: '1',
+      }, {
+        key: 'b1',
+        value: '21',
+      }, {
+        key: 'c1',
+        value: '22x1',
+      }];
+    },
+  };
   return (
     <>
       <Divider>普通选择器</Divider>
-      <Promise.Select action={'https://api-dev.hocgin.top/api/test_select'} />
+      <Promise.Select useAction={useAction} />
       <Divider>多选选择器</Divider>
-      <Promise.Select multiple={true} action={'https://api-dev.hocgin.top/api/test_select'} />
+      <Promise.Select multiple={true} useAction={useAction} />
       <Divider>单选按钮</Divider>
-      <Promise.RadioButton action={'https://api-dev.hocgin.top/api/test_select'} />
+      <Promise.RadioButton useAction={useAction} />
       <Divider>单选</Divider>
-      <Promise.Radio action={'https://api-dev.hocgin.top/api/test_select'} />
+      <Promise.Radio useAction={useAction} />
       <Divider>复选框</Divider>
-      <Promise.Checkbox action={'https://api-dev.hocgin.top/api/test_select'} />
+      <Promise.Checkbox useAction={useAction} />
     </>
   );
 };

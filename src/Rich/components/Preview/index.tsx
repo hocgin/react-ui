@@ -23,9 +23,14 @@ class Index extends Component<EditorProps, EditorState> {
     let { children } = this.props;
     return (
       <div className={styles.richPreview}>
-        <div dangerouslySetInnerHTML={{ __html: `${children}` }} />
+        <div dangerouslySetInnerHTML={this.dangerouslySetInnerHTML} />
       </div>
     );
+  }
+
+  get dangerouslySetInnerHTML() {
+    let { children } = this.props;
+    return { __html: `${children}` };
   }
 }
 

@@ -4,21 +4,22 @@ import { Ui } from './ui';
 import { DateFormat } from './format';
 import { Config } from './config';
 import { Model } from './model';
+import { Struct } from './result';
 
 const Utils = class {
-  static Request: typeof Request;
-  static Config: typeof Config;
-  static Lang: typeof Lang;
-  static Model: typeof Model;
-  static Ui: typeof Ui;
-  static Format: any;
-};
-Utils.Request = Request;
-Utils.Config = Config;
-Utils.Lang = Lang;
-Utils.Model = Model;
-Utils.Ui = Ui;
-Utils.Format = {
-  DateFormat,
+  static Struct: typeof Struct = Struct;
+
+  /**
+   * @deprecated 废弃
+   * @替换方案 /Utils/request/request.ts
+   */
+  static Request: typeof Request = Request;
+  static Config: typeof Config = Config;
+  static Lang: typeof Lang = Lang;
+  static Model: typeof Model = Model;
+  static Ui: typeof Ui = Ui;
+  static Format: any = {
+    DateFormat,
+  };
 };
 export default Utils;

@@ -21,15 +21,15 @@ const ArchiveSchema: React.FC<ArchiveSchemaProps> = ({
 }) => {
   // @formatter: on
   const values = useContext(ProProvider);
+  let value = {
+    ...values,
+    valueTypeMap: {
+      ...SchemeColumns,
+    },
+  };
+
   return (
-    <ProProvider.Provider
-      value={{
-        ...values,
-        valueTypeMap: {
-          ...SchemeColumns,
-        },
-      }}
-    >
+    <ProProvider.Provider value={value}>
       <ProDescriptions columns={handleSchemeColumns(columns || [])} {...rest}>
         {children}
       </ProDescriptions>

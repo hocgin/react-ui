@@ -71,7 +71,7 @@ class ComplexTable extends React.Component<
       <Card
         className={styles.component}
         bordered={false}
-        bodyStyle={{ padding: 0 }}
+        bodyStyle={this.bodyStyle}
       >
         {/*搜索栏*/}
         {searchItems?.length > 0 && (
@@ -105,6 +105,10 @@ class ComplexTable extends React.Component<
         />
       </Card>
     );
+  }
+
+  get bodyStyle() {
+    return { padding: 0 };
   }
 }
 

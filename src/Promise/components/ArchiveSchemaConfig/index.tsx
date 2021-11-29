@@ -3,21 +3,26 @@ import { Button } from 'antd';
 import { Promise, Utils } from '@hocgin/ui';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProFormLayoutType } from '@ant-design/pro-form/lib/components/SchemaForm';
-import Service from './service';
+import { UseAction } from '@/Promise/components/ArchiveSchemaConfig/type';
+import { useRequest } from 'ahooks';
 
 type ConfigType = {
-  /**
-   * 唯一标记
-   */
-  id?: number | string | undefined;
   /**
    * 更新模式是否需要初始化参数,默认为:true
    */
   init?: boolean;
   /**
+   * 默认参数
+   */
+  defaultParams?: any;
+  /**
+   * 是否更新模式
+   */
+  isUpdate?: boolean;
+  /**
    * 地址
    */
-  action: string;
+  useAction: UseAction;
   /**
    * 布局
    */
@@ -49,29 +54,20 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
 }) => {
   // @formatter: on
   let {
-    id,
-    action,
+    defaultParams,
+    useAction,
     title,
     layoutType = 'ModalForm',
     trigger,
+    isUpdate = false,
+    init = true,
     columns = [],
     ...rest
   } = config;
-  let isUpdate = Utils.Lang.isNotNull(id);
-  let onFinish = async (values: any) => {
-    await Service.submit(isUpdate, action, id, values);
-  };
-  let initialValues = async () => {
-    let init = config?.init ?? true;
-    let result = {};
-    if (isUpdate && init) {
-      let resp = await Service.initialValues(action, id);
-      if (Utils.Ui.isSuccess(resp)) {
-        result = { ...result, ...resp?.data };
-      }
-    }
-    return result;
-  };
+  let submitRequest = useRequest(useAction!.submit, {
+    ...defaultParams,
+    manual: true,
+  });
 
   let triggerEl = trigger ? (
     trigger
@@ -84,13 +80,17 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
       新建
     </Button>
   );
+
+  let request = async (params: Record<string, any>, props: any) => {
+    return useAction?.initialValues(params);
+  };
   return (
     <Promise.ArchiveSchema
       layoutType={layoutType}
       title={title}
       trigger={triggerEl}
-      onFinish={onFinish}
-      request={initialValues}
+      onFinish={async (values: any) => submitRequest.run(values)}
+      request={request}
       columns={columns}
       {...rest}
     />

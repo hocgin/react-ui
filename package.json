@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/ui",
-  "version": "4.0.13",
+  "version": "4.0.14",
   "sideEffects": [
     ".less",
     ".css"
@@ -44,7 +44,8 @@
     "@ant-design/pro-table": "^2.53.1",
     "@uiw/react-md-editor": "^3.0.8",
     "@umijs/plugin-request": "^2.7.0",
-    "ahooks": "^2.10.9",
+    "ahooks": "^3.0.0-alpha.12",
+    "ahooks-v2": "^2.10.13",
     "antd": "^4.15.5",
     "braft-editor": "^2.3.9",
     "braft-extensions": "^0.1.1",
