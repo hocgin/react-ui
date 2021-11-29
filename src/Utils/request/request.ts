@@ -1,7 +1,12 @@
 import { request as umiRequest } from '@umijs/plugin-request/src/request';
 
+let defaultOptions: any = {
+  debounceWait: 300,
+  retryCount: 3,
+};
+
 const extendRequest = (url: string, options: any) => {
-  return umiRequest(url, options).catch(console.debug);
+  return umiRequest(url, { ...defaultOptions, options }).catch(console.debug);
 };
 
 export function request(url: string, options?: any): Promise<any> {
