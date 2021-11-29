@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Promise - 契约
 order: 1000
@@ -25,11 +24,11 @@ Promise.PageLayout:
 
 Promise.SchemeTable:
 
-[comment]: <> (<code src="./demos/scheme-table.tsx"  background="#f0f2f5" />)
+<code src="./demos/scheme-table.tsx"  background="#f0f2f5" />
 
-[comment]: <> (Promise.SchemeArchive:)
+Promise.SchemeArchive:
 
-[comment]: <> (<code src="./demos/scheme-archive.tsx"  background="#f0f2f5" />)
+<code src="./demos/scheme-archive.tsx"  background="#f0f2f5" />
 
 JSON 展示方案 (Promise.SchemeExhibit):
 

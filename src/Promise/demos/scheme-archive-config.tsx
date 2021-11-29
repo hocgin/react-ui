@@ -1,7 +1,19 @@
 import React from 'react';
+import { useGet } from '@hocgin/ui';
 
 export const config: any = {
-  action: 'https://api-dev.hocgin.top/api/xx',
+  useAction: {
+    initialValues: async (params: Record<string, any>) => {
+      console.log('scheme-archive-config.tsx', params);
+      return {
+        title: '666',
+        state: 'vx',
+      };
+    },
+    submit: async (params: Record<string, any>) => {
+      return {};
+    },
+  },
   layoutType: 'ModalForm',
   columns: [
     {
@@ -36,7 +48,13 @@ export const config: any = {
       dataIndex: 'gin_select_name',
       valueType: 'gin.select',
       params: {
-        action: 'http://api-dev.hocgin.top/api/test_select',
+        useAction: {
+          initialValues: async (params: Record<string, any>) => {
+            return useGet('http://api-dev.hocgin.top/api/test_select').then(
+              ({ data }) => data,
+            );
+          },
+        },
       },
     },
     {
@@ -44,7 +62,13 @@ export const config: any = {
       dataIndex: 'gin_tree_select_name',
       valueType: 'gin.treeSelect',
       params: {
-        action: 'http://api-dev.hocgin.top/api/tree_select',
+        useAction: {
+          initialValues: async (params: Record<string, any>) => {
+            return useGet('http://api-dev.hocgin.top/api/tree_select').then(
+              ({ data }) => data,
+            );
+          },
+        },
       },
     },
     {
@@ -52,7 +76,13 @@ export const config: any = {
       dataIndex: 'gin_radioButton_name',
       valueType: 'gin.radioButton',
       params: {
-        action: 'http://api-dev.hocgin.top/api/test_select',
+        useAction: {
+          initialValues: async (params: Record<string, any>) => {
+            return useGet('http://api-dev.hocgin.top/api/test_select').then(
+              ({ data }) => data,
+            );
+          },
+        },
       },
     },
     {
@@ -60,7 +90,13 @@ export const config: any = {
       dataIndex: 'gin_radio_name',
       valueType: 'gin.radio',
       params: {
-        action: 'http://api-dev.hocgin.top/api/test_select',
+        useAction: {
+          initialValues: async (params: Record<string, any>) => {
+            return useGet('http://api-dev.hocgin.top/api/test_select').then(
+              ({ data }) => data,
+            );
+          },
+        },
       },
     },
     {
@@ -68,7 +104,13 @@ export const config: any = {
       dataIndex: 'gin_checkbox_name',
       valueType: 'gin.checkbox',
       params: {
-        action: 'http://api-dev.hocgin.top/api/test_select',
+        useAction: {
+          initialValues: async (params: any) => {
+            return useGet('http://api-dev.hocgin.top/api/test_select').then(
+              ({ data }) => data,
+            );
+          },
+        },
       },
     },
     {

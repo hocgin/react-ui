@@ -11,16 +11,16 @@ export default class Index extends React.PureComponent<{}> {
   state = {};
 
   render() {
+    let config1 = { ...config, id: 1, layoutType: 'Form', isUpdate: true };
+    let config2 = { ...config, id: 1, isUpdate: true };
     return (
       <>
         <Divider />
-        <Promise.ArchiveSchemaConfig
-          config={{ ...config, id: 1, layoutType: 'Form' }}
-        />
+        <Promise.ArchiveSchemaConfig config={config1} />
         <Divider />
         <Promise.ArchiveSchemaConfig config={config} />
         <Divider type="vertical" />
-        <Promise.ArchiveSchemaConfig config={{ ...config, id: 1 }} />
+        <Promise.ArchiveSchemaConfig config={config2} />
       </>
     );
   }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Checkbox as AntdCheckbox } from 'antd';
 import { Option } from '@/Utils/types/rt-grass';
 import { useMount, useRequest } from 'ahooks';
-import { UseAction } from '@/Promise/components/RadioButton/type';
+import { UseAction } from './type';
 
 interface CheckboxProps {
   /**
@@ -14,15 +14,17 @@ interface CheckboxProps {
 // @formatter: off
 const Checkbox: React.FC<CheckboxProps> = ({ useAction, ...rest }) => {
   // @formatter: on
-  let [options, setOptions] = useState<{ label: string, value: string; }[]>([]);
+  let [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 
   let { run, loading } = useRequest(useAction.initialValues, {
     manual: true,
     onSuccess: (data: Option[]) => {
-      setOptions(data.map(({ key, value }: Option) => ({
-        label: key,
-        value,
-      })));
+      setOptions(
+        data.map(({ key, value }: Option) => ({
+          label: key,
+          value,
+        })),
+      );
     },
   });
 
