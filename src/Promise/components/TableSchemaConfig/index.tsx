@@ -40,7 +40,7 @@ const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
     let ro = {
       ...defaultParams,
       page: current,
-      pageSize: pageSize,
+      size: pageSize,
     };
     return useAction.paging(ro).then((data) => ({
       success: true,

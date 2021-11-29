@@ -5,7 +5,9 @@ import { UserType } from '@/Utils/interface';
 import {
   CommentType as CommentType,
   DislikeDataType,
-  LikeDataType, PagingDataType, PagingParamsType,
+  LikeDataType,
+  PagingDataType,
+  PagingParamsType,
   UseAction,
 } from '../type';
 import styles from './index.less';
@@ -63,16 +65,15 @@ const UserOptions: React.FC<{
     manual: true,
     defaultParams: { commentId } as any,
     onSuccess: ({
-                  likes = 0,
-                  disliked = 0,
-                  action,
-                }: DislikeDataType | LikeDataType) => {
+      likes = 0,
+      disliked = 0,
+      action,
+    }: DislikeDataType | LikeDataType) => {
       setLikesCount(likes);
       setDislikedCount(disliked);
       setUserAction(action);
     },
   };
-
 
   let likeRequest = useRequest(useAction.like, options);
   let dislikeRequest = useRequest(useAction.dislike, options);
@@ -89,13 +90,13 @@ const UserOptions: React.FC<{
 
   return (
     <>
-      <Tooltip title='Like'>
+      <Tooltip title="Like">
         <span onClick={onAction.bind(this, 'like', commentId)}>
           {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
           <span className={styles.commentAction}>{likesCount}</span>
         </span>
       </Tooltip>
-      <Tooltip title='Dislike'>
+      <Tooltip title="Dislike">
         <span onClick={onAction.bind(this, 'dislike', commentId)}>
           {React.createElement(
             userAction === 'dislike' ? DislikeFilled : DislikeOutlined,
@@ -157,18 +158,18 @@ const Comment: React.FC<{
   children?: React.ReactNode;
   actions?: React.ReactNode[];
 }> = ({
-        id,
-        type = 'none',
-        active = false,
-        datetime,
-        content,
-        replyId,
-        author,
-        replier,
-        children,
-        actions = [],
-        className,
-      }) => {
+  id,
+  type = 'none',
+  active = false,
+  datetime,
+  content,
+  replyId,
+  author,
+  replier,
+  children,
+  actions = [],
+  className,
+}) => {
   let hasReply = replyId !== undefined;
 
   return (
@@ -244,24 +245,26 @@ const Index: React.FC<{
     setDataSource([...dataSource, comment] as CommentType[]);
   });
 
+  let { loading, run } = useRequest<PagingDataType, [PagingParamsType]>(
+    useAction.paging,
+    {
+      defaultParams,
+      manual: true,
+      retryCount: 3,
+      debounceWait: 300,
+      onSuccess: (data: PagingDataType) => {
+        let tableData = Utils.Struct.getTableData(data);
+        let pagination = tableData?.pagination;
+        let total: number = pagination?.total || 0;
+        let current: number = pagination?.current || 0;
+        let records: CommentType[] = tableData?.list || [];
 
-  let { loading, run } = useRequest<PagingDataType, [PagingParamsType]>(useAction.paging, {
-    defaultParams,
-    manual: true,
-    retryCount: 3,
-    debounceWait: 300,
-    onSuccess: (data: PagingDataType) => {
-      let tableData = Utils.Struct.getTableData(data);
-      let pagination = tableData?.pagination;
-      let total: number = pagination?.total || 0;
-      let current: number = pagination?.current || 0;
-      let records: CommentType[] = tableData?.list || [];
-
-      setCurrent(current);
-      setTotal(total);
-      setDataSource([...records] as CommentType[]);
+        setCurrent(current);
+        setTotal(total);
+        setDataSource([...records] as CommentType[]);
+      },
     },
-  });
+  );
 
   useMount(() => {
     if (hasReply && initialLoad) {
@@ -270,7 +273,7 @@ const Index: React.FC<{
   });
 
   let onPageChange = (page?: number, pageSize?: number) => {
-    run({ ...defaultParams, page, pageSize });
+    run({ ...defaultParams, page, size: pageSize });
   };
 
   return (
@@ -310,13 +313,13 @@ const Index: React.FC<{
                 </List.Item>
               );
             }}
-            itemLayout='horizontal'
+            itemLayout="horizontal"
             dataSource={dataSource}
           />
           <Pagination
             hideOnSinglePage
             className={styles.pagination}
-            size='small'
+            size="small"
             total={total}
             defaultCurrent={1}
             current={current}

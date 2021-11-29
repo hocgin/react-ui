@@ -1,6 +1,12 @@
-import { UserType, ID, PageRo, ScrollRo, IScroll, IPage } from '@/Utils/interface';
+import {
+  UserType,
+  ID,
+  PageRo,
+  ScrollRo,
+  IScroll,
+  IPage,
+} from '@/Utils/interface';
 
-export type ActionType = 'reply' | 'show' | 'like' | 'dislike' | 'user';
 export type ParamsType =
   | [ReplyParamsType]
   | [PagingParamsType]
@@ -30,7 +36,6 @@ export interface UseAction {
   user: (args: UserParamsType) => Promise<UserDataType>;
 }
 
-
 // ========================================================
 export interface CommentType {
   replyId?: ID;
@@ -51,20 +56,15 @@ export interface CommentType {
   action: 'liked' | 'disliked' | 'none';
 }
 
+// ========================================================
+export interface ScrollParamsType extends ScrollRo {}
+
+export interface ScrollDataType extends IScroll<CommentType> {}
 
 // ========================================================
-export interface ScrollParamsType extends ScrollRo {
-}
+export interface UserParamsType {}
 
-export interface ScrollDataType extends IScroll<CommentType> {
-}
-
-// ========================================================
-export interface UserParamsType {
-}
-
-export interface UserDataType extends UserType {
-}
+export interface UserDataType extends UserType {}
 
 // ========================================================
 export interface ReplyParamsType {
@@ -72,16 +72,14 @@ export interface ReplyParamsType {
   content?: string;
 }
 
-export interface ReplyDataType extends CommentType {
-}
+export interface ReplyDataType extends CommentType {}
 
 // ========================================================
 export interface PagingParamsType extends PageRo {
   parentId: ID;
 }
 
-export interface PagingDataType extends IPage<CommentType> {
-}
+export interface PagingDataType extends IPage<CommentType> {}
 
 // ========================================================
 export interface LikeParamsType {

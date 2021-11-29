@@ -56,8 +56,7 @@ export interface IScroll<D = any> {
 
 export interface ScrollRo {
   nextId?: ID;
-  page?: number;
-  pageSize?: number;
+  size?: number;
 
   [key: string]: any;
 }
@@ -75,7 +74,7 @@ export interface IPage<D = any> {
 
 export interface PageRo {
   page?: number;
-  pageSize?: number;
+  size?: number;
 
   [key: string]: any;
 }
