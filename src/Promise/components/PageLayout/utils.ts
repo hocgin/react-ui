@@ -1,7 +1,7 @@
 import { MenuDataItem } from '@umijs/route-utils';
 import { LocalRoute } from '@/Utils/interface';
 import memoizeOne from 'memoize-one';
-import { Ui } from '@/Utils/ui';
+import { Dom } from '@hocgin/ui';
 
 export let fastGetMenuDataItem = memoizeOne(getMenuDataItem);
 
@@ -56,7 +56,6 @@ function asRouteMap(routes: LocalRoute[]): Record<string, LocalRoute> {
     });
   };
   mergeMenuAndRouter(routes);
-  console.log('ro', routeMap);
   return routeMap;
 }
 
@@ -75,7 +74,7 @@ function asMenuDataItem({
     hideInMenu: hideInMenu,
     name: title,
     key: key,
-    icon: Ui.getIcon(icon),
+    icon: Dom.getIcon(icon),
     path: path,
     access: access,
     parentKeys: parentKeys,
@@ -92,4 +91,18 @@ export function routesToAccess(routes: LocalRoute[]): string[] {
       return [access, ...routesToAccess(routes)];
     })
     .filter((i) => i !== null);
+}
+
+export let fastGetAccess = memoizeOne(getAccess);
+
+/**
+ * 把路由 access 提取出来
+ * @param routes
+ */
+function getAccess(routes: LocalRoute = []): string[] {
+  return (routes || [])
+    .flatMap(({ access, routes = [] }: LocalRoute) => {
+      return [access, ...getAccess(routes)];
+    })
+    .filter((i: string) => i !== null);
 }

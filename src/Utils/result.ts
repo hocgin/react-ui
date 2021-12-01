@@ -1,4 +1,4 @@
-import { HttpResult, IPage, Result } from '@/Utils/interface';
+import { HttpResult, IPage, Result } from './interface';
 import { message } from 'antd';
 import memoizeOne from 'memoize-one';
 

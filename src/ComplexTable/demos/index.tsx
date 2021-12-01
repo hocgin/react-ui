@@ -5,7 +5,7 @@
 import React from 'react';
 import { Button, Divider, Dropdown, Form, Input, Menu, Modal } from 'antd';
 import { DownOutlined, PlusOutlined } from '@ant-design/icons';
-import { ComplexTable, Utils } from '@hocgin/ui';
+import { ComplexTable, Utils, Dom } from '@hocgin/ui';
 import styles from './index.less';
 import { IPage } from '@/Utils/interface';
 
@@ -64,7 +64,7 @@ export default () => {
                           </Form.Item>,
                         ]}
                         tableLoading={false}
-                        tableData={Utils.Ui.fastGetTableData(paging)}
+                        tableData={Dom.fastGetTableData(paging)}
                         selectedRows={selectedRows}
                         tableColumns={tableColumns} />);
 };

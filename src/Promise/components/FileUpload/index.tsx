@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileUpload, Utils } from '@hocgin/ui';
+import { FileUpload, Utils, Dom } from '@hocgin/ui';
 
 interface FileUploadProps {
   children?: string | Node;
@@ -37,9 +37,9 @@ class Index extends React.PureComponent<FileUploadProps> {
       return [];
     }
     if (values instanceof Array) {
-      return (values || []).map(Utils.Ui.asFile);
+      return (values || []).map(Dom.asFile);
     }
-    return [Utils.Ui.asFile(values, 0)];
+    return [Dom.asFile(values, 0)];
   };
 
   handleChange = ({ file, fileList }: any) => {
@@ -48,7 +48,7 @@ class Index extends React.PureComponent<FileUploadProps> {
       let result = file.response;
       if (result) {
         // Component will show file.url as link
-        if (Utils.Ui.showErrorMessageIfExits(result)) {
+        if (Dom.showErrorMessageIfExits(result)) {
           file.url = result?.data;
         } else {
           file.status = 'error';

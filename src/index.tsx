@@ -22,12 +22,9 @@ export { default as FileUpload } from './FileUpload';
 export { default as PhotoWall } from './PhotoWall';
 export { default as TextRow } from './TextRow';
 export { default as Beta } from './Beta';
+// Utils
+export { request, usePost, useDelete, useGet, usePut } from './Utils/request';
+export { default as Format } from './Utils/format';
+export { default as Dom } from './Utils/dom';
+export { default as Types } from './Utils/types';
 export { default as Utils } from './Utils';
-export { default as useRequest } from './Utils/useRequest';
-export {
-  request,
-  usePost,
-  useDelete,
-  useGet,
-  usePut,
-} from './Utils/request/request';

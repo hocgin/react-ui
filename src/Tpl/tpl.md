@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Tpl - 模版文件
 nav:
@@ -18,17 +17,9 @@ group:
 
 ### 基础用法
 
-Request2:
-
-<code src="./demos/request2.tsx"  background="#f0f2f5" />
-
 Demo:
 
 <code src="./demos/index.tsx"  background="#f0f2f5" />
-
-Request:
-
-<code src="./demos/request.tsx"  background="#f0f2f5" />
 
 ## API
 

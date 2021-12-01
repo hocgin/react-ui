@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ComplexTable, Utils } from '@hocgin/ui';
+import { ComplexTable, Utils, Dom } from '@hocgin/ui';
 import { EventInfo, TableColumns, TableData } from './type';
 import { IPage, PageRo } from '@/Utils/interface';
 import { Menu, Divider, Dropdown } from 'antd';
@@ -134,7 +134,7 @@ const Index: React.FC<TableProps> = ({
       batchMenus={batchMenus}
       buttons={buttons}
       searchItems={searchItems}
-      tableData={Utils.Ui.fastGetTableData(data)}
+      tableData={Dom.fastGetTableData(data)}
       selectedRows={selectedRows}
       onSelectRow={onChangeSelectRow}
       onClickSearch={(values: any) => setDefaultParams(values)}

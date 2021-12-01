@@ -1,5 +1,4 @@
 import React from 'react';
-import { CommentType } from '@/Comment/components/type';
 
 export interface UserType {
   id: ID;

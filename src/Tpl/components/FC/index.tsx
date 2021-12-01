@@ -1,33 +1,10 @@
-import React, { useState, useMemo, useRef } from 'react';
-import { useRequest } from '@hocgin/ui';
-import { Action } from '@/Utils/useRequest';
+import * as React from 'react';
 
-export interface RequestProps {
-  /**
-   * 设置样式名
-   */
+const Index: React.FC<{
   className?: string;
   defaultParams?: any;
-  action: Action<'default', any, any>;
-}
-
-const Request: React.FC<RequestProps> = (props, ref) => {
-  let { action, defaultParams } = props;
-  let request = {
-    default: () => useRequest('default', action, { defaultParams }),
-  };
-
-  let { data, loading, refresh, runAsync } = request['default']?.();
-
-  const onClickReload = () => refresh();
-  const onClickAdd = () => runAsync({ ...defaultParams, t: Math.random() });
-  return (
-    <div>
-      {loading ? '加载中' : `${JSON.stringify(data)}`}
-      <button onClick={onClickReload}>reload</button>
-      <button onClick={onClickAdd}>add</button>
-    </div>
-  );
+}> = (props, ref) => {
+  return <div> 加载中 </div>;
 };
 
-export default Request;
+export default Index;

@@ -3,7 +3,7 @@ import { useRequest } from 'ahooks';
 import { Footer } from '@hocgin/ui';
 import ProLayout, { ProBreadcrumb } from '@ant-design/pro-layout';
 import { MenuDataItem } from '@umijs/route-utils';
-import { fastGetMenuDataItem } from '@/Promise/components/PageLayout/utils';
+import { fastGetAccess, fastGetMenuDataItem } from './utils';
 import { WithFalse } from '@ant-design/pro-layout/lib/typings';
 import { HeaderViewProps } from '@ant-design/pro-layout/lib/Header';
 import { BasicLayoutProps } from '@ant-design/pro-layout/lib/BasicLayout';
@@ -37,18 +37,24 @@ export interface PageLayoutProps extends BasicLayoutProps {
    * 右上角
    */
   rightContentRender?: WithFalse<(props: HeaderViewProps) => React.ReactNode>;
+  /**
+   * 显示所有(拥有所有菜单)
+   */
+  isShowAll?: boolean;
 }
 
 // @formatter: off
 const PageLayout: React.FC<PageLayoutProps> = ({
-                                                 rightContentRender,
-                                                 title, logo,
-                                                 useAction,
-                                                 route,
-                                                 location,
-                                                 children,
-                                                 ...rest
-                                               }) => {
+  rightContentRender,
+  title,
+  logo,
+  useAction,
+  route,
+  isShowAll = false,
+  location,
+  children,
+  ...rest
+}) => {
   // @formatter: on
   const [pathname, setPathname] = useState(DEFAULT_PATHNAME);
 
@@ -58,23 +64,35 @@ const PageLayout: React.FC<PageLayoutProps> = ({
 
   let menu = {
     request: (params: Record<string, any>, defaultMenuData: MenuDataItem[]) => {
-      return runAsync().then((access = []) => (fastGetMenuDataItem(route?.routes ?? [], access) || defaultMenuData));
+      let routes = route?.routes ?? [];
+      if (isShowAll) {
+        return Promise.resolve(
+          fastGetMenuDataItem(routes, fastGetAccess(routes)),
+        );
+      }
+      return runAsync().then(
+        (access = []) => fastGetMenuDataItem(routes, access) || defaultMenuData,
+      );
     },
   };
-  return (<ProLayout menu={menu}
-                     location={{ pathname }}
-                     fixSiderbar
-                     fixedHeader
-                     logo={logo}
-                     title={title}
-                     rightContentRender={rightContentRender}
-                     headerContentRender={() => <ProBreadcrumb />}
-                     menuItemRender={(item, dom) => (
-                       <a onClick={() => setPathname(item.path || DEFAULT_PATHNAME)}>{dom}</a>
-                     )}
-                     footerRender={() => <Footer />}
-                     {...rest}>
-    {children}
-  </ProLayout>);
+  return (
+    <ProLayout
+      menu={menu}
+      location={{ pathname }}
+      fixSiderbar
+      fixedHeader
+      logo={logo}
+      title={title}
+      rightContentRender={rightContentRender}
+      headerContentRender={() => <ProBreadcrumb />}
+      menuItemRender={(item, dom) => (
+        <a onClick={() => setPathname(item.path || DEFAULT_PATHNAME)}>{dom}</a>
+      )}
+      footerRender={() => <Footer />}
+      {...rest}
+    >
+      {children}
+    </ProLayout>
+  );
 };
 export default PageLayout;

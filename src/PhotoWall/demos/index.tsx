@@ -3,9 +3,9 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Tpl } from '@hocgin/ui';
+import { PhotoWall } from '@hocgin/ui';
 import styles from './index.less';
 
 export default () => {
-  return <Tpl.Tpl className={styles.ok} />;
+  return <PhotoWall maxLength={1} />;
 };

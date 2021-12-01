@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './DateTime.less';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { DateFormat } from '@/Utils/format';
+import { Format } from '@hocgin/ui';
 import type Picker from './Picker';
 
 interface DateTimeProps {
@@ -33,7 +33,7 @@ export default class DateTime extends React.Component<DateTimeProps> {
     if (valueType === 'string') {
       text = value;
     } else if (valueType === 'number') {
-      text = DateFormat.timestampAs(value as number);
+      text = Format.DateTime.timestampAs(value as number);
     }
     return text;
   }

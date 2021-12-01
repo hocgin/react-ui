@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './Link.less';
-import { Utils } from '@hocgin/ui';
+import { Utils, Dom } from '@hocgin/ui';
 import { CloudDownloadOutlined } from '@ant-design/icons';
 
 export interface DownloadProps {
@@ -31,7 +31,7 @@ class Index extends React.Component<DownloadProps> {
   }
 
   onClickDownload = (e: any) => {
-    Utils.Ui.downloadUrl(e, { url: this.fullUrl });
+    Dom.downloadUrl(e, { url: this.fullUrl });
   };
 
   get fullUrl() {

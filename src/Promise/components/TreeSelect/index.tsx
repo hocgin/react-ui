@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
-import { Utils } from '@hocgin/ui';
+import { Utils, Dom } from '@hocgin/ui';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
 import { TreeNode } from '@/Utils/interface';
@@ -43,7 +43,7 @@ const Index: React.FC<TreeSelectProps> = ({
                 placeholder={placeholder}
                 {...rest}
     >
-      {Utils.Ui.renderTreeSelectNodes(data)}
+      {Dom.renderTreeSelectNodes(data)}
     </TreeSelect>
   );
 };
