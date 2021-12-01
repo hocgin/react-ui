@@ -1,81 +1,61 @@
-import React, { Component } from 'react';
-import 'braft-editor/dist/index.css';
-import 'braft-extensions/dist/code-highlighter.css';
-import 'braft-extensions/dist/table.css';
+import React, { useState } from 'react';
 import styles from './index.less';
 import { Utils } from '@hocgin/ui';
-
-let RichEditor: any = null;
+import { useMount } from 'ahooks';
 
 const EDITOR_ID = 'rich-editor';
+let RichEditor: any = undefined;
 
-interface EditorProps {
+const Index: React.FC<{
   value?: string;
   onChange?: (value?: string) => void;
-}
+}> = (props, ref) => {
+  let { onChange } = props;
+  let [value, setValue] = useState(props?.value || '');
+  let [init, setInit] = useState(false);
 
-interface EditorState {}
-
-class Index extends Component<EditorProps, EditorState> {
-  static defaultProps = {
-    children: '',
+  let onFinally = () => {
+    setValue(RichEditor?.createEditorState(value, { editorId: EDITOR_ID }));
+    setInit(true);
   };
 
-  state = {
-    richValue: null,
-  };
-
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
-
-  componentDidMount() {
+  useMount(() => {
     if (Utils.Lang.isServer()) {
       return;
     }
+    import('braft-editor/dist/index.css');
+    import('braft-extensions/dist/code-highlighter.css');
+    import('braft-extensions/dist/table.css');
 
-    // 初始化文本
-    let initValue = () =>
-      this.setState({
-        richValue: RichEditor?.createEditorState(this.props?.value, {
-          editorId: EDITOR_ID,
-        }),
-      });
-
-    // 初始化编辑器
     import('braft-editor')
-      .then((re) => {
-        RichEditor = re.default;
-      })
+      .then((re) => (RichEditor = re.default))
+      .catch(console.error)
       .finally(() => {
         // @ts-ignore
         import('braft-extensions/dist/code-highlighter.js')
           .then((CodeHighlighter) => RichEditor.use(CodeHighlighter.default()))
+          .catch(console.error)
           .finally(() => {
             // @ts-ignore
             import('braft-extensions/dist/table.js')
               .then((Table) => RichEditor.use(Table.default()))
+              .catch(console.error)
               .finally(() => {
                 // @ts-ignore
                 import('braft-extensions/dist/markdown.js')
                   .then((Markdown) => RichEditor.use(Markdown.default()))
-                  .finally(initValue);
+                  .catch(console.error)
+                  .finally(onFinally);
               });
           });
       });
-  }
+  });
 
-  render() {
-    let { value, onChange } = this.props;
-    let { richValue } = this.state;
-    return (
-      <div className={styles.rich}>
-        {RichEditor && (
-          <RichEditor id={EDITOR_ID} value={richValue} onChange={onChange} />
-        )}
-      </div>
-    );
-  }
-}
+  return (
+    <div className={styles.rich}>
+      {init && <RichEditor id={EDITOR_ID} value={value} onChange={onChange} />}
+    </div>
+  );
+};
 
 export default Index;

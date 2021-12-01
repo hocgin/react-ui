@@ -1,10 +1,10 @@
 import React from 'react';
-import { message, Tree, TreeSelect } from 'antd';
-import { Struct } from './result';
-import { FileInfo, HttpResult, IPage, TreeNode } from '@/Utils/interface';
+import { Tree, TreeSelect } from 'antd';
+import { Struct } from '../result';
+import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
-export class Ui {
+export default class Dom {
   /**
    * 获取图标
    * @param name

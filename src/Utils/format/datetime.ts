@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-export class DateFormat {
+export default class DateTimeFormat {
   static FORMAT_1 = 'YYYY-MM-DD HH:mm:ss';
   static FORMAT_2 = 'YYYY-MM-DD HH:mm';
 
@@ -13,7 +13,7 @@ export class DateFormat {
    */
   static timestampAs(
     timestamp: number,
-    format: string = DateFormat.FORMAT_1,
+    format: string = DateTimeFormat.FORMAT_1,
     def: string = 'N/A',
   ) {
     if (timestamp === null || timestamp === undefined) {
@@ -32,7 +32,7 @@ export class DateFormat {
   static relativeFromNow(
     timestamp: number,
     len = 10 * 24 * 60 * 60 * 1000,
-    defFormat = DateFormat.FORMAT_2,
+    defFormat = DateTimeFormat.FORMAT_2,
   ) {
     if (timestamp < new Date().getTime() - len) {
       return this.timestampAs(timestamp, defFormat);
@@ -45,7 +45,7 @@ export class DateFormat {
    * 2021-06-01T00:30:30.159
    */
   static defRelativeFromNow(localDatetime: string) {
-    return DateFormat.relativeFromNow(
+    return DateTimeFormat.relativeFromNow(
       moment(localDatetime, moment.HTML5_FMT.DATETIME_LOCAL_MS).valueOf(),
     );
   }

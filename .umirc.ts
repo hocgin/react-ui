@@ -1,5 +1,4 @@
 import { defineConfig } from 'dumi';
-import chalk from 'chalk';
 import { readdirSync } from 'fs';
 import { join } from 'path';
 
@@ -47,10 +46,13 @@ export default defineConfig({
   // ssr: {},
   exportStatic: {},
   extraBabelPlugins: [
-    ['babel-plugin-import', {
-      libraryName: 'antd',
-      libraryDirectory: 'es',
-      style: true,
-    }],
+    [
+      'babel-plugin-import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'es',
+        style: true,
+      },
+    ],
   ],
 });

@@ -9,5 +9,3 @@ export class Model {
     return `${model.namespace}/${effects.name}`;
   }
 }
-
-

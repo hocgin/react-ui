@@ -1,7 +1,7 @@
 import React from 'react';
 import { Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { Utils } from '@hocgin/ui';
+import { Dom } from '@hocgin/ui';
 import { HttpRequestHeader } from '@/Utils/interface';
 import { UploadFile } from 'antd/lib/upload/interface';
 
@@ -85,7 +85,7 @@ class Index extends React.Component<PhotoWallProps, PhotoWallState> {
       let result = file.response;
       if (result) {
         // Component will show file.url as link
-        if (Utils.Ui.showErrorMessageIfExits(result)) {
+        if (Dom.showErrorMessageIfExits(result)) {
           file.url = result.data;
         } else {
           file.status = 'error';
