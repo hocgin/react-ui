@@ -1,4 +1,4 @@
-import { request as umiRequest } from '@umijs/plugin-request/src/request';
+import umiRequest from 'umi-request';
 
 let defaultOptions: any = {
   debounceWait: 300,
@@ -6,7 +6,9 @@ let defaultOptions: any = {
 };
 
 const extendRequest = (url: string, options: any) => {
-  return umiRequest(url, { ...defaultOptions, options }).catch(console.debug);
+  return umiRequest(url, { ...defaultOptions, ...options }).catch(
+    console.debug,
+  );
 };
 
 export function request(url: string, options?: any): Promise<any> {

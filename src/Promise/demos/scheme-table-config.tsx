@@ -3,7 +3,7 @@ import { TableDropdown } from '@ant-design/pro-table';
 import { Space } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
-import { Promise, useGet } from '@hocgin/ui';
+import { Promise, useGet, usePost } from '@hocgin/ui';
 
 let deleteConfig = {
   delete: async (id: any[]) => {
@@ -16,7 +16,7 @@ export const config: any = {
   useAction: {
     paging: async () => {
       console.log('请求', 'scheme-table-config.tsx');
-      return useGet(
+      return usePost(
         'https://api-dev.hocgin.top/api/mina/mobile-wallpaper/_paging',
       ).then(({ data }) => data);
     },
