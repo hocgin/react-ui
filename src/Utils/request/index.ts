@@ -1,4 +1,4 @@
-import { request as umiRequest } from '@umijs/plugin-request/src/request';
+import { request as umiRequest } from 'umi';
 
 let defaultOptions: any = {
   debounceWait: 300,
