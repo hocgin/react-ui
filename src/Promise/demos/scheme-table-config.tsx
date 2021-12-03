@@ -8,7 +8,7 @@ import data from './table-config';
 
 let deleteConfig = {
   delete: async (id: any[]) => {
-    console.log('删除', id);
+    console.log('删除2', id);
   },
 };
 

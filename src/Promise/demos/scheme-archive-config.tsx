@@ -11,7 +11,8 @@ export const config: any = {
       };
     },
     submit: async (params: Record<string, any>) => {
-      return {};
+      console.log('保存', params);
+      return true;
     },
   },
   layoutType: 'ModalForm',
