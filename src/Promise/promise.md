@@ -10,9 +10,17 @@ group:
 # @formatter:on
 ---
 
-# Promise - Promise
+# Promise - 约定式组件
 
-这是一个组件的基础描述
+> 新增、修改、删除、分页查询、详情
+
+| 操作       | 组件                          | 说明 |
+| ---------- | ----------------------------- | ---- |
+| `新增`     | `Promise.ArchiveSchemaConfig` | 契约 |
+| `修改`     | `Promise.ArchiveSchemaConfig` | 契约 |
+| `删除`     | `Promise.DeleteSchemaConfig`  | 契约 |
+| `分页查询` | `Promise.TableSchemaConfig`   | 契约 |
+| `详情`     | `Promise.ExhibitSchemaConfig` | 契约 |
 
 ## 代码演示
 

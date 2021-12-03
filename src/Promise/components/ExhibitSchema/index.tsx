@@ -39,19 +39,31 @@ const ArchiveSchema: React.FC<ArchiveSchemaProps> = ({
 
 const ArchiveSchemaModal: React.FC<ArchiveSchemaProps> = ({
   trigger,
+  request,
   ...rest
 }) => {
-  let [isModalVisible, setIsModalVisible] = useState(false);
+  let [visible, setVisible] = useState(false);
+  let [initial, setInitial] = useState(false);
   let triggerEl =
     trigger &&
     React.cloneElement(trigger, {
-      onClick: () => setIsModalVisible(true),
+      onClick: () => {
+        setVisible(true);
+        setInitial(true);
+      },
     });
+
   return (
     <>
       {triggerEl}
-      <Modal visible={isModalVisible} onCancel={() => setIsModalVisible(false)}>
-        <ArchiveSchema {...rest} />
+      <Modal visible={visible} onCancel={() => setVisible(false)}>
+        <ArchiveSchema
+          params={{ initial }}
+          {...rest}
+          request={async (params: Record<string, any>) =>
+            initial ? request?.(params) : Promise.resolve({} as any)
+          }
+        />
       </Modal>
     </>
   );
