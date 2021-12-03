@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Promise } from '@hocgin/ui';
 import { UseAction } from './type';
 
@@ -35,19 +35,17 @@ const ExhibitSchemaConfig: React.FC<ExhibitSchemaConfigProps> = ({
   // @formatter: on
   let { useAction, title, trigger, columns = [], ...rest } = config;
 
-  let request = async (params: Record<string, any>) => {
-    return useAction?.initialValues(params).then((data: any) => ({
-      success: true,
-      data,
-    }));
-  };
-
   return (
     <Promise.ExhibitSchema
       title={title}
       trigger={trigger}
-      request={request}
       columns={columns}
+      request={async (params: Record<string, any>) =>
+        useAction?.initialValues(params).then((data: any) => ({
+          success: true,
+          data,
+        }))
+      }
       {...rest}
     />
   );

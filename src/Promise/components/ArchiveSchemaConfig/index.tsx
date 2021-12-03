@@ -1,16 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 import { Promise, Utils } from '@hocgin/ui';
 import { PlusOutlined } from '@ant-design/icons';
 import { ProFormLayoutType } from '@ant-design/pro-form/lib/components/SchemaForm';
 import { UseAction } from '@/Promise/components/ArchiveSchemaConfig/type';
-import { useRequest } from 'ahooks';
+import { useBoolean, useRequest } from 'ahooks';
 
 type ConfigType = {
-  /**
-   * 更新模式是否需要初始化参数,默认为:true
-   */
-  init?: boolean;
   /**
    * 默认参数
    */
@@ -60,10 +56,11 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
     layoutType = 'ModalForm',
     trigger,
     isUpdate = false,
-    init = true,
     columns = [],
     ...rest
   } = config;
+  let [initial, setInitial] = useState(false);
+
   let submitRequest = useRequest(useAction!.submit, {
     ...defaultParams,
     manual: true,
@@ -81,16 +78,17 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
     </Button>
   );
 
-  let request = async (params: Record<string, any>, props: any) => {
-    return useAction?.initialValues(params);
-  };
   return (
     <Promise.ArchiveSchema
       layoutType={layoutType}
+      params={{ initial }}
       title={title}
       trigger={triggerEl}
+      onVisibleChange={(visible) => setInitial(true)}
       onFinish={async (values: any) => submitRequest.run(values)}
-      request={request}
+      request={async (params: Record<string, any>, props: any) =>
+        initial && useAction?.initialValues(params)
+      }
       columns={columns}
       {...rest}
     />
