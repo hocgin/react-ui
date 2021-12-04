@@ -43,6 +43,24 @@ export class Struct {
   }
 
   /**
+   * 过渡处理错误信息
+   * @param result
+   */
+  static thenShowErrorIfExits(
+    result?: HttpResult<any>,
+  ): HttpResult<any> | undefined {
+    if (Struct.isSuccess(result)) {
+      return result;
+    }
+
+    if (result?.message) {
+      message.error(result.message);
+    }
+
+    return result;
+  }
+
+  /**
    * 获取 FORM 提交表单的错误信息
    * @param errors
    */

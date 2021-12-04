@@ -4,7 +4,7 @@ import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { UseAction } from './type';
 import { ID } from '@/Utils/interface';
 
-interface DeleteSchemaConfigProps {
+type ConfigType = {
   /**
    * 请求
    */
@@ -17,16 +17,27 @@ interface DeleteSchemaConfigProps {
    * 触发点
    */
   trigger?: JSX.Element;
+};
+
+interface DeleteSchemaConfigProps {
+  /**
+   * 配置
+   */
+  config: ConfigType;
 }
 
 // @formatter: off
 const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
-  id,
-  useAction,
-  trigger = <a rel="noopener noreferrer">删除</a>,
-  ...rest
+  config = {},
 }) => {
   // @formatter: on
+  let {
+    id = [],
+    useAction,
+    trigger = <a rel="noopener noreferrer">删除</a>,
+    ...rest
+  } = config;
+
   let showConfirm = () => {
     Modal.confirm({
       icon: <ExclamationCircleOutlined />,
@@ -37,10 +48,7 @@ const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
     });
   };
   let triggerEl =
-    trigger &&
-    React.cloneElement(trigger, {
-      onClick: showConfirm,
-    });
+    trigger && React.cloneElement(trigger, { onClick: showConfirm });
   return <>{triggerEl}</>;
 };
 export default DeleteSchemaConfig;

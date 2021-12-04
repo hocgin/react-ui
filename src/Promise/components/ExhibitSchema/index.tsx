@@ -56,13 +56,17 @@ const ArchiveSchemaModal: React.FC<ArchiveSchemaProps> = ({
   return (
     <>
       {triggerEl}
-      <Modal visible={visible} onCancel={() => setVisible(false)}>
+      <Modal
+        visible={visible}
+        onCancel={() => setVisible(false)}
+        onOk={() => setVisible(false)}
+      >
         <ArchiveSchema
           params={{ initial }}
-          {...rest}
           request={async (params: Record<string, any>) =>
             initial ? request?.(params) : Promise.resolve({} as any)
           }
+          {...rest}
         />
       </Modal>
     </>
