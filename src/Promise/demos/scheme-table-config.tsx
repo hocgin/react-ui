@@ -7,8 +7,12 @@ import { Promise } from '@hocgin/ui';
 import data from './table-config';
 
 let deleteConfig = {
-  delete: async (id: any[]) => {
-    console.log('删除2', id);
+  id: [1],
+  useAction: {
+    delete: async (id: any[]) => {
+      console.log('删除2', id);
+      return true;
+    },
   },
 };
 
@@ -77,12 +81,7 @@ export const config: any = {
             menus={[
               {
                 key: 'delete',
-                name: (
-                  <Promise.DeleteSchemaConfig
-                    useAction={deleteConfig}
-                    id={[1]}
-                  />
-                ),
+                name: <Promise.DeleteSchemaConfig config={deleteConfig} />,
               },
             ]}
           />,
@@ -95,11 +94,7 @@ export const config: any = {
   ],
   tableAlertOptionRender: ({ selectedRowKeys }: any) => (
     <Space size={16}>
-      <Promise.DeleteSchemaConfig
-        useAction={deleteConfig}
-        id={selectedRowKeys}
-        trigger={<a>批量删除</a>}
-      />
+      <Promise.DeleteSchemaConfig config={deleteConfig} />
       <a>导出数据</a>
     </Space>
   ),
