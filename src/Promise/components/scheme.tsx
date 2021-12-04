@@ -4,6 +4,10 @@ import { FileInfo, IPage, Result } from '@/Utils/interface';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { TableSchemaDataResult } from '@/Promise/components/TableSchema';
 
+/**
+ * @deprecated
+ * @param result
+ */
 export const asTableDataResult = (
   result: Result<IPage>,
 ): TableSchemaDataResult => {
