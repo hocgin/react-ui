@@ -3,8 +3,11 @@ import { Tree, TreeSelect } from 'antd';
 import { Struct } from '../result';
 import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
+import { prefix } from '@/Promise/components/scheme';
 
 export default class Dom {
+  static columnPrefix = prefix;
+
   /**
    * 获取图标
    * @param name

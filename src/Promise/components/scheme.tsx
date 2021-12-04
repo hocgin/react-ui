@@ -4,6 +4,10 @@ import { FileInfo, IPage, Result } from '@/Utils/interface';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { TableSchemaDataResult } from '@/Promise/components/TableSchema';
 
+/**
+ * @deprecated
+ * @param result
+ */
 export const asTableDataResult = (
   result: Result<IPage>,
 ): TableSchemaDataResult => {
@@ -22,8 +26,8 @@ const handleSchemeColumn = (column: any): any => {
   return column;
 };
 
-const prefix = (type: string) => {
-  return `gin.${type}`;
+export const prefix = (type: string) => {
+  return `ui.${type}`;
 };
 
 export interface GinUploadParam {
@@ -83,7 +87,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       let params: GinSelectParam = props?.params || {};
       return (
         <Promise.Select
-          multiple={params?.multiple || false}
+          multiple={params?.multiple ?? false}
           useAction={params.useAction}
           {...props?.fieldProps}
         />
