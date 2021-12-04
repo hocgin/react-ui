@@ -1,5 +1,6 @@
 import React from 'react';
 import { UseAction } from '@/Promise/components/ExhibitSchemaConfig/type';
+import { Dom } from '@hocgin/ui';
 
 export const config: any = {
   layoutType: 'ModalForm',
@@ -43,32 +44,32 @@ export const config: any = {
     {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
-      valueType: 'gin.select',
+      valueType: Dom.columnPrefix('select'),
     },
     {
       title: '树型选择',
       dataIndex: 'gin_tree_select_name',
-      valueType: 'gin.treeSelect',
+      valueType: Dom.columnPrefix('gin.treeSelect'),
     },
     {
       title: 'radioButton',
       dataIndex: 'gin_radioButton_name',
-      valueType: 'gin.radioButton',
+      valueType: Dom.columnPrefix('radioButton'),
     },
     {
       title: 'radio',
       dataIndex: 'gin_radio_name',
-      valueType: 'gin.radio',
+      valueType: Dom.columnPrefix('radio'),
     },
     {
       title: 'checkbox',
       dataIndex: 'gin_checkbox_name',
-      valueType: 'gin.checkbox',
+      valueType: Dom.columnPrefix('checkbox'),
     },
     {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
-      valueType: 'gin.upload',
+      valueType: Dom.columnPrefix('upload'),
     },
   ],
 };

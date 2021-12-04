@@ -1,5 +1,6 @@
 import React from 'react';
 import { useGet } from '@hocgin/ui';
+import { Dom } from '@hocgin/ui';
 
 export const config: any = {
   useAction: {
@@ -47,11 +48,11 @@ export const config: any = {
     {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
-      valueType: 'gin.select',
+      valueType: Dom.columnPrefix('select'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => {
-            return useGet('http://api-dev.hocgin.top/api/test_select').then(
+            return useGet('http://127.0.0.1:8000/api/test_select').then(
               ({ data }) => data,
             );
           },
@@ -61,7 +62,7 @@ export const config: any = {
     {
       title: '树型选择',
       dataIndex: 'gin_tree_select_name',
-      valueType: 'gin.treeSelect',
+      valueType: Dom.columnPrefix('treeSelect'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => {
@@ -75,7 +76,7 @@ export const config: any = {
     {
       title: 'radioButton',
       dataIndex: 'gin_radioButton_name',
-      valueType: 'gin.radioButton',
+      valueType: Dom.columnPrefix('radioButton'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => {
@@ -89,7 +90,7 @@ export const config: any = {
     {
       title: 'radio',
       dataIndex: 'gin_radio_name',
-      valueType: 'gin.radio',
+      valueType: Dom.columnPrefix('radio'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => {
@@ -103,7 +104,7 @@ export const config: any = {
     {
       title: 'checkbox',
       dataIndex: 'gin_checkbox_name',
-      valueType: 'gin.checkbox',
+      valueType: Dom.columnPrefix('checkbox'),
       params: {
         useAction: {
           initialValues: async (params: any) => {
@@ -117,7 +118,7 @@ export const config: any = {
     {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
-      valueType: 'gin.upload',
+      valueType: Dom.columnPrefix('upload'),
       params: {
         action: 'http://api-dev.hocgin.top/api/upload',
         maxCount: 1,

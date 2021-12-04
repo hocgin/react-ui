@@ -21,11 +21,14 @@ export class Struct {
 
   /**
    * 获取数据
+   * @deprecated
    * @param result
    */
   static getData(result?: HttpResult<any>): any {
     return result && result.data;
   }
+
+  static thenData = Struct.getData;
 
   /**
    * 响应失败自动弹出提示
