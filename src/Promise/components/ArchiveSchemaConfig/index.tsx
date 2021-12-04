@@ -75,9 +75,12 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
       trigger={triggerEl}
       onVisibleChange={() => setInitial(true)}
       onFinish={useAction!.submit}
-      request={async (params: Record<string, any>, props: any) =>
-        initial && useAction?.initialValues(params)
-      }
+      request={async (params: Record<string, any>, props: any) => {
+        if (initial) {
+          return useAction?.initialValues(params);
+        }
+        return {};
+      }}
       columns={columns}
       {...rest}
     />

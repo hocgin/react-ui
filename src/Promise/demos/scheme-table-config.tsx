@@ -1,9 +1,10 @@
 import React from 'react';
 import { TableDropdown } from '@ant-design/pro-table';
-import { Space } from 'antd';
+import { Space, Divider, Dropdown } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
 import { Promise } from '@hocgin/ui';
+import { DownOutlined } from '@ant-design/icons';
 import data from './table-config';
 
 let deleteConfig = {
@@ -74,7 +75,9 @@ export const config: any = {
 
         return [
           <Promise.ExhibitSchemaConfig config={viewConfigs} />,
+          <Divider type="vertical" />,
           <Promise.ArchiveSchemaConfig config={addConfigs} />,
+          <Divider type="vertical" />,
           <TableDropdown
             key="actionGroup"
             onSelect={() => action?.reload()}

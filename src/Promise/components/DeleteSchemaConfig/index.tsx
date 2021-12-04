@@ -62,7 +62,7 @@ const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
         onCancel={() => setVisible(false)}
         onOk={onConfirm}
       >
-        <ExclamationCircleOutlined />{' '}
+        <ExclamationCircleOutlined />
         {`请确认是否删除 ${id.length} 条数据(无法恢复)?`}
       </Modal>
     </>
