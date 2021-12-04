@@ -39,6 +39,7 @@ const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
   ) => {
     let ro = {
       ...defaultParams,
+      ...params,
       page: current,
       size: pageSize,
     };

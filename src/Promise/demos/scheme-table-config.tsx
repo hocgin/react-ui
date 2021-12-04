@@ -1,14 +1,19 @@
 import React from 'react';
 import { TableDropdown } from '@ant-design/pro-table';
-import { Space } from 'antd';
+import { Space, Divider, Dropdown } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
 import { Promise } from '@hocgin/ui';
+import { DownOutlined } from '@ant-design/icons';
 import data from './table-config';
 
 let deleteConfig = {
-  delete: async (id: any[]) => {
-    console.log('删除2', id);
+  id: [1],
+  useAction: {
+    delete: async (id: any[]) => {
+      console.log('删除2', id);
+      return true;
+    },
   },
 };
 
@@ -70,19 +75,16 @@ export const config: any = {
 
         return [
           <Promise.ExhibitSchemaConfig config={viewConfigs} />,
+          <Divider type="vertical" />,
           <Promise.ArchiveSchemaConfig config={addConfigs} />,
+          <Divider type="vertical" />,
           <TableDropdown
             key="actionGroup"
             onSelect={() => action?.reload()}
             menus={[
               {
                 key: 'delete',
-                name: (
-                  <Promise.DeleteSchemaConfig
-                    useAction={deleteConfig}
-                    id={[1]}
-                  />
-                ),
+                name: <Promise.DeleteSchemaConfig config={deleteConfig} />,
               },
             ]}
           />,
@@ -95,11 +97,7 @@ export const config: any = {
   ],
   tableAlertOptionRender: ({ selectedRowKeys }: any) => (
     <Space size={16}>
-      <Promise.DeleteSchemaConfig
-        useAction={deleteConfig}
-        id={selectedRowKeys}
-        trigger={<a>批量删除</a>}
-      />
+      <Promise.DeleteSchemaConfig config={deleteConfig} />
       <a>导出数据</a>
     </Space>
   ),

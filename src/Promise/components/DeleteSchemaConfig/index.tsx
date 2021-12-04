@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { UseAction } from './type';
@@ -35,20 +35,37 @@ const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
     id = [],
     useAction,
     trigger = <a rel="noopener noreferrer">删除</a>,
-    ...rest
   } = config;
+  let [visible, setVisible] = useState(false);
+  let [loading, setLoading] = useState(false);
 
-  let showConfirm = () => {
-    Modal.confirm({
-      icon: <ExclamationCircleOutlined />,
-      content: `请确认是否删除 ${id.length} 条数据(无法恢复)?`,
-      onOk: async () => {
-        await useAction!.delete(id);
-      },
-    });
+  let onConfirm = async () => {
+    setLoading(true);
+    let isOk = (await useAction!.delete(id)) ?? true;
+    if (isOk) {
+      setVisible(false);
+    }
+    setLoading(false);
   };
+
   let triggerEl =
-    trigger && React.cloneElement(trigger, { onClick: showConfirm });
-  return <>{triggerEl}</>;
+    trigger && React.cloneElement(trigger, { onClick: () => setVisible(true) });
+  return (
+    <>
+      {triggerEl}
+      <Modal
+        visible={visible}
+        width={400}
+        confirmLoading={loading}
+        closable={false}
+        title={'删除确认'}
+        onCancel={() => setVisible(false)}
+        onOk={onConfirm}
+      >
+        <ExclamationCircleOutlined />
+        {`请确认是否删除 ${id.length} 条数据(无法恢复)?`}
+      </Modal>
+    </>
+  );
 };
 export default DeleteSchemaConfig;
