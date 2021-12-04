@@ -1,5 +1,5 @@
 /**
- * title: 我是标题
+ * title: 用于展示详情的组件
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
