@@ -51,7 +51,9 @@ class Index extends React.Component<ArchiveProps> {
       return (
         <Radio.Group size="middle" buttonStyle="solid">
           {options.map(({ key, value }: Option) => (
-            <Radio.Button value={value}>{key}</Radio.Button>
+            <Radio.Button key={`${value}`} value={value}>
+              {key}
+            </Radio.Button>
           ))}
         </Radio.Group>
       );

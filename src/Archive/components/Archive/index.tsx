@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './index.less';
-import { Form} from 'antd';
+import { Form } from 'antd';
 import type { ArchiveColumn } from '../interface';
 import ArchiveItem from '../ArchiveItem';
 import classnames from 'classnames';
@@ -44,7 +44,7 @@ class Index extends React.Component<ArchiveProps, ArchiveState> {
           onValuesChange={this.onValuesChange}
           initialValues={initialValues}
         >
-          <Form.List name={'data'}>
+          <Form.List key={'data'} name={'data'}>
             {() => (
               <>
                 {columns?.map((column: ArchiveColumn) => (

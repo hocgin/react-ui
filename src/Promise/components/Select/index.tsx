@@ -20,29 +20,29 @@ interface TreeSelectProps {
 }
 
 const Index: React.FC<TreeSelectProps> = ({
-                                            multiple = true,
-                                            placeholder = '请选择',
-                                            useAction,
-                                            ...rest
-                                          }) => {
-
+  multiple = true,
+  placeholder = '请选择',
+  useAction,
+  ...rest
+}) => {
   let [data, setData] = useState<Option[]>([]);
   let style = { minWidth: '5em' };
 
   let { run, loading } = useRequest(useAction.initialValues, {
     manual: true,
-    onSuccess: (data: Option[]) => setData(data),
+    onSuccess: (data: Option[]) => setData(data || []),
   });
 
   useMount(() => run());
 
   return (
-    <Select loading={loading}
-            allowClear
-            style={style}
-            mode={multiple ? 'multiple' : undefined}
-            placeholder={placeholder}
-            {...rest}
+    <Select
+      loading={loading}
+      allowClear
+      style={style}
+      mode={multiple ? 'multiple' : undefined}
+      placeholder={placeholder}
+      {...rest}
     >
       {data.map(({ key, value }: Option) => (
         <Select.Option key={`${value}`} value={value}>
@@ -51,7 +51,6 @@ const Index: React.FC<TreeSelectProps> = ({
       ))}
     </Select>
   );
-
 };
 
 export default Index;

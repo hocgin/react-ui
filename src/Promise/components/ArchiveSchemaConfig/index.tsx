@@ -55,7 +55,7 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
   } = config;
   let [initial, setInitial] = useState(false);
 
-  let triggerEl = trigger ? (
+  trigger = trigger ? (
     trigger
   ) : isUpdate ? (
     <Button type="primary" icon={<PlusOutlined />}>
@@ -67,14 +67,18 @@ const ArchiveSchemaConfig: React.FC<ArchiveSchemaConfigProps> = ({
     </Button>
   );
 
+  let triggerEl = trigger;
+
   return (
     <Promise.ArchiveSchema
       layoutType={layoutType}
       params={{ initial }}
       title={title}
-      trigger={triggerEl}
       onVisibleChange={() => setInitial(true)}
-      onFinish={useAction!.submit}
+      trigger={triggerEl}
+      onFinish={async (values: any) => {
+        return await useAction!.submit(values);
+      }}
       request={async (params: Record<string, any>, props: any) => {
         if (initial && useAction?.initialValues) {
           return useAction.initialValues(params);
