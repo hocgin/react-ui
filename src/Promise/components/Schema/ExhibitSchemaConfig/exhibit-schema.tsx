@@ -4,21 +4,18 @@ import ProProvider from '@ant-design/pro-provider';
 import ProDescriptions, {
   ProDescriptionsProps,
 } from '@ant-design/pro-descriptions';
-import {
-  SchemeColumns,
-  handleSchemeColumns,
-} from '@/Promise/components/scheme';
+import { SchemeColumns, handleSchemeColumns } from '../scheme';
 
-interface ArchiveSchemaProps extends ProDescriptionsProps {
+interface ExhibitSchemaProps extends ProDescriptionsProps {
   trigger?: JSX.Element;
 }
 
 // @formatter: off
-const ArchiveSchema: React.FC<ArchiveSchemaProps> = ({
-  columns,
-  children,
-  ...rest
-}) => {
+const ArchiveSchema: React.FC<ExhibitSchemaProps> = ({
+                                                       columns,
+                                                       children,
+                                                       ...rest
+                                                     }) => {
   // @formatter: on
   const values = useContext(ProProvider);
   let value = {
@@ -37,11 +34,11 @@ const ArchiveSchema: React.FC<ArchiveSchemaProps> = ({
   );
 };
 
-const ArchiveSchemaModal: React.FC<ArchiveSchemaProps> = ({
-  trigger,
-  request,
-  ...rest
-}) => {
+const ArchiveSchemaModal: React.FC<ExhibitSchemaProps> = ({
+                                                            trigger,
+                                                            request,
+                                                            ...rest
+                                                          }) => {
   let [visible, setVisible] = useState(false);
   let [initial, setInitial] = useState(false);
   let triggerEl =
@@ -73,10 +70,10 @@ const ArchiveSchemaModal: React.FC<ArchiveSchemaProps> = ({
   );
 };
 
-const ArchiveSchemaWrapper: React.FC<ArchiveSchemaProps> = ({
-  trigger,
-  ...rest
-}) => {
+const ArchiveSchemaWrapper: React.FC<ExhibitSchemaProps> = ({
+                                                              trigger,
+                                                              ...rest
+                                                            }) => {
   return (
     <>
       {trigger ? (

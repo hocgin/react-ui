@@ -55,45 +55,42 @@ export const config: any = {
       title: '操作',
       valueType: 'option',
       render: (text: any, record: any, _: any, action: any) => {
+        let id = record.id;
         let viewConfigs = {
           ...viewConfig,
           trigger: (
-            <a key="view" rel="noopener noreferrer">
+            <a key='view' rel='noopener noreferrer'>
               详情
             </a>
           ),
         };
         let addConfigs = {
           ...addConfig,
-          id: record.id,
+          id: id,
           trigger: (
-            <a key="update" rel="noopener noreferrer">
+            <a key='update' rel='noopener noreferrer'>
               修改
             </a>
           ),
         };
 
-        return [
-          <Promise.ExhibitSchemaConfig config={viewConfigs} />,
-          <Divider type="vertical" />,
-          <Promise.ArchiveSchemaConfig config={addConfigs} />,
-          <Divider type="vertical" />,
-          <TableDropdown
-            key="actionGroup"
-            onSelect={() => action?.reload()}
-            menus={[
-              {
-                key: 'delete',
-                name: <Promise.DeleteSchemaConfig config={deleteConfig} />,
-              },
-            ]}
-          />,
-        ];
+        return (<div key={id}>
+          <Promise.ExhibitSchemaConfig key={1} config={viewConfigs} />
+          <Divider key={2} type='vertical' />
+          <Promise.ArchiveSchemaConfig key={'scheme-table-config.tsx@columns'} config={addConfigs} />
+          <Divider key={4} type='vertical' />
+          <TableDropdown key='actionGroup'
+                         onSelect={() => action?.reload()}
+                         menus={[{
+                           key: 'delete',
+                           name: <Promise.DeleteSchemaConfig config={deleteConfig} />,
+                         }]} />
+        </div>);
       },
     },
   ],
   toolBarRender: () => [
-    <Promise.ArchiveSchemaConfig config={{ ...addConfig }} />,
+    <Promise.ArchiveSchemaConfig key={'scheme-table-config.tsx@toolBarRender'} config={addConfig} />,
   ],
   tableAlertOptionRender: ({ selectedRowKeys }: any) => (
     <Space size={16}>

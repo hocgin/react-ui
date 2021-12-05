@@ -13,18 +13,20 @@ export { default as Money } from './Money';
 export { default as Stretch } from './Stretch';
 export { default as ComplexTable } from './ComplexTable';
 export { default as ComplexCollapse } from './ComplexCollapse';
-export { default as Exhibit } from './Exhibit';
 export { default as Code } from './Code';
-export { default as Archive } from './Archive';
 export { default as SearchBar } from './SearchBar';
 export { default as Promise } from './Promise';
 export { default as FileUpload } from './FileUpload';
 export { default as PhotoWall } from './PhotoWall';
 export { default as TextRow } from './TextRow';
 export { default as Beta } from './Beta';
+// 注意: 因为被替代暂时没用
+export { default as Exhibit } from './Exhibit';
+export { default as Archive } from './Archive';
 // Utils
 export { request, usePost, useDelete, useGet, usePut } from './Utils/request';
 export { default as Format } from './Utils/format';
 export { default as Dom } from './Utils/dom';
 export { default as Types } from './Utils/types';
 export { default as Utils } from './Utils';
+

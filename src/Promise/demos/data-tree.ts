@@ -1,0 +1,171 @@
+export default [
+  {
+    'id': 1,
+    'title': '首页',
+    'parentId': null,
+    'children': [
+      {
+        'id': 8,
+        'title': '控制台',
+        'parentId': 1,
+        'children': [],
+        'authorityCode': 'home.dashboard',
+      },
+    ],
+    'authorityCode': 'home',
+  },
+  {
+    'id': 2,
+    'title': '用户中心',
+    'parentId': null,
+    'children': [
+      {
+        'id': 9,
+        'title': '用户管理',
+        'parentId': 2,
+        'children': [],
+        'authorityCode': 'ums.user',
+      },
+    ],
+    'authorityCode': 'ums',
+  },
+  {
+    'id': 3,
+    'title': '访问控制',
+    'parentId': null,
+    'children': [
+      {
+        'id': 10,
+        'title': '接口管理',
+        'parentId': 3,
+        'children': [],
+        'authorityCode': 'access.api',
+      },
+      {
+        'id': 11,
+        'title': '权限管理',
+        'parentId': 3,
+        'children': [],
+        'authorityCode': 'access.authority',
+      },
+      {
+        'id': 12,
+        'title': '角色管理',
+        'parentId': 3,
+        'children': [],
+        'authorityCode': 'access.role',
+      },
+      {
+        'id': 13,
+        'title': '用户组管理',
+        'parentId': 3,
+        'children': [],
+        'authorityCode': 'access.user_group',
+      },
+    ],
+    'authorityCode': 'access',
+  },
+  {
+    'id': 4,
+    'title': '支付网关',
+    'parentId': null,
+    'children': [
+      {
+        'id': 14,
+        'title': '接入应用',
+        'parentId': 4,
+        'children': [],
+        'authorityCode': 'payment.access_app',
+      },
+      {
+        'id': 15,
+        'title': '交易账单',
+        'parentId': 4,
+        'children': [
+          {
+            'id': 16,
+            'title': '交易账单(详情)',
+            'parentId': 15,
+            'children': [],
+            'authorityCode': 'payment.trade.detail',
+          },
+        ],
+        'authorityCode': 'payment.trade',
+      },
+      {
+        'id': 17,
+        'title': '通知记录',
+        'parentId': 4,
+        'children': [],
+        'authorityCode': 'payment.notify',
+      },
+    ],
+    'authorityCode': 'payment',
+  },
+  {
+    'id': 5,
+    'title': '微信小程序',
+    'parentId': null,
+    'children': [
+      {
+        'id': 18,
+        'title': '工具集',
+        'parentId': 5,
+        'children': [],
+        'authorityCode': 'mina.toolset',
+      },
+      {
+        'id': 19,
+        'title': '红白机模拟器',
+        'parentId': 5,
+        'children': [],
+        'authorityCode': 'mina.nes_game',
+      },
+    ],
+    'authorityCode': 'mina',
+  },
+  {
+    'id': 6,
+    'title': '通用',
+    'parentId': null,
+    'children': [
+      {
+        'id': 20,
+        'title': '项目配置',
+        'parentId': 6,
+        'children': [],
+        'authorityCode': 'com.project',
+      },
+    ],
+    'authorityCode': 'com',
+  },
+  {
+    'id': 7,
+    'title': '开发工具',
+    'parentId': null,
+    'children': [
+      {
+        'id': 21,
+        'title': '数据字典',
+        'parentId': 7,
+        'children': [],
+        'authorityCode': 'devtools.data_dict',
+      },
+      {
+        'id': 22,
+        'title': '请求日志',
+        'parentId': 7,
+        'children': [],
+        'authorityCode': 'devtools.request_log',
+      },
+      {
+        'id': 23,
+        'title': '短链接',
+        'parentId': 7,
+        'children': [],
+        'authorityCode': 'devtools.short_url',
+      },
+    ],
+    'authorityCode': 'devtools',
+  },
+];

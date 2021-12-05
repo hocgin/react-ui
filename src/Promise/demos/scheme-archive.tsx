@@ -16,11 +16,11 @@ export default class Index extends React.PureComponent<{}> {
     return (
       <>
         <Divider />
-        <Promise.ArchiveSchemaConfig config={config1} />
+        <Promise.ArchiveSchemaConfig key={'scheme-archive.tsx@1'} config={config1} />
         <Divider />
-        <Promise.ArchiveSchemaConfig config={config} />
-        <Divider type="vertical" />
-        <Promise.ArchiveSchemaConfig config={config2} />
+        <Promise.ArchiveSchemaConfig key={'scheme-archive.tsx@2'} config={config} />
+        <Divider type='vertical' />
+        <Promise.ArchiveSchemaConfig key={'scheme-archive.tsx@3'} config={config2} />
       </>
     );
   }

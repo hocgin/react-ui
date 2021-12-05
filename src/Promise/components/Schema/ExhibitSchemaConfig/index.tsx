@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Promise } from '@hocgin/ui';
+import React from 'react';
+import ExhibitSchema from './exhibit-schema';
 import { UseAction } from './type';
 
 type ConfigType = {
@@ -30,25 +30,23 @@ export interface ExhibitSchemaConfigProps {
 
 // @formatter: off
 const ExhibitSchemaConfig: React.FC<ExhibitSchemaConfigProps> = ({
-  config,
-}) => {
+                                                                   config,
+                                                                 }) => {
   // @formatter: on
   let { useAction, title, trigger, columns = [], ...rest } = config;
 
-  return (
-    <Promise.ExhibitSchema
-      title={title}
-      trigger={trigger}
-      columns={columns}
-      request={async (params: Record<string, any>) =>
-        useAction?.initialValues(params).then((data: any) => ({
-          success: true,
-          data,
-        }))
-      }
-      {...rest}
-    />
-  );
+  return <ExhibitSchema
+    title={title}
+    trigger={trigger}
+    columns={columns}
+    request={async (params: Record<string, any>) =>
+      useAction?.initialValues(params).then((data: any) => ({
+        success: true,
+        data,
+      }))
+    }
+    {...rest}
+  />;
 };
 
 export default ExhibitSchemaConfig;
