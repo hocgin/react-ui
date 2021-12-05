@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Promise - 契约
 order: 1000
@@ -14,6 +13,7 @@ group:
 # Promise - 约定式组件
 
 > 新增、修改、删除、分页查询、详情
+> [Antd Schema 扩展和定义](https://procomponents.ant.design/components/schema)
 
 | 操作       | 组件                          | 说明 |
 | ---------- | ----------------------------- | ---- |
