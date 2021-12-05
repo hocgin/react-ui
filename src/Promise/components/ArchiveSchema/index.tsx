@@ -19,6 +19,7 @@ const ArchiveSchema: React.FC<FormSchema> = ({ columns, ...rest }) => {
     },
   };
 
+  console.log('ArchiveSchema', value);
   return (
     <ProProvider.Provider value={value}>
       <BetaSchemaForm columns={handleSchemeColumns(columns)} {...rest} />
