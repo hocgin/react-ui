@@ -4,24 +4,19 @@ import ProTable from '@ant-design/pro-table';
 import {
   SchemeColumns,
   handleSchemeColumns,
-} from '@/Promise/components/scheme';
+} from '../scheme';
 import { ProTableProps } from '@ant-design/pro-table/lib/typing';
 
-export interface TableSchemaDataResult<T = any> {
-  data: T[];
-  success: boolean;
-  total: number;
+interface TableSchemaProps extends ProTableProps<any, any, any> {
 }
-
-interface TableSchemaProps extends ProTableProps<any, any, any> {}
 
 // @formatter: off
 const ArchiveSchema: React.FC<TableSchemaProps> = ({
-  columns,
-  rowKey,
-  children,
-  ...rest
-}) => {
+                                                     columns,
+                                                     rowKey,
+                                                     children,
+                                                     ...rest
+                                                   }) => {
   // @formatter: on
   const values = useContext(ProProvider);
   let value = {
@@ -34,12 +29,10 @@ const ArchiveSchema: React.FC<TableSchemaProps> = ({
 
   return (
     <ProProvider.Provider value={value}>
-      <ProTable
-        rowKey={rowKey || 'id'}
-        search={search}
-        columns={handleSchemeColumns(columns || [])}
-        {...rest}
-      >
+      <ProTable rowKey={rowKey || 'id'}
+                search={search}
+                columns={handleSchemeColumns(columns || [])}
+                {...rest}>
         {children}
       </ProTable>
     </ProProvider.Provider>

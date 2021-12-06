@@ -1,6 +1,7 @@
 import { HttpResult, IPage, Result } from './interface';
 import { message } from 'antd';
 import memoizeOne from 'memoize-one';
+import { Option } from '@/Utils/types/rt-grass';
 
 export class Struct {
   /**
@@ -29,6 +30,16 @@ export class Struct {
   }
 
   static thenData = Struct.getData;
+
+  /**
+   * 转换为 Antd 的 {label, value}
+   * @param data
+   */
+  static thenOptions(data: Option[]): any[] {
+    return data.map(({ key, value }: any) => ({
+      label: key, value,
+    }));
+  }
 
   /**
    * 响应失败自动弹出提示

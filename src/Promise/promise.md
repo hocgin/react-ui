@@ -13,6 +13,7 @@ group:
 # Promise - 约定式组件
 
 > 新增、修改、删除、分页查询、详情
+> [Antd Schema 扩展和定义](https://procomponents.ant.design/components/schema)
 
 | 操作       | 组件                          | 说明 |
 | ---------- | ----------------------------- | ---- |
@@ -26,13 +27,13 @@ group:
 
 ### 基础用法
 
-Promise.PageLayout:
-
-<code src="./demos/page-layout.tsx"  background="#f0f2f5" transform="true" iframe />
-
 Promise.SchemeTable:
 
 <code src="./demos/scheme-table.tsx"  background="#f0f2f5" />
+
+Promise.PageLayout:
+
+<code src="./demos/page-layout.tsx"  background="#f0f2f5" transform="true" iframe />
 
 Promise.SchemeArchive:
 

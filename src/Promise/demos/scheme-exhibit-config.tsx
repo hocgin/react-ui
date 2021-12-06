@@ -1,5 +1,5 @@
 import React from 'react';
-import { UseAction } from '@/Promise/components/ExhibitSchemaConfig/type';
+import { UseAction } from '@/Promise/components/Schema/ExhibitSchemaConfig/type';
 import { Dom } from '@hocgin/ui';
 
 export const config: any = {

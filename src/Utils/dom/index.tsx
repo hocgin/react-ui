@@ -3,10 +3,15 @@ import { Tree, TreeSelect } from 'antd';
 import { Struct } from '../result';
 import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
-import { prefix } from '@/Promise/components/scheme';
 
 export default class Dom {
-  static columnPrefix = prefix;
+  /**
+   * 自定义组件前缀
+   * @param type
+   */
+  static columnPrefix(type: string): string {
+    return `ui.${type}`;
+  }
 
   /**
    * 获取图标

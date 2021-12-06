@@ -1,7 +1,7 @@
 import React from 'react';
 import { Table, Space } from 'antd';
-import { Promise } from '@hocgin/ui';
-import { UseAction } from '@/Promise/components/TableSchemaConfig/type';
+import TableSchema from './table-schema';
+import { UseAction } from './type';
 
 type ConfigType = {
   /**
@@ -19,15 +19,13 @@ type ConfigType = {
   toolBarRender?: any;
 };
 
-export interface TableSchemaConfigProps {
+// @formatter: off
+const TableSchemaConfig: React.FC<{
   /**
    * 配置
    */
   config: ConfigType;
-}
-
-// @formatter: off
-const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
+}> = ({ config }) => {
   // @formatter: on
   let { useAction, title, toolBarRender, columns = [], ...rest } = config;
   let defaultParams = {};
@@ -54,35 +52,29 @@ const TableSchemaConfig: React.FC<TableSchemaConfigProps> = ({ config }) => {
   let rowSelection = {
     selections: [Table.SELECTION_ALL, Table.SELECTION_INVERT],
   };
-  let pagination = { pageSize: 10 };
+  let pagination = { pageSize: 20 };
 
-  return (
-    <Promise.TableSchema
-      headerTitle={title}
-      request={request}
-      cardBordered
-      tableAlertRender={({
-        selectedRowKeys,
-        selectedRows,
-        onCleanSelected,
-      }) => (
-        <Space size={24}>
+  return <TableSchema
+    headerTitle={title}
+    request={request}
+    cardBordered
+    tableAlertRender={({ selectedRowKeys, selectedRows, onCleanSelected }: any) => (
+      <Space size={24}>
           <span>
             已选 {selectedRowKeys.length} 项
             <a style={style} onClick={onCleanSelected}>
               取消选择
             </a>
           </span>
-        </Space>
-      )}
-      rowSelection={rowSelection}
-      search={{}}
-      toolBarRender={toolBarRender}
-      pagination={pagination}
-      columns={columns}
-      {...rest}
-    />
-  );
+      </Space>
+    )}
+    rowSelection={rowSelection}
+    search={{}}
+    toolBarRender={toolBarRender}
+    pagination={pagination}
+    columns={columns}
+    {...rest}
+  />;
 };
 
 export default TableSchemaConfig;

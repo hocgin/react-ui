@@ -17,24 +17,25 @@ type ConfigType = {
    * 触发点
    */
   trigger?: JSX.Element;
+  /**
+   * 标题
+   */
+  title?: string;
 };
 
-interface DeleteSchemaConfigProps {
+// @formatter: off
+const DeleteSchemaConfig: React.FC<{
   /**
    * 配置
    */
   config: ConfigType;
-}
-
-// @formatter: off
-const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
-  config = {},
-}) => {
+}> = ({ config = {} }) => {
   // @formatter: on
   let {
     id = [],
     useAction,
-    trigger = <a rel="noopener noreferrer">删除</a>,
+    title,
+    trigger = <a rel='noopener noreferrer'>删除</a>,
   } = config;
   let [visible, setVisible] = useState(false);
   let [loading, setLoading] = useState(false);
@@ -58,7 +59,7 @@ const DeleteSchemaConfig: React.FC<DeleteSchemaConfigProps> = ({
         width={400}
         confirmLoading={loading}
         closable={false}
-        title={'删除确认'}
+        title={title}
         onCancel={() => setVisible(false)}
         onOk={onConfirm}
       >

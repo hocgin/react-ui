@@ -1,6 +1,6 @@
 import React from 'react';
-import { useGet } from '@hocgin/ui';
 import { Dom } from '@hocgin/ui';
+import treedata from './data-tree';
 
 export const config: any = {
   useAction: {
@@ -16,7 +16,6 @@ export const config: any = {
       return true;
     },
   },
-  layoutType: 'ModalForm',
   columns: [
     {
       title: '标题',
@@ -51,11 +50,10 @@ export const config: any = {
       valueType: Dom.columnPrefix('select'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => {
-            return useGet('http://127.0.0.1:8000/api/test_select').then(
-              ({ data }) => data,
-            );
-          },
+          initialValues: async (params: Record<string, any>) => [{
+            key: 'lab',
+            value: 'vx',
+          }],
         },
       },
     },
@@ -65,11 +63,7 @@ export const config: any = {
       valueType: Dom.columnPrefix('treeSelect'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => {
-            return useGet('http://api-dev.hocgin.top/api/tree_select').then(
-              ({ data }) => data,
-            );
-          },
+          initialValues: async (params: Record<string, any>) => treedata,
         },
       },
     },
@@ -79,11 +73,10 @@ export const config: any = {
       valueType: Dom.columnPrefix('radioButton'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => {
-            return useGet('http://api-dev.hocgin.top/api/test_select').then(
-              ({ data }) => data,
-            );
-          },
+          initialValues: async (params: Record<string, any>) => [{
+            key: 'lab',
+            value: 'vx',
+          }],
         },
       },
     },
@@ -93,11 +86,10 @@ export const config: any = {
       valueType: Dom.columnPrefix('radio'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => {
-            return useGet('http://api-dev.hocgin.top/api/test_select').then(
-              ({ data }) => data,
-            );
-          },
+          initialValues: async (params: Record<string, any>) => [{
+            key: 'lab',
+            value: 'vx',
+          }],
         },
       },
     },
@@ -107,11 +99,10 @@ export const config: any = {
       valueType: Dom.columnPrefix('checkbox'),
       params: {
         useAction: {
-          initialValues: async (params: any) => {
-            return useGet('http://api-dev.hocgin.top/api/test_select').then(
-              ({ data }) => data,
-            );
-          },
+          initialValues: async (params: Record<string, any>) => [{
+            key: 'lab',
+            value: 'vx',
+          }],
         },
       },
     },
