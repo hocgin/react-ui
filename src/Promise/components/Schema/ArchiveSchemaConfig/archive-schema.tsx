@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ProProvider from '@ant-design/pro-provider';
+import ConfigContext from '@ant-design/pro-provider';
 import { BetaSchemaForm } from '@ant-design/pro-form';
 import type { FormSchema } from '@ant-design/pro-form/lib/components/SchemaForm';
 import {
@@ -20,7 +20,7 @@ const ArchiveSchema: React.FC<FormSchema> = ({
                                                onVisibleChange,
                                              }) => {
   // @formatter: on
-  const values = useContext(ProProvider);
+  const values = useContext(ConfigContext);
 
   let value = {
     ...values,
@@ -30,7 +30,7 @@ const ArchiveSchema: React.FC<FormSchema> = ({
   };
 
   return (
-    <ProProvider.Provider value={value}>
+    <ConfigContext.Provider value={value}>
       <BetaSchemaForm columns={handleSchemeColumns(columns)}
                       visible={visible}
                       layoutType={layoutType}
@@ -40,7 +40,7 @@ const ArchiveSchema: React.FC<FormSchema> = ({
                       request={request}
                       onFinish={onFinish}
                       trigger={trigger} />
-    </ProProvider.Provider>
+    </ConfigContext.Provider>
   );
 };
 

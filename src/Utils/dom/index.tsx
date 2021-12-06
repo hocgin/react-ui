@@ -10,7 +10,7 @@ export default class Dom {
    * @param type
    */
   static columnPrefix(type: string): string {
-    return `ui__${type}`;
+    return `ui.${type}`;
   }
 
   /**
