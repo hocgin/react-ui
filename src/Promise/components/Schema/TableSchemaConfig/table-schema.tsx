@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import ProProvider from '@ant-design/pro-provider';
+import { ConfigProvider as AntdConfigProvider } from 'antd';
 import ProTable from '@ant-design/pro-table';
 import {
   SchemeColumns,
@@ -18,6 +18,7 @@ const ArchiveSchema: React.FC<TableSchemaProps> = ({
                                                      ...rest
                                                    }) => {
   // @formatter: on
+  let ProProvider = AntdConfigProvider.ConfigContext;
   const values = useContext(ProProvider);
   let value = {
     ...values,

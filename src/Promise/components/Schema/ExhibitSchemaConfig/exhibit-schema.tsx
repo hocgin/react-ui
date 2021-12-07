@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Modal } from 'antd';
-import ProProvider from '@ant-design/pro-provider';
+import { ConfigProvider as AntdConfigProvider } from 'antd';
 import ProDescriptions, {
   ProDescriptionsProps,
 } from '@ant-design/pro-descriptions';
@@ -17,6 +17,7 @@ const ArchiveSchema: React.FC<ExhibitSchemaProps> = ({
                                                        ...rest
                                                      }) => {
   // @formatter: on
+  let ProProvider = AntdConfigProvider.ConfigContext;
   const values = useContext(ProProvider);
   let value = {
     ...values,
