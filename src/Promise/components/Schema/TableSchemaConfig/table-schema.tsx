@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { ConfigProvider as AntdConfigProvider } from 'antd';
+import ProProvider from '@ant-design/pro-provider';
 import ProTable from '@ant-design/pro-table';
 import {
   SchemeColumns,
@@ -12,13 +12,12 @@ interface TableSchemaProps extends ProTableProps<any, any, any> {
 
 // @formatter: off
 const ArchiveSchema: React.FC<TableSchemaProps> = ({
-                                                     columns,
+                                                     columns = [],
                                                      rowKey,
                                                      children,
                                                      ...rest
                                                    }) => {
   // @formatter: on
-  let ProProvider = AntdConfigProvider.ConfigContext;
   const values = useContext(ProProvider);
   let value = {
     ...values,
@@ -32,7 +31,7 @@ const ArchiveSchema: React.FC<TableSchemaProps> = ({
     <ProProvider.Provider value={value}>
       <ProTable rowKey={rowKey || 'id'}
                 search={search}
-                columns={handleSchemeColumns(columns || [])}
+                columns={handleSchemeColumns(columns)}
                 {...rest}>
         {children}
       </ProTable>
