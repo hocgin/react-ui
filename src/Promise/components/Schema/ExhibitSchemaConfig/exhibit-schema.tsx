@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Modal } from 'antd';
-import { ConfigProvider as AntdConfigProvider } from 'antd';
+import ProProvider from '@ant-design/pro-provider';
 import ProDescriptions, {
   ProDescriptionsProps,
 } from '@ant-design/pro-descriptions';
@@ -12,12 +12,11 @@ interface ExhibitSchemaProps extends ProDescriptionsProps {
 
 // @formatter: off
 const ArchiveSchema: React.FC<ExhibitSchemaProps> = ({
-                                                       columns,
+                                                       columns = [],
                                                        children,
                                                        ...rest
                                                      }) => {
   // @formatter: on
-  let ProProvider = AntdConfigProvider.ConfigContext;
   const values = useContext(ProProvider);
   let value = {
     ...values,
@@ -28,7 +27,7 @@ const ArchiveSchema: React.FC<ExhibitSchemaProps> = ({
 
   return (
     <ProProvider.Provider value={value}>
-      <ProDescriptions columns={handleSchemeColumns(columns || [])} {...rest}>
+      <ProDescriptions columns={handleSchemeColumns(columns)} {...rest}>
         {children}
       </ProDescriptions>
     </ProProvider.Provider>
