@@ -62,7 +62,7 @@
   "peerDependencies": {
     "react": "^16.12.0"
   },
-  "bundleDependencies": [
+  "bundledDependencies": [
     "antd",
     "@ant-design/pro-table",
     "@ant-design/pro-layout",
