@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/ui",
-  "version": "4.0.27",
+  "version": "4.0.28",
   "sideEffects": [
     ".less",
     ".css"
@@ -36,44 +36,54 @@
     ]
   },
   "dependencies": {
+    "antd": "^4.15.5",
+    "@ant-design/pro-descriptions": "^1.9.13",
+    "@ant-design/pro-field": "^1.22.1",
+    "@ant-design/pro-form": "^1.43.2",
+    "@ant-design/pro-layout": "^6.25.4",
+    "@ant-design/pro-table": "^2.53.1",
+    "@ant-design/icons": "^4.6.3",
     "@umijs/plugin-request": "^2.7.0",
     "ahooks": "^3.0.0-alpha.12",
     "classnames": "^2.3.1",
-    "draft-js-prism": "^1.0.6",
     "memoize-one": "^5.2.1",
+
+    "emoji-mart": "^3.0.1",
+    "@uiw/react-md-editor": "^3.0.8",
+    "braft-editor": "^2.3.9",
+    "braft-extensions": "^0.1.1",
+
+    "draft-js-prism": "^1.0.6",
     "react-copy-to-clipboard": "^5.0.4",
     "react-countup": "^5.2.0",
     "react-image": "^4.0.3",
     "react-infinite-scroller": "^1.2.2"
   },
   "peerDependencies": {
-    "@ant-design/icons": "^4.6.3",
-    "@ant-design/pro-descriptions": "^1.9.13",
-    "@ant-design/pro-field": "^1.22.1",
-    "@ant-design/pro-form": "^1.43.2",
-    "@ant-design/pro-layout": "^6.25.4",
-    "@ant-design/pro-table": "^2.53.1",
-    "emoji-mart": "^3.0.1",
-    "@uiw/react-md-editor": "^3.0.8",
-    "braft-editor": "^2.3.9",
-    "braft-extensions": "^0.1.1",
-    "antd": "^4.15.5",
     "react": "^16.12.0"
   },
-  "devDependencies": {
-    "@ant-design/icons": "^4.6.3",
-    "@ant-design/pro-descriptions": "^1.9.13",
-    "@ant-design/pro-field": "^1.22.1",
-    "@ant-design/pro-form": "^1.43.2",
-    "@ant-design/pro-layout": "^6.25.4",
-    "@ant-design/pro-table": "^2.53.1",
-    "emoji-mart": "^3.0.1",
-    "@uiw/react-md-editor": "^3.0.8",
-    "braft-editor": "^2.3.9",
-    "braft-extensions": "^0.1.1",
-    "antd": "^4.15.5",
-    "react": "^16.12.0",
+  "bundleDependencies": [
+    "antd",
+    "@ant-design/pro-table",
+    "@ant-design/pro-layout",
+    "@ant-design/pro-form",
+    "@ant-design/pro-field",
+    "@ant-design/pro-descriptions",
+    "@ant-design/icons",
+    "@umijs/plugin-request",
 
+    "emoji-mart",
+    "@uiw/react-md-editor",
+    "braft-editor",
+    "braft-extensions",
+
+    "memoize-one",
+    "ahooks",
+    "classnames"
+  ],
+  "optionalDependencies": {
+  },
+  "devDependencies": {
     "@types/react-copy-to-clipboard": "^5.0.1",
     "@types/react-infinite-scroller": "^1.2.2",
     "@umijs/test": "^3.0.5",
