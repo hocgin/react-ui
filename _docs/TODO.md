@@ -20,3 +20,7 @@
 | useAction     | 请求处理组   |
 | initialValues | 初始化值     |
 | xx$           | 事件         |
+
+### 包依赖类型
+
+https://yarn.bootcss.com/docs/dependency-types/
