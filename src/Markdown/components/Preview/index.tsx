@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
-import MDEditor from '@uiw/react-md-editor';
 import styles from './index.less';
 
 interface EditorProps {
   children?: string;
 }
 
-interface EditorState {}
+interface EditorState {
+}
 
 class Index extends Component<EditorProps, EditorState> {
   static defaultProps = {
@@ -17,13 +17,19 @@ class Index extends Component<EditorProps, EditorState> {
     super(props, context);
   }
 
-  componentDidMount() {}
-
   render() {
     let { children } = this.props;
+    let result = <span>需要安装 @uiw/react-md-editor</span>;
+    try {
+      let MDEditor = require('@uiw/react-md-editor');
+      result = <MDEditor.Markdown source={children} />;
+    } catch (e) {
+      console.warn('需要安装 @uiw/react-md-editor', e);
+    }
+
     return (
       <div className={styles.markdownPreview}>
-        <MDEditor.Markdown source={children} />
+        {result}
       </div>
     );
   }

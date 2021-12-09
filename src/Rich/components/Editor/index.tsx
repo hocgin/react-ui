@@ -4,7 +4,7 @@ import { Utils } from '@hocgin/ui';
 import { useMount } from 'ahooks';
 
 const EDITOR_ID = 'rich-editor';
-let RichEditor: any = undefined;
+let RichEditor: any = (<></>);
 
 const Index: React.FC<{
   value?: string;
@@ -23,32 +23,29 @@ const Index: React.FC<{
     if (Utils.Lang.isServer()) {
       return;
     }
-    import('braft-editor/dist/index.css');
-    import('braft-extensions/dist/code-highlighter.css');
-    import('braft-extensions/dist/table.css');
 
-    import('braft-editor')
-      .then((re) => (RichEditor = re.default))
-      .catch(console.error)
-      .finally(() => {
-        // @ts-ignore
-        import('braft-extensions/dist/code-highlighter.js')
-          .then((CodeHighlighter) => RichEditor.use(CodeHighlighter.default()))
-          .catch(console.error)
-          .finally(() => {
-            // @ts-ignore
-            import('braft-extensions/dist/table.js')
-              .then((Table) => RichEditor.use(Table.default()))
-              .catch(console.error)
-              .finally(() => {
-                // @ts-ignore
-                import('braft-extensions/dist/markdown.js')
-                  .then((Markdown) => RichEditor.use(Markdown.default()))
-                  .catch(console.error)
-                  .finally(onFinally);
-              });
-          });
-      });
+    let re = Utils.Lang.tryRequire('braft-editor');
+    if (re) {
+      Utils.Lang.tryRequire('braft-editor/dist/index.css');
+      Utils.Lang.tryRequire('braft-extensions/dist/code-highlighter.css');
+      Utils.Lang.tryRequire('braft-extensions/dist/table.css');
+      RichEditor = re.default;
+
+      let codeHighlighter = Utils.Lang.tryRequire('braft-extensions/dist/code-highlighter.js');
+      if (codeHighlighter) {
+        RichEditor.use(codeHighlighter.default());
+      }
+
+      let table = Utils.Lang.tryRequire('braft-extensions/dist/table.js');
+      if (table) {
+        RichEditor.use(table.default());
+      }
+
+      let markdown = Utils.Lang.tryRequire('braft-extensions/dist/markdown.js');
+      if (markdown) {
+        RichEditor.use(markdown.default());
+      }
+    }
   });
 
   return (

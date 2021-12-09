@@ -174,4 +174,13 @@ export default class Lang {
   static isServer() {
     return typeof window === 'undefined';
   }
+
+  static tryRequire(path: string) {
+    try {
+      return require(path);
+    } catch (e) {
+      console.warn(`require(${path}) try error`, e);
+      return null;
+    }
+  }
 }

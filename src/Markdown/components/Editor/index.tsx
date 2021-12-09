@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MDEditor from '@uiw/react-md-editor';
 import styles from './index.less';
 
 interface EditorProps {
@@ -8,24 +7,25 @@ interface EditorProps {
   onChange?: (value?: string) => void;
 }
 
-interface EditorState {}
-
-class Index extends Component<EditorProps, EditorState> {
+class Index extends Component<EditorProps, {}> {
   static defaultProps = {};
 
   constructor(props: any, context: any) {
     super(props, context);
   }
 
-  componentDidMount() {}
-
   render() {
     let { children, value, height, onChange } = this.props;
-    return (
-      <>
-        <MDEditor value={value} height={height} onChange={onChange} />
-      </>
-    );
+
+    let result = <span>需要安装 @uiw/react-md-editor</span>;
+    try {
+      let MDEditor = require('@uiw/react-md-editor');
+      result = <MDEditor value={value} height={height} onChange={onChange} />;
+    } catch (e) {
+      console.warn('需要安装 @uiw/react-md-editor', e);
+    }
+
+    return <>{result}</>;
   }
 }
 
