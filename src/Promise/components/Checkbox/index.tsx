@@ -3,6 +3,7 @@ import { Checkbox as AntdCheckbox } from 'antd';
 import { Option } from '@/Utils/types/rt-grass';
 import { useMount, useRequest } from 'ahooks';
 import { UseAction } from './type';
+import { Utils } from '@/index';
 
 interface CheckboxProps {
   /**
@@ -16,7 +17,8 @@ const Checkbox: React.FC<CheckboxProps> = ({ useAction, ...rest }) => {
   // @formatter: on
   let [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 
-  let { run, loading } = useRequest(useAction.initialValues, {
+  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: Option[]) => {
       setOptions(

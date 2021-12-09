@@ -5,12 +5,14 @@ import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
 export default class Dom {
+  static COLUMN_PREFIX = 'ui.';
+
   /**
    * 自定义组件前缀
    * @param type
    */
   static columnPrefix(type: string): string {
-    return `ui.${type}`;
+    return Dom.COLUMN_PREFIX + `${type}`;
   }
 
   /**

@@ -28,7 +28,9 @@ const Index: React.FC<TreeSelectProps> = ({
                                           }) => {
 
   let [data, setData] = useState<TreeNode[]>([]);
-  let { run, loading } = useRequest(useAction.initialValues, {
+
+  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: TreeNode[]) => setData(data),
   });

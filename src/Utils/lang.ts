@@ -1,3 +1,5 @@
+import { useRequest } from 'ahooks';
+
 export default class Lang {
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
@@ -175,6 +177,10 @@ export default class Lang {
     return typeof window === 'undefined';
   }
 
+  /**
+   * 引入库
+   * @param path
+   */
   static tryRequire(path: string) {
     try {
       return require(path);
@@ -182,5 +188,14 @@ export default class Lang {
       console.warn(`require(${path}) try error`, e);
       return null;
     }
+  }
+
+  /**
+   * 服务嵌套
+   * @param service
+   * @param defResult
+   */
+  static nilService(service: any, defResult: any): any {
+    return service !== undefined ? service : async () => defResult;
   }
 }

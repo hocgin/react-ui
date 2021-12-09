@@ -4,12 +4,27 @@ import { FileInfo } from '@/Utils/interface';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { UseAction } from '@/Promise/components/RadioButton/type';
+import { Select } from 'antd';
 
 export const handleSchemeColumns = (columns: any[]): any[] => {
   return columns.map(handleSchemeColumn);
 };
 
 const handleSchemeColumn = (column: any): any => {
+  // log: 这边是用来兼容 antd pro 组件 valueTypeMaps 不生效的问题
+  let valueType = `${column?.valueType}`;
+  let isCustom = valueType.startsWith(Dom.COLUMN_PREFIX);
+  if (!isCustom) {
+    return column;
+  }
+  let schemeColumn = SchemeColumns[valueType];
+  column.renderFormItem = (item: any, config: any, form: any) => {
+    let text = config?.value;
+    return schemeColumn?.renderFormItem?.(text, item, form);
+  };
+  column.render = (dom: any, entity: any, index: number, action: any, schema: any) => {
+    return schemeColumn?.render?.(schema?.text, { mode: schema?.mode, ...column }, dom);
+  };
   return column;
 };
 
@@ -61,14 +76,12 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
   },
   [prefix('select')]: {
     render: (text: any, props: any) => {
-      console.log('select render', text, props);
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
-      console.log('select renderFormItem', text, props);
       let params: SelectParam = props?.params || {};
       return (
-        <Promise.Select multiple={params?.multiple ?? false} useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.Select {...props?.fieldProps} multiple={params?.multiple} useAction={params?.useAction} />
       );
     },
   },
@@ -86,7 +99,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: CheckboxParam = props?.params || {};
       return (
-        <Promise.Checkbox useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.Checkbox useAction={params?.useAction} {...props?.fieldProps} />
       );
     },
   },
@@ -96,7 +109,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: RadioParam = props?.params || {};
       return (
-        <Promise.Radio useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.Radio useAction={params?.useAction} {...props?.fieldProps} />
       );
     },
   },
@@ -106,7 +119,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: RadioButtonParam = props?.params || {};
       return (
-        <Promise.RadioButton useAction={params.useAction}  {...props?.fieldProps} />
+        <Promise.RadioButton useAction={params?.useAction}  {...props?.fieldProps} />
       );
     },
   },

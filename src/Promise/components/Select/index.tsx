@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
+import { Utils } from '@hocgin/ui';
 import { Option } from '@/Utils/types/rt-grass';
-import { UseAction } from '@/Promise/components/Select/type';
+import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
 
-interface TreeSelectProps {
+const Index: React.FC<{
   /**
    * 请求
    */
@@ -17,18 +18,11 @@ interface TreeSelectProps {
    * 选择提示
    */
   placeholder?: string;
-}
-
-const Index: React.FC<TreeSelectProps> = ({
-                                            multiple = true,
-                                            placeholder = '请选择',
-                                            useAction,
-                                            ...rest
-                                          }) => {
+}> = ({ multiple = false, placeholder = '请选择', useAction, ...rest }) => {
   let [data, setData] = useState<Option[]>([]);
   let style = { minWidth: '5em' };
-
-  let { run, loading } = useRequest(useAction.initialValues, {
+  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: Option[]) => setData(data || []),
   });
