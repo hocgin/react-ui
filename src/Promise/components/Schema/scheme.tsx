@@ -11,7 +11,7 @@ export const handleSchemeColumns = (columns: any[]): any[] => {
 };
 
 const handleSchemeColumn = (column: any): any => {
-  // log: 这边是用来兼容 antd pro 组件 valueTypeMaps 不生效的问题
+  // fixme 20211209: 这边是用来兼容 antd pro 组件 valueTypeMaps 不生效的问题
   let valueType = `${column?.valueType}`;
   let isCustom = valueType.startsWith(Dom.COLUMN_PREFIX);
   if (!isCustom) {
@@ -81,7 +81,8 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: SelectParam = props?.params || {};
       return (
-        <Promise.Select {...props?.fieldProps} multiple={params?.multiple} useAction={params?.useAction} />
+        <Promise.Select {...props?.fieldProps} multiple={params?.multiple}
+                        useAction={params?.useAction} {...props?.fieldProps} />
       );
     },
   },
