@@ -8,25 +8,33 @@ import { Promise } from '@hocgin/ui';
 
 export default () => {
   let useAction = {
-    initialValues: async () => {
-      return [{
-        key: 'a1',
-        value: '1',
-      }, {
-        key: 'b1',
-        value: '21',
-      }, {
-        key: 'c1',
-        value: '22x1',
-      }];
+    initialValues: async (keyword?: string) => {
+      console.log('请求', keyword);
+      let str = keyword ?? '';
+      return [
+        {
+          key: 'a1' + str,
+          value: '1' + str,
+        },
+        {
+          key: 'b1',
+          value: '21',
+        },
+        {
+          key: 'c1',
+          value: '22x1',
+        },
+      ];
     },
   };
   return (
     <>
       <Divider>普通选择器</Divider>
       <Promise.Select useAction={useAction} />
-      <Divider>多选选择器</Divider>
       <Promise.Select multiple={true} useAction={useAction} />
+      <Divider>搜索选择器</Divider>
+      <Promise.Search useAction={useAction} />
+      <Promise.Search useAction={useAction} multiple={true} />
       <Divider>单选按钮</Divider>
       <Promise.RadioButton useAction={useAction} />
       <Divider>单选</Divider>

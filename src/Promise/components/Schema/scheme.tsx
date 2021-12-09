@@ -10,6 +10,30 @@ export const handleSchemeColumns = (columns: any[]): any[] => {
 };
 
 const handleSchemeColumn = (column: any): any => {
+  // fixme 20211209: 这边是用来兼容 antd pro 组件 valueTypeMaps 不生效的问题
+  let valueType = `${column?.valueType}`;
+  let isCustom = valueType.startsWith(Dom.COLUMN_PREFIX);
+  if (!isCustom) {
+    return column;
+  }
+  let schemeColumn = SchemeColumns[valueType];
+  column.renderFormItem = (item: any, config: any, form: any) => {
+    let text = config?.value;
+    return schemeColumn?.renderFormItem?.(text, item, form);
+  };
+  column.render = (
+    dom: any,
+    entity: any,
+    index: number,
+    action: any,
+    schema: any,
+  ) => {
+    return schemeColumn?.render?.(
+      schema?.text,
+      { mode: schema?.mode, ...column },
+      dom,
+    );
+  };
   return column;
 };
 
@@ -55,20 +79,41 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: UploadParam = props?.params || {};
       return (
-        <Promise.FileUpload action={params?.action} maxCount={params?.maxCount} {...props?.fieldProps} />
+        <Promise.FileUpload
+          action={params?.action}
+          maxCount={params?.maxCount}
+          {...props?.fieldProps}
+        />
       );
     },
   },
   [prefix('select')]: {
     render: (text: any, props: any) => {
-      console.log('select render', text, props);
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
-      console.log('select renderFormItem', text, props);
-      let params: SelectParam = props?.params || {};
+      let params: any = props?.params || {};
       return (
-        <Promise.Select multiple={params?.multiple ?? false} useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.Select
+          {...props?.fieldProps}
+          multiple={params?.multiple}
+          useAction={params?.useAction}
+        />
+      );
+    },
+  },
+  [prefix('search')]: {
+    render: (text: any, props: any) => {
+      return <div>{text}</div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      let params: any = props?.params || {};
+      return (
+        <Promise.Search
+          {...props?.fieldProps}
+          multiple={params?.multiple}
+          useAction={params?.useAction}
+        />
       );
     },
   },
@@ -77,7 +122,11 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: TreeSelectParam = props?.params || {};
       return (
-        <Promise.TreeSelect multiple={params?.multiple ?? false} useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.TreeSelect
+          multiple={params?.multiple ?? false}
+          useAction={params.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },
@@ -86,7 +135,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: CheckboxParam = props?.params || {};
       return (
-        <Promise.Checkbox useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.Checkbox
+          useAction={params?.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },
@@ -96,7 +148,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: RadioParam = props?.params || {};
       return (
-        <Promise.Radio useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.Radio useAction={params?.useAction} {...props?.fieldProps} />
       );
     },
   },
@@ -106,7 +158,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: RadioButtonParam = props?.params || {};
       return (
-        <Promise.RadioButton useAction={params.useAction}  {...props?.fieldProps} />
+        <Promise.RadioButton
+          useAction={params?.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },

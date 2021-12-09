@@ -34,7 +34,7 @@ type ConfigType = {
 
 // @formatter: off
 const ArchiveSchemaConfig: React.FC<{
-  key?: any,
+  key?: any;
   /**
    * 配置
    */
@@ -55,11 +55,11 @@ const ArchiveSchemaConfig: React.FC<{
   let triggerEl = trigger ? (
     trigger
   ) : isUpdate ? (
-    <Button type='primary' icon={<PlusOutlined />}>
+    <Button type="primary" icon={<PlusOutlined />}>
       修改
     </Button>
   ) : (
-    <Button type='primary' icon={<PlusOutlined />}>
+    <Button type="primary" icon={<PlusOutlined />}>
       新建
     </Button>
   );
@@ -70,23 +70,26 @@ const ArchiveSchemaConfig: React.FC<{
       ...modalProps,
       onVisibleChange: (visible: boolean) => !initial && setInitial(true),
     };
-    console.log(`ModalForm`, key, config, modalProps, initial);
   }
 
-  return <ArchiveSchema layoutType={layoutType}
-                        params={{ initial }}
-                        title={title}
-                        trigger={triggerEl}
-                        columns={columns}
-                        onFinish={(values: any) => useAction!.submit(values) ?? true}
-                        request={async (params: Record<string, any>, props: any) => {
-                          if (initial && useAction?.initialValues) {
-                            return useAction.initialValues(params);
-                          }
-                          return {};
-                        }}
-                        {...modalProps}
-                        {...rest} />;
+  return (
+    <ArchiveSchema
+      layoutType={layoutType}
+      params={{ initial }}
+      title={title}
+      trigger={triggerEl}
+      columns={columns}
+      onFinish={(values: any) => useAction!.submit(values) ?? true}
+      request={async (params: Record<string, any>, props: any) => {
+        if (initial && useAction?.initialValues) {
+          return useAction.initialValues(params);
+        }
+        return {};
+      }}
+      {...modalProps}
+      {...rest}
+    />
+  );
 };
 
 export default ArchiveSchemaConfig;
