@@ -5,26 +5,26 @@ import { useMount, useRequest } from 'ahooks';
 import { UseAction } from '@/Promise/components/Select/type';
 import { Utils } from '@/index';
 
-interface RadioProps {
+// @formatter: off
+const Radio: React.FC<{
   /**
    * 请求
    */
   useAction: UseAction;
-}
-
-// @formatter: off
-const Radio: React.FC<RadioProps> = ({ useAction, ...rest }) => {
+}> = ({ useAction, ...rest }) => {
   // @formatter: on
-  let [options, setOptions] = useState<{ label: string, value: string; }[]>([]);
+  let [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: Option[]) => {
-      setOptions(data.map(({ key, value }: Option) => ({
-        label: key,
-        value,
-      })));
+      setOptions(
+        data.map(({ key, value }: Option) => ({
+          label: key,
+          value,
+        })),
+      );
     },
   });
 

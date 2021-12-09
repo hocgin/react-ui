@@ -5,15 +5,13 @@ import { useRequest, useMount } from 'ahooks';
 import { UseAction } from './type';
 import { Utils } from '@/index';
 
-interface RadioButtonProps {
+// @formatter: off
+const RadioButton: React.FC<{
   /**
    * 请求
    */
   useAction: UseAction;
-}
-
-// @formatter: off
-const RadioButton: React.FC<RadioButtonProps> = ({ useAction, ...rest }) => {
+}> = ({ useAction, ...rest }) => {
   // @formatter: on
   let [data, setData] = useState<Option[]>([]);
 

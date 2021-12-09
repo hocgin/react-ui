@@ -5,15 +5,13 @@ import { useMount, useRequest } from 'ahooks';
 import { UseAction } from './type';
 import { Utils } from '@/index';
 
-interface CheckboxProps {
+// @formatter: off
+const Checkbox: React.FC<{
   /**
    * 请求
    */
   useAction: UseAction;
-}
-
-// @formatter: off
-const Checkbox: React.FC<CheckboxProps> = ({ useAction, ...rest }) => {
+}> = ({ useAction, ...rest }) => {
   // @formatter: on
   let [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 

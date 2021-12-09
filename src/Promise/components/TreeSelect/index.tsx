@@ -5,7 +5,7 @@ import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
 import { TreeNode } from '@/Utils/interface';
 
-interface TreeSelectProps {
+const Index: React.FC<{
   /**
    * 请求
    */
@@ -18,15 +18,7 @@ interface TreeSelectProps {
    * 选择提示
    */
   placeholder?: string;
-}
-
-const Index: React.FC<TreeSelectProps> = ({
-                                            multiple = true,
-                                            placeholder = '请选择',
-                                            useAction,
-                                            ...rest
-                                          }) => {
-
+}> = ({ multiple = true, placeholder = '请选择..', useAction, ...rest }) => {
   let [data, setData] = useState<TreeNode[]>([]);
 
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
@@ -38,12 +30,13 @@ const Index: React.FC<TreeSelectProps> = ({
   useMount(() => run());
 
   return (
-    <TreeSelect loading={loading}
-                allowClear
-                treeCheckable={multiple}
-                multiple={multiple}
-                placeholder={placeholder}
-                {...rest}
+    <TreeSelect
+      loading={loading}
+      allowClear
+      treeCheckable={multiple}
+      multiple={multiple}
+      placeholder={placeholder}
+      {...rest}
     >
       {Dom.renderTreeSelectNodes(data)}
     </TreeSelect>

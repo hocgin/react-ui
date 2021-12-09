@@ -196,6 +196,8 @@ export default class Lang {
    * @param defResult
    */
   static nilService(service: any, defResult: any): any {
-    return service !== undefined ? service : async () => defResult;
+    return service !== undefined
+      ? service
+      : async (...args: any[]) => defResult;
   }
 }

@@ -4,7 +4,6 @@ import { FileInfo } from '@/Utils/interface';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { UseAction } from '@/Promise/components/RadioButton/type';
-import { Select } from 'antd';
 
 export const handleSchemeColumns = (columns: any[]): any[] => {
   return columns.map(handleSchemeColumn);
@@ -22,8 +21,18 @@ const handleSchemeColumn = (column: any): any => {
     let text = config?.value;
     return schemeColumn?.renderFormItem?.(text, item, form);
   };
-  column.render = (dom: any, entity: any, index: number, action: any, schema: any) => {
-    return schemeColumn?.render?.(schema?.text, { mode: schema?.mode, ...column }, dom);
+  column.render = (
+    dom: any,
+    entity: any,
+    index: number,
+    action: any,
+    schema: any,
+  ) => {
+    return schemeColumn?.render?.(
+      schema?.text,
+      { mode: schema?.mode, ...column },
+      dom,
+    );
   };
   return column;
 };
@@ -70,7 +79,11 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: UploadParam = props?.params || {};
       return (
-        <Promise.FileUpload action={params?.action} maxCount={params?.maxCount} {...props?.fieldProps} />
+        <Promise.FileUpload
+          action={params?.action}
+          maxCount={params?.maxCount}
+          {...props?.fieldProps}
+        />
       );
     },
   },
@@ -79,10 +92,28 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
-      let params: SelectParam = props?.params || {};
+      let params: any = props?.params || {};
       return (
-        <Promise.Select {...props?.fieldProps} multiple={params?.multiple}
-                        useAction={params?.useAction} {...props?.fieldProps} />
+        <Promise.Select
+          {...props?.fieldProps}
+          multiple={params?.multiple}
+          useAction={params?.useAction}
+        />
+      );
+    },
+  },
+  [prefix('search')]: {
+    render: (text: any, props: any) => {
+      return <div>{text}</div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      let params: any = props?.params || {};
+      return (
+        <Promise.Search
+          {...props?.fieldProps}
+          multiple={params?.multiple}
+          useAction={params?.useAction}
+        />
       );
     },
   },
@@ -91,7 +122,11 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: TreeSelectParam = props?.params || {};
       return (
-        <Promise.TreeSelect multiple={params?.multiple ?? false} useAction={params.useAction} {...props?.fieldProps} />
+        <Promise.TreeSelect
+          multiple={params?.multiple ?? false}
+          useAction={params.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },
@@ -100,7 +135,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: CheckboxParam = props?.params || {};
       return (
-        <Promise.Checkbox useAction={params?.useAction} {...props?.fieldProps} />
+        <Promise.Checkbox
+          useAction={params?.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },
@@ -120,7 +158,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     renderFormItem: (text: any, props: any) => {
       let params: RadioButtonParam = props?.params || {};
       return (
-        <Promise.RadioButton useAction={params?.useAction}  {...props?.fieldProps} />
+        <Promise.RadioButton
+          useAction={params?.useAction}
+          {...props?.fieldProps}
+        />
       );
     },
   },

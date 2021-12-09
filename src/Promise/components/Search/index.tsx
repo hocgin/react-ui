@@ -3,7 +3,7 @@ import { Select } from 'antd';
 import { Utils } from '@hocgin/ui';
 import { Option } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
-import { useMount, useRequest } from 'ahooks';
+import { useUpdateEffect, useRequest } from 'ahooks';
 
 const Index: React.FC<{
   /**
@@ -20,6 +20,7 @@ const Index: React.FC<{
   placeholder?: string;
 }> = ({ multiple = false, placeholder = '请选择..', useAction, ...rest }) => {
   let [data, setData] = useState<Option[]>([]);
+  let [keyword, setKeyword] = useState<string>();
   let style = { minWidth: '10em' };
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
@@ -27,14 +28,18 @@ const Index: React.FC<{
     onSuccess: (data: Option[]) => setData(data || []),
   });
 
-  useMount(() => run());
+  useUpdateEffect(() => run(keyword), [keyword]);
 
   return (
     <Select
       loading={loading}
+      showSearch
+      showArrow={false}
+      filterOption={false}
       allowClear
       style={style}
       mode={multiple ? 'multiple' : undefined}
+      onSearch={setKeyword}
       placeholder={placeholder}
       {...rest}
     >
