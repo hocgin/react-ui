@@ -1,14 +1,14 @@
-let umiPlugin;
+let umiRequest: any;
 try {
-  umiPlugin = require('@umijs/plugin-request/src/request');
+  const { request } = require('@umijs/plugin-request/src/request');
+  umiRequest = request;
 } catch (e) {
-  umiPlugin = null;
+  umiRequest = null;
   console.warn('Please install @umijs/plugin-request');
 }
 
 let requestFun: any;
-if (umiPlugin) {
-  let { umiRequest } = umiPlugin;
+if (umiRequest) {
   let defaultOptions: any = {
     debounceWait: 300,
     retryCount: 3,
