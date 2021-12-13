@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import 'braft-extensions/dist/code-highlighter.css';
 import styles from './index.less';
+import { Utils } from '@/index';
 
 interface EditorProps {
   children?: string;
@@ -20,7 +20,7 @@ class Index extends Component<EditorProps, EditorState> {
   componentDidMount() {}
 
   render() {
-    let { children } = this.props;
+    Utils.Lang.tryRequire('braft-extensions/dist/code-highlighter.css');
     return (
       <div className={styles.richPreview}>
         <div dangerouslySetInnerHTML={this.dangerouslySetInnerHTML} />

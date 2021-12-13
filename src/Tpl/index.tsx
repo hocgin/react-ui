@@ -5,6 +5,4 @@
 import React from 'react';
 import Tpl from './components/Tpl';
 
-export default {
-  Tpl: Tpl,
-};
+export default Tpl;
