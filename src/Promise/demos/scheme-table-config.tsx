@@ -1,10 +1,9 @@
 import React from 'react';
 import { TableDropdown } from '@ant-design/pro-table';
-import { Space, Divider, Dropdown } from 'antd';
+import { Space, Divider } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
 import { Promise } from '@hocgin/ui';
-import { DownOutlined } from '@ant-design/icons';
 import data from './table-config';
 
 let deleteConfig = {
@@ -59,7 +58,7 @@ export const config: any = {
         let viewConfigs = {
           ...viewConfig,
           trigger: (
-            <a key='view' rel='noopener noreferrer'>
+            <a key="view" rel="noopener noreferrer">
               详情
             </a>
           ),
@@ -68,29 +67,41 @@ export const config: any = {
           ...addConfig,
           id: id,
           trigger: (
-            <a key='update' rel='noopener noreferrer'>
+            <a key="update" rel="noopener noreferrer">
               修改
             </a>
           ),
         };
 
-        return (<div key={id}>
-          <Promise.ExhibitSchemaConfig key={1} config={viewConfigs} />
-          <Divider key={2} type='vertical' />
-          <Promise.ArchiveSchemaConfig key={'scheme-table-config.tsx@columns'} config={addConfigs} />
-          <Divider key={4} type='vertical' />
-          <TableDropdown key='actionGroup'
-                         onSelect={() => action?.reload()}
-                         menus={[{
-                           key: 'delete',
-                           name: <Promise.DeleteSchemaConfig config={deleteConfig} />,
-                         }]} />
-        </div>);
+        return (
+          <div key={id}>
+            <Promise.ExhibitSchemaConfig key={1} config={viewConfigs} />
+            <Divider key={2} type="vertical" />
+            <Promise.ArchiveSchemaConfig
+              key={'scheme-table-config.tsx@columns'}
+              config={addConfigs}
+            />
+            <Divider key={4} type="vertical" />
+            <TableDropdown
+              key="actionGroup"
+              onSelect={() => action?.reload()}
+              menus={[
+                {
+                  key: 'delete',
+                  name: <Promise.DeleteSchemaConfig config={deleteConfig} />,
+                },
+              ]}
+            />
+          </div>
+        );
       },
     },
   ],
   toolBarRender: () => [
-    <Promise.ArchiveSchemaConfig key={'scheme-table-config.tsx@toolBarRender'} config={addConfig} />,
+    <Promise.ArchiveSchemaConfig
+      key={'scheme-table-config.tsx@toolBarRender'}
+      config={addConfig}
+    />,
   ],
   tableAlertOptionRender: ({ selectedRowKeys }: any) => (
     <Space size={16}>

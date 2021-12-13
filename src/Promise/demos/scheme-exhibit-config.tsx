@@ -10,6 +10,8 @@ export const config: any = {
       return {
         title: '这是标题',
         state: 'vx',
+        stretch:
+          '这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题',
       };
     },
   } as UseAction,
@@ -70,6 +72,16 @@ export const config: any = {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
       valueType: Dom.columnPrefix('upload'),
+    },
+    {
+      title: '链接',
+      dataIndex: 'link',
+      valueType: Dom.columnPrefix('link'),
+    },
+    {
+      title: '文本',
+      dataIndex: 'stretch',
+      valueType: Dom.columnPrefix('stretch'),
     },
   ],
 };
