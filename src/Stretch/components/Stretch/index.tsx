@@ -14,7 +14,7 @@ const Index: React.FC<{
   className?: string;
   children?: string | Node;
   maxRow?: number;
-  bordered: boolean;
+  bordered?: boolean;
 }> = ({ children, className, maxRow, bordered = true, ...rest }) => {
   let [fullSize, setFullSize] = useState(true);
   let [copied, setCopied] = useState(false);

@@ -201,12 +201,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       if (!text) {
         return <span>-</span>;
       }
-      let { maxRow, fullSize } = props?.params || {
-        maxRow: 2,
-        fullSize: false,
-      };
+      let { maxRow, fullSize } = props?.params || {};
+
       return (
-        <Exhibit.Text.Stretch maxRow={maxRow} fullSize={fullSize}>
+        <Exhibit.Text.Stretch maxRow={maxRow ?? 2} fullSize={fullSize ?? false}>
           {text}
         </Exhibit.Text.Stretch>
       );
