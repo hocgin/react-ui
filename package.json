@@ -50,7 +50,6 @@
     "draft-js-prism": "^1.0.6",
     "emoji-mart": "^3.0.1",
     "memoize-one": "^5.2.1",
-    "qs": "^6.10.2",
     "react-copy-to-clipboard": "^5.0.4",
     "react-countup": "^5.2.0",
     "react-image": "^4.0.3",
