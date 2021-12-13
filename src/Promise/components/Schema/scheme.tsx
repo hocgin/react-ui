@@ -3,7 +3,7 @@ import { Promise, Exhibit } from '@hocgin/ui';
 import { FileInfo } from '@/Utils/interface';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
-import { UseAction } from '@/Promise/components/RadioButton/type';
+import { Input } from 'antd';
 
 export const handleSchemeColumns = (columns: any[]): any[] => {
   return columns.map(handleSchemeColumn);
@@ -46,11 +46,6 @@ export interface UploadParam {
   maxCount?: number;
 }
 
-export interface SelectParam {
-  useAction: any;
-  multiple?: boolean;
-}
-
 export interface TreeSelectParam {
   useAction: any;
   multiple?: boolean;
@@ -65,12 +60,17 @@ export interface RadioParam {
 }
 
 export interface RadioButtonParam {
-  useAction: UseAction;
+  useAction: any;
 }
 
 export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
+  // 上传按钮
   [prefix('upload')]: {
-    render: (record: FileInfo | FileInfo[]) => {
+    render: (record?: any) => {
+      if (!record) {
+        return <span>-</span>;
+      }
+
       if (record && record instanceof Array) {
         return <Exhibit.Array.Image src={record.map(({ url }) => url)} />;
       }
@@ -87,8 +87,12 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       );
     },
   },
+  // 下拉选择框
   [prefix('select')]: {
     render: (text: any, props: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
@@ -102,8 +106,12 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       );
     },
   },
+  // 搜索框
   [prefix('search')]: {
     render: (text: any, props: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
@@ -117,8 +125,14 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       );
     },
   },
+  // 树型选择框
   [prefix('treeSelect')]: {
-    render: (text: any) => <div>{text}</div>,
+    render: (text: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      return <div>{text}</div>;
+    },
     renderFormItem: (text: any, props: any) => {
       let params: TreeSelectParam = props?.params || {};
       return (
@@ -130,8 +144,14 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       );
     },
   },
+  // 多选按钮
   [prefix('checkbox')]: {
-    render: (text: any) => <div>{text}</div>,
+    render: (text: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      return <div>{text}</div>;
+    },
     renderFormItem: (text: any, props: any) => {
       let params: CheckboxParam = props?.params || {};
       return (
@@ -142,9 +162,14 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       );
     },
   },
-
+  // 单选
   [prefix('radio')]: {
-    render: (text: any) => <div>{text}</div>,
+    render: (text: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      return <div>{text}</div>;
+    },
     renderFormItem: (text: any, props: any) => {
       let params: RadioParam = props?.params || {};
       return (
@@ -152,9 +177,14 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       );
     },
   },
-
+  // 单选按钮
   [prefix('radioButton')]: {
-    render: (text: any) => <div>{text}</div>,
+    render: (text: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      return <div>{text}</div>;
+    },
     renderFormItem: (text: any, props: any) => {
       let params: RadioButtonParam = props?.params || {};
       return (
@@ -163,6 +193,58 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
           {...props?.fieldProps}
         />
       );
+    },
+  },
+  // 多行文本
+  [prefix('stretch')]: {
+    render: (text: any, props: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      let { maxRow, fullSize } = props?.params || {
+        maxRow: 2,
+        fullSize: false,
+      };
+      return (
+        <Exhibit.Text.Stretch maxRow={maxRow} fullSize={fullSize}>
+          {text}
+        </Exhibit.Text.Stretch>
+      );
+    },
+    renderFormItem: (text: any, props: any) => {
+      return <Input.TextArea {...props?.fieldProps} />;
+    },
+  },
+  // 代码
+  [prefix('code')]: {
+    render: (text: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      return <Exhibit.Text.Stretch>{text}</Exhibit.Text.Stretch>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      return <Input.TextArea {...props?.fieldProps} />;
+    },
+  },
+  // 链接
+  [prefix('link')]: {
+    render: (text: any, props: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+
+      let { type } = props?.params || {};
+      if (type === 'download') {
+        return <Exhibit.Link.Download url={text} />;
+      } else if (type === 'file') {
+        return <Exhibit.Link.Download url={text} title={'文件'} />;
+      } else {
+        return <Exhibit.Link.Site url={text} />;
+      }
+    },
+    renderFormItem: (text: any, props: any) => {
+      return <Input {...props?.fieldProps} />;
     },
   },
   // https://procomponents.ant.design/components/field

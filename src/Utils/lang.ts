@@ -1,5 +1,3 @@
-import { useRequest } from 'ahooks';
-
 export default class Lang {
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
@@ -183,7 +181,7 @@ export default class Lang {
    */
   static tryRequire(path: string) {
     try {
-      return require(path);
+      return require(`${path}`);
     } catch (e) {
       console.warn(`require(${path}) try error`, e);
       return null;
