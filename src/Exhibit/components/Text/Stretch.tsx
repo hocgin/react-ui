@@ -4,9 +4,6 @@ import React from 'react';
 export interface StretchProps {
   fullSize?: boolean;
   maxRow?: number;
-  /**
-   * 内容
-   */
   children?: string | Node;
 }
 
