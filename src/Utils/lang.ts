@@ -176,26 +176,11 @@ export default class Lang {
   }
 
   /**
-   * 引入库
-   * @param path
-   */
-  static tryRequire(path: string) {
-    try {
-      return require(`${path}`);
-    } catch (e) {
-      console.warn(`require(${path}) try error`, e);
-      return null;
-    }
-  }
-
-  /**
    * 服务嵌套
    * @param service
    * @param defResult
    */
   static nilService(service: any, defResult: any): any {
-    return service !== undefined
-      ? service
-      : async (...args: any[]) => defResult;
+    return service ? service : async (...args: any[]) => defResult;
   }
 }

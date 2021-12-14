@@ -4,7 +4,7 @@ import { Utils } from '@hocgin/ui';
 import { useMount } from 'ahooks';
 
 const EDITOR_ID = 'rich-editor';
-let RichEditor: any = (<></>);
+let RichEditor: any = <></>;
 
 const Index: React.FC<{
   value?: string;
@@ -24,24 +24,24 @@ const Index: React.FC<{
       return;
     }
 
-    let re = Utils.Lang.tryRequire('braft-editor');
+    let re = require('braft-editor');
     if (re) {
-      Utils.Lang.tryRequire('braft-editor/dist/index.css');
-      Utils.Lang.tryRequire('braft-extensions/dist/code-highlighter.css');
-      Utils.Lang.tryRequire('braft-extensions/dist/table.css');
+      require('braft-editor/dist/index.css');
+      require('braft-extensions/dist/code-highlighter.css');
+      require('braft-extensions/dist/table.css');
       RichEditor = re.default;
 
-      let codeHighlighter = Utils.Lang.tryRequire('braft-extensions/dist/code-highlighter.js');
+      let codeHighlighter = require('braft-extensions/dist/code-highlighter.js');
       if (codeHighlighter) {
         RichEditor.use(codeHighlighter.default());
       }
 
-      let table = Utils.Lang.tryRequire('braft-extensions/dist/table.js');
+      let table = require('braft-extensions/dist/table.js');
       if (table) {
         RichEditor.use(table.default());
       }
 
-      let markdown = Utils.Lang.tryRequire('braft-extensions/dist/markdown.js');
+      let markdown = require('braft-extensions/dist/markdown.js');
       if (markdown) {
         RichEditor.use(markdown.default());
       }

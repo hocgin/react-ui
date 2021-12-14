@@ -23,19 +23,11 @@ type ConfigType = {
   trigger?: JSX.Element;
 };
 
-export interface ExhibitSchemaConfigProps {
-  className?: string;
-  /**
-   * 配置
-   */
-  config: ConfigType;
-}
-
 // @formatter: off
-const ExhibitSchemaConfig: React.FC<ExhibitSchemaConfigProps> = ({
-  className,
-  config,
-}) => {
+const ExhibitSchemaConfig: React.FC<{
+  className?: string;
+  config: ConfigType;
+}> = ({ className, config }) => {
   // @formatter: on
   let { useAction, title, trigger, columns = [], ...rest } = config;
 

@@ -1,6 +1,5 @@
 import React from 'react';
 import { Promise, Exhibit } from '@hocgin/ui';
-import { FileInfo } from '@/Utils/interface';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input } from 'antd';

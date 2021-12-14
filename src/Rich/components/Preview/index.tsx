@@ -1,37 +1,24 @@
 import React, { Component } from 'react';
-import 'braft-extensions/dist/code-highlighter.css';
 import styles from './index.less';
+import { Utils } from '@/index';
+import { useMount } from 'ahooks';
 
-interface EditorProps {
+const Index: React.FC<{
   children?: string;
-}
+}> = ({ children }, ref) => {
+  useMount(() => {
+    if (Utils.Lang.isServer()) {
+      return;
+    }
+    require('braft-extensions/dist/code-highlighter.css');
+  });
 
-interface EditorState {}
-
-class Index extends Component<EditorProps, EditorState> {
-  static defaultProps = {
-    children: '',
-  };
-
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
-
-  componentDidMount() {}
-
-  render() {
-    let { children } = this.props;
-    return (
-      <div className={styles.richPreview}>
-        <div dangerouslySetInnerHTML={this.dangerouslySetInnerHTML} />
-      </div>
-    );
-  }
-
-  get dangerouslySetInnerHTML() {
-    let { children } = this.props;
-    return { __html: `${children}` };
-  }
-}
+  let dangerouslySetInnerHTML = { __html: `${children}` };
+  return (
+    <div className={styles.richPreview}>
+      <div dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+    </div>
+  );
+};
 
 export default Index;
