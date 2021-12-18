@@ -20,7 +20,18 @@ const Index: React.FC<{
    * 选择提示
    */
   placeholder?: string;
-}> = ({ multiple = false, placeholder = '请选择..', useAction, ...rest }) => {
+  /**
+   * 变更值
+   * @param values
+   */
+  onChange?: (values: any | any[]) => void;
+}> = ({
+  multiple = false,
+  placeholder = '请选择..',
+  onChange,
+  useAction,
+  ...rest
+}) => {
   let [data, setData] = useState<SearchOption[]>([]);
   let [keyword, setKeyword] = useState<string>();
   let style = { minWidth: '10em', width: '100%' };
@@ -36,6 +47,7 @@ const Index: React.FC<{
     <Select
       loading={loading}
       showSearch
+      onChange={onChange}
       showArrow={false}
       filterOption={false}
       allowClear
