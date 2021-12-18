@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
-import { Select } from 'antd';
+import { Select, Spin, Avatar } from 'antd';
 import { Utils } from '@hocgin/ui';
-import { Option } from '@/Utils/types/rt-grass';
+import { SearchOption } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
+import styles from './index.less';
+import { UserOutlined } from '@ant-design/icons';
 import { useUpdateEffect, useRequest } from 'ahooks';
 
 const Index: React.FC<{
@@ -19,13 +21,13 @@ const Index: React.FC<{
    */
   placeholder?: string;
 }> = ({ multiple = false, placeholder = '请选择..', useAction, ...rest }) => {
-  let [data, setData] = useState<Option[]>([]);
+  let [data, setData] = useState<SearchOption[]>([]);
   let [keyword, setKeyword] = useState<string>();
-  let style = { minWidth: '10em' };
+  let style = { minWidth: '10em', width: '100%' };
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
-    onSuccess: (data: Option[]) => setData(data || []),
+    onSuccess: (data: SearchOption[]) => setData(data || []),
   });
 
   useUpdateEffect(() => run(keyword), [keyword]);
@@ -39,16 +41,36 @@ const Index: React.FC<{
       allowClear
       style={style}
       mode={multiple ? 'multiple' : undefined}
+      notFoundContent={loading ? <Spin size="small" /> : null}
       onSearch={setKeyword}
       placeholder={placeholder}
+      optionLabelProp="label"
       {...rest}
     >
-      {data.map(({ key, value }: Option) => (
-        <Select.Option key={`${value}`} value={value}>
-          {key}
+      {data.map(({ key, image, description, value }: SearchOption) => (
+        <Select.Option key={`${value}`} value={value} label={key}>
+          <OptionView title={key} image={image} description={description} />
         </Select.Option>
       ))}
     </Select>
+  );
+};
+
+const OptionView: React.FC<{
+  title?: string;
+  image?: string;
+  description?: string;
+}> = ({ title, image, description }) => {
+  return (
+    <div className={styles.optionView}>
+      {image && (
+        <Avatar className={styles.image} size={32} icon={<UserOutlined />} />
+      )}
+      <div className={styles.info}>
+        <div className={styles.title}>{title}</div>
+        <div className={styles.description}>{description}</div>
+      </div>
+    </div>
   );
 };
 

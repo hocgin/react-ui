@@ -20,7 +20,7 @@ const Index: React.FC<{
   placeholder?: string;
 }> = ({ multiple = false, placeholder = '请选择..', useAction, ...rest }) => {
   let [data, setData] = useState<Option[]>([]);
-  let style = { minWidth: '10em' };
+  let style = { minWidth: '10em', width: '100%' };
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
