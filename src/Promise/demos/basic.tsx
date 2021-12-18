@@ -51,6 +51,8 @@ export default () => {
 
   return (
     <>
+      <Divider>编号</Divider>
+      <Promise.Encoding prefix={'66'} />
       <Divider>普通选择器</Divider>
       <Promise.Select useAction={useAction} />
       <Promise.Select multiple={true} useAction={useAction} />

@@ -3,6 +3,7 @@ import FileUpload from './FileUpload';
 import TreeSelect from './TreeSelect';
 import Select from './Select';
 import Search from './Search';
+import Encoding from './Encoding';
 import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
@@ -17,6 +18,7 @@ export default class Promise {
   static Table: typeof Table = Table;
   static FileUpload: typeof FileUpload = FileUpload;
   static Select: typeof Select = Select;
+  static Encoding: typeof Encoding = Encoding;
   static Search: typeof Search = Search;
   static TreeSelect: typeof TreeSelect = TreeSelect;
   static RadioButton: typeof RadioButton = RadioButton;

@@ -244,5 +244,25 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return <Input {...props?.fieldProps} />;
     },
   },
+  // 链接
+  [prefix('encoding')]: {
+    render: (text: any, props: any) => {
+      if (!text) {
+        return <span>-</span>;
+      }
+      return <div>{text}</div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      let { prefix, randExp, defaultValue } = props?.params || {};
+      return (
+        <Promise.Encoding
+          prefix={prefix}
+          randEx={randExp}
+          defaultValue={defaultValue}
+          {...props?.fieldProps}
+        />
+      );
+    },
+  },
   // https://procomponents.ant.design/components/field
 };

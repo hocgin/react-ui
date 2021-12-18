@@ -14,13 +14,14 @@ const Index: React.FC<{
   className?: string;
   children?: string | Node;
   maxRow?: number;
+  fullSize?: boolean;
   bordered?: boolean;
-}> = ({ children, className, maxRow, bordered = true, ...rest }) => {
-  let [fullSize, setFullSize] = useState(true);
+}> = ({ children, fullSize, className, maxRow, bordered = true, ...rest }) => {
+  let [fsize, setFullSize] = useState(fullSize);
   let [copied, setCopied] = useState(false);
 
-  let contentStyle = fullSize ? {} : { WebkitLineClamp: maxRow };
-  let sizeIcon = fullSize ? <FullscreenExitOutlined /> : <FullscreenOutlined />;
+  let contentStyle = fsize ? {} : { WebkitLineClamp: maxRow };
+  let sizeIcon = fsize ? <FullscreenExitOutlined /> : <FullscreenOutlined />;
 
   let onCopy = () => {
     if (!copied) {
@@ -50,7 +51,7 @@ const Index: React.FC<{
             </CopyToClipboard>
           )}
         </span>
-        <span onClick={() => setFullSize(!fullSize)} className={styles.resize}>
+        <span onClick={() => setFullSize(!fsize)} className={styles.resize}>
           {sizeIcon}
         </span>
       </div>

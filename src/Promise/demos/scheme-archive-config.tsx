@@ -50,10 +50,12 @@ export const config: any = {
       valueType: Dom.columnPrefix('select'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => [{
-            key: 'lab',
-            value: 'vx',
-          }],
+          initialValues: async (params: Record<string, any>) => [
+            {
+              key: 'lab',
+              value: 'vx',
+            },
+          ],
         },
       },
     },
@@ -73,10 +75,12 @@ export const config: any = {
       valueType: Dom.columnPrefix('radioButton'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => [{
-            key: 'lab',
-            value: 'vx',
-          }],
+          initialValues: async (params: Record<string, any>) => [
+            {
+              key: 'lab',
+              value: 'vx',
+            },
+          ],
         },
       },
     },
@@ -86,10 +90,12 @@ export const config: any = {
       valueType: Dom.columnPrefix('radio'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => [{
-            key: 'lab',
-            value: 'vx',
-          }],
+          initialValues: async (params: Record<string, any>) => [
+            {
+              key: 'lab',
+              value: 'vx',
+            },
+          ],
         },
       },
     },
@@ -99,10 +105,12 @@ export const config: any = {
       valueType: Dom.columnPrefix('checkbox'),
       params: {
         useAction: {
-          initialValues: async (params: Record<string, any>) => [{
-            key: 'lab',
-            value: 'vx',
-          }],
+          initialValues: async (params: Record<string, any>) => [
+            {
+              key: 'lab',
+              value: 'vx',
+            },
+          ],
         },
       },
     },
@@ -114,6 +122,11 @@ export const config: any = {
         action: 'http://api-dev.hocgin.top/api/upload',
         maxCount: 1,
       },
+    },
+    {
+      title: '编号',
+      dataIndex: 'encoding',
+      valueType: Dom.columnPrefix('encoding'),
     },
   ],
 };
