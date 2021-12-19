@@ -117,14 +117,22 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     },
     renderFormItem: (text: any, props: any) => {
       let params: any = props?.params || {};
-      return (
-        <Promise.Search
-          defaultValue={params?.defaultValue}
-          multiple={params?.multiple}
-          useAction={params?.useAction}
-          {...props?.fieldProps}
-        />
-      );
+      let valueEnum = props?.valueEnum || {};
+
+      let options: any = [];
+      if (text) {
+        options = Object.keys(valueEnum).map((key) => ({
+          value: key,
+          // title
+          key: valueEnum[key]?.text || valueEnum[key],
+        }));
+      }
+      return <Promise.Search options={options}
+                             defaultValue={params?.defaultValue}
+                             multiple={params?.multiple}
+                             useAction={params?.useAction}
+                             {...props?.fieldProps}
+      />;
     },
   },
   // 树型选择框
@@ -256,15 +264,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
-      let { prefix, randExp, defaultValue } = props?.params || {};
-      return (
-        <Promise.Encoding
-          prefix={prefix}
-          randEx={randExp}
-          defaultValue={defaultValue}
-          {...props?.fieldProps}
-        />
-      );
+      let { prefix, randExp } = props?.params || {};
+      return <Promise.Encoding prefix={prefix} randEx={randExp}
+                               {...props?.fieldProps}
+      />;
     },
   },
   // https://procomponents.ant.design/components/field

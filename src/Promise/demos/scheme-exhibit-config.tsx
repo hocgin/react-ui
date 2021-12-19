@@ -42,8 +42,7 @@ export const config: any = {
           },
         ];
       },
-    },
-    {
+    }, {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
       valueType: Dom.columnPrefix('select'),

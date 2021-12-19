@@ -5,7 +5,7 @@ import { SearchOption } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import styles from './index.less';
 import { UserOutlined } from '@ant-design/icons';
-import { useUpdateEffect, useRequest } from 'ahooks';
+import { useUpdateEffect, useRequest, useMount } from 'ahooks';
 
 const Index: React.FC<{
   /**
@@ -29,15 +29,21 @@ const Index: React.FC<{
    * @param values
    */
   onChange?: (values: any | any[]) => void;
+  /**
+   * 默认 options
+   */
+  options?: SearchOption[];
 }> = ({
-  multiple = false,
-  placeholder = '请选择..',
-  onChange,
-  useAction,
-  defaultValue,
-  ...rest
-}) => {
-  let [data, setData] = useState<SearchOption[]>([]);
+        multiple = false,
+        placeholder = '请选择..',
+        onChange,
+        useAction,
+        defaultValue,
+        options = [],
+        ...rest
+      }) => {
+
+  let [data, setData] = useState<SearchOption[]>(options);
   let [keyword, setKeyword] = useState<string>();
   let style = { minWidth: '10em', width: '100%' };
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
@@ -46,7 +52,7 @@ const Index: React.FC<{
     onSuccess: (data: SearchOption[]) => setData(data || []),
   });
 
-  useUpdateEffect(() => run(keyword), [keyword]);
+  useUpdateEffect(() => run(keyword, false), [keyword]);
 
   return (
     <Select
@@ -59,10 +65,10 @@ const Index: React.FC<{
       allowClear
       style={style}
       mode={multiple ? 'multiple' : undefined}
-      notFoundContent={loading ? <Spin size="small" /> : null}
+      notFoundContent={loading ? <Spin size='small' /> : null}
       onSearch={setKeyword}
       placeholder={placeholder}
-      optionLabelProp="label"
+      optionLabelProp='label'
       {...rest}
     >
       {data.map(({ key, image, description, value }: SearchOption) => (
