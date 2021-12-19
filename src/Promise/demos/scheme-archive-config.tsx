@@ -9,6 +9,8 @@ export const config: any = {
       return {
         title: '666',
         state: 'vx',
+        search: 'search_key',
+        searchName: 'searchName',
       };
     },
     submit: async (params: Record<string, any>) => {
@@ -29,8 +31,32 @@ export const config: any = {
         ],
       },
       width: 'm',
-    },
-    {
+    }, {
+      fieldProps: {
+        name: ['search', 'searchName'],
+      },
+      title: 'search',
+      valueType: 'dependency',
+      columns: ({ search, searchName }: any) => {
+        return [{
+          title: 'search',
+          dataIndex: 'search',
+          valueType: Dom.columnPrefix('search'),
+          hideInTable: true,
+          valueEnum: {
+            [search]: searchName,
+          },
+          params: {
+            useAction: {
+              initialValues: async (params: Record<string, any>) => [{
+                key: 'lab',
+                value: 'vx',
+              }],
+            },
+          },
+        }];
+      },
+    }, {
       title: '状态',
       dataIndex: 'state',
       valueType: 'select',

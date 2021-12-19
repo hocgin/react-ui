@@ -108,6 +108,8 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
   // 搜索框
   [prefix('search')]: {
     render: (text: any, props: any) => {
+      let params: any = props?.params || {};
+      text = params?.defaultValue;
       if (!text) {
         return <span>-</span>;
       }
@@ -115,13 +117,22 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     },
     renderFormItem: (text: any, props: any) => {
       let params: any = props?.params || {};
-      return (
-        <Promise.Search
-          {...props?.fieldProps}
-          multiple={params?.multiple}
-          useAction={params?.useAction}
-        />
-      );
+      let valueEnum = props?.valueEnum || {};
+
+      let options: any = [];
+      if (text) {
+        options = Object.keys(valueEnum).map((key) => ({
+          value: key,
+          // title
+          key: valueEnum[key]?.text || valueEnum[key],
+        }));
+      }
+      return <Promise.Search options={options}
+                             defaultValue={params?.defaultValue}
+                             multiple={params?.multiple}
+                             useAction={params?.useAction}
+                             {...props?.fieldProps}
+      />;
     },
   },
   // 树型选择框
@@ -244,7 +255,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return <Input {...props?.fieldProps} />;
     },
   },
-  // 链接
+  // 编号
   [prefix('encoding')]: {
     render: (text: any, props: any) => {
       if (!text) {
@@ -253,15 +264,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return <div>{text}</div>;
     },
     renderFormItem: (text: any, props: any) => {
-      let { prefix, randExp, defaultValue } = props?.params || {};
-      return (
-        <Promise.Encoding
-          prefix={prefix}
-          randEx={randExp}
-          defaultValue={defaultValue}
-          {...props?.fieldProps}
-        />
-      );
+      let { prefix, randExp } = props?.params || {};
+      return <Promise.Encoding prefix={prefix} randEx={randExp}
+                               {...props?.fieldProps}
+      />;
     },
   },
   // https://procomponents.ant.design/components/field
