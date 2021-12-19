@@ -108,6 +108,8 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
   // 搜索框
   [prefix('search')]: {
     render: (text: any, props: any) => {
+      let params: any = props?.params || {};
+      text = params?.defaultValue;
       if (!text) {
         return <span>-</span>;
       }
@@ -117,9 +119,10 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       let params: any = props?.params || {};
       return (
         <Promise.Search
-          {...props?.fieldProps}
+          defaultValue={params?.defaultValue}
           multiple={params?.multiple}
           useAction={params?.useAction}
+          {...props?.fieldProps}
         />
       );
     },
@@ -244,7 +247,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       return <Input {...props?.fieldProps} />;
     },
   },
-  // 链接
+  // 编号
   [prefix('encoding')]: {
     render: (text: any, props: any) => {
       if (!text) {

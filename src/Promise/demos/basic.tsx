@@ -57,7 +57,7 @@ export default () => {
       <Promise.Select useAction={useAction} />
       <Promise.Select multiple={true} useAction={useAction} />
       <Divider>搜索选择器</Divider>
-      <Promise.Search useAction={searchUseAction} />
+      <Promise.Search useAction={searchUseAction} defaultValue={'默认'} />
       <Promise.Search useAction={searchUseAction} multiple={true} />
       <Divider>单选按钮</Divider>
       <Promise.RadioButton useAction={useAction} />

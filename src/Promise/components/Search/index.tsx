@@ -21,6 +21,10 @@ const Index: React.FC<{
    */
   placeholder?: string;
   /**
+   * 默认值
+   */
+  defaultValue?: string;
+  /**
    * 变更值
    * @param values
    */
@@ -30,6 +34,7 @@ const Index: React.FC<{
   placeholder = '请选择..',
   onChange,
   useAction,
+  defaultValue,
   ...rest
 }) => {
   let [data, setData] = useState<SearchOption[]>([]);
@@ -45,6 +50,7 @@ const Index: React.FC<{
 
   return (
     <Select
+      defaultValue={defaultValue}
       loading={loading}
       showSearch
       onChange={onChange}
