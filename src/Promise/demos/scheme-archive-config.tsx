@@ -31,32 +31,70 @@ export const config: any = {
         ],
       },
       width: 'm',
-    }, {
+    },
+    {
       fieldProps: {
         name: ['search', 'searchName'],
       },
-      title: 'search',
       valueType: 'dependency',
       columns: ({ search, searchName }: any) => {
-        return [{
-          title: 'search',
-          dataIndex: 'search',
-          valueType: Dom.columnPrefix('search'),
-          hideInTable: true,
-          valueEnum: {
-            [search]: searchName,
-          },
-          params: {
-            useAction: {
-              initialValues: async (params: Record<string, any>) => [{
-                key: 'lab',
-                value: 'vx',
-              }],
+        return [
+          {
+            title: 'search',
+            dataIndex: 'search',
+            valueType: Dom.columnPrefix('search'),
+            hideInTable: true,
+            valueEnum: {
+              [search]: searchName,
+            },
+            params: {
+              useAction: {
+                initialValues: async (params: Record<string, any>) => [
+                  {
+                    key: 'lab',
+                    value: 'vx',
+                  },
+                ],
+              },
             },
           },
-        }];
+        ];
       },
-    }, {
+    },
+    {
+      fieldProps: {
+        name: ['search', 'searchName'],
+      },
+      valueType: 'dependency',
+      columns: ({ search2, search2Name }: any) => {
+        return [
+          {
+            key: '22',
+            title: 'search2',
+            dataIndex: 'search2',
+            valueType: Dom.columnPrefix('search'),
+            hideInTable: true,
+            valueEnum: {
+              [search2]: search2Name,
+            },
+            params: {
+              useAction: {
+                initialValues: async (params: Record<string, any>) => {
+                  console.log('请求 search2', params);
+                  return [
+                    {
+                      key: 'lab',
+                      value: 'vx',
+                    },
+                  ];
+                },
+              },
+            },
+          },
+        ];
+      },
+    },
+    {
       title: '状态',
       dataIndex: 'state',
       valueType: 'select',

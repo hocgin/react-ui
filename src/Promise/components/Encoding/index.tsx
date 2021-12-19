@@ -14,7 +14,13 @@ const Index: React.FC<{
   defaultValue?: string;
   onChange?: (value: string) => void;
 }> = (
-  { prefix, onChange, started = true, defaultValue, randExp = /[a-z0-9]{16}/ },
+  {
+    prefix = '',
+    onChange,
+    started = true,
+    defaultValue,
+    randExp = /[a-z0-9]{16}/,
+  },
   ref,
 ) => {
   let [value, setValue] = useState<string>();

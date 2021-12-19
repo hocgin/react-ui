@@ -13,6 +13,17 @@ const handleSchemeColumn = (column: any): any => {
   let valueType = `${column?.valueType}`;
   let isCustom = valueType.startsWith(Dom.COLUMN_PREFIX);
   if (!isCustom) {
+    let columnsField = column?.columns;
+
+    // 处理内嵌的 columns 函数
+    if (columnsField instanceof Function) {
+      column.columns = (...rest: any) =>
+        columnsField(...rest).map(handleSchemeColumn);
+    }
+    // 处理内嵌的 columns 字段
+    else if (columnsField instanceof Array) {
+      column.columns = columnsField.map(handleSchemeColumn);
+    }
     return column;
   }
   let schemeColumn = SchemeColumns[valueType];
@@ -127,12 +138,15 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
           key: valueEnum[key]?.text || valueEnum[key],
         }));
       }
-      return <Promise.Search options={options}
-                             defaultValue={params?.defaultValue}
-                             multiple={params?.multiple}
-                             useAction={params?.useAction}
-                             {...props?.fieldProps}
-      />;
+      return (
+        <Promise.Search
+          options={options}
+          defaultValue={params?.defaultValue}
+          multiple={params?.multiple}
+          useAction={params?.useAction}
+          {...props?.fieldProps}
+        />
+      );
     },
   },
   // 树型选择框
@@ -265,9 +279,13 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     },
     renderFormItem: (text: any, props: any) => {
       let { prefix, randExp } = props?.params || {};
-      return <Promise.Encoding prefix={prefix} randEx={randExp}
-                               {...props?.fieldProps}
-      />;
+      return (
+        <Promise.Encoding
+          prefix={prefix}
+          randEx={randExp}
+          {...props?.fieldProps}
+        />
+      );
     },
   },
   // https://procomponents.ant.design/components/field
