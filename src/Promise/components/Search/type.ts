@@ -1,5 +1,5 @@
 import { Option, SearchOption } from '@/Utils/types/rt-grass';
 
 export interface UseAction {
-  initialValues: (keyword?: string, started?: boolean) => Promise<SearchOption[]>;
+  initialValues: (keyword?: string) => Promise<SearchOption[]>;
 }

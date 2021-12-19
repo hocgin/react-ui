@@ -34,15 +34,14 @@ const Index: React.FC<{
    */
   options?: SearchOption[];
 }> = ({
-        multiple = false,
-        placeholder = '请选择..',
-        onChange,
-        useAction,
-        defaultValue,
-        options = [],
-        ...rest
-      }) => {
-
+  multiple = false,
+  placeholder = '请选择..',
+  onChange,
+  useAction,
+  defaultValue,
+  options = [],
+  ...rest
+}) => {
   let [data, setData] = useState<SearchOption[]>(options);
   let [keyword, setKeyword] = useState<string>();
   let style = { minWidth: '10em', width: '100%' };
@@ -52,7 +51,7 @@ const Index: React.FC<{
     onSuccess: (data: SearchOption[]) => setData(data || []),
   });
 
-  useUpdateEffect(() => run(keyword, false), [keyword]);
+  useUpdateEffect(() => run(keyword), [keyword]);
 
   return (
     <Select
@@ -65,10 +64,10 @@ const Index: React.FC<{
       allowClear
       style={style}
       mode={multiple ? 'multiple' : undefined}
-      notFoundContent={loading ? <Spin size='small' /> : null}
+      notFoundContent={loading ? <Spin size="small" /> : null}
       onSearch={setKeyword}
       placeholder={placeholder}
-      optionLabelProp='label'
+      optionLabelProp="label"
       {...rest}
     >
       {data.map(({ key, image, description, value }: SearchOption) => (
