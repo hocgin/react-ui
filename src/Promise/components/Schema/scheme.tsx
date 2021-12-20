@@ -130,12 +130,16 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       let params: any = props?.params || {};
       let valueEnum = props?.valueEnum || {};
 
+      console.log('text', text);
+      console.log('text type', typeof text);
+
+
       let options: any = [];
       if (text) {
-        options = Object.keys(valueEnum).map((key) => ({
-          value: key,
+        options = Object.keys(valueEnum).map((value) => ({
+          value: typeof text === 'number' ? parseInt(value) : value,
           // title
-          key: valueEnum[key]?.text || valueEnum[key],
+          key: valueEnum[value]?.text ?? valueEnum[value],
         }));
       }
       return (
