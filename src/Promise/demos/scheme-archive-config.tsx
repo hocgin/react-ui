@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dom } from '@hocgin/ui';
+import { Dom, Utils } from '@hocgin/ui';
 import treedata from './data-tree';
 
 export const config: any = {
@@ -49,12 +49,13 @@ export const config: any = {
             },
             params: {
               useAction: {
-                initialValues: async (params: Record<string, any>) => [
-                  {
-                    key: 'lab',
-                    value: 'vx',
-                  },
-                ],
+                initialValues: async (params: Record<string, any>) =>
+                  Utils.Lang.sleep(1000).then(() => [
+                    {
+                      key: '这是key字段',
+                      value: 'vx',
+                    },
+                  ]),
               },
             },
           },
@@ -70,24 +71,20 @@ export const config: any = {
         return [
           {
             key: '22',
-            title: 'search2',
+            title: 'search sleep',
             dataIndex: 'search2',
             valueType: Dom.columnPrefix('search'),
             hideInTable: true,
-            valueEnum: {
-              [search2]: search2Name,
-            },
+            valueEnum: { [search2]: search2Name },
             params: {
               useAction: {
-                initialValues: async (params: Record<string, any>) => {
-                  console.log('请求 search2', params);
-                  return [
+                initialValues: async (params: Record<string, any>) =>
+                  Utils.Lang.sleep(1000).then(() => [
                     {
-                      key: 'lab',
+                      key: '这是key字段',
                       value: 'vx',
                     },
-                  ];
-                },
+                  ]),
               },
             },
           },
