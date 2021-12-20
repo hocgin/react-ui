@@ -1,12 +1,12 @@
 // :: 网络数据类型协议
 
 export interface Option {
-  value: string;
+  value: any;
   key: string;
 }
 
 export interface SearchOption {
-  value: string;
+  value: any;
   key?: string;
   image?: string;
   description?: string;
