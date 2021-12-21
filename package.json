@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/ui",
-  "version": "4.0.37",
+  "version": "4.0.38",
   "sideEffects": [
     ".less",
     ".css"

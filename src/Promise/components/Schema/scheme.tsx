@@ -122,7 +122,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       let params: any = props?.params || {};
       text = params?.defaultValue;
       if (!text) {
-        return <span>-</span>;
+        return <div>-</div>;
       }
       return <div>{text}</div>;
     },
@@ -130,17 +130,39 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       let params: any = props?.params || {};
       let valueEnum = props?.valueEnum || {};
 
-      console.log('text', text);
-      console.log('text type', typeof text);
-
-
       let options: any = [];
       if (text) {
-        options = Object.keys(valueEnum).map((value) => ({
-          value: typeof text === 'number' ? parseInt(value) : value,
-          // title
-          key: valueEnum[value]?.text ?? valueEnum[value],
-        }));
+        options = Object.keys(valueEnum).map((value) => {
+          let newValue: any = value;
+
+          // 如果是 number 类型
+          if (
+            typeof text === 'number' ||
+            (typeof text === 'object' &&
+              text instanceof Array &&
+              text?.length > 0 &&
+              typeof text[0] === 'number')
+          ) {
+            newValue = parseInt(value);
+          }
+
+          // 如果是 string 类型
+          if (
+            typeof text === 'string' ||
+            (typeof text === 'object' &&
+              text instanceof Array &&
+              text?.length > 0 &&
+              typeof text[0] === 'string')
+          ) {
+            newValue = `${value}`;
+          }
+
+          return {
+            value: newValue,
+            // title
+            key: valueEnum[value]?.text ?? valueEnum[value],
+          };
+        });
       }
       return (
         <Promise.Search
