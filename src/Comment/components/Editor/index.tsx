@@ -7,11 +7,13 @@ import { ClearOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
 import {
   CommentType,
   ReplyDataType,
-  ReplyParamsType, UseAction,
+  ReplyParamsType,
+  UseAction,
   UserDataType,
 } from '../type';
 // @ts-ignore
 import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 import { useMount, useRequest } from 'ahooks';
 
 const { TextArea } = Input;
