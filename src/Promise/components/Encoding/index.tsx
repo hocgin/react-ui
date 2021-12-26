@@ -2,9 +2,10 @@ import * as React from 'react';
 import RandExp from 'randexp';
 import { Button, Input, Tooltip } from 'antd';
 import styles from './index.less';
-import { SyncOutlined, CopyOutlined } from '@ant-design/icons';
+import { SyncOutlined, CopyOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import { useInterval } from 'ahooks';
 
 const Index: React.FC<{
   started?: boolean;
@@ -25,6 +26,9 @@ const Index: React.FC<{
 ) => {
   let [value, setValue] = useState<string>();
   let [init, setInit] = useState(true);
+  let [copied, setCopied] = useState(false);
+  useInterval(() => setCopied?.(false), 2000);
+  let checkStyle = { color: '#00B06D' };
   let randExpGx = new RandExp(randExp);
 
   let setPrefixValue = (v?: string) => {
@@ -40,7 +44,6 @@ const Index: React.FC<{
     setInit(false);
     onRandom();
   }
-
   return (
     <Input.Group className={styles.view} compact>
       <Input
@@ -52,11 +55,20 @@ const Index: React.FC<{
       <Tooltip title="摇一下">
         <Button onClick={onRandom} icon={<SyncOutlined />} />
       </Tooltip>
-      <Tooltip title="复制">
-        <CopyToClipboard text={`${value}`}>
-          <Button icon={<CopyOutlined />} />
-        </CopyToClipboard>
-      </Tooltip>
+      <Button
+        icon={
+          copied ? (
+            <CheckOutlined style={checkStyle} />
+          ) : (
+            <CopyToClipboard
+              text={`${value}`}
+              onCopy={() => !copied && setCopied(true)}
+            >
+              <CopyOutlined />
+            </CopyToClipboard>
+          )
+        }
+      />
     </Input.Group>
   );
 };
