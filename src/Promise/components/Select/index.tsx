@@ -3,6 +3,7 @@ import { Select } from 'antd';
 import { Utils } from '@hocgin/ui';
 import { Option } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
+import styles from './index.less';
 import { useMount, useRequest } from 'ahooks';
 
 const Index: React.FC<{
@@ -20,7 +21,6 @@ const Index: React.FC<{
   placeholder?: string;
 }> = ({ multiple = false, placeholder = '请选择..', useAction, ...rest }) => {
   let [data, setData] = useState<Option[]>([]);
-  let style = { minWidth: '10em', width: '100%' };
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
@@ -30,14 +30,12 @@ const Index: React.FC<{
   useMount(() => run());
 
   return (
-    <Select
-      loading={loading}
-      allowClear
-      style={style}
-      mode={multiple ? 'multiple' : undefined}
-      placeholder={placeholder}
-      {...rest}
-    >
+    <Select className={styles.component}
+            loading={loading}
+            allowClear
+            mode={multiple ? 'multiple' : undefined}
+            placeholder={placeholder}
+            {...rest}>
       {data.map(({ key, value }: Option) => (
         <Select.Option key={`${value}`} value={value}>
           {key}

@@ -27,7 +27,7 @@ class Index extends React.Component<SiteProps> {
           <Tooltip placement="top" color="#383838" title={fullUrl}>
             <LinkOutlined />
           </Tooltip>
-          &nbsp;{title || url}
+          <span className={styles.linkText}>{title || url}</span>
         </a>
       </div>
     );

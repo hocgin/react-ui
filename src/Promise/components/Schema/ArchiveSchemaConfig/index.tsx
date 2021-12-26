@@ -4,6 +4,7 @@ import ArchiveSchema from './archive-schema';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ProFormLayoutType } from '@ant-design/pro-form';
 import { UseAction } from './type';
+import { useUpdate } from 'ahooks';
 
 type ConfigType = {
   /**
@@ -50,16 +51,16 @@ const ArchiveSchemaConfig: React.FC<{
     columns = [],
     ...rest
   } = config;
-  let [initial, setInitial] = useState(false);
+  const update = useUpdate();
 
   let triggerEl = trigger ? (
     trigger
   ) : isUpdate ? (
-    <Button type="primary" icon={<PlusOutlined />}>
+    <Button type='primary' icon={<PlusOutlined />}>
       修改
     </Button>
   ) : (
-    <Button type="primary" icon={<PlusOutlined />}>
+    <Button type='primary' icon={<PlusOutlined />}>
       新建
     </Button>
   );
@@ -68,24 +69,17 @@ const ArchiveSchemaConfig: React.FC<{
   if (layoutType === 'ModalForm') {
     modalProps = {
       ...modalProps,
-      onVisibleChange: (visible: boolean) => !initial && setInitial(true),
     };
   }
 
   return (
     <ArchiveSchema
       layoutType={layoutType}
-      params={{ initial }}
       title={title}
       trigger={triggerEl}
       columns={columns}
-      onFinish={(values: any) => useAction!.submit(values) ?? true}
-      request={async (params: Record<string, any>, props: any) => {
-        if (initial && useAction?.initialValues) {
-          return useAction.initialValues(params);
-        }
-        return {};
-      }}
+      onFinish={async (values: any) => useAction!.submit(values)}
+      request={useAction?.initialValues ?? (async () => ({}))}
       {...modalProps}
       {...rest}
     />

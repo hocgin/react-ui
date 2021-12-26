@@ -1,6 +1,6 @@
 ---
 # @formatter:off
-title: Archive - 存档
+title: Archive - 存档(弃)
 order: 1000
 nav:
   title: 高级组件

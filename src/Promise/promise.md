@@ -1,4 +1,5 @@
 ---
+
 # @formatter:off
 title: Promise - 契约
 order: 1000
@@ -27,22 +28,6 @@ group:
 
 ### 基础用法
 
-Promise.SchemeTable:
-
-<code src="./demos/scheme-table.tsx"  background="#f0f2f5" />
-
-Promise.PageLayout:
+菜单(Promise.PageLayout):
 
 <code src="./demos/page-layout.tsx"  background="#f0f2f5" transform="true" iframe />
-
-Promise.SchemeArchive:
-
-<code src="./demos/scheme-archive.tsx"  background="#f0f2f5" />
-
-JSON 展示方案 (Promise.SchemeExhibit):
-
-<code src="./demos/scheme-exhibit.tsx"  background="#f0f2f5" />
-
-高级表格 (Promise.Table):
-
-<code src="./demos/table.tsx"  background="#f0f2f5" />

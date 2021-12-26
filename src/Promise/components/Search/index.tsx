@@ -34,17 +34,16 @@ const Index: React.FC<{
    */
   options?: SearchOption[];
 }> = ({
-  multiple = false,
-  placeholder = '请选择..',
-  onChange,
-  useAction,
-  defaultValue,
-  options = [],
-  ...rest
-}) => {
+        multiple = false,
+        placeholder = '请选择..',
+        onChange,
+        useAction,
+        defaultValue,
+        options = [],
+        ...rest
+      }) => {
   let [data, setData] = useState<SearchOption[]>(options);
   let [keyword, setKeyword] = useState<string>();
-  let style = { minWidth: '10em', width: '100%' };
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
@@ -54,24 +53,23 @@ const Index: React.FC<{
   useUpdateEffect(() => run(keyword), [keyword]);
 
   return (
-    <Select
-      defaultValue={defaultValue}
-      loading={loading}
-      showSearch
-      onChange={onChange}
-      showArrow={false}
-      filterOption={false}
-      allowClear
-      style={style}
-      mode={multiple ? 'multiple' : undefined}
-      notFoundContent={loading ? <Spin size="small" /> : null}
-      onSearch={setKeyword}
-      placeholder={placeholder}
-      optionLabelProp="label"
-      {...rest}
+    <Select className={styles.component}
+            defaultValue={defaultValue}
+            loading={loading}
+            showSearch
+            onChange={onChange}
+            showArrow={false}
+            filterOption={false}
+            allowClear
+            mode={multiple ? 'multiple' : undefined}
+            notFoundContent={loading ? <Spin size='small' /> : null}
+            onSearch={setKeyword}
+            placeholder={placeholder}
+            optionLabelProp='label'
+            {...rest}
     >
       {data.map(({ key, image, description, value }: SearchOption) => (
-        <Select.Option value={value} label={key}>
+        <Select.Option key={value} value={value} label={key}>
           <OptionView title={key} image={image} description={description} />
         </Select.Option>
       ))}
