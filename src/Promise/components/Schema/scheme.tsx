@@ -305,13 +305,11 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     },
     renderFormItem: (text: any, props: any) => {
       let { prefix, randExp } = props?.params || {};
-      return (
-        <Promise.Encoding
-          prefix={prefix}
-          randEx={randExp}
-          {...props?.fieldProps}
-        />
-      );
+      return <Promise.Encoding
+        prefix={prefix}
+        randEx={randExp}
+        {...props?.fieldProps}
+      />;
     },
   },
   // https://procomponents.ant.design/components/field

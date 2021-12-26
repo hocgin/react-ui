@@ -16,23 +16,19 @@ const ArchiveSchema: React.FC<FormSchema> = ({
                                                params,
                                                request,
                                                layoutType,
-                                               visible,
                                                onVisibleChange,
                                              }) => {
   // @formatter: on
   const values = useContext(ProProvider);
-
   let value = {
     ...values,
     valueTypeMap: {
       ...SchemeColumns,
     },
   };
-
   return (
     <ProProvider.Provider value={value}>
       <BetaSchemaForm columns={handleSchemeColumns(columns)}
-                      visible={visible}
                       layoutType={layoutType}
                       params={params}
                       title={title}

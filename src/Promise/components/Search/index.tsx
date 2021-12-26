@@ -69,7 +69,7 @@ const Index: React.FC<{
             {...rest}
     >
       {data.map(({ key, image, description, value }: SearchOption) => (
-        <Select.Option value={value} label={key}>
+        <Select.Option key={value} value={value} label={key}>
           <OptionView title={key} image={image} description={description} />
         </Select.Option>
       ))}
