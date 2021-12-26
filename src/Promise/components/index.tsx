@@ -7,12 +7,14 @@ import Encoding from './Encoding';
 import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
-import PageLayout from './PageLayout';
-import PageContainer from './PageContainer';
 import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './Schema/ArchiveSchemaConfig';
 import TableSchemaConfig from './Schema/TableSchemaConfig';
 import DeleteSchemaConfig from './Schema/DeleteSchemaConfig';
+
+import PageLayout from './PageLayout';
+import PageContainer from './PageContainer';
+import UserAvatar from './UserAvatar';
 
 export default class Promise {
   static Table: typeof Table = Table;
@@ -32,4 +34,5 @@ export default class Promise {
 
   static PageLayout: typeof PageLayout = PageLayout;
   static PageContainer: typeof PageContainer = PageContainer;
+  static UserAvatar: typeof UserAvatar = UserAvatar;
 }
