@@ -1,32 +1,23 @@
-import React, { Component } from 'react';
+import React from 'react';
 import styles from './index.less';
 
-interface EditorProps {
+const MDEditor: React.FC<any> = ({ ...rest }: any) => {
+  try {
+    let Uiw = require('@uiw/react-md-editor')?.default;
+    console.log(Uiw);
+    return <Uiw {...rest} />;
+  } catch (e) {
+    return <div>需要安装 @uiw/react-md-editor</div>;
+  }
+};
+
+
+const Index: React.FC<{
   value: string;
   height?: number;
   onChange?: (value?: string) => void;
-}
-
-class Index extends Component<EditorProps, {}> {
-  static defaultProps = {};
-
-  constructor(props: any, context: any) {
-    super(props, context);
-  }
-
-  render() {
-    let { children, value, height, onChange } = this.props;
-
-    let result = <span>需要安装 @uiw/react-md-editor</span>;
-    try {
-      let MDEditor = require('@uiw/react-md-editor');
-      result = <MDEditor value={value} height={height} onChange={onChange} />;
-    } catch (e) {
-      console.warn('需要安装 @uiw/react-md-editor', e);
-    }
-
-    return <>{result}</>;
-  }
-}
+}> = ({ children, value, height, onChange }, ref) => {
+  return <><MDEditor value={value} height={height} onChange={onChange} /></>;
+};
 
 export default Index;
