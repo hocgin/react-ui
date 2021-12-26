@@ -53,11 +53,7 @@ export default class Index extends React.PureComponent<{}> {
         <Promise.PageLayout
           {...localRoutes}
           useAction={useAction}
-          rightContentRender={() => (
-            <div>
-              <Avatar shape='square' size='small' icon={<UserOutlined />} />
-            </div>
-          )}>
+          rightContentRender={() => <div><Avatar shape='square' size='small' icon={<UserOutlined />} /></div>}>
           <Promise.PageContainer waterMarkProps={waterMark}>
             <div style={style}>内容</div>
           </Promise.PageContainer>
