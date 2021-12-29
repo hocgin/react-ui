@@ -9,6 +9,7 @@ export const config: any = {
       return {
         title: '666',
         state: 'vx',
+        encoding: '这是自定义的',
         search: 'search_key',
         searchName: 'searchName',
       };
