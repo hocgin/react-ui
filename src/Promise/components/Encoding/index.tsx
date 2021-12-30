@@ -12,19 +12,19 @@ const Index: React.FC<{
   prefix?: string;
   // https://www.npmjs.com/package/randexp
   randExp?: any;
-  defaultValue?: string;
+  value?: string;
   onChange?: (value: string) => void;
 }> = (
   {
     prefix = '',
     onChange,
     started = true,
-    defaultValue,
+    value = undefined,
     randExp = /[a-z0-9]{16}/,
   },
   ref,
 ) => {
-  let [value, setValue] = useState<string>();
+  let [text, setText] = useState<string | undefined>(value);
   let [init, setInit] = useState(true);
   let [copied, setCopied] = useState(false);
   useInterval(() => setCopied?.(false), 2000);
@@ -33,14 +33,14 @@ const Index: React.FC<{
 
   let setPrefixValue = (v?: string) => {
     let newValue = `${prefix}${v}`;
-    setValue(newValue);
+    setText(newValue);
     onChange?.(newValue);
   };
 
   let onRandom = () => {
     setPrefixValue(randExpGx.gen());
   };
-  if (init && started) {
+  if (value === undefined && init && started) {
     setInit(false);
     onRandom();
   }
@@ -48,9 +48,8 @@ const Index: React.FC<{
     <Input.Group className={styles.view} compact>
       <Input
         className={styles.input}
-        value={value}
+        value={text}
         onChange={(e) => setPrefixValue(e?.target?.value)}
-        defaultValue={defaultValue}
       />
       <Tooltip title="摇一下">
         <Button onClick={onRandom} icon={<SyncOutlined />} />

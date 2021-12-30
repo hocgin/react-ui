@@ -6,16 +6,19 @@ import styles from './index.less';
 const Index: React.FC<{
   menus?: any[];
   className?: string | undefined;
-}> = ({ className, menus = [] }, ref) => {
+  title?: React.ReactNode | string;
+  href?: string;
+}> = ({ className, menus = [], title, href = 'https://www.hocgin.top' }, ref) => {
   let [isOpenMenu, setIsOpenMenu] = useState(false);
   return (
     <header className={classnames(styles.topHeader, className)}>
-      <a href="http://www.hocgin.top/" className={styles.logo}>
+      <a href={href} className={styles.logo}>
         <span>HOCGIN</span>
         <span className={styles.suffix}>
           <span className={styles.dot}>.</span>
           <span>top</span>
         </span>
+        {title && <span className={styles.title}>{title}</span>}
       </a>
       <div
         className={classnames(styles.toggle, { [styles.active]: isOpenMenu })}

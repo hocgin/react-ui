@@ -35,6 +35,21 @@
   font-weight: 700;
   user-select: none;
   animation: slideLeft .5s ease-in-out forwards;
+
+  .title {
+    opacity: .85;
+    font-size: 16px;
+
+    &::before {
+      content: "";
+      margin: 0 5px;
+      border-left: 2px solid #E1E1E1;
+    }
+
+    &:hover {
+      opacity: 1;
+    }
+  }
 }
 
 .toggle {
