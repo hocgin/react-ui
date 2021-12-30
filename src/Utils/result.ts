@@ -37,7 +37,8 @@ export class Struct {
    */
   static thenOptions(data: Option[]): any[] {
     return data.map(({ key, value }: any) => ({
-      label: key, value,
+      label: key,
+      value,
     }));
   }
 
@@ -71,6 +72,23 @@ export class Struct {
       message.error(result.message);
     }
 
+    return result;
+  }
+
+  /**
+   * 异常的方式处理错误信息
+   * @param result
+   */
+  static thenTryErrorIfExits(
+    result?: HttpResult<any>,
+  ): HttpResult<any> | undefined {
+    if (Struct.isSuccess(result)) {
+      return result;
+    }
+
+    if (result?.message) {
+      throw new Error(result?.message);
+    }
     return result;
   }
 
