@@ -73,15 +73,15 @@ const ArchiveSchemaConfig: React.FC<{
   }
 
   return (
-    <ArchiveSchema
-      layoutType={layoutType}
-      title={title}
-      trigger={triggerEl}
-      columns={columns}
-      onFinish={async (values: any) => useAction!.submit(values)}
-      request={useAction?.initialValues ?? (async () => ({}))}
-      {...modalProps}
-      {...rest}
+    <ArchiveSchema key={key}
+                   layoutType={layoutType}
+                   title={title}
+                   trigger={triggerEl}
+                   columns={columns}
+                   onFinish={async (values: any) => useAction!.submit(values)}
+                   request={useAction?.initialValues ?? (async () => ({}))}
+                   {...modalProps}
+                   {...rest}
     />
   );
 };
