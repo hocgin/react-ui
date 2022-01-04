@@ -11,6 +11,7 @@ import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './Schema/ArchiveSchemaConfig';
 import TableSchemaConfig from './Schema/TableSchemaConfig';
 import DeleteSchemaConfig from './Schema/DeleteSchemaConfig';
+import TreeSchemaConfig from './Schema/TreeSchemaConfig';
 
 import PageLayout from './PageLayout';
 import PageContainer from './PageContainer';
@@ -31,6 +32,7 @@ export default class Promise {
   static ArchiveSchemaConfig: typeof ArchiveSchemaConfig = ArchiveSchemaConfig;
   static TableSchemaConfig: typeof TableSchemaConfig = TableSchemaConfig;
   static DeleteSchemaConfig: typeof DeleteSchemaConfig = DeleteSchemaConfig;
+  static TreeSchemaConfig: typeof TreeSchemaConfig = TreeSchemaConfig;
 
   static PageLayout: typeof PageLayout = PageLayout;
   static PageContainer: typeof PageContainer = PageContainer;

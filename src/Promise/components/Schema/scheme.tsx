@@ -1,6 +1,7 @@
 import React from 'react';
-import { Promise, Exhibit } from '@hocgin/ui';
+import { Promise, Exhibit, Rich, Markdown } from '@hocgin/ui';
 import Dom from '@/Utils/dom';
+import styles from './index.less';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input } from 'antd';
 
@@ -310,6 +311,30 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
         randEx={randExp}
         {...props?.fieldProps}
       />;
+    },
+  },
+  // 富文本编辑器
+  [prefix('rich')]: {
+    render: (text: any, props: any) => {
+      if (!text) {
+        return <div className={styles.box}><Rich.Preview>-</Rich.Preview></div>;
+      }
+      return <div className={styles.box}><Rich.Preview>{text}</Rich.Preview></div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      return <Rich.Editor {...props?.fieldProps} />;
+    },
+  },
+  // MD编辑器
+  [prefix('markdown')]: {
+    render: (text: any, props: any) => {
+      if (!text) {
+        return <div className={styles.box}><Markdown.Preview>-</Markdown.Preview></div>;
+      }
+      return <div className={styles.box}><Markdown.Preview>{text}</Markdown.Preview></div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      return <Markdown.Editor {...props?.fieldProps} />;
     },
   },
   // https://procomponents.ant.design/components/field

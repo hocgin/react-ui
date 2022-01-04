@@ -10,6 +10,8 @@ export const config: any = {
       return {
         title: '这是标题',
         state: 'vx',
+        rich: '<p>666 <strong>777</strong></p>',
+        markdown: `# 这是标题1 \n ## 这是标题2 \n ### 这是标题3 \n`,
         stretch:
           '这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题这是标题',
       };
@@ -81,6 +83,16 @@ export const config: any = {
       title: '文本',
       dataIndex: 'stretch',
       valueType: Dom.columnPrefix('stretch'),
+    },
+    {
+      title: '富文本',
+      dataIndex: 'rich',
+      valueType: Dom.columnPrefix('rich'),
+    },
+    {
+      title: 'Markdown',
+      dataIndex: 'markdown',
+      valueType: Dom.columnPrefix('markdown'),
     },
   ],
 };

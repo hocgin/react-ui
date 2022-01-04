@@ -4,15 +4,15 @@ import { Utils } from '@hocgin/ui';
 import { useMount } from 'ahooks';
 
 const EDITOR_ID = 'rich-editor';
-const RichEditor: React.FC<any> = ({ value, ...rest }: any) => {
+const RichEditor: React.FC<any> = ({ value, onChange, ...rest }: any) => {
   if (Utils.Lang.isServer()) {
     return <></>;
   }
-  let [text, setText] = useState(undefined);
+  let [editorState, setEditorState] = useState(undefined);
 
   try {
     let RichEd = require('braft-editor')?.default;
-    useMount(() => setText(RichEd?.createEditorState?.(value, { editorId: EDITOR_ID })));
+    useMount(() => setEditorState(RichEd?.createEditorState?.(value, { editorId: EDITOR_ID })));
     if (RichEd) {
       require('braft-editor/dist/index.css');
       require('braft-extensions/dist/code-highlighter.css');
@@ -33,7 +33,13 @@ const RichEditor: React.FC<any> = ({ value, ...rest }: any) => {
         RichEd.use(markdown.default());
       }
     }
-    return <div className={styles.rich}><RichEd value={text} {...rest} /></div>;
+    return <div className={styles.rich}>
+      <RichEd value={editorState} {...rest}
+              onChange={(editorState: any) => {
+                setEditorState(editorState);
+                onChange && onChange(editorState?.toHTML());
+              }} />
+    </div>;
   } catch (e) {
     return <div>需要安装 braft-editor</div>;
   }

@@ -190,5 +190,15 @@ export const config: any = {
       dataIndex: 'encoding',
       valueType: Dom.columnPrefix('encoding'),
     },
+    {
+      title: '富文本',
+      dataIndex: 'rich',
+      valueType: Dom.columnPrefix('rich'),
+    },
+    {
+      title: 'Markdown',
+      dataIndex: 'markdown',
+      valueType: Dom.columnPrefix('markdown'),
+    },
   ],
 };

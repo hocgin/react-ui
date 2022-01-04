@@ -86,6 +86,12 @@ export interface TreeNode<D = any> {
   children?: TreeNode<D>[];
 }
 
+export interface TreeRo {
+  parentId?: number;
+
+  [key: string]: any;
+}
+
 /**
  * [本地]路由配置
  */
