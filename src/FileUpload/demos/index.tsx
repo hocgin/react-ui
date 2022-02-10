@@ -9,7 +9,7 @@ import styles from './index.less';
 export default () => {
   return (
     <>
-      <FileUpload action={'/api/com/file/upload'} />
+      <FileUpload action={`${window.location.origin}/api/com/file/upload`} />
     </>
   );
 };

@@ -181,8 +181,8 @@ export const config: any = {
       dataIndex: 'gin_upload_name',
       valueType: Dom.columnPrefix('upload'),
       params: {
-        action: 'http://api-dev.hocgin.top/api/upload',
-        maxCount: 1,
+        action: `${window.location.origin}/api/com/file/upload`,
+        maxCount: 2,
       },
     },
     {

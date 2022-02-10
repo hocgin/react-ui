@@ -207,7 +207,7 @@ const Comment: React.FC<{
             )}
           </>
         }
-        content={<p className={styles.content}>{content}</p>}
+        content={<div className={styles.content}>{content}</div>}
         actions={actions}
       >
         {children}
@@ -284,7 +284,7 @@ const Index: React.FC<{
       datetime={datetime}
       author={author}
       replier={replier}
-      content={<p className={styles.content}>{content}</p>}
+      content={<div className={styles.content}>{content}</div>}
       actions={[
         <UserOptions
           reply$={reply$}
