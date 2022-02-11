@@ -1,49 +1,23 @@
 import React from 'react';
 import { FileUpload, Utils, Dom } from '@hocgin/ui';
+import { FileInfo } from '@/Utils/interface';
 
-interface FileUploadProps {
-  children?: string | Node;
+const Index: React.FC<{
+  children?: any;
   action?: string;
   maxCount?: number;
-  value?: any;
+  value?: FileInfo | FileInfo[];
   onChange?: (info: any) => void;
-}
-
-class Index extends React.PureComponent<FileUploadProps> {
-  static defaultProps = {
-    action: `/com/file/upload`,
-    maxCount: 1,
-  };
-  state = {
-    fileList: [],
-  };
-
-  render() {
-    let { children, action, value, maxCount, ...rest } = this.props;
-    return (
-      <FileUpload
-        maxCount={maxCount}
-        action={`${action}`}
-        defaultFileList={this.handleFileList(value)}
-        {...rest}
-        onChange={this.handleChange}>
-        {children}
-      </FileUpload>
-    );
-  }
-
-  handleFileList = (values: any) => {
-    if (Utils.Lang.isNull(values)) {
-      return [];
-    }
-    if (values instanceof Array) {
-      return (values || []).map(Dom.asFile);
-    }
-    return [Dom.asFile(values, 0)];
-  };
-
-  handleChange = ({ file, fileList }: any) => {
-    let { onChange, maxCount } = this.props;
+}> = ({
+  children,
+  action = `/com/file/upload`,
+  value,
+  maxCount = 1,
+  onChange,
+  ...rest
+}) => {
+  let [fileList, setFileList] = React.useState([]);
+  let handleChange = ({ file, fileList }: any) => {
     fileList = fileList.map((file: any) => {
       let result = file.response;
       if (result) {
@@ -56,12 +30,34 @@ class Index extends React.PureComponent<FileUploadProps> {
       }
       return file;
     });
-    this.setState({ fileList });
+    setFileList(fileList);
     let uploadFiles = fileList
       .filter(({ url }: any) => url)
-      .map(({ url, name }: any) => ({ url, name }));
+      .map(({ url, name }: any) => ({ url, filename: name }));
     onChange && onChange(maxCount === 1 ? uploadFiles[0] : uploadFiles);
   };
-}
+
+  let handleFileList = (values: any) => {
+    if (Utils.Lang.isNull(values)) {
+      return [];
+    }
+    if (values instanceof Array) {
+      return (values || []).map(Dom.asFile);
+    }
+    return [Dom.asFile(values, 0)];
+  };
+
+  return (
+    <FileUpload
+      maxCount={maxCount}
+      action={`${action}`}
+      defaultFileList={handleFileList(value)}
+      {...rest}
+      onChange={handleChange}
+    >
+      {children}
+    </FileUpload>
+  );
+};
 
 export default Index;

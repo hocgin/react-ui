@@ -9,7 +9,9 @@ import styles from './index.less';
 export default () => {
   return (
     <>
-      <Promise.FileUpload />
+      <Promise.FileUpload
+        action={`${window.location.origin}/api/com/file/upload`}
+      />
     </>
   );
 };

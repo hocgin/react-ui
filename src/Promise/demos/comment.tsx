@@ -3,9 +3,12 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Tpl } from '@hocgin/ui';
-import styles from './index.less';
+import { Promise } from '@hocgin/ui';
 
 export default () => {
-  return <Tpl className={styles.ok} />;
+  return (
+    <>
+      <Promise.Comment refType={'test'} refId={1} />
+    </>
+  );
 };

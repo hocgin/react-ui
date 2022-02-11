@@ -1,6 +1,6 @@
 {
   "name": "@hocgin/ui",
-  "version": "4.0.41",
+  "version": "4.0.42",
   "sideEffects": [
     ".less",
     ".css"
@@ -54,6 +54,7 @@
     "draft-js-prism": "^1.0.6",
     "emoji-mart": "^3.0.1",
     "memoize-one": "^5.2.1",
+    "mockjs": "^1.1.0",
     "randexp": "^0.5.3",
     "react-copy-to-clipboard": "^5.0.4",
     "react-countup": "^5.2.0",

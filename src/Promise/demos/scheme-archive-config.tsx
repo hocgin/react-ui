@@ -12,6 +12,10 @@ export const config: any = {
         encoding: '这是自定义的',
         search: 'search_key',
         searchName: 'searchName',
+        gin_upload_name: {
+          url: 'http://dummyimage.com/100x100',
+          filename: '_reset.jpg',
+        },
       };
     },
     submit: async (params: Record<string, any>) => {
@@ -181,8 +185,8 @@ export const config: any = {
       dataIndex: 'gin_upload_name',
       valueType: Dom.columnPrefix('upload'),
       params: {
-        action: 'http://api-dev.hocgin.top/api/upload',
-        maxCount: 1,
+        action: `${window.location.origin}/api/com/file/upload`,
+        maxCount: 2,
       },
     },
     {
