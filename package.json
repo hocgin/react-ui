@@ -68,8 +68,8 @@
     "@uiw/react-md-editor": "^3.9.2",
     "@umijs/plugin-request": "^2.7.0",
     "braft-editor": "^2.3.9",
-    "braft-extensions": "^0.1.1",
-    "draft-js-prism": "^1.0.6"
+    "draft-js-prism": "^1.0.6",
+    "braft-extensions": "^0.1.1"
   },
   "devDependencies": {
     "@types/react-copy-to-clipboard": "^5.0.1",
