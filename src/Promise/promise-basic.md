@@ -16,6 +16,10 @@ group:
 
 ### 基础用法
 
+评论组件 (Comment):
+
+<code src="./demos/comment.tsx"  background="#f0f2f5" />
+
 基础网络组件 (Basic):
 
 <code src="./demos/basic.tsx"  background="#f0f2f5" />

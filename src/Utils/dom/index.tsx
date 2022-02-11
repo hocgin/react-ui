@@ -1,5 +1,5 @@
 import React from 'react';
-import { Tree, TreeSelect } from 'antd';
+import { message, Tree, TreeSelect } from 'antd';
 import { Struct } from '../result';
 import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
@@ -115,7 +115,17 @@ export default class Dom {
   static getPagingPagination = Struct.getPagingPagination;
   static fastPagingPagination = Struct.fastPagingPagination;
   static getTableData = Struct.getTableData;
+
+  // 获取分页数据(表格形式)
   static fastGetTableData = Struct.fastGetTableData;
+
+  // 解析错误信息
+  static showErrorMessage = (e: Error) => message.error(e.message);
+
+  // 检测到错误，直接抛出
+  static tryErrorIfExits = Struct.thenTryErrorIfExits;
+  // 直接获取数据
+  static thenData = Struct.thenData;
 
   /**
    * 获取域名

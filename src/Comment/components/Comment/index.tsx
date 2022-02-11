@@ -52,13 +52,11 @@ const UserOptions: React.FC<{
   comment: CommentType;
   useAction: UseAction;
   userAction?: string;
-  likesCount?: number;
-  dislikedCount?: number;
 }> = (props, ref) => {
   let { useAction, comment } = props;
   let [userAction, setUserAction] = useState(props?.userAction);
-  let [likesCount, setLikesCount] = useState(props?.likesCount || 0);
-  let [dislikedCount, setDislikedCount] = useState(props?.dislikedCount || 0);
+  let [likesCount, setLikesCount] = useState(comment?.likes || 0);
+  let [dislikedCount, setDislikedCount] = useState(comment?.disliked || 0);
 
   let commentId = comment.id;
   let options = {

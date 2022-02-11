@@ -22,14 +22,9 @@ export class Struct {
 
   /**
    * 获取数据
-   * @deprecated
    * @param result
    */
-  static getData(result?: HttpResult<any>): any {
-    return result && result.data;
-  }
-
-  static thenData = Struct.getData;
+  static thenData = (result?: HttpResult<any>) => result?.data;
 
   /**
    * 转换为 Antd 的 {label, value}
@@ -59,6 +54,7 @@ export class Struct {
 
   /**
    * 过渡处理错误信息
+   * @deprecated
    * @param result
    */
   static thenShowErrorIfExits(

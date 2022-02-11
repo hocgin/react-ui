@@ -3,7 +3,12 @@ import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import { Avatar, Button, Divider, Popover, Tooltip, Input } from 'antd';
-import { ClearOutlined, SmileOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  ClearOutlined,
+  SmileOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import {
   CommentType,
   ReplyDataType,
@@ -14,7 +19,7 @@ import {
 // @ts-ignore
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
-import { useMount, useRequest } from 'ahooks';
+import { useInterval, useMount, useRequest } from 'ahooks';
 
 const { TextArea } = Input;
 
@@ -32,6 +37,9 @@ const Editor: React.FC<{
   } = props;
   let [reply, setReply] = useState<CommentType | undefined>(undefined);
   let [content, setContent] = useState<string | undefined>('');
+  let [replied, setReplied] = useState(false);
+  useInterval(() => setReplied?.(false), 2000);
+
   reply$.useSubscription((comment?: CommentType) => {
     setReply(comment);
   });
@@ -54,6 +62,10 @@ const Editor: React.FC<{
     debounceWait: 300,
     onSuccess: (data: ReplyDataType) => {
       replied$.emit(data);
+
+      // 清除原先内容
+      setContent('');
+      setReplied(true);
     },
   });
 
@@ -86,7 +98,7 @@ const Editor: React.FC<{
       </div>
       <div className={styles.right}>
         <div className={styles.header}>
-          {userName}{' '}
+          <span className={styles.title}>{userName} </span>
           {hasBeReply && (
             <>
               <a href={`#c_${replyId}`} className={styles.reply}>
@@ -115,8 +127,14 @@ const Editor: React.FC<{
           />
         </div>
         <div>
-          <Button size="small" disabled={!landed} onClick={onSubmitReply}>
-            评论
+          <Button disabled={!landed} onClick={onSubmitReply}>
+            {replied ? (
+              <>
+                <CheckOutlined style={{ color: '#00B06D' } as any} /> 评论成功
+              </>
+            ) : (
+              '评论'
+            )}
           </Button>
           <Divider type="vertical" />
           <div className={styles.emojiBox}>

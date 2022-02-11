@@ -7,6 +7,7 @@ import Encoding from './Encoding';
 import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
+import Comment from './Comment';
 import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './Schema/ArchiveSchemaConfig';
 import TableSchemaConfig from './Schema/TableSchemaConfig';
@@ -27,6 +28,7 @@ export default class Promise {
   static RadioButton: typeof RadioButton = RadioButton;
   static Radio: typeof Radio = Radio;
   static Checkbox: typeof Checkbox = Checkbox;
+  static Comment: typeof Comment = Comment;
 
   static ExhibitSchemaConfig: typeof ExhibitSchemaConfig = ExhibitSchemaConfig;
   static ArchiveSchemaConfig: typeof ArchiveSchemaConfig = ArchiveSchemaConfig;
