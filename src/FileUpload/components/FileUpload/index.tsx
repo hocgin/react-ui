@@ -7,7 +7,7 @@ const Index: React.FC<{
   headers?: any;
   action?: string;
   maxCount?: number;
-  defaultFileList?: any;
+  defaultFileList?: any[];
   onChange?: (info: any) => void;
 }> = ({
   children = (

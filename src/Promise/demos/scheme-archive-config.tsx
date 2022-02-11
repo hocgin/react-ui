@@ -12,6 +12,10 @@ export const config: any = {
         encoding: '这是自定义的',
         search: 'search_key',
         searchName: 'searchName',
+        gin_upload_name: {
+          url: 'http://dummyimage.com/100x100',
+          filename: '_reset.jpg',
+        },
       };
     },
     submit: async (params: Record<string, any>) => {

@@ -1,11 +1,12 @@
 import React from 'react';
 import { FileUpload, Utils, Dom } from '@hocgin/ui';
+import { FileInfo } from '@/Utils/interface';
 
 const Index: React.FC<{
   children?: any;
   action?: string;
   maxCount?: number;
-  value?: any;
+  value?: FileInfo | FileInfo[];
   onChange?: (info: any) => void;
 }> = ({
   children,
@@ -32,7 +33,7 @@ const Index: React.FC<{
     setFileList(fileList);
     let uploadFiles = fileList
       .filter(({ url }: any) => url)
-      .map(({ url, name }: any) => ({ url, name }));
+      .map(({ url, name }: any) => ({ url, filename: name }));
     onChange && onChange(maxCount === 1 ? uploadFiles[0] : uploadFiles);
   };
 
