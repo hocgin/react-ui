@@ -14,6 +14,15 @@ export default {
         avatar: Mock.Random.image('100x100'),
       }),
     ),
+  'POST /api/ums/user/_complete': (req: any, res: any) =>
+    res.json(
+      success([{
+        id: 1,
+        nickname: 'hocgin',
+        username: 'hocgin',
+        avatar: Mock.Random.image('100x100'),
+      }]),
+    ),
   'POST /api/com/comment/:refType/:refId/like': (req: any, res: any) =>
     res.json(success(mockData())),
   'POST /api/com/comment/:refType/:refId/dislike': (req: any, res: any) =>

@@ -1,6 +1,6 @@
 import {
   DislikeParamsType,
-  LikeParamsType,
+  LikeParamsType, MentionsParamsType,
   PagingDataType,
   PagingParamsType,
   ReplyDataType,
@@ -42,13 +42,19 @@ export default (refType: any, refId: any) => ({
     (await service.dislike(refType, refId, args?.commentId)) as any,
   // 当前登陆用户
   user: async (args: UserParamsType) => {
-    let { id, title, nickname, avatarUrl, avatar, href } =
-      (await service.getCurrentUser()) as any;
-    return {
-      id,
-      title: title || nickname,
-      avatarUrl: avatarUrl || avatar,
-      href,
-    } as UserDataType;
+    return asUser(await service.getCurrentUser()) as UserDataType;
   },
+  // 提及用户
+  mentionUser: async (args: MentionsParamsType) => ((await service.searchUser(args)) || []).map(asUser),
 });
+
+
+let asUser = (user: any) => {
+  let { id, title, nickname, avatarUrl, avatar, href } = user;
+  return {
+    id,
+    title: title || nickname,
+    avatarUrl: avatarUrl || avatar,
+    href,
+  } as UserDataType;
+};

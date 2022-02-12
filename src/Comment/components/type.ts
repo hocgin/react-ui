@@ -34,6 +34,13 @@ export interface UseAction {
   dislike: (args: DislikeParamsType) => Promise<DislikeDataType>;
   // 当前登陆用户
   user: (args: UserParamsType) => Promise<UserDataType>;
+  // 提及用户
+  mentionUser: (args: MentionsParamsType) => Promise<UserDataType[]>;
+}
+
+// ========================================================
+export interface MentionsParamsType {
+  keyword: string;
 }
 
 // ========================================================
@@ -57,14 +64,18 @@ export interface CommentType {
 }
 
 // ========================================================
-export interface ScrollParamsType extends ScrollRo {}
+export interface ScrollParamsType extends ScrollRo {
+}
 
-export interface ScrollDataType extends IScroll<CommentType> {}
+export interface ScrollDataType extends IScroll<CommentType> {
+}
 
 // ========================================================
-export interface UserParamsType {}
+export interface UserParamsType {
+}
 
-export interface UserDataType extends UserType {}
+export interface UserDataType extends UserType {
+}
 
 // ========================================================
 export interface ReplyParamsType {
@@ -72,14 +83,16 @@ export interface ReplyParamsType {
   content?: string;
 }
 
-export interface ReplyDataType extends CommentType {}
+export interface ReplyDataType extends CommentType {
+}
 
 // ========================================================
 export interface PagingParamsType extends PageRo {
   parentId: ID;
 }
 
-export interface PagingDataType extends IPage<CommentType> {}
+export interface PagingDataType extends IPage<CommentType> {
+}
 
 // ========================================================
 export interface LikeParamsType {
