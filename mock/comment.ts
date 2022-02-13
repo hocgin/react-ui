@@ -16,12 +16,14 @@ export default {
     ),
   'POST /api/ums/user/_complete': (req: any, res: any) =>
     res.json(
-      success([{
-        id: 1,
-        nickname: 'hocgin',
-        username: 'hocgin',
-        avatar: Mock.Random.image('100x100'),
-      }]),
+      success([
+        {
+          id: 1,
+          nickname: 'hocgin',
+          username: 'hocgin',
+          avatar: Mock.Random.image('100x100'),
+        },
+      ]),
     ),
   'POST /api/com/comment/:refType/:refId/like': (req: any, res: any) =>
     res.json(success(mockData())),
@@ -43,9 +45,8 @@ export default {
     res.json(
       success({
         current: 1,
-        total: 1,
-        size: 1,
-        pages: 1,
+        total: 12,
+        size: 10,
         records: [mockData()],
       }),
     ),
