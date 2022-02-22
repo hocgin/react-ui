@@ -1,6 +1,5 @@
 import { success } from './_utils/result';
 import Mock from 'mockjs';
-import { CommentType } from '@/Comment/components/type';
 import { UserType } from '@/Utils/interface';
 
 // http://mockjs.com/examples.html
