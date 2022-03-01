@@ -21,7 +21,7 @@ import ExColor from '@tiptap/extension-color';
 import ExDropcursor from '@tiptap/extension-dropcursor';
 import ExCodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import ExMention from '@tiptap/extension-mention';
-import { HexColorDecorator, MentionSuggestion } from '../Extension';
+import { HexColorDecorator, MentionSuggestion, FontSize as ExFontSize } from '../Extension';
 import classnames from 'classnames';
 import { Divider } from 'antd';
 
@@ -87,6 +87,9 @@ const Index: React.FC<{
       ExGapcursor,
       ExTypography,
       ExColor,
+      ExFontSize.configure({
+        types: ['paragraph'],
+      }),
       HexColorDecorator,
       ExPlaceholder.configure({
         placeholder: '请输入内容..',

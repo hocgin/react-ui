@@ -32,36 +32,21 @@ import styles from './action.less';
 import { useState } from 'react';
 
 export const FontSize: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
-  let menus = [
-    {
-      key: '12px',
-      title: '12px',
-      header: '12px',
-      onAction: () =>
-        editor
-          ?.chain()
-          .focus()
-          .setMark('textStyle', {
-            fontSize: '12px',
-          })
-          .run(),
-      onMatched: () => editor?.isActive('textStyle', { fontSize: '12px' }),
-    },
-    {
-      key: '14px',
-      title: '14px',
-      header: '14px',
-      onAction: () =>
-        editor
-          ?.chain()
-          .focus()
-          .setMark('textStyle', {
-            fontSize: '14px',
-          })
-          .run(),
-      onMatched: () => editor?.isActive('textStyle', { fontSize: '14px' }),
-    },
-  ];
+  let fontSizes = ['12px', '13px', '14px', '16px', '19px', '22px', '24px', '29px', '32px', '40px', '48px'];
+
+  let menus = fontSizes.map((fontSize, index) => ({
+    key: fontSize,
+    title: fontSize,
+    header: fontSize,
+    onAction: () =>
+      editor
+        ?.chain()
+        .focus()
+        .setFontSize(fontSize)
+        .run(),
+    onMatched: () => editor?.isActive({ fontSize: fontSize }),
+  }));
+
   return <MeDropdown menus={menus} defaultValue={'14px'} />;
 };
 
