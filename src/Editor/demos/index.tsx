@@ -9,6 +9,7 @@ import styles from './index.less';
 export default () => {
   const content = `
       <a href='https://www.baidu.com'>ksjdkHi</a>
+      #FB5151
       <p><img src="https://source.unsplash.com/8xznAGy4HcY/800x400" /></p>
       <h2>
         Hi there,

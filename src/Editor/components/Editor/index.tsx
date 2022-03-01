@@ -2,7 +2,7 @@ import * as React from 'react';
 import styles from './index.less';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
-import Highlight from '@tiptap/extension-highlight';
+import ExHighlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
 import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
@@ -15,8 +15,13 @@ import ExCode from '@tiptap/extension-code';
 import ExTextAlign from '@tiptap/extension-text-align';
 import ExItalic from '@tiptap/extension-italic';
 import ExPlaceholder from '@tiptap/extension-placeholder';
+import ExTypography from '@tiptap/extension-typography';
 import ExGapcursor from '@tiptap/extension-gapcursor';
 import ExColor from '@tiptap/extension-color';
+import ExDropcursor from '@tiptap/extension-dropcursor';
+import ExCodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import ExMention from '@tiptap/extension-mention';
+import { HexColorDecorator, MentionSuggestion } from '../Extension';
 import classnames from 'classnames';
 import { Divider } from 'antd';
 
@@ -36,8 +41,16 @@ import {
   Strike,
   TextAlign,
   Color,
-} from '@/Editor/components/Editor/action';
-import { useToggle } from 'ahooks';
+  Highlight,
+} from './action';
+import { useExternal, useToggle } from 'ahooks';
+
+// @ts-ignore
+import { lowlight } from 'lowlight/lib/core';
+
+lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
+
+
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/TbButton';
 
@@ -48,12 +61,13 @@ const Index: React.FC<{
   editable?: boolean;
   onChange?: (v: string) => void;
 }> = ({ fullscreen = false, editable = true, value }) => {
+  // 导入css
+  useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen }] =
     useToggle<boolean>(fullscreen);
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Highlight,
       Typography,
       Image.configure({ inline: true }),
       Link.configure({ openOnClick: false }),
@@ -65,12 +79,20 @@ const Index: React.FC<{
       ExTextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
+      ExHighlight.configure({ multicolor: true }),
+      ExCodeBlockLowlight.configure({ lowlight }),
       ExSubscript,
+      ExDropcursor,
       ExSuperscript,
       ExGapcursor,
+      ExTypography,
       ExColor,
+      HexColorDecorator,
       ExPlaceholder.configure({
         placeholder: '请输入内容..',
+      }),
+      ExMention.configure({
+        suggestion: MentionSuggestion,
       }),
     ],
     content: value,
@@ -85,7 +107,11 @@ const Index: React.FC<{
           [styles.mini]: !isFullscreen,
         })}
       >
-        <div className={styles.header}>
+        <div
+          className={styles.header}
+          onTouchStart={(e) => e.preventDefault()}
+          onMouseDown={(e) => e.preventDefault()}
+        >
           <div className={styles.tpToolbar}>
             <UploadImage editor={editor} />
             <Divider type={'vertical'} />
@@ -98,6 +124,7 @@ const Index: React.FC<{
             <TextScript editor={editor} />
             <Divider type={'vertical'} />
             <Color editor={editor} />
+            <Highlight editor={editor} />
             <TextAlign editor={editor} />
             <OrderedList editor={editor} />
             <BulletList editor={editor} />
@@ -137,7 +164,11 @@ const Index: React.FC<{
             </FloatingMenu>
           )}
         </div>
-        <div className={styles.btToolbar}>
+        <div
+          className={styles.btToolbar}
+          onTouchStart={(e) => e.preventDefault()}
+          onMouseDown={(e) => e.preventDefault()}
+        >
           <UploadImage editor={editor} />
           <Paragraph editor={editor} />
           <Bold editor={editor} />

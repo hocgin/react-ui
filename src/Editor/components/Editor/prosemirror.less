@@ -6,5 +6,38 @@
       height: auto;
       max-width: 100%;
     }
+
+    pre {
+      background-color: #eee;
+      padding: 8px;
+      border-radius: 4px;
+      //[class^="language-"] {
+      //  background-color: #eee;
+      //}
+    }
+
+    .color {
+      white-space: nowrap;
+
+      &:before {
+        content: ' ';
+        display: inline-block;
+        width: 0.8em;
+        height: 0.8em;
+        border: 1px solid rgba(#808080, 0.3);
+        vertical-align: middle;
+        margin-right: 0.2em;
+        margin-bottom: 0.15em;
+        border-radius: 50%;
+        background: var(--color);
+      }
+    }
+
+    [data-type='mention'] {
+      border: 1px solid #000;
+      border-radius: 0.4rem;
+      box-decoration-break: clone;
+      padding: 0.1rem 0.3rem;
+    }
   }
 }

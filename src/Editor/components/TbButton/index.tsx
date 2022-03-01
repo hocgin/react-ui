@@ -14,7 +14,7 @@ const Index: React.FC<{
     <div className={classnames(styles.btn, className)}>
       <Tooltip placement="bottom" title={title}>
         <Button type="text" onClick={onClick} disabled={disabled}>
-          <div>{children}</div>
+          <div onTouchStart={(e) => e.preventDefault()}>{children}</div>
         </Button>
       </Tooltip>
     </div>

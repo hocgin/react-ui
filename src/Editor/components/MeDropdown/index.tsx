@@ -18,8 +18,9 @@ const Index: React.FC<{
   className?: string;
   menus?: MenuInfo[];
   defaultValue?: any;
+  onClick?: (key: string) => void;
   mode?: 'vertical' | 'horizontal' | 'inline';
-}> = ({ className, menus = [], defaultValue, mode }) => {
+}> = ({ className, onClick, menus = [], defaultValue, mode }) => {
   let [key, setKey] = useState<string>('none');
   let matchMenu = (key: string) => menus?.find((item) => item.key === key);
 
@@ -34,14 +35,21 @@ const Index: React.FC<{
     }
   }, 1000);
   return (
-    <div className={classnames(styles.dropdown, className)}>
+    <div
+      className={classnames(styles.dropdown, className)}
+      onTouchStart={(e) => e.preventDefault()}
+    >
       <Dropdown
+        overlayClassName={classnames({
+          [styles.horizontal]: mode === 'horizontal',
+        })}
         overlay={
           <Menu
             mode={mode}
             onClick={({ key }) => {
               setKey(key);
               onAction(key);
+              onClick?.(key);
             }}
           >
             {(menus || []).map(({ key, header }) => (
