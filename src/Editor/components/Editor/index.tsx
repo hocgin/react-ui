@@ -18,6 +18,8 @@ import ExPlaceholder from '@tiptap/extension-placeholder';
 import ExTypography from '@tiptap/extension-typography';
 import ExGapcursor from '@tiptap/extension-gapcursor';
 import ExColor from '@tiptap/extension-color';
+import ExTaskList from '@tiptap/extension-task-list';
+import ExTaskItem from '@tiptap/extension-task-item';
 import ExDropcursor from '@tiptap/extension-dropcursor';
 import ExCodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import ExMention from '@tiptap/extension-mention';
@@ -42,6 +44,14 @@ import {
   TextAlign,
   Color,
   Highlight,
+  ClearStyle,
+  CodeBlock,
+  HardBreak,
+  HorizontalRule,
+  Undo,
+  Redo,
+  Blockquote,
+  TaskList,
 } from '../Action';
 import { useExternal, useToggle } from 'ahooks';
 
@@ -87,6 +97,10 @@ const Index: React.FC<{
       ExGapcursor,
       ExTypography,
       ExColor,
+      ExTaskList,
+      ExTaskItem.configure({
+        nested: true,
+      }),
       ExFontSize.configure({
         types: ['paragraph'],
       }),
@@ -118,6 +132,13 @@ const Index: React.FC<{
           <div className={styles.tpToolbar}>
             <UploadImage editor={editor} />
             <Divider type={'vertical'} />
+            <Undo editor={editor} />
+            <Redo editor={editor} />
+            <Divider type={'vertical'} />
+            <ClearStyle editor={editor} />
+            <HardBreak editor={editor} />
+            <CodeBlock editor={editor} />
+            <Divider type={'vertical'} />
             <Paragraph editor={editor} />
             <FontSize editor={editor} />
             <Bold editor={editor} />
@@ -132,6 +153,9 @@ const Index: React.FC<{
             <OrderedList editor={editor} />
             <BulletList editor={editor} />
             <Divider type={'vertical'} />
+            <Blockquote editor={editor} />
+            <TaskList editor={editor} />
+            <HorizontalRule editor={editor} />
             <SetLink editor={editor} />
             <Emoji editor={editor} />
           </div>

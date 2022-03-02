@@ -33,11 +33,39 @@
       }
     }
 
+    blockquote {
+      border-left: 3px solid rgba(#0d0d0d, 0.1);
+      padding-left: 1rem;
+    }
+
     [data-type='mention'] {
       border: 1px solid #000;
       border-radius: 0.4rem;
       box-decoration-break: clone;
       padding: 0.1rem 0.3rem;
+    }
+
+    ul[data-type="taskList"] {
+      list-style: none;
+      padding: 0;
+
+      p {
+        margin: 0;
+      }
+
+      li {
+        display: flex;
+
+        > label {
+          flex: 0 0 auto;
+          margin-right: 0.5rem;
+          user-select: none;
+        }
+
+        > div {
+          flex: 1 1 auto;
+        }
+      }
     }
   }
 }

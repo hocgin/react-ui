@@ -18,6 +18,7 @@ export const FontSize: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
     onMatched: () => editor?.isActive({ fontSize: fontSize }),
   }));
 
-  return <MeDropdown menus={menus} defaultValue={'14px'} />;
+  return <MeDropdown menus={menus} defaultValue={<span
+    style={{ fontSize: '14px', width: 40, fontWeight: 300 } as any}>14px</span>} />;
 };
 

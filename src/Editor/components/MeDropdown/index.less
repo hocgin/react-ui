@@ -27,9 +27,23 @@
       align-items: center;
     }
   }
+
 }
 
 .horizontal > ul {
   display: flex;
   flex-direction: row;
+}
+
+.menu {
+  :global {
+    .ant-dropdown-menu-title-content {
+      display: flex;
+      align-items: center;
+    }
+  }
+  h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 3px;
+    margin-top: 3px;
+  }
 }

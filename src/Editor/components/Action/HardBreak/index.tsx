@@ -6,7 +6,6 @@ import { BoldOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const HardBreak: React.FC<{ editor?: Editor | null }> = ({ editor }) => (
   <TbButton
     title='换行'
-    disabled={!editor?.isActive('codeBlock')}
     onClick={() =>
       editor?.chain().focus().setHardBreak().run()
     }>

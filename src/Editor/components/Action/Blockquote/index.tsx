@@ -6,7 +6,6 @@ import { BoldOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Blockquote: React.FC<{ editor?: Editor | null }> = ({ editor }) => (
   <TbButton
     title='插入引用'
-    disabled={!editor?.isActive('codeBlock')}
     onClick={() =>
       editor?.chain().focus().toggleBlockquote().run()
     }>

@@ -21,3 +21,4 @@ export { TextScript } from './TextScript';
 export { UnsetLink } from './UnsetLink';
 export { Undo } from './Undo';
 export { UploadImage } from './UploadImage';
+export { TaskList } from './TaskList';

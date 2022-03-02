@@ -45,7 +45,7 @@ const Index: React.FC<{
         })}
         overlay={
           <Menu
-            mode={mode}
+            mode={mode} selectedKeys={[key]}
             onClick={({ key }) => {
               setKey(key);
               onAction(key);
@@ -53,7 +53,7 @@ const Index: React.FC<{
             }}
           >
             {(menus || []).map(({ key, header }) => (
-              <Menu.Item key={key}>{header}</Menu.Item>
+              <Menu.Item className={styles.menu} key={key}>{header}</Menu.Item>
             ))}
           </Menu>
         }
