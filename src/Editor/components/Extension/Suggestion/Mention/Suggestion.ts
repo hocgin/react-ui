@@ -52,6 +52,7 @@ export let MentionSuggestion: Omit<SuggestionOptions, 'editor'> = {
         });
 
         popup = tippy('body', {
+          theme: 'light',
           getReferenceClientRect: props.clientRect,
           appendTo: () => document.body,
           content: component.element,

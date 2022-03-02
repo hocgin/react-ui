@@ -1,16 +1,31 @@
 .dropdown {
-  padding-top: 2px;
-  padding-left: 2px;
-  margin-left: 2px;
+  padding: 0 6px;
+  border-radius: 6px;
+  border: none;
+  background: transparent;
+  //height: unset;
+  font-size: 14px;
+  justify-content: center;
+  align-items: center;
 
   .selectedValue {
-    width: 40px;
     text-align: left;
     font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .caretDown {
+      width: 10px;
+      height: 10px;
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './index.less';
-import { Dropdown, Menu } from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Button, Dropdown, Menu } from 'antd';
+import { CaretDownOutlined, DownOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useInterval } from 'ahooks';
 import classnames from 'classnames';
@@ -35,9 +35,9 @@ const Index: React.FC<{
     }
   }, 1000);
   return (
-    <div
-      className={classnames(styles.dropdown, className)}
-      onTouchStart={(e) => e.preventDefault()}
+    <Button type='text'
+            className={classnames(styles.dropdown, className)}
+            onTouchStart={(e) => e.preventDefault()}
     >
       <Dropdown
         overlayClassName={classnames({
@@ -60,10 +60,10 @@ const Index: React.FC<{
         trigger={['click']}
       >
         <span className={styles.selectedValue}>
-          {menuTitle} <DownOutlined />
+          {menuTitle} <CaretDownOutlined className={styles.caretDown} />
         </span>
       </Dropdown>
-    </div>
+    </Button>
   );
 };
 

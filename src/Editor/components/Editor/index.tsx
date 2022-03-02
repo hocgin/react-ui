@@ -30,7 +30,7 @@ import {
   Underline,
   BulletList,
   SetLink,
-  EmojiAction,
+  Emoji,
   OrderedList,
   UnsetLink,
   FontSize,
@@ -42,7 +42,7 @@ import {
   TextAlign,
   Color,
   Highlight,
-} from './action';
+} from '../Action';
 import { useExternal, useToggle } from 'ahooks';
 
 // @ts-ignore
@@ -133,7 +133,7 @@ const Index: React.FC<{
             <BulletList editor={editor} />
             <Divider type={'vertical'} />
             <SetLink editor={editor} />
-            <EmojiAction editor={editor} />
+            <Emoji editor={editor} />
           </div>
           <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
             {isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
@@ -178,7 +178,7 @@ const Index: React.FC<{
           <OrderedList editor={editor} />
           <BulletList editor={editor} />
           <SetLink editor={editor} />
-          <EmojiAction editor={editor} />
+          <Emoji editor={editor} />
         </div>
       </div>
     </div>
