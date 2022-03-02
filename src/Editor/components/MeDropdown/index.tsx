@@ -16,11 +16,12 @@ interface MenuInfo {
 
 const Index: React.FC<{
   className?: string;
+  titleClassName?: string;
   menus?: MenuInfo[];
   defaultValue?: any;
   onClick?: (key: string) => void;
   mode?: 'vertical' | 'horizontal' | 'inline';
-}> = ({ className, onClick, menus = [], defaultValue, mode }) => {
+}> = ({ className, titleClassName, onClick, menus = [], defaultValue, mode }) => {
   let [key, setKey] = useState<string>('none');
   let matchMenu = (key: string) => menus?.find((item) => item.key === key);
 
@@ -44,13 +45,12 @@ const Index: React.FC<{
           [styles.horizontal]: mode === 'horizontal',
         })}
         overlay={
-          <Menu
-            mode={mode} selectedKeys={[key]}
-            onClick={({ key }) => {
-              setKey(key);
-              onAction(key);
-              onClick?.(key);
-            }}
+          <Menu selectedKeys={[key]}
+                onClick={({ key }) => {
+                  setKey(key);
+                  onAction(key);
+                  onClick?.(key);
+                }}
           >
             {(menus || []).map(({ key, header }) => (
               <Menu.Item className={styles.menu} key={key}>{header}</Menu.Item>
@@ -59,8 +59,9 @@ const Index: React.FC<{
         }
         trigger={['click']}
       >
-        <span className={styles.selectedValue}>
-          {menuTitle} <CaretDownOutlined className={styles.caretDown} />
+        <span className={classnames(styles.selectedValue)}>
+          <span className={classnames(titleClassName)}>{menuTitle}</span> <CaretDownOutlined
+          className={styles.caretDown} />
         </span>
       </Dropdown>
     </Button>

@@ -101,9 +101,7 @@ const Index: React.FC<{
       ExTaskItem.configure({
         nested: true,
       }),
-      ExFontSize.configure({
-        types: ['paragraph'],
-      }),
+      ExFontSize,
       HexColorDecorator,
       ExPlaceholder.configure({
         placeholder: '请输入内容..',

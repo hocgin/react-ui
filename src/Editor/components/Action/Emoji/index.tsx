@@ -8,7 +8,8 @@ import { Picker } from 'emoji-mart';
 export const Emoji: React.FC<{ editor?: Editor | null }> = ({
                                                               editor,
                                                             }) => (
-  <TbButton>
+  <TbButton onClick={() =>
+    console.log(editor?.getAttributes('textStyle'))}>
     <Popover
       placement='top'
       trigger='click'

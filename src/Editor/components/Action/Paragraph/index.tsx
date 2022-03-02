@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Editor } from '@tiptap/react';
 import MeDropdown from '@/Editor/components/MeDropdown';
+import styles from './index.less';
 
 export const Paragraph: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
   let menus = [
@@ -41,7 +42,7 @@ export const Paragraph: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
     },
   ];
 
-  return <MeDropdown menus={menus} defaultValue={'正文'} />;
+  return <MeDropdown menus={menus} defaultValue={'正文'} titleClassName={styles.content} />;
 };
 
 
