@@ -16,6 +16,7 @@ import TreeSchemaConfig from './Schema/TreeSchemaConfig';
 
 import PageLayout from './PageLayout';
 import PageContainer from './PageContainer';
+import { EditorPage } from './Page';
 import UserAvatar from './UserAvatar';
 
 export default class Promise {
@@ -39,4 +40,6 @@ export default class Promise {
   static PageLayout: typeof PageLayout = PageLayout;
   static PageContainer: typeof PageContainer = PageContainer;
   static UserAvatar: typeof UserAvatar = UserAvatar;
+
+  static ViewEditorPage: typeof EditorPage = EditorPage;
 }
