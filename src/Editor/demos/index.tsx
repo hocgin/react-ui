@@ -3,7 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React, { useRef, useState } from 'react';
-import { Editor } from '@hocgin/ui';
+import { Editor, Header } from '@hocgin/ui';
 import styles from './index.less';
 import { Button, Divider } from 'antd';
 import { useBoolean, useToggle } from 'ahooks';
@@ -46,33 +46,59 @@ const content = `
 export default () => {
   let editorRef = useRef<any>();
   let [editable, setEditable] = useState<boolean>(true);
-  let [fullscreen, setFullscreen] = useState<boolean>(true);
+  let [fullscreen, setFullscreen] = useState<boolean>(false);
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
 
   return (
     <>
-      <Editor editorRef={editorRef} editable={editable} fullscreen={fullscreen} className={classnames(styles.ok, {
-        [styles.unsetHeight]: unsetHeight,
-      })} value={content} />
+      <Editor
+        header={fullscreen ? <Header /> : <></>}
+        editorRef={editorRef}
+        editable={editable}
+        fullscreen={fullscreen}
+        className={classnames(styles.ok, {
+          [styles.unsetHeight]: unsetHeight,
+        })}
+        value={content}
+        onChangeFullscreen={(fullscreen) => setFullscreen(fullscreen)}
+      />
       <Divider />
-      <Button onClick={() => {
-        setText(editorRef.current.getHTML());
-      }}>获取HTML</Button>
-      <Button onClick={() => {
-        setText(JSON.stringify(editorRef.current.getJSON()));
-      }}>获取JSON</Button>
-      <Button onClick={() => {
-        let b = !editable;
-        editorRef.current.setEditable(b);
-        setEditable(b);
-      }}>{editable ? '可编辑' : '不可编辑'}</Button>
-      <Button onClick={toggleUnsetHeight}>{unsetHeight ? '取消高度' : '恢复高度'}</Button>
-      <Button onClick={() => {
-        let b = !fullscreen;
-        editorRef.current.setFullscreen(b);
-        setFullscreen(b);
-      }}>{fullscreen ? '全屏' : '非全屏'}</Button>
+      <Button
+        onClick={() => {
+          setText(editorRef.current.getHTML());
+        }}
+      >
+        获取HTML
+      </Button>
+      <Button
+        onClick={() => {
+          setText(JSON.stringify(editorRef.current.getJSON()));
+        }}
+      >
+        获取JSON
+      </Button>
+      <Button
+        onClick={() => {
+          let b = !editable;
+          editorRef.current.setEditable(b);
+          setEditable(b);
+        }}
+      >
+        {editable ? '可编辑' : '不可编辑'}
+      </Button>
+      <Button onClick={toggleUnsetHeight}>
+        {unsetHeight ? '取消高度' : '恢复高度'}
+      </Button>
+      <Button
+        onClick={() => {
+          let b = !fullscreen;
+          editorRef.current.setFullscreen(b);
+          setFullscreen(b);
+        }}
+      >
+        {fullscreen ? '全屏' : '非全屏'}
+      </Button>
       <Divider />
       <div>{text}</div>
     </>

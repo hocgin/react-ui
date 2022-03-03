@@ -65,13 +65,12 @@ import {
   FillTableBackground,
   LineHeight,
 } from '../Action';
-import { useExternal, useToggle } from 'ahooks';
+import { useUpdateEffect, useExternal, useToggle } from 'ahooks';
 
 // @ts-ignore
 import { lowlight } from 'lowlight/lib/core';
 
 lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
-
 
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/TbButton';
@@ -79,17 +78,31 @@ import { useImperativeHandle } from 'react';
 
 const Index: React.FC<{
   editorRef: any;
+  header?: any;
   value?: string;
   className?: string;
   fullscreen?: boolean;
   editable?: boolean;
   onChange?: (v: string) => void;
-}> = ({ className, editorRef, fullscreen = false, editable = true, value }, ref) => {
+  onChangeFullscreen?: (fullscreen: boolean) => void;
+}> = (
+  {
+    className,
+    header,
+    onChangeFullscreen,
+    editorRef,
+    fullscreen = false,
+    editable = true,
+    value,
+  },
+  ref,
+) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
     useToggle<boolean>(fullscreen);
   let [editorEditable, setEditorEditable] = useState<boolean>(editable);
+  useUpdateEffect(() => onChangeFullscreen?.(isFullscreen), [isFullscreen]);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -134,15 +147,19 @@ const Index: React.FC<{
     editable: editorEditable,
   });
   useEffect(() => editor?.setEditable?.(editorEditable), [editor]);
-  useImperativeHandle(editorRef, () => ({
-    getHTML: editor?.getHTML.bind(editor),
-    getJSON: editor?.getJSON.bind(editor),
-    setEditable: (editable: boolean) => {
-      editor?.setEditable(editable);
-      setEditorEditable(editable);
-    },
-    setFullscreen: setFullscreen.bind(this),
-  }), [editor]);
+  useImperativeHandle(
+    editorRef,
+    () => ({
+      getHTML: editor?.getHTML.bind(editor),
+      getJSON: editor?.getJSON.bind(editor),
+      setEditable: (editable: boolean) => {
+        editor?.setEditable(editable);
+        setEditorEditable(editable);
+      },
+      setFullscreen: setFullscreen.bind(this),
+    }),
+    [editor],
+  );
 
   return (
     <div className={classnames(styles.editor, className)}>
@@ -152,73 +169,84 @@ const Index: React.FC<{
           [styles.mini]: !isFullscreen,
         })}
       >
-        {editorEditable && <div
-          className={classnames(styles.header, {
-            [styles.hide]: !isFullscreen,
-          })}
-          onTouchStart={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
-        >
-          <div style={{ flex: 1 } as any}>
-            {(isFullscreen) && <div className={styles.tpToolbar}>
-              <InsertCard editor={editor} />
-              <Divider type={'vertical'} />
-              <Undo editor={editor} />
-              <Redo editor={editor} />
-              <Divider type={'vertical'} />
-              <ClearStyle editor={editor} />
-              {/*字体*/}
-              <Divider type={'vertical'} />
-              <Paragraph editor={editor} />
-              <FontSize editor={editor} />
-              <Bold editor={editor} />
-              <Italic editor={editor} />
-              <Strike editor={editor} />
-              <Underline editor={editor} />
-              <TextScript editor={editor} />
-              {/*颜色*/}
-              <Divider type={'vertical'} />
-              <Color editor={editor} />
-              <Highlight editor={editor} />
-              <FillTableBackground editor={editor} />
-              {/*位置*/}
-              <TextAlign editor={editor} />
-              <OrderedList editor={editor} />
-              <BulletList editor={editor} />
-              <LineHeight editor={editor} />
-              <TableCtl editor={editor} />
-              {/*其他*/}
-              <Divider type={'vertical'} />
-              <TaskList editor={editor} />
-              <CodeBlock editor={editor} />
-              <Blockquote editor={editor} />
-              <SetLink editor={editor} />
-              <HorizontalRule editor={editor} />
-              <HardBreak editor={editor} />
-              <Emoji editor={editor} />
-            </div>}
+        {header}
+        {editorEditable && (
+          <div
+            className={classnames(styles.header, {
+              [styles.hide]: !isFullscreen,
+            })}
+            onTouchStart={(e) => e.preventDefault()}
+            onMouseDown={(e) => e.preventDefault()}
+          >
+            <div style={{ flex: 1 } as any}>
+              {isFullscreen && (
+                <div className={styles.tpToolbar}>
+                  <InsertCard editor={editor} />
+                  <Divider type={'vertical'} />
+                  <Undo editor={editor} />
+                  <Redo editor={editor} />
+                  <Divider type={'vertical'} />
+                  <ClearStyle editor={editor} />
+                  {/*字体*/}
+                  <Divider type={'vertical'} />
+                  <Paragraph editor={editor} />
+                  <FontSize editor={editor} />
+                  <Bold editor={editor} />
+                  <Italic editor={editor} />
+                  <Strike editor={editor} />
+                  <Underline editor={editor} />
+                  <TextScript editor={editor} />
+                  {/*颜色*/}
+                  <Divider type={'vertical'} />
+                  <Color editor={editor} />
+                  <Highlight editor={editor} />
+                  <FillTableBackground editor={editor} />
+                  {/*位置*/}
+                  <TextAlign editor={editor} />
+                  <OrderedList editor={editor} />
+                  <BulletList editor={editor} />
+                  <LineHeight editor={editor} />
+                  <TableCtl editor={editor} />
+                  {/*其他*/}
+                  <Divider type={'vertical'} />
+                  <TaskList editor={editor} />
+                  <CodeBlock editor={editor} />
+                  <Blockquote editor={editor} />
+                  <SetLink editor={editor} />
+                  <HorizontalRule editor={editor} />
+                  <HardBreak editor={editor} />
+                  <Emoji editor={editor} />
+                </div>
+              )}
+            </div>
+            <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
+              {isFullscreen ? (
+                <FullscreenExitOutlined />
+              ) : (
+                <FullscreenOutlined />
+              )}
+            </TbButton>
           </div>
-          <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
-            {isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
-          </TbButton>
-        </div>}
+        )}
         <div className={styles.content}>
           <EditorContent editor={editor} />
-          {editor && (<FloatingMenus editor={editor} />)}
+          {editor && <FloatingMenus editor={editor} />}
         </div>
-        {(!isFullscreen && editorEditable) && <div
-          className={styles.btToolbar}
-          onTouchStart={(e) => e.preventDefault()}
-          onMouseDown={(e) => e.preventDefault()}
-        >
-          <InsertCard editor={editor} />
-          <Paragraph editor={editor} />
-          <Bold editor={editor} />
-          <OrderedList editor={editor} />
-          <BulletList editor={editor} />
-          <SetLink editor={editor} />
-          <Emoji editor={editor} />
-        </div>}
+        {!isFullscreen && editorEditable && (
+          <div
+            className={styles.btToolbar}
+            onTouchStart={(e) => e.preventDefault()}
+            onMouseDown={(e) => e.preventDefault()}
+          >
+            <InsertCard editor={editor} />
+            <Paragraph editor={editor} />
+            <Bold editor={editor} />
+            <OrderedList editor={editor} />
+            <BulletList editor={editor} />
+            <SetLink editor={editor} />
+            <Emoji editor={editor} />
+          </div>
+        )}
       </div>
     </div>
   );
