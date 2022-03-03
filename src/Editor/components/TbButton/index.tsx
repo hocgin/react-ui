@@ -11,9 +11,9 @@ const Index: React.FC<{
   disabled?: boolean;
 }> = ({ className, disabled = false, title, children, onClick }) => {
   return (
-    <div className={classnames(styles.btn, className)}>
-      <Tooltip placement="bottom" title={title}>
-        <Button type="text" onClick={onClick} disabled={disabled}>
+    <div className={classnames('gin-tb-button', styles.btn, className)}>
+      <Tooltip placement='bottom' title={title}>
+        <Button type='text' onClick={onClick} disabled={disabled}>
           <div onTouchStart={(e) => e.preventDefault()}>{children}</div>
         </Button>
       </Tooltip>

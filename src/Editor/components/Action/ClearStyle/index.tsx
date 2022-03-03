@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Editor } from '@tiptap/react';
 import TbButton from '@/Editor/components/TbButton';
-import { BoldOutlined, DisconnectOutlined } from '@ant-design/icons';
+import { ClearOutlined } from '@ant-design/icons';
 
 export const ClearStyle: React.FC<{ editor?: Editor | null }> = ({ editor }) => (
   <TbButton
@@ -9,6 +9,6 @@ export const ClearStyle: React.FC<{ editor?: Editor | null }> = ({ editor }) => 
     onClick={() =>
       editor?.chain().focus().unsetAllMarks().clearNodes().run()
     }>
-    <DisconnectOutlined />
+    <ClearOutlined />
   </TbButton>
 );

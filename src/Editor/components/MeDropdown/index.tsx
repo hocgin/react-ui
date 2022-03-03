@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styles from './index.less';
 import { Button, Dropdown, Menu } from 'antd';
-import { CaretDownOutlined, DownOutlined } from '@ant-design/icons';
+import { CaretDownOutlined} from '@ant-design/icons';
 import { useState } from 'react';
 import { useInterval } from 'ahooks';
 import classnames from 'classnames';
@@ -21,7 +21,8 @@ const Index: React.FC<{
   defaultValue?: any;
   onClick?: (key: string) => void;
   mode?: 'vertical' | 'horizontal' | 'inline';
-}> = ({ className, titleClassName, onClick, menus = [], defaultValue, mode }) => {
+  disabled?: boolean;
+}> = ({ className, disabled = false, titleClassName, onClick, menus = [], defaultValue, mode }) => {
   let [key, setKey] = useState<string>('none');
   let matchMenu = (key: string) => menus?.find((item) => item.key === key);
 
@@ -36,10 +37,9 @@ const Index: React.FC<{
     }
   }, 1000);
   return (
-    <Button type='text'
+    <Button type='text' disabled={disabled}
             className={classnames(styles.dropdown, className)}
-            onTouchStart={(e) => e.preventDefault()}
-    >
+            onTouchStart={(e) => e.preventDefault()}>
       <Dropdown
         overlayClassName={classnames({
           [styles.horizontal]: mode === 'horizontal',

@@ -2,15 +2,17 @@
  * title: 我是标题
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { Editor } from '@hocgin/ui';
 import styles from './index.less';
+import { Button, Divider } from 'antd';
+import { useBoolean, useToggle } from 'ahooks';
+import classnames from 'classnames';
 
-export default () => {
-  const content = `
+const content = `
       <a href='https://www.baidu.com'>ksjdkHi</a>
       #FB5151
-      <p><img src="https://source.unsplash.com/8xznAGy4HcY/800x400" /></p>
+      <p><img src='https://source.unsplash.com/8xznAGy4HcY/800x400' /></p>
       <h2>
         Hi there,
       </h2>
@@ -41,9 +43,38 @@ export default () => {
       </blockquote>
     `;
 
+export default () => {
+  let editorRef = useRef<any>();
+  let [editable, setEditable] = useState<boolean>(true);
+  let [fullscreen, setFullscreen] = useState<boolean>(true);
+  let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
+  let [text, setText] = useState<string>('');
+
   return (
     <>
-      <Editor className={styles.ok} value={content} />
+      <Editor editorRef={editorRef} editable={editable} fullscreen={fullscreen} className={classnames(styles.ok, {
+        [styles.unsetHeight]: unsetHeight,
+      })} value={content} />
+      <Divider />
+      <Button onClick={() => {
+        setText(editorRef.current.getHTML());
+      }}>获取HTML</Button>
+      <Button onClick={() => {
+        setText(JSON.stringify(editorRef.current.getJSON()));
+      }}>获取JSON</Button>
+      <Button onClick={() => {
+        let b = !editable;
+        editorRef.current.setEditable(b);
+        setEditable(b);
+      }}>{editable ? '可编辑' : '不可编辑'}</Button>
+      <Button onClick={toggleUnsetHeight}>{unsetHeight ? '取消高度' : '恢复高度'}</Button>
+      <Button onClick={() => {
+        let b = !fullscreen;
+        editorRef.current.setFullscreen(b);
+        setFullscreen(b);
+      }}>{fullscreen ? '全屏' : '非全屏'}</Button>
+      <Divider />
+      <div>{text}</div>
     </>
   );
 };

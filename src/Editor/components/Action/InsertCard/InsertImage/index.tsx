@@ -2,11 +2,10 @@ import * as React from 'react';
 import { Editor } from '@tiptap/react';
 import { Dom } from '@/index';
 import TbButton from '@/Editor/components/TbButton';
-import styles from '@/Editor/components/Editor/action.less';
 import { Upload } from 'antd';
 import { PictureOutlined } from '@ant-design/icons';
 
-export const UploadImage: React.FC<{ editor?: Editor | null }> = ({
+export const InsertImage: React.FC<{ editor?: Editor | null }> = ({
                                                                     editor,
                                                                   }) => {
   let handleChange = ({ file, fileList }: any) => {
@@ -28,7 +27,7 @@ export const UploadImage: React.FC<{ editor?: Editor | null }> = ({
     }
   };
   return (
-    <TbButton title='图片' className={styles.uploadImage}>
+    <TbButton title='插入图片'>
       <Upload
         accept={'image/*'}
         withCredentials
@@ -36,9 +35,8 @@ export const UploadImage: React.FC<{ editor?: Editor | null }> = ({
         maxCount={1}
         action={'/api/com/file/upload'}
         headers={{}}
-        onChange={handleChange}
-      >
-        <PictureOutlined />
+        onChange={handleChange}>
+        <PictureOutlined /> 图片
       </Upload>
     </TbButton>
   );

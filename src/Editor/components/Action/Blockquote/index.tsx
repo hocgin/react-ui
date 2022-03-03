@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { Editor } from '@tiptap/react';
 import TbButton from '@/Editor/components/TbButton';
-import { BoldOutlined, DisconnectOutlined } from '@ant-design/icons';
+import Icon from '@ant-design/icons';
+import { Quote } from '@/Editor/components/Action/Icon';
 
 export const Blockquote: React.FC<{ editor?: Editor | null }> = ({ editor }) => (
   <TbButton
@@ -9,7 +10,12 @@ export const Blockquote: React.FC<{ editor?: Editor | null }> = ({ editor }) => 
     onClick={() =>
       editor?.chain().focus().toggleBlockquote().run()
     }>
-    <DisconnectOutlined />
+    <Icon component={Quote.bind(this)} style={{
+      display: 'flex',
+      justifyContent: 'center',
+      width: 16,
+      height: 16,
+    } as any} />
   </TbButton>
 );
 

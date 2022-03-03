@@ -4,27 +4,27 @@ import { Node } from 'prosemirror-model';
 import { Plugin } from 'prosemirror-state';
 import { Extension } from '@tiptap/core';
 
-export interface FontSizeOptions {
+export interface LineHeightOptions {
   types: string[],
 }
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
-    fontSize: {
+    lineHeight: {
       /**
        * Set the font size attribute
        */
-      setFontSize: (fontSize: string) => ReturnType,
+      setLineHeight: (lineHeight: string) => ReturnType,
       /**
        * Unset the font size attribute
        */
-      unsetFontSize: () => ReturnType,
+      unsetLineHeight: () => ReturnType,
     };
   }
 }
 
-const FontSize = Extension.create<FontSizeOptions>({
-  name: 'fontSize',
+const LineHeight = Extension.create<LineHeightOptions>({
+  name: 'lineHeight',
   addOptions() {
     return {
       types: ['paragraph'],
@@ -35,14 +35,13 @@ const FontSize = Extension.create<FontSizeOptions>({
       {
         types: this.options.types,
         attributes: {
-          fontSize: {
-            default: null,
-            parseHTML: element => element.style.fontSize,
+          lineHeight: {
+            parseHTML: element => element.style.lineHeight,
             renderHTML: attributes => {
-              if (!attributes.fontSize) {
+              if (!attributes.lineHeight) {
                 return {};
               }
-              return { style: `font-size: ${attributes.fontSize}` };
+              return { style: `line-height: ${attributes.lineHeight}` };
             },
           },
         },
@@ -51,12 +50,12 @@ const FontSize = Extension.create<FontSizeOptions>({
   },
   addCommands() {
     return {
-      setFontSize: (fontSize: string) => ({ commands }: any) => {
-        return this.options.types.every(type => commands.updateAttributes(type, { fontSize: fontSize }));
+      setLineHeight: (lineHeight: string) => ({ commands }: any) => {
+        return this.options.types.every(type => commands.updateAttributes(type, { lineHeight: lineHeight }));
       },
 
       unsetFontSize: () => ({ commands }) => {
-        return this.options.types.every(type => commands.resetAttributes(type, 'fontSize'));
+        return this.options.types.every(type => commands.resetAttributes(type, 'lineHeight'));
       },
     };
   },
@@ -66,4 +65,4 @@ const FontSize = Extension.create<FontSizeOptions>({
   },
 });
 
-export { FontSize };
+export { LineHeight };

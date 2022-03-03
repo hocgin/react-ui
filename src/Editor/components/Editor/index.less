@@ -6,6 +6,9 @@
     border: 1px solid #e8e8e8;
     position: relative;
     border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 
     &.fullscreen {
       position: fixed !important;
@@ -27,6 +30,9 @@
 
   .content {
     padding: 16px 16px 8px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    flex: 1 1;
 
     &:focus-visible,
     & > div:focus-visible,
@@ -45,6 +51,15 @@
     flex-direction: row;
     align-items: center;
     border-bottom: 1px solid #f5f5f5;
+
+    &.hide {
+      padding: 2px 0;
+      border-bottom: unset;
+
+      .toggleFull {
+        width: unset;
+      }
+    }
 
     .tpToolbar {
       flex: 1;

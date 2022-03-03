@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './index.less';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -21,11 +21,21 @@ import ExColor from '@tiptap/extension-color';
 import ExTaskList from '@tiptap/extension-task-list';
 import ExTaskItem from '@tiptap/extension-task-item';
 import ExDropcursor from '@tiptap/extension-dropcursor';
+import ExTable from '@tiptap/extension-table';
+import ExTableRow from '@tiptap/extension-table-row';
+import ExTableHeader from '@tiptap/extension-table-header';
 import ExCodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
 import ExMention from '@tiptap/extension-mention';
-import { HexColorDecorator, MentionSuggestion, FontSize as ExFontSize } from '../Extension';
+import {
+  HexColorDecorator,
+  MentionSuggestion,
+  LineHeight as ExLineHeight,
+  FontSize as ExFontSize,
+  TableCell as ExTableCell,
+} from '../Extension';
 import classnames from 'classnames';
 import { Divider } from 'antd';
+import FloatingMenus from '../FloatingMenus';
 
 import {
   Bold,
@@ -34,9 +44,7 @@ import {
   SetLink,
   Emoji,
   OrderedList,
-  UnsetLink,
   FontSize,
-  UploadImage,
   Paragraph,
   Italic,
   TextScript,
@@ -52,6 +60,10 @@ import {
   Redo,
   Blockquote,
   TaskList,
+  InsertCard,
+  TableCtl,
+  FillTableBackground,
+  LineHeight,
 } from '../Action';
 import { useExternal, useToggle } from 'ahooks';
 
@@ -63,18 +75,21 @@ lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/TbButton';
+import { useImperativeHandle } from 'react';
 
 const Index: React.FC<{
+  editorRef: any;
   value?: string;
   className?: string;
   fullscreen?: boolean;
   editable?: boolean;
   onChange?: (v: string) => void;
-}> = ({ fullscreen = false, editable = true, value }) => {
+}> = ({ className, editorRef, fullscreen = false, editable = true, value }, ref) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
-  let [isFullscreen, { toggle: toggleFullscreen }] =
+  let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
     useToggle<boolean>(fullscreen);
+  let [editorEditable, setEditorEditable] = useState<boolean>(editable);
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -98,6 +113,11 @@ const Index: React.FC<{
       ExTypography,
       ExColor,
       ExTaskList,
+      ExLineHeight,
+      ExTable.configure({ resizable: true }),
+      ExTableRow,
+      ExTableCell.configure(),
+      ExTableHeader,
       ExTaskItem.configure({
         nested: true,
       }),
@@ -111,97 +131,94 @@ const Index: React.FC<{
       }),
     ],
     content: value,
-    editable: editable,
+    editable: editorEditable,
   });
+  useEffect(() => editor?.setEditable?.(editorEditable), [editor]);
+  useImperativeHandle(editorRef, () => ({
+    getHTML: editor?.getHTML.bind(editor),
+    getJSON: editor?.getJSON.bind(editor),
+    setEditable: (editable: boolean) => {
+      editor?.setEditable(editable);
+      setEditorEditable(editable);
+    },
+    setFullscreen: setFullscreen.bind(this),
+  }), [editor]);
 
   return (
-    <div className={styles.editor}>
+    <div className={classnames(styles.editor, className)}>
       <div
         className={classnames(styles.editorWrapper, {
           [styles.fullscreen]: isFullscreen,
           [styles.mini]: !isFullscreen,
         })}
       >
-        <div
-          className={styles.header}
+        {editorEditable && <div
+          className={classnames(styles.header, {
+            [styles.hide]: !isFullscreen,
+          })}
           onTouchStart={(e) => e.preventDefault()}
           onMouseDown={(e) => e.preventDefault()}
         >
-          <div className={styles.tpToolbar}>
-            <UploadImage editor={editor} />
-            <Divider type={'vertical'} />
-            <Undo editor={editor} />
-            <Redo editor={editor} />
-            <Divider type={'vertical'} />
-            <ClearStyle editor={editor} />
-            <HardBreak editor={editor} />
-            <CodeBlock editor={editor} />
-            <Divider type={'vertical'} />
-            <Paragraph editor={editor} />
-            <FontSize editor={editor} />
-            <Bold editor={editor} />
-            <Italic editor={editor} />
-            <Strike editor={editor} />
-            <Underline editor={editor} />
-            <TextScript editor={editor} />
-            <Divider type={'vertical'} />
-            <Color editor={editor} />
-            <Highlight editor={editor} />
-            <TextAlign editor={editor} />
-            <OrderedList editor={editor} />
-            <BulletList editor={editor} />
-            <Divider type={'vertical'} />
-            <Blockquote editor={editor} />
-            <TaskList editor={editor} />
-            <HorizontalRule editor={editor} />
-            <SetLink editor={editor} />
-            <Emoji editor={editor} />
+          <div style={{ flex: 1 } as any}>
+            {(isFullscreen) && <div className={styles.tpToolbar}>
+              <InsertCard editor={editor} />
+              <Divider type={'vertical'} />
+              <Undo editor={editor} />
+              <Redo editor={editor} />
+              <Divider type={'vertical'} />
+              <ClearStyle editor={editor} />
+              {/*字体*/}
+              <Divider type={'vertical'} />
+              <Paragraph editor={editor} />
+              <FontSize editor={editor} />
+              <Bold editor={editor} />
+              <Italic editor={editor} />
+              <Strike editor={editor} />
+              <Underline editor={editor} />
+              <TextScript editor={editor} />
+              {/*颜色*/}
+              <Divider type={'vertical'} />
+              <Color editor={editor} />
+              <Highlight editor={editor} />
+              <FillTableBackground editor={editor} />
+              {/*位置*/}
+              <TextAlign editor={editor} />
+              <OrderedList editor={editor} />
+              <BulletList editor={editor} />
+              <LineHeight editor={editor} />
+              <TableCtl editor={editor} />
+              {/*其他*/}
+              <Divider type={'vertical'} />
+              <TaskList editor={editor} />
+              <CodeBlock editor={editor} />
+              <Blockquote editor={editor} />
+              <SetLink editor={editor} />
+              <HorizontalRule editor={editor} />
+              <HardBreak editor={editor} />
+              <Emoji editor={editor} />
+            </div>}
           </div>
           <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
             {isFullscreen ? <FullscreenExitOutlined /> : <FullscreenOutlined />}
           </TbButton>
-        </div>
+        </div>}
         <div className={styles.content}>
           <EditorContent editor={editor} />
-          {editor && (
-            <FloatingMenu
-              editor={editor}
-              pluginKey={'linkFloatingMenu'}
-              className={styles.linkFloatingMenu}
-              tippyOptions={
-                {
-                  placement: 'top',
-                  duration: 100,
-                  theme: 'light',
-                } as any
-              }
-              shouldShow={({ editor, view, state, oldState }: any) => {
-                const { from, to } = view.state.selection;
-                const text = state.doc.textBetween(from, to, '');
-                let isLink = editor.isActive('link');
-                let isEmpty = !text;
-                // link or select text
-                return !isEmpty || isLink;
-              }}
-            >
-              <SetLink editor={editor} />
-              <UnsetLink editor={editor} />
-            </FloatingMenu>
-          )}
+          {editor && (<FloatingMenus editor={editor} />)}
         </div>
-        <div
+        {(!isFullscreen && editorEditable) && <div
           className={styles.btToolbar}
           onTouchStart={(e) => e.preventDefault()}
           onMouseDown={(e) => e.preventDefault()}
         >
-          <UploadImage editor={editor} />
+          <InsertCard editor={editor} />
           <Paragraph editor={editor} />
           <Bold editor={editor} />
           <OrderedList editor={editor} />
           <BulletList editor={editor} />
           <SetLink editor={editor} />
           <Emoji editor={editor} />
-        </div>
+        </div>}
       </div>
     </div>
   );
