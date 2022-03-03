@@ -7,84 +7,61 @@ import { SuggestionKeyDownProps } from '@tiptap/suggestion/dist/packages/suggest
 
 export type Mention = string;
 
-export let MentionSuggestion: Omit<SuggestionOptions, 'editor'> = {
-  items: ({ query }: any): Mention[] => {
-    return [
-      'Lea Thompson',
-      'Cyndi Lauper',
-      'Tom Cruise',
-      'Madonna',
-      'Jerry Hall',
-      'Joan Collins',
-      'Winona Ryder',
-      'Christina Applegate',
-      'Alyssa Milano',
-      'Molly Ringwald',
-      'Ally Sheedy',
-      'Debbie Harry',
-      'Olivia Newton-John',
-      'Elton John',
-      'Michael J. Fox',
-      'Axl Rose',
-      'Emilio Estevez',
-      'Ralph Macchio',
-      'Rob Lowe',
-      'Jennifer Grey',
-      'Mickey Rourke',
-      'John Cusack',
-      'Matthew Broderick',
-      'Justine Bateman',
-      'Lisa Bonet',
-    ]
-      .filter(item => item.toLowerCase().startsWith(query.toLowerCase()))
-      .slice(0, 5);
-  },
+export type onSearchMention = (keyword: string) => Mention[] | undefined;
 
-  render: () => {
-    let component: ReactRenderer<any, Mention[]>;
-    let popup: Instance<any>[];
+export let MentionSuggestion = (search?: onSearchMention) => {
+  let MentionSuggestion: Omit<SuggestionOptions, 'editor'> = {
+    items: ({ query }: any): Mention[] | any => {
+      return search?.(query) ?? undefined;
+    },
 
-    return {
-      onStart: (props: SuggestionProps) => {
-        component = new ReactRenderer(MentionList, {
-          props,
-          editor: props.editor,
-        });
+    render: () => {
+      let component: ReactRenderer<any, Mention[]>;
+      let popup: Instance<any>[];
 
-        popup = tippy('body', {
-          theme: 'light',
-          getReferenceClientRect: props.clientRect,
-          appendTo: () => document.body,
-          content: component.element,
-          showOnCreate: true,
-          interactive: true,
-          trigger: 'manual',
-          placement: 'bottom-start',
-        });
-      },
+      return {
+        onStart: (props: SuggestionProps) => {
+          component = new ReactRenderer(MentionList, {
+            props,
+            editor: props.editor,
+          });
 
-      onUpdate(props: SuggestionProps) {
-        component.updateProps(props);
+          popup = tippy('body', {
+            theme: 'light',
+            getReferenceClientRect: props.clientRect,
+            appendTo: () => document.body,
+            content: component.element,
+            showOnCreate: true,
+            interactive: true,
+            trigger: 'manual',
+            placement: 'bottom-start',
+          });
+        },
 
-        popup[0].setProps({
-          getReferenceClientRect: props.clientRect,
-        });
-      },
+        onUpdate(props: SuggestionProps) {
+          component.updateProps(props);
 
-      onKeyDown(props: SuggestionKeyDownProps) {
-        if (props.event.key === 'Escape') {
-          popup[0].hide();
+          popup[0].setProps({
+            getReferenceClientRect: props.clientRect,
+          });
+        },
 
-          return true;
-        }
+        onKeyDown(props: SuggestionKeyDownProps) {
+          if (props.event.key === 'Escape') {
+            popup[0].hide();
 
-        return component.ref?.onKeyDown(props);
-      },
+            return true;
+          }
 
-      onExit() {
-        popup[0].destroy();
-        component.destroy();
-      },
-    };
-  },
+          return component.ref?.onKeyDown(props);
+        },
+
+        onExit() {
+          popup[0].destroy();
+          component.destroy();
+        },
+      };
+    },
+  };
+  return MentionSuggestion;
 };

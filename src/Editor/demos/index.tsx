@@ -43,17 +43,49 @@ const content = `
       </blockquote>
     `;
 
+let onSearchMention = (query: string) => {
+  return [
+    'Lea Thompson',
+    'Cyndi Lauper',
+    'Tom Cruise',
+    'Madonna',
+    'Jerry Hall',
+    'Joan Collins',
+    'Winona Ryder',
+    'Christina Applegate',
+    'Alyssa Milano',
+    'Molly Ringwald',
+    'Ally Sheedy',
+    'Debbie Harry',
+    'Olivia Newton-John',
+    'Elton John',
+    'Michael J. Fox',
+    'Axl Rose',
+    'Emilio Estevez',
+    'Ralph Macchio',
+    'Rob Lowe',
+    'Jennifer Grey',
+    'Mickey Rourke',
+    'John Cusack',
+    'Matthew Broderick',
+    'Justine Bateman',
+    'Lisa Bonet',
+  ]
+    .filter(item => item.toLowerCase().startsWith(query.toLowerCase()))
+    .slice(0, 5);
+};
+
 export default () => {
   let editorRef = useRef<any>();
   let [editable, setEditable] = useState<boolean>(true);
   let [fullscreen, setFullscreen] = useState<boolean>(false);
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
-
   return (
     <>
       <Editor
         header={fullscreen ? <Header /> : <></>}
+        onSearchMention={onSearchMention}
         editorRef={editorRef}
         editable={editable}
         fullscreen={fullscreen}

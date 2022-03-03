@@ -75,6 +75,7 @@ lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/TbButton';
 import { useImperativeHandle } from 'react';
+import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 
 const Index: React.FC<{
   editorRef: any;
@@ -84,6 +85,7 @@ const Index: React.FC<{
   fullscreen?: boolean;
   editable?: boolean;
   onChange?: (v: string) => void;
+  onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = (
   {
@@ -94,8 +96,8 @@ const Index: React.FC<{
     fullscreen = false,
     editable = true,
     value,
+    onSearchMention,
   },
-  ref,
 ) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
@@ -140,7 +142,7 @@ const Index: React.FC<{
         placeholder: '请输入内容..',
       }),
       ExMention.configure({
-        suggestion: MentionSuggestion,
+        suggestion: onSearchMention ? MentionSuggestion(onSearchMention) : undefined,
       }),
     ],
     content: value,
