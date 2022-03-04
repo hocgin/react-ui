@@ -20,7 +20,8 @@ export default {
       }),
     ),
   'POST /api/rcm/doc/:id/content': (req: any, res: any) => res.json(success()),
-  'POST /api/rcm/doc/:id/publish': (req: any, res: any) =>
+  'POST /api/rcm/doc/:id/publish': (req: any, res: any) => res.json(success()),
+  'POST /api/rcm/doc/:id/history': (req: any, res: any) =>
     res.json(
       success([
         {
@@ -37,7 +38,6 @@ export default {
         },
       ]),
     ),
-  'POST /api/rcm/doc/:id/history': (req: any, res: any) => res.json(success()),
   'POST /api/rcm/doc/:id/rollback': (req: any, res: any) => res.json(success()),
   'POST /api/rcm/doc/version/:contentId/name': (req: any, res: any) =>
     res.json(success()),

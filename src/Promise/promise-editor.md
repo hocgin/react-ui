@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Promise - 页面 - 编辑器页面
 order: 1000
@@ -19,4 +18,4 @@ group:
 
 菜单(Promise.PageLayout):
 
-<code src="./demos/page-editor"  background="#f0f2f5" transform="true" iframe />
+<code src="./demos/promise-editor"  background="#f0f2f5" transform="true" iframe />

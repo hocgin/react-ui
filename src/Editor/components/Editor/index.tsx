@@ -172,9 +172,9 @@ const Index: React.FC<{
   );
 
   return (
-    <div className={classnames(styles.editor, className)}>
+    <div className={classnames(styles.editor)}>
       <div
-        className={classnames(styles.editorWrapper, {
+        className={classnames(styles.editorWrapper, className, {
           [styles.fullscreen]: isFullscreen,
           [styles.mini]: !isFullscreen,
         })}
@@ -238,7 +238,10 @@ const Index: React.FC<{
             </TbButton>
           </div>
         )}
-        <div className={styles.content}>
+        <div
+          className={styles.content}
+          onClick={() => editor?.chain().focus().run()}
+        >
           <EditorContent editor={editor} />
           {editor && <FloatingMenus editor={editor} />}
         </div>
