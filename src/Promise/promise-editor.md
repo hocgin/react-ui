@@ -18,4 +18,4 @@ group:
 
 菜单(Promise.PageLayout):
 
-<code src="./demos/promise-editor"  background="#f0f2f5" transform="true" iframe />
+<code src="./demos/promise-editor"  background="#f0f2f5" transform="true" />

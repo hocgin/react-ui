@@ -1,90 +1,92 @@
 @import './prosemirror.less';
 
 .editor {
-  .editorWrapper {
-    background-color: #fff;
-    border: 1px solid #e8e8e8;
-    position: relative;
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
 
-    &.fullscreen {
-      position: fixed !important;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 1010;
-      height: auto;
-      max-height: unset;
+}
 
-      .content {
-        height: 100%;
-      }
-    }
+.floatingMenu {
+  display: flex;
+  flex-direction: row;
+}
 
-    &.mini {
-      //
-    }
-  }
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border-bottom: 1px solid #f5f5f5;
 
-  .content {
-    padding: 16px 16px 8px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    flex: 1 1;
-
-    &:focus-visible,
-    & > div:focus-visible,
-    :global(.ProseMirror) {
-      outline: none !important;
-    }
-  }
-
-  .linkFloatingMenu {
-    display: flex;
-    flex-direction: row;
-  }
-
-  .header {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    border-bottom: 1px solid #f5f5f5;
-
-    &.hide {
-      padding: 2px 0;
-      border-bottom: unset;
-
-      .toggleFull {
-        width: unset;
-      }
-    }
-
-    .tpToolbar {
-      flex: 1;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      height: 50px;
-      padding-left: 40px;
-      background: #fff;
-      flex-wrap: wrap;
-    }
+  &.hide {
+    padding: 2px 0;
+    border-bottom: unset;
 
     .toggleFull {
-      width: 40px;
+      width: unset;
     }
   }
 
-  .btToolbar {
-    align-items: center;
+  .tpToolbar {
+    flex: 1;
     display: flex;
     flex-direction: row;
-    padding-left: 8px;
-    height: 32px;
+    align-items: center;
+    height: 50px;
+    padding-left: 40px;
+    background: #fff;
+    flex-wrap: wrap;
+  }
+
+  .toggleFull {
+    width: 40px;
+  }
+}
+
+.btToolbar {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding-left: 8px;
+  height: 32px;
+}
+
+.content {
+  padding: 16px 16px 8px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  flex: 1 1;
+
+  &:focus-visible,
+  & > div:focus-visible,
+  :global(.ProseMirror) {
+    outline: none !important;
+  }
+}
+
+.editorWrapper {
+  background-color: #fff;
+  border: 1px solid #e8e8e8;
+  position: relative;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  &.fullscreen {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1010;
+    height: auto;
+    max-height: unset;
+
+    .content {
+      height: 100%;
+    }
+  }
+
+  &.mini {
+    //
   }
 }
 

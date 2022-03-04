@@ -18,7 +18,7 @@ const Index: React.FC<{
 }> = ({ editor }) => {
   return (<FloatingMenu editor={editor}
                         pluginKey={'floatingMenu'}
-                        className={styles.linkFloatingMenu}
+                        className={styles.floatingMenu}
                         tippyOptions={
                           {
                             placement: 'top',

@@ -89,21 +89,23 @@ const Index: React.FC<{
   header?: any;
   value?: string;
   className?: string;
+  contentClassName?: string;
   fullscreen?: boolean;
   editable?: boolean;
   onChange?: (v: string) => void;
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-  className,
-  header,
-  onChangeFullscreen,
-  editorRef,
-  fullscreen = false,
-  editable = true,
-  value,
-  onSearchMention,
-}) => {
+        className,
+        contentClassName,
+        header,
+        onChangeFullscreen,
+        editorRef,
+        fullscreen = false,
+        editable = true,
+        value,
+        onSearchMention,
+      }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -239,7 +241,7 @@ const Index: React.FC<{
           </div>
         )}
         <div
-          className={styles.content}
+          className={classnames(styles.content, contentClassName)}
           onClick={() => editor?.chain().focus().run()}
         >
           <EditorContent editor={editor} />
