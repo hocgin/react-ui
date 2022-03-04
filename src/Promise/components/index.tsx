@@ -8,6 +8,7 @@ import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Comment from './Comment';
+import { Editor } from './Editor';
 import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './Schema/ArchiveSchemaConfig';
 import TableSchemaConfig from './Schema/TableSchemaConfig';
@@ -16,7 +17,6 @@ import TreeSchemaConfig from './Schema/TreeSchemaConfig';
 
 import PageLayout from './PageLayout';
 import PageContainer from './PageContainer';
-import { EditorPage } from './Page';
 import UserAvatar from './UserAvatar';
 
 export default class Promise {
@@ -41,5 +41,5 @@ export default class Promise {
   static PageContainer: typeof PageContainer = PageContainer;
   static UserAvatar: typeof UserAvatar = UserAvatar;
 
-  static ViewEditorPage: typeof EditorPage = EditorPage;
+  static Editor: typeof Editor = Editor;
 }

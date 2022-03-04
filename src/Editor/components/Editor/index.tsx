@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MutableRefObject, useEffect, useState } from 'react';
 import styles from './index.less';
 import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -77,8 +77,15 @@ import TbButton from '@/Editor/components/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 
+export interface EditorFn {
+  getHTML: () => string;
+  getJSON: () => any;
+  setEditable: (editable: boolean) => void;
+  setFullscreen: (fullscreen: boolean) => void;
+}
+
 const Index: React.FC<{
-  editorRef: any;
+  editorRef: MutableRefObject<EditorFn | undefined>;
   header?: any;
   value?: string;
   className?: string;
@@ -87,18 +94,16 @@ const Index: React.FC<{
   onChange?: (v: string) => void;
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
-}> = (
-  {
-    className,
-    header,
-    onChangeFullscreen,
-    editorRef,
-    fullscreen = false,
-    editable = true,
-    value,
-    onSearchMention,
-  },
-) => {
+}> = ({
+  className,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -142,7 +147,9 @@ const Index: React.FC<{
         placeholder: '请输入内容..',
       }),
       ExMention.configure({
-        suggestion: onSearchMention ? MentionSuggestion(onSearchMention) : undefined,
+        suggestion: onSearchMention
+          ? MentionSuggestion(onSearchMention)
+          : undefined,
       }),
     ],
     content: value,
@@ -151,15 +158,16 @@ const Index: React.FC<{
   useEffect(() => editor?.setEditable?.(editorEditable), [editor]);
   useImperativeHandle(
     editorRef,
-    () => ({
-      getHTML: editor?.getHTML.bind(editor),
-      getJSON: editor?.getJSON.bind(editor),
-      setEditable: (editable: boolean) => {
-        editor?.setEditable(editable);
-        setEditorEditable(editable);
-      },
-      setFullscreen: setFullscreen.bind(this),
-    }),
+    () =>
+      ({
+        getHTML: editor?.getHTML.bind(editor),
+        getJSON: editor?.getJSON.bind(editor),
+        setEditable: (editable: boolean) => {
+          editor?.setEditable(editable);
+          setEditorEditable(editable);
+        },
+        setFullscreen: setFullscreen.bind(this),
+      } as EditorFn),
     [editor],
   );
 
