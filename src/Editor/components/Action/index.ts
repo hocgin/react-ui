@@ -24,4 +24,7 @@ export { Undo } from './Undo';
 export { TaskList } from './TaskList';
 export { InsertCard } from './InsertCard';
 export { TableCtl } from './TableCtl';
+export { Indent } from './Indent';
+export { Outdent } from './Outdent';
+export { Print } from './Print';
 export { FillTableBackground } from './FillTableBackground';

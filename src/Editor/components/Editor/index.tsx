@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useEffect, useState } from 'react';
 import styles from './index.less';
-import { useEditor, EditorContent} from '@tiptap/react';
+import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ExHighlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
@@ -33,6 +33,8 @@ import {
   FontSize as ExFontSize,
   TableCell as ExTableCell,
   Image as ExImage,
+  Indent as ExIndent,
+  Print as ExPrint,
 } from '../Extension';
 import classnames from 'classnames';
 import { Divider } from 'antd';
@@ -65,6 +67,8 @@ import {
   TableCtl,
   FillTableBackground,
   LineHeight,
+  Indent,
+  Outdent, Print,
 } from '../Action';
 import { useUpdateEffect, useExternal, useToggle } from 'ahooks';
 
@@ -145,6 +149,8 @@ const Index: React.FC<{
         nested: true,
       }),
       ExFontSize,
+      ExIndent,
+      ExPrint,
       HexColorDecorator,
       ExPlaceholder.configure({
         placeholder: '请输入内容..',
@@ -219,10 +225,13 @@ const Index: React.FC<{
                   <OrderedList editor={editor} />
                   <BulletList editor={editor} />
                   <LineHeight editor={editor} />
+                  <Indent editor={editor} />
+                  <Outdent editor={editor} />
                   <TableCtl editor={editor} />
                   {/*其他*/}
                   <Divider type={'vertical'} />
                   <TaskList editor={editor} />
+                  <Print editor={editor} />
                   <CodeBlock editor={editor} />
                   <Blockquote editor={editor} />
                   <SetLink editor={editor} />

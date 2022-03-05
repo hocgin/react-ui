@@ -20,7 +20,6 @@ const Image: React.FC<{
   let view = editor.view;
   let attrs = node.attrs || {};
   let editable = view.editable;
-  console.log('attrs', updateAttributes, node.attrs);
   let [originalSize, setOriginalSize] = useState({
     width: 0, height: 0,
   });

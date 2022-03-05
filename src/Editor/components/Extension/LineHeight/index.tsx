@@ -1,7 +1,4 @@
-import * as React from 'react';
-import { Decoration, DecorationSet } from 'prosemirror-view';
-import { Node } from 'prosemirror-model';
-import { Plugin } from 'prosemirror-state';
+import React from 'react';
 import { Extension } from '@tiptap/core';
 
 export interface LineHeightOptions {
