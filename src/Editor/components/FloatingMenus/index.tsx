@@ -27,8 +27,6 @@ const Index: React.FC<{
                           } as any
                         }
                         shouldShow={(props: any) => {
-                          console.log('editor', editor);
-                          console.log('props', props);
                           return shouldShowLink(props);
                         }}>
     <>

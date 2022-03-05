@@ -183,4 +183,14 @@ export default class Lang {
   static nilService(service: any, defResult: any): any {
     return service ? service : async (...args: any[]) => defResult;
   }
+
+  static clamp(val: number, min: number, max: number): number {
+    if (val < min) {
+      return min;
+    }
+    if (val > max) {
+      return max;
+    }
+    return val;
+  }
 }

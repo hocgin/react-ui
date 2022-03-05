@@ -3,4 +3,5 @@ export { FontSize } from './FontSize';
 export { TableCell } from './TableCell';
 export { LineHeight } from './LineHeight';
 export { MentionSuggestion } from './Suggestion';
+export { Image } from './Image';
 

@@ -1,6 +1,6 @@
 import React, { MutableRefObject, useEffect, useState } from 'react';
 import styles from './index.less';
-import { useEditor, EditorContent, FloatingMenu } from '@tiptap/react';
+import { useEditor, EditorContent} from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ExHighlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
@@ -32,6 +32,7 @@ import {
   LineHeight as ExLineHeight,
   FontSize as ExFontSize,
   TableCell as ExTableCell,
+  Image as ExImage,
 } from '../Extension';
 import classnames from 'classnames';
 import { Divider } from 'antd';
@@ -116,7 +117,7 @@ const Index: React.FC<{
     extensions: [
       StarterKit,
       Typography,
-      Image.configure({ inline: true }),
+      ExImage.configure({ inline: true }),
       Link.configure({ openOnClick: false }),
       ExUnderline,
       ExTextStyle,
