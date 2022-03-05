@@ -5,9 +5,10 @@ import TbButton from '@/Editor/components/TbButton';
 import { Upload } from 'antd';
 import { PictureOutlined } from '@ant-design/icons';
 
-export const InsertImage: React.FC<{ editor?: Editor | null }> = ({
-                                                                    editor,
-                                                                  }) => {
+export const InsertImage: React.FC<{ editor?: Editor | null, uploadUrl: string }> = ({
+                                                                                       editor,
+                                                                                       uploadUrl,
+                                                                                     }) => {
   let handleChange = ({ file, fileList }: any) => {
     fileList = fileList.map((file: any) => {
       let result = file.response;
@@ -33,8 +34,7 @@ export const InsertImage: React.FC<{ editor?: Editor | null }> = ({
         withCredentials
         name='file'
         maxCount={1}
-        action={'/api/com/file/upload'}
-        headers={{}}
+        action={uploadUrl}
         onChange={handleChange}>
         <PictureOutlined /> 图片
       </Upload>

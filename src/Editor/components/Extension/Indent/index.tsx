@@ -88,9 +88,15 @@ const Indent = Extension.create<IndentOptions>({
           indent: {
             default: null,
             parseHTML: element => parseInt(element.style.marginLeft ?? 0),
-            renderHTML: attributes => ({
-              style: `margin-left: ${attributes.indent}px!important;`,
-            }),
+            renderHTML: attributes => {
+              if (!attributes.indent) {
+                return {};
+              }
+
+              return {
+                style: `margin-left: ${attributes.indent}px!important;`,
+              };
+            },
           },
         },
       },

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { TableCell as TipTapTableCell } from '@tiptap/extension-table-cell';
 
 const TableCell = TipTapTableCell.extend({
@@ -7,8 +7,11 @@ const TableCell = TipTapTableCell.extend({
       ...this.parent?.(),
       backgroundColor: {
         default: null,
-        parseHTML: element => element.style.backgroundColor,
-        renderHTML: attributes => {
+        parseHTML: (element) => element.style.backgroundColor,
+        renderHTML: (attributes) => {
+          if (!attributes.backgroundColor) {
+            return {};
+          }
           return {
             style: `background-color: ${attributes.backgroundColor}`,
           };
@@ -17,6 +20,5 @@ const TableCell = TipTapTableCell.extend({
     };
   },
 });
-
 
 export { TableCell };

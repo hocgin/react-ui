@@ -1,11 +1,11 @@
-import * as React from 'react';
+import React from 'react';
 import { printView } from './utils';
 import { Extension } from '@tiptap/core';
 
 declare module '@tiptap/core' {
   interface Commands<ReturnType> {
     print: {
-      print: () => ReturnType,
+      print: () => ReturnType;
     };
   }
 }
@@ -14,7 +14,10 @@ const Print = Extension.create<{}>({
   name: 'print',
   addCommands() {
     return {
-      print: () => ({ view }: any) => printView(view),
+      print:
+        () =>
+        ({ view }: any) =>
+          printView(view),
     };
   },
 

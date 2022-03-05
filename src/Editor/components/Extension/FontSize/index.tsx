@@ -1,11 +1,8 @@
-import * as React from 'react';
-import { Decoration, DecorationSet } from 'prosemirror-view';
-import { Node } from 'prosemirror-model';
-import { Plugin } from 'prosemirror-state';
+import React from 'react';
 import { Extension } from '@tiptap/core';
 
 export interface FontSizeOptions {
-  types: string[],
+  types: string[];
 }
 
 declare module '@tiptap/core' {
@@ -14,11 +11,11 @@ declare module '@tiptap/core' {
       /**
        * Set the font size attribute
        */
-      setFontSize: (fontSize: string) => ReturnType,
+      setFontSize: (fontSize: string) => ReturnType;
       /**
        * Unset the font size attribute
        */
-      unsetFontSize: () => ReturnType,
+      unsetFontSize: () => ReturnType;
     };
   }
 }
@@ -37,8 +34,8 @@ const FontSize = Extension.create<FontSizeOptions>({
         attributes: {
           fontSize: {
             default: null,
-            parseHTML: element => element.style.fontSize,
-            renderHTML: attributes => {
+            parseHTML: (element) => element.style.fontSize,
+            renderHTML: (attributes) => {
               if (!attributes.fontSize) {
                 return {};
               }
@@ -51,13 +48,21 @@ const FontSize = Extension.create<FontSizeOptions>({
   },
   addCommands() {
     return {
-      setFontSize: (fontSize: string) => ({ commands }: any) => {
-        return this.options.types.every(type => commands.updateAttributes(type, { fontSize: fontSize }));
-      },
+      setFontSize:
+        (fontSize: string) =>
+        ({ commands }: any) => {
+          return this.options.types.every((type) =>
+            commands.updateAttributes(type, { fontSize: fontSize }),
+          );
+        },
 
-      unsetFontSize: () => ({ commands }) => {
-        return this.options.types.every(type => commands.resetAttributes(type, 'fontSize'));
-      },
+      unsetFontSize:
+        () =>
+        ({ commands }) => {
+          return this.options.types.every((type) =>
+            commands.resetAttributes(type, 'fontSize'),
+          );
+        },
     };
   },
 

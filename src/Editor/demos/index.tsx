@@ -12,7 +12,29 @@ import classnames from 'classnames';
 const content = `
       <a href='https://www.baidu.com'>ksjdkHi</a>
       #FB5151
-      <p><img src='https://source.unsplash.com/8xznAGy4HcY/800x400' /></p>
+      <p><img src='https://source.unsplash.com/8xznAGy4HcY/800x400' width='100' height='50'/></p>
+        <table style='width:100%'>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Age</th>
+    </tr>
+    <tr>
+      <td>Jill</td>
+      <td>Smith</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <td>Eve</td>
+      <td>Jackson</td>
+      <td>94</td>
+    </tr>
+    <tr>
+      <td>John</td>
+      <td>Doe</td>
+      <td>80</td>
+    </tr>
+  </table>
       <h2>
         Hi there,
       </h2>
@@ -71,7 +93,7 @@ let onSearchMention = (query: string) => {
     'Justine Bateman',
     'Lisa Bonet',
   ]
-    .filter(item => item.toLowerCase().startsWith(query.toLowerCase()))
+    .filter((item) => item.toLowerCase().startsWith(query.toLowerCase()))
     .slice(0, 5);
 };
 

@@ -9,11 +9,12 @@ import styles from './index.less';
 
 export const InsertCard: React.FC<{
   editor?: Editor | null,
-  className?: string
-}> = ({ editor, className }) => {
+  className?: string,
+  uploadImageUrl: string,
+}> = ({ editor, uploadImageUrl, className }) => {
   const menu = (<Menu className={styles.menus}>
     <Menu.Item key={'InsertImage'}>
-      <InsertImage editor={editor} />
+      <InsertImage editor={editor} uploadUrl={uploadImageUrl} />
     </Menu.Item>
     <Menu.Item key={'InsertTable'}>
       <InsertTable editor={editor} />

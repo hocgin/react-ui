@@ -37,7 +37,7 @@ import {
   Print as ExPrint,
 } from '../Extension';
 import classnames from 'classnames';
-import { Divider } from 'antd';
+import { Divider, Dropdown, Menu } from 'antd';
 import FloatingMenus from '../FloatingMenus';
 
 import {
@@ -95,6 +95,7 @@ const Index: React.FC<{
   value?: string;
   className?: string;
   contentClassName?: string;
+  uploadImageUrl?: string;
   fullscreen?: boolean;
   editable?: boolean;
   onChange?: (v: string) => void;
@@ -110,6 +111,7 @@ const Index: React.FC<{
         editable = true,
         value,
         onSearchMention,
+        uploadImageUrl = '/api/com/file/upload',
       }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
@@ -181,99 +183,100 @@ const Index: React.FC<{
   );
 
   return (
-    <div className={classnames(styles.editor)}>
-      <div
-        className={classnames(styles.editorWrapper, className, {
-          [styles.fullscreen]: isFullscreen,
-          [styles.mini]: !isFullscreen,
-        })}
-      >
-        {header}
-        {editorEditable && (
-          <div
-            className={classnames(styles.header, {
-              [styles.hide]: !isFullscreen,
-            })}
-            onTouchStart={(e) => e.preventDefault()}
-            onMouseDown={(e) => e.preventDefault()}
-          >
-            <div style={{ flex: 1 } as any}>
-              {isFullscreen && (
-                <div className={styles.tpToolbar}>
-                  <InsertCard editor={editor} />
-                  <Divider type={'vertical'} />
-                  <Undo editor={editor} />
-                  <Redo editor={editor} />
-                  <Divider type={'vertical'} />
-                  <ClearStyle editor={editor} />
-                  {/*字体*/}
-                  <Divider type={'vertical'} />
-                  <Paragraph editor={editor} />
-                  <FontSize editor={editor} />
-                  <Bold editor={editor} />
-                  <Italic editor={editor} />
-                  <Strike editor={editor} />
-                  <Underline editor={editor} />
-                  <TextScript editor={editor} />
-                  {/*颜色*/}
-                  <Divider type={'vertical'} />
-                  <Color editor={editor} />
-                  <Highlight editor={editor} />
-                  <FillTableBackground editor={editor} />
-                  {/*位置*/}
-                  <TextAlign editor={editor} />
-                  <OrderedList editor={editor} />
-                  <BulletList editor={editor} />
-                  <LineHeight editor={editor} />
-                  <Indent editor={editor} />
-                  <Outdent editor={editor} />
-                  <TableCtl editor={editor} />
-                  {/*其他*/}
-                  <Divider type={'vertical'} />
-                  <TaskList editor={editor} />
-                  <Print editor={editor} />
-                  <CodeBlock editor={editor} />
-                  <Blockquote editor={editor} />
-                  <SetLink editor={editor} />
-                  <HorizontalRule editor={editor} />
-                  <HardBreak editor={editor} />
-                  <Emoji editor={editor} />
-                </div>
-              )}
-            </div>
-            <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
-              {isFullscreen ? (
-                <FullscreenExitOutlined />
-              ) : (
-                <FullscreenOutlined />
-              )}
-            </TbButton>
-          </div>
-        )}
+    <Dropdown disabled={!editor?.isActive('table')} overlay={<TableCtl editor={editor} />} trigger={['contextMenu']}>
+      <div className={classnames(styles.editor)}>
         <div
-          className={classnames(styles.content, contentClassName)}
-          onClick={() => editor?.chain().focus().run()}
+          className={classnames(styles.editorWrapper, className, {
+            [styles.fullscreen]: isFullscreen,
+            [styles.mini]: !isFullscreen,
+          })}
         >
-          <EditorContent editor={editor} />
-          {editor && <FloatingMenus editor={editor} />}
-        </div>
-        {!isFullscreen && editorEditable && (
+          {header}
+          {editorEditable && (
+            <div
+              className={classnames(styles.header, {
+                [styles.hide]: !isFullscreen,
+              })}
+              onTouchStart={(e) => e.preventDefault()}
+              onMouseDown={(e) => e.preventDefault()}
+            >
+              <div style={{ flex: 1 } as any}>
+                {isFullscreen && (
+                  <div className={styles.tpToolbar}>
+                    <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
+                    <Divider type={'vertical'} />
+                    <Undo editor={editor} />
+                    <Redo editor={editor} />
+                    <Divider type={'vertical'} />
+                    <ClearStyle editor={editor} />
+                    {/*字体*/}
+                    <Divider type={'vertical'} />
+                    <Paragraph editor={editor} />
+                    <FontSize editor={editor} />
+                    <Bold editor={editor} />
+                    <Italic editor={editor} />
+                    <Strike editor={editor} />
+                    <Underline editor={editor} />
+                    <TextScript editor={editor} />
+                    {/*颜色*/}
+                    <Divider type={'vertical'} />
+                    <Color editor={editor} />
+                    <Highlight editor={editor} />
+                    <FillTableBackground editor={editor} />
+                    {/*位置*/}
+                    <TextAlign editor={editor} />
+                    <OrderedList editor={editor} />
+                    <BulletList editor={editor} />
+                    <LineHeight editor={editor} />
+                    <Indent editor={editor} />
+                    <Outdent editor={editor} />
+                    {/*其他*/}
+                    <Divider type={'vertical'} />
+                    <TaskList editor={editor} />
+                    <Print editor={editor} />
+                    <CodeBlock editor={editor} />
+                    <Blockquote editor={editor} />
+                    <SetLink editor={editor} />
+                    <HorizontalRule editor={editor} />
+                    <HardBreak editor={editor} />
+                    <Emoji editor={editor} />
+                  </div>
+                )}
+              </div>
+              <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
+                {isFullscreen ? (
+                  <FullscreenExitOutlined />
+                ) : (
+                  <FullscreenOutlined />
+                )}
+              </TbButton>
+            </div>
+          )}
           <div
-            className={styles.btToolbar}
-            onTouchStart={(e) => e.preventDefault()}
-            onMouseDown={(e) => e.preventDefault()}
+            className={classnames(styles.content, contentClassName)}
+            onClick={() => editor?.chain().focus().run()}
           >
-            <InsertCard editor={editor} />
-            <Paragraph editor={editor} />
-            <Bold editor={editor} />
-            <OrderedList editor={editor} />
-            <BulletList editor={editor} />
-            <SetLink editor={editor} />
-            <Emoji editor={editor} />
+            <EditorContent editor={editor} />
+            {editor && <FloatingMenus editor={editor} />}
           </div>
-        )}
+          {!isFullscreen && editorEditable && (
+            <div
+              className={styles.btToolbar}
+              onTouchStart={(e) => e.preventDefault()}
+              onMouseDown={(e) => e.preventDefault()}
+            >
+              <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
+              <Paragraph editor={editor} />
+              <Bold editor={editor} />
+              <OrderedList editor={editor} />
+              <BulletList editor={editor} />
+              <SetLink editor={editor} />
+              <Emoji editor={editor} />
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </Dropdown>
   );
 };
 

@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { Editor } from '@tiptap/react';
-import MeDropdown from '@/Editor/components/MeDropdown';
 import styles from './index.less';
-import { TableOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 
 export const TableCtl: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
   let menus = [{
@@ -61,6 +60,13 @@ export const TableCtl: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
     onMatched: () => false,
   }];
 
-  return <MeDropdown menus={menus} titleClassName={styles.title} defaultValue={<TableOutlined />} />;
+  return (<Menu onClick={({ key }) => {
+    let matchMenu: any = (key: string) => menus?.find((item) => item.key === key);
+    matchMenu(key).onAction?.();
+  }} mode='inline'>
+    {(menus || []).map(({ key, header }) => (
+      <Menu.Item className={styles.menu} key={key}>{header}</Menu.Item>
+    ))}
+  </Menu>);
 };
 

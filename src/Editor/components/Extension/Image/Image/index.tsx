@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
 import { NodeSelection } from 'prosemirror-state';
 import classnames from 'classnames';
@@ -21,7 +21,8 @@ const Image: React.FC<{
   let attrs = node.attrs || {};
   let editable = view.editable;
   let [originalSize, setOriginalSize] = useState({
-    width: 0, height: 0,
+    width: 0,
+    height: 0,
   });
 
   if (editable) {
@@ -66,12 +67,11 @@ const Image: React.FC<{
       resizerState.y = e.clientY;
       const originalWidth = originalSize.width;
       const originalHeight = originalSize.height;
-      const aspectRatio = (originalWidth / originalHeight) || 1;
+      const aspectRatio = originalWidth / originalHeight || 1;
       let { width, height } = node.attrs;
       width = !width ? originalWidth : width;
       height = !height ? originalHeight : height;
 
-      console.log('resizerState down', dir, width, height, originalSize);
       const maxWidth = maxSize.width;
       if (width && !height) {
         width = width > maxWidth ? maxWidth : width;
@@ -89,7 +89,6 @@ const Image: React.FC<{
       resizerState.w = width;
       resizerState.h = height;
       resizerState.dir = dir;
-      console.log('resizerState down', originalSize, resizerState);
       resizing = true;
       onEvents();
     };
@@ -104,7 +103,6 @@ const Image: React.FC<{
     let onMouseMove = (e: any) => {
       e.preventDefault();
       e.stopPropagation();
-      console.log('resizerState', resizerState);
       if (!resizing) return;
       const { x, y, w, h, dir } = resizerState;
       const dx = (e.clientX - x) * (/l/.test(dir) ? -1 : 1);
@@ -132,31 +130,73 @@ const Image: React.FC<{
       onSelectImage();
     };
 
-    return (<NodeViewWrapper>
-      <div className={classnames(styles.imageView, {
-        [styles.imageViewSelected]: selected,
-      })} style={{ display: 'inline-block' } as any}>
-        <img className={classnames({
-          [styles.imageSelected]: selected,
-        })} title={attrs?.title} src={attrs?.src} alt={attrs?.alt} width={node.attrs?.width} height={node.attrs?.height}
-             onClick={onSelectImage} />
-        {(editable && selected) ? (<div className={styles.imageResizer}>
-          <span className={classnames(styles.imageResizerHandle, styles.imageResizerHandleTl)}
-                onMouseDown={onMouseDown.bind(this, 'tl')} />
-          <span className={classnames(styles.imageResizerHandle, styles.imageResizerHandleTr)}
-                onMouseDown={onMouseDown.bind(this, 'tr')} />
-          <span className={classnames(styles.imageResizerHandle, styles.imageResizerHandleBl)}
-                onMouseDown={onMouseDown.bind(this, 'bl')} />
-          <span className={classnames(styles.imageResizerHandle, styles.imageResizerHandleBr)}
-                onMouseDown={onMouseDown.bind(this, 'br')} />
-        </div>) : null}
-      </div>
-    </NodeViewWrapper>);
+    return (
+      <NodeViewWrapper>
+        <div
+          className={classnames(styles.imageView, {
+            [styles.imageViewSelected]: selected,
+          })}
+          style={{ display: 'inline-block' } as any}
+        >
+          <img
+            className={classnames({
+              [styles.imageSelected]: selected,
+            })}
+            title={attrs?.title}
+            src={attrs?.src}
+            alt={attrs?.alt}
+            width={node.attrs?.width}
+            height={node.attrs?.height}
+            onClick={onSelectImage}
+          />
+          {editable && selected ? (
+            <div className={styles.imageResizer}>
+              <span
+                className={classnames(
+                  styles.imageResizerHandle,
+                  styles.imageResizerHandleTl,
+                )}
+                onMouseDown={onMouseDown.bind(this, 'tl')}
+              />
+              <span
+                className={classnames(
+                  styles.imageResizerHandle,
+                  styles.imageResizerHandleTr,
+                )}
+                onMouseDown={onMouseDown.bind(this, 'tr')}
+              />
+              <span
+                className={classnames(
+                  styles.imageResizerHandle,
+                  styles.imageResizerHandleBl,
+                )}
+                onMouseDown={onMouseDown.bind(this, 'bl')}
+              />
+              <span
+                className={classnames(
+                  styles.imageResizerHandle,
+                  styles.imageResizerHandleBr,
+                )}
+                onMouseDown={onMouseDown.bind(this, 'br')}
+              />
+            </div>
+          ) : null}
+        </div>
+      </NodeViewWrapper>
+    );
   }
 
-  return <NodeViewWrapper>
-    <img title={attrs?.title} src={attrs?.src} alt={attrs?.alt} width={attrs?.width} height={attrs?.height} />
-  </NodeViewWrapper>;
+  return (
+    <NodeViewWrapper>
+      <img
+        title={attrs?.title}
+        src={attrs?.src}
+        alt={attrs?.alt}
+        width={attrs?.width}
+        height={attrs?.height}
+      />
+    </NodeViewWrapper>
+  );
 };
 
 export { Image };
