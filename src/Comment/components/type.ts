@@ -34,6 +34,13 @@ export interface UseAction {
   dislike: (args: DislikeParamsType) => Promise<DislikeDataType>;
   // 当前登陆用户
   user: (args: UserParamsType) => Promise<UserDataType>;
+  // 提及用户
+  mentionUser: (args: MentionsParamsType) => Promise<UserDataType[]>;
+}
+
+// ========================================================
+export interface MentionsParamsType {
+  keyword: string;
 }
 
 // ========================================================

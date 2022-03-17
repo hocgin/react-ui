@@ -1,7 +1,7 @@
 # react-ui
-> Rabbit-tail Grass
-
 > React UI 组件库，基于 React 和 Ant Design
+
+![npm](https://img.shields.io/npm/v/@hocgin/ui?style=flat-square)
 
 ## 目录
 

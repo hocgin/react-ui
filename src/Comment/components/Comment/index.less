@@ -8,6 +8,18 @@
       color: rgba(0, 0, 0, 0.55);
     }
   }
+
+  :global {
+    .ant-pagination-item-active {
+      background: unset !important;
+      border: unset !important;
+      border-color: unset !important;
+    }
+
+    .ant-comment-nested {
+      margin-bottom: 10px;
+    }
+  }
 }
 
 .commentAction {
@@ -43,6 +55,7 @@
 
     .ant-list-item:hover {
       background-color: rgba(0, 0, 0, 0.015);
+      border-radius: 2px;
     }
   }
 }

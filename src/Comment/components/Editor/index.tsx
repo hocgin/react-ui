@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
-import { Avatar, Button, Divider, Popover, Tooltip, Input } from 'antd';
+import { Avatar, Button, Divider, Popover, Tooltip, Input, Mentions } from 'antd';
 import {
   CheckOutlined,
   ClearOutlined,
@@ -37,6 +37,7 @@ const Editor: React.FC<{
   } = props;
   let [reply, setReply] = useState<CommentType | undefined>(undefined);
   let [content, setContent] = useState<string | undefined>('');
+  let [mentionUser, setMentionUser] = useState<UserDataType[]>([]);
   let [replied, setReplied] = useState(false);
   useInterval(() => setReplied?.(false), 2000);
 
@@ -51,9 +52,14 @@ const Editor: React.FC<{
     manual: true,
     retryCount: 3,
     debounceWait: 300,
-    onSuccess: (data?: UserDataType) => {
-      setUser(data as UserDataType);
-    },
+    onSuccess: (data?: UserDataType) => setUser(data as UserDataType),
+  });
+
+  let mentionUserRequest = useRequest<UserDataType[], any>(useAction.mentionUser, {
+    manual: true,
+    retryCount: 3,
+    debounceWait: 300,
+    onSuccess: (data?: UserDataType[]) => setMentionUser(data || []),
   });
 
   let replyRequest = useRequest(useAction.reply, {
@@ -105,10 +111,10 @@ const Editor: React.FC<{
                 回复&nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title="取消回复">
+              <Tooltip title='取消回复'>
                 <Button
-                  size="small"
-                  shape="circle"
+                  size='small'
+                  shape='circle'
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />
@@ -116,15 +122,21 @@ const Editor: React.FC<{
             </>
           )}
         </div>
-        <div>
-          <TextArea
-            rows={2}
-            disabled={!landed}
-            bordered={false}
-            value={content}
-            placeholder={landed ? placeholder : `请先进行登陆哈 😄`}
-            onChange={(e) => setContent(e?.target?.value || undefined)}
-          />
+        <div style={{ margin: '3px 0' } as any}>
+          <Mentions loading={mentionUserRequest?.loading} onSearch={(keyword) => mentionUserRequest.run({ keyword })}
+                    rows={3}
+                    disabled={!landed}
+                    value={content}
+                    onSelect={console.log}
+                    placeholder={landed ? placeholder : `请先进行登陆哈 😄`}
+                    onChange={(text) => setContent(text || undefined)}
+          >
+            {(mentionUser || []).map(({ id, title, avatarUrl }) => (
+              <Mentions.Option value={`${title}`}>
+                <Avatar src={avatarUrl} alt={title} />
+                <span>{title}</span>
+              </Mentions.Option>))}
+          </Mentions>
         </div>
         <div>
           <Button disabled={!landed} onClick={onSubmitReply}>
@@ -136,14 +148,14 @@ const Editor: React.FC<{
               '评论'
             )}
           </Button>
-          <Divider type="vertical" />
+          <Divider type='vertical' />
           <div className={styles.emojiBox}>
             <Popover
-              placement="top"
+              placement='top'
               content={<Picker onSelect={onSelectEmoji} />}
-              trigger="click"
+              trigger='click'
             >
-              <Button size="small" shape="circle" icon={<SmileOutlined />} />
+              <Button size='small' shape='circle' icon={<SmileOutlined />} />
             </Popover>
           </div>
         </div>

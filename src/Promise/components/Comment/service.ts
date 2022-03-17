@@ -62,4 +62,12 @@ export default class {
       .then(Dom.thenData)
       .catch(Dom.showErrorMessage);
   }
+
+  static searchUser(payload: any = {}) {
+    return usePost(`/api/ums/user/_complete`, {
+      data: { ...payload },
+    }).then(Dom.tryErrorIfExits)
+      .then(Dom.thenData)
+      .catch(Dom.showErrorMessage);
+  }
 }

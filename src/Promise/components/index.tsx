@@ -8,6 +8,7 @@ import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Comment from './Comment';
+import { Editor, Preview as EditorPreview } from './Editor';
 import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './Schema/ArchiveSchemaConfig';
 import TableSchemaConfig from './Schema/TableSchemaConfig';
@@ -39,4 +40,7 @@ export default class Promise {
   static PageLayout: typeof PageLayout = PageLayout;
   static PageContainer: typeof PageContainer = PageContainer;
   static UserAvatar: typeof UserAvatar = UserAvatar;
+
+  static Editor: typeof Editor = Editor;
+  static EditorPreview: typeof EditorPreview = EditorPreview;
 }
