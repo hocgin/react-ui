@@ -51,7 +51,7 @@ jobs:
 
       - name: Rename Version
         run: |
-          sed -i "" "s/\"4.0.45\"/${VERSION}/" package.json
+          sed -i "" "s/\"4.0.45\"/\"${VERSION}\"/" package.json
         env:
           VERSION: ${{ steps.prep.outputs.version }}
 
