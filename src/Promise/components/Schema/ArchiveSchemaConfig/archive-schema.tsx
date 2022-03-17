@@ -2,22 +2,19 @@ import React, { useContext } from 'react';
 import ProProvider from '@ant-design/pro-provider';
 import { BetaSchemaForm } from '@ant-design/pro-form';
 import type { FormSchema } from '@ant-design/pro-form/lib/components/SchemaForm';
-import {
-  SchemeColumns,
-  handleSchemeColumns,
-} from '../scheme';
+import { SchemeColumns, handleSchemeColumns } from '../scheme';
 
 // @formatter: off
-const ArchiveSchema: React.FC<FormSchema> = ({
-                                               columns = [],
-                                               trigger,
-                                               title,
-                                               onFinish,
-                                               params,
-                                               request,
-                                               layoutType,
-                                               onVisibleChange,
-                                             }) => {
+const ArchiveSchema: React.FC<FormSchema & Record<string, any>> = ({
+  columns = [],
+  trigger,
+  title,
+  onFinish,
+  params,
+  request,
+  layoutType,
+  onVisibleChange,
+}) => {
   // @formatter: on
   const values = useContext(ProProvider);
   let value = {
@@ -28,14 +25,16 @@ const ArchiveSchema: React.FC<FormSchema> = ({
   };
   return (
     <ProProvider.Provider value={value}>
-      <BetaSchemaForm columns={handleSchemeColumns(columns)}
-                      layoutType={layoutType}
-                      params={params}
-                      title={title}
-                      onVisibleChange={onVisibleChange}
-                      request={request}
-                      onFinish={onFinish}
-                      trigger={trigger} />
+      <BetaSchemaForm
+        columns={handleSchemeColumns(columns)}
+        layoutType={layoutType}
+        params={params}
+        title={title}
+        onVisibleChange={onVisibleChange}
+        request={request}
+        onFinish={onFinish}
+        trigger={trigger}
+      />
     </ProProvider.Provider>
   );
 };
