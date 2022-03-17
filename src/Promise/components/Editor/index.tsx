@@ -11,8 +11,12 @@ import { Button } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';
 import { ID } from '@/Utils/interface';
-import { DraftDoc, PublishedDoc, UseAction } from '@/Promise/components/Editor/types';
-import { useInterval, useLockFn, useRequest } from 'ahooks';
+import {
+  DraftDoc,
+  PublishedDoc,
+  UseAction,
+} from '@/Promise/components/Editor/types';
+import { useInterval, useLockFn, useMount, useRequest } from 'ahooks';
 import { EditorFn } from '@/Editor/components/Editor';
 
 const Header: React.FC<{
@@ -42,7 +46,7 @@ const Header: React.FC<{
       <div className={styles.info}>{title}</div>
       <div className={styles.toolbar}>
         <div className={styles.tips}>{tips}</div>
-        <Button type='primary' onClick={onClickSave}>
+        <Button type="primary" onClick={onClickSave}>
           保存
         </Button>
       </div>
@@ -62,9 +66,12 @@ export const Editor: React.FC<{
   let [draft, setDraft] = useState<DraftDoc | undefined>();
   let [fullscreen, setFullscreen] = useState<boolean>(false);
 
-  let { loading } = useRequest(Utils.Lang.nilService(action?.getDrafted, {}), {
+  let getDrafted = useRequest(Utils.Lang.nilService(action?.getDrafted, {}), {
+    manual: true,
     onSuccess: setDraft,
   });
+
+  useMount(() => getDrafted?.run());
 
   let saveDraft = async () => {
     headerRef.current?.setTips('正在自动保存...');
@@ -82,7 +89,7 @@ export const Editor: React.FC<{
     onClickSave?.();
   });
 
-  if (loading || !draft) {
+  if (getDrafted.loading || !draft) {
     return <></>;
   }
   return (
@@ -107,27 +114,35 @@ export const Editor: React.FC<{
   );
 };
 
-export const Preview: React.FC<{ id: ID, className?: string, contentClassName?: string } & Record<string, any>>
-  = ({
-       id,
-       className,
-       contentClassName,
-       ...props
-     }: any) => {
+export const Preview: React.FC<
+  { id: ID; className?: string; contentClassName?: string } & Record<
+    string,
+    any
+  >
+> = ({ id, className, contentClassName, ...props }: any) => {
   let [published, setPublished] = useState<PublishedDoc | undefined>();
   let action: UseAction = useAction(id);
-  let { loading } = useRequest(Utils.Lang.nilService(action?.getPublished, {}), {
-    onSuccess: setPublished,
-  });
+  let { loading } = useRequest(
+    Utils.Lang.nilService(action?.getPublished, {}),
+    {
+      onSuccess: setPublished,
+    },
+  );
   if (loading || !published) {
     return <div>正在加载...</div>;
   }
 
-  return (<div className={styles.preview}>
-    <GEditor {...props} value={published?.content} editable={false}
-             contentClassName={classnames(styles.content, contentClassName)}
-             className={classnames(styles.editor, className)} />
-  </div>);
+  return (
+    <div className={styles.preview}>
+      <GEditor
+        {...props}
+        value={published?.content}
+        editable={false}
+        contentClassName={classnames(styles.content, contentClassName)}
+        className={classnames(styles.editor, className)}
+      />
+    </div>
+  );
 };
 
 // 编辑模式全屏

@@ -4,7 +4,6 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ExHighlight from '@tiptap/extension-highlight';
 import Typography from '@tiptap/extension-typography';
-import Image from '@tiptap/extension-image';
 import Link from '@tiptap/extension-link';
 import ExUnderline from '@tiptap/extension-underline';
 import ExStrike from '@tiptap/extension-strike';
@@ -37,7 +36,7 @@ import {
   Print as ExPrint,
 } from '../Extension';
 import classnames from 'classnames';
-import { Divider, Dropdown, Menu } from 'antd';
+import { Divider, Dropdown } from 'antd';
 import FloatingMenus from '../FloatingMenus';
 
 import {
@@ -68,7 +67,8 @@ import {
   FillTableBackground,
   LineHeight,
   Indent,
-  Outdent, Print,
+  Outdent,
+  Print,
 } from '../Action';
 import { useUpdateEffect, useExternal, useToggle } from 'ahooks';
 
@@ -102,17 +102,17 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-        className,
-        contentClassName,
-        header,
-        onChangeFullscreen,
-        editorRef,
-        fullscreen = false,
-        editable = true,
-        value,
-        onSearchMention,
-        uploadImageUrl = '/api/com/file/upload',
-      }) => {
+  className,
+  contentClassName,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+  uploadImageUrl = '/api/com/file/upload',
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -183,7 +183,11 @@ const Index: React.FC<{
   );
 
   return (
-    <Dropdown disabled={!editor?.isActive('table')} overlay={<TableCtl editor={editor} />} trigger={['contextMenu']}>
+    <Dropdown
+      disabled={!editor?.isActive('table')}
+      overlay={<TableCtl editor={editor} />}
+      trigger={['contextMenu']}
+    >
       <div className={classnames(styles.editor)}>
         <div
           className={classnames(styles.editorWrapper, className, {
@@ -203,7 +207,10 @@ const Index: React.FC<{
               <div style={{ flex: 1 } as any}>
                 {isFullscreen && (
                   <div className={styles.tpToolbar}>
-                    <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
+                    <InsertCard
+                      editor={editor}
+                      uploadImageUrl={uploadImageUrl}
+                    />
                     <Divider type={'vertical'} />
                     <Undo editor={editor} />
                     <Redo editor={editor} />
@@ -243,7 +250,10 @@ const Index: React.FC<{
                   </div>
                 )}
               </div>
-              <TbButton className={styles.toggleFull} onClick={toggleFullscreen}>
+              <TbButton
+                className={styles.toggleFull}
+                onClick={toggleFullscreen}
+              >
                 {isFullscreen ? (
                   <FullscreenExitOutlined />
                 ) : (

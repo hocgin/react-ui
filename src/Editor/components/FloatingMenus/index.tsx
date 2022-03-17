@@ -1,5 +1,5 @@
-import * as React from 'react';
-import styles from '@/Editor/components/Editor/index.less';
+import React from 'react';
+import styles from './index.less';
 import { SetLink, UnsetLink } from '@/Editor/components/Action';
 import { Editor, FloatingMenu } from '@tiptap/react';
 
@@ -16,24 +16,28 @@ const Index: React.FC<{
   editor: Editor;
   defaultParams?: any;
 }> = ({ editor }) => {
-  return (<FloatingMenu editor={editor}
-                        pluginKey={'floatingMenu'}
-                        className={styles.floatingMenu}
-                        tippyOptions={
-                          {
-                            placement: 'top',
-                            duration: 100,
-                            theme: 'light',
-                          } as any
-                        }
-                        shouldShow={(props: any) => {
-                          return shouldShowLink(props);
-                        }}>
-    <>
-      <SetLink editor={editor} />
-      <UnsetLink editor={editor} />
-    </>
-  </FloatingMenu>);
+  return (
+    <FloatingMenu
+      editor={editor}
+      pluginKey={'floatingMenu'}
+      className={styles.floatingMenu}
+      tippyOptions={
+        {
+          placement: 'top',
+          duration: 100,
+          theme: 'light',
+        } as any
+      }
+      shouldShow={(props: any) => {
+        return shouldShowLink(props);
+      }}
+    >
+      <>
+        <SetLink editor={editor} />
+        <UnsetLink editor={editor} />
+      </>
+    </FloatingMenu>
+  );
 };
 
 export default Index;
