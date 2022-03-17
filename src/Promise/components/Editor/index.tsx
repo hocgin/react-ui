@@ -107,7 +107,7 @@ export const Editor: React.FC<{
   );
 };
 
-export const Preview: React.FC<{ id: ID, className: string, contentClassName: string } & Record<string, any>>
+export const Preview: React.FC<{ id: ID, className?: string, contentClassName?: string } & Record<string, any>>
   = ({
        id,
        className,
