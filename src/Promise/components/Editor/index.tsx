@@ -115,21 +115,32 @@ export const Editor: React.FC<{
 };
 
 export const Preview: React.FC<
-  { id: ID; className?: string; contentClassName?: string } & Record<
-    string,
-    any
-  >
-> = ({ id, className, contentClassName, ...props }: any) => {
-  let [published, setPublished] = useState<PublishedDoc | undefined>();
-  let action: UseAction = useAction(id);
-  let { loading } = useRequest(
-    Utils.Lang.nilService(action?.getPublished, {}),
-    {
-      onSuccess: setPublished,
-    },
+  {
+    id: ID;
+    className?: string;
+    contentClassName?: string;
+    defaultValue?: PublishedDoc;
+  } & Record<string, any>
+> = ({ id, className, contentClassName, defaultValue, ...props }: any) => {
+  let [published, setPublished] = useState<PublishedDoc | undefined>(
+    defaultValue,
   );
-  if (loading || !published) {
-    return <div>正在加载...</div>;
+
+  if (!published) {
+    let action: UseAction = useAction(id);
+    let getPublished = useRequest(
+      Utils.Lang.nilService(action?.getPublished, {}),
+      {
+        manual: true,
+        onSuccess: setPublished,
+      },
+    );
+
+    useMount(() => getPublished?.run());
+
+    if (getPublished?.loading) {
+      return <div>加载...</div>;
+    }
   }
 
   return (

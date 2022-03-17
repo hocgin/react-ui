@@ -1,20 +1,4 @@
 import { ID, ScrollRo } from '@/Utils/interface';
-import {
-  DislikeDataType,
-  DislikeParamsType,
-  LikeDataType,
-  LikeParamsType,
-  MentionsParamsType,
-  PagingDataType,
-  PagingParamsType,
-  ReplyDataType,
-  ReplyParamsType,
-  ScrollDataType,
-  ScrollParamsType,
-  UserDataType,
-  UserParamsType,
-} from '@/Comment/components/type';
-import service from '@/Promise/components/Editor/service';
 
 export interface PublishedDoc {
   ownerUserId: ID;
