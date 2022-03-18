@@ -1,10 +1,13 @@
 ---
+
+# @formatter:off
 title: Header - 头部
 nav:
   title: 组件
   path: /components
 group:
   path: /
+# @formatter:on
 ---
 
 # Header - 头部
@@ -17,4 +20,4 @@ group:
 
 Demo:
 
-<code src="./demos/index.tsx"  background="#f0f2f5" />
+<code src="./demos/index.tsx"  background="#f0f2f5" iframe/>

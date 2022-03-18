@@ -2,16 +2,25 @@ import React, { useState } from 'react';
 import classnames from 'classnames';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import styles from './index.less';
+import { useScroll } from 'ahooks';
+
+type Mode = 'none' | 'fixed' | 'sticky';
 
 const Index: React.FC<{
   menus?: any[];
+  mode?: Mode,
   className?: string | undefined;
   title?: React.ReactNode | string;
   href?: string;
-}> = ({ className, menus = [], title, href = 'https://www.hocgin.top' }, ref) => {
+  style?: any;
+}> = ({ className, style, mode = 'none', menus = [], title, href = 'https://www.hocgin.top' }, ref) => {
   let [isOpenMenu, setIsOpenMenu] = useState(false);
+
   return (
-    <header className={classnames(styles.topHeader, className)}>
+    <header className={classnames(styles.topHeader, {
+      [styles.fixed]: mode === 'fixed',
+      [styles.sticky]: mode === 'sticky',
+    }, className)} style={style}>
       <a href={href} className={styles.logo}>
         <span>HOCGIN</span>
         <span className={styles.suffix}>
