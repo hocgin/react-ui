@@ -1,21 +1,21 @@
 @import '../../../../src/mixin.less';
 
-.topHeader {
+.header {
   width: 100%;
   height: 100px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   z-index: 1000;
-  position: relative;
-  //padding-left: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   font-variant: tabular-nums;
-  font-feature-settings: "tnum", "tnum";
+  font-feature-settings: 'tnum', 'tnum';
 
   backdrop-filter: blur(12px);
-  background-color: rgba(255, 255, 255, .7);
+  background-color: rgba(255, 255, 255, 0.7);
 
   &.fixed {
     position: fixed;
@@ -27,11 +27,19 @@
   }
 }
 
+.container {
+  flex: 1 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+}
+
 .suffix {
   font-size: 6px;
 
   .dot {
-    color: #F1423C;
+    color: #f1423c;
     font-weight: 700;
     font-size: 16px;
   }
@@ -46,16 +54,16 @@
   letter-spacing: 2px;
   font-weight: 700;
   user-select: none;
-  animation: slideLeft .5s ease-in-out forwards;
+  animation: slideLeft 0.5s ease-in-out forwards;
 
   .title {
-    opacity: .85;
+    opacity: 0.85;
     font-size: 16px;
 
     &::before {
-      content: "";
+      content: '';
       margin: 0 5px;
-      border-left: 2px solid #E1E1E1;
+      border-left: 2px solid #e1e1e1;
     }
 
     &:hover {
@@ -75,17 +83,18 @@
   background-repeat: no-repeat;
   cursor: pointer;
   z-index: 1000;
-  background-color: rgba(245, 246, 247, .4);
-  animation: slideRight .5s ease-in-out forwards;
-  transition-delay: .5s;
+  background-color: rgba(245, 246, 247, 0.4);
+  animation: slideRight 0.5s ease-in-out forwards;
+  transition-delay: 0.5s;
   opacity: 0;
   top: 0;
   right: 0;
   border-radius: 2px;
 
-  &.active, &:hover {
-    background-color: rgba(134, 134, 134, .1);
-    transition-delay: .1s;
+  &.active,
+  &:hover {
+    background-color: rgba(134, 134, 134, 0.1);
+    transition-delay: 0.1s;
   }
 }
 
@@ -117,7 +126,7 @@
       }
 
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         height: 3px;
         width: 0;
@@ -134,12 +143,11 @@
     visibility: unset;
 
     li a {
-      animation: slideRight .5s ease-in-out forwards;
-      animation-delay: calc(.2s * var(--i));
+      animation: slideRight 0.5s ease-in-out forwards;
+      animation-delay: calc(0.2s * var(--i));
     }
   }
 }
-
 
 .mobile({
   .toggle {
@@ -148,7 +156,7 @@
       transition-delay: 0s;
     }
   }
-  .topHeader {
+  .header {
     height: 70px;
   }
 

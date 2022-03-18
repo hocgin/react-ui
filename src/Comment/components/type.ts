@@ -35,7 +35,7 @@ export interface UseAction {
   // 当前登陆用户
   user: (args: UserParamsType) => Promise<UserDataType>;
   // 提及用户
-  mentionUser: (args: MentionsParamsType) => Promise<UserDataType[]>;
+  mentionUser?: (args: MentionsParamsType) => Promise<UserDataType[]>;
 }
 
 // ========================================================

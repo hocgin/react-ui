@@ -2,34 +2,37 @@
   background-color: #fff;
   padding: 16px;
   display: flex;
-  border-top: 1px solid #ebedf1;
-  border-bottom: 1px solid #ebedf1;
+  border: 1px solid #ebedf1;
   box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.08);
-}
-
-.left {
-  margin-right: 8px;
+  border-radius: 2px;
 }
 
 .right {
   flex: 1 1;
 
   .header {
-    height: 30px;
-    line-height: 30px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
     color: rgba(0, 0, 0, 0.85);
 
     .title {
+      margin-left: 4px;
+      margin-right: 2px;
       font-weight: 400;
       font-size: 1.1em;
     }
+  }
+
+  .content {
+    height: 120px;
   }
 
   .reply {
     color: rgba(0, 0, 0, 0.45);
   }
 
-  .emojiBox {
-    display: inline-block;
+  .replyButton {
+    margin-top: 5px;
   }
 }

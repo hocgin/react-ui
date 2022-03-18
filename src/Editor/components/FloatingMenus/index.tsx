@@ -4,12 +4,13 @@ import { SetLink, UnsetLink } from '@/Editor/components/Action';
 import { Editor, FloatingMenu } from '@tiptap/react';
 
 const shouldShowLink = ({ editor, view, state, oldState }: any) => {
+  let editable = view?.editable;
   const { from, to } = view.state.selection;
   const text = state.doc.textBetween(from, to, '');
   let isLink = editor.isActive('link');
   let isEmpty = !text;
   // link or select text
-  return !isEmpty || isLink;
+  return editable && (!isEmpty || isLink);
 };
 
 const Index: React.FC<{

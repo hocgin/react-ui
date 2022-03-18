@@ -1,5 +1,5 @@
 import React, { useState, createElement } from 'react';
-import { Utils } from '@hocgin/ui';
+import { Utils, Editor as GEditor } from '@hocgin/ui';
 import { useMount, useRequest } from 'ahooks';
 import { UserType } from '@/Utils/interface';
 import {
@@ -63,10 +63,10 @@ const UserOptions: React.FC<{
     manual: true,
     defaultParams: { commentId } as any,
     onSuccess: ({
-      likes = 0,
-      disliked = 0,
-      action,
-    }: DislikeDataType | LikeDataType) => {
+                  likes = 0,
+                  disliked = 0,
+                  action,
+                }: DislikeDataType | LikeDataType) => {
       setLikesCount(likes);
       setDislikedCount(disliked);
       setUserAction(action);
@@ -88,13 +88,13 @@ const UserOptions: React.FC<{
 
   return (
     <>
-      <Tooltip title="Like">
+      <Tooltip title='Like'>
         <span onClick={onAction.bind(this, 'like', commentId)}>
           {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
           <span className={styles.commentAction}>{likesCount}</span>
         </span>
       </Tooltip>
-      <Tooltip title="Dislike">
+      <Tooltip title='Dislike'>
         <span onClick={onAction.bind(this, 'dislike', commentId)}>
           {React.createElement(
             userAction === 'dislike' ? DislikeFilled : DislikeOutlined,
@@ -130,7 +130,7 @@ const SubComment: React.FC<{
       author={author}
       replier={replier}
       datetime={datetime}
-      content={content}
+      content={<GEditor editable={false} value={content} />}
       actions={[
         <UserOptions
           reply$={reply$}
@@ -156,18 +156,18 @@ const Comment: React.FC<{
   children?: React.ReactNode;
   actions?: React.ReactNode[];
 }> = ({
-  id,
-  type = 'none',
-  active = false,
-  datetime,
-  content,
-  replyId,
-  author,
-  replier,
-  children,
-  actions = [],
-  className,
-}) => {
+        id,
+        type = 'none',
+        active = false,
+        datetime,
+        content,
+        replyId,
+        author,
+        replier,
+        children,
+        actions = [],
+        className,
+      }) => {
   let hasReply = replyId !== undefined;
 
   return (
@@ -205,9 +205,8 @@ const Comment: React.FC<{
             )}
           </>
         }
-        content={<div className={styles.content}>{content}</div>}
-        actions={actions}
-      >
+        content={content}
+        actions={actions}>
         {children}
       </AntdComment>
     </div>
@@ -282,7 +281,7 @@ const Index: React.FC<{
       datetime={datetime}
       author={author}
       replier={replier}
-      content={<div className={styles.content}>{content}</div>}
+      content={<div className={styles.content}><GEditor value={content} editable={false} /></div>}
       actions={[
         <UserOptions
           reply$={reply$}
@@ -311,13 +310,13 @@ const Index: React.FC<{
                 </List.Item>
               );
             }}
-            itemLayout="horizontal"
+            itemLayout='horizontal'
             dataSource={dataSource}
           />
           <Pagination
             hideOnSinglePage
             className={styles.pagination}
-            size="small"
+            size='small'
             total={total}
             defaultCurrent={1}
             current={current}
