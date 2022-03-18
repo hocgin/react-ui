@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Comment } from '@hocgin/ui';
 import useAction from './use_action';
 

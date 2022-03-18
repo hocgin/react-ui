@@ -6,7 +6,6 @@ import {
   Avatar,
   Button,
   Tooltip,
-  Mentions,
 } from 'antd';
 import {
   CheckOutlined,
@@ -20,9 +19,6 @@ import {
   UseAction,
   UserDataType,
 } from '../type';
-// @ts-ignore
-import { Picker } from 'emoji-mart';
-import 'emoji-mart/css/emoji-mart.css';
 import { useInterval, useMount, useRequest } from 'ahooks';
 import { Editor as GEditor, Utils } from '@hocgin/ui';
 
@@ -32,7 +28,7 @@ const Editor: React.FC<{
   replied$: EventEmitter<CommentType>;
   placeholder?: string;
   useAction: UseAction;
-}> = (props, ref) => {
+}> = (props) => {
   let {
     useAction,
     placeholder = '写下尊重、理性、友好的评论，让彼此更友好地交流～',
@@ -130,13 +126,9 @@ const Editor: React.FC<{
         </div>
         <div className={styles.replyButton}>
           <Button disabled={!landed} onClick={onSubmitReply}>
-            {replied ? (
-              <>
-                <CheckOutlined style={{ color: '#00B06D' } as any} /> 评论成功
-              </>
-            ) : (
-              '评论'
-            )}
+            {replied ? <>
+              <CheckOutlined style={{ color: '#00B06D' } as any} /> 评论成功
+            </> : '评论'}
           </Button>
         </div>
       </div>

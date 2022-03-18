@@ -21,8 +21,7 @@ export interface IndexProps {
   useAction: UseAction;
 }
 
-const Index: React.FC<IndexProps> = (props, ref) => {
-  let { useAction, total } = props;
+const Index: React.FC<IndexProps> = ({ useAction, total }) => {
   let [dataSource, setDataSource] = useState([] as CommentType[]);
   let [hasMore, setHasMore] = useState(true);
   let [defaultParams, setDefaultParams] = useSetState({});
@@ -75,7 +74,7 @@ const Index: React.FC<IndexProps> = (props, ref) => {
           className={styles.comments}
           loading={scrollPull?.loading}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout="horizontal"
+          itemLayout='horizontal'
           header={total !== undefined ? `${total} 评论` : '评论'}
           dataSource={dataSource}
           renderItem={(item: CommentType, index) => (
