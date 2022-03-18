@@ -83,18 +83,19 @@ export interface EditorFn {
 }
 
 const Index: React.FC<{
-  editorRef: MutableRefObject<EditorFn | undefined>;
+  editorRef?: MutableRefObject<EditorFn | undefined>;
   header?: any;
-  value?: string;
+  value?: any;
   className?: string;
   contentClassName?: string;
   uploadImageUrl?: string;
   fullscreen?: boolean;
   editable?: boolean;
-  onChange?: (v: string) => void;
+  onChange?: () => void;
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
+        onChange,
         className,
         contentClassName,
         header,
@@ -113,6 +114,9 @@ const Index: React.FC<{
   let [editorEditable, setEditorEditable] = useState<boolean>(editable);
   useUpdateEffect(() => onChangeFullscreen?.(isFullscreen), [isFullscreen]);
   const editor = useEditor({
+    onUpdate({ editor }) {
+      onChange?.();
+    },
     extensions: [
       StarterKit,
       ExImage.configure({ inline: true }),
@@ -150,6 +154,10 @@ const Index: React.FC<{
     content: value,
     editable: editorEditable,
   });
+  useUpdateEffect(() => {
+    editor?.commands?.setContent?.(value);
+  }, [value]);
+
   useEffect(() => editor?.setEditable?.(editorEditable), [editor]);
   useImperativeHandle(
     editorRef,
@@ -161,6 +169,8 @@ const Index: React.FC<{
           editor?.setEditable(editable);
           setEditorEditable(editable);
         },
+        clearContent: () => editor?.commands?.clearContent?.(true),
+        setContent: (content: any) => editor?.commands?.setContent?.(content),
         setFullscreen: setFullscreen.bind(this),
       } as EditorFn),
     [editor],
@@ -177,6 +187,8 @@ const Index: React.FC<{
           className={classnames(styles.editorWrapper, className, {
             [styles.fullscreen]: isFullscreen,
             [styles.mini]: !isFullscreen,
+            [styles.editable]: editable,
+            [styles.noEditable]: !editable,
           })}
         >
           {header}

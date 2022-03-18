@@ -65,6 +65,14 @@
   flex-direction: column;
   height: 100%;
 
+  &.editable {
+  }
+
+  &.noEditable {
+    background-color: unset;
+    border: unset;
+  }
+
   &.fullscreen {
     position: fixed !important;
     top: 0;
@@ -81,8 +89,15 @@
   }
 
   &.mini {
+    .header {
+      float: right;
+      display: inline-block;
+      align-self: flex-end;
+      position: absolute;
+    }
+
     .content {
-      padding-top: unset;
+      padding-top: 4px;
     }
   }
 }

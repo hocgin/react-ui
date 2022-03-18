@@ -6,7 +6,7 @@ import React, { useRef, useState } from 'react';
 import { Editor, Header } from '@hocgin/ui';
 import styles from './index.less';
 import { Button, Divider } from 'antd';
-import { useBoolean, useToggle } from 'ahooks';
+import { useToggle } from 'ahooks';
 import classnames from 'classnames';
 
 const content = `
@@ -157,6 +157,9 @@ export default () => {
       </Button>
       <Divider />
       <div>{text}</div>
+
+
+      <Editor editable={false} value={'你好'} />
     </>
   );
 };

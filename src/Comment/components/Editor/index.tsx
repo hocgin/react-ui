@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
-import { Avatar, Button, Divider, Popover, Tooltip, Input, Mentions } from 'antd';
+import {
+  Avatar,
+  Button,
+  Tooltip,
+  Mentions,
+} from 'antd';
 import {
   CheckOutlined,
   ClearOutlined,
-  SmileOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import {
@@ -20,8 +24,8 @@ import {
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 import { useInterval, useMount, useRequest } from 'ahooks';
+import { Editor as GEditor, Utils } from '@hocgin/ui';
 
-const { TextArea } = Input;
 
 const Editor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
@@ -40,6 +44,7 @@ const Editor: React.FC<{
   let [mentionUser, setMentionUser] = useState<UserDataType[]>([]);
   let [replied, setReplied] = useState(false);
   useInterval(() => setReplied?.(false), 2000);
+  let editorRef = useRef<any>();
 
   reply$.useSubscription((comment?: CommentType) => {
     setReply(comment);
@@ -55,12 +60,15 @@ const Editor: React.FC<{
     onSuccess: (data?: UserDataType) => setUser(data as UserDataType),
   });
 
-  let mentionUserRequest = useRequest<UserDataType[], any>(useAction.mentionUser, {
-    manual: true,
-    retryCount: 3,
-    debounceWait: 300,
-    onSuccess: (data?: UserDataType[]) => setMentionUser(data || []),
-  });
+  let mentionUserRequest = useRequest<UserDataType[], any>(
+    Utils.Lang.nilService(useAction.mentionUser, []),
+    {
+      manual: true,
+      retryCount: 3,
+      debounceWait: 300,
+      onSuccess: (data?: UserDataType[]) => setMentionUser(data || []),
+    },
+  );
 
   let replyRequest = useRequest(useAction.reply, {
     manual: true,
@@ -70,7 +78,7 @@ const Editor: React.FC<{
       replied$.emit(data);
 
       // 清除原先内容
-      setContent('');
+      editorRef?.current?.clearContent();
       setReplied(true);
     },
   });
@@ -81,10 +89,6 @@ const Editor: React.FC<{
       content,
     } as ReplyParamsType);
     reply$.emit(undefined);
-  };
-
-  let onSelectEmoji = (emoji: any) => {
-    setContent(content + emoji.native);
   };
 
   useMount(() => {
@@ -99,12 +103,10 @@ const Editor: React.FC<{
 
   return (
     <div className={classNames(styles.editor)}>
-      <div className={styles.left}>
-        <Avatar size={40} icon={<UserOutlined />} src={user?.avatarUrl} />
-      </div>
       <div className={styles.right}>
         <div className={styles.header}>
-          <span className={styles.title}>{userName} </span>
+          <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
+          <span className={styles.title}>{userName}</span>
           {hasBeReply && (
             <>
               <a href={`#c_${replyId}`} className={styles.reply}>
@@ -123,22 +125,10 @@ const Editor: React.FC<{
           )}
         </div>
         <div style={{ margin: '3px 0' } as any}>
-          <Mentions loading={mentionUserRequest?.loading} onSearch={(keyword) => mentionUserRequest.run({ keyword })}
-                    rows={3}
-                    disabled={!landed}
-                    value={content}
-                    onSelect={console.log}
-                    placeholder={landed ? placeholder : `请先进行登陆哈 😄`}
-                    onChange={(text) => setContent(text || undefined)}
-          >
-            {(mentionUser || []).map(({ id, title, avatarUrl }) => (
-              <Mentions.Option value={`${title}`}>
-                <Avatar src={avatarUrl} alt={title} />
-                <span>{title}</span>
-              </Mentions.Option>))}
-          </Mentions>
+          <GEditor editorRef={editorRef} className={styles.content}
+                   onChange={() => setContent(editorRef.current.getHTML())} />
         </div>
-        <div>
+        <div className={styles.replyButton}>
           <Button disabled={!landed} onClick={onSubmitReply}>
             {replied ? (
               <>
@@ -148,16 +138,6 @@ const Editor: React.FC<{
               '评论'
             )}
           </Button>
-          <Divider type='vertical' />
-          <div className={styles.emojiBox}>
-            <Popover
-              placement='top'
-              content={<Picker onSelect={onSelectEmoji} />}
-              trigger='click'
-            >
-              <Button size='small' shape='circle' icon={<SmileOutlined />} />
-            </Popover>
-          </div>
         </div>
       </div>
     </div>

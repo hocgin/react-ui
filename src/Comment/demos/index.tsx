@@ -27,7 +27,7 @@ let records = [
     id: 2,
     likes: 10,
     disliked: 20,
-    content: '666',
+    content: '<p>这是一条回复</p> <a href="https://hocgin.top">HOCGIN</a>',
     action: 'liked',
     author: {
       id: 1,
