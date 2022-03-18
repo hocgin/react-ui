@@ -8,7 +8,7 @@ import {
 import classNames from 'classnames';
 import styles from './index.less';
 import InfiniteScroll from 'react-infinite-scroller';
-import { List } from 'antd';
+import { List, Divider } from 'antd';
 import { useEventEmitter, useRequest, useSetState } from 'ahooks';
 import Comment, { AffixEditor } from './Comment';
 
@@ -74,8 +74,8 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
           className={styles.comments}
           loading={scrollPull?.loading}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout='horizontal'
-          header={total !== undefined ? `${total} 评论` : '评论'}
+          itemLayout="horizontal"
+          header={<>{total !== undefined ? `${total} 评论` : '评论'}</>}
           dataSource={dataSource}
           renderItem={(item: CommentType, index) => (
             <List.Item key={index}>
