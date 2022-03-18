@@ -106,7 +106,9 @@ export default () => {
   return (
     <>
       <Editor
-        header={fullscreen ? <Header /> : <></>}
+        header={fullscreen ?
+          <Header style={{ padding: '0 10px' } as any}
+                  menus={[{ href: 'www.baidu.com', title: '标题' }, { href: 'www.baidu.com', title: '标题' }]} /> : <></>}
         onSearchMention={onSearchMention}
         editorRef={editorRef}
         editable={editable}

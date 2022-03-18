@@ -8,15 +8,15 @@ import styles from './index.less';
 import { Divider } from 'antd';
 
 export default () => {
-  return (
-    <div>
-      <article className={styles.preview}>
-        <Header />
-        <h1 className={styles.title}>你好👋</h1>
-        <Promise.EditorPreview id={666} />
-        <Divider />
-      </article>
+  return (<>
+      <div style={{ border: '1px solid rgb(242 242 242)' } as any}>
+        <article className={styles.preview}>
+          <h1 className={styles.title}>你好👋</h1>
+          <Promise.EditorPreview id={666} />
+        </article>
+      </div>
+      <Divider />
       <Footer />
-    </div>
+    </>
   );
 };

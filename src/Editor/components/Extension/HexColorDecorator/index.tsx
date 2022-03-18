@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Decoration, DecorationSet } from 'prosemirror-view';
 import { Node } from 'prosemirror-model';
-import { Plugin } from 'prosemirror-state';
+import { Plugin, PluginKey } from 'prosemirror-state';
 import { Extension } from '@tiptap/core';
 
 function findColors(doc: Node): DecorationSet {
@@ -19,6 +19,7 @@ function findColors(doc: Node): DecorationSet {
       const from = position + index;
       const to = from + color.length;
       const decoration = Decoration.inline(from, to, {
+        ['data-type']: 'color',
         class: 'color',
         style: `--color: ${color}`,
       });
@@ -34,6 +35,7 @@ const HexColorDecorator = Extension.create({
   addProseMirrorPlugins() {
     return [
       new Plugin({
+        key: new PluginKey('hexColorDecorator'),
         state: {
           init(_, { doc }) {
             return findColors(doc);

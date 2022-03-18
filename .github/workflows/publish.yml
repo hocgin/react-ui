@@ -20,7 +20,14 @@ jobs:
         os: [ ubuntu-18.04 ]
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v1
+
+      - name: Get version from Tags
+        id: prep
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/}
+          VERSION=$(echo "${VERSION}" | sed 's/v//')
+          echo ::set-output name=version::${VERSION}
 
       - name: Git Identity
         run: |
@@ -41,6 +48,12 @@ jobs:
           npm whoami
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Rename Version
+        run: |
+          sed -i "" "s/\"4.0.45\"/\"${VERSION}\"/" package.json
+        env:
+          VERSION: ${{ steps.prep.outputs.version }}
 
       - name: Publish package
         run: |

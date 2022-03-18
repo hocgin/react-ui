@@ -23,8 +23,12 @@ export const InsertImage: React.FC<{ editor?: Editor | null, uploadUrl: string }
       return file;
     });
     if (fileList.length >= 1 && fileList[0]?.url) {
-      let src = fileList[0]?.url;
-      editor?.chain().focus().setImage({ src: src }).run();
+      let uploadFile = fileList[0];
+      editor?.chain().focus().setImage({
+        src: uploadFile?.url,
+        alt: uploadFile?.title,
+        title: uploadFile?.title,
+      }).run();
     }
   };
   return (

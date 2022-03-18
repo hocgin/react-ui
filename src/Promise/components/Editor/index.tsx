@@ -46,7 +46,7 @@ const Header: React.FC<{
       <div className={styles.info}>{title}</div>
       <div className={styles.toolbar}>
         <div className={styles.tips}>{tips}</div>
-        <Button type="primary" onClick={onClickSave}>
+        <Button type='primary' onClick={onClickSave}>
           保存
         </Button>
       </div>
@@ -89,8 +89,8 @@ export const Editor: React.FC<{
     onClickSave?.();
   });
 
-  if (getDrafted.loading || !draft) {
-    return <></>;
+  if (getDrafted.loading) {
+    return <div />;
   }
   return (
     <>
@@ -114,33 +114,30 @@ export const Editor: React.FC<{
   );
 };
 
-export const Preview: React.FC<
-  {
-    id: ID;
-    className?: string;
-    contentClassName?: string;
-    defaultValue?: PublishedDoc;
-  } & Record<string, any>
-> = ({ id, className, contentClassName, defaultValue, ...props }: any) => {
+export const Preview: React.FC<{
+  id: ID;
+  className?: string;
+  contentClassName?: string;
+  defaultValue?: PublishedDoc;
+} & Record<string, any>> = ({ id, className, contentClassName, defaultValue, ...props }: any) => {
   let [published, setPublished] = useState<PublishedDoc | undefined>(
     defaultValue,
   );
 
+  let action: UseAction = useAction(id);
+  let getPublished = useRequest(
+    Utils.Lang.nilService(action?.getPublished, {}),
+    {
+      manual: true,
+      onSuccess: setPublished,
+    },
+  );
+  useMount(() => {
+    !published && getPublished?.run();
+  });
+
   if (!published) {
-    let action: UseAction = useAction(id);
-    let getPublished = useRequest(
-      Utils.Lang.nilService(action?.getPublished, {}),
-      {
-        manual: true,
-        onSuccess: setPublished,
-      },
-    );
-
-    useMount(() => getPublished?.run());
-
-    if (getPublished?.loading) {
-      return <div>加载...</div>;
-    }
+    return <div>加载...</div>;
   }
 
   return (

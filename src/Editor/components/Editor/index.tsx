@@ -3,23 +3,16 @@ import styles from './index.less';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ExHighlight from '@tiptap/extension-highlight';
-import Typography from '@tiptap/extension-typography';
 import Link from '@tiptap/extension-link';
 import ExUnderline from '@tiptap/extension-underline';
-import ExStrike from '@tiptap/extension-strike';
 import ExSubscript from '@tiptap/extension-subscript';
 import ExSuperscript from '@tiptap/extension-superscript';
 import ExTextStyle from '@tiptap/extension-text-style';
-import ExCode from '@tiptap/extension-code';
 import ExTextAlign from '@tiptap/extension-text-align';
-import ExItalic from '@tiptap/extension-italic';
 import ExPlaceholder from '@tiptap/extension-placeholder';
-import ExTypography from '@tiptap/extension-typography';
-import ExGapcursor from '@tiptap/extension-gapcursor';
 import ExColor from '@tiptap/extension-color';
 import ExTaskList from '@tiptap/extension-task-list';
 import ExTaskItem from '@tiptap/extension-task-item';
-import ExDropcursor from '@tiptap/extension-dropcursor';
 import ExTable from '@tiptap/extension-table';
 import ExTableRow from '@tiptap/extension-table-row';
 import ExTableHeader from '@tiptap/extension-table-header';
@@ -102,17 +95,17 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-  className,
-  contentClassName,
-  header,
-  onChangeFullscreen,
-  editorRef,
-  fullscreen = false,
-  editable = true,
-  value,
-  onSearchMention,
-  uploadImageUrl = '/api/com/file/upload',
-}) => {
+        className,
+        contentClassName,
+        header,
+        onChangeFullscreen,
+        editorRef,
+        fullscreen = false,
+        editable = true,
+        value,
+        onSearchMention,
+        uploadImageUrl = '/api/com/file/upload',
+      }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -122,24 +115,17 @@ const Index: React.FC<{
   const editor = useEditor({
     extensions: [
       StarterKit,
-      Typography,
       ExImage.configure({ inline: true }),
       Link.configure({ openOnClick: false }),
       ExUnderline,
       ExTextStyle,
-      ExItalic,
-      ExCode,
-      ExStrike,
+      ExCodeBlockLowlight.configure({ lowlight }),
       ExTextAlign.configure({
         types: ['heading', 'paragraph'],
       }),
       ExHighlight.configure({ multicolor: true }),
-      ExCodeBlockLowlight.configure({ lowlight }),
       ExSubscript,
-      ExDropcursor,
       ExSuperscript,
-      ExGapcursor,
-      ExTypography,
       ExColor,
       ExTaskList,
       ExLineHeight,
@@ -147,9 +133,7 @@ const Index: React.FC<{
       ExTableRow,
       ExTableCell.configure(),
       ExTableHeader,
-      ExTaskItem.configure({
-        nested: true,
-      }),
+      ExTaskItem.configure({ nested: true }),
       ExFontSize,
       ExIndent,
       ExPrint,
