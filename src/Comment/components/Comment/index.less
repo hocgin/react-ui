@@ -28,7 +28,12 @@
 }
 
 .content {
-  word-break: break-all;
+  :global(.ProseMirror p) {
+    margin-bottom: .4em;
+  }
+  .editorContent {
+    padding: 0;
+  }
 }
 
 .activeComment {
@@ -82,4 +87,14 @@
 .pagination {
   margin-top: 10px;
   margin-bottom: 10px;
+
+  :global {
+    .ant-pagination-prev:hover .ant-pagination-item-link, .ant-pagination-next:hover .ant-pagination-item-link,
+    .ant-pagination-item-active a, .ant-pagination-item:hover a {
+      color: rgba(0, 0, 0, 0.85);
+      border-radius: 6px;
+      background: rgba(0, 0, 0, 0.018);
+    }
+
+  }
 }

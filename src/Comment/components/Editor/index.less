@@ -3,8 +3,14 @@
   padding: 16px;
   display: flex;
   border: 1px solid #ebedf1;
-  box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: unset;
   border-radius: 2px;
+}
+
+:global(.ant-affix) {
+  .editor {
+    box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.08);
+  }
 }
 
 .right {
@@ -27,12 +33,12 @@
   .content {
     height: 120px;
   }
+}
 
-  .reply {
-    color: rgba(0, 0, 0, 0.45);
-  }
+.reply {
+  color: rgba(0, 0, 0, 0.45);
+}
 
-  .replyButton {
-    margin-top: 5px;
-  }
+.replyButton {
+  margin-top: 5px;
 }

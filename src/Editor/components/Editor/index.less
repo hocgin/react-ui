@@ -16,7 +16,14 @@
 
     .toggleFull {
       width: unset;
+      position: relative;
+      z-index: 1000;
     }
+  }
+
+  .tpToolbarWrapper {
+    flex: 1;
+    overflow-x: scroll;
   }
 
   .tpToolbar {
@@ -24,10 +31,10 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    flex-wrap: nowrap;
     height: 50px;
     padding-left: 40px;
     background: #fff;
-    flex-wrap: wrap;
   }
 
   .toggleFull {

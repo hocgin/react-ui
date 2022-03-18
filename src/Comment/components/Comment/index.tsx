@@ -130,7 +130,8 @@ const SubComment: React.FC<{
       author={author}
       replier={replier}
       datetime={datetime}
-      content={<GEditor editable={false} value={content} />}
+      content={<div className={styles.content}><GEditor contentClassName={styles.editorContent} editable={false}
+                                                        value={content} /></div>}
       actions={[
         <UserOptions
           reply$={reply$}
@@ -281,7 +282,8 @@ const Index: React.FC<{
       datetime={datetime}
       author={author}
       replier={replier}
-      content={<div className={styles.content}><GEditor value={content} editable={false} /></div>}
+      content={<div className={styles.content}><GEditor contentClassName={styles.editorContent} value={content}
+                                                        editable={false} /></div>}
       actions={[
         <UserOptions
           reply$={reply$}

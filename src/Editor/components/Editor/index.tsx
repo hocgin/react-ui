@@ -200,7 +200,7 @@ const Index: React.FC<{
               onTouchStart={(e) => e.preventDefault()}
               onMouseDown={(e) => e.preventDefault()}
             >
-              <div style={{ flex: 1 } as any}>
+              <div className={styles.tpToolbarWrapper}>
                 {isFullscreen && (
                   <div className={styles.tpToolbar}>
                     <InsertCard
