@@ -1,6 +1,7 @@
 :global {
   .ProseMirror {
     outline: none !important;
+    line-height: 1.7;
 
     img {
       height: auto;
@@ -11,6 +12,7 @@
     }
 
     pre {
+      margin: 10px 0;
       background-color: #eee;
       padding: 8px;
       border-radius: 4px;
@@ -36,13 +38,35 @@
       }
     }
 
-    h1, h2, h3, h4, h5, h6, p {
+    h1, h2, h3, h4, h5, h6 {
       margin: unset;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    h2, h3, h4, h5, h6 {
+      margin-top: 7px;
+      margin-bottom: 7px;
+    }
+
+    p {
+      margin-bottom: 1em;
+      font-size: 15px;
     }
 
     blockquote {
       border-left: 3px solid rgba(#0d0d0d, 0.1);
       padding-left: 1rem;
+      margin: 10px 0;
+    }
+
+    [data-type='color'] {
+      border: 1px solid #dadadf;
+      background-color: #f9fafb;
+      padding: 1px 2px;
+      border-radius: 4px;
     }
 
     [data-type='mention'] {
@@ -52,9 +76,16 @@
       padding: 0.1rem 0.3rem;
     }
 
+    ul > li {
+      p {
+        margin: 0;
+      }
+    }
+
     ul[data-type="taskList"] {
       list-style: none;
       padding: 0;
+      margin-bottom: 10px;
 
       p {
         margin: 0;
@@ -64,8 +95,10 @@
         display: flex;
 
         > label {
+          display: flex;
+          align-items: center;
           flex: 0 0 auto;
-          margin-right: 0.5rem;
+          margin-right: 0.3rem;
           user-select: none;
         }
 
@@ -80,7 +113,7 @@
       overflow: hidden;
       table-layout: fixed;
       width: 100%;
-      margin: 5px 0;
+      margin: 10px 0;
 
       td,
       th {
@@ -128,5 +161,9 @@
         margin: 0;
       }
     }
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }

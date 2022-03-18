@@ -19,6 +19,7 @@ function findColors(doc: Node): DecorationSet {
       const from = position + index;
       const to = from + color.length;
       const decoration = Decoration.inline(from, to, {
+        ['data-type']: 'color',
         class: 'color',
         style: `--color: ${color}`,
       });
