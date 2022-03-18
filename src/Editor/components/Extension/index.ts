@@ -5,6 +5,7 @@ export { LineHeight } from './LineHeight';
 export { Image } from './Image';
 export { Indent } from './Indent';
 export { Print } from './Print';
+export { Iframe } from './Iframe';
 
 export { MentionSuggestion } from './Suggestion';
 
