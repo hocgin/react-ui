@@ -4,7 +4,7 @@ import { UserType } from '@/Utils/interface';
 
 // http://mockjs.com/examples.html
 export default {
-  'GET /ums/account': (req: any, res: any) =>
+  'GET /api/ums/account': (req: any, res: any) =>
     res.json(
       success({
         id: 1,
@@ -13,7 +13,7 @@ export default {
         avatar: Mock.Random.image('100x100'),
       }),
     ),
-  'POST /ums/user/_complete': (req: any, res: any) =>
+  'POST /api/ums/user/_complete': (req: any, res: any) =>
     res.json(
       success([
         {
@@ -24,15 +24,15 @@ export default {
         },
       ]),
     ),
-  'POST /com/comment/:refType/:refId/like': (req: any, res: any) =>
+  'POST /api/com/comment/:refType/:refId/like': (req: any, res: any) =>
     res.json(success(mockData())),
-  'POST /com/comment/:refType/:refId/dislike': (req: any, res: any) =>
+  'POST /api/com/comment/:refType/:refId/dislike': (req: any, res: any) =>
     res.json(success(mockData())),
-  'POST /com/comment/:refType/:refId/report': (req: any, res: any) =>
+  'POST /api/com/comment/:refType/:refId/report': (req: any, res: any) =>
     res.json(success(mockData())),
-  'POST /com/comment/:refType/:refId/reply': (req: any, res: any) =>
+  'POST /api/com/comment/:refType/:refId/reply': (req: any, res: any) =>
     res.json(success(mockData())),
-  'POST /com/comment/:refType/:refId/_scroll': (req: any, res: any) =>
+  'POST /api/com/comment/:refType/:refId/_scroll': (req: any, res: any) =>
     res.json(
       success({
         nextId: 1,
@@ -40,7 +40,7 @@ export default {
         records: [mockData()],
       }),
     ),
-  'POST /com/comment/:refType/:refId/_paging': (req: any, res: any) =>
+  'POST /api/com/comment/:refType/:refId/_paging': (req: any, res: any) =>
     res.json(
       success({
         current: 1,

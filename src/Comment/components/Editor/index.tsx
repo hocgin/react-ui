@@ -105,10 +105,10 @@ const Editor: React.FC<{
                 回复&nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title="取消回复">
+              <Tooltip title='取消回复'>
                 <Button
-                  size="small"
-                  shape="circle"
+                  size='small'
+                  shape='circle'
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />
