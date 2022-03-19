@@ -56,8 +56,8 @@ export default class {
       .catch(Dom.showErrorMessage);
   }
 
-  static getCurrentUser() {
-    return useGet(`/ums/account`, {})
+  static getCurrentUser(force: boolean = false) {
+    return useGet(`/ums/account`, { force })
       .then(Dom.tryErrorIfExits)
       .then(Dom.thenData)
       .catch(Dom.showErrorMessage);
@@ -66,7 +66,8 @@ export default class {
   static searchUser(payload: any = {}) {
     return usePost(`/ums/user/_complete`, {
       data: { ...payload },
-    }).then(Dom.tryErrorIfExits)
+    })
+      .then(Dom.tryErrorIfExits)
       .then(Dom.thenData)
       .catch(Dom.showErrorMessage);
   }
