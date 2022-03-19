@@ -2,16 +2,8 @@ import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
-import {
-  Avatar,
-  Button,
-  Tooltip,
-} from 'antd';
-import {
-  CheckOutlined,
-  ClearOutlined,
-  UserOutlined,
-} from '@ant-design/icons';
+import { Avatar, Button, Tooltip } from 'antd';
+import { CheckOutlined, ClearOutlined, UserOutlined } from '@ant-design/icons';
 import {
   CommentType,
   ReplyDataType,
@@ -21,7 +13,6 @@ import {
 } from '../type';
 import { useInterval, useMount, useRequest } from 'ahooks';
 import { Editor as GEditor, Utils } from '@hocgin/ui';
-
 
 const Editor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
@@ -88,7 +79,7 @@ const Editor: React.FC<{
   };
 
   useMount(() => {
-    userRequest.run({});
+    userRequest.run(false);
   });
 
   let userName = user?.title;
@@ -102,17 +93,22 @@ const Editor: React.FC<{
       <div className={styles.right}>
         <div className={styles.header}>
           <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
-          <span className={styles.title}>{userName}</span>
+          <span
+            className={styles.title}
+            onClick={() => !user && userRequest.runAsync(true)}
+          >
+            {userName ?? '点击登陆'}
+          </span>
           {hasBeReply && (
             <>
               <a href={`#c_${replyId}`} className={styles.reply}>
                 回复&nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title='取消回复'>
+              <Tooltip title="取消回复">
                 <Button
-                  size='small'
-                  shape='circle'
+                  size="small"
+                  shape="circle"
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />
@@ -121,14 +117,21 @@ const Editor: React.FC<{
           )}
         </div>
         <div style={{ margin: '3px 0' } as any}>
-          <GEditor editorRef={editorRef} className={styles.content}
-                   onChange={() => setContent(editorRef.current.getHTML())} />
+          <GEditor
+            editorRef={editorRef}
+            className={styles.content}
+            onChange={() => setContent(editorRef.current.getHTML())}
+          />
         </div>
         <div className={styles.replyButton}>
           <Button disabled={!landed} onClick={onSubmitReply}>
-            {replied ? <>
-              <CheckOutlined style={{ color: '#00B06D' } as any} /> 评论成功
-            </> : '评论'}
+            {replied ? (
+              <>
+                <CheckOutlined style={{ color: '#00B06D' } as any} /> 评论成功
+              </>
+            ) : (
+              '评论'
+            )}
           </Button>
         </div>
       </div>
