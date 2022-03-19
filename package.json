@@ -84,6 +84,7 @@
     "mockjs": "^1.1.0",
     "overlayscrollbars": "^1.13.1",
     "overlayscrollbars-react": "^0.2.3",
+    "querystring": "^0.2.1",
     "randexp": "^0.5.3",
     "react-adsense": "^0.1.0",
     "react-color": "^2.19.3",
