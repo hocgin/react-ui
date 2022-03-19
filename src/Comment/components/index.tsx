@@ -75,7 +75,7 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
           loading={scrollPull?.loading}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
           itemLayout="horizontal"
-          header={<>{total !== undefined ? `${total} 评论` : '评论'}</>}
+          header={<span className={styles.header}>{total !== undefined ? `${total} 评论` : '评论'}</span>}
           dataSource={dataSource}
           renderItem={(item: CommentType, index) => (
             <List.Item key={index}>
