@@ -75,7 +75,7 @@ const html = `
     `;
 // http://mockjs.com/examples.html
 export default {
-  'GET /api/rcm/doc/:id': (req: any, res: any) =>
+  'GET /rcm/doc/:id': (req: any, res: any) =>
     res.json(
       success({
         id: req.params.id,
@@ -83,7 +83,7 @@ export default {
         content: html,
       }),
     ),
-  'GET /api/rcm/doc/:id/content': (req: any, res: any) =>
+  'GET /rcm/doc/:id/content': (req: any, res: any) =>
     res.json(
       success({
         id: req.params.id,
@@ -92,9 +92,9 @@ export default {
         content: html,
       }),
     ),
-  'POST /api/rcm/doc/:id/content': (req: any, res: any) => res.json(success()),
-  'POST /api/rcm/doc/:id/publish': (req: any, res: any) => res.json(success()),
-  'POST /api/rcm/doc/:id/history': (req: any, res: any) =>
+  'POST /rcm/doc/:id/content': (req: any, res: any) => res.json(success()),
+  'POST /rcm/doc/:id/publish': (req: any, res: any) => res.json(success()),
+  'POST /rcm/doc/:id/history': (req: any, res: any) =>
     res.json(
       success([
         {
@@ -111,7 +111,7 @@ export default {
         },
       ]),
     ),
-  'POST /api/rcm/doc/:id/rollback': (req: any, res: any) => res.json(success()),
-  'POST /api/rcm/doc/version/:contentId/name': (req: any, res: any) =>
+  'POST /rcm/doc/:id/rollback': (req: any, res: any) => res.json(success()),
+  'POST /rcm/doc/version/:contentId/name': (req: any, res: any) =>
     res.json(success()),
 };

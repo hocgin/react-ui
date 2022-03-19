@@ -11,6 +11,7 @@ import classnames from 'classnames';
 
 const content = `
       <a href='https://www.baidu.com'>ksjdkHi</a>
+      <iframe src='https://www.youtube.com/embed/XIMLoLxmTDw' frameborder='0' allowfullscreen></iframe>
       #FB5151
       <p><img src='https://source.unsplash.com/8xznAGy4HcY/800x400' width='100' height='50'/></p>
         <table style='width:100%'>

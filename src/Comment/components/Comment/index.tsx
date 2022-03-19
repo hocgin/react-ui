@@ -3,7 +3,7 @@ import { Utils, Editor as GEditor } from '@hocgin/ui';
 import { useMount, useRequest } from 'ahooks';
 import { UserType } from '@/Utils/interface';
 import {
-  CommentType as CommentType,
+  CommentType,
   DislikeDataType,
   LikeDataType,
   PagingDataType,
@@ -30,7 +30,7 @@ import {
 } from 'antd';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
-import Editor from '../Editor';
+import Editor from '@/Comment/components/Editor';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 
 export const AffixEditor: React.FC<{
@@ -52,7 +52,7 @@ const UserOptions: React.FC<{
   comment: CommentType;
   useAction: UseAction;
   userAction?: string;
-}> = (props, ref) => {
+}> = (props) => {
   let { useAction, comment } = props;
   let [userAction, setUserAction] = useState(props?.userAction);
   let [likesCount, setLikesCount] = useState(comment?.likes || 0);

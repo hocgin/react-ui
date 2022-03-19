@@ -24,6 +24,7 @@ import {
   LineHeight as ExLineHeight,
   FontSize as ExFontSize,
   TableCell as ExTableCell,
+  Iframe as ExIframe,
   Image as ExImage,
   Indent as ExIndent,
   Print as ExPrint,
@@ -141,6 +142,7 @@ const Index: React.FC<{
       ExFontSize,
       ExIndent,
       ExPrint,
+      ExIframe,
       HexColorDecorator,
       ExPlaceholder.configure({
         placeholder: '请输入内容..',
