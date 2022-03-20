@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import { Avatar, Button, Tooltip } from 'antd';
-import { CheckOutlined, ClearOutlined, UserOutlined } from '@ant-design/icons';
+import { CheckOutlined, ClearOutlined, RetweetOutlined, UserOutlined } from '@ant-design/icons';
 import {
   CommentType,
   ReplyDataType,
@@ -79,7 +79,7 @@ const Editor: React.FC<{
   };
 
   useMount(() => {
-    userRequest.run(false);
+    userRequest.run({ force: false });
   });
 
   let userName = user?.title;
@@ -95,14 +95,14 @@ const Editor: React.FC<{
           <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
           <span
             className={styles.title}
-            onClick={() => !user && userRequest.runAsync(true)}
+            onClick={() => !user && userRequest.runAsync({ force: true })}
           >
             {userName ?? '点击登陆'}
           </span>
           {hasBeReply && (
             <>
               <a href={`#c_${replyId}`} className={styles.reply}>
-                回复&nbsp;@{replyUsername}
+                <RetweetOutlined />&nbsp;@{replyUsername}
               </a>
               &nbsp;
               <Tooltip title='取消回复'>

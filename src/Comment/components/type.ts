@@ -69,7 +69,9 @@ export interface ScrollParamsType extends ScrollRo {}
 export interface ScrollDataType extends IScroll<CommentType> {}
 
 // ========================================================
-export interface UserParamsType {}
+export interface UserParamsType {
+  force?: boolean;
+}
 
 export interface UserDataType extends UserType {}
 

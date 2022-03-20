@@ -42,7 +42,7 @@ export default (refType: any, refId: any) => ({
     (await service.dislike(refType, refId, args?.commentId)) as any,
   // 当前登陆用户
   user: async (args: UserParamsType) => {
-    return asUser(await service.getCurrentUser()) as UserDataType;
+    return asUser(await service.getCurrentUser(args?.force)) as UserDataType;
   },
   // 提及用户
   mentionUser: async (args: MentionsParamsType) => ((await service.searchUser(args)) || []).map(asUser),
@@ -50,6 +50,10 @@ export default (refType: any, refId: any) => ({
 
 
 let asUser = (user: any) => {
+  if (!user) {
+    return null;
+  }
+
   let { id, title, nickname, avatarUrl, avatar, href } = user;
   return {
     id,
