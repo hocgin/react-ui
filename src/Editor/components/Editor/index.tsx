@@ -1,5 +1,6 @@
 import React, { MutableRefObject, useEffect, useState } from 'react';
 import styles from './index.less';
+import { HeartFilled } from '@hocgin/ui';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ExHighlight from '@tiptap/extension-highlight';
@@ -96,18 +97,18 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-        onChange,
-        className,
-        contentClassName,
-        header,
-        onChangeFullscreen,
-        editorRef,
-        fullscreen = false,
-        editable = true,
-        value,
-        onSearchMention,
-        uploadImageUrl = '/api/com/file/upload',
-      }) => {
+  onChange,
+  className,
+  contentClassName,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+  uploadImageUrl = '/api/com/file/upload',
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -268,18 +269,21 @@ const Index: React.FC<{
             {editor && <FloatingMenus editor={editor} />}
           </div>
           {!isFullscreen && editorEditable && (
-            <div
-              className={styles.btToolbar}
-              onTouchStart={(e) => e.preventDefault()}
-              onMouseDown={(e) => e.preventDefault()}
-            >
-              <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
-              <Paragraph editor={editor} />
-              <Bold editor={editor} />
-              <OrderedList editor={editor} />
-              <BulletList editor={editor} />
-              <SetLink editor={editor} />
-              <Emoji editor={editor} />
+            <div className={styles.btToolbar}>
+              <div
+                className={styles.btActions}
+                onTouchStart={(e) => e.preventDefault()}
+                onMouseDown={(e) => e.preventDefault()}
+              >
+                <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
+                <Paragraph editor={editor} />
+                <Bold editor={editor} />
+                <OrderedList editor={editor} />
+                <BulletList editor={editor} />
+                <SetLink editor={editor} />
+                <Emoji editor={editor} />
+              </div>
+              <HeartFilled style={{ marginRight: 10 } as any} />
             </div>
           )}
         </div>

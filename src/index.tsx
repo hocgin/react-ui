@@ -2,7 +2,7 @@ export { default as Tpl } from './Tpl';
 export { default as Snow } from './Snow';
 export { default as Sponsor } from './Sponsor';
 export { default as Comment } from './Comment';
-export { default as Logo } from './Logo';
+export { Logo, HeartFilled } from './Logo';
 export { default as Rich } from './Rich';
 export { default as Markdown } from './Markdown';
 export { default as Featbar } from './Featbar';
