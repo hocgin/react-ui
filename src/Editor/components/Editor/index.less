@@ -1,4 +1,5 @@
 @import './prosemirror.less';
+@import '../../../../src/mixin.less';
 
 .editor {
   //color: unset;
@@ -46,6 +47,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.heart {
+  margin-right: 10px;
+  .mobile({
+    display: none;
+  });
 }
 
 .btActions {

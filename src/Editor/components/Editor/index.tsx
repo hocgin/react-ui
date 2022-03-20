@@ -97,18 +97,18 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-  onChange,
-  className,
-  contentClassName,
-  header,
-  onChangeFullscreen,
-  editorRef,
-  fullscreen = false,
-  editable = true,
-  value,
-  onSearchMention,
-  uploadImageUrl = '/api/com/file/upload',
-}) => {
+        onChange,
+        className,
+        contentClassName,
+        header,
+        onChangeFullscreen,
+        editorRef,
+        fullscreen = false,
+        editable = true,
+        value,
+        onSearchMention,
+        uploadImageUrl = '/api/com/file/upload',
+      }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -283,7 +283,7 @@ const Index: React.FC<{
                 <SetLink editor={editor} />
                 <Emoji editor={editor} />
               </div>
-              <HeartFilled style={{ marginRight: 10 } as any} />
+              <HeartFilled className={styles.heart} />
             </div>
           )}
         </div>
