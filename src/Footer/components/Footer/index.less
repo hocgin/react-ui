@@ -14,10 +14,13 @@
   flex-direction: column;
   align-items: center;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
 
   .footerInfo {
+    display: flex;
+    align-items: center;
+
     .heart {
       vertical-align: baseline;
       color: #f22e3c;
@@ -70,7 +73,9 @@
     margin-right: 10px;
     border-right: 1px solid rgba(234, 234, 234, 0.7);
     padding-right: 10px;
-    .dark({border-right: 1px solid rgba(234, 234, 234, 0.25) ;});
+    .dark({
+      border-right: 1px solid rgba(234, 234, 234, 0.25);
+    });
 
     &:last-child {
       border-right: none;
