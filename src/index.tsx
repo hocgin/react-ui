@@ -4,6 +4,7 @@ export { default as Sponsor } from './Sponsor';
 export { default as Comment } from './Comment';
 export { Logo, HeartFilled } from './Logo';
 export { Loading } from './Loading';
+export { LikeCheckbox } from './LikeCheckbox';
 export { default as Rich } from './Rich';
 export { default as Markdown } from './Markdown';
 export { default as Featbar } from './Featbar';
