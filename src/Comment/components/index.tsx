@@ -9,8 +9,15 @@ import classNames from 'classnames';
 import styles from './index.less';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Button, List, Divider } from 'antd';
-import { useEventEmitter, useUpdateEffect, useRequest, useSetState, useToggle } from 'ahooks';
-import Comment, { AffixEditor } from './Comment';
+import {
+  useEventEmitter,
+  useUpdateEffect,
+  useRequest,
+  useSetState,
+  useToggle,
+} from 'ahooks';
+import Comment from './Comment';
+import { AffixEditor } from './Editor';
 import { Loading } from '@hocgin/ui';
 
 export interface IndexProps {
@@ -70,24 +77,40 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
 
   return (
     <div className={classNames(styles.commentGroup)}>
-      <InfiniteScroll key={`${orderDesc}`}
-                      initialLoad={true}
-                      pageStart={0}
-                      loadMore={onLoadMore}
-                      hasMore={!scrollPull.loading && hasMore}
-                      useWindow={true}>
+      <InfiniteScroll
+        key={`${orderDesc}`}
+        initialLoad={true}
+        pageStart={0}
+        loadMore={onLoadMore}
+        hasMore={!scrollPull.loading && hasMore}
+        useWindow={true}
+      >
         <List
           className={styles.comments}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout='horizontal'
-          header={<div className={styles.header}>
-            <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
-            <div>
-              <Button type='link' onClick={toggleOrderDesc} disabled={orderDesc}>倒序↓</Button>
-              <Divider type='vertical' />
-              <Button type='link' onClick={toggleOrderDesc} disabled={!orderDesc}>正序↑</Button>
+          itemLayout="horizontal"
+          header={
+            <div className={styles.header}>
+              <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
+              <div>
+                <Button
+                  type="link"
+                  onClick={toggleOrderDesc}
+                  disabled={orderDesc}
+                >
+                  倒序↓
+                </Button>
+                <Divider type="vertical" />
+                <Button
+                  type="link"
+                  onClick={toggleOrderDesc}
+                  disabled={!orderDesc}
+                >
+                  正序↑
+                </Button>
+              </div>
             </div>
-          </div>}
+          }
           dataSource={dataSource}
           renderItem={(item: CommentType, index) => (
             <List.Item key={index}>

@@ -107,9 +107,19 @@ export default () => {
   return (
     <>
       <Editor
-        header={fullscreen ?
-          <Header style={{ padding: '0 10px' } as any}
-                  menus={[{ href: 'www.baidu.com', title: '标题' }, { href: 'www.baidu.com', title: '标题' }]} /> : <></>}
+        header={
+          fullscreen ? (
+            <Header
+              style={{ padding: '0 10px' } as any}
+              menus={[
+                { href: 'www.baidu.com', title: '标题' },
+                { href: 'www.baidu.com', title: '标题' },
+              ]}
+            />
+          ) : (
+            <></>
+          )
+        }
         onSearchMention={onSearchMention}
         editorRef={editorRef}
         editable={editable}
@@ -117,7 +127,8 @@ export default () => {
         className={classnames(styles.ok, {
           [styles.unsetHeight]: unsetHeight,
         })}
-        value={content}
+        placeholder={'请输入内容'}
+        // value={content}
         onChangeFullscreen={(fullscreen) => setFullscreen(fullscreen)}
       />
       <Divider />
@@ -158,7 +169,6 @@ export default () => {
       </Button>
       <Divider />
       <div>{text}</div>
-
 
       <Editor editable={false} value={'你好'} />
     </>

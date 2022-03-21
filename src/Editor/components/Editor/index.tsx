@@ -139,21 +139,23 @@ const Index: React.FC<{
       ExLineHeight,
       ExTable.configure({ resizable: true }),
       ExTableRow,
-      ExTableCell.configure(),
+      ExTableCell.configure({}),
       ExTableHeader,
-      ExTaskItem.configure({ nested: true }),
       ExFontSize,
       ExIndent,
       ExPrint,
       ExIframe,
       HexColorDecorator,
-      ExPlaceholder.configure({
-        placeholder: placeholder,
-      }),
+      ExTaskItem.configure({ nested: true }),
       ExMention.configure({
         suggestion: onSearchMention
           ? MentionSuggestion(onSearchMention)
           : undefined,
+      }),
+      ExPlaceholder.configure({
+        placeholder: (props: any) => {
+          return `${placeholder}` as string;
+        },
       }),
     ],
     content: value,
@@ -182,115 +184,117 @@ const Index: React.FC<{
   );
 
   return (
-    <Dropdown
-      disabled={!editor?.isActive('table')}
-      overlay={<TableCtl editor={editor} />}
-      trigger={['contextMenu']}
-    >
-      <div className={classnames(styles.editor)}>
-        <div
-          className={classnames(styles.editorWrapper, className, {
-            [styles.fullscreen]: isFullscreen,
-            [styles.mini]: !isFullscreen,
-            [styles.editable]: editable,
-            [styles.noEditable]: !editable,
-          })}
-        >
-          {header}
-          {editorEditable && (
-            <div
-              className={classnames(styles.header, {
-                [styles.hide]: !isFullscreen,
-              })}
-              onTouchStart={(e) => e.preventDefault()}
-              onMouseDown={(e) => e.preventDefault()}
-            >
-              <div className={styles.tpToolbarWrapper}>
-                {isFullscreen && (
-                  <div className={styles.tpToolbar}>
-                    <InsertCard
-                      editor={editor}
-                      uploadImageUrl={uploadImageUrl}
-                    />
-                    <Divider type={'vertical'} />
-                    <Undo editor={editor} />
-                    <Redo editor={editor} />
-                    <Divider type={'vertical'} />
-                    <ClearStyle editor={editor} />
-                    {/*字体*/}
-                    <Divider type={'vertical'} />
-                    <Paragraph editor={editor} />
-                    <FontSize editor={editor} />
-                    <Bold editor={editor} />
-                    <Italic editor={editor} />
-                    <Strike editor={editor} />
-                    <Underline editor={editor} />
-                    <TextScript editor={editor} />
-                    {/*颜色*/}
-                    <Divider type={'vertical'} />
-                    <Color editor={editor} />
-                    <Highlight editor={editor} />
-                    <FillTableBackground editor={editor} />
-                    {/*位置*/}
-                    <TextAlign editor={editor} />
-                    <OrderedList editor={editor} />
-                    <BulletList editor={editor} />
-                    <LineHeight editor={editor} />
-                    <Indent editor={editor} />
-                    <Outdent editor={editor} />
-                    {/*其他*/}
-                    <Divider type={'vertical'} />
-                    <TaskList editor={editor} />
-                    <Print editor={editor} />
-                    <CodeBlock editor={editor} />
-                    <Blockquote editor={editor} />
-                    <SetLink editor={editor} />
-                    <HorizontalRule editor={editor} />
-                    <HardBreak editor={editor} />
-                    <Emoji editor={editor} />
-                  </div>
-                )}
-              </div>
-              <TbButton
-                className={styles.toggleFull}
-                onClick={toggleFullscreen}
-              >
-                {isFullscreen ? (
-                  <FullscreenExitOutlined />
-                ) : (
-                  <FullscreenOutlined />
-                )}
-              </TbButton>
-            </div>
-          )}
+    <>
+      <Dropdown
+        disabled={!editor?.isActive('table')}
+        overlay={<TableCtl editor={editor} />}
+        trigger={['contextMenu']}
+      >
+        <div className={classnames(styles.editor)}>
           <div
-            className={classnames(styles.content, contentClassName)}
-            onClick={() => editor?.chain().focus().run()}
+            className={classnames(styles.editorWrapper, className, {
+              [styles.fullscreen]: isFullscreen,
+              [styles.mini]: !isFullscreen,
+              [styles.editable]: editable,
+              [styles.noEditable]: !editable,
+            })}
           >
-            <EditorContent editor={editor} />
-            {editor && <FloatingMenus editor={editor} />}
-          </div>
-          {!isFullscreen && editorEditable && (
-            <div className={styles.btToolbar}>
+            {header}
+            {editorEditable && (
               <div
-                className={styles.btActions}
+                className={classnames(styles.header, {
+                  [styles.hide]: !isFullscreen,
+                })}
                 onTouchStart={(e) => e.preventDefault()}
                 onMouseDown={(e) => e.preventDefault()}
               >
-                <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
-                <Paragraph editor={editor} />
-                <Bold editor={editor} />
-                <OrderedList editor={editor} />
-                <BulletList editor={editor} />
-                <SetLink editor={editor} />
-                <Emoji editor={editor} />
+                <div className={styles.tpToolbarWrapper}>
+                  {isFullscreen && (
+                    <div className={styles.tpToolbar}>
+                      <InsertCard
+                        editor={editor}
+                        uploadImageUrl={uploadImageUrl}
+                      />
+                      <Divider type={'vertical'} />
+                      <Undo editor={editor} />
+                      <Redo editor={editor} />
+                      <Divider type={'vertical'} />
+                      <ClearStyle editor={editor} />
+                      {/*字体*/}
+                      <Divider type={'vertical'} />
+                      <Paragraph editor={editor} />
+                      <FontSize editor={editor} />
+                      <Bold editor={editor} />
+                      <Italic editor={editor} />
+                      <Strike editor={editor} />
+                      <Underline editor={editor} />
+                      <TextScript editor={editor} />
+                      {/*颜色*/}
+                      <Divider type={'vertical'} />
+                      <Color editor={editor} />
+                      <Highlight editor={editor} />
+                      <FillTableBackground editor={editor} />
+                      {/*位置*/}
+                      <TextAlign editor={editor} />
+                      <OrderedList editor={editor} />
+                      <BulletList editor={editor} />
+                      <LineHeight editor={editor} />
+                      <Indent editor={editor} />
+                      <Outdent editor={editor} />
+                      {/*其他*/}
+                      <Divider type={'vertical'} />
+                      <TaskList editor={editor} />
+                      <Print editor={editor} />
+                      <CodeBlock editor={editor} />
+                      <Blockquote editor={editor} />
+                      <SetLink editor={editor} />
+                      <HorizontalRule editor={editor} />
+                      <HardBreak editor={editor} />
+                      <Emoji editor={editor} />
+                    </div>
+                  )}
+                </div>
+                <TbButton
+                  className={styles.toggleFull}
+                  onClick={toggleFullscreen}
+                >
+                  {isFullscreen ? (
+                    <FullscreenExitOutlined />
+                  ) : (
+                    <FullscreenOutlined />
+                  )}
+                </TbButton>
               </div>
-              <HeartFilled className={styles.heart} />
+            )}
+            <div
+              className={classnames(styles.content, contentClassName)}
+              onClick={() => editor?.chain().focus().run()}
+            >
+              <EditorContent editor={editor} />
+              {editor && <FloatingMenus editor={editor} />}
             </div>
-          )}
+            {!isFullscreen && editorEditable && (
+              <div className={styles.btToolbar}>
+                <div
+                  className={styles.btActions}
+                  onTouchStart={(e) => e.preventDefault()}
+                  onMouseDown={(e) => e.preventDefault()}
+                >
+                  <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
+                  <Paragraph editor={editor} />
+                  <Bold editor={editor} />
+                  <OrderedList editor={editor} />
+                  <BulletList editor={editor} />
+                  <SetLink editor={editor} />
+                  <Emoji editor={editor} />
+                </div>
+                <HeartFilled className={styles.heart} />
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-    </Dropdown>
+      </Dropdown>
+    </>
   );
 };
 

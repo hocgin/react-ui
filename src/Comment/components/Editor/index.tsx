@@ -2,12 +2,14 @@ import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
-import { Avatar, Button, Tooltip } from 'antd';
+import { Affix, Avatar, Button, Tooltip } from 'antd';
 import {
   CheckOutlined,
   ClearOutlined,
   RetweetOutlined,
   UserOutlined,
+  CaretDownOutlined,
+  CaretUpOutlined,
 } from '@ant-design/icons';
 import {
   CommentType,
@@ -16,8 +18,23 @@ import {
   UseAction,
   UserDataType,
 } from '../type';
-import { useInterval, useMount, useRequest } from 'ahooks';
+import { useInterval, useMount, useRequest, useToggle } from 'ahooks';
 import { Editor as GEditor, Utils } from '@hocgin/ui';
+import classnames from 'classnames';
+
+export const AffixEditor: React.FC<{
+  reply$: EventEmitter<CommentType | undefined>;
+  replied$: EventEmitter<CommentType>;
+  useAction: UseAction;
+}> = ({ reply$, replied$, useAction }) => {
+  return (
+    <div>
+      <Affix offsetBottom={0}>
+        <Editor reply$={reply$} replied$={replied$} useAction={useAction} />
+      </Affix>
+    </div>
+  );
+};
 
 const Editor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
@@ -97,9 +114,18 @@ const Editor: React.FC<{
   let replyUsername = reply?.author?.title;
   let replyId = reply?.id;
 
+  let [expand, { toggle: toggleExpand }] = useToggle<boolean>(false);
+
   return (
-    <div className={classNames(styles.editor)}>
-      <div className={styles.right}>
+    <div
+      className={classNames(styles.editor, {
+        [styles.expand]: expand,
+      })}
+    >
+      <div className={styles.mini} onClick={toggleExpand}>
+        {expand ? <CaretDownOutlined /> : <CaretUpOutlined />}
+      </div>
+      <div className={classnames(styles.bottom)}>
         <div className={styles.header}>
           <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
           <span
@@ -115,10 +141,10 @@ const Editor: React.FC<{
                 &nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title='取消回复'>
+              <Tooltip title="取消回复">
                 <Button
-                  size='small'
-                  shape='circle'
+                  size="small"
+                  shape="circle"
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />

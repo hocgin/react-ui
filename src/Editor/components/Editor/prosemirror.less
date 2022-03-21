@@ -64,6 +64,14 @@
     p {
       margin-bottom: 1em;
       font-size: 15px;
+
+      &.is-editor-empty:first-child::before {
+        color: #adb5bd;
+        content: attr(data-placeholder);
+        float: left;
+        height: 0;
+        pointer-events: none;
+      }
     }
 
     blockquote {

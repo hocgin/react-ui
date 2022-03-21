@@ -61,7 +61,7 @@ const Content: React.FC<{
       </div>
       {(size?.height ?? 0) > maxHeight && (
         <a
-          rel='noopener noreferrer'
+          rel="noopener noreferrer"
           className={styles.expanded}
           onClick={toggleExpanded}
         >
@@ -69,20 +69,6 @@ const Content: React.FC<{
         </a>
       )}
     </>
-  );
-};
-
-export const AffixEditor: React.FC<{
-  reply$: EventEmitter<CommentType | undefined>;
-  replied$: EventEmitter<CommentType>;
-  useAction: UseAction;
-}> = ({ reply$, replied$, useAction }) => {
-  return (
-    <div className={styles.editor}>
-      <Affix offsetBottom={0}>
-        <Editor reply$={reply$} replied$={replied$} useAction={useAction} />
-      </Affix>
-    </div>
   );
 };
 
@@ -102,10 +88,10 @@ const UserOptions: React.FC<{
     manual: true,
     defaultParams: { commentId } as any,
     onSuccess: ({
-                  likes = 0,
-                  disliked = 0,
-                  action,
-                }: DislikeDataType | LikeDataType) => {
+      likes = 0,
+      disliked = 0,
+      action,
+    }: DislikeDataType | LikeDataType) => {
       setLikesCount(likes);
       setDislikedCount(disliked);
       setUserAction(action);
@@ -128,13 +114,13 @@ const UserOptions: React.FC<{
   return (
     <>
       <span onClick={onClickReply}>回复</span>
-      <Tooltip title='Like'>
+      <Tooltip title="Like">
         <span onClick={onAction.bind(this, 'like', commentId)}>
           {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
           <span className={styles.commentAction}>{likesCount}</span>
         </span>
       </Tooltip>
-      <Tooltip title='Dislike'>
+      <Tooltip title="Dislike">
         <span onClick={onAction.bind(this, 'dislike', commentId)}>
           {React.createElement(
             userAction === 'dislike' ? DislikeFilled : DislikeOutlined,
@@ -195,18 +181,18 @@ const CiComment: React.FC<{
   children?: React.ReactNode;
   actions?: React.ReactNode[];
 }> = ({
-        id,
-        type = 'none',
-        active = false,
-        datetime,
-        content,
-        replyId,
-        author,
-        replier,
-        children,
-        actions = [],
-        className,
-      }) => {
+  id,
+  type = 'none',
+  active = false,
+  datetime,
+  content,
+  replyId,
+  author,
+  replier,
+  children,
+  actions = [],
+  className,
+}) => {
   let hasReply = replyId && replier;
 
   return (
@@ -354,13 +340,13 @@ const Index: React.FC<{
                 </List.Item>
               );
             }}
-            itemLayout='horizontal'
+            itemLayout="horizontal"
             dataSource={dataSource}
           />
           <Pagination
             hideOnSinglePage
             className={styles.pagination}
-            size='small'
+            size="small"
             total={total}
             defaultCurrent={1}
             current={current}
