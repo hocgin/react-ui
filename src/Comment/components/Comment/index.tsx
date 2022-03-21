@@ -1,6 +1,6 @@
 import React, { useState, createElement } from 'react';
 import { Utils, Editor as GEditor } from '@hocgin/ui';
-import { useMount, useRequest } from 'ahooks';
+import { useMount, useRequest, useToggle } from 'ahooks';
 import { UserType } from '@/Utils/interface';
 import {
   CommentType,
@@ -26,12 +26,27 @@ import {
   List,
   Pagination,
   Skeleton,
-  Affix,
+  Affix, Button,
 } from 'antd';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
 import Editor from '@/Comment/components/Editor';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
+
+const Content: React.FC<{ children?: any, expanded?: boolean, maxHeight?: number }> = ({
+                                                                                         children,
+                                                                                         maxHeight = 100,
+                                                                                         ...props
+                                                                                       }) => {
+  let [expanded, { toggle: toggleExpanded }] = useToggle<boolean>(props?.expanded ?? false);
+  let contentStyle = expanded ? {} : { maxHeight: `${maxHeight}px`, overflow: 'hidden' };
+  return <>
+    <div className={styles.content} style={contentStyle}>
+      <GEditor contentClassName={styles.editorContent} value={children} editable={false} />
+    </div>
+    <a rel='noopener noreferrer' className={styles.expanded} onClick={toggleExpanded}>{expanded ? '收起' : '展开'}</a>
+  </>;
+};
 
 export const AffixEditor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
@@ -88,6 +103,7 @@ const UserOptions: React.FC<{
 
   return (
     <>
+      <span onClick={onClickReply}>回复</span>
       <Tooltip title='Like'>
         <span onClick={onAction.bind(this, 'like', commentId)}>
           {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
@@ -102,7 +118,6 @@ const UserOptions: React.FC<{
           <span className={styles.commentAction}>{dislikedCount}</span>
         </span>
       </Tooltip>
-      <span onClick={onClickReply}>回复</span>
     </>
   );
 };
@@ -130,8 +145,7 @@ const SubComment: React.FC<{
       author={author}
       replier={replier}
       datetime={datetime}
-      content={<div className={styles.content}><GEditor contentClassName={styles.editorContent} editable={false}
-                                                        value={content} /></div>}
+      content={<Content>{content}</Content>}
       actions={[
         <UserOptions
           reply$={reply$}
@@ -146,11 +160,11 @@ const SubComment: React.FC<{
 
 const Comment: React.FC<{
   id: ID;
-  replyId?: ID;
+  replyId?: ID | null;
   datetime?: string;
   content?: React.ReactNode;
   author: UserType;
-  replier?: UserType;
+  replier?: UserType | null;
   type?: 'small' | 'none';
   className?: string;
   active?: boolean;
@@ -169,7 +183,7 @@ const Comment: React.FC<{
         actions = [],
         className,
       }) => {
-  let hasReply = replyId !== undefined;
+  let hasReply = replyId && replier;
 
   return (
     <div
@@ -189,8 +203,7 @@ const Comment: React.FC<{
         }
         author={author?.title}
         datetime={
-          <>
-            {datetime}{' '}
+          <div className={styles.tiptap}>
             {hasReply && (
               <a
                 href={`#c_${replyId || ''}`}
@@ -199,12 +212,13 @@ const Comment: React.FC<{
                   // onJump && onJump(replyId);
                 }}
               >
-                <RetweetOutlined />{' '}
-                <Avatar size={15} src={replier?.avatarUrl} />{' '}
+                <RetweetOutlined className={styles.replyFlag} />
+                <Avatar size={15} src={replier?.avatarUrl} className={styles.replyAvatar} />
                 <span>{replier?.title}</span>
               </a>
             )}
-          </>
+            <span>{datetime}</span>
+          </div>
         }
         content={content}
         actions={actions}>
@@ -282,8 +296,7 @@ const Index: React.FC<{
       datetime={datetime}
       author={author}
       replier={replier}
-      content={<div className={styles.content}><GEditor contentClassName={styles.editorContent} value={content}
-                                                        editable={false} /></div>}
+      content={<Content>{content}</Content>}
       actions={[
         <UserOptions
           reply$={reply$}

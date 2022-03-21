@@ -8,9 +8,10 @@ import {
 import classNames from 'classnames';
 import styles from './index.less';
 import InfiniteScroll from 'react-infinite-scroller';
-import { List } from 'antd';
-import { useEventEmitter, useRequest, useSetState } from 'ahooks';
+import { Button, List, Divider } from 'antd';
+import { useEventEmitter, useUpdateEffect, useRequest, useSetState, useToggle } from 'ahooks';
 import Comment, { AffixEditor } from './Comment';
+import { Loading } from '@hocgin/ui';
 
 export interface IndexProps {
   /**
@@ -24,6 +25,7 @@ export interface IndexProps {
 const Index: React.FC<IndexProps> = ({ useAction, total }) => {
   let [dataSource, setDataSource] = useState([] as CommentType[]);
   let [hasMore, setHasMore] = useState(true);
+  let [orderDesc, { toggle: toggleOrderDesc }] = useToggle<boolean>(true);
   let [defaultParams, setDefaultParams] = useSetState({});
 
   // 点击回复事件
@@ -56,26 +58,34 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
       },
     },
   );
+  useUpdateEffect(() => {
+    setDataSource([]);
+  }, [orderDesc]);
 
   let onLoadMore = (page = 1) => {
-    scrollPull.run({ ...defaultParams, page } as ScrollParamsType);
+    scrollPull.run({ ...defaultParams, orderDesc, page } as ScrollParamsType);
   };
 
   return (
     <div className={classNames(styles.commentGroup)}>
-      <InfiniteScroll
-        initialLoad={true}
-        pageStart={0}
-        loadMore={onLoadMore}
-        hasMore={!scrollPull.loading && hasMore}
-        useWindow={true}
-      >
+      <InfiniteScroll key={`${orderDesc}`}
+                      initialLoad={true}
+                      pageStart={0}
+                      loadMore={onLoadMore}
+                      hasMore={!scrollPull.loading && hasMore}
+                      useWindow={true}>
         <List
           className={styles.comments}
-          loading={scrollPull?.loading}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
           itemLayout='horizontal'
-          header={<span className={styles.header}>{total !== undefined ? `${total} 评论` : '评论'}</span>}
+          header={<div className={styles.header}>
+            <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
+            <div>
+              <Button type='link' onClick={toggleOrderDesc} disabled={orderDesc}>倒序↓</Button>
+              <Divider type='vertical' />
+              <Button type='link' onClick={toggleOrderDesc} disabled={!orderDesc}>正序↑</Button>
+            </div>
+          </div>}
           dataSource={dataSource}
           renderItem={(item: CommentType, index) => (
             <List.Item key={index}>
@@ -89,6 +99,7 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
             </List.Item>
           )}
         />
+        {scrollPull?.loading && <Loading />}
       </InfiniteScroll>
       <AffixEditor reply$={reply$} replied$={replied$} useAction={useAction} />
     </div>

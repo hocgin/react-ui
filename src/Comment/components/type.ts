@@ -45,7 +45,7 @@ export interface MentionsParamsType {
 
 // ========================================================
 export interface CommentType {
-  replyId?: ID;
+  replyId?: ID | null;
   id: ID;
   datetime: string;
   /**
@@ -55,7 +55,7 @@ export interface CommentType {
   /**
    * 被评论人
    */
-  replier: UserType;
+  replier?: UserType | null;
   content?: string;
   likes?: number;
   disliked?: number;
@@ -64,16 +64,19 @@ export interface CommentType {
 }
 
 // ========================================================
-export interface ScrollParamsType extends ScrollRo {}
+export interface ScrollParamsType extends ScrollRo {
+}
 
-export interface ScrollDataType extends IScroll<CommentType> {}
+export interface ScrollDataType extends IScroll<CommentType> {
+}
 
 // ========================================================
 export interface UserParamsType {
   force?: boolean;
 }
 
-export interface UserDataType extends UserType {}
+export interface UserDataType extends UserType {
+}
 
 // ========================================================
 export interface ReplyParamsType {
@@ -81,14 +84,16 @@ export interface ReplyParamsType {
   content?: string;
 }
 
-export interface ReplyDataType extends CommentType {}
+export interface ReplyDataType extends CommentType {
+}
 
 // ========================================================
 export interface PagingParamsType extends PageRo {
   parentId: ID;
 }
 
-export interface PagingDataType extends IPage<CommentType> {}
+export interface PagingDataType extends IPage<CommentType> {
+}
 
 // ========================================================
 export interface LikeParamsType {

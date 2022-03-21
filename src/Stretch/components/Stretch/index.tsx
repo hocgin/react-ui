@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
 import styles from './index.less';
-import { useInterval, useTimeout } from 'ahooks';
+// @ts-ignore
+import Truncate from 'react-truncate';
+import { useInterval } from 'ahooks';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import {
   FullscreenOutlined,
@@ -12,15 +14,14 @@ import {
 
 const Index: React.FC<{
   className?: string;
-  children?: string | Node;
+  children?: any;
   maxRow?: number;
   fullSize?: boolean;
   bordered?: boolean;
-}> = ({ children, fullSize, className, maxRow, bordered = true, ...rest }) => {
+}> = ({ children, fullSize = false, className, maxRow, bordered = false, ...rest }) => {
   let [fsize, setFullSize] = useState(fullSize);
   let [copied, setCopied] = useState(false);
 
-  let contentStyle = fsize ? {} : { WebkitLineClamp: maxRow };
   let sizeIcon = fsize ? <FullscreenExitOutlined /> : <FullscreenOutlined />;
 
   let onCopy = () => {
@@ -30,21 +31,19 @@ const Index: React.FC<{
   };
   useInterval(() => setCopied?.(false), 2000);
 
-  let checkStyle = { color: '#00B06D' };
-
   return (
     <div
       className={classnames(styles.stretch, className, {
         [styles.bordered]: bordered,
       })}
     >
-      <div className={styles.content} style={{ ...contentStyle }}>
-        {children}
+      <div className={styles.content}>
+        <Truncate lines={!fsize && maxRow} ellipsis={'...'}>{children}</Truncate>
       </div>
       <div className={styles.toolbar}>
         <span className={styles.copy}>
           {copied ? (
-            <CheckOutlined style={checkStyle} />
+            <CheckOutlined style={{ color: '#00B06D' } as any} />
           ) : (
             <CopyToClipboard text={`${children}`} onCopy={onCopy}>
               <CopyOutlined />

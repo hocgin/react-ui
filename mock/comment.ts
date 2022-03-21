@@ -58,7 +58,7 @@ let mockData = () => {
     likes: '@integer(0, 10)',
     disliked: '@integer(0, 10)',
     action: 'none',
-    content: '@string()',
+    content: '@cparagraph(1, 1000)',
     hasReply: '@bool()',
     author: mockUser(),
     replier: mockUser(),

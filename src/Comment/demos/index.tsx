@@ -1,6 +1,7 @@
 import React from 'react';
 import { Comment } from '@hocgin/ui';
 import {
+  CommentType,
   DislikeParamsType,
   LikeParamsType,
   PagingDataType,
@@ -44,7 +45,29 @@ let records = [
     hasReply: true,
     datetime: '1 分钟前',
   },
-];
+  {
+    replyId: 22,
+    id: 2,
+    likes: 10,
+    disliked: 20,
+    content: '<p>这是一条回复</p> <a href="https://hocgin.top">HOCGIN</a>',
+    action: 'liked',
+    author: {
+      id: 1,
+      title: 'hocgin2',
+      avatarUrl: '',
+      href: '',
+    },
+    replier: {
+      id: 1,
+      title: 'hocgin',
+      avatarUrl: '',
+      href: '',
+    },
+    hasReply: true,
+    datetime: '1 分钟前',
+  },
+] as any[];
 let showResult = {
   current: 1,
   total: 12,
@@ -66,12 +89,12 @@ let reply = (replyId?: any, replyContent?: any) => {
       avatarUrl: '',
       href: '',
     },
-    replier: {
+    replier: replyId !== null ? {
       id: 1,
       title: 'hocgin',
       avatarUrl: '',
       href: '',
-    },
+    } : null,
     hasReply: false,
     datetime: '1 分钟前',
   });
@@ -88,7 +111,11 @@ let useAction = {
     return {
       hasMore: false,
       nextId: undefined,
-      records: records,
+      records: (records || []).map(({ replyId, replier, ...record }: CommentType) => {
+        return {
+          ...record,
+        };
+      }),
     } as ScrollDataType;
   },
   // 查询子评论

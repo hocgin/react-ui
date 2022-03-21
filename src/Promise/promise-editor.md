@@ -1,6 +1,7 @@
 ---
+
 # @formatter:off
-title: Promise - 页面 - 编辑器页面
+title: Promise - 编辑器页面
 order: 1000
 nav:
   title: 高级组件
@@ -10,7 +11,7 @@ group:
 # @formatter:on
 ---
 
-# Promise - 页面 - 编辑器页面
+# Promise - 编辑器页面
 
 ## 代码演示
 
