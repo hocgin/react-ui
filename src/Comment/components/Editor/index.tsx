@@ -76,6 +76,10 @@ const Editor: React.FC<{
   });
 
   let onSubmitReply = () => {
+    if (`${content}`.trim().length === 0) {
+      return;
+    }
+
     replyRequest.run({
       commentId: reply?.id,
       content,
@@ -111,10 +115,10 @@ const Editor: React.FC<{
                 &nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title="取消回复">
+              <Tooltip title='取消回复'>
                 <Button
-                  size="small"
-                  shape="circle"
+                  size='small'
+                  shape='circle'
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />
