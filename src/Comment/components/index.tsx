@@ -60,6 +60,8 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
   );
   useUpdateEffect(() => {
     setDataSource([]);
+    setDefaultParams({ nextId: null });
+    setHasMore(true);
   }, [orderDesc]);
 
   let onLoadMore = (page = 1) => {
