@@ -1,7 +1,10 @@
 {
   "name": "@hocgin/ui",
   "version": "4.0.45",
-  "sideEffects": true,
+  "sideEffects": [
+    ".less",
+    ".css"
+  ],
   "scripts": {
     "start": "dumi dev",
     "docs:build": "dumi build",

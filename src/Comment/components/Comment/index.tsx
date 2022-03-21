@@ -21,14 +21,14 @@ import {
 } from '@ant-design/icons';
 import {
   Avatar,
-  Comment as AntdComment,
+  Comment,
   Tooltip,
   List,
   Pagination,
   Skeleton,
   Affix,
-  Button,
 } from 'antd';
+import 'antd/es/comment/style';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
 import Editor from '@/Comment/components/Editor';
@@ -162,7 +162,7 @@ const SubComment: React.FC<{
   } = comment;
   let id = comment.id;
   return (
-    <Comment
+    <CiComment
       type={'small'}
       id={id}
       replyId={replyId}
@@ -182,7 +182,7 @@ const SubComment: React.FC<{
   );
 };
 
-const Comment: React.FC<{
+const CiComment: React.FC<{
   id: ID;
   replyId?: ID | null;
   datetime?: string;
@@ -221,7 +221,7 @@ const Comment: React.FC<{
         className,
       )}
     >
-      <AntdComment
+      <Comment
         avatar={
           <Avatar src={author?.avatarUrl} size={32} icon={<UserOutlined />} />
         }
@@ -252,7 +252,7 @@ const Comment: React.FC<{
         actions={actions}
       >
         {children}
-      </AntdComment>
+      </Comment>
     </div>
   );
 };
@@ -318,7 +318,7 @@ const Index: React.FC<{
   };
 
   return (
-    <Comment
+    <CiComment
       className={styles.comment}
       id={id}
       replyId={replyId}
@@ -369,7 +369,7 @@ const Index: React.FC<{
           />
         </>
       ) : null}
-    </Comment>
+    </CiComment>
   );
 };
 
