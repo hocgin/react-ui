@@ -89,6 +89,7 @@ const Index: React.FC<{
   header?: any;
   value?: any;
   className?: string;
+  placeholder?: string;
   contentClassName?: string;
   uploadImageUrl?: string;
   fullscreen?: boolean;
@@ -97,18 +98,19 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-        onChange,
-        className,
-        contentClassName,
-        header,
-        onChangeFullscreen,
-        editorRef,
-        fullscreen = false,
-        editable = true,
-        value,
-        onSearchMention,
-        uploadImageUrl = '/api/com/file/upload',
-      }) => {
+  onChange,
+  className,
+  placeholder,
+  contentClassName,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+  uploadImageUrl = '/api/com/file/upload',
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -146,7 +148,7 @@ const Index: React.FC<{
       ExIframe,
       HexColorDecorator,
       ExPlaceholder.configure({
-        placeholder: '请输入内容..',
+        placeholder: placeholder,
       }),
       ExMention.configure({
         suggestion: onSearchMention

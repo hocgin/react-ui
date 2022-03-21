@@ -3,7 +3,12 @@ import classNames from 'classnames';
 import styles from './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import { Avatar, Button, Tooltip } from 'antd';
-import { CheckOutlined, ClearOutlined, RetweetOutlined, UserOutlined } from '@ant-design/icons';
+import {
+  CheckOutlined,
+  ClearOutlined,
+  RetweetOutlined,
+  UserOutlined,
+} from '@ant-design/icons';
 import {
   CommentType,
   ReplyDataType,
@@ -102,13 +107,14 @@ const Editor: React.FC<{
           {hasBeReply && (
             <>
               <a href={`#c_${replyId}`} className={styles.reply}>
-                <RetweetOutlined />&nbsp;@{replyUsername}
+                <RetweetOutlined />
+                &nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title='取消回复'>
+              <Tooltip title="取消回复">
                 <Button
-                  size='small'
-                  shape='circle'
+                  size="small"
+                  shape="circle"
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />
@@ -119,6 +125,7 @@ const Editor: React.FC<{
         <div style={{ margin: '3px 0' } as any}>
           <GEditor
             editorRef={editorRef}
+            placeholder={placeholder}
             className={styles.content}
             onChange={() => setContent(editorRef.current.getHTML())}
           />
