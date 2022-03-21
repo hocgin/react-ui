@@ -47,10 +47,14 @@ export default class DateTimeFormat {
    * 相对时间
    * 2021-06-01T00:30:30.159
    */
-  static defRelativeFromNow(localDatetime: string): string {
-    return DateTimeFormat.relativeFromNow(
-      moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT).valueOf(),
-    );
+  static defRelativeFromNow(localDatetime?: string): string | undefined {
+    try {
+      return DateTimeFormat.relativeFromNow(
+        moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT).valueOf(),
+      );
+    } catch (e) {
+      return localDatetime;
+    }
   }
 
   /**
