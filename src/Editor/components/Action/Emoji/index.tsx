@@ -5,12 +5,12 @@ import { SmileOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
 // @ts-ignore
 import { Picker } from 'emoji-mart';
+import 'emoji-mart/css/emoji-mart.css';
 
 export const Emoji: React.FC<{ editor?: Editor | null }> = ({
                                                               editor,
                                                             }) => (
-  <TbButton onClick={() =>
-    console.log(editor?.getAttributes('textStyle'))}>
+  <TbButton>
     <Popover
       placement='top'
       trigger='click'
