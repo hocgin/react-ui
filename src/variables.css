@@ -1,0 +1,5 @@
+/* small / middle / large */
+:root {
+  --large-header-height: 70px;
+  --small-header-height: 70px;
+}

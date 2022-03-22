@@ -1,10 +1,44 @@
 import React, { useState } from 'react';
+import { configResponsive, useResponsive } from 'ahooks';
 import classnames from 'classnames';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import styles from './index.less';
-import { useScroll } from 'ahooks';
+
+configResponsive({
+  small: 0,
+  middle: 800,
+  large: 1200,
+});
 
 type Mode = 'none' | 'fixed' | 'sticky';
+
+const HeaderMenu: React.FC<{
+  menus?: any[];
+}> = ({ menus }) => {
+  const responsive = useResponsive();
+  let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
+  return (
+    <>
+      <div
+        className={classnames(styles.toggle, { [styles.active]: isOpenMenu })}
+        onClick={() => setIsOpenMenu(!isOpenMenu)}
+      >
+        {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
+      </div>
+      <ul
+        className={classnames(styles.navigation, {
+          [styles.active]: isOpenMenu,
+        })}
+      >
+        {(menus || []).map(({ href, title }, index) => (
+          <li key={index}>
+            <a href={href}>{title}</a>
+          </li>
+        ))}
+      </ul>
+    </>
+  );
+};
 
 const Index: React.FC<{
   menus?: any[];
@@ -25,8 +59,6 @@ const Index: React.FC<{
   title,
   href = 'https://www.hocgin.top',
 }) => {
-  let [isOpenMenu, setIsOpenMenu] = useState(false);
-
   return (
     <header
       className={classnames(
@@ -51,23 +83,7 @@ const Index: React.FC<{
           </span>
           {title && <span className={styles.title}>{title}</span>}
         </a>
-        <div
-          className={classnames(styles.toggle, { [styles.active]: isOpenMenu })}
-          onClick={() => setIsOpenMenu(!isOpenMenu)}
-        >
-          {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
-        </div>
-        <ul
-          className={classnames(styles.navigation, {
-            [styles.active]: isOpenMenu,
-          })}
-        >
-          {(menus || []).map(({ href, title }, index) => (
-            <li key={index}>
-              <a href={href}>{title}</a>
-            </li>
-          ))}
-        </ul>
+        <HeaderMenu menus={menus} />
       </div>
     </header>
   );

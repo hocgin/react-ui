@@ -7,12 +7,15 @@ import { Popover } from 'antd';
 import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 
-export const Emoji: React.FC<{ editor?: Editor | null }> = ({
-                                                              editor,
-                                                            }) => (
+export const Emoji: React.FC<{
+  editor?: Editor | null,
+  placement?: 'top' | 'bottom',
+}> = ({
+        editor, placement = 'top',
+      }) => (
   <TbButton>
     <Popover
-      placement='top'
+      placement={placement}
       trigger='click'
       content={
         <Picker

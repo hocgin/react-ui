@@ -12,7 +12,8 @@ export const InsertCard: React.FC<{
   editor?: Editor | null,
   className?: string,
   uploadImageUrl: string,
-}> = ({ editor, uploadImageUrl, className }) => {
+  placement?: 'top' | 'bottom',
+}> = ({ editor, placement = 'top', uploadImageUrl, className }) => {
   const menu = (<Menu className={styles.menus}>
     <Menu.Item key={'InsertImage'}>
       <InsertImage editor={editor} uploadUrl={uploadImageUrl} />
@@ -27,7 +28,7 @@ export const InsertCard: React.FC<{
 
   return (
     <Button type='text' title={'插入卡片'} className={classnames(styles.dropdown, className)}>
-      <Dropdown overlay={menu} trigger={['click']}>
+      <Dropdown overlay={menu} trigger={['click']} placement={placement}>
         <PlusCircleFilled className={styles.icon} />
       </Dropdown>
     </Button>

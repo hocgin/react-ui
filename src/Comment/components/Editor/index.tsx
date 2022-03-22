@@ -127,7 +127,7 @@ const Editor: React.FC<{
       </div>
       <div className={classnames(styles.bottom)}>
         <div className={styles.header}>
-          <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
+          <Avatar size={28} icon={<UserOutlined />} src={user?.avatarUrl} />
           <span
             className={styles.title}
             onClick={() => !user && userRequest.runAsync({ force: true })}

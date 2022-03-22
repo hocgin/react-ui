@@ -5,6 +5,7 @@ export { default as Comment } from './Comment';
 export { Logo, HeartFilled } from './Logo';
 export { Loading } from './Loading';
 export { LikeCheckbox } from './LikeCheckbox';
+export { NotificationIndicator, NotificationBox } from './Notification';
 export { default as Rich } from './Rich';
 export { default as Markdown } from './Markdown';
 export { default as Featbar } from './Featbar';

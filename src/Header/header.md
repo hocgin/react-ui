@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Header - 头部
 nav:
@@ -18,6 +17,10 @@ group:
 
 ### 基础用法
 
-Demo:
+同一个 div 的场景:
 
 <code src="./demos/index.tsx"  background="#f0f2f5" iframe/>
+
+不在同一个 div 的场景:
+
+<code src="./demos/mode2.tsx"  background="#f0f2f5" iframe/>

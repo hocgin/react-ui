@@ -1,7 +1,7 @@
 ---
 
 # @formatter:off
-title: Loading - 加载中
+title: Notification - 通知
 nav:
   title: 组件
   path: /components
@@ -10,7 +10,7 @@ group:
 # @formatter:on
 ---
 
-# Loading - 加载中
+# Notification - 通知
 
 这是一个组件的基础描述
 

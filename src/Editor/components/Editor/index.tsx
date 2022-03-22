@@ -98,19 +98,19 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-  onChange,
-  className,
-  placeholder,
-  contentClassName,
-  header,
-  onChangeFullscreen,
-  editorRef,
-  fullscreen = false,
-  editable = true,
-  value,
-  onSearchMention,
-  uploadImageUrl = '/api/com/file/upload',
-}) => {
+        onChange,
+        className,
+        placeholder,
+        contentClassName,
+        header,
+        onChangeFullscreen,
+        editorRef,
+        fullscreen = false,
+        editable = true,
+        value,
+        onSearchMention,
+        uploadImageUrl = '/api/com/file/upload',
+      }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -183,6 +183,7 @@ const Index: React.FC<{
     [editor],
   );
 
+  let placement: any = isFullscreen ? 'bottom' : 'top';
   return (
     <>
       <Dropdown
@@ -214,6 +215,7 @@ const Index: React.FC<{
                       <InsertCard
                         editor={editor}
                         uploadImageUrl={uploadImageUrl}
+                        placement={placement}
                       />
                       <Divider type={'vertical'} />
                       <Undo editor={editor} />
@@ -222,8 +224,8 @@ const Index: React.FC<{
                       <ClearStyle editor={editor} />
                       {/*字体*/}
                       <Divider type={'vertical'} />
-                      <Paragraph editor={editor} />
-                      <FontSize editor={editor} />
+                      <Paragraph editor={editor} placement={placement} />
+                      <FontSize editor={editor} placement={placement} />
                       <Bold editor={editor} />
                       <Italic editor={editor} />
                       <Strike editor={editor} />
@@ -250,7 +252,7 @@ const Index: React.FC<{
                       <SetLink editor={editor} />
                       <HorizontalRule editor={editor} />
                       <HardBreak editor={editor} />
-                      <Emoji editor={editor} />
+                      <Emoji editor={editor} placement={placement} />
                     </div>
                   )}
                 </div>
@@ -281,7 +283,7 @@ const Index: React.FC<{
                   onMouseDown={(e) => e.preventDefault()}
                 >
                   <InsertCard editor={editor} uploadImageUrl={uploadImageUrl} />
-                  <Paragraph editor={editor} />
+                  <Paragraph editor={editor} placement={placement} />
                   <Bold editor={editor} />
                   <OrderedList editor={editor} />
                   <BulletList editor={editor} />

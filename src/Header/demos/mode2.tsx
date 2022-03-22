@@ -8,7 +8,7 @@ import styles from './index.less';
 
 export default () => {
   return (
-    <div style={{ backgroundColor: 'black', height: '500px' } as any}>
+    <div style={{ height: '500px' } as any}>
       <Header
         style={{ padding: '0 10px 0' } as any}
         mode={'sticky'}
@@ -17,7 +17,7 @@ export default () => {
           { href: 'www.baidu.com', title: '🖍️ 标题' },
         ]}
       />
-      <div style={{ height: 500 } as any}>4</div>
+      <div style={{ backgroundColor: 'black', height: 500 } as any}>你好</div>
     </div>
   );
 };

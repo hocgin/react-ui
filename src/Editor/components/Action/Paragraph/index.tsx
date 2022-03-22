@@ -3,7 +3,10 @@ import { Editor } from '@tiptap/react';
 import MeDropdown from '@/Editor/components/MeDropdown';
 import styles from './index.less';
 
-export const Paragraph: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
+export const Paragraph: React.FC<{
+  editor?: Editor | null,
+  placement?: 'top' | 'bottom',
+}> = ({ editor, placement }) => {
   let menus = [
     {
       key: 'paragraph',
@@ -42,7 +45,7 @@ export const Paragraph: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
     },
   ];
 
-  return <MeDropdown menus={menus} defaultValue={'正文'} titleClassName={styles.content} />;
+  return <MeDropdown placement={placement} menus={menus} defaultValue={'正文'} titleClassName={styles.content} />;
 };
 
 
