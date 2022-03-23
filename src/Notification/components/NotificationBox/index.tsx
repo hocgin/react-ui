@@ -1,20 +1,26 @@
 import React from 'react';
-
-const ChatCard: React.FC<{
-  avatarUrl?: any;
-  title?: string;
-  dot?: boolean;
-  content?: string;
-  createdAt?: string;
-}> = () => {
-  return <div>ChatCard</div>;
-};
-
+import { Tabs } from 'antd';
+import styles from './index.less';
+import { NoticePane } from './NoticePane';
+import { PersonalPane } from './PersonalPane';
+import { SystemPane } from './SystemPane';
+import { UseAction } from '../types';
+import classnames from 'classnames';
 
 export const NotificationBox: React.FC<{
   className?: string;
-  defaultParams?: any;
-}> = (props, ref) => {
-  return <div> 加载中 </div>;
+  useAction: UseAction;
+}> = ({ useAction }) => {
+  return <Tabs tabPosition='left' className={styles.tab} type='card'>
+    <Tabs.TabPane tab='📪 私信' key='2' className={classnames(styles.tabPane, styles.personalPane)}>
+      <PersonalPane useAction={useAction} />
+    </Tabs.TabPane>
+    <Tabs.TabPane tab='🎉 通知' key='3' className={styles.tabPane}>
+      <NoticePane useAction={useAction}/>
+    </Tabs.TabPane>
+    <Tabs.TabPane tab='📢 公告' key='1' className={styles.tabPane}>
+      <SystemPane useAction={useAction} />
+    </Tabs.TabPane>
+  </Tabs>;
 };
 

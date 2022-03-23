@@ -1,7 +1,19 @@
-import { ID, IScroll, ScrollRo } from '@/Utils/interface';
+import { ID, IScroll, LocalDateTime, ScrollRo } from '@/Utils/interface';
+
+type MessageType = 'system_message' | 'personal_message' | 'notice_message';
 
 export interface ScrollParamsType extends ScrollRo {
   keyword?: string;
+}
+
+export interface ScrollPersonalParamsType extends ScrollRo {
+  keyword?: string;
+  chatUserId?: ID;
+}
+
+export interface sendPersonalParamsType {
+  receiverUserId: ID;
+  content?: string;
 }
 
 // 您订阅的 "文章" 有一条新的 "评论"
@@ -25,16 +37,41 @@ interface PersonalMessage {
 }
 
 export interface MessageDataType {
-  id: ID,
-  messageType: string;
+  id: ID;
+  messageType: MessageType;
+  title?: string;
+  description?: string;
+  linkUrl?: string;
   noticeMessage?: NoticeMessage;
   systemMessage?: SystemMessage;
   personalMessage?: PersonalMessage;
-  readyAt?: string;
+  readyAt?: LocalDateTime;
+  sendAt?: LocalDateTime;
+  senderUser?: ID;
+  senderUserName?: string;
+  senderUserAvatarUrl?: string;
   receiverUser?: ID;
   receiverUserName?: string;
+  receiverUserAvatarUrl?: string;
 }
 
 export interface UseAction {
-  scroll: (args: ScrollParamsType) => Promise<IScroll<MessageDataType>>;
+  // [通知] 所有会话
+  scrollWithNoticeMessage?: (
+    args: ScrollParamsType,
+  ) => Promise<IScroll<MessageDataType>>;
+  // [公告] 所有会话
+  scrollWithSystemMessage?: (
+    args: ScrollParamsType,
+  ) => Promise<IScroll<MessageDataType>>;
+  // [私信] 所有会话
+  scrollWithPersonalMessage?: (
+    args: ScrollPersonalParamsType,
+  ) => Promise<IScroll<MessageDataType>>;
+  // [私信] 最近会话
+  scrollLastChatWithPersonalMessage?: (
+    args: ScrollParamsType,
+  ) => Promise<IScroll<MessageDataType>>;
+  // [私信] 发送私信
+  sendWithPersonalMessage?: (args: sendPersonalParamsType) => Promise<any>;
 }

@@ -1,4 +1,4 @@
-import { HttpResult, IPage, Result } from './interface';
+import { HttpResult, IPage, IScroll, Result } from './interface';
 import { message } from 'antd';
 import memoizeOne from 'memoize-one';
 import { Option } from '@/Utils/types/rt-grass';
@@ -156,6 +156,17 @@ export class Struct {
     return {
       list: Struct.fastGetPagingList(paging),
       pagination: Struct.fastPagingPagination(paging),
+    };
+  }
+
+  /**
+   * 获取滚动数据结构
+   * @param fromResult
+   */
+  static getScrollData(fromResult?: IScroll) {
+    return {
+      records: fromResult?.records || [],
+      nextId: fromResult?.nextId,
     };
   }
 

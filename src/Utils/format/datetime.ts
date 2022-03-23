@@ -1,8 +1,10 @@
 import moment from 'moment';
+import { LocalDateTime } from '@/Utils/interface';
 
 export default class DateTimeFormat {
-  static FORMAT_1 = 'YYYY-MM-DD HH:mm:ss';
-  static FORMAT_2 = 'YYYY-MM-DD HH:mm';
+  public static FORMAT_1 = 'YYYY-MM-DD HH:mm:ss';
+  public static FORMAT_2 = 'YYYY-MM-DD HH:mm';
+  public static FORMAT_3 = 'YYYY-MM-DD';
 
   // 2021-06-01T00:30:30.159
   static DEFAULT_FORMAT = moment.HTML5_FMT.DATETIME_LOCAL_MS;
@@ -45,25 +47,31 @@ export default class DateTimeFormat {
 
   /**
    * 相对时间
-   * 2021-06-01T00:30:30.159
+   * @param localDatetime 2021-06-01T00:30:30.159
+   * @return 3分钟前
    */
-  static defRelativeFromNow(localDatetime?: string): string | undefined {
-    try {
-      return DateTimeFormat.relativeFromNow(
-        moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT).valueOf(),
-      );
-    } catch (e) {
+  static useDefRelativeFromNow(localDatetime?: LocalDateTime): string | undefined {
+    let formatter = moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT);
+    if (!formatter.isValid()) {
       return localDatetime;
     }
+    return DateTimeFormat.relativeFromNow(
+      formatter.valueOf(),
+    );
   }
 
+
   /**
-   * 2021-06-01T00:30:30.159
-   * @param localDatetime
+   * 格式化时间
+   * @param localDatetime 2021-06-01T00:30:30.159
+   * @param defFormat 格式
+   * @return 根据格式返回
    */
-  static localDatetime(localDatetime: string) {
-    return moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT).format(
-      DateTimeFormat.FORMAT_1,
-    );
+  static useDefLocalDatetime(localDatetime?: LocalDateTime, defFormat: string = DateTimeFormat.FORMAT_1): string {
+    let formatter = moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT);
+    if (!formatter.isValid()) {
+      return `${localDatetime}`;
+    }
+    return formatter.format(defFormat);
   }
 }

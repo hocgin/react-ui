@@ -1,3 +1,6 @@
+// 2021-06-01T00:30:30.159
+export type LocalDateTime = string;
+
 export interface UserType {
   id: ID;
   title: string;

@@ -180,17 +180,19 @@ export default class Lang {
    * @param service
    * @param defResult
    */
-  static nilService(service: any, defResult: any): any {
+  static nilService(service: any, defResult: any): (...args: any | any[]) => Promise<any> {
     return service ? service : async (...args: any[]) => defResult;
   }
 
+  /**
+   * 返回值在上下限范围内
+   * @param val 值
+   * @param min 下限
+   * @param max 上限
+   */
   static clamp(val: number, min: number, max: number): number {
-    if (val < min) {
-      return min;
-    }
-    if (val > max) {
-      return max;
-    }
+    if (val < min) return min;
+    if (val > max) return max;
     return val;
   }
 }

@@ -230,7 +230,7 @@ const CiComment: React.FC<{
                 <span>{replier?.title}</span>
               </a>
             )}
-            <span>{DateTimeFormat.defRelativeFromNow(datetime)}</span>
+            <span>{DateTimeFormat.useDefRelativeFromNow(datetime)}</span>
           </div>
         }
         content={content}

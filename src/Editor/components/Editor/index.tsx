@@ -100,7 +100,7 @@ const Index: React.FC<{
 }> = ({
         onChange,
         className,
-        placeholder,
+        placeholder = '',
         contentClassName,
         header,
         onChangeFullscreen,
