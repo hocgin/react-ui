@@ -14,32 +14,41 @@ export const Title: React.FC<{
 
 export const Dot: React.FC<{}> = () => <span className={styles.dot}>·</span>;
 
-export const MessageSmallCard: React.FC<{ title: string, content: string, description?: string, datetime?: LocalDateTime }>
-  = ({
-       title,
-       datetime,
-       content,
-       description,
-     }) => {
-  let [ellipsis, setEllipsis] = useState<boolean>(false);
+export const MessageSmallCard: React.FC<{
+  title: string;
+  content: string;
+  description?: string;
+  datetime?: LocalDateTime;
+}> = ({ title, datetime, content, description }) => {
   let fmtDatetime = Format.DateTime.useDefRelativeFromNow(datetime);
-  return <div className={styles.messageSmallCard}>
-    <Avatar size={34} icon={<NotificationOutlined />} />
-    <div className={styles.body}>
-      <div className={styles.title}><span>{title}</span>{fmtDatetime && (<>{fmtDatetime}</>)}</div>
-      <div className={styles.content}>
-        <Typography.Paragraph
-          ellipsis={{
-            rows: 2,
-            expandable: false,
-            suffix: ellipsis ? <a onClick={() => Modal.confirm({
-              icon: null,
-              cancelText: null,
-              content: <><Editor editable={false} value={content} /></>,
-            })}>查看</a> : null,
-            onEllipsis: () => setEllipsis(true),
-          } as any}>{description}</Typography.Paragraph>
+  return (
+    <div className={styles.messageSmallCard}>
+      <Avatar size={34} icon={<NotificationOutlined />} />
+      <div className={styles.body}>
+        <div className={styles.title}>
+          <span>{title}</span>
+          {fmtDatetime && <>{fmtDatetime}</>}
+        </div>
+        <div className={styles.container}>
+          <div className={styles.content}>{description}</div>
+          <div className={styles.more}>
+            {content && (
+              <a
+                rel='noopener noreferrer'
+                onClick={() =>
+                  Modal.confirm({
+                    icon: null,
+                    cancelText: null,
+                    content: <Editor editable={false} value={content} />,
+                  })
+                }
+              >
+                更多
+              </a>
+            )}
+          </div>
+        </div>
       </div>
     </div>
-  </div>;
+  );
 };

@@ -1,5 +1,5 @@
 .header {
-  padding: 24px 32px 0 0;
+  padding: 24px 16px 0 16px;
   display: block;
   font-size: 14px;
   font-weight: 600;
@@ -10,9 +10,8 @@
   padding: 0 3px;
 }
 
-
 .messageSmallCard {
-  padding: 20px 32px 20px 0;
+  padding: 20px 16px 20px 16px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -21,6 +20,7 @@
   .body {
     margin-left: 12px;
     flex: 1;
+    overflow: hidden;
 
     .title {
       display: flex;
@@ -30,21 +30,34 @@
       color: grey;
     }
 
+    .more {
+      width: 2em;
+      display: flex;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+    }
+
     .content {
+      flex: 1;
       font-size: 14px;
       margin-top: 4px;
       color: #121212;
       font-weight: 500;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
 
-      :global(.ant-typography ) {
+      :global(.ant-typography) {
         margin-bottom: 0;
       }
     }
-
   }
 
   &:after {
-    content: "";
+    content: '';
     position: absolute;
     bottom: 0;
     left: 0;
@@ -52,5 +65,4 @@
     height: 1px;
     background-color: #ebeef5;
   }
-
 }

@@ -163,9 +163,9 @@ export class Struct {
    * 获取滚动数据结构
    * @param fromResult
    */
-  static getScrollData(fromResult?: IScroll) {
+  static getScrollData(fromResult?: IScroll): any {
     return {
-      records: fromResult?.records || [],
+      list: fromResult?.records || [],
       nextId: fromResult?.nextId,
     };
   }

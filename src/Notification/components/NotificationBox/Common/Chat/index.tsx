@@ -3,7 +3,7 @@ import { Avatar, Button, List, Input } from 'antd';
 import styles from './index.less';
 import { SearchOutlined } from '@ant-design/icons';
 import { ID, LocalDateTime } from '@/Utils/interface';
-import { Format, Editor as GEditor, Utils } from '@hocgin/ui';
+import { Format, Editor as GEditor, Utils, Loading } from '@hocgin/ui';
 import classnames from 'classnames';
 import {
   MessageDataType,
@@ -11,6 +11,8 @@ import {
   UseAction,
 } from '@/Notification/components/types';
 import { useInfiniteScroll, useRequest } from 'ahooks';
+import { Struct } from '@/Utils/result';
+import useInfiniteTopScroll from '@/Utils/scene/useInfiniteTopScroll';
 
 const UserCard: React.FC<{
   datetime?: LocalDateTime;
@@ -85,12 +87,16 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
   chatUserId,
   useAction,
 }) => {
-  console.log('chatUserId', chatUserId);
   const ref = useRef<any>();
-  const { data, loading, loadMore, loadingMore, noMore } = useInfiniteScroll(
+  const { data, loading, loadMore, loadingMore, noMore } = useInfiniteTopScroll(
     (d) =>
-      useAction?.scrollWithPersonalMessage?.({ ...d, chatUserId }) ??
-      Promise.resolve({} as any),
+      Utils.Lang.nilService(
+        useAction?.scrollWithPersonalMessage?.bind(this, {
+          ...d,
+          chatUserId,
+        }),
+        {},
+      )().then(Struct.getScrollData),
     {
       target: ref,
       isNoMore: (d) => d?.nextId === undefined,
@@ -98,7 +104,7 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
   );
   return (
     <div ref={ref} className={styles.chatBody}>
-      {(data?.records || []).map(
+      {(data?.list || []).map(
         ({
           senderUser,
           sendAt,
@@ -177,7 +183,11 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
   // 与谁聊天
   let [chatUser, setChatUser] = useState<{ id: any; title: string }>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteScroll(
-    Utils.Lang.nilService(useAction?.scrollLastChatWithPersonalMessage, {}),
+    () =>
+      Utils.Lang.nilService(
+        useAction?.scrollLastChatWithPersonalMessage,
+        {},
+      )().then(Struct.getScrollData),
     {
       target: ref,
       isNoMore: (d) => d?.nextId === undefined,
@@ -192,7 +202,7 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
           <List
             rowKey="id"
             itemLayout="horizontal"
-            dataSource={data?.records || []}
+            dataSource={data?.list || []}
             renderItem={({
               sendAt,
               senderUser,
@@ -212,6 +222,7 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
               />
             )}
           />
+          {loading && <Loading />}
         </div>
       </div>
       <div className={styles.right}>
