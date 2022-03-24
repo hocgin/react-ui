@@ -1,10 +1,13 @@
 ---
+
+# @formatter:off
 title: ComplexTable - 表格
 nav:
   title: ⚠️ 废弃中
   path: /components
 group:
   path: /deprecated
+# @formatter:on
 ---
 
 # ComplexTable
