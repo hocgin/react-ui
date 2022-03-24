@@ -11,6 +11,7 @@ export const config: any = {
         state: 'vx',
         encoding: '这是自定义的',
         search: 'search_key',
+        html: 'test html',
         searchName: 'searchName',
         gin_upload_name: {
           url: 'http://dummyimage.com/100x100',
@@ -193,6 +194,11 @@ export const config: any = {
       title: '编号',
       dataIndex: 'encoding',
       valueType: Dom.columnPrefix('encoding'),
+    },
+    {
+      title: '富文本 html',
+      dataIndex: 'html',
+      valueType: Dom.columnPrefix('html'),
     },
     {
       title: '富文本',

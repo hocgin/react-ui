@@ -1,5 +1,5 @@
 import React from 'react';
-import { Promise, Exhibit, Rich, Markdown } from '@hocgin/ui';
+import { Promise, Exhibit, Rich, Markdown, Editor } from '@hocgin/ui';
 import Dom from '@/Utils/dom';
 import styles from './index.less';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
@@ -311,6 +311,17 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
         randEx={randExp}
         {...props?.fieldProps}
       />;
+    },
+  },
+  [prefix('html')]: {
+    render: (text: any, props: any) => {
+      if (!text) {
+        return <div className={styles.box} />;
+      }
+      return <div className={styles.box}><Editor value={text} editable={false} /></div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      return <Editor value={text} {...props?.fieldProps} />;
     },
   },
   // 富文本编辑器

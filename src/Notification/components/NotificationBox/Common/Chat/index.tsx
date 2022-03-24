@@ -142,7 +142,7 @@ const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
     }
 
     sendRequest.run({
-      receiverUserId: chatUserId,
+      receiver: chatUserId,
       content,
     } as sendPersonalParamsType);
   };

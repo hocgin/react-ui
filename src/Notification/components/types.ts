@@ -12,7 +12,7 @@ export interface ScrollPersonalParamsType extends ScrollRo {
 }
 
 export interface sendPersonalParamsType {
-  receiverUserId: ID;
+  receiver: ID;
   content?: string;
 }
 

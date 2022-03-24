@@ -94,7 +94,7 @@ const Index: React.FC<{
   uploadImageUrl?: string;
   fullscreen?: boolean;
   editable?: boolean;
-  onChange?: () => void;
+  onChange?: (value: string) => void;
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
@@ -119,7 +119,7 @@ const Index: React.FC<{
   useUpdateEffect(() => onChangeFullscreen?.(isFullscreen), [isFullscreen]);
   const editor = useEditor({
     onUpdate({ editor }) {
-      onChange?.();
+      onChange?.(editor.getHTML());
     },
     extensions: [
       StarterKit,

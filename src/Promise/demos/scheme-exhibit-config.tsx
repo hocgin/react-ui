@@ -10,6 +10,7 @@ export const config: any = {
       return {
         title: '这是标题',
         state: 'vx',
+        html: '<p>666 <strong>777</strong></p>',
         rich: '<p>666 <strong>777</strong></p>',
         markdown: `# 这是标题1 \n ## 这是标题2 \n ### 这是标题3 \n`,
         stretch:
@@ -83,6 +84,11 @@ export const config: any = {
       title: '文本',
       dataIndex: 'stretch',
       valueType: Dom.columnPrefix('stretch'),
+    },
+    {
+      title: '富文本 html',
+      dataIndex: 'html',
+      valueType: Dom.columnPrefix('html'),
     },
     {
       title: '富文本',
