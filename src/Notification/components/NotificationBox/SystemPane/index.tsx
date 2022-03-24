@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import { MessageSmallCard, Title } from '../Common';
 import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll } from 'ahooks';
-import { Loading, Utils } from '@/index';
+import { Empty, Loading, Utils } from '@/index';
 import { Struct } from '@/Utils/result';
 import styles from './index.less';
 
@@ -37,6 +37,7 @@ export const SystemPane: React.FC<{
             />
           ),
         )}
+        {(noMore && (data?.list || []).length === 0) && <Empty />}
         {loading && <Loading />}
       </div>
     </div>

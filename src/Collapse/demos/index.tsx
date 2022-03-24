@@ -3,13 +3,13 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { ComplexCollapse, TextRow, Exhibit } from '@hocgin/ui';
+import { Collapse, TextRow, Exhibit } from '@hocgin/ui';
 import styles from './index.less';
 
 export default () => {
   return (
-    <ComplexCollapse defaultActiveKey={['1']}>
-      <ComplexCollapse.Panel header="基础信息" key="1">
+    <Collapse defaultActiveKey={['1']}>
+      <Collapse.Panel header='基础信息' key='1'>
         <TextRow bordered={true} title={'父级名称'}>
           顶级
         </TextRow>
@@ -27,13 +27,13 @@ export default () => {
         <TextRow title={'链接'}>
           <Exhibit.Link.Site url={'http://www.hocgin.top'} />
         </TextRow>
-      </ComplexCollapse.Panel>
-      <ComplexCollapse.Panel header="关联角色" key="2">
+      </Collapse.Panel>
+      <Collapse.Panel header='关联角色' key='2'>
         <TextRow bordered={true} title={'权限名称'}>
           权限名称
         </TextRow>
         <TextRow title={'权限类型'}>权限类型</TextRow>
-      </ComplexCollapse.Panel>
-    </ComplexCollapse>
+      </Collapse.Panel>
+    </Collapse>
   );
 };

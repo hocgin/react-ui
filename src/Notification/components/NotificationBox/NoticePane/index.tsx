@@ -4,7 +4,7 @@ import { Title, MessageSmallCard } from '../Common';
 import classnames from 'classnames';
 import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll, useSet } from 'ahooks';
-import { Format, Loading } from '@hocgin/ui';
+import { Empty, Format, Loading } from '@hocgin/ui';
 import { Utils } from '@/index';
 import { Struct } from '@/Utils/result';
 
@@ -51,6 +51,7 @@ export const NoticePane: React.FC<{
             );
           },
         )}
+        {(noMore && (data?.list || []).length === 0) && <Empty />}
         {loading && <Loading />}
       </div>
     </div>

@@ -73,7 +73,6 @@ let useAction = {
   },
   scrollWithPersonalMessage: async (args: ScrollPersonalParamsType) => {
     console.log('scrollWithPersonalMessage::', args);
-    let senderUser = args?.chatUserId;
     return {
       hasMore: true,
       nextId: '1',
@@ -176,15 +175,16 @@ export default () => {
   let [count, setCount] = useState<number>(0);
   return (
     <>
-      <Divider type="horizontal" />
+      <Divider type='horizontal' />
       <NotificationIndicator
         count={count}
         onClick={() => setCount(Math.round(Math.random() * 10))}
         className={styles.ok}
       />
-      <Divider type="horizontal" />
+      <Divider type='horizontal' />
       <NotificationBox useAction={useAction} tabPosition={'top'} />
-      <NotificationBox useAction={useAction} tabPosition={'left'} />
+      <Divider type='horizontal' />
+      <NotificationBox useAction={{}} tabPosition={'left'} />
     </>
   );
 };

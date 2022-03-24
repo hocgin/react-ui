@@ -1,5 +1,5 @@
 ---
-title: ComplexCollapse - 视图
+title: Collapse - 视图
 nav:
   title: 组件
   path: /components
@@ -7,7 +7,7 @@ group:
   path: /
 ---
 
-# ComplexCollapse
+# Collapse
 
 这是一个组件的基础描述
 

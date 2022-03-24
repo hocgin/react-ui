@@ -3,7 +3,7 @@ import { Avatar, Button, List, Input } from 'antd';
 import styles from './index.less';
 import { SearchOutlined } from '@ant-design/icons';
 import { ID, LocalDateTime } from '@/Utils/interface';
-import { Format, Editor as GEditor, Utils, Loading } from '@hocgin/ui';
+import { Format, Editor as GEditor, Utils, Loading, Empty } from '@hocgin/ui';
 import classnames from 'classnames';
 import {
   MessageDataType,
@@ -22,13 +22,13 @@ const UserCard: React.FC<{
   avatar?: any;
   onClick?: (id: any) => void;
 }> = ({
-  datetime,
-  nickname,
-  avatar,
-  onClick,
-  selected = false,
-  content = ' ',
-}) => {
+        datetime,
+        nickname,
+        avatar,
+        onClick,
+        selected = false,
+        content = ' ',
+      }) => {
   let fmtDatetime = Format.DateTime.useDefRelativeFromNow(datetime);
   return (
     <div
@@ -84,9 +84,9 @@ const ChatRecord: React.FC<{
 };
 
 const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
-  chatUserId,
-  useAction,
-}) => {
+                                                                         chatUserId,
+                                                                         useAction,
+                                                                       }) => {
   const ref = useRef<any>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteTopScroll(
     (d) =>
@@ -106,11 +106,11 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
     <div ref={ref} className={styles.chatBody}>
       {(data?.list || []).map(
         ({
-          senderUser,
-          sendAt,
-          senderUserAvatarUrl,
-          personalMessage,
-        }: MessageDataType) => (
+           senderUser,
+           sendAt,
+           senderUserAvatarUrl,
+           personalMessage,
+         }: MessageDataType) => (
           <ChatRecord
             datetime={sendAt}
             avatar={senderUserAvatarUrl}
@@ -119,14 +119,16 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
           />
         ),
       )}
+      {(noMore && (data?.list || []).length === 0) && <Empty description={'暂无聊天内容'} />}
+      {loading && <Loading />}
     </div>
   );
 };
 
 const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
-  useAction,
-  chatUserId,
-}) => {
+                                                                      useAction,
+                                                                      chatUserId,
+                                                                    }) => {
   let editorRef = useRef<any>();
   let [content, setContent] = useState<string | undefined>('');
   let sendRequest = useRequest(
@@ -162,7 +164,7 @@ const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
       />
       <div className={styles.editorToolbar}>
         <div />
-        <Button type="primary" onClick={onSubmitSend}>
+        <Button type='primary' onClick={onSubmitSend}>
           发送
         </Button>
       </div>
@@ -173,7 +175,7 @@ const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
 const UserHeader: React.FC<{}> = () => {
   return (
     <div className={styles.userHeader}>
-      <Input placeholder="搜索联系人" suffix={<SearchOutlined />} />
+      <Input placeholder='搜索联系人' suffix={<SearchOutlined />} />
     </div>
   );
 };
@@ -200,16 +202,17 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
         <UserHeader />
         <div ref={ref} className={styles.userList}>
           <List
-            rowKey="id"
-            itemLayout="horizontal"
+            locale={{ emptyText: '暂无联系人' } as any}
+            rowKey='id'
+            itemLayout='horizontal'
             dataSource={data?.list || []}
             renderItem={({
-              sendAt,
-              senderUser,
-              senderUserName,
-              senderUserAvatarUrl,
-              description,
-            }: MessageDataType) => (
+                           sendAt,
+                           senderUser,
+                           senderUserName,
+                           senderUserAvatarUrl,
+                           description,
+                         }: MessageDataType) => (
               <UserCard
                 selected={chatUser?.id === senderUser}
                 avatar={senderUserAvatarUrl}
@@ -237,7 +240,7 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
             <Editor chatUserId={chatUser.id} useAction={useAction} />
           </>
         ) : (
-          <></>
+          <><Empty /></>
         )}
       </div>
     </div>
