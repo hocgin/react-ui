@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Badge, Tooltip } from 'antd';
 import styles from './index.less';
 import { BellOutlined } from '@ant-design/icons';

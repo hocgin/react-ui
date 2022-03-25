@@ -4,5 +4,5 @@
  */
 import React from 'react';
 
-export { NotificationIndicator } from './components/NotificationIndicator';
-export { NotificationBox } from './components/NotificationBox';
+export { NotificationIndicator as Indicator } from './components/NotificationIndicator';
+export { NotificationBox as Box } from './components/NotificationBox';

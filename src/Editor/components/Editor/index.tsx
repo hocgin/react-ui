@@ -73,7 +73,7 @@ import { lowlight } from 'lowlight/lib/core';
 lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
-import TbButton from '@/Editor/components/TbButton';
+import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 
@@ -98,19 +98,19 @@ const Index: React.FC<{
   onSearchMention?: (keyword: string) => Mention[] | undefined;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-        onChange,
-        className,
-        placeholder = '',
-        contentClassName,
-        header,
-        onChangeFullscreen,
-        editorRef,
-        fullscreen = false,
-        editable = true,
-        value,
-        onSearchMention,
-        uploadImageUrl = '/api/com/file/upload',
-      }) => {
+  onChange,
+  className,
+  placeholder = '',
+  contentClassName,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+  uploadImageUrl = '/api/com/file/upload',
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =

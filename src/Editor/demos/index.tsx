@@ -101,7 +101,7 @@ let onSearchMention = (query: string) => {
 export default () => {
   let editorRef = useRef<any>();
   let [editable, setEditable] = useState<boolean>(true);
-  let [fullscreen, setFullscreen] = useState<boolean>(true);
+  let [fullscreen, setFullscreen] = useState<boolean>(false);
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
   return (

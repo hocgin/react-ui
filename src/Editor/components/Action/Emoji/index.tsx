@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Editor } from '@tiptap/react';
-import TbButton from '@/Editor/components/TbButton';
+import TbButton from '@/Editor/components/Common/TbButton';
 import { SmileOutlined } from '@ant-design/icons';
 import { Popover } from 'antd';
 // @ts-ignore
@@ -8,15 +8,13 @@ import { Picker } from 'emoji-mart';
 import 'emoji-mart/css/emoji-mart.css';
 
 export const Emoji: React.FC<{
-  editor?: Editor | null,
-  placement?: 'top' | 'bottom',
-}> = ({
-        editor, placement = 'top',
-      }) => (
+  editor?: Editor | null;
+  placement?: 'top' | 'bottom';
+}> = ({ editor, placement = 'top' }) => (
   <TbButton>
     <Popover
       placement={placement}
-      trigger='click'
+      trigger="click"
       content={
         <Picker
           onSelect={(emoji: any) =>
@@ -29,4 +27,3 @@ export const Emoji: React.FC<{
     </Popover>
   </TbButton>
 );
-

@@ -89,10 +89,10 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
                                                                        }) => {
   const ref = useRef<any>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteTopScroll(
-    (d) =>
+    (d?: any) =>
       Utils.Lang.nilService(
         useAction?.scrollWithPersonalMessage?.bind(this, {
-          ...d,
+          nextId: d?.nextId,
           chatUserId,
         }),
         {},
@@ -119,7 +119,9 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
           />
         ),
       )}
-      {(noMore && (data?.list || []).length === 0) && <Empty description={'暂无聊天内容'} />}
+      {noMore && (data?.list || []).length === 0 && (
+        <Empty description={'暂无聊天内容'} />
+      )}
       {loading && <Loading />}
     </div>
   );
@@ -185,11 +187,11 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
   // 与谁聊天
   let [chatUser, setChatUser] = useState<{ id: any; title: string }>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteScroll(
-    () =>
+    (d?: any) =>
       Utils.Lang.nilService(
         useAction?.scrollLastChatWithPersonalMessage,
         {},
-      )().then(Struct.getScrollData),
+      )({ nextId: d?.nextId }).then(Struct.getScrollData),
     {
       target: ref,
       isNoMore: (d) => d?.nextId === undefined,
@@ -240,7 +242,9 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
             <Editor chatUserId={chatUser.id} useAction={useAction} />
           </>
         ) : (
-          <><Empty /></>
+          <>
+            <Empty />
+          </>
         )}
       </div>
     </div>

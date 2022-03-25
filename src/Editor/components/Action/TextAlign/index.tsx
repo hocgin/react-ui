@@ -7,7 +7,7 @@ import {
   AlignRightOutlined,
   QuestionOutlined,
 } from '@ant-design/icons';
-import MeDropdown from '@/Editor/components/MeDropdown';
+import MeDropdown from '@/Editor/components/Common/MeDropdown';
 
 export const TextAlign: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
   let menus = [
@@ -43,10 +43,9 @@ export const TextAlign: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
   return (
     <MeDropdown
       menus={menus}
-      mode='horizontal'
+      mode="horizontal"
       titleClassName={styles.content}
       defaultValue={<AlignLeftOutlined />}
     />
   );
 };
-

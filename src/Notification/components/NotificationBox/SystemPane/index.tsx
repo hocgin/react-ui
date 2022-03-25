@@ -13,10 +13,11 @@ export const SystemPane: React.FC<{
 }> = ({ className, useAction }) => {
   const ref = useRef<any>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteScroll(
-    () =>
-      Utils.Lang.nilService(useAction?.scrollWithSystemMessage, {})().then(
-        Struct.getScrollData,
-      ),
+    (d?: any) =>
+      Utils.Lang.nilService(
+        useAction?.scrollWithSystemMessage,
+        {},
+      )({ nextId: d?.nextId }).then(Struct.getScrollData),
     {
       target: ref,
       isNoMore: (d) => d?.nextId === undefined,
@@ -37,7 +38,7 @@ export const SystemPane: React.FC<{
             />
           ),
         )}
-        {(noMore && (data?.list || []).length === 0) && <Empty />}
+        {noMore && (data?.list || []).length === 0 && <Empty />}
         {loading && <Loading />}
       </div>
     </div>

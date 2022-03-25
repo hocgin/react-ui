@@ -23,7 +23,16 @@ const Index: React.FC<{
   onClick?: (key: string) => void;
   mode?: 'vertical' | 'horizontal' | 'inline';
   disabled?: boolean;
-}> = ({ className, placement, disabled = false, titleClassName, onClick, menus = [], defaultValue, mode }) => {
+}> = ({
+  className,
+  placement,
+  disabled = false,
+  titleClassName,
+  onClick,
+  menus = [],
+  defaultValue,
+  mode,
+}) => {
   let [key, setKey] = useState<string>('none');
   let matchMenu = (key: string) => menus?.find((item) => item.key === key);
 
@@ -38,31 +47,38 @@ const Index: React.FC<{
     }
   }, 1000);
   return (
-    <Button type='text' disabled={disabled}
-            className={classnames(styles.dropdown, className)}
-            onTouchStart={(e) => e.preventDefault()}>
-      <Dropdown placement={placement}
-                overlayClassName={classnames({
-                  [styles.horizontal]: mode === 'horizontal',
-                })}
-                overlay={
-                  <Menu selectedKeys={[key]}
-                        onClick={({ key }) => {
-                          setKey(key);
-                          onAction(key);
-                          onClick?.(key);
-                        }}
-                  >
-                    {(menus || []).map(({ key, header }) => (
-                      <Menu.Item className={styles.menu} key={key}>{header}</Menu.Item>
-                    ))}
-                  </Menu>
-                }
-                trigger={['click']}
+    <Button
+      type="text"
+      disabled={disabled}
+      className={classnames(styles.dropdown, className)}
+      onTouchStart={(e) => e.preventDefault()}
+    >
+      <Dropdown
+        placement={placement}
+        overlayClassName={classnames({
+          [styles.horizontal]: mode === 'horizontal',
+        })}
+        overlay={
+          <Menu
+            selectedKeys={[key]}
+            onClick={({ key }) => {
+              setKey(key);
+              onAction(key);
+              onClick?.(key);
+            }}
+          >
+            {(menus || []).map(({ key, header }) => (
+              <Menu.Item className={styles.menu} key={key}>
+                {header}
+              </Menu.Item>
+            ))}
+          </Menu>
+        }
+        trigger={['click']}
       >
         <span className={classnames(styles.selectedValue)}>
-          <span className={classnames(titleClassName)}>{menuTitle}</span> <CaretDownOutlined
-          className={styles.caretDown} />
+          <span className={classnames(titleClassName)}>{menuTitle}</span>{' '}
+          <CaretDownOutlined className={styles.caretDown} />
         </span>
       </Dropdown>
     </Button>

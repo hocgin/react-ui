@@ -36,6 +36,13 @@ interface PersonalMessage {
   content: string;
 }
 
+export interface MessageStat {
+  unreadTotalCount?: number;
+  unreadSystemCount?: number;
+  unreadPersonCount?: number;
+  unreadNoticeCount?: number;
+}
+
 export interface MessageDataType {
   id: ID;
   messageType: MessageType;
@@ -74,4 +81,6 @@ export interface UseAction {
   ) => Promise<IScroll<MessageDataType>>;
   // [私信] 发送私信
   sendWithPersonalMessage?: (args: sendPersonalParamsType) => Promise<any>;
+  // 消息状态
+  stat?: () => Promise<MessageStat>;
 }

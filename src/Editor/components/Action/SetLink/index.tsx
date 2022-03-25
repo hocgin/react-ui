@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Editor } from '@tiptap/react';
-import TbButton from '@/Editor/components/TbButton';
+import TbButton from '@/Editor/components/Common/TbButton';
 import { BoldOutlined, LinkOutlined } from '@ant-design/icons';
 
 export const SetLink: React.FC<{ editor?: Editor | null }> = ({ editor }) => (
   <TbButton
-    title='链接'
+    title="链接"
     onClick={() => {
       let defValue = editor?.getAttributes('link').href;
       const href: any = window.prompt('URL', defValue);

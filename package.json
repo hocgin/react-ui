@@ -73,6 +73,7 @@
     "@tiptap/starter-kit": "^2.0.0-beta.183",
     "@uiw/react-md-editor": "^3.9.2",
     "@umijs/plugin-request": "^2.7.0",
+    "mockjs": "^1.1.0",
     "ahooks": "^3.0.0-alpha.12",
     "antd": "^4.17.2",
     "braft-editor": "^2.3.9",
@@ -115,7 +116,6 @@
     "father-build": "^1.17.2",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
-    "mockjs": "^1.1.0",
     "prettier": "^2.2.1",
     "yorkie": "^2.0.0"
   }
