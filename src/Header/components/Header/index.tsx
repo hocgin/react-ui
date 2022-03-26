@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { configResponsive, useResponsive } from 'ahooks';
 import classnames from 'classnames';
+import { Notification } from '@hocgin/ui';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import styles from './index.less';
+import { Avatar } from 'antd';
 
 configResponsive({
   small: 0,
@@ -40,6 +42,12 @@ const HeaderMenu: React.FC<{
   );
 };
 
+const SuffixMenu: React.FC<{ children?: any }> = ({ children }) => {
+  return <div className={styles.suffixMenu}>
+    {children}
+  </div>;
+};
+
 const Index: React.FC<{
   menus?: any[];
   mode?: Mode;
@@ -47,18 +55,20 @@ const Index: React.FC<{
   style?: any;
   containerClassName?: string | undefined;
   containerStyle?: any;
+  suffix?: any;
   title?: React.ReactNode | string;
   href?: string;
 }> = ({
-  className,
-  style,
-  containerClassName,
-  containerStyle,
-  mode = 'none',
-  menus = [],
-  title,
-  href = 'https://www.hocgin.top',
-}) => {
+        className,
+        style,
+        containerClassName,
+        containerStyle,
+        mode = 'none',
+        menus = [],
+        title,
+        suffix,
+        href = 'https://www.hocgin.top',
+      }) => {
   return (
     <header
       className={classnames(
@@ -85,6 +95,7 @@ const Index: React.FC<{
         </a>
         <HeaderMenu menus={menus} />
       </div>
+      {suffix && <SuffixMenu>{suffix}</SuffixMenu>}
     </header>
   );
 };
