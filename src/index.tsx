@@ -7,6 +7,7 @@ export { Loading } from './Loading';
 export { LikeCheckbox } from './LikeCheckbox';
 export * as Notification from './Notification';
 export { default as Featbar } from './Featbar';
+export { Settings } from './Settings';
 export { default as Eggs } from './Eggs';
 export { default as Footer } from './Footer';
 export { default as Header } from './Header';

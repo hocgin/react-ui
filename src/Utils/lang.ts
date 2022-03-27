@@ -1,3 +1,5 @@
+import { LocalRoute } from '@/Utils/interface';
+
 export default class Lang {
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
@@ -194,5 +196,16 @@ export default class Lang {
     if (val < min) return min;
     if (val > max) return max;
     return val;
+  }
+
+  /**
+   * 转为map
+   * @param items
+   * @param fieldKey
+   */
+  static toMap(items: any[] = [], fieldKey: string): Record<string, any> {
+    let result: Record<string, any> = {};
+    items.forEach(item => result[item[`${fieldKey}`]] = item);
+    return result;
   }
 }
