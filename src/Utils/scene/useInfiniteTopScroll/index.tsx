@@ -107,7 +107,6 @@ const useInfiniteTopScroll = <TData extends Data>(
   };
 
   const storeScroll = () => {
-    console.log('保存滚动位置');
     const el = getTargetElement(target);
     if (!el) {
       return;

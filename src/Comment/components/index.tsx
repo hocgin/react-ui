@@ -72,7 +72,7 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
   }, [orderDesc]);
 
   let onLoadMore = (page = 1) => {
-    scrollPull.run({ ...defaultParams, orderDesc, page } as ScrollParamsType);
+    scrollPull.runAsync({ ...defaultParams, orderDesc } as ScrollParamsType);
   };
 
   return (
@@ -88,21 +88,21 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
         <List
           className={styles.comments}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout="horizontal"
+          itemLayout='horizontal'
           header={
             <div className={styles.header}>
               <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
               <div>
                 <Button
-                  type="link"
+                  type='link'
                   onClick={toggleOrderDesc}
                   disabled={orderDesc}
                 >
                   倒序↓
                 </Button>
-                <Divider type="vertical" />
+                <Divider type='vertical' />
                 <Button
-                  type="link"
+                  type='link'
                   onClick={toggleOrderDesc}
                   disabled={!orderDesc}
                 >
