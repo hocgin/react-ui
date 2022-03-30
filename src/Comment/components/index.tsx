@@ -82,9 +82,8 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
         initialLoad={true}
         pageStart={0}
         loadMore={onLoadMore}
-        hasMore={!scrollPull.loading && hasMore}
-        useWindow={true}
-      >
+        hasMore={hasMore}
+        useWindow={true}>
         <List
           className={styles.comments}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
