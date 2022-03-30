@@ -30,12 +30,16 @@ export default {
     res.json(success(mockData())),
   'POST /api/com/comment/:refType/:refId/report': (req: any, res: any) =>
     res.json(success(mockData())),
-  'POST /api/com/comment/:refType/:refId/reply': (req: any, res: any) =>
-    res.json(success(mockData())),
+  'POST /api/com/comment/:refType/:refId/reply': (req: any, res: any) => {
+    res.json(success({
+      ...mockData(),
+      replyId: !!req?.body?.commentId ? req?.body?.commentId : null,
+    }));
+  },
   'POST /api/com/comment/:refType/:refId/_scroll': (req: any, res: any) =>
     res.json(
       success({
-        nextId: 1,
+        nextId: new Date().getTime(),
         hasMore: true,
         records: [mockData()],
       }),

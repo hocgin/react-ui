@@ -14,11 +14,13 @@ import {
   useUpdateEffect,
   useRequest,
   useSetState,
-  useToggle,
+  useToggle, useInfiniteScroll,
 } from 'ahooks';
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
-import { Loading } from '@hocgin/ui';
+import { Loading, Utils } from '@hocgin/ui';
+import Lang from '@/Utils/lang';
+import { Struct } from '@/Utils/result';
 
 export interface IndexProps {
   /**
@@ -30,10 +32,7 @@ export interface IndexProps {
 }
 
 const Index: React.FC<IndexProps> = ({ useAction, total }) => {
-  let [dataSource, setDataSource] = useState([] as CommentType[]);
-  let [hasMore, setHasMore] = useState(true);
   let [orderDesc, { toggle: toggleOrderDesc }] = useToggle<boolean>(true);
-  let [defaultParams, setDefaultParams] = useSetState({});
 
   // 点击回复事件
   const reply$ = useEventEmitter<CommentType | undefined>();
@@ -41,90 +40,68 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
   // 提交回复事件
   const replied$ = useEventEmitter<CommentType>();
 
+  const { data, loading, reload, mutate } = useInfiniteScroll(
+    (d?: any) =>
+      Utils.Lang.nilService(useAction?.scroll)({ orderDesc, nextId: d?.nextId }).then(Struct.getScrollData),
+    {
+      target: document,
+      isNoMore: (d) => d?.nextId === undefined,
+    },
+  );
+
   replied$.useSubscription((comment: CommentType) => {
     let isReplyCommend = !!comment?.replyId;
     if (isReplyCommend) {
       return;
     }
-    setDataSource([...dataSource, comment] as CommentType[]);
+    data.list = [...data?.list, comment] as CommentType[];
+    mutate({ ...data });
   });
 
-  // 请求
-  let scrollPull = useRequest<ScrollDataType, [ScrollParamsType]>(
-    useAction!.scroll,
-    {
-      manual: true,
-      onSuccess: (data: ScrollDataType) => {
-        let hasMore: boolean = data?.hasMore || false;
-        let records: CommentType[] = data?.records || [];
-        let nextId = data?.nextId;
-
-        setDefaultParams({ nextId: nextId });
-        setDataSource([...dataSource, ...records] as CommentType[]);
-        setHasMore(hasMore);
-      },
-    },
-  );
-  useUpdateEffect(() => {
-    setDataSource([]);
-    setDefaultParams({ nextId: null });
-    setHasMore(true);
-  }, [orderDesc]);
-
-  let onLoadMore = (page = 1) => {
-    scrollPull.runAsync({ ...defaultParams, orderDesc } as ScrollParamsType);
-  };
+  useUpdateEffect(() => reload(), [orderDesc]);
 
   return (
     <div className={classNames(styles.commentGroup)}>
-      <InfiniteScroll
-        key={`${orderDesc}`}
-        initialLoad={true}
-        pageStart={0}
-        loadMore={onLoadMore}
-        hasMore={hasMore}
-        useWindow={true}>
-        <List
-          className={styles.comments}
-          locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout='horizontal'
-          header={
-            <div className={styles.header}>
-              <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
-              <div>
-                <Button
-                  type='link'
-                  onClick={toggleOrderDesc}
-                  disabled={orderDesc}
-                >
-                  倒序↓
-                </Button>
-                <Divider type='vertical' />
-                <Button
-                  type='link'
-                  onClick={toggleOrderDesc}
-                  disabled={!orderDesc}
-                >
-                  正序↑
-                </Button>
-              </div>
+      <List
+        className={styles.comments}
+        locale={{ emptyText: '赶快来评论一下吧～' } as any}
+        itemLayout='horizontal'
+        header={
+          <div className={styles.header}>
+            <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
+            <div>
+              <Button
+                type='link'
+                onClick={toggleOrderDesc}
+                disabled={orderDesc}
+              >
+                倒序↓
+              </Button>
+              <Divider type='vertical' />
+              <Button
+                type='link'
+                onClick={toggleOrderDesc}
+                disabled={!orderDesc}
+              >
+                正序↑
+              </Button>
             </div>
-          }
-          dataSource={dataSource}
-          renderItem={(item: CommentType, index) => (
-            <List.Item key={index}>
-              <Comment
-                reply$={reply$}
-                replied$={replied$}
-                comment={item}
-                useAction={useAction}
-                initialLoad={index < 3}
-              />
-            </List.Item>
-          )}
-        />
-        {scrollPull?.loading && <Loading />}
-      </InfiniteScroll>
+          </div>
+        }
+        dataSource={data?.list || []}
+        renderItem={(item: CommentType, index) => (
+          <List.Item key={index}>
+            <Comment
+              reply$={reply$}
+              replied$={replied$}
+              comment={item}
+              useAction={useAction}
+              initialLoad={index < 3}
+            />
+          </List.Item>
+        )}
+      />
+      {loading && <Loading />}
       <AffixEditor reply$={reply$} replied$={replied$} useAction={useAction} />
     </div>
   );

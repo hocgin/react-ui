@@ -182,7 +182,7 @@ export default class Lang {
    * @param service
    * @param defResult
    */
-  static nilService(service: any, defResult: any): (...args: any | any[]) => Promise<any> {
+  static nilService(service: any, defResult: any = {}): (...args: any | any[]) => Promise<any> {
     return service ? service : async (...args: any[]) => defResult;
   }
 

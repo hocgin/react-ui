@@ -19,4 +19,4 @@ group:
 
 评论组件
 
-<code src="./demos/comment.tsx"  background="#f0f2f5" />
+<code src="./demos/comment.tsx"  background="#f0f2f5" inline/>
