@@ -6,7 +6,7 @@ import { Logo as GinLogo } from '@hocgin/ui';
 const GitHubFilled = (props: any) => {
   return (
     <i className={classnames(props.className, styles.github)}>
-      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg width='18px' height='18px' role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <title>GitHub icon</title>
         <path
           fill="currentColor"
@@ -20,7 +20,7 @@ const GitHubFilled = (props: any) => {
 const SinaWeiboFilled = (props: any) => {
   return (
     <i className={classnames(props.className, styles.weibo)}>
-      <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <svg width='18px' height='18px' role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
         <title>Sina Weibo icon</title>
         <path
           fill="currentColor"
