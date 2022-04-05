@@ -31,9 +31,7 @@ export const NotificationBox: React.FC<{
     },
   });
 
-  useMount(() => {
-    !unready && statRequest.runAsync();
-  });
+  useMount(() => !unready && statRequest.runAsync());
 
   return <Tabs tabPosition={tabPosition} defaultActiveKey={defaultActiveKey} className={styles.tab} type={type}>
     <Tabs.TabPane tab={<Badge dot={(unready || []).includes('system')}>📢 公告</Badge>} key='system'

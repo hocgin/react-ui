@@ -14,7 +14,7 @@ export const NoticePane: React.FC<{
 }> = ({ className, useAction }) => {
   const set: string[] = [];
   const ref = useRef<any>();
-  const { data, loading, loadMore, loadingMore, noMore } = useInfiniteScroll(
+  const { data, loading, noMore } = useInfiniteScroll(
     (d?: any) =>
       Utils.Lang.nilService(
         useAction?.scrollWithNoticeMessage,
@@ -22,7 +22,7 @@ export const NoticePane: React.FC<{
       )({ nextId: d?.nextId }).then(Struct.getScrollData),
     {
       target: ref,
-      isNoMore: (d) => d?.nextId === undefined,
+      isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
   return (

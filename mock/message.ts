@@ -7,7 +7,7 @@ export default {
   'POST /api/com/message/_scroll': (req: any, res: any) => {
     return res.json(
       success({
-        hasMore: true,
+        hasMore: false,
         nextId: '1',
         records: [mockMessage(req.params.messageType)],
       }),

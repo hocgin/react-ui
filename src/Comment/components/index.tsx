@@ -45,7 +45,7 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
       Utils.Lang.nilService(useAction?.scroll)({ orderDesc, nextId: d?.nextId }).then(Struct.getScrollData),
     {
       target: document,
-      isNoMore: (d) => d?.nextId === undefined,
+      isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
 

@@ -99,7 +99,7 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
       )().then(Struct.getScrollData),
     {
       target: ref,
-      isNoMore: (d) => d?.nextId === undefined,
+      isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
   return (
@@ -194,7 +194,7 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
       )({ nextId: d?.nextId }).then(Struct.getScrollData),
     {
       target: ref,
-      isNoMore: (d) => d?.nextId === undefined,
+      isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
 
