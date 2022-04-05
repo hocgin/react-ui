@@ -37,12 +37,23 @@
   align-items: center;
 }
 
+.prefixMenu {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+
 .container {
   flex: 1 1;
   display: flex;
   align-items: center;
   justify-content: space-between;
   position: relative;
+}
+
+.action {
+  display: flex;
+  align-items: center;
 }
 
 .suffix {
@@ -93,7 +104,7 @@
   background-repeat: no-repeat;
   cursor: pointer;
   z-index: 1000;
-  background-color: rgba(245, 246, 247, 0.4);
+  background-color: rgba(245, 246, 247, 0.3);
   animation: slideRight 0.5s ease-in-out forwards;
   transition-delay: 0.5s;
   opacity: 0;
@@ -109,9 +120,9 @@
 }
 
 .navigation {
-  position: absolute;
+  //position: absolute;
   display: flex;
-  right: 30px;
+  //right: 30px;
   opacity: 0;
   visibility: hidden;
   transition: 0.5s;
@@ -127,7 +138,7 @@
       color: #111111;
       text-decoration: none;
       font-size: 16px;
-      margin: 0 20px;
+      margin: 0 10px;
       font-weight: 600;
       display: inline-block;
       padding: 2px 4px;

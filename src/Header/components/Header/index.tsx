@@ -16,37 +16,40 @@ type Mode = 'none' | 'fixed' | 'sticky';
 
 const HeaderMenu: React.FC<{
   menus?: any[];
-}> = ({ menus }) => {
+  suffix?: any;
+  prefix?: any;
+}> = ({ menus, prefix, suffix }) => {
   const responsive = useResponsive();
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
   return (
-    <>
-      <div
-        className={classnames(styles.toggle, { [styles.active]: isOpenMenu })}
-        onClick={() => setIsOpenMenu(!isOpenMenu)}
-      >
-        {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
+    <div>
+      <div className={styles.action}>
+        <ul
+          className={classnames(styles.navigation, {
+            [styles.active]: isOpenMenu,
+          })}
+        >
+          {(menus || []).map(({ href, title }, index) => (
+            <li key={index}>
+              <a href={href}>{title}</a>
+            </li>
+          ))}
+        </ul>
+        {prefix && <PrefixMenu>{prefix}</PrefixMenu>}
+        <div
+          className={classnames(styles.toggle, { [styles.active]: isOpenMenu })}
+          onClick={() => setIsOpenMenu(!isOpenMenu)}
+        >
+          {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
+        </div>
+        {suffix && <SuffixMenu>{suffix}</SuffixMenu>}
       </div>
-      <ul
-        className={classnames(styles.navigation, {
-          [styles.active]: isOpenMenu,
-        })}
-      >
-        {(menus || []).map(({ href, title }, index) => (
-          <li key={index}>
-            <a href={href}>{title}</a>
-          </li>
-        ))}
-      </ul>
-    </>
+    </div>
   );
 };
 
-const SuffixMenu: React.FC<{ children?: any }> = ({ children }) => {
-  return <div className={styles.suffixMenu}>
-    {children}
-  </div>;
-};
+const SuffixMenu: React.FC<{ children?: any }> = ({ children }) => <div className={styles.suffixMenu}>{children}</div>;
+const PrefixMenu: React.FC<{ children?: any }> = ({ children }) => <div className={styles.prefixMenu}>{children}</div>;
 
 const Index: React.FC<{
   menus?: any[];
@@ -56,6 +59,7 @@ const Index: React.FC<{
   containerClassName?: string | undefined;
   containerStyle?: any;
   suffix?: any;
+  prefix?: any;
   title?: React.ReactNode | string;
   href?: string;
 }> = ({
@@ -67,7 +71,8 @@ const Index: React.FC<{
         menus = [],
         title,
         suffix,
-        href = 'https://www.hocgin.top',
+        prefix,
+        href = '/',
       }) => {
   return (
     <header
@@ -93,9 +98,8 @@ const Index: React.FC<{
           </span>
           {title && <span className={styles.title}>{title}</span>}
         </a>
-        <HeaderMenu menus={menus} />
+        <HeaderMenu prefix={prefix} suffix={suffix} menus={menus} />
       </div>
-      {suffix && <SuffixMenu>{suffix}</SuffixMenu>}
     </header>
   );
 };

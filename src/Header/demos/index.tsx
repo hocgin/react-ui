@@ -12,7 +12,8 @@ export default () => {
       <Header
         style={{ padding: '0 10px 0' } as any}
         mode={'sticky'}
-        suffix={<><Notification.Indicator /></>}
+        prefix={<><Notification.Indicator /></>}
+        // suffix={<><Notification.Indicator /></>}
         menus={[
           { href: 'www.baidu.com', title: '🐰 标题' },
           { href: 'www.baidu.com', title: '🖍️ 标题' },
