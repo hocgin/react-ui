@@ -5,6 +5,4 @@ import { UseAction } from '@/Notification/components/types';
 export const PersonalPane: React.FC<{
   className?: string;
   useAction: UseAction;
-}> = ({ useAction }) => {
-  return (<Chat useAction={useAction}/>);
-};
+}> = ({ useAction }) => <Chat useAction={useAction} />;
