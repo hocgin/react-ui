@@ -1,9 +1,8 @@
-import React from 'react';
-import { Modal, Upload } from 'antd';
+import React, { useState } from 'react';
+import { message, Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { Dom } from '@hocgin/ui';
-import { HttpRequestHeader } from '@/Utils/interface';
-import { UploadFile } from 'antd/lib/upload/interface';
+import { FileInfo, HttpRequestHeader } from '@/Utils/interface';
 
 function getBase64(file: any) {
   return new Promise((resolve, reject) => {
@@ -14,75 +13,38 @@ function getBase64(file: any) {
   });
 }
 
-interface PhotoWallProps {
+const Index: React.FC<{
   headers?: HttpRequestHeader;
   action?: string;
-  maxLength: number;
-  onChange?: (values: []) => void;
-  defaultFileList?: Array<UploadFile>;
-}
+  accept?: string;
+  maxLength?: number;
+  beforeUpload?: (file: any, FileList: any) => boolean;
+  value?: FileInfo[];
+  onChange?: (values: FileInfo[]) => void;
+}> = ({
+  action = '/api/com/file/upload',
+  beforeUpload,
+  accept,
+  value,
+  headers,
+  maxLength = 100,
+  onChange,
+}) => {
+  let [previewVisible, setPreviewVisible] = useState<boolean>(false);
+  let [fileList, setFileList] = useState<FileInfo[]>(value || []);
+  let [previewImage, setPreviewImage] = useState<string | undefined>(undefined);
 
-interface PhotoWallState {}
-
-class Index extends React.Component<PhotoWallProps, PhotoWallState> {
-  static defaultProps = {
-    maxLength: 1000,
-    defaultFileList: [],
-    onChange: (values = []) => {},
-  };
-  state = {
-    previewVisible: false,
-    previewImage: null,
-    fileList: [],
-  };
-
-  render() {
-    let { maxLength, defaultFileList, headers, action } = this.props;
-    let { previewVisible, fileList, previewImage } = this.state;
-    const uploadButton = (
-      <div>
-        <PlusOutlined />
-        <div>上传</div>
-      </div>
-    );
-    return (
-      <div>
-        <Upload
-          action={action}
-          headers={headers}
-          defaultFileList={defaultFileList}
-          listType="picture-card"
-          onPreview={this.handlePreview}
-          onChange={this.handleChange}
-        >
-          {fileList.length >= maxLength ? null : uploadButton}
-        </Upload>
-        <Modal
-          visible={previewVisible}
-          footer={null}
-          onCancel={this.handleCancel}
-        >
-          <img style={this.imgStyle} src={previewImage || ''} alt={'图片'} />
-        </Modal>
-      </div>
-    );
-  }
-
-  handlePreview = async (file: any) => {
+  let handlePreview = async (file: any) => {
     if (!file.url && !file.preview) {
       file.preview = await getBase64(file.originFileObj);
     }
-
-    this.setState({
-      previewImage: file.url || file.preview,
-      previewVisible: true,
-    });
+    setPreviewVisible(true);
+    setPreviewImage(file.url || file.preview);
   };
 
-  handleChange = ({ file, fileList }: any) => {
-    let { onChange } = this.props;
+  let handleChange = ({ file, fileList }: any) => {
     fileList = fileList.map((file: any) => {
-      let result = file.response;
+      let result = file?.response;
       if (result) {
         // Component will show file.url as link
         if (Dom.showErrorMessageIfExits(result)) {
@@ -93,20 +55,46 @@ class Index extends React.Component<PhotoWallProps, PhotoWallState> {
       }
       return file;
     });
-    this.setState({ fileList });
-    onChange &&
-      onChange(
-        fileList
-          .filter(({ url }: any) => url)
-          .map(({ url, name }: any) => ({ url, name })),
-      );
+    let newFileList = fileList
+      .filter(({ url }: any) => url)
+      .map(Dom.asServerFile);
+    setFileList(newFileList);
+    onChange?.(newFileList);
   };
 
-  handleCancel = () => this.setState({ previewVisible: false });
-
-  get imgStyle() {
-    return { width: '100%' };
-  }
-}
+  return (
+    <div>
+      <Upload
+        accept={accept}
+        action={action}
+        headers={headers}
+        beforeUpload={beforeUpload}
+        defaultFileList={(value || []).map(Dom.asFile) as any}
+        listType="picture-card"
+        onPreview={handlePreview}
+        maxCount={maxLength}
+        onChange={handleChange}
+      >
+        {fileList.length >= maxLength ? null : (
+          <div>
+            <PlusOutlined />
+            <div>上传</div>
+          </div>
+        )}
+      </Upload>
+      <Modal
+        visible={previewVisible}
+        footer={null}
+        onCancel={setPreviewVisible.bind(this, false)}
+      >
+        <img
+          style={{ width: '100%' } as any}
+          src={previewImage || ''}
+          alt={'图片'}
+        />
+      </Modal>
+    </div>
+  );
+};
 
 export default Index;

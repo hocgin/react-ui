@@ -1,5 +1,5 @@
 import React from 'react';
-import { message, Tree, TreeSelect } from 'antd';
+import { message, Tree, TreeSelect, Upload } from 'antd';
 import { Struct } from '../result';
 import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
@@ -29,7 +29,7 @@ export default class Dom {
   }
 
   /**
-   * 转为 Upload 文件
+   * 转为 Upload 文件(本地)
    * @param url
    * @param filename
    * @param index
@@ -41,6 +41,13 @@ export default class Dom {
       status: 'done',
       name: filename,
     };
+  }
+
+  /**
+   * 转为远程文件
+   */
+  static asServerFile({ url, name }: any): FileInfo {
+    return { url, filename: name };
   }
 
   /**
@@ -155,4 +162,32 @@ export default class Dom {
     aElement.click();
     document.body.removeChild(aElement);
   }
+
+  /**
+   * 校验文件信息
+   * @param types 文件类型, image/jpeg,image/png,image/gif
+   * @param maxSize 文件大小, 2 * 1024 * 1024
+   * @param file 待校验的文件
+   */
+  static validFile = (types = '', maxSize: number, file: any): any => {
+    let meetType = types.split(',').includes(file.type);
+    if (!meetType) {
+      message.error('请上传正确的文件格式!');
+      return Upload.LIST_IGNORE;
+    }
+    let meetSize = file.size <= maxSize;
+    if (!meetSize) {
+      message.error('请确认上传的图片大小!');
+      return Upload.LIST_IGNORE;
+    }
+
+    let image = new Image();
+    image.onload = function () {
+      let width = image.width;
+      let height = image.height;
+      // console.log(width + '======' + height);
+    };
+    image.src = file;
+    return meetType && meetSize;
+  };
 }

@@ -21,7 +21,7 @@ const Index: React.FC<{
     </Button>
   ),
   headers = {},
-  action = `/api/file/upload`,
+  action = `/api/com/file/upload`,
   maxCount,
   defaultFileList,
   onChange,
