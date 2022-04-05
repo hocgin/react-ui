@@ -9,7 +9,7 @@ import styles from './index.less';
 export default () => {
   return (
     <PhotoWall
-      maxLength={5}
+      maxCount={5}
       onChange={console.log}
       beforeUpload={Dom.validFile.bind(
         this,

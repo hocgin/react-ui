@@ -16,20 +16,22 @@ function getBase64(file: any) {
 const Index: React.FC<{
   headers?: HttpRequestHeader;
   action?: string;
+  name?: string;
   accept?: string;
-  maxLength?: number;
+  maxCount?: number;
   beforeUpload?: (file: any, FileList: any) => boolean;
   value?: FileInfo[];
   onChange?: (values: FileInfo[]) => void;
 }> = ({
-  action = '/api/com/file/upload',
-  beforeUpload,
-  accept,
-  value,
-  headers,
-  maxLength = 100,
-  onChange,
-}) => {
+        action = '/api/com/file/upload',
+        beforeUpload,
+        name,
+        accept,
+        value,
+        headers,
+        maxCount = 100,
+        onChange,
+      }) => {
   let [previewVisible, setPreviewVisible] = useState<boolean>(false);
   let [fileList, setFileList] = useState<FileInfo[]>(value || []);
   let [previewImage, setPreviewImage] = useState<string | undefined>(undefined);
@@ -64,18 +66,18 @@ const Index: React.FC<{
 
   return (
     <div>
-      <Upload
-        accept={accept}
-        action={action}
-        headers={headers}
-        beforeUpload={beforeUpload}
-        defaultFileList={(value || []).map(Dom.asFile) as any}
-        listType="picture-card"
-        onPreview={handlePreview}
-        maxCount={maxLength}
-        onChange={handleChange}
+      <Upload name={name}
+              accept={accept}
+              action={action}
+              headers={headers}
+              beforeUpload={beforeUpload}
+              defaultFileList={(value || []).map(Dom.asFile) as any}
+              listType='picture-card'
+              onPreview={handlePreview}
+              maxCount={maxCount}
+              onChange={handleChange}
       >
-        {fileList.length >= maxLength ? null : (
+        {fileList.length >= maxCount ? null : (
           <div>
             <PlusOutlined />
             <div>上传</div>
