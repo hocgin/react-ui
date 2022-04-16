@@ -12,6 +12,7 @@ import {
 } from '@/Comment/components/type';
 
 import service from './service';
+import { UmsService } from '@/Utils/request/protocol';
 
 export default (refType: any, refId: any) => ({
   reply: async (args: ReplyParamsType) => {
@@ -42,10 +43,10 @@ export default (refType: any, refId: any) => ({
     (await service.dislike(refType, refId, args?.commentId)) as any,
   // 当前登陆用户
   user: async (args: UserParamsType) => {
-    return asUser(await service.getCurrentUser(args?.force)) as UserDataType;
+    return asUser(await UmsService.getCurrentUser(args?.force)) as UserDataType;
   },
   // 提及用户
-  mentionUser: async (args: MentionsParamsType) => ((await service.searchUser(args)) || []).map(asUser),
+  mentionUser: async (args: MentionsParamsType) => ((await UmsService.searchUser(args)) || []).map(asUser),
 });
 
 
