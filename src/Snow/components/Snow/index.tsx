@@ -3,6 +3,7 @@ import styles from './index.less';
 
 interface SnowProps {
   isShow?: boolean;
+  children?: any;
 }
 
 interface SnowState {
