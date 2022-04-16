@@ -16,6 +16,16 @@ export default class Dom {
   }
 
   /**
+   * 获取 Window, 时刻提醒要进行 SSR 组件处理
+   */
+  static getWindow(): (undefined | Window) {
+    if (typeof window === 'undefined') {
+      return undefined;
+    }
+    return window;
+  }
+
+  /**
    * 获取图标
    * @param name
    */
@@ -182,7 +192,7 @@ export default class Dom {
     }
 
     let image = new Image();
-    image.onload = function () {
+    image.onload = function() {
       let width = image.width;
       let height = image.height;
       // console.log(width + '======' + height);

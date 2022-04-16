@@ -1,6 +1,6 @@
 import { success } from './_utils/result';
 
-const html = `
+export const html = `
     <h1>这是一份报告 H1</h1>
     <h2>👋系统分析 H2</h2>
     <h3>👋系统分析 H3</h3>

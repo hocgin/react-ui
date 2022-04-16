@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
 import { configResponsive, useResponsive } from 'ahooks';
 import classnames from 'classnames';
-import { Notification } from '@hocgin/ui';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 import styles from './index.less';
-import { Avatar } from 'antd';
 
 configResponsive({
   small: 0,
@@ -29,11 +27,9 @@ const HeaderMenu: React.FC<{
             [styles.active]: isOpenMenu,
           })}
         >
-          {(menus || []).map(({ href, title }, index) => (
-            <li key={index}>
-              <a href={href}>{title}</a>
-            </li>
-          ))}
+          {(menus || []).map(({ href, title }, index) => <li key={index}>
+            <a href={href}>{title}</a>
+          </li>)}
         </ul>
         {prefix && <PrefixMenu>{prefix}</PrefixMenu>}
         <div

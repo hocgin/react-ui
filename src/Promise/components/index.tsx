@@ -9,7 +9,7 @@ import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Comment from './Comment';
 import { NotificationBox, NotificationIndicator } from './Notification';
-import { Editor, Preview as EditorPreview } from './Editor';
+import { Editor, HtmlPreview, Preview as EditorPreview } from './Editor';
 import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
 import ArchiveSchemaConfig from './Schema/ArchiveSchemaConfig';
 import TableSchemaConfig from './Schema/TableSchemaConfig';
@@ -44,6 +44,7 @@ export default class Promise {
 
   static Editor: typeof Editor = Editor;
   static EditorPreview: typeof EditorPreview = EditorPreview;
+  static EditorHtmlPreview: typeof HtmlPreview = HtmlPreview;
   static NotificationBox: typeof NotificationBox = NotificationBox;
   static NotificationIndicator: typeof NotificationIndicator =
     NotificationIndicator;

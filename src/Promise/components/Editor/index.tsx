@@ -1,7 +1,6 @@
 import React, {
   MutableRefObject,
-  useEffect,
-  useImperativeHandle,
+  useImperativeHandle, useMemo,
   useRef,
   useState,
 } from 'react';
@@ -17,7 +16,8 @@ import {
   UseAction,
 } from '@/Promise/components/Editor/types';
 import { useInterval, useLockFn, useMount, useRequest } from 'ahooks';
-import { EditorFn } from '@/Editor/components/Editor';
+import { EditorFn, getExtensions } from '@/Editor/components/Editor';
+import { generateHTML, generateJSON } from '@tiptap/html';
 
 const Header: React.FC<{
   headerRef: MutableRefObject<any>;
@@ -115,7 +115,7 @@ export const Editor: React.FC<{
 };
 
 export const Preview: React.FC<{
-  id: ID;
+  id?: ID;
   className?: string;
   contentClassName?: string;
   defaultValue?: PublishedDoc;
@@ -124,9 +124,8 @@ export const Preview: React.FC<{
     defaultValue,
   );
 
-  let action: UseAction = useAction(id);
   let getPublished = useRequest(
-    Utils.Lang.nilService(action?.getPublished, {}),
+    Utils.Lang.nilService(id ? useAction?.(id)?.getPublished : undefined, {}),
     {
       manual: true,
       onSuccess: setPublished,
@@ -149,6 +148,22 @@ export const Preview: React.FC<{
         contentClassName={classnames(styles.content, contentClassName)}
         className={classnames(styles.editor, className)}
       />
+    </div>
+  );
+};
+
+export const HtmlPreview: React.FC<{
+  className?: string;
+  contentClassName?: string;
+  value?: string;
+} & Record<string, any>> = ({ className, value }: any) => {
+  let extensions = getExtensions();
+  const html = useMemo(() => {
+    return generateHTML(generateJSON(value, extensions), extensions);
+  }, [value]);
+  return (
+    <div className={classnames(styles.preview, 'ProseMirror', className)}>
+      <div dangerouslySetInnerHTML={{ __html: html } as any} />
     </div>
   );
 };

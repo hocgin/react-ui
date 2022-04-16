@@ -84,6 +84,48 @@ export interface EditorFn {
   setFullscreen: (fullscreen: boolean) => void;
 }
 
+export let getExtensions = (placeholder: string = '', onSearchMention: onSearchMentionFunction = undefined) => {
+  return [
+    StarterKit,
+    ExImage.configure({ inline: true }),
+    Link.configure({ openOnClick: false }),
+    ExUnderline,
+    ExTextStyle,
+    ExCodeBlockLowlight.configure({ lowlight }),
+    ExTextAlign.configure({
+      types: ['heading', 'paragraph'],
+    }),
+    ExHighlight.configure({ multicolor: true }),
+    ExSubscript,
+    ExSuperscript,
+    ExColor,
+    ExTaskList,
+    ExLineHeight,
+    ExTable.configure({ resizable: true }),
+    ExTableRow,
+    ExTableCell.configure({}),
+    ExTableHeader,
+    ExFontSize,
+    ExIndent,
+    ExPrint,
+    ExIframe,
+    HexColorDecorator,
+    ExTaskItem.configure({ nested: true }),
+    ExMention.configure({
+      suggestion: onSearchMention
+        ? MentionSuggestion(onSearchMention)
+        : undefined,
+    }),
+    ExPlaceholder.configure({
+      placeholder: (props: any) => {
+        return `${placeholder}` as string;
+      },
+    }),
+  ];
+};
+
+type onSearchMentionFunction = ((keyword: string) => Mention[] | undefined) | undefined;
+
 const Index: React.FC<{
   editorRef?: MutableRefObject<EditorFn | undefined>;
   header?: any;
@@ -95,22 +137,22 @@ const Index: React.FC<{
   fullscreen?: boolean;
   editable?: boolean;
   onChange?: (value: string) => void;
-  onSearchMention?: (keyword: string) => Mention[] | undefined;
+  onSearchMention?: onSearchMentionFunction;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-  onChange,
-  className,
-  placeholder = '',
-  contentClassName,
-  header,
-  onChangeFullscreen,
-  editorRef,
-  fullscreen = false,
-  editable = true,
-  value,
-  onSearchMention,
-  uploadImageUrl = '/api/com/file/upload',
-}) => {
+        onChange,
+        className,
+        placeholder = '',
+        contentClassName,
+        header,
+        onChangeFullscreen,
+        editorRef,
+        fullscreen = false,
+        editable = true,
+        value,
+        onSearchMention,
+        uploadImageUrl = '/api/com/file/upload',
+      }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -121,43 +163,7 @@ const Index: React.FC<{
     onUpdate({ editor }) {
       onChange?.(editor.getHTML());
     },
-    extensions: [
-      StarterKit,
-      ExImage.configure({ inline: true }),
-      Link.configure({ openOnClick: false }),
-      ExUnderline,
-      ExTextStyle,
-      ExCodeBlockLowlight.configure({ lowlight }),
-      ExTextAlign.configure({
-        types: ['heading', 'paragraph'],
-      }),
-      ExHighlight.configure({ multicolor: true }),
-      ExSubscript,
-      ExSuperscript,
-      ExColor,
-      ExTaskList,
-      ExLineHeight,
-      ExTable.configure({ resizable: true }),
-      ExTableRow,
-      ExTableCell.configure({}),
-      ExTableHeader,
-      ExFontSize,
-      ExIndent,
-      ExPrint,
-      ExIframe,
-      HexColorDecorator,
-      ExTaskItem.configure({ nested: true }),
-      ExMention.configure({
-        suggestion: onSearchMention
-          ? MentionSuggestion(onSearchMention)
-          : undefined,
-      }),
-      ExPlaceholder.configure({
-        placeholder: (props: any) => {
-          return `${placeholder}` as string;
-        },
-      }),
-    ],
+    extensions: getExtensions(placeholder, onSearchMention),
     content: value,
     editable: editorEditable,
   });

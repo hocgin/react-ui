@@ -1,26 +1,21 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   CommentType,
-  ScrollDataType,
-  ScrollParamsType,
   UseAction,
 } from './type';
 import classNames from 'classnames';
 import styles from './index.less';
-import InfiniteScroll from 'react-infinite-scroller';
 import { Button, List, Divider } from 'antd';
 import {
   useEventEmitter,
   useUpdateEffect,
-  useRequest,
-  useSetState,
   useToggle, useInfiniteScroll,
 } from 'ahooks';
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
 import { Loading, Utils } from '@hocgin/ui';
-import Lang from '@/Utils/lang';
 import { Struct } from '@/Utils/result';
+import Lang from '@/Utils/lang';
 
 export interface IndexProps {
   /**
@@ -44,7 +39,7 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
     (d?: any) =>
       Utils.Lang.nilService(useAction?.scroll)({ orderDesc, nextId: d?.nextId }).then(Struct.getScrollData),
     {
-      target: document,
+      target: Lang.isBrowser() ? document : null,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
