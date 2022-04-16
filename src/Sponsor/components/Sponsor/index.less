@@ -1,26 +1,11 @@
-.sponsor {
+@import '../../../../src/style/index.less';
+
+@sponsor-prefix-cls: ~'@{hui-prefix}-sponsor';
+@sponsor--qrcode-prefix-cls: ~'@{hui-prefix}-sponsor--qrcode';
+
+.@{sponsor-prefix-cls} {
   display: inline-block;
   text-align: center;
-
-  .qrcode {
-    margin: 5px;
-    display: inline-block;
-    img {
-      border-radius: 5px;
-      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3) !important;
-    }
-    span {
-      color: rgba(102, 102, 102, 0.5);
-      font-size: 0.8em;
-    }
-
-    img,
-    span {
-      display: block;
-    }
-
-    text-align: center;
-  }
 
   .sponsorBtn {
     display: inline-block !important;
@@ -40,10 +25,32 @@
     .heart {
       vertical-align: baseline;
       color: #f22e3c;
-      margin: 0 0px;
+      margin: 0 0;
       height: 16px;
       width: 16px;
       display: inline-block;
     }
   }
+}
+
+.@{sponsor--qrcode-prefix-cls} {
+  margin: 5px;
+  display: inline-block;
+
+  img {
+    border-radius: 5px;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3) !important;
+  }
+
+  span {
+    color: rgba(102, 102, 102, 0.5);
+    font-size: 0.8em;
+  }
+
+  img,
+  span {
+    display: block;
+  }
+
+  text-align: center;
 }

@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './index.less';
 import CountUp from 'react-countup';
 import Lang from '@/Utils/lang';
 

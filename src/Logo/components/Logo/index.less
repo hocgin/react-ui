@@ -1,8 +1,13 @@
-.logo {
+@import '../../../../src/style/index.less';
+
+@logo-prefix-cls: ~'@{hui-prefix}-logo';
+@logo-heart-prefix-cls: ~'@{hui-prefix}-logo-heart';
+
+.@{logo-prefix-cls} {
   display: inline-flex;
   align-items: center;
 
-  .text {
+  &-text {
     line-height: 1.1em;
     margin-right: 8px;
     border-bottom: 2px solid #e2e8f0;
@@ -17,32 +22,30 @@
   }
 }
 
-.a {
+.@{logo-heart-prefix-cls} {
   display: flex;
-}
 
-.heart {
-  box-sizing: border-box;
-  vertical-align: baseline;
-  color: #f22e3c;
-  margin: 0 4px;
-  height: 16px;
-  width: 16px;
-  display: inline-block;
-  animation: animation-heartbeat 1.3s ease 0s infinite normal;
+  &-heart {
+    box-sizing: border-box;
+    vertical-align: baseline;
+    color: #f22e3c;
+    margin: 0 4px;
+    height: 16px;
+    width: 16px;
+    display: inline-block;
+    animation: animation-heartbeat 1.3s ease 0s infinite normal;
 
-  @keyframes animation-heartbeat {
-    0%,
-    28%,
-    70% {
-      -webkit-transform: scale(1);
-      transform: scale(1);
-    }
+    @keyframes animation-heartbeat {
+      0%,
+      28%,
+      70% {
+        transform: scale(1);
+      }
 
-    14%,
-    42% {
-      -webkit-transform: scale(1.3);
-      transform: scale(1.3);
+      14%,
+      42% {
+        transform: scale(1.3);
+      }
     }
   }
 }

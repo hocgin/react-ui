@@ -1,12 +1,12 @@
 import React, {
   MutableRefObject,
-  useImperativeHandle, useMemo,
+  useImperativeHandle,
+  useMemo,
   useRef,
   useState,
 } from 'react';
 import { Editor as GEditor, Utils } from '@hocgin/ui';
-import styles from './index.less';
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';
 import { ID } from '@/Utils/interface';
@@ -18,12 +18,15 @@ import {
 import { useInterval, useLockFn, useMount, useRequest } from 'ahooks';
 import { EditorFn, getExtensions } from '@/Editor/components/Editor';
 import { generateHTML, generateJSON } from '@tiptap/html';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 const Header: React.FC<{
   headerRef: MutableRefObject<any>;
   title?: string;
+  prefixCls?: string;
   onClickSave?: () => any;
-}> = ({ onClickSave, title, headerRef }) => {
+}> = ({ onClickSave, title, headerRef, ...props }) => {
   let [tips, setTips] = useState<string>('');
 
   useImperativeHandle(
@@ -39,14 +42,16 @@ const Header: React.FC<{
       setTips('');
     }
   }, 3 * 1000);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise-editor--header', props.prefixCls);
 
   return (
-    <div className={styles.header}>
-      <div className={styles.logo} />
-      <div className={styles.info}>{title}</div>
-      <div className={styles.toolbar}>
-        <div className={styles.tips}>{tips}</div>
-        <Button type='primary' onClick={onClickSave}>
+    <div className={prefixCls}>
+      <div className={'logo'} />
+      <div className={'info'}>{title}</div>
+      <div className={'toolbar'}>
+        <div className={'tips'}>{tips}</div>
+        <Button type="primary" onClick={onClickSave}>
           保存
         </Button>
       </div>
@@ -114,12 +119,15 @@ export const Editor: React.FC<{
   );
 };
 
-export const Preview: React.FC<{
-  id?: ID;
-  className?: string;
-  contentClassName?: string;
-  defaultValue?: PublishedDoc;
-} & Record<string, any>> = ({ id, className, contentClassName, defaultValue, ...props }: any) => {
+export const Preview: React.FC<
+  {
+    id?: ID;
+    className?: string;
+    prefixCls?: string;
+    contentClassName?: string;
+    defaultValue?: PublishedDoc;
+  } & Record<string, any>
+> = ({ id, className, contentClassName, defaultValue, ...props }: any) => {
   let [published, setPublished] = useState<PublishedDoc | undefined>(
     defaultValue,
   );
@@ -134,35 +142,43 @@ export const Preview: React.FC<{
   useMount(() => {
     !published && getPublished?.run();
   });
-
-  if (!published) {
-    return <div>加载...</div>;
-  }
-
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise-editor--preview', props.prefixCls);
   return (
-    <div className={styles.preview}>
-      <GEditor
-        {...props}
-        value={published?.content}
-        editable={false}
-        contentClassName={classnames(styles.content, contentClassName)}
-        className={classnames(styles.editor, className)}
-      />
+    <div className={prefixCls}>
+      <Skeleton
+        title
+        paragraph={{ rows: 8 } as any}
+        loading={!published && getPublished.loading}
+      >
+        <GEditor
+          {...props}
+          value={published?.content}
+          editable={false}
+          contentClassName={classnames('content', contentClassName)}
+          className={classnames('editor', className)}
+        />
+      </Skeleton>
     </div>
   );
 };
 
-export const HtmlPreview: React.FC<{
-  className?: string;
-  contentClassName?: string;
-  value?: string;
-} & Record<string, any>> = ({ className, value }: any) => {
+export const HtmlPreview: React.FC<
+  {
+    className?: string;
+    contentClassName?: string;
+    value?: string;
+    prefixCls?: string;
+  } & Record<string, any>
+> = ({ className, value, ...props }: any) => {
   let extensions = getExtensions();
   const html = useMemo(() => {
     return generateHTML(generateJSON(value, extensions), extensions);
   }, [value]);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise-editor--preview', props.prefixCls);
   return (
-    <div className={classnames(styles.preview, 'ProseMirror', className)}>
+    <div className={classnames(prefixCls, 'ProseMirror', className)}>
       <div dangerouslySetInnerHTML={{ __html: html } as any} />
     </div>
   );

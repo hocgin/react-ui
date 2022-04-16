@@ -3,8 +3,9 @@ import { Select } from 'antd';
 import { Utils } from '@hocgin/ui';
 import { Option } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
-import styles from './index.less';
 import { useMount, useRequest } from 'ahooks';
+import './index.less';
+import { ConfigContext } from '@/config-provider';
 
 const Index: React.FC<{
   /**
@@ -19,7 +20,8 @@ const Index: React.FC<{
    * 选择提示
    */
   placeholder?: string;
-}> = ({ multiple = false, placeholder = '请选择..', useAction, ...rest }) => {
+  prefixCls?: string;
+}> = ({ multiple = false, placeholder = '请选择..', useAction, ...props }) => {
   let [data, setData] = useState<Option[]>([]);
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
@@ -28,21 +30,20 @@ const Index: React.FC<{
   });
 
   useMount(() => run());
-
-  return (
-    <Select className={styles.component}
-            loading={loading}
-            allowClear
-            mode={multiple ? 'multiple' : undefined}
-            placeholder={placeholder}
-            {...rest}>
-      {data.map(({ key, value }: Option) => (
-        <Select.Option key={`${value}`} value={value}>
-          {key}
-        </Select.Option>
-      ))}
-    </Select>
-  );
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise--Select', props.prefixCls);
+  return <Select className={prefixCls}
+                 loading={loading}
+                 allowClear
+                 mode={multiple ? 'multiple' : undefined}
+                 placeholder={placeholder}
+                 {...props}>
+    {data.map(({ key, value }: Option) => (
+      <Select.Option key={`${value}`} value={value}>
+        {key}
+      </Select.Option>
+    ))}
+  </Select>;
 };
 
 export default Index;

@@ -10,7 +10,6 @@ import {
   PagingParamsType,
   UseAction,
 } from '../type';
-import styles from './index.less';
 import {
   DislikeFilled,
   DislikeOutlined,
@@ -19,26 +18,24 @@ import {
   RetweetOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import {
-  Avatar,
-  Comment,
-  Tooltip,
-  List,
-  Pagination,
-  Skeleton,
-} from 'antd';
+import { Avatar, Comment, Tooltip, List, Pagination, Skeleton } from 'antd';
 import 'antd/es/comment/style';
 import 'antd/es/list/style';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import DateTimeFormat from '@/Utils/format/datetime';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 const Content: React.FC<{
+  prefixCls?: string;
   children?: any;
   expanded?: boolean;
   maxHeight?: number;
 }> = ({ children, maxHeight = 100, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('comment', props.prefixCls);
   const ref = useRef<any>();
   const size = useSize(ref);
   let [expanded, { toggle: toggleExpanded }] = useToggle<boolean>(
@@ -47,12 +44,13 @@ const Content: React.FC<{
   let contentStyle = expanded
     ? {}
     : { maxHeight: `${maxHeight}px`, overflow: 'hidden' };
+
   return (
     <>
-      <div className={styles.content} style={contentStyle}>
+      <div className={`${prefixCls}-content`} style={contentStyle}>
         <div ref={ref}>
           <GEditor
-            contentClassName={styles.editorContent}
+            contentClassName={`${prefixCls}-content-editorContent`}
             value={children}
             editable={false}
           />
@@ -60,8 +58,8 @@ const Content: React.FC<{
       </div>
       {(size?.height ?? 0) > maxHeight && (
         <a
-          rel='noopener noreferrer'
-          className={styles.expanded}
+          rel="noopener noreferrer"
+          className={`${prefixCls}-expanded`}
           onClick={toggleExpanded}
         >
           {expanded ? '收起' : '展开'}
@@ -76,6 +74,7 @@ const UserOptions: React.FC<{
   comment: CommentType;
   useAction: UseAction;
   userAction?: string;
+  prefixCls?: string;
 }> = (props) => {
   let { useAction, comment } = props;
   let [userAction, setUserAction] = useState(props?.userAction);
@@ -87,10 +86,10 @@ const UserOptions: React.FC<{
     manual: true,
     defaultParams: { commentId } as any,
     onSuccess: ({
-                  likes = 0,
-                  disliked = 0,
-                  action,
-                }: DislikeDataType | LikeDataType) => {
+      likes = 0,
+      disliked = 0,
+      action,
+    }: DislikeDataType | LikeDataType) => {
       setLikesCount(likes);
       setDislikedCount(disliked);
       setUserAction(action);
@@ -110,21 +109,23 @@ const UserOptions: React.FC<{
     props.reply$.emit(comment);
   };
 
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <>
       <span onClick={onClickReply}>回复</span>
-      <Tooltip title='Like'>
+      <Tooltip title="Like">
         <span onClick={onAction.bind(this, 'like', commentId)}>
           {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
-          <span className={styles.commentAction}>{likesCount}</span>
+          <span className={`${prefixCls}-commentAction`}>{likesCount}</span>
         </span>
       </Tooltip>
-      <Tooltip title='Dislike'>
+      <Tooltip title="Dislike">
         <span onClick={onAction.bind(this, 'dislike', commentId)}>
           {React.createElement(
             userAction === 'dislike' ? DislikeFilled : DislikeOutlined,
           )}
-          <span className={styles.commentAction}>{dislikedCount}</span>
+          <span className={`${prefixCls}-commentAction`}>{dislikedCount}</span>
         </span>
       </Tooltip>
     </>
@@ -168,6 +169,7 @@ const SubComment: React.FC<{
 };
 
 const CiComment: React.FC<{
+  prefixCls?: string;
   id: ID;
   replyId?: ID | null;
   datetime?: string;
@@ -180,28 +182,30 @@ const CiComment: React.FC<{
   children?: React.ReactNode;
   actions?: React.ReactNode[];
 }> = ({
-        id,
-        type = 'none',
-        active = false,
-        datetime,
-        content,
-        replyId,
-        author,
-        replier,
-        children,
-        actions = [],
-        className,
-      }) => {
+  id,
+  type = 'none',
+  active = false,
+  datetime,
+  content,
+  replyId,
+  author,
+  replier,
+  children,
+  actions = [],
+  className,
+  ...props
+}) => {
   let hasReply = replyId && replier;
-
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <div
       id={`c_${id}`}
       className={classnames(
-        styles.component,
+        `${prefixCls}`,
         {
-          [styles.small]: type === 'small',
-          [styles.activeComment]: active,
+          [`${prefixCls}-small`]: type === 'small',
+          [`${prefixCls}-activeComment`]: active,
         },
         className,
       )}
@@ -212,20 +216,20 @@ const CiComment: React.FC<{
         }
         author={author?.title}
         datetime={
-          <div className={styles.tiptap}>
+          <div className={`${prefixCls}-tiptap`}>
             {hasReply && (
               <a
                 href={`#c_${replyId || ''}`}
-                className={styles.reply}
+                className={`${prefixCls}-reply`}
                 onClick={() => {
                   // onJump && onJump(replyId);
                 }}
               >
-                <RetweetOutlined className={styles.replyFlag} />
+                <RetweetOutlined className={`${prefixCls}-replyFlag`} />
                 <Avatar
                   size={15}
                   src={replier?.avatarUrl}
-                  className={styles.replyAvatar}
+                  className={`${prefixCls}-replyAvatar`}
                 />
                 <span>{replier?.title}</span>
               </a>
@@ -243,6 +247,7 @@ const CiComment: React.FC<{
 };
 
 const Index: React.FC<{
+  prefixCls?: string;
   reply$: EventEmitter<CommentType | undefined>;
   replied$: EventEmitter<CommentType>;
   initialLoad: boolean;
@@ -301,10 +306,11 @@ const Index: React.FC<{
   let onPageChange = (page?: number, pageSize?: number) => {
     run({ ...defaultParams, page, size: pageSize });
   };
-
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <CiComment
-      className={styles.comment}
+      className={prefixCls}
       id={id}
       replyId={replyId}
       datetime={datetime}
@@ -324,7 +330,7 @@ const Index: React.FC<{
         <>
           <List
             loading={loading}
-            className={styles.subComments}
+            className={`${prefixCls}-subComments`}
             loadMore={true}
             renderItem={(item: CommentType, index: number) => {
               return (
@@ -339,13 +345,13 @@ const Index: React.FC<{
                 </List.Item>
               );
             }}
-            itemLayout='horizontal'
+            itemLayout="horizontal"
             dataSource={dataSource}
           />
           <Pagination
             hideOnSinglePage
-            className={styles.pagination}
-            size='small'
+            className={`${prefixCls}-pagination`}
+            size="small"
             total={total}
             defaultCurrent={1}
             current={current}

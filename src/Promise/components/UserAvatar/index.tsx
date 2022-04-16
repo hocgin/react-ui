@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import { Avatar, Dropdown, Menu } from 'antd';
-import styles from './index.less';
+import './index.less';
 import {
   UserOutlined,
   ExportOutlined,
@@ -8,32 +8,39 @@ import {
   SettingOutlined,
   AccountBookOutlined,
 } from '@ant-design/icons';
+import { ConfigContext } from '@/config-provider';
 
 const UserInfo: React.FC<{
+  prefixCls?: string;
   avatarSrc?: React.ReactNode;
   title?: React.ReactNode;
-}> = ({ avatarSrc, title }, ref) => {
+}> = ({ avatarSrc, title, ...props }, ref) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise--UserAvatar', props.prefixCls);
   return (
-    <div className={styles.userInfo}>
+    <div className={prefixCls}>
       <div>
         <Avatar
-          shape="circle"
+          shape='circle'
           size={64}
           icon={<UserOutlined />}
           src={avatarSrc}
         />
       </div>
-      <div className={styles.title}>{title}</div>
+      <div className={'title'}>{title}</div>
     </div>
   );
 };
 
 const Index: React.FC<{
+  prefixCls?: string;
   className?: string;
   defaultParams?: any;
 }> = (props, ref) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise--UserAvatar', props.prefixCls);
   let menu = (
-    <Menu className={styles.menu}>
+    <Menu className={'menu'}>
       <UserInfo title={'hocgin'} />
       <Menu.Divider />
       <Menu.Item icon={<UserOutlined />}>个人中心</Menu.Item>
@@ -44,13 +51,11 @@ const Index: React.FC<{
       <Menu.Item icon={<ExportOutlined />}>退出</Menu.Item>
     </Menu>
   );
-  return (
-    <div>
-      <Dropdown overlay={menu} trigger={['click']}>
-        <Avatar shape="circle" size={36} icon={<UserOutlined />} />
-      </Dropdown>
-    </div>
-  );
+  return <div className={prefixCls}>
+    <Dropdown overlay={menu} trigger={['click']}>
+      <Avatar shape='circle' size={36} icon={<UserOutlined />} />
+    </Dropdown>
+  </div>;
 };
 
 export default Index;

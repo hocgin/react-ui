@@ -1,11 +1,9 @@
 import React from 'react';
-import { Menu } from 'antd';
+import { Menu as AnMenu } from 'antd';
 import classnames from 'classnames';
-import styles from './index.less';
 import { Empty } from '@hocgin/ui';
-import {
-  MailOutlined,
-} from '@ant-design/icons';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 interface MenuItem {
   title: string;
@@ -17,26 +15,39 @@ export interface Group {
   menus?: MenuItem[];
 }
 
-const LeftMenu: React.FC<{
+const Menu: React.FC<{
+  prefixCls?: string;
   className?: string;
   activeKey?: string;
   groups?: Group[];
   onClick?: (scope: string) => void;
-}> = ({ className, activeKey, onClick, groups = [] }) => {
-  return <div className={classnames(styles.menu, className)}>
-    {groups.length ? <Menu activeKey={activeKey} onClick={({ key }) => onClick?.(key)}>
-      {(groups || []).map((group, index) => {
-        return <>
-          <Menu.Divider />
-          <Menu.ItemGroup title={group.title}>
-            {(group.menus || []).map(menu => {
-              return <Menu.Item key={menu.scope}>{menu.title}</Menu.Item>;
-            })}
-          </Menu.ItemGroup>
-        </>;
-      })}
-    </Menu> : <Empty />}
-  </div>;
+}> = ({ className, activeKey, onClick, groups = [], ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('settings--Menu', props.prefixCls);
+  return (
+    <div className={classnames(prefixCls, className)}>
+      {groups.length ? (
+        <AnMenu activeKey={activeKey} onClick={({ key }) => onClick?.(key)}>
+          {(groups || []).map((group, index) => {
+            return (
+              <>
+                <AnMenu.Divider />
+                <AnMenu.ItemGroup title={group.title}>
+                  {(group.menus || []).map((menu) => {
+                    return (
+                      <AnMenu.Item key={menu.scope}>{menu.title}</AnMenu.Item>
+                    );
+                  })}
+                </AnMenu.ItemGroup>
+              </>
+            );
+          })}
+        </AnMenu>
+      ) : (
+        <Empty />
+      )}
+    </div>
+  );
 };
 
-export default LeftMenu;
+export default Menu;

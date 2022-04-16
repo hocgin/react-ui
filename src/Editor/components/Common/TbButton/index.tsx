@@ -1,17 +1,21 @@
-import * as React from 'react';
+import React from 'react';
 import { Button, Tooltip } from 'antd';
 import styles from './index.less';
 import classnames from 'classnames';
+import { ConfigContext } from '@/config-provider';
 
 const Index: React.FC<{
   className?: string;
   onClick?: () => void;
   children?: any;
   title?: string;
+  prefixCls?: string;
   disabled?: boolean;
-}> = ({ className, disabled = false, title, children, onClick }) => {
+}> = ({ className, disabled = false, title, children, onClick, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor-e-tb-button', props.prefixCls);
   return (
-    <div className={classnames('gin-tb-button', styles.btn, className)}>
+    <div className={classnames(prefixCls, className)}>
       <Tooltip placement="bottom" title={title}>
         <Button type="text" onClick={onClick} disabled={disabled}>
           <div onTouchStart={(e) => e.preventDefault()}>{children}</div>

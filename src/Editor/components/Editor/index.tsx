@@ -1,5 +1,4 @@
 import React, { MutableRefObject, useEffect, useState } from 'react';
-import styles from './index.less';
 import { HeartFilled } from '@hocgin/ui';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
@@ -76,6 +75,8 @@ import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 export interface EditorFn {
   getHTML: () => string;
@@ -84,7 +85,10 @@ export interface EditorFn {
   setFullscreen: (fullscreen: boolean) => void;
 }
 
-export let getExtensions = (placeholder: string = '', onSearchMention: onSearchMentionFunction = undefined) => {
+export let getExtensions = (
+  placeholder: string = '',
+  onSearchMention: onSearchMentionFunction = undefined,
+) => {
   return [
     StarterKit,
     ExImage.configure({ inline: true }),
@@ -124,13 +128,16 @@ export let getExtensions = (placeholder: string = '', onSearchMention: onSearchM
   ];
 };
 
-type onSearchMentionFunction = ((keyword: string) => Mention[] | undefined) | undefined;
+type onSearchMentionFunction =
+  | ((keyword: string) => Mention[] | undefined)
+  | undefined;
 
 const Index: React.FC<{
   editorRef?: MutableRefObject<EditorFn | undefined>;
   header?: any;
   value?: any;
   className?: string;
+  prefixCls?: string;
   placeholder?: string;
   contentClassName?: string;
   uploadImageUrl?: string;
@@ -140,19 +147,20 @@ const Index: React.FC<{
   onSearchMention?: onSearchMentionFunction;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-        onChange,
-        className,
-        placeholder = '',
-        contentClassName,
-        header,
-        onChangeFullscreen,
-        editorRef,
-        fullscreen = false,
-        editable = true,
-        value,
-        onSearchMention,
-        uploadImageUrl = '/api/com/file/upload',
-      }) => {
+  onChange,
+  className,
+  placeholder = '',
+  contentClassName,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+  uploadImageUrl = '/api/com/file/upload',
+  ...props
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
@@ -190,6 +198,8 @@ const Index: React.FC<{
   );
 
   let placement: any = isFullscreen ? 'bottom' : 'top';
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor', props.prefixCls);
   return (
     <>
       <Dropdown
@@ -197,27 +207,27 @@ const Index: React.FC<{
         overlay={<TableCtl editor={editor} />}
         trigger={['contextMenu']}
       >
-        <div className={classnames(styles.editor)}>
+        <div className={classnames(`${prefixCls}-editor`)}>
           <div
-            className={classnames(styles.editorWrapper, className, {
-              [styles.fullscreen]: isFullscreen,
-              [styles.mini]: !isFullscreen,
-              [styles.editable]: editable,
-              [styles.noEditable]: !editable,
+            className={classnames(`${prefixCls}-editorWrapper`, className, {
+              [`${prefixCls}-fullscreen`]: isFullscreen,
+              [`${prefixCls}-mini`]: !isFullscreen,
+              [`${prefixCls}-editable`]: editable,
+              [`${prefixCls}-noEditable`]: !editable,
             })}
           >
             {header}
             {editorEditable && (
               <div
-                className={classnames(styles.header, {
-                  [styles.hide]: !isFullscreen,
+                className={classnames(`${prefixCls}-header`, {
+                  [`${prefixCls}-header-hide`]: !isFullscreen,
                 })}
                 onTouchStart={(e) => e.preventDefault()}
                 onMouseDown={(e) => e.preventDefault()}
               >
-                <div className={styles.tpToolbarWrapper}>
+                <div className={`${prefixCls}-header-tpToolbarWrapper`}>
                   {isFullscreen && (
-                    <div className={styles.tpToolbar}>
+                    <div className={`${prefixCls}-header-tpToolbar`}>
                       <InsertCard
                         editor={editor}
                         uploadImageUrl={uploadImageUrl}
@@ -263,7 +273,7 @@ const Index: React.FC<{
                   )}
                 </div>
                 <TbButton
-                  className={styles.toggleFull}
+                  className={`${prefixCls}-header-toggleFull`}
                   onClick={toggleFullscreen}
                 >
                   {isFullscreen ? (
@@ -275,16 +285,16 @@ const Index: React.FC<{
               </div>
             )}
             <div
-              className={classnames(styles.content, contentClassName)}
+              className={classnames(`${prefixCls}-content`, contentClassName)}
               onClick={() => editor?.chain().focus().run()}
             >
               <EditorContent editor={editor} />
               {editor && <FloatingMenus editor={editor} />}
             </div>
             {!isFullscreen && editorEditable && (
-              <div className={styles.btToolbar}>
+              <div className={`${prefixCls}-btToolbar`}>
                 <div
-                  className={styles.btActions}
+                  className={`${prefixCls}-btActions`}
                   onTouchStart={(e) => e.preventDefault()}
                   onMouseDown={(e) => e.preventDefault()}
                 >
@@ -296,7 +306,7 @@ const Index: React.FC<{
                   <SetLink editor={editor} />
                   <Emoji editor={editor} />
                 </div>
-                <HeartFilled className={styles.heart} />
+                <HeartFilled className={`${prefixCls}-heart`} />
               </div>
             )}
           </div>

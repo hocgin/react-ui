@@ -1,33 +1,17 @@
 import React from 'react';
-import styles from './DateTime.less';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import { Format } from '@hocgin/ui';
-import type Picker from './Picker';
+import { ConfigContext } from '@/config-provider';
+import './DateTime.less';
 
-interface DateTimeProps {
-  /**
-   * 时间日期
-   */
+const Index: React.FC<{
+  prefixCls?: string;
   value: string | number;
-}
+}> = ({ value, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('exhibit--DateTime', props.prefixCls);
 
-export default class DateTime extends React.Component<DateTimeProps> {
-  static Picker: typeof Picker;
-  static defaultProps = {
-    value: 'N/A',
-  };
-
-  render() {
-    return (
-      <div className={styles.datetime}>
-        <ClockCircleOutlined />
-        <span className={styles.text}>{this.value}</span>
-      </div>
-    );
-  }
-
-  get value() {
-    let { value } = this.props;
+  let getValue = () => {
     let text = value;
     let valueType = typeof value;
     if (valueType === 'string') {
@@ -36,5 +20,14 @@ export default class DateTime extends React.Component<DateTimeProps> {
       text = Format.DateTime.timestampAs(value as number);
     }
     return text;
-  }
-}
+  };
+
+  return (
+    <div className={prefixCls}>
+      <ClockCircleOutlined />
+      <span className={`${prefixCls}-text`}>{getValue()}</span>
+    </div>
+  );
+};
+
+export default Index;

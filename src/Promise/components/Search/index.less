@@ -1,15 +1,19 @@
-:global(.ant-modal-body) {
-  .component {
-    width: 100%!important;
+@import '../../../../src/style/index.less';
+
+@promise--Search-prefix-cls: ~'@{hui-prefix}-promise--Search';
+@promise--Search-OptionView-prefix-cls: ~'@{hui-prefix}-promise--Search-OptionView';
+
+.ant-modal-body {
+  .@{promise--Search-prefix-cls} {
+    width: 100% !important;
   }
 }
 
-.component {
+.@{promise--Search-prefix-cls} {
   min-width: 10em;
 }
 
-
-.optionView {
+.@{promise--Search-OptionView-prefix-cls} {
   display: flex;
   flex-direction: row;
   align-items: center;

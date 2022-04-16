@@ -1,40 +1,24 @@
 import React from 'react';
-import classnames from 'classnames';
 import { Statistic } from 'antd';
-import styles from './index.less';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
-interface MoneyProps {
+const Index: React.FC<{
+  prefixCls?: string;
   precision?: number;
   value?: number | string;
-}
-
-interface MoneyState {}
-
-class Index extends React.Component<MoneyProps, MoneyState> {
-  static defaultProps = {
-    precision: 2,
-    value: '-.--',
-  };
-  state = {};
-
-  render() {
-    let {} = this.state;
-    let { precision, value } = this.props;
-    return (
-      <div className={styles.component}>
-        <Statistic
-          valueStyle={this.valueStyle}
-          prefix={'¥'}
-          value={value}
-          precision={precision}
-        />
-      </div>
-    );
-  }
-
-  get valueStyle() {
-    return { color: '#E86A5E' };
-  }
-}
-
+}> = ({ precision = 2, value = '-.--', ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('money', props.prefixCls);
+  return (
+    <div className={prefixCls}>
+      <Statistic
+        valueStyle={{ color: '#E86A5E' } as any}
+        prefix={'¥'}
+        value={value}
+        precision={precision}
+      />
+    </div>
+  );
+};
 export default Index;

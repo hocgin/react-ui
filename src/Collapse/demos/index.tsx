@@ -8,15 +8,15 @@ import styles from './index.less';
 
 export default () => {
   return (
-    <Collapse defaultActiveKey={['1']}>
-      <Collapse.Panel header='基础信息' key='1'>
+    <Collapse.Collapse defaultActiveKey={['1']}>
+      <Collapse.Panel header="基础信息" key="1">
         <TextRow bordered={true} title={'父级名称'}>
           顶级
         </TextRow>
         <TextRow title={'权限名称'}>权限名称</TextRow>
         <TextRow title={'权限类型'}>权限类型</TextRow>
         <TextRow title={'图片'}>
-          <Exhibit.Image src={''} />
+          <Exhibit.Image.Image src={''} />
         </TextRow>
         <TextRow title={'时间'}>
           <Exhibit.DateTime.Picker startAt={'1:00'} endAt={'12:00'} />
@@ -28,12 +28,12 @@ export default () => {
           <Exhibit.Link.Site url={'http://www.hocgin.top'} />
         </TextRow>
       </Collapse.Panel>
-      <Collapse.Panel header='关联角色' key='2'>
+      <Collapse.Panel header="关联角色" key="2">
         <TextRow bordered={true} title={'权限名称'}>
           权限名称
         </TextRow>
         <TextRow title={'权限类型'}>权限类型</TextRow>
       </Collapse.Panel>
-    </Collapse>
+    </Collapse.Collapse>
   );
 };

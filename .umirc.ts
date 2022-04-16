@@ -54,5 +54,9 @@ export default defineConfig({
         style: true,
       },
     ],
+    [
+      'babel-plugin-transform-remove-console',
+      { exclude: ['error', 'warn', 'info'] },
+    ],
   ],
 });

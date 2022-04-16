@@ -1,45 +1,48 @@
-@import '../../../../src/variables.less';
+@import '../../../../src/style/index.less';
 
+@settings-prefix-cls: ~'@{hui-prefix}-settings';
+@settings--RightContent-prefix-cls: ~'@{hui-prefix}-settings--RightContent';
+@settings--LeftMenu-prefix-cls: ~'@{hui-prefix}-settings--LeftMenu';
 @borderColor: var(--border-color);
 
-.component {
+.@{settings-prefix-cls} {
   display: flex;
   justify-content: space-between;
   background-color: #fff;
   padding: 10px 0 10px 10px;
 }
 
-.left {
+.@{settings--LeftMenu-prefix-cls} {
   width: 256px;
   padding-right: 16px;
   box-sizing: border-box;
-}
 
-.avatar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding-bottom: 20px;
-
-  .info {
-    margin-left: 10px;
-    flex: 1;
+  .avatar {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
 
-    .title {
-      font-weight: 500;
-      font-size: 17px;
-    }
+    .info {
+      margin-left: 10px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
 
-    .description {
-      color: #999;
-      font-size: 14px;
+      .title {
+        font-weight: 500;
+        font-size: 17px;
+      }
+
+      .description {
+        color: #999;
+        font-size: 14px;
+      }
     }
   }
 }
 
-.right {
+.@{settings--RightContent-prefix-cls} {
   flex: 1;
   background-color: #fff;
   overflow-y: auto;
@@ -61,9 +64,7 @@
     font-size: 13px;
   }
 
-  :global {
-    .ant-divider {
-      margin: 15px 0;
-    }
+  .ant-divider {
+    margin: 15px 0;
   }
 }

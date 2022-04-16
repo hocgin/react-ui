@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileUpload, Utils, Dom } from '@hocgin/ui';
+import { FileUpload } from '@hocgin/ui';
 import { FileInfo } from '@/Utils/interface';
 
 const Index: React.FC<{
@@ -8,21 +8,15 @@ const Index: React.FC<{
   maxCount?: number;
   value?: FileInfo | FileInfo[];
   onChange?: (info: any) => void;
-}> = ({
-        children,
-        action,
-        value,
-        maxCount = 1,
-        onChange,
-        ...rest
-      }) => {
+}> = ({ children, action, value, maxCount = 1, onChange, ...rest }) => {
   return (
     <FileUpload
       maxCount={maxCount}
       action={`${action}`}
       value={value}
       {...rest}
-      onChange={onChange}>
+      onChange={onChange}
+    >
       {children}
     </FileUpload>
   );

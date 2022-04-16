@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Image.less';
 import { Exhibit } from '@hocgin/ui';
 
 export interface ImageProps {
@@ -17,9 +16,9 @@ class Index extends React.Component<ImageProps> {
   render() {
     let { src } = this.props;
     return (
-      <div className={styles.component}>
+      <div>
         {src.map((url) => (
-          <Exhibit.Image src={url} />
+          <Exhibit.Image.Image src={url} />
         ))}
       </div>
     );

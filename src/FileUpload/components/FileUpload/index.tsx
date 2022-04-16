@@ -3,6 +3,7 @@ import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { FileInfo } from '@/Utils/interface';
 import { Dom, Utils } from '@/index';
+import 'antd/es/upload/style';
 
 let defaultChildren = <><Button
   type='primary'

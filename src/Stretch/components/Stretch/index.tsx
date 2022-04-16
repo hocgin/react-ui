@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import styles from './index.less';
 // @ts-ignore
 import Truncate from 'react-truncate';
 import { useInterval } from 'ahooks';
@@ -11,14 +10,24 @@ import {
   CopyOutlined,
   CheckOutlined,
 } from '@ant-design/icons';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 const Index: React.FC<{
+  prefixCls?: string;
   className?: string;
   children?: any;
   maxRow?: number;
   fullSize?: boolean;
   bordered?: boolean;
-}> = ({ children, fullSize = false, className, maxRow, bordered = false, ...rest }) => {
+}> = ({
+  children,
+  fullSize = false,
+  className,
+  maxRow,
+  bordered = false,
+  ...props
+}) => {
   let [fsize, setFullSize] = useState(fullSize);
   let [copied, setCopied] = useState(false);
 
@@ -31,17 +40,22 @@ const Index: React.FC<{
   };
   useInterval(() => setCopied?.(false), 2000);
 
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('stretch', props.prefixCls);
+
   return (
     <div
-      className={classnames(styles.stretch, className, {
-        [styles.bordered]: bordered,
+      className={classnames(prefixCls, className, {
+        [`${prefixCls}-bordered`]: bordered,
       })}
     >
-      <div className={styles.content}>
-        <Truncate lines={!fsize && maxRow} ellipsis={'...'}>{children}</Truncate>
+      <div className={'content'}>
+        <Truncate lines={!fsize && maxRow} ellipsis={'...'}>
+          {children}
+        </Truncate>
       </div>
-      <div className={styles.toolbar}>
-        <span className={styles.copy}>
+      <div className={'toolbar'}>
+        <span className={'copy'}>
           {copied ? (
             <CheckOutlined style={{ color: '#00B06D' } as any} />
           ) : (
@@ -50,7 +64,7 @@ const Index: React.FC<{
             </CopyToClipboard>
           )}
         </span>
-        <span onClick={() => setFullSize(!fsize)} className={styles.resize}>
+        <span onClick={() => setFullSize(!fsize)} className={'resize'}>
           {sizeIcon}
         </span>
       </div>

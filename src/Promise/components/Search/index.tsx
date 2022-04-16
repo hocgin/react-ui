@@ -3,11 +3,13 @@ import { Select, Spin, Avatar } from 'antd';
 import { Utils } from '@hocgin/ui';
 import { SearchOption } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
-import styles from './index.less';
 import { UserOutlined } from '@ant-design/icons';
-import { useUpdateEffect, useRequest, useMount } from 'ahooks';
+import { useUpdateEffect, useRequest } from 'ahooks';
+import './index.less';
+import { ConfigContext } from '@/config-provider';
 
 const Index: React.FC<{
+  prefixCls?: string;
   /**
    * 请求
    */
@@ -40,7 +42,7 @@ const Index: React.FC<{
         useAction,
         defaultValue,
         options = [],
-        ...rest
+        ...props
       }) => {
   let [data, setData] = useState<SearchOption[]>(options);
   let [keyword, setKeyword] = useState<string>();
@@ -52,8 +54,10 @@ const Index: React.FC<{
 
   useUpdateEffect(() => run(keyword), [keyword]);
 
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise--Search', props.prefixCls);
   return (
-    <Select className={styles.component}
+    <Select className={prefixCls}
             defaultValue={defaultValue}
             loading={loading}
             showSearch
@@ -66,7 +70,7 @@ const Index: React.FC<{
             onSearch={setKeyword}
             placeholder={placeholder}
             optionLabelProp='label'
-            {...rest}
+            {...props}
     >
       {data.map(({ key, image, description, value }: SearchOption) => (
         <Select.Option key={value} value={value} label={key}>
@@ -78,18 +82,19 @@ const Index: React.FC<{
 };
 
 const OptionView: React.FC<{
+  prefixCls?: string;
   title?: string;
   image?: string;
   description?: string;
-}> = ({ title, image, description }) => {
+}> = ({ title, image, description, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('promise--Search-OptionView', props.prefixCls);
   return (
-    <div className={styles.optionView}>
-      {image && (
-        <Avatar className={styles.image} size={32} icon={<UserOutlined />} />
-      )}
-      <div className={styles.info}>
-        <div className={styles.title}>{title}</div>
-        <div className={styles.description}>{description}</div>
+    <div className={prefixCls}>
+      {image && <Avatar className={'image'} size={32} icon={<UserOutlined />} />}
+      <div className={'info'}>
+        <div className={'title'}>{title}</div>
+        <div className={'description'}>{description}</div>
       </div>
     </div>
   );

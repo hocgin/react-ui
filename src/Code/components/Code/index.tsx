@@ -1,8 +1,10 @@
 import React from 'react';
-import styles from './index.less';
 import classnames from 'classnames';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
-export interface CodeProps {
+const Index: React.FC<{
+  prefixCls?: string;
   /**
    * 设置样式名
    */
@@ -14,33 +16,24 @@ export interface CodeProps {
   /**
    * 编程语言
    */
-  lang: string;
+  lang?: string;
   /**
    * 边框
    */
-  bordered: boolean;
-}
-
-interface CodeState {}
-
-class Index extends React.Component<CodeProps, CodeState> {
-  static defaultProps = {
-    lang: 'auto',
-    bordered: true,
-  };
-
-  render(): JSX.Element {
-    let { className, children, bordered } = this.props;
-    return (
-      <div
-        className={classnames(styles.component, className, {
-          [styles.bordered]: bordered,
-        })}
-      >
-        <code>{children}</code>
-      </div>
-    );
-  }
-}
+  bordered?: boolean;
+}> = (props, ref) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('code', props.prefixCls);
+  let { className, children, bordered = true } = props;
+  return (
+    <div
+      className={classnames(prefixCls, className, {
+        [`${prefixCls}-bordered`]: bordered,
+      })}
+    >
+      <code>{children}</code>
+    </div>
+  );
+};
 
 export default Index;

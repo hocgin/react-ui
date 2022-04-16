@@ -1,9 +1,15 @@
 import React from 'react';
-import { Promise, Exhibit, Rich, Markdown, Editor } from '@hocgin/ui';
+import { Promise, Exhibit, Editor } from '@hocgin/ui';
 import Dom from '@/Utils/dom';
-import styles from './index.less';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input } from 'antd';
+
+let boxStyle = {
+  width: '100%',
+  padding: 5,
+  borderRadius: 2,
+  border: '1px solid rgba(204, 204, 204, 0.8)',
+} as any;
 
 export const handleSchemeColumns = (columns: any[]): any[] => {
   return columns.map(handleSchemeColumn);
@@ -306,46 +312,28 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
     },
     renderFormItem: (text: any, props: any) => {
       let { prefix, randExp } = props?.params || {};
-      return <Promise.Encoding
-        prefix={prefix}
-        randEx={randExp}
-        {...props?.fieldProps}
-      />;
+      return (
+        <Promise.Encoding
+          prefix={prefix}
+          randEx={randExp}
+          {...props?.fieldProps}
+        />
+      );
     },
   },
   [prefix('html')]: {
     render: (text: any, props: any) => {
       if (!text) {
-        return <div className={styles.box} />;
+        return <div style={boxStyle} />;
       }
-      return <div className={styles.box}><Editor value={text} editable={false} /></div>;
+      return (
+        <div style={boxStyle}>
+          <Editor value={text} editable={false} />
+        </div>
+      );
     },
     renderFormItem: (text: any, props: any) => {
       return <Editor value={text} {...props?.fieldProps} />;
-    },
-  },
-  // 富文本编辑器
-  [prefix('rich')]: {
-    render: (text: any, props: any) => {
-      if (!text) {
-        return <div className={styles.box}><Rich.Preview>-</Rich.Preview></div>;
-      }
-      return <div className={styles.box}><Rich.Preview>{text}</Rich.Preview></div>;
-    },
-    renderFormItem: (text: any, props: any) => {
-      return <Rich.Editor {...props?.fieldProps} />;
-    },
-  },
-  // MD编辑器
-  [prefix('markdown')]: {
-    render: (text: any, props: any) => {
-      if (!text) {
-        return <div className={styles.box}><Markdown.Preview>-</Markdown.Preview></div>;
-      }
-      return <div className={styles.box}><Markdown.Preview>{text}</Markdown.Preview></div>;
-    },
-    renderFormItem: (text: any, props: any) => {
-      return <Markdown.Editor {...props?.fieldProps} />;
     },
   },
   // https://procomponents.ant.design/components/field

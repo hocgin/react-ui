@@ -1,10 +1,11 @@
-import * as React from 'react';
-import styles from './index.less';
+import React from 'react';
+import './index.less';
 import { Button, Dropdown, Menu } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useInterval } from 'ahooks';
 import classnames from 'classnames';
+import { ConfigContext } from '@/config-provider';
 
 interface MenuInfo {
   key: string;
@@ -16,6 +17,8 @@ interface MenuInfo {
 
 const Index: React.FC<{
   className?: string;
+  prefixCls?: string;
+  titleStyle?: any;
   titleClassName?: string;
   menus?: MenuInfo[];
   defaultValue?: any;
@@ -29,9 +32,11 @@ const Index: React.FC<{
   disabled = false,
   titleClassName,
   onClick,
+  titleStyle,
   menus = [],
   defaultValue,
   mode,
+  ...props
 }) => {
   let [key, setKey] = useState<string>('none');
   let matchMenu = (key: string) => menus?.find((item) => item.key === key);
@@ -46,17 +51,19 @@ const Index: React.FC<{
       setKey(matchedMenu?.key);
     }
   }, 1000);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor-e-me-dropdown', props.prefixCls);
   return (
     <Button
       type="text"
       disabled={disabled}
-      className={classnames(styles.dropdown, className)}
+      className={classnames(prefixCls, className)}
       onTouchStart={(e) => e.preventDefault()}
     >
       <Dropdown
         placement={placement}
         overlayClassName={classnames({
-          [styles.horizontal]: mode === 'horizontal',
+          [`${prefixCls}-horizontal`]: mode === 'horizontal',
         })}
         overlay={
           <Menu
@@ -68,7 +75,7 @@ const Index: React.FC<{
             }}
           >
             {(menus || []).map(({ key, header }) => (
-              <Menu.Item className={styles.menu} key={key}>
+              <Menu.Item className={classnames(`${prefixCls}-menu`)} key={key}>
                 {header}
               </Menu.Item>
             ))}
@@ -76,9 +83,11 @@ const Index: React.FC<{
         }
         trigger={['click']}
       >
-        <span className={classnames(styles.selectedValue)}>
-          <span className={classnames(titleClassName)}>{menuTitle}</span>{' '}
-          <CaretDownOutlined className={styles.caretDown} />
+        <span className={classnames(`${prefixCls}-selectedValue`)}>
+          <span className={classnames(titleClassName)} style={titleStyle}>
+            {menuTitle}
+          </span>{' '}
+          <CaretDownOutlined className={classnames(`${prefixCls}-caretDown`)} />
         </span>
       </Dropdown>
     </Button>

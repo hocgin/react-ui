@@ -1,12 +1,14 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import MeDropdown from '@/Editor/components/Common/MeDropdown';
-import styles from './index.less';
+import './index.less';
+import { ConfigContext } from '@/config-provider';
 
 export const FontSize: React.FC<{
   editor?: Editor | null;
+  prefixCls?: string;
   placement?: 'top' | 'bottom';
-}> = ({ editor, placement = 'top' }) => {
+}> = ({ editor, placement = 'top', ...props }) => {
   let fontSizes = [
     '12px',
     '13px',
@@ -31,11 +33,13 @@ export const FontSize: React.FC<{
     },
   }));
 
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor-e-font-size', props.prefixCls);
   return (
     <MeDropdown
       placement={placement}
       menus={menus}
-      titleClassName={styles.title}
+      titleClassName={prefixCls}
       defaultValue="15px"
     />
   );

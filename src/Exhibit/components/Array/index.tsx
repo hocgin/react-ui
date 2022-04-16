@@ -1,8 +1,7 @@
-import Index from './Array';
 import Image from './Image';
 import Tag from './Tag';
 
-Index.Image = Image;
-Index.Tag = Tag;
-
-export default Index;
+export default class {
+  static Image: typeof Image = Image;
+  static Tag: typeof Tag = Tag;
+}

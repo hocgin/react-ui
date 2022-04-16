@@ -1,9 +1,9 @@
-import Index from './Link';
 import File from './File';
 import Download from './Download';
 import Site from './Site';
 
-Index.File = File;
-Index.Download = Download;
-Index.Site = Site;
-export default Index;
+export default class {
+  static File: typeof File = File;
+  static Download: typeof Download = Download;
+  static Site: typeof Site = Site;
+}

@@ -48,16 +48,32 @@ export default class DateTimeFormat {
   /**
    * 相对时间
    * @param localDatetime 2021-06-01T00:30:30.159
-   * @return 3分钟前
+   * @return
+   * -> 一天内 3分钟前
+   * -> 一年内 09-11 11:30
+   * -> 一年前 2020-06-01 11:30
    */
   static useDefRelativeFromNow(localDatetime?: LocalDateTime): string | undefined {
     let formatter = moment(localDatetime, DateTimeFormat.DEFAULT_FORMAT);
     if (!formatter.isValid()) {
       return localDatetime;
     }
-    return DateTimeFormat.relativeFromNow(
-      formatter.valueOf(),
-    );
+
+    let timestamp = formatter.valueOf();
+    let diffTimestamp = new Date().getTime() - timestamp;
+
+    // 一天内 3分钟前
+    if (diffTimestamp <= 24 * 60 * 60 * 1000) {
+      return moment(timestamp).fromNow();
+    }
+    // 和当前是同一年内 09-11 11:30
+    else if (diffTimestamp <= 365 * 24 * 60 * 60 * 1000 && formatter.year() === new Date().getFullYear()) {
+      return formatter.format('MM-DD HH:mm');
+    }
+    // 2020-06-01 11:30
+    else {
+      return formatter.format('YYYY-MM-DD HH:mm');
+    }
   }
 
 

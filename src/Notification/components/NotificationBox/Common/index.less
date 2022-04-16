@@ -1,16 +1,22 @@
-.header {
+@import '../../../../style/index.less';
+
+@notification--Common-Title-prefix-cls: ~'@{hui-prefix}-notification--Common-Title';
+@notification--Common-Dot-prefix-cls: ~'@{hui-prefix}-notification--Common-Dot';
+@notification--Common-MessageSmallCard-prefix-cls: ~'@{hui-prefix}-notification--Common-MessageSmallCard';
+
+.@{notification--Common-Title-prefix-cls} {
   padding: 24px 16px 0 16px;
   display: block;
   font-size: 14px;
   font-weight: 600;
 }
 
-.dot {
+.@{notification--Common-Dot-prefix-cls} {
   font-weight: 500;
   padding: 0 3px;
 }
 
-.messageSmallCard {
+.@{notification--Common-MessageSmallCard-prefix-cls} {
   padding: 20px 16px 20px 16px;
   display: flex;
   flex-direction: row;
@@ -50,7 +56,7 @@
       text-overflow: ellipsis;
       overflow: hidden;
 
-      :global(.ant-typography) {
+      .ant-typography {
         margin-bottom: 0;
       }
     }

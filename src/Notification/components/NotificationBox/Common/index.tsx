@@ -1,40 +1,60 @@
 import React, { useState } from 'react';
-import styles from './index.less';
+import './index.less';
 import { LocalDateTime } from '@/Utils/interface';
 import { Avatar, Typography, Modal } from 'antd';
 import { Editor } from '@hocgin/ui';
 import { NotificationOutlined } from '@ant-design/icons';
 import { Format } from '@/index';
+import { ConfigContext } from '@/config-provider';
 
 export { Chat } from './Chat';
 
 export const Title: React.FC<{
   children?: any;
-}> = ({ children }) => <div className={styles.header}>{children}</div>;
+  className?: string;
+  prefixCls?: string;
+}> = ({ children, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--Common-Title', props.prefixCls);
+  return <div className={prefixCls}>{children}</div>;
+};
 
-export const Dot: React.FC<{}> = () => <span className={styles.dot}>·</span>;
+export const Dot: React.FC<{
+  className?: string;
+  prefixCls?: string;
+}> = ({ ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--Common-Dot', props.prefixCls);
+  return <span className={prefixCls}>·</span>;
+};
 
 export const MessageSmallCard: React.FC<{
   title: string;
   content: string;
   description?: string;
   datetime?: LocalDateTime;
-}> = ({ title, datetime, content, description }) => {
+  prefixCls?: string;
+}> = ({ title, datetime, content, description, ...props }) => {
   let fmtDatetime = Format.DateTime.useDefRelativeFromNow(datetime);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls(
+    'notification--Common-MessageSmallCard',
+    props.prefixCls,
+  );
   return (
-    <div className={styles.messageSmallCard}>
+    <div className={prefixCls}>
       <Avatar size={34} icon={<NotificationOutlined />} />
-      <div className={styles.body}>
-        <div className={styles.title}>
+      <div className={'body'}>
+        <div className={'title'}>
           <span>{title}</span>
           {fmtDatetime && <>{fmtDatetime}</>}
         </div>
-        <div className={styles.container}>
-          <div className={styles.content}>{description}</div>
-          <div className={styles.more}>
+        <div className={'container'}>
+          <div className={'content'}>{description}</div>
+          <div className={'more'}>
             {content && (
               <a
-                rel='noopener noreferrer'
+                rel="noopener noreferrer"
                 onClick={() =>
                   Modal.confirm({
                     icon: null,

@@ -166,6 +166,7 @@ export class Struct {
   static getScrollData(fromResult?: IScroll): any {
     return {
       list: fromResult?.records || [],
+      hasMore: fromResult?.hasMore,
       nextId: fromResult?.nextId,
     };
   }
