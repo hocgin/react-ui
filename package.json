@@ -76,7 +76,7 @@
     "@umijs/plugin-request": "^2.7.0",
     "mockjs": "^1.1.0",
     "ahooks": "^3.0.0-alpha.12",
-    "antd": "^4.17.2",
+    "antd": "^4.19.5",
     "braft-editor": "^2.3.9",
     "braft-extensions": "^0.1.1",
     "classnames": "^2.3.1",

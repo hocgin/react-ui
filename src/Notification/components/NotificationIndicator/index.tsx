@@ -11,6 +11,7 @@ export const NotificationIndicator: React.FC<{
   let visible = !!count;
   return <div className={styles.component} onClick={onClick}>
     <Tooltip title={visible ? '有未读的消息' : null}>
+      {/*@ts-ignore*/}
       <Badge dot={visible} size='small'><BellOutlined style={{ fontSize: 16 } as any} /></Badge>
     </Tooltip>
   </div>;
