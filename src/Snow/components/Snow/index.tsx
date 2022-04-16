@@ -5,7 +5,8 @@ interface SnowProps {
   isShow?: boolean;
 }
 
-interface SnowState {}
+interface SnowState {
+}
 
 class Index extends Component<SnowProps, SnowState> {
   static defaultProps = {
@@ -53,8 +54,7 @@ class Index extends Component<SnowProps, SnowState> {
   }
 
   render() {
-    let { children } = this.props;
-    return <>{children}</>;
+    return <>{this.props?.children}</>;
   }
 }
 
