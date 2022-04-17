@@ -6,7 +6,7 @@ import React, {
 } from 'react';
 import { Editor as GEditor, Utils } from '@hocgin/ui';
 import styles from './index.less';
-import { Button } from 'antd';
+import { Button, Skeleton } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';
 import { ID } from '@/Utils/interface';
@@ -135,19 +135,17 @@ export const Preview: React.FC<{
     !published && getPublished?.run();
   });
 
-  if (!published) {
-    return <div>加载...</div>;
-  }
-
   return (
     <div className={styles.preview}>
-      <GEditor
-        {...props}
-        value={published?.content}
-        editable={false}
-        contentClassName={classnames(styles.content, contentClassName)}
-        className={classnames(styles.editor, className)}
-      />
+      <Skeleton title paragraph={{rows: 8} as any} loading={!published && getPublished.loading}>
+        <GEditor
+          {...props}
+          value={published?.content}
+          editable={false}
+          contentClassName={classnames(styles.content, contentClassName)}
+          className={classnames(styles.editor, className)}
+        />
+      </Skeleton>
     </div>
   );
 };
