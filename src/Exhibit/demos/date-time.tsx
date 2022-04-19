@@ -9,7 +9,7 @@ export default () => {
   return (
     <>
       <Exhibit.DateTime.Picker startAt={'12:00'} endAt={'13:00'} />
-      <Exhibit.DateTime value={'12:00'} />
+      <Exhibit.DateTime.DateTime value={'12:00'} />
       <Exhibit.DateTime.Picker startAt={102212891829} endAt={102212891829} />
     </>
   );

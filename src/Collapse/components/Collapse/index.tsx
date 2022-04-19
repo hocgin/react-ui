@@ -1,30 +1,27 @@
 import React from 'react';
-import styles from './index.less';
 import { Collapse } from 'antd';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
-interface ComplexCollapseProps {
+const Index: React.FC<{
+  prefixCls?: string;
   children?: React.ReactNode | string;
   defaultActiveKey?: Array<string | number> | string | number;
-}
-
-class Index extends React.PureComponent<ComplexCollapseProps> {
-  static Panel = Collapse.Panel;
-
-  render() {
-    let { children, defaultActiveKey } = this.props;
-    return (
-      <div className={styles.component}>
-        <Collapse
-          expandIconPosition="right"
-          bordered={false}
-          accordion
-          defaultActiveKey={defaultActiveKey}
-        >
-          {children}
-        </Collapse>
-      </div>
-    );
-  }
-}
+}> = ({ defaultActiveKey, children, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('collapse', props.prefixCls);
+  return (
+    <div className={`${prefixCls}`}>
+      <Collapse
+        expandIconPosition="right"
+        bordered={false}
+        accordion
+        defaultActiveKey={defaultActiveKey}
+      >
+        {children}
+      </Collapse>
+    </div>
+  );
+};
 
 export default Index;

@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import TbButton from '@/Editor/components/Common/TbButton';
-import { BoldOutlined, ItalicOutlined } from '@ant-design/icons';
+import { ItalicOutlined } from '@ant-design/icons';
 
 export const Italic: React.FC<{ editor?: Editor | null }> = ({ editor }) => (
   <TbButton

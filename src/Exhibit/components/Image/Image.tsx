@@ -1,9 +1,9 @@
 import React from 'react';
-import styles from './Image.less';
-import type Avatar from './Avatar';
 import { Utils } from '@hocgin/ui';
 import { Img } from 'react-image';
 import { SyncOutlined, FileExclamationOutlined } from '@ant-design/icons';
+import { ConfigContext } from '@/config-provider';
+import './Image.less';
 
 export interface ImageProps {
   /**
@@ -14,44 +14,30 @@ export interface ImageProps {
    * 图片描述
    */
   alt?: string;
+  prefixCls?: string;
 }
 
-class Index extends React.Component<ImageProps> {
-  static Avatar: typeof Avatar;
-
-  static defaultProps = {};
-
-  render() {
-    let { src, alt } = this.props;
-    let suffix = this.suffix;
-    return (
-      <div className={styles.component}>
-        <div className={styles.photoShot}>
-          <div className={styles.photoImg}>
-            <Img
-              src={[src]}
-              loader={<SyncOutlined spin style={this.iconStyle} />}
-              unloader={
-                <FileExclamationOutlined style={this.iconStyle} />
-              }
-              className={styles.photo}
-              alt={alt || src}
-            />
-          </div>
+let Index: React.FC<ImageProps> = ({ src, alt, ...props }) => {
+  let suffix = Utils.Lang.getSuffix(src) || 'N/A';
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('exhibit--Image', props.prefixCls);
+  return (
+    <div className={prefixCls}>
+      <div className={'photoShot'}>
+        <div className={'photoImg'}>
+          <Img
+            src={[src]}
+            loader={<SyncOutlined spin style={{ fontSize: '32px' } as any} />}
+            unloader={
+              <FileExclamationOutlined style={{ fontSize: '32px' } as any} />
+            }
+            className={'photo'}
+            alt={alt || src}
+          />
         </div>
-        {suffix !== '' && <div className={styles.indicator}>{suffix}</div>}
       </div>
-    );
-  }
-
-  get iconStyle() {
-    return { fontSize: '32px' };
-  }
-
-  get suffix() {
-    let { src } = this.props;
-    return Utils.Lang.getSuffix(src) || 'N/A';
-  }
-}
-
+      {suffix !== '' && <div className={'indicator'}>{suffix}</div>}
+    </div>
+  );
+};
 export default Index;

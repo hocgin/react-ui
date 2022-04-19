@@ -1,5 +1,5 @@
-import Index from './Number';
 import Decimal from './Decimal';
 
-Index.Decimal = Decimal;
-export default Index;
+export default class {
+  static Decimal: typeof Decimal = Decimal;
+}

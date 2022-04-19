@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import styles from './index.less';
 import {
@@ -44,7 +44,11 @@ export const TextAlign: React.FC<{ editor?: Editor | null }> = ({ editor }) => {
     <MeDropdown
       menus={menus}
       mode="horizontal"
-      titleClassName={styles.content}
+      titleStyle={
+        {
+          width: 20,
+        } as any
+      }
       defaultValue={<AlignLeftOutlined />}
     />
   );

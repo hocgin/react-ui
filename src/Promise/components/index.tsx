@@ -1,4 +1,3 @@
-import Table from './Table';
 import FileUpload from './FileUpload';
 import TreeSelect from './TreeSelect';
 import Select from './Select';
@@ -21,7 +20,6 @@ import PageContainer from './PageContainer';
 import UserAvatar from './UserAvatar';
 
 export default class Promise {
-  static Table: typeof Table = Table;
   static FileUpload: typeof FileUpload = FileUpload;
   static Select: typeof Select = Select;
   static Encoding: typeof Encoding = Encoding;

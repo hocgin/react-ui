@@ -1,6 +1,7 @@
-import Index from './DateTime';
+import DateTime from './DateTime';
 import Picker from './Picker';
 
-Index.Picker = Picker;
-
-export default Index;
+export default class {
+  static Picker: typeof Picker = Picker;
+  static DateTime: typeof DateTime = DateTime;
+}

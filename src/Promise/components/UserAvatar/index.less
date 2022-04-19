@@ -1,8 +1,15 @@
-.menu {
-  width: 256px;
+@import '../../../../src/style/index.less';
+
+@promise--UserAvatar-prefix-cls: ~'@{hui-prefix}-promise--UserAvatar';
+@promise--UserInfo-prefix-cls: ~'@{hui-prefix}-promise--UserInfo';
+
+.@{promise--UserAvatar-prefix-cls} {
+  .menu {
+    width: 256px;
+  }
 }
 
-.userInfo {
+.@{promise--UserInfo-prefix-cls} {
   display: flex;
   flex-direction: column;
   align-items: center;

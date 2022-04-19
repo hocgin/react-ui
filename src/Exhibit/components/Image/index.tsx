@@ -1,6 +1,7 @@
-import Index from './Image';
+import Image from './Image';
 import Avatar from './Avatar';
 
-Index.Avatar = Avatar;
-
-export default Index;
+export default class {
+  static Image: typeof Image = Image;
+  static Avatar: typeof Avatar = Avatar;
+}

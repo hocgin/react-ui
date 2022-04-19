@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react';
-import styles from './index.less';
+import './index.less';
 import { Title, MessageSmallCard } from '../Common';
 import classnames from 'classnames';
 import { MessageDataType, UseAction } from '@/Notification/components/types';
@@ -7,11 +7,13 @@ import { useInfiniteScroll, useSet } from 'ahooks';
 import { Empty, Format, Loading } from '@hocgin/ui';
 import { Utils } from '@/index';
 import { Struct } from '@/Utils/result';
+import { ConfigContext } from '@/config-provider';
 
 export const NoticePane: React.FC<{
+  prefixCls?: string;
   className?: string;
   useAction: UseAction;
-}> = ({ className, useAction }) => {
+}> = ({ className, useAction, ...props }) => {
   const set: string[] = [];
   const ref = useRef<any>();
   const { data, loading, noMore } = useInfiniteScroll(
@@ -25,10 +27,12 @@ export const NoticePane: React.FC<{
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--NoticePane', props.prefixCls);
   return (
-    <div className={classnames(styles.component, className)}>
+    <div className={classnames(prefixCls, className)}>
       <Title>订阅通知</Title>
-      <div ref={ref} className={classnames(styles.container)}>
+      <div ref={ref} className={classnames('container')}>
         {(data?.list || []).map(
           ({ sendAt, title, description, noticeMessage }: MessageDataType) => {
             let ymd: string = Format.DateTime.useDefLocalDatetime(

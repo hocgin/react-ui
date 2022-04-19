@@ -1,9 +1,13 @@
-:global(.ant-modal-body) {
-  .component {
-    width: 100%!important;
+@import '../../../../src/style/index.less';
+
+@promise--Select-prefix-cls: ~'@{hui-prefix}-promise--Select';
+
+.ant-modal-body {
+  .@{promise--Select-prefix-cls} {
+    width: 100% !important;
   }
 }
 
-.component {
+.@{promise--Select-prefix-cls} {
   min-width: 10em;
 }

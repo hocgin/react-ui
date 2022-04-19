@@ -1,12 +1,9 @@
 import React from 'react';
-import styles from './Link.less';
-import { Tooltip, Popover, Avatar } from 'antd';
+import { Popover, Avatar } from 'antd';
 import { Utils } from '@hocgin/ui';
-import {
-  FileImageOutlined,
-  LinkOutlined,
-  FileUnknownOutlined,
-} from '@ant-design/icons';
+import { FileImageOutlined, FileUnknownOutlined } from '@ant-design/icons';
+import './index.less';
+import { ConfigContext } from '@/config-provider';
 
 export interface FileProps {
   /**
@@ -21,27 +18,32 @@ export interface FileProps {
    * 文件类型
    */
   type?: string;
+  prefixCls?: string;
 }
 
-class Index extends React.Component<FileProps> {
-  static defaultProps = {
-    type: 'auto',
-  };
-
-  render(): JSX.Element {
-    let { url, title } = this.props;
-    let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
-    return (
-      <div>
-        <a href={fullUrl} className={styles.link} target='_blank'>
-          <Popover content={<Avatar size={200} icon={<FileUnknownOutlined />} src={fullUrl} />}>
-            <FileImageOutlined />
-          </Popover>
-          &nbsp;{title || url}
-        </a>
-      </div>
-    );
-  }
-}
+const Index: React.FC<FileProps> = ({
+  url,
+  type = 'auto',
+  title,
+  ...props
+}) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('link', props.prefixCls);
+  let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
+  return (
+    <div>
+      <a href={fullUrl} className={prefixCls} target="_blank">
+        <Popover
+          content={
+            <Avatar size={200} icon={<FileUnknownOutlined />} src={fullUrl} />
+          }
+        >
+          <FileImageOutlined />
+        </Popover>
+        &nbsp;{title || url}
+      </a>
+    </div>
+  );
+};
 
 export default Index;

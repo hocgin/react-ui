@@ -1,0 +1,32 @@
+@import '../../../style/index.less';
+
+@text-row-prefix-cls: ~'@{hui-prefix}-text-row';
+
+.@{text-row-prefix-cls} {
+  position: relative;
+  padding: 10px 15px;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+
+  &.@{text-row-prefix-cls}-border-top {
+    border-top: 1px solid #ddd;
+  }
+
+  &-title {
+    font-weight: 700;
+    margin-right: 10px;
+    font-size: 110%;
+    text-align: right;
+  }
+
+  &-text {
+    flex: 1 1;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: auto;
+  }
+}

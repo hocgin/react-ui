@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Promise - 契约(表单)
 order: 1000
@@ -16,7 +15,3 @@ group:
 新 高级表格(Promise.SchemeTable):
 
 <code src="./demos/scheme-table.tsx"  background="#f0f2f5" />
-
-旧 高级表格 (Promise.Table):
-
-<code src="./demos/table.tsx"  background="#f0f2f5" />

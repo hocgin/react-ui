@@ -1,5 +1,5 @@
-import * as React from 'react';
-import { TextSelection, AllSelection, Transaction } from 'prosemirror-state';
+import React from 'react';
+import { TextSelection, Transaction } from 'prosemirror-state';
 import { Extension } from '@tiptap/core';
 import Lang from '@/Utils/lang';
 import { isListNode } from './utils';

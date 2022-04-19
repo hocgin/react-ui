@@ -1,24 +1,31 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import Icon from '@ant-design/icons';
 import MeDropdown from '@/Editor/components/Common/MeDropdown';
-import styles from './index.less';
+import './index.less';
 import { Moremark, Code, Subscript, Superscript } from '../Icon';
+import { ConfigContext } from '@/config-provider';
 
-export const TextScript: React.FC<{ editor?: Editor | null }> = ({
-  editor,
-}) => {
+export const TextScript: React.FC<{
+  editor?: Editor | null;
+  prefixCls?: string;
+}> = ({ editor, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor-e-text-script', props.prefixCls);
   let menus = [
     {
       key: 'superscript',
       title: (
-        <Icon component={Superscript.bind(this)} className={styles.icon} />
+        <Icon
+          component={Superscript.bind(this)}
+          className={`${prefixCls}-icon`}
+        />
       ),
       header: (
         <>
           <Icon
             component={Superscript.bind(this)}
-            className={styles.smallIcon}
+            className={`${prefixCls}-smallIcon`}
           />{' '}
           上标
         </>
@@ -29,10 +36,18 @@ export const TextScript: React.FC<{ editor?: Editor | null }> = ({
     },
     {
       key: 'subscript',
-      title: <Icon component={Subscript.bind(this)} className={styles.icon} />,
+      title: (
+        <Icon
+          component={Subscript.bind(this)}
+          className={`${prefixCls}-icon`}
+        />
+      ),
       header: (
         <>
-          <Icon component={Subscript.bind(this)} className={styles.smallIcon} />{' '}
+          <Icon
+            component={Subscript.bind(this)}
+            className={`${prefixCls}-smallIcon`}
+          />{' '}
           下标
         </>
       ),
@@ -42,10 +57,15 @@ export const TextScript: React.FC<{ editor?: Editor | null }> = ({
     },
     {
       key: 'code',
-      title: <Icon component={Code.bind(this)} className={styles.icon} />,
+      title: (
+        <Icon component={Code.bind(this)} className={`${prefixCls}-icon`} />
+      ),
       header: (
         <>
-          <Icon component={Code.bind(this)} className={styles.smallIcon} />{' '}
+          <Icon
+            component={Code.bind(this)}
+            className={`${prefixCls}-smallIcon`}
+          />{' '}
           行内代码
         </>
       ),
@@ -60,13 +80,12 @@ export const TextScript: React.FC<{ editor?: Editor | null }> = ({
       onMatched: () => editor?.isActive('code'),
     },
   ];
-
   return (
     <MeDropdown
       menus={menus}
-      titleClassName={styles.content}
+      titleClassName={`${prefixCls}-content`}
       defaultValue={
-        <Icon component={Moremark.bind(this)} className={styles.icon} />
+        <Icon component={Moremark.bind(this)} className={`${prefixCls}-icon`} />
       }
     />
   );

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import TbButton from '@/Editor/components/Common/TbButton';
 import { YoutubeOutlined } from '@ant-design/icons';

@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
-import styles from './index.less';
 
 interface SnowProps {
   isShow?: boolean;
   children?: any;
 }
 
-interface SnowState {
-}
-
-class Index extends Component<SnowProps, SnowState> {
+class Index extends Component<SnowProps> {
   static defaultProps = {
     isShow: true,
   };
@@ -22,8 +18,9 @@ class Index extends Component<SnowProps, SnowState> {
     let { isShow } = this.props;
     if (isShow) {
       this.getOrCreateSnowContainer();
-      this.loadScript('//libs.baidu.com/jquery/2.0.0/jquery.min.js', () =>
-        this.loadScript('//cdn.hocgin.top/snowy.js'),
+      this.loadScript(
+        '//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js',
+        () => this.loadScript('//cdn.hocgin.top/snowy.js'),
       );
     }
   }

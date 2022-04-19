@@ -5,12 +5,14 @@ import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll } from 'ahooks';
 import { Empty, Loading, Utils } from '@/index';
 import { Struct } from '@/Utils/result';
-import styles from './index.less';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 export const SystemPane: React.FC<{
+  prefixCls?: string;
   className?: string;
   useAction: UseAction;
-}> = ({ className, useAction }) => {
+}> = ({ className, useAction, ...props }) => {
   const ref = useRef<any>();
   const { data, loading, noMore } = useInfiniteScroll(
     (d?: any) =>
@@ -23,11 +25,13 @@ export const SystemPane: React.FC<{
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--systemPane', props.prefixCls);
 
   return (
-    <div className={styles.component}>
+    <div className={prefixCls}>
       <Title>系统公告</Title>
-      <div ref={ref} className={classnames(styles.container, className)}>
+      <div ref={ref} className={classnames('container', className)}>
         {(data?.list || []).map(
           ({ title, description, systemMessage, sendAt }: MessageDataType) => (
             <MessageSmallCard

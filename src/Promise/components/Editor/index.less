@@ -1,4 +1,9 @@
-.header {
+@import '../../../../src/style/index.less';
+
+@promise-editor-header-prefix-cls: ~'@{hui-prefix}-promise-editor--header';
+@promise-editor-preview-prefix-cls: ~'@{hui-prefix}-promise-editor--preview';
+
+.@{promise-editor-header-prefix-cls} {
   display: flex;
   flex-direction: row;
   padding-right: 24px;
@@ -34,7 +39,7 @@
   }
 }
 
-.preview {
+.@{promise-editor-preview-prefix-cls} {
   .editor {
     background-color: unset;
     border: unset;

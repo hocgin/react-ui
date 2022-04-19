@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from './Image.less';
 import { Exhibit } from '@hocgin/ui';
 
 export interface TagProps {
@@ -17,7 +16,7 @@ class Index extends React.Component<TagProps> {
   render() {
     let { value } = this.props;
     return (
-      <div className={styles.component}>
+      <div>
         {value.map((i) => (
           <Exhibit.Text.Tag>{i}</Exhibit.Text.Tag>
         ))}

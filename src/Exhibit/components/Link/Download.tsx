@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './Link.less';
 import { Utils, Dom } from '@hocgin/ui';
 import { CloudDownloadOutlined } from '@ant-design/icons';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 export interface DownloadProps {
   /**
@@ -12,32 +13,23 @@ export interface DownloadProps {
    * 链接标题(如果没有会读取链接地址)
    */
   title?: string;
+  prefixCls?: string;
 }
 
-class Index extends React.Component<DownloadProps> {
-  static defaultProps = {};
-
-  render(): JSX.Element {
-    let { title } = this.props;
-    let fullUrl = this.fullUrl;
-    return (
-      <div>
-        <a onClick={this.onClickDownload} className={styles.link}>
-          <CloudDownloadOutlined />
-          &nbsp;下载
-        </a>
-      </div>
-    );
-  }
-
-  onClickDownload = (e: any) => {
-    Dom.downloadUrl(e, { url: this.fullUrl });
-  };
-
-  get fullUrl() {
-    let { url } = this.props;
-    return Utils.Lang.suppleUrlPrefix(url);
-  }
-}
-
+const Index: React.FC<DownloadProps> = ({ url, title, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('link', props.prefixCls);
+  let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
+  return (
+    <div>
+      <a
+        onClick={(e: any) => Dom.downloadUrl(e, { url: fullUrl })}
+        className={prefixCls}
+      >
+        <CloudDownloadOutlined />
+        &nbsp;下载
+      </a>
+    </div>
+  );
+};
 export default Index;

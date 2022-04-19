@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import { FontColors } from '../Icon';
 import ColorDropdown from '@/Editor/components/Common/ColorDropdown';

@@ -1,6 +1,9 @@
 @import '../../../../src/mixin.less';
+@import '../../../style/index.less';
 
-.editor {
+@comment-editor-prefix-cls: ~'@{hui-prefix}-comment-editor';
+
+.@{comment-editor-prefix-cls} {
   background-color: #fff;
   padding: 14px;
   display: flex;
@@ -9,13 +12,12 @@
   border-radius: 2px;
   flex-direction: column;
 
-  .mini {
+  &-mini {
     display: none;
   }
-
 }
 
-:global(.ant-affix) {
+.ant-affix {
   margin-bottom: -50px;
 
   .mobile({
@@ -25,7 +27,7 @@
     }
   });
 
-  .editor {
+  .@{comment-editor-prefix-cls} {
     padding: 6px 8px;
     border-radius: 3px;
     box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.08);
@@ -45,37 +47,37 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      &.expand {
+      &.@{comment-editor-prefix-cls}-expand {
         position: unset;
         bottom: unset;
         width: unset;
 
-        .bottom {
+        .@{comment-editor-prefix-cls}-bottom {
           display: unset;
         }
       }
-      .mini {
+      &-mini {
         display: flex;
         align-items: center;
         justify-content: center;
       }
-      .bottom {
+      &-bottom {
         display: none;
       }
     });
   }
 }
 
-.bottom {
+.@{comment-editor-prefix-cls}-bottom {
   flex: 1 1;
 
-  .header {
+  &-header {
     display: flex;
     align-items: center;
     padding-bottom: 5px;
     color: rgba(0, 0, 0, 0.85);
 
-    .title {
+    &-title {
       margin-left: 4px;
       margin-right: 2px;
       font-weight: 400;
@@ -84,18 +86,18 @@
     }
   }
 
-  .content {
+  &-content {
     height: 120px;
   }
 }
 
-.reply {
+.@{comment-editor-prefix-cls}-bottom-reply {
   display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.45);
 }
 
-.replyButton {
+.@{comment-editor-prefix-cls}-bottom-replyButton {
   margin-top: 5px;
 
   button {
@@ -103,11 +105,9 @@
     color: #fff;
   }
 
-  :global {
-    .ant-btn:hover,
-    .ant-btn:focus {
-      border-color: rgb(38, 38, 38, 85%);
-      color: rgb(38, 38, 38, 85%);
-    }
+  .ant-btn:hover,
+  .ant-btn:focus {
+    border-color: rgb(38, 38, 38, 85%);
+    color: rgb(38, 38, 38, 85%);
   }
 }

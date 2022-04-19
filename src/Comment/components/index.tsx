@@ -1,32 +1,32 @@
 import React from 'react';
-import {
-  CommentType,
-  UseAction,
-} from './type';
+import { CommentType, UseAction } from './type';
 import classNames from 'classnames';
-import styles from './index.less';
 import { Button, List, Divider } from 'antd';
 import {
   useEventEmitter,
   useUpdateEffect,
-  useToggle, useInfiniteScroll,
+  useToggle,
+  useInfiniteScroll,
 } from 'ahooks';
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
 import { Loading, Utils } from '@hocgin/ui';
 import { Struct } from '@/Utils/result';
 import Lang from '@/Utils/lang';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 export interface IndexProps {
   /**
    * 设置样式名
    */
   className?: string;
+  prefixCls?: string;
   total?: number;
   useAction: UseAction;
 }
 
-const Index: React.FC<IndexProps> = ({ useAction, total }) => {
+const Index: React.FC<IndexProps> = ({ useAction, total, ...props }) => {
   let [orderDesc, { toggle: toggleOrderDesc }] = useToggle<boolean>(true);
 
   // 点击回复事件
@@ -37,7 +37,10 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
 
   const { data, loading, reload, mutate } = useInfiniteScroll(
     (d?: any) =>
-      Utils.Lang.nilService(useAction?.scroll)({ orderDesc, nextId: d?.nextId }).then(Struct.getScrollData),
+      Utils.Lang.nilService(useAction?.scroll)({
+        orderDesc,
+        nextId: d?.nextId,
+      }).then(Struct.getScrollData),
     {
       target: Lang.isBrowser() ? document : null,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
@@ -54,27 +57,29 @@ const Index: React.FC<IndexProps> = ({ useAction, total }) => {
   });
 
   useUpdateEffect(() => reload(), [orderDesc]);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('comment-group', props.prefixCls);
 
   return (
-    <div className={classNames(styles.commentGroup)}>
+    <div className={classNames(prefixCls)}>
       <List
-        className={styles.comments}
+        className={`${prefixCls}-comments`}
         locale={{ emptyText: '赶快来评论一下吧～' } as any}
-        itemLayout='horizontal'
+        itemLayout="horizontal"
         header={
-          <div className={styles.header}>
+          <div className={`${prefixCls}-header`}>
             <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
             <div>
               <Button
-                type='link'
+                type="link"
                 onClick={toggleOrderDesc}
                 disabled={orderDesc}
               >
                 倒序↓
               </Button>
-              <Divider type='vertical' />
+              <Divider type="vertical" />
               <Button
-                type='link'
+                type="link"
                 onClick={toggleOrderDesc}
                 disabled={!orderDesc}
               >

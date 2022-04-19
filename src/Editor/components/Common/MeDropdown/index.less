@@ -1,4 +1,8 @@
-.dropdown {
+@import '../../../../style/index.less';
+
+@editor-e-me-dropdown-prefix-cls: ~'@{hui-prefix}-editor-e-me-dropdown';
+
+.@{editor-e-me-dropdown-prefix-cls} {
   padding: 0 6px;
   border-radius: 6px;
   border: none;
@@ -8,7 +12,7 @@
   justify-content: center;
   align-items: center;
 
-  .selectedValue {
+  .@{editor-e-me-dropdown-prefix-cls}-selectedValue {
     text-align: left;
     font-size: 14px;
     overflow: hidden;
@@ -19,7 +23,7 @@
     justify-content: center;
     align-items: center;
 
-    .caretDown {
+    .@{editor-e-me-dropdown-prefix-cls}-caretDown {
       width: 10px;
       height: 10px;
       display: flex !important;
@@ -29,18 +33,17 @@
   }
 }
 
-.horizontal > ul {
+.@{editor-e-me-dropdown-prefix-cls}-horizontal > ul {
   display: flex;
   flex-direction: row;
 }
 
-.menu {
-  :global {
-    .ant-dropdown-menu-title-content {
-      display: flex;
-      align-items: center;
-    }
+.@{editor-e-me-dropdown-prefix-cls}-menu {
+  .ant-dropdown-menu-title-content {
+    display: flex;
+    align-items: center;
   }
+
   h1,
   h2,
   h3,

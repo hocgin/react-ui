@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { message, Modal, Upload } from 'antd';
+import { Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { Dom } from '@hocgin/ui';
 import { FileInfo, HttpRequestHeader } from '@/Utils/interface';
@@ -23,15 +23,15 @@ const Index: React.FC<{
   value?: FileInfo[];
   onChange?: (values: FileInfo[]) => void;
 }> = ({
-        action = '/api/com/file/upload',
-        beforeUpload,
-        name,
-        accept,
-        value,
-        headers,
-        maxCount = 100,
-        onChange,
-      }) => {
+  action = '/api/com/file/upload',
+  beforeUpload,
+  name,
+  accept,
+  value,
+  headers,
+  maxCount = 100,
+  onChange,
+}) => {
   let [previewVisible, setPreviewVisible] = useState<boolean>(false);
   let [fileList, setFileList] = useState<FileInfo[]>(value || []);
   let [previewImage, setPreviewImage] = useState<string | undefined>(undefined);
@@ -66,16 +66,17 @@ const Index: React.FC<{
 
   return (
     <div>
-      <Upload name={name}
-              accept={accept}
-              action={action}
-              headers={headers}
-              beforeUpload={beforeUpload}
-              defaultFileList={(value || []).map(Dom.asFile) as any}
-              listType='picture-card'
-              onPreview={handlePreview}
-              maxCount={maxCount}
-              onChange={handleChange}
+      <Upload
+        name={name}
+        accept={accept}
+        action={action}
+        headers={headers}
+        beforeUpload={beforeUpload}
+        defaultFileList={(value || []).map(Dom.asFile) as any}
+        listType="picture-card"
+        onPreview={handlePreview}
+        maxCount={maxCount}
+        onChange={handleChange}
       >
         {fileList.length >= maxCount ? null : (
           <div>

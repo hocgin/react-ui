@@ -6,6 +6,7 @@ import Image from './components/Image';
 import Link from './components/Link';
 import Text from './components/Text';
 import Array from './components/Array';
+
 Exhibit.Text = Text;
 Exhibit.Image = Image;
 Exhibit.DateTime = DateTime;

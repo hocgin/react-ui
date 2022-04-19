@@ -1,8 +1,9 @@
 import React from 'react';
-import styles from './Avatar.less';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { AvatarSize } from 'antd/lib/avatar/SizeContext';
+import { ConfigContext } from '@/config-provider';
+import './Avatar.less';
 
 export interface AvatarProps {
   /**
@@ -13,20 +14,17 @@ export interface AvatarProps {
    * 大小
    */
   size?: AvatarSize;
+  prefixCls?: string;
 }
 
-class Index extends React.Component<AvatarProps> {
-  static defaultProps = {
-    size: 45,
-  };
+const Index: React.FC<AvatarProps> = ({ size = 45, src, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('exhibit--Avatar', props.prefixCls);
+  return (
+    <div className={prefixCls}>
+      <Avatar size={size} src={src} icon={<UserOutlined />} />
+    </div>
+  );
+};
 
-  render() {
-    let { src, size } = this.props;
-    return (
-      <div className={styles.component}>
-        <Avatar size={size} src={src} icon={<UserOutlined />} />
-      </div>
-    );
-  }
-}
 export default Index;

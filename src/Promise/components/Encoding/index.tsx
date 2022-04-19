@@ -1,7 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import RandExp from 'randexp';
 import { Button, Input, Tooltip } from 'antd';
-import styles from './index.less';
 import { SyncOutlined, CopyOutlined, CheckOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
@@ -45,9 +44,9 @@ const Index: React.FC<{
     onRandom();
   }
   return (
-    <Input.Group className={styles.view} compact>
+    <Input.Group style={{ display: 'flex' } as any} compact>
       <Input
-        className={styles.input}
+        style={{ flex: '1 1' } as any}
         value={text}
         onChange={(e) => setPrefixValue(e?.target?.value)}
       />

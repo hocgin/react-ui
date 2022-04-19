@@ -1,11 +1,19 @@
 import React from 'react';
 import { Spin } from 'antd';
-import styles from './index.less';
+import './index.less';
+import { ConfigContext } from '@/config-provider';
 
 const Index: React.FC<{
+  prefixCls?: string;
   className?: string;
 }> = (props) => {
-  return <div className={styles.loading}><Spin delay={300} /></div>;
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('loading', props.prefixCls);
+  return (
+    <div className={`${prefixCls}-loading`}>
+      <Spin delay={300} />
+    </div>
+  );
 };
 
 export default Index;

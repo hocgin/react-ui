@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
-import styles from './index.less';
+import './index.less';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import { Affix, Avatar, Button, Tooltip } from 'antd';
 import {
@@ -21,6 +21,7 @@ import {
 import { useInterval, useMount, useRequest, useToggle } from 'ahooks';
 import { Editor as GEditor, Utils } from '@hocgin/ui';
 import classnames from 'classnames';
+import { ConfigContext } from '@/config-provider';
 
 export const AffixEditor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
@@ -40,6 +41,7 @@ const Editor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
   replied$: EventEmitter<CommentType>;
   placeholder?: string;
+  prefixCls?: string;
   useAction: UseAction;
 }> = (props) => {
   let {
@@ -116,27 +118,29 @@ const Editor: React.FC<{
 
   let [expand, { toggle: toggleExpand }] = useToggle<boolean>(false);
 
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('comment-editor', props.prefixCls);
   return (
     <div
-      className={classNames(styles.editor, {
-        [styles.expand]: expand,
+      className={classNames(prefixCls, {
+        [`${prefixCls}-expand`]: expand,
       })}
     >
-      <div className={styles.mini} onClick={toggleExpand}>
+      <div className={`${prefixCls}-mini`} onClick={toggleExpand}>
         {expand ? <CaretDownOutlined /> : <CaretUpOutlined />}
       </div>
-      <div className={classnames(styles.bottom)}>
-        <div className={styles.header}>
+      <div className={classnames(`${prefixCls}-bottom`)}>
+        <div className={`${prefixCls}-bottom-header`}>
           <Avatar size={28} icon={<UserOutlined />} src={user?.avatarUrl} />
           <span
-            className={styles.title}
+            className={`${prefixCls}-bottom-header-title`}
             onClick={() => !user && userRequest.runAsync({ force: true })}
           >
             {userName ?? '点击登陆'}
           </span>
           {hasBeReply && (
             <>
-              <a href={`#c_${replyId}`} className={styles.reply}>
+              <a href={`#c_${replyId}`} className={`${prefixCls}-bottom-reply`}>
                 <RetweetOutlined />
                 &nbsp;@{replyUsername}
               </a>
@@ -156,11 +160,11 @@ const Editor: React.FC<{
           <GEditor
             editorRef={editorRef}
             placeholder={placeholder}
-            className={styles.content}
+            className={`${prefixCls}-bottom-content`}
             onChange={() => setContent(editorRef.current.getHTML())}
           />
         </div>
-        <div className={styles.replyButton}>
+        <div className={`${prefixCls}-bottom-replyButton`}>
           <Button disabled={!landed} onClick={onSubmitReply}>
             {replied ? (
               <>

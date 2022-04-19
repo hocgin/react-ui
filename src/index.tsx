@@ -1,16 +1,18 @@
-export { default as Tpl } from './Tpl';
+export * as ConfigProvider from './config-provider';
+export { default as TextRow } from './text-row';
+export { default as Header } from './header';
+export { default as Tpl } from './tpl';
 export { default as Snow } from './Snow';
 export { default as Sponsor } from './Sponsor';
 export { default as Comment } from './Comment';
 export { Logo, HeartFilled } from './Logo';
 export { Loading } from './Loading';
-export { LikeCheckbox } from './LikeCheckbox';
+export { Like } from './Like';
 export * as Notification from './Notification';
 export { default as Featbar } from './Featbar';
 export { Settings } from './Settings';
 export { default as Eggs } from './Eggs';
 export { default as Footer } from './Footer';
-export { default as Header } from './Header';
 export { default as Money } from './Money';
 export { default as Stretch } from './Stretch';
 export { default as Collapse } from './Collapse';
@@ -19,16 +21,11 @@ export { default as SearchBar } from './SearchBar';
 export { default as Promise } from './Promise';
 export { default as FileUpload } from './FileUpload';
 export { default as PhotoWall } from './PhotoWall';
-export { default as TextRow } from './TextRow';
 export { default as Editor } from './Editor';
 export { Empty } from './Empty';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
 export { default as Exhibit } from './Exhibit';
-export { default as ComplexTable } from './Deprecated/ComplexTable';
-export { default as Rich } from './Deprecated/Rich';
-export { default as Markdown } from './Deprecated/Markdown';
-export { default as Archive } from './Deprecated/Archive';
 // Utils
 export { request, usePost, useDelete, useGet, usePut } from './Utils/request';
 export { default as Format } from './Utils/format';

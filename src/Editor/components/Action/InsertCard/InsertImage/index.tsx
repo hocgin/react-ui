@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { Editor } from '@tiptap/react';
 import { Dom } from '@/index';
 import TbButton from '@/Editor/components/Common/TbButton';

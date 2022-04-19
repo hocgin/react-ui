@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import Menu, { Group } from '../Menu';
-import styles from './index.less';
-import { Avatar, Divider, PageHeader, Input, Button, Form, InputNumber, Switch } from 'antd';
-import { ConfigScopeItemType, ConfigScopeStructType, ConfigScopeType, UseAction } from '@/Settings/components/types';
+import {
+  Avatar,
+  Divider,
+  PageHeader,
+  Input,
+  Button,
+  Form,
+  InputNumber,
+  Switch,
+} from 'antd';
+import {
+  ConfigScopeStructType,
+  ConfigScopeType,
+  UseAction,
+} from '@/Settings/components/types';
 import memoizeOne from 'memoize-one';
 import { Empty, Utils } from '@hocgin/ui';
 import { useMount, useRequest } from 'ahooks';
 import classnames from 'classnames';
+import './index.less';
+import { ConfigContext } from '@/config-provider';
 
 interface UserProfile {
   avatarSrc?: any;
@@ -15,19 +29,24 @@ interface UserProfile {
 }
 
 const LeftMenu: React.FC<{
+  prefixCls?: string;
   className?: string;
   groups?: Group[];
   user?: UserProfile;
   activeKey?: string;
   onClick?: (scope: string) => void;
-}> = ({ onClick, activeKey, groups = [], user }) => {
+}> = ({ onClick, activeKey, groups = [], user, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('settings--LeftMenu', props.prefixCls);
   return (
-    <div className={styles.left}>
-      <div className={styles.avatar}>
+    <div className={prefixCls}>
+      <div className={'avatar'}>
         <Avatar size={48} src={user?.avatarSrc} />
-        <div className={styles.info}>
-          <span className={styles.title}>{user?.title}</span>
-          <span className={styles.description}>{user?.description || '暂无描述'}</span>
+        <div className={'info'}>
+          <span className={'title'}>{user?.title}</span>
+          <span className={'description'}>
+            {user?.description || '暂无描述'}
+          </span>
         </div>
       </div>
       <Menu activeKey={activeKey} onClick={onClick} groups={groups} />
@@ -35,61 +54,108 @@ const LeftMenu: React.FC<{
   );
 };
 
-const RightContent: React.FC<{ scope?: string; children?: any; result?: any }> = ({ result, scope, children }) => {
-  let map: Record<string, ConfigScopeStructType> = Utils.Lang.toMap(fastToMenu(result), 'scope');
+const RightContent: React.FC<{
+  prefixCls?: string;
+  scope?: string;
+  children?: any;
+  result?: any;
+}> = ({ result, scope, ...props }) => {
+  let map: Record<string, ConfigScopeStructType> = Utils.Lang.toMap(
+    fastToMenu(result),
+    'scope',
+  );
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('settings--RightContent', props.prefixCls);
   let listItem: ConfigScopeStructType = map[`${scope}`];
   let fileds = (listItem?.items || []).filter(({ readable }) => readable);
-  return <div className={styles.right}>
-    {scope ? <>
-      <PageHeader className={styles.header} title={listItem?.title} subTitle={listItem?.remark} />
-      <div className={styles.body}>
-        {fileds.map((item, index) => {
-          let { nullable, title, writable, type, itemId = 'item' } = item;
-          let rules = [{ required: !nullable, message: `"${title}"不能为空` }];
-          let isLast = (index === fileds.length - 1);
-          let disabled = !writable;
-          return <>
-            <h4>{item?.title}</h4>
-            {item?.remark && <p className={styles.remark}>{item?.remark}</p>}
-            <Form requiredMark={false} layout='inline'
-                  initialValues={{ [`${itemId}`]: (item?.value || item?.defaultValue) } as any}>
-              {() => {
-                let el: any = null;
-                if (['java.lang.Boolean'].includes(type)) {
-                  return <Form.Item name={`${itemId}`} rules={rules} valuePropName='checked'>
-                    <Switch disabled={disabled} />
-                  </Form.Item>;
-                } else if (['java.lang.Integer'].includes(type)) {
-                  el = <InputNumber disabled={disabled} />;
-                } else {
-                  el = <Input disabled={disabled} />;
-                }
-                return <>
-                  <Form.Item name={`${itemId}`} rules={rules}>
-                    {el}
-                  </Form.Item>
-                  <Form.Item>
-                    <Button disabled={disabled} htmlType='submit'>保存</Button>
-                  </Form.Item>
-                </>;
-              }}
-            </Form>
-            {!isLast && <Divider orientation='left' orientationMargin={0} />}
-          </>;
-        })}
-      </div>
-    </> : <Empty />}
-  </div>;
+  return (
+    <div className={prefixCls}>
+      {scope ? (
+        <>
+          <PageHeader
+            className={'header'}
+            title={listItem?.title}
+            subTitle={listItem?.remark}
+          />
+          <div className={'body'}>
+            {fileds.map((item, index) => {
+              let { nullable, title, writable, type, itemId = 'item' } = item;
+              let rules = [
+                { required: !nullable, message: `"${title}"不能为空` },
+              ];
+              let isLast = index === fileds.length - 1;
+              let disabled = !writable;
+              return (
+                <>
+                  <h4>{item?.title}</h4>
+                  {item?.remark && <p className={'remark'}>{item?.remark}</p>}
+                  <Form
+                    requiredMark={false}
+                    layout="inline"
+                    initialValues={
+                      {
+                        [`${itemId}`]: item?.value || item?.defaultValue,
+                      } as any
+                    }
+                  >
+                    {() => {
+                      let el: any = null;
+                      if (['java.lang.Boolean'].includes(type)) {
+                        return (
+                          <Form.Item
+                            name={`${itemId}`}
+                            rules={rules}
+                            valuePropName="checked"
+                          >
+                            <Switch disabled={disabled} />
+                          </Form.Item>
+                        );
+                      } else if (['java.lang.Integer'].includes(type)) {
+                        el = <InputNumber disabled={disabled} />;
+                      } else {
+                        el = <Input disabled={disabled} />;
+                      }
+                      return (
+                        <>
+                          <Form.Item name={`${itemId}`} rules={rules}>
+                            {el}
+                          </Form.Item>
+                          <Form.Item>
+                            <Button disabled={disabled} htmlType="submit">
+                              保存
+                            </Button>
+                          </Form.Item>
+                        </>
+                      );
+                    }}
+                  </Form>
+                  {!isLast && (
+                    <Divider orientation="left" orientationMargin={0} />
+                  )}
+                </>
+              );
+            })}
+          </div>
+        </>
+      ) : (
+        <Empty />
+      )}
+    </div>
+  );
 };
 
-
 export const Settings: React.FC<{
+  prefixCls?: string;
   className?: string;
   activeKey?: string;
   useAction: UseAction;
 }> = ({ useAction, className, ...props }) => {
-  let [activeKey, setActiveKey] = useState<string | undefined>(props?.activeKey);
+  let [activeKey, setActiveKey] = useState<string | undefined>(
+    props?.activeKey,
+  );
   let [result, setResult] = useState<ConfigScopeType>({} as any);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('settings', props.prefixCls);
 
   let getConfig = useRequest(Utils.Lang.nilService(useAction?.getConfig, {}), {
     manual: true,
@@ -97,10 +163,17 @@ export const Settings: React.FC<{
   });
   useMount(() => getConfig.runAsync());
 
-  return <div className={classnames(styles.component, className)}>
-    <LeftMenu activeKey={activeKey} onClick={setActiveKey} groups={fastToGroup(result)} user={fastToUser(result)} />
-    <RightContent scope={activeKey} result={result} />
-  </div>;
+  return (
+    <div className={classnames(prefixCls, className)}>
+      <LeftMenu
+        activeKey={activeKey}
+        onClick={setActiveKey}
+        groups={fastToGroup(result)}
+        user={fastToUser(result)}
+      />
+      <RightContent scope={activeKey} result={result} />
+    </div>
+  );
 };
 
 let toUser = (result: ConfigScopeType) => ({
@@ -110,17 +183,23 @@ let toUser = (result: ConfigScopeType) => ({
 });
 let fastToUser = memoizeOne(toUser);
 
-let toGroup = (result: ConfigScopeType) => (result?.groups || [])
-  .map(group => ({
-    title: group.title, menus: (group.menus || []).map(menu => ({
+let toGroup = (result: ConfigScopeType) =>
+  (result?.groups || []).map((group) => ({
+    title: group.title,
+    menus: (group.menus || []).map((menu) => ({
       scope: menu.scope,
       title: menu.title,
     })),
   }));
 let fastToGroup = memoizeOne(toGroup);
 
-let toMenu = (result: ConfigScopeType) => (result?.groups || [])
-  .flatMap(group => (group.menus || []).map(menu => ({
-    ...menu,
-  } as ConfigScopeStructType)));
+let toMenu = (result: ConfigScopeType) =>
+  (result?.groups || []).flatMap((group) =>
+    (group.menus || []).map(
+      (menu) =>
+        ({
+          ...menu,
+        } as ConfigScopeStructType),
+    ),
+  );
 let fastToMenu = memoizeOne(toMenu);

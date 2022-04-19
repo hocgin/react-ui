@@ -1,7 +1,8 @@
 import React from 'react';
-import styles from './index.less';
+import './index.less';
 import { SetLink, UnsetLink } from '@/Editor/components/Action';
 import { Editor, FloatingMenu } from '@tiptap/react';
+import { ConfigContext } from '@/config-provider';
 
 const shouldShowLink = ({ editor, view, state, oldState }: any) => {
   let editable = view?.editable;
@@ -16,12 +17,15 @@ const shouldShowLink = ({ editor, view, state, oldState }: any) => {
 const Index: React.FC<{
   editor: Editor;
   defaultParams?: any;
-}> = ({ editor }) => {
+  prefixCls?: string;
+}> = ({ editor, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor-e-floatingMenu', props.prefixCls);
   return (
     <FloatingMenu
       editor={editor}
       pluginKey={'floatingMenu'}
-      className={styles.floatingMenu}
+      className={prefixCls}
       tippyOptions={
         {
           placement: 'top',

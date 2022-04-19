@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Exhibit - 展览
 order: 1000
@@ -53,6 +52,4 @@ group:
 
 ## API
 
-<API src="./components/Text/Text.tsx"></API>
-<API src="./components/Text/Code.tsx"></API>
-<API src="./components/Text/Stretch.tsx"></API>
+<API src="./components/Text/index.tsx"></API>

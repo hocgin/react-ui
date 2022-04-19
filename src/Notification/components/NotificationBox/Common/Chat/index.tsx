@@ -1,6 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { Avatar, Button, List, Input } from 'antd';
-import styles from './index.less';
 import { SearchOutlined } from '@ant-design/icons';
 import { ID, LocalDateTime } from '@/Utils/interface';
 import { Format, Editor as GEditor, Utils, Loading, Empty } from '@hocgin/ui';
@@ -13,44 +12,60 @@ import {
 import { useInfiniteScroll, useRequest } from 'ahooks';
 import { Struct } from '@/Utils/result';
 import useInfiniteTopScroll from '@/Utils/scene/useInfiniteTopScroll';
+import { ConfigContext } from '@/config-provider';
+import './index.less';
 
 const UserCard: React.FC<{
   datetime?: LocalDateTime;
+  prefixCls?: string;
   nickname?: string;
   selected?: boolean;
   content?: string;
   avatar?: any;
   onClick?: (id: any) => void;
 }> = ({
-        datetime,
-        nickname,
-        avatar,
-        onClick,
-        selected = false,
-        content = ' ',
-      }) => {
+  datetime,
+  nickname,
+  avatar,
+  onClick,
+  selected = false,
+  content = ' ',
+  ...props
+}) => {
   let fmtDatetime = Format.DateTime.useDefRelativeFromNow(datetime);
+
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--Chat-UserCard', props.prefixCls);
+
   return (
     <div
-      className={classnames(styles.userCard, {
-        [styles.selected]: selected,
+      className={classnames(prefixCls, {
+        ['selected']: selected,
       })}
       onClick={onClick}
     >
       <Avatar size={40} src={avatar} />
-      <div className={styles.body}>
-        <div className={styles.title}>
-          <span className={styles.name}>{nickname}</span>
-          <span className={styles.datetime}>{fmtDatetime}</span>
+      <div className={'body'}>
+        <div className={'title'}>
+          <span className={'name'}>{nickname}</span>
+          <span className={'datetime'}>{fmtDatetime}</span>
         </div>
-        <div className={styles.content}>{content}</div>
+        <div className={'content'}>{content}</div>
       </div>
     </div>
   );
 };
 
-const ChatHeader: React.FC<{ children?: any }> = ({ children }) => {
-  return <div className={styles.header}>{children}</div>;
+const ChatHeader: React.FC<{
+  children?: any;
+  prefixCls?: string;
+}> = ({ children, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls(
+    'notification--Chat-ChatHeader',
+    props.prefixCls,
+  );
+  return <div className={prefixCls}>{children}</div>;
 };
 
 const ChatRecord: React.FC<{
@@ -62,18 +77,18 @@ const ChatRecord: React.FC<{
   let fmtDatetime = Format.DateTime.useDefRelativeFromNow(datetime);
   return (
     <div
-      className={classnames(styles.record, {
-        [styles.reverse]: reverse,
+      className={classnames('record', {
+        ['reverse']: reverse,
       })}
     >
-      <div className={styles.datetime}>{fmtDatetime}</div>
-      <div className={styles.message}>
+      <div className={'datetime'}>{fmtDatetime}</div>
+      <div className={'message'}>
         <div>
           <Avatar size={40} src={avatar} />
         </div>
-        <div className={styles.body}>
+        <div className={'body'}>
           <GEditor
-            contentClassName={styles.bodyContent}
+            contentClassName={'bodyContent'}
             value={content}
             editable={false}
           />
@@ -83,10 +98,11 @@ const ChatRecord: React.FC<{
   );
 };
 
-const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
-                                                                         chatUserId,
-                                                                         useAction,
-                                                                       }) => {
+const ChatBody: React.FC<{
+  chatUserId: any;
+  useAction: UseAction;
+  prefixCls?: string;
+}> = ({ chatUserId, useAction, ...props }) => {
   const ref = useRef<any>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteTopScroll(
     (d?: any) =>
@@ -102,23 +118,18 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--Chat-ChatBody', props.prefixCls);
   return (
-    <div ref={ref} className={styles.chatBody}>
-      {(data?.list || []).map(
-        ({
-           senderUser,
-           sendAt,
-           senderUserAvatarUrl,
-           personalMessage,
-         }: MessageDataType) => (
-          <ChatRecord
-            datetime={sendAt}
-            avatar={senderUserAvatarUrl}
-            content={personalMessage?.content}
-            reverse={senderUser !== chatUserId}
-          />
-        ),
-      )}
+    <div ref={ref} className={prefixCls}>
+      {(data?.list || []).map((messageData: MessageDataType) => (
+        <ChatRecord
+          datetime={messageData?.sendAt}
+          avatar={messageData?.senderUserAvatarUrl}
+          content={messageData?.personalMessage?.content}
+          reverse={messageData?.senderUser !== chatUserId}
+        />
+      ))}
       {noMore && (data?.list || []).length === 0 && (
         <Empty description={'暂无聊天内容'} />
       )}
@@ -127,10 +138,11 @@ const ChatBody: React.FC<{ chatUserId: any; useAction: UseAction }> = ({
   );
 };
 
-const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
-                                                                      useAction,
-                                                                      chatUserId,
-                                                                    }) => {
+const Editor: React.FC<{
+  useAction: UseAction;
+  chatUserId: ID;
+  prefixCls?: string;
+}> = ({ useAction, chatUserId, ...props }) => {
   let editorRef = useRef<any>();
   let [content, setContent] = useState<string | undefined>('');
   let sendRequest = useRequest(
@@ -156,17 +168,18 @@ const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
       content,
     } as sendPersonalParamsType);
   };
-
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--Chat-Editor', props.prefixCls);
   return (
-    <div className={styles.editor}>
+    <div className={prefixCls}>
       <GEditor
         editorRef={editorRef}
-        className={styles.editorContent}
+        className={'editorContent'}
         onChange={() => setContent(editorRef.current.getHTML())}
       />
-      <div className={styles.editorToolbar}>
+      <div className={'editorToolbar'}>
         <div />
-        <Button type='primary' onClick={onSubmitSend}>
+        <Button type="primary" onClick={onSubmitSend}>
           发送
         </Button>
       </div>
@@ -174,19 +187,24 @@ const Editor: React.FC<{ useAction: UseAction; chatUserId: ID }> = ({
   );
 };
 
-const UserHeader: React.FC<{}> = () => {
+const UserHeader: React.FC<{
+  className?: string;
+}> = ({ className }) => {
   return (
-    <div className={styles.userHeader}>
-      <Input placeholder='搜索联系人' suffix={<SearchOutlined />} />
+    <div className={className}>
+      <Input placeholder="搜索联系人" suffix={<SearchOutlined />} />
     </div>
   );
 };
 
-export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
+export const Chat: React.FC<{
+  useAction: UseAction;
+  prefixCls?: string;
+}> = ({ useAction, ...props }) => {
   const ref = useRef<any>();
   // 与谁聊天
   let [chatUser, setChatUser] = useState<{ id: any; title: string }>();
-  const { data, loading, loadMore, loadingMore, noMore } = useInfiniteScroll(
+  const { data, loading } = useInfiniteScroll(
     (d?: any) =>
       Utils.Lang.nilService(
         useAction?.scrollLastChatWithPersonalMessage,
@@ -198,23 +216,25 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
     },
   );
 
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('notification--Chat', props.prefixCls);
   return (
-    <div className={styles.chat}>
-      <div className={styles.left}>
-        <UserHeader />
-        <div ref={ref} className={styles.userList}>
+    <div className={prefixCls}>
+      <div className={'left'}>
+        <UserHeader className={'userHeader'} />
+        <div ref={ref} className={'userList'}>
           <List
             locale={{ emptyText: '暂无联系人' } as any}
-            rowKey='id'
-            itemLayout='horizontal'
+            rowKey="id"
+            itemLayout="horizontal"
             dataSource={data?.list || []}
             renderItem={({
-                           sendAt,
-                           senderUser,
-                           senderUserName,
-                           senderUserAvatarUrl,
-                           description,
-                         }: MessageDataType) => (
+              sendAt,
+              senderUser,
+              senderUserName,
+              senderUserAvatarUrl,
+              description,
+            }: MessageDataType) => (
               <UserCard
                 selected={chatUser?.id === senderUser}
                 avatar={senderUserAvatarUrl}
@@ -230,7 +250,7 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
           {loading && <Loading />}
         </div>
       </div>
-      <div className={styles.right}>
+      <div className={'right'}>
         {chatUser ? (
           <>
             <ChatHeader>{chatUser?.title}</ChatHeader>
@@ -242,9 +262,7 @@ export const Chat: React.FC<{ useAction: UseAction }> = ({ useAction }) => {
             <Editor chatUserId={chatUser.id} useAction={useAction} />
           </>
         ) : (
-          <>
-            <Empty />
-          </>
+          <Empty />
         )}
       </div>
     </div>
