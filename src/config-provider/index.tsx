@@ -1,1 +1,4 @@
-export { ConfigContext } from './context';
+import { ConfigContext } from './context';
+
+export { ConfigContext };
+export default { ConfigContext };
