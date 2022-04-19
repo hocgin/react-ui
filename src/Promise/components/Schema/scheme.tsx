@@ -91,7 +91,7 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       if (record && record instanceof Array) {
         return <Exhibit.Array.Image src={record.map(({ url }) => url)} />;
       }
-      return <Exhibit.Image src={record?.url} />;
+      return <Exhibit.Image.Image src={record?.url} />;
     },
     renderFormItem: (text: any, props: any) => {
       let params: UploadParam = props?.params || {};
