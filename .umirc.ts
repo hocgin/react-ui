@@ -1,6 +1,6 @@
 import { defineConfig } from 'dumi';
 import { readdirSync } from 'fs';
-import { join } from 'path';
+import { join, resolve } from 'path';
 
 const ignorePkgList: any[] = ['index.tsx'];
 const pkgList = readdirSync(join(__dirname, 'src')).filter(
@@ -45,18 +45,7 @@ export default defineConfig({
   },
   // ssr: {},
   exportStatic: {},
-  extraBabelPlugins: [
-    [
-      'babel-plugin-import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'es',
-        style: true,
-      },
-    ],
-    [
-      'babel-plugin-transform-remove-console',
-      { exclude: ['error', 'warn', 'info'] },
-    ],
-  ],
+  lessLoader: {
+    paths: [resolve(__dirname)],
+  },
 });

@@ -1,4 +1,4 @@
-export * as ConfigProvider from './config-provider';
+export { default as ConfigProvider } from './config-provider';
 export { default as TextRow } from './text-row';
 export { default as Header } from './header';
 export { default as Tpl } from './tpl';
