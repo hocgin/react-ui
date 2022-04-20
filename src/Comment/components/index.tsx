@@ -11,8 +11,6 @@ import {
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
 import { Loading, Utils } from '@hocgin/ui';
-import { Struct } from '@/Utils/result';
-import Lang from '@/Utils/lang';
 import { ConfigContext } from '@/config-provider';
 import './index.less';
 
@@ -40,9 +38,9 @@ const Index: React.FC<IndexProps> = ({ useAction, total, ...props }) => {
       Utils.Lang.nilService(useAction?.scroll)({
         orderDesc,
         nextId: d?.nextId,
-      }).then(Struct.getScrollData),
+      }).then(Utils.Struct.getScrollData),
     {
-      target: Lang.isBrowser() ? document : null,
+      target: Utils.Lang.isBrowser() ? document : null,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );
