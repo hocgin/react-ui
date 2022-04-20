@@ -1,9 +1,9 @@
 import React from 'react';
 import { Popover, Avatar } from 'antd';
-import { Utils } from '@hocgin/ui';
+import { Utils } from '@/index';
 import { FileImageOutlined, FileUnknownOutlined } from '@ant-design/icons';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface FileProps {
   /**

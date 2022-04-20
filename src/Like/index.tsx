@@ -4,4 +4,6 @@
  */
 import React from 'react';
 
-export { Like } from './components/Like';
+import { Like } from './components/Like';
+
+export default Like;

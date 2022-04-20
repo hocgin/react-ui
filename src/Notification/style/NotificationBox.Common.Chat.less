@@ -1,0 +1,205 @@
+@import '~@/style/index.less';
+@import '~@/mixin.less';
+
+@notification--Chat-prefix-cls: ~'@{hui-prefix}-notification--Chat';
+@notification--Chat-UserCard-prefix-cls: ~'@{hui-prefix}-notification--Chat-UserCard';
+@notification--Chat-ChatHeader-prefix-cls: ~'@{hui-prefix}-notification--Chat-ChatHeader';
+@notification--Chat-ChatBody-prefix-cls: ~'@{hui-prefix}-notification--Chat-ChatBody';
+@notification--Chat-Editor-prefix-cls: ~'@{hui-prefix}-notification--Chat-Editor';
+
+@borderColor: var(--border-color);
+@leftWidth: 250px;
+@reverseColor: @primary-color;
+@userCardMarginWidth: 24px;
+
+.@{notification--Chat-prefix-cls} {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  min-height: 500px;
+
+  .left {
+    width: @leftWidth;
+    height: 100%;
+    padding-top: 10px;
+    border-right: 1px solid @borderColor;
+    display: flex;
+    flex-direction: column;
+
+    .userList {
+      flex: 1;
+      overflow: auto;
+    }
+
+    .userHeader {
+      padding-right: @userCardMarginWidth;
+      padding-left: @userCardMarginWidth;
+      padding-bottom: 10px;
+      border-bottom: solid 1px @borderColor;
+    }
+  }
+
+  .right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.@{notification--Chat-UserCard-prefix-cls} {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 0;
+  cursor: pointer;
+  position: relative;
+  border-bottom: solid 1px @borderColor;
+  padding-right: @userCardMarginWidth;
+  padding-left: @userCardMarginWidth;
+
+  .body {
+    flex: 1;
+    margin-left: 10px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    .name {
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    .datetime {
+      font-size: 12px;
+      color: #999;
+      width: 90px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .content {
+    padding-right: 5px;
+    box-sizing: border-box;
+    font-size: 13px;
+    color: #999;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  &.selected {
+    background-color: #f6f6f6;
+  }
+}
+
+.@{notification--Chat-ChatHeader-prefix-cls} {
+  font-weight: 600;
+  font-size: 15px;
+  margin: 0 14px;
+  height: 50px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  box-sizing: border-box;
+  border-bottom: 1px solid @borderColor;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.@{notification--Chat-ChatBody-prefix-cls} {
+  word-break: break-all;
+  flex: 1;
+  padding: 0 10px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+
+  .datetime {
+    font-size: 12px;
+    color: #999;
+    text-align: center;
+    padding-top: 15px;
+  }
+
+  .message {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+
+    .body {
+      margin: 0 10px;
+      background-color: #f6f6f6;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 14px;
+      text-align: left;
+      position: relative;
+
+      .ProseMirror > * {
+        margin: 0 !important;
+      }
+
+      .bodyContent {
+        padding: unset;
+      }
+
+      &::after {
+        transform: rotate(45deg);
+        content: '';
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        left: -4px;
+        top: 14px;
+        background: #f6f6f6;
+      }
+    }
+  }
+
+  .record.reverse {
+    .message {
+      flex-direction: row-reverse;
+
+      .body {
+        background-color: @reverseColor;
+        color: #fff;
+
+        &::after {
+          right: -4px;
+          left: unset;
+          background: @reverseColor;
+        }
+      }
+    }
+  }
+}
+
+.@{notification--Chat-Editor-prefix-cls} {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+
+  .editorContent {
+    height: 150px;
+  }
+
+  .editorToolbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+  }
+}

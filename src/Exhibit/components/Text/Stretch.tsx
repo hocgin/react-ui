@@ -1,4 +1,4 @@
-import { Stretch as HStretch } from '@hocgin/ui';
+import { Stretch as HStretch } from '@/index';
 import React from 'react';
 
 export interface StretchProps {

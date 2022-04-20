@@ -1,7 +1,7 @@
 import React from 'react';
 import { Spin } from 'antd';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   prefixCls?: string;

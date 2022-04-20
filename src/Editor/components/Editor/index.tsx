@@ -1,5 +1,5 @@
 import React, { MutableRefObject, useEffect, useState } from 'react';
-import { HeartFilled } from '@hocgin/ui';
+import { HeartFilled } from '@/Logo';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import ExHighlight from '@tiptap/extension-highlight';
@@ -75,8 +75,7 @@ import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface EditorFn {
   getHTML: () => string;
@@ -147,20 +146,20 @@ const Index: React.FC<{
   onSearchMention?: onSearchMentionFunction;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-  onChange,
-  className,
-  placeholder = '',
-  contentClassName,
-  header,
-  onChangeFullscreen,
-  editorRef,
-  fullscreen = false,
-  editable = true,
-  value,
-  onSearchMention,
-  uploadImageUrl = '/api/com/file/upload',
-  ...props
-}) => {
+        onChange,
+        className,
+        placeholder = '',
+        contentClassName,
+        header,
+        onChangeFullscreen,
+        editorRef,
+        fullscreen = false,
+        editable = true,
+        value,
+        onSearchMention,
+        uploadImageUrl = '/api/com/file/upload',
+        ...props
+      }) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =

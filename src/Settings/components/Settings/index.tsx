@@ -16,11 +16,11 @@ import {
   UseAction,
 } from '@/Settings/components/types';
 import memoizeOne from 'memoize-one';
-import { Empty, Utils } from '@hocgin/ui';
+import { Empty, Utils } from '@/index';
 import { useMount, useRequest } from 'ahooks';
 import classnames from 'classnames';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 interface UserProfile {
   avatarSrc?: any;

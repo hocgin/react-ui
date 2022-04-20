@@ -3,6 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
+import { Settings } from './components/Settings';
 
-export { Settings } from './components/Settings';
 
+export default Settings;

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
-import './index.less';
+
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import { Affix, Avatar, Button, Tooltip } from 'antd';
 import {
@@ -19,9 +19,9 @@ import {
   UserDataType,
 } from '../type';
 import { useInterval, useMount, useRequest, useToggle } from 'ahooks';
-import { Editor as GEditor, Utils } from '@hocgin/ui';
+import { Editor as GEditor, Utils } from '@/index';
 import classnames from 'classnames';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const AffixEditor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;

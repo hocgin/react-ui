@@ -1,6 +1,5 @@
-import { useGet, usePost, Dom } from '@hocgin/ui';
-import { ID } from '@/Utils/interface';
-import { stringify } from 'querystring';
+import { useGet, usePost } from '@/index';
+import Dom from '@/Utils/dom';
 
 type MessageType = 'system_message' | 'personal_message' | 'notice_message';
 

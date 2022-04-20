@@ -1,6 +1,6 @@
 import React from 'react';
 import { UseAction } from '@/Promise/components/Schema/ExhibitSchemaConfig/type';
-import { Dom } from '@hocgin/ui';
+import { Utils } from '@hocgin/ui';
 
 export const config: any = {
   layoutType: 'ModalForm',
@@ -45,60 +45,61 @@ export const config: any = {
           },
         ];
       },
-    }, {
+    },
+    {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
-      valueType: Dom.columnPrefix('select'),
+      valueType: Utils.Dom.columnPrefix('select'),
     },
     {
       title: '树型选择',
       dataIndex: 'gin_tree_select_name',
-      valueType: Dom.columnPrefix('gin.treeSelect'),
+      valueType: Utils.Dom.columnPrefix('gin.treeSelect'),
     },
     {
       title: 'radioButton',
       dataIndex: 'gin_radioButton_name',
-      valueType: Dom.columnPrefix('radioButton'),
+      valueType: Utils.Dom.columnPrefix('radioButton'),
     },
     {
       title: 'radio',
       dataIndex: 'gin_radio_name',
-      valueType: Dom.columnPrefix('radio'),
+      valueType: Utils.Dom.columnPrefix('radio'),
     },
     {
       title: 'checkbox',
       dataIndex: 'gin_checkbox_name',
-      valueType: Dom.columnPrefix('checkbox'),
+      valueType: Utils.Dom.columnPrefix('checkbox'),
     },
     {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
-      valueType: Dom.columnPrefix('upload'),
+      valueType: Utils.Dom.columnPrefix('upload'),
     },
     {
       title: '链接',
       dataIndex: 'link',
-      valueType: Dom.columnPrefix('link'),
+      valueType: Utils.Dom.columnPrefix('link'),
     },
     {
       title: '文本',
       dataIndex: 'stretch',
-      valueType: Dom.columnPrefix('stretch'),
+      valueType: Utils.Dom.columnPrefix('stretch'),
     },
     {
       title: '富文本 html',
       dataIndex: 'html',
-      valueType: Dom.columnPrefix('html'),
+      valueType: Utils.Dom.columnPrefix('html'),
     },
     {
       title: '富文本',
       dataIndex: 'rich',
-      valueType: Dom.columnPrefix('rich'),
+      valueType: Utils.Dom.columnPrefix('rich'),
     },
     {
       title: 'Markdown',
       dataIndex: 'markdown',
-      valueType: Dom.columnPrefix('markdown'),
+      valueType: Utils.Dom.columnPrefix('markdown'),
     },
   ],
 };

@@ -1,10 +1,9 @@
 import React, { ReactNode, useState } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
-import { Utils } from '@hocgin/ui';
+import { Utils } from '@/index';
 import classnames from 'classnames';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 interface SearchBarProps {
   prefixCls?: string;

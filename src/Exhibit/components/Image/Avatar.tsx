@@ -2,8 +2,7 @@ import React from 'react';
 import { Avatar } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { AvatarSize } from 'antd/lib/avatar/SizeContext';
-import { ConfigContext } from '@/config-provider';
-import './Avatar.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface AvatarProps {
   /**

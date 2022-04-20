@@ -21,3 +21,7 @@
 ### 包依赖类型
 
 https://yarn.bootcss.com/docs/dependency-types/
+
+### 处理样式通用引入
+1. 组件命名规则 `{前缀}-{组件夹名}--{组件内部名}`
+2. 

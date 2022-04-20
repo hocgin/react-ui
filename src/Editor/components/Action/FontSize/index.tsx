@@ -1,8 +1,8 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
 import MeDropdown from '@/Editor/components/Common/MeDropdown';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 export const FontSize: React.FC<{
   editor?: Editor | null;

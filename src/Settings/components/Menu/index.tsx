@@ -1,9 +1,8 @@
 import React from 'react';
 import { Menu as AnMenu } from 'antd';
 import classnames from 'classnames';
-import { Empty } from '@hocgin/ui';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { Empty } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
 
 interface MenuItem {
   title: string;

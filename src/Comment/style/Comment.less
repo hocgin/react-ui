@@ -1,0 +1,47 @@
+@import '~@/style/index.less';
+
+@comment-group-prefix-cls: ~'@{hui-prefix}-comment-group';
+
+.@{comment-group-prefix-cls} {
+  background-color: #fff;
+
+  .ant-list-header {
+    padding-left: 10px;
+    background-color: rgba(0, 0, 0, 0.015);
+    border: 1px solid #f0f0f0;
+    border-radius: 2px;
+  }
+
+  .ant-avatar {
+    border: 1px solid rgba(218, 218, 223, 0.8);
+  }
+
+  &-header {
+    font-weight: bold;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &-comments {
+    min-height: 300px;
+
+    .ske {
+      flex: 1 1;
+    }
+
+    .ant-list-item {
+      padding: 0 10px;
+    }
+
+    .ant-list-item:hover {
+      background-color: rgba(0, 0, 0, 0.015);
+    }
+
+    .ant-list-header {
+      border-top: 1px solid #f0f0f0;
+      font-size: 15px;
+    }
+  }
+}

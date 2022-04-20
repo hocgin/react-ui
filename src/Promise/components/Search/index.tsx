@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Select, Spin, Avatar } from 'antd';
-import { Utils } from '@hocgin/ui';
+import { Utils } from '@/index';
 import { SearchOption } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import { UserOutlined } from '@ant-design/icons';
 import { useUpdateEffect, useRequest } from 'ahooks';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   prefixCls?: string;
@@ -36,14 +36,14 @@ const Index: React.FC<{
    */
   options?: SearchOption[];
 }> = ({
-        multiple = false,
-        placeholder = '请选择..',
-        onChange,
-        useAction,
-        defaultValue,
-        options = [],
-        ...props
-      }) => {
+  multiple = false,
+  placeholder = '请选择..',
+  onChange,
+  useAction,
+  defaultValue,
+  options = [],
+  ...props
+}) => {
   let [data, setData] = useState<SearchOption[]>(options);
   let [keyword, setKeyword] = useState<string>();
   let service = Utils.Lang.nilService(useAction?.initialValues, []);
@@ -57,20 +57,21 @@ const Index: React.FC<{
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('promise--Search', props.prefixCls);
   return (
-    <Select className={prefixCls}
-            defaultValue={defaultValue}
-            loading={loading}
-            showSearch
-            onChange={onChange}
-            showArrow={false}
-            filterOption={false}
-            allowClear
-            mode={multiple ? 'multiple' : undefined}
-            notFoundContent={loading ? <Spin size='small' /> : null}
-            onSearch={setKeyword}
-            placeholder={placeholder}
-            optionLabelProp='label'
-            {...props}
+    <Select
+      className={prefixCls}
+      defaultValue={defaultValue}
+      loading={loading}
+      showSearch
+      onChange={onChange}
+      showArrow={false}
+      filterOption={false}
+      allowClear
+      mode={multiple ? 'multiple' : undefined}
+      notFoundContent={loading ? <Spin size="small" /> : null}
+      onSearch={setKeyword}
+      placeholder={placeholder}
+      optionLabelProp="label"
+      {...props}
     >
       {data.map(({ key, image, description, value }: SearchOption) => (
         <Select.Option key={value} value={value} label={key}>
@@ -91,7 +92,9 @@ const OptionView: React.FC<{
   let prefixCls = getPrefixCls('promise--Search-OptionView', props.prefixCls);
   return (
     <div className={prefixCls}>
-      {image && <Avatar className={'image'} size={32} icon={<UserOutlined />} />}
+      {image && (
+        <Avatar className={'image'} size={32} icon={<UserOutlined />} />
+      )}
       <div className={'info'}>
         <div className={'title'}>{title}</div>
         <div className={'description'}>{description}</div>

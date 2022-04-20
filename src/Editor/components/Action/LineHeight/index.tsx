@@ -2,8 +2,7 @@ import React from 'react';
 import { Editor } from '@tiptap/react';
 import MeDropdown from '@/Editor/components/Common/MeDropdown';
 import { LineHeightOutlined } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const LineHeight: React.FC<{
   editor?: Editor | null;

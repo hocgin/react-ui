@@ -1,0 +1,28 @@
+@import '~@/style/index.less';
+@import '~@/mixin.less';
+
+@notification-prefix-cls: ~'@{hui-prefix}-notification';
+
+@borderColor: var(--border-color);
+@messageHeight: var(--message-height);
+
+.@{notification-prefix-cls} {
+  .ant-tabs-content-holder {
+    background: #fff;
+    box-sizing: border-box;
+    border: 1px solid #f0f0f0;
+    //border-left: unset;
+  }
+
+  .ant-tabs-tab {
+    border-right: unset !important;
+  }
+
+  .tabPane {
+    height: @messageHeight;
+
+    &.personalPane {
+      padding-left: 0 !important;
+    }
+  }
+}

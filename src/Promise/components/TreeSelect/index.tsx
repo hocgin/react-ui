@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
-import { Utils, Dom } from '@hocgin/ui';
+import { Utils } from '@/index';
+import Dom from '@/Utils/dom';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
 import { TreeNode } from '@/Utils/interface';

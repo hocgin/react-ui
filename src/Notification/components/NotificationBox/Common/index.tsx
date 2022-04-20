@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
-import './index.less';
+import React from 'react';
+
 import { LocalDateTime } from '@/Utils/interface';
-import { Avatar, Typography, Modal } from 'antd';
-import { Editor } from '@hocgin/ui';
+import { Avatar, Modal } from 'antd';
+import { Editor } from '@/index';
 import { NotificationOutlined } from '@ant-design/icons';
-import { Format } from '@/index';
-import { ConfigContext } from '@/config-provider';
+import Utils from '@/Utils';
+import { ConfigContext } from '@/ConfigProvider';
 
 export { Chat } from './Chat';
 
@@ -35,7 +35,7 @@ export const MessageSmallCard: React.FC<{
   datetime?: LocalDateTime;
   prefixCls?: string;
 }> = ({ title, datetime, content, description, ...props }) => {
-  let fmtDatetime = Format.DateTime.useDefRelativeFromNow(datetime);
+  let fmtDatetime = Utils.Format.DateTime.useDefRelativeFromNow(datetime);
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls(
     'notification--Common-MessageSmallCard',

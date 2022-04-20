@@ -1,0 +1,113 @@
+@import '~@/mixin.less';
+@import '~@/style/index.less';
+
+@comment-editor-prefix-cls: ~'@{hui-prefix}-comment-editor';
+
+.@{comment-editor-prefix-cls} {
+  background-color: #fff;
+  padding: 14px;
+  display: flex;
+  border: 1px solid #ebedf1;
+  box-shadow: unset;
+  border-radius: 2px;
+  flex-direction: column;
+
+  &-mini {
+    display: none;
+  }
+}
+
+.ant-affix {
+  margin-bottom: -50px;
+
+  .mobile({
+    margin-bottom: unset;
+    .content {
+      height: 120px !important;
+    }
+  });
+
+  .@{comment-editor-prefix-cls} {
+    padding: 6px 8px;
+    border-radius: 3px;
+    box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.08);
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+
+    .content {
+      height: 70px;
+    }
+
+    .mobile({
+      padding: 8px;
+      border-radius: 2px;
+    });
+
+    .mobile({
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      &.@{comment-editor-prefix-cls}-expand {
+        position: unset;
+        bottom: unset;
+        width: unset;
+
+        .@{comment-editor-prefix-cls}-bottom {
+          display: unset;
+        }
+      }
+      &-mini {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &-bottom {
+        display: none;
+      }
+    });
+  }
+}
+
+.@{comment-editor-prefix-cls}-bottom {
+  flex: 1 1;
+
+  &-header {
+    display: flex;
+    align-items: center;
+    padding-bottom: 5px;
+    color: rgba(0, 0, 0, 0.85);
+
+    &-title {
+      margin-left: 4px;
+      margin-right: 2px;
+      font-weight: 400;
+      font-size: 14px;
+      cursor: pointer;
+    }
+  }
+
+  &-content {
+    height: 120px;
+  }
+}
+
+.@{comment-editor-prefix-cls}-bottom-reply {
+  display: flex;
+  align-items: center;
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.@{comment-editor-prefix-cls}-bottom-replyButton {
+  margin-top: 5px;
+
+  button {
+    background-color: rgb(38, 38, 38, 85%);
+    color: #fff;
+  }
+
+  .ant-btn:hover,
+  .ant-btn:focus {
+    border-color: rgb(38, 38, 38, 85%);
+    color: rgb(38, 38, 38, 85%);
+  }
+}

@@ -1,6 +1,7 @@
 import { defineConfig } from 'dumi';
 import { readdirSync } from 'fs';
 import { join, resolve } from 'path';
+import * as fs from 'fs';
 
 const ignorePkgList: any[] = ['index.tsx'];
 const pkgList = readdirSync(join(__dirname, 'src')).filter(
@@ -41,4 +42,60 @@ export default defineConfig({
   },
   // ssr: {},
   exportStatic: {},
+  extraBabelPlugins: [
+    [
+      'import',
+      {
+        libraryName: 'antd',
+        libraryDirectory: 'lib',
+        style: true,
+      },
+      'antd',
+    ],
+    [
+      // https://github.com/umijs/babel-plugin-import#style
+      'import',
+      {
+        libraryName: '@hocgin/ui',
+        camel2DashComponentName: false,
+        style: (name: string, file: Object) => {
+          let packageName = name.replace('@hocgin/ui/lib/', '');
+          if (
+            [
+              'Dom',
+              'ConfigProvider',
+              'Utils',
+              'Format',
+              'request',
+              'usePost',
+              'useDelete',
+              'useGet',
+              'usePut',
+              'Types',
+            ].includes(name)
+          ) {
+            console.info(`组件 ${name} 无需加载样式`);
+            return false;
+          }
+          let stylePath = join(
+            __dirname,
+            'src',
+            packageName,
+            'style/index.tsx',
+          );
+          let hasFile = fs.existsSync(stylePath);
+
+          if (!hasFile) {
+            console.info(
+              `[X]组件 ${packageName} 加载样式失败，样式文件不存在`,
+            );
+            return false;
+          }
+          console.info(`[V]组件 ${packageName} 自动加载样式`);
+          // 注意：这里 ./ 表示的是演示的 .md 文件目录
+          return stylePath;
+        },
+      },
+    ],
+  ],
 });

@@ -1,8 +1,7 @@
 import React from 'react';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { Format } from '@hocgin/ui';
-import { ConfigContext } from '@/config-provider';
-import './DateTime.less';
+import { Format } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   prefixCls?: string;

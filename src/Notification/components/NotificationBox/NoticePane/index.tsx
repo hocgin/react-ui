@@ -1,13 +1,13 @@
 import React, { useRef, useState } from 'react';
-import './index.less';
+
 import { Title, MessageSmallCard } from '../Common';
 import classnames from 'classnames';
 import { MessageDataType, UseAction } from '@/Notification/components/types';
-import { useInfiniteScroll, useSet } from 'ahooks';
-import { Empty, Format, Loading } from '@hocgin/ui';
-import { Utils } from '@/index';
+import { useInfiniteScroll } from 'ahooks';
+import { Empty, Loading } from '@/index';
+import { Utils, Format } from '@/index';
 import { Struct } from '@/Utils/result';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const NoticePane: React.FC<{
   prefixCls?: string;

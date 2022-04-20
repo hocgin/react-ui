@@ -1,9 +1,9 @@
-import { Dom, useGet, usePost } from '@hocgin/ui';
+import { useGet, usePost } from '@/index';
+import Dom from '@/Utils/dom';
 import { UserInfo } from './type';
 import { stringify } from 'querystring';
 
 export default class {
-
   /**
    * 获取当前用户信息
    * @param force true 表示一定需要登陆

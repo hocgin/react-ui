@@ -2,7 +2,6 @@ import React from 'react';
 import { UseAction } from './type';
 import { Tree, Space, Tooltip, Card, Alert } from 'antd';
 import classnames from 'classnames';
-import { Dom, Utils } from '@hocgin/ui';
 import { BetaSchemaForm } from '@ant-design/pro-form';
 import { ReloadOutlined } from '@ant-design/icons';
 import { useContext, useState } from 'react';
@@ -13,8 +12,9 @@ import {
   handleSchemeColumns,
   SchemeColumns,
 } from '@/Promise/components/Schema/scheme';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
+import { Utils } from '@/index';
+import Dom from '@/Utils/dom';
 
 const SearchBar: React.FC<{
   config: ConfigType;

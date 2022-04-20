@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import { NodeViewWrapper } from '@tiptap/react';
 import { NodeSelection } from 'prosemirror-state';
 import classnames from 'classnames';
-import styles from './index.less';
 import { useMount } from 'ahooks';
 import Lang from '@/Utils/lang';
 import { resolveImg } from './image';
+import { ConfigContext } from '@/ConfigProvider';
 
 const MIN_SIZE = 20;
 const MAX_SIZE = 100000;
 
 const Image: React.FC<{
+  prefixCls?: string;
   node: any;
   getPos: any;
   editor: any;
   updateAttributes: any;
   selected: boolean;
 }> = ({ node, selected, updateAttributes, editor, getPos, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor--Extension-Image', props.prefixCls);
+
   let view = editor.view;
   let attrs = node.attrs || {};
   let editable = view.editable;
@@ -133,14 +137,14 @@ const Image: React.FC<{
     return (
       <NodeViewWrapper>
         <div
-          className={classnames(styles.imageView, {
-            [styles.imageViewSelected]: selected,
+          className={classnames(prefixCls, {
+            [`${prefixCls}-imageViewSelected`]: selected,
           })}
           style={{ display: 'inline-block' } as any}
         >
           <img
             className={classnames({
-              [styles.imageSelected]: selected,
+              [`${prefixCls}-imageSelected`]: selected,
             })}
             title={attrs?.title}
             src={attrs?.src}
@@ -150,32 +154,32 @@ const Image: React.FC<{
             onClick={onSelectImage}
           />
           {editable && selected ? (
-            <div className={styles.imageResizer}>
+            <div className={`${prefixCls}-imageResizer`}>
               <span
                 className={classnames(
-                  styles.imageResizerHandle,
-                  styles.imageResizerHandleTl,
+                  `${prefixCls}-imageResizerHandle`,
+                  `${prefixCls}-imageResizerHandleTl`,
                 )}
                 onMouseDown={onMouseDown.bind(this, 'tl')}
               />
               <span
                 className={classnames(
-                  styles.imageResizerHandle,
-                  styles.imageResizerHandleTr,
+                  `${prefixCls}-imageResizerHandle`,
+                  `${prefixCls}-imageResizerHandleTr`,
                 )}
                 onMouseDown={onMouseDown.bind(this, 'tr')}
               />
               <span
                 className={classnames(
-                  styles.imageResizerHandle,
-                  styles.imageResizerHandleBl,
+                  `${prefixCls}-imageResizerHandle`,
+                  `${prefixCls}-imageResizerHandleBl`,
                 )}
                 onMouseDown={onMouseDown.bind(this, 'bl')}
               />
               <span
                 className={classnames(
-                  styles.imageResizerHandle,
-                  styles.imageResizerHandleBr,
+                  `${prefixCls}-imageResizerHandle`,
+                  `${prefixCls}-imageResizerHandleBr`,
                 )}
                 onMouseDown={onMouseDown.bind(this, 'br')}
               />

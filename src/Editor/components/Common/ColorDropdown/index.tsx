@@ -2,9 +2,9 @@ import React from 'react';
 import { Popover, Button } from 'antd';
 import { SketchPicker } from 'react-color';
 import { useState } from 'react';
-import './index.less';
+
 import Icon, { CaretDownOutlined } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   renderIcon?: (color: string) => any;

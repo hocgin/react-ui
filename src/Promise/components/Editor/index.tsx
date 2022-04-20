@@ -5,7 +5,7 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Editor as GEditor, Utils } from '@hocgin/ui';
+import { Editor as GEditor, Utils } from '@/index';
 import { Button, Skeleton } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';
@@ -18,8 +18,7 @@ import {
 import { useInterval, useLockFn, useMount, useRequest } from 'ahooks';
 import { EditorFn, getExtensions } from '@/Editor/components/Editor';
 import { generateHTML, generateJSON } from '@tiptap/html';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Header: React.FC<{
   headerRef: MutableRefObject<any>;

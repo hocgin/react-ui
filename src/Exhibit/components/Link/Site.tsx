@@ -1,9 +1,8 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { Utils } from '@hocgin/ui';
+import { Utils } from '@/index';
 import { LinkOutlined } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface SiteProps {
   /**

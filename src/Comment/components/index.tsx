@@ -10,9 +10,8 @@ import {
 } from 'ahooks';
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
-import { Loading, Utils } from '@hocgin/ui';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { Loading, Utils } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface IndexProps {
   /**
