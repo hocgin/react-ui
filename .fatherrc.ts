@@ -1,5 +1,6 @@
 import { IBundleOptions } from 'father-build/src/types';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
+import { resolve, join } from 'path';
 
 export default {
   esm: 'babel',
@@ -12,29 +13,29 @@ export default {
   },
   runtimeHelpers: true,
   extractCSS: true,
-  lessInBabelMode: true,
+  lessInBabelMode: {
+    paths: [resolve(__dirname, 'node_modules')],
+    // @ts-ignore
+    javascriptEnabled: true,
+  },
   extraBabelPlugins: [
     [
-      'babel-plugin-import',
+      'import',
       {
         libraryName: 'antd',
-        libraryDirectory: 'es',
+        libraryDirectory: 'lib',
         style: true,
       },
       'antd',
     ],
+    ['transform-remove-console', { exclude: ['error', 'warn', 'info'] }],
     [
-      'babel-plugin-transform-remove-console',
-      { exclude: ['error', 'warn', 'info'] },
-    ],
-    [
-      'babel-plugin-module-resolver',
+      'module-resolver',
       {
-        root: ['.'],
-        extensions: ['.ts', '.tsx', '.js', '.jsx'],
         alias: {
           '@': './src',
           '@@': './src/.umi',
+          '@hocgin/ui': './src',
         },
       },
     ],

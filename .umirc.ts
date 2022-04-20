@@ -18,10 +18,6 @@ const tailPkgList = pkgList
 export default defineConfig({
   title: 'HOCGIN x UI',
   mode: 'site',
-  alias: {
-    '@hocgin/ui': path,
-    '@/': join(__dirname, 'src'),
-  },
   // more config: https://d.umijs.org/config
   logo: 'http://cdn.hocgin.top/uPic/mp_logo.png',
   navs: [
@@ -45,7 +41,4 @@ export default defineConfig({
   },
   // ssr: {},
   exportStatic: {},
-  lessLoader: {
-    paths: [resolve(__dirname)],
-  },
 });
