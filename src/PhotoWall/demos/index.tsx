@@ -3,7 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Dom, PhotoWall } from '@hocgin/ui';
+import { PhotoWall, Utils } from '@hocgin/ui';
 import styles from './index.less';
 
 export default () => {
@@ -11,7 +11,7 @@ export default () => {
     <PhotoWall
       maxCount={5}
       onChange={console.log}
-      beforeUpload={Dom.validFile.bind(
+      beforeUpload={Utils.Dom.validFile.bind(
         this,
         'image/jpeg,image/png,image/gif',
         2 * 1024 * 1024,

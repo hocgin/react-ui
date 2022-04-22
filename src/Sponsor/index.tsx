@@ -1,3 +1,3 @@
-import Sponsor from './components/Sponsor';
+import Sponsor from './Sponsor';
 
 export default Sponsor;

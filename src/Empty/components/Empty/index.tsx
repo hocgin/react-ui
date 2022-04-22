@@ -1,7 +1,6 @@
 import React from 'react';
 import { Empty as AntdEmpty } from 'antd';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const Empty: React.FC<{
   prefixCls?: string;

@@ -1,11 +1,11 @@
 import React from 'react';
 import { message, Tree, TreeSelect, Upload } from 'antd';
-import { Struct } from '../result';
+import { Struct } from '@/Utils/result';
 import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
 export default class Dom {
-  static COLUMN_PREFIX = 'ui.';
+  static COLUMN_PREFIX = 'hui.';
 
   /**
    * 自定义组件前缀

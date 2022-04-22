@@ -1,6 +1,6 @@
-import { useGet, usePost, Dom } from '@hocgin/ui';
+import { usePost } from '@/Request';
+import Dom from '@/Utils/dom';
 import { ID } from '@/Utils/interface';
-import { stringify } from 'querystring';
 
 export default class {
   static reply(refType: any, refId: any, commentId?: ID, content?: string) {
@@ -56,5 +56,4 @@ export default class {
       .then(Dom.thenData)
       .catch(Dom.showErrorMessage);
   }
-
 }

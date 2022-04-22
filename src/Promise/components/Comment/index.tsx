@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment } from '@hocgin/ui';
+import { Comment } from '@/index';
 import useAction from './use_action';
 
 const Index: React.FC<{

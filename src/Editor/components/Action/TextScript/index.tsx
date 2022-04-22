@@ -2,9 +2,9 @@ import React from 'react';
 import { Editor } from '@tiptap/react';
 import Icon from '@ant-design/icons';
 import MeDropdown from '@/Editor/components/Common/MeDropdown';
-import './index.less';
+
 import { Moremark, Code, Subscript, Superscript } from '../Icon';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const TextScript: React.FC<{
   editor?: Editor | null;

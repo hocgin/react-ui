@@ -1,8 +1,8 @@
 import React from 'react';
-import './index.less';
+
 import { SetLink, UnsetLink } from '@/Editor/components/Action';
 import { Editor, FloatingMenu } from '@tiptap/react';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 const shouldShowLink = ({ editor, view, state, oldState }: any) => {
   let editable = view?.editable;

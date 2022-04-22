@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileUpload } from '@hocgin/ui';
+import { FileUpload } from '@/index';
 import { FileInfo } from '@/Utils/interface';
 
 const Index: React.FC<{

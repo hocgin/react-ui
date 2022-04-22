@@ -1,4 +1,5 @@
-import { useGet, usePost, Dom } from '@hocgin/ui';
+import { useGet, usePost } from '@/Request';
+import Dom from '@/Utils/dom';
 import { ID, ScrollRo } from '@/Utils/interface';
 import {
   DraftDoc,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Promise, Exhibit, Editor } from '@hocgin/ui';
+import { Promise, Exhibit, Editor } from '@/index';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input } from 'antd';

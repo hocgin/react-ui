@@ -1,5 +1,5 @@
 import React, { useState, useRef, createElement } from 'react';
-import { Utils, Editor as GEditor } from '@hocgin/ui';
+import { Utils, Editor as GEditor } from '@/index';
 import { useMount, useRequest, useToggle, useSize } from 'ahooks';
 import { UserType } from '@/Utils/interface';
 import {
@@ -19,14 +19,11 @@ import {
   UserOutlined,
 } from '@ant-design/icons';
 import { Avatar, Comment, Tooltip, List, Pagination, Skeleton } from 'antd';
-import 'antd/es/comment/style';
-import 'antd/es/list/style';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import DateTimeFormat from '@/Utils/format/datetime';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Content: React.FC<{
   prefixCls?: string;

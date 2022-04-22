@@ -1,9 +1,8 @@
 import React from 'react';
-import { Utils } from '@hocgin/ui';
+import { Utils } from '@/index';
 import { Img } from 'react-image';
 import { SyncOutlined, FileExclamationOutlined } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
-import './Image.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface ImageProps {
   /**

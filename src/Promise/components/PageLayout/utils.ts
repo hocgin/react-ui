@@ -1,7 +1,7 @@
 import { MenuDataItem } from '@umijs/route-utils';
 import { LocalRoute } from '@/Utils/interface';
 import memoizeOne from 'memoize-one';
-import { Dom } from '@hocgin/ui';
+import Dom from '@/Utils/dom';
 
 export let fastGetMenuDataItem = memoizeOne(getMenuDataItem);
 

@@ -1,8 +1,7 @@
 import React from 'react';
-import { Utils, Dom } from '@hocgin/ui';
+import { Utils } from '@/index';
 import { CloudDownloadOutlined } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export interface DownloadProps {
   /**
@@ -23,7 +22,7 @@ const Index: React.FC<DownloadProps> = ({ url, title, ...props }) => {
   return (
     <div>
       <a
-        onClick={(e: any) => Dom.downloadUrl(e, { url: fullUrl })}
+        onClick={(e: any) => Utils.Dom.downloadUrl(e, { url: fullUrl })}
         className={prefixCls}
       >
         <CloudDownloadOutlined />

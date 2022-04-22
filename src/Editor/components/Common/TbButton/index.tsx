@@ -1,8 +1,7 @@
 import React from 'react';
 import { Button, Tooltip } from 'antd';
-import styles from './index.less';
 import classnames from 'classnames';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   className?: string;
@@ -16,8 +15,8 @@ const Index: React.FC<{
   let prefixCls = getPrefixCls('editor-e-tb-button', props.prefixCls);
   return (
     <div className={classnames(prefixCls, className)}>
-      <Tooltip placement="bottom" title={title}>
-        <Button type="text" onClick={onClick} disabled={disabled}>
+      <Tooltip placement='bottom' title={title}>
+        <Button type='text' onClick={onClick} disabled={disabled}>
           <div onTouchStart={(e) => e.preventDefault()}>{children}</div>
         </Button>
       </Tooltip>

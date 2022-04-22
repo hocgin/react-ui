@@ -1,6 +1,8 @@
 import React from 'react';
-import { Dom, Utils } from '@hocgin/ui';
+import { Utils } from '@hocgin/ui';
 import treedata from './data-tree';
+
+console.log('Utils', Utils);
 
 export const config: any = {
   useAction: {
@@ -48,7 +50,7 @@ export const config: any = {
           {
             title: 'search',
             dataIndex: 'search',
-            valueType: Dom.columnPrefix('search'),
+            valueType: Utils.Dom.columnPrefix('search'),
             hideInTable: true,
             valueEnum: {
               [search]: searchName,
@@ -79,7 +81,7 @@ export const config: any = {
             key: '22',
             title: 'search sleep',
             dataIndex: 'search2',
-            valueType: Dom.columnPrefix('search'),
+            valueType: Utils.Dom.columnPrefix('search'),
             hideInTable: true,
             valueEnum: { [search2]: search2Name },
             params: {
@@ -114,7 +116,7 @@ export const config: any = {
     {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
-      valueType: Dom.columnPrefix('select'),
+      valueType: Utils.Dom.columnPrefix('select'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -129,7 +131,7 @@ export const config: any = {
     {
       title: '树型选择',
       dataIndex: 'gin_tree_select_name',
-      valueType: Dom.columnPrefix('treeSelect'),
+      valueType: Utils.Dom.columnPrefix('treeSelect'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => treedata,
@@ -139,7 +141,7 @@ export const config: any = {
     {
       title: 'radioButton',
       dataIndex: 'gin_radioButton_name',
-      valueType: Dom.columnPrefix('radioButton'),
+      valueType: Utils.Dom.columnPrefix('radioButton'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -154,7 +156,7 @@ export const config: any = {
     {
       title: 'radio',
       dataIndex: 'gin_radio_name',
-      valueType: Dom.columnPrefix('radio'),
+      valueType: Utils.Dom.columnPrefix('radio'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -169,7 +171,7 @@ export const config: any = {
     {
       title: 'checkbox',
       dataIndex: 'gin_checkbox_name',
-      valueType: Dom.columnPrefix('checkbox'),
+      valueType: Utils.Dom.columnPrefix('checkbox'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -184,7 +186,7 @@ export const config: any = {
     {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
-      valueType: Dom.columnPrefix('upload'),
+      valueType: Utils.Dom.columnPrefix('upload'),
       params: {
         action: `${window.location.origin}/api/com/file/upload`,
         maxCount: 2,
@@ -193,22 +195,22 @@ export const config: any = {
     {
       title: '编号',
       dataIndex: 'encoding',
-      valueType: Dom.columnPrefix('encoding'),
+      valueType: Utils.Dom.columnPrefix('encoding'),
     },
     {
       title: '富文本 html',
       dataIndex: 'html',
-      valueType: Dom.columnPrefix('html'),
+      valueType: Utils.Dom.columnPrefix('html'),
     },
     {
       title: '富文本',
       dataIndex: 'rich',
-      valueType: Dom.columnPrefix('rich'),
+      valueType: Utils.Dom.columnPrefix('rich'),
     },
     {
       title: 'Markdown',
       dataIndex: 'markdown',
-      valueType: Dom.columnPrefix('markdown'),
+      valueType: Utils.Dom.columnPrefix('markdown'),
     },
   ],
 };

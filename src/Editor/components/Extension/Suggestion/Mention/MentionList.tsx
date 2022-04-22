@@ -1,13 +1,18 @@
 import React, {
-  useState, useEffect, forwardRef, useImperativeHandle,
+  useState,
+  useEffect,
+  forwardRef,
+  useImperativeHandle,
 } from 'react';
 import { SuggestionKeyDownProps } from '@tiptap/suggestion/dist/packages/suggestion/src/suggestion';
-import styles from './MentionList.less';
 import classnames from 'classnames';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
+import { ConfigContext } from '@/ConfigProvider';
 
 export default forwardRef((props: any, ref) => {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('editor--extension-mention');
 
   let items = props.items;
   const selectItem = (index: number) => {
@@ -53,18 +58,25 @@ export default forwardRef((props: any, ref) => {
     },
   }));
 
-  return (items && <div className={styles.items}>
-    {items.length ? items.map((item: Mention, index: number) => (
-        <button
-          className={classnames(styles.item, {
-            [styles.isSelected]: index === selectedIndex,
-          })}
-          key={index}
-          onClick={() => selectItem(index)}>
-          {item}
-        </button>
-      ))
-      : <div className={styles.item}>No result</div>
-    }
-  </div>);
+  return (
+    items && (
+      <div className={prefixCls}>
+        {items.length ? (
+          items.map((item: Mention, index: number) => (
+            <button
+              className={classnames(`${prefixCls}-item`, {
+                [`${prefixCls}-isSelected`]: index === selectedIndex,
+              })}
+              key={index}
+              onClick={() => selectItem(index)}
+            >
+              {item}
+            </button>
+          ))
+        ) : (
+          <div className={`${prefixCls}-item`}>No result</div>
+        )}
+      </div>
+    )
+  );
 });

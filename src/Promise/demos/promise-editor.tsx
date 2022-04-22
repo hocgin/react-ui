@@ -5,7 +5,6 @@
 import React, { useRef } from 'react';
 import { Promise } from '@hocgin/ui';
 import styles from './index.less';
-import { Preview } from '@/Promise/components/Editor';
 
 export default () => {
   return (

@@ -7,8 +7,8 @@ import { MessageStat, UseAction } from '../types';
 import classnames from 'classnames';
 import { Utils } from '@/index';
 import { useMount, useRequest } from 'ahooks';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 type MessageType = 'notice' | 'personal' | 'system';
 export const NotificationBox: React.FC<{

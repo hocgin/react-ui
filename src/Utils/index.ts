@@ -1,9 +1,10 @@
-import Lang from './lang';
+import { default as Lang } from './lang';
 import { Model } from './dva/model';
 import { Struct } from './result';
+import { default as Dom } from './dom';
+import { default as Format } from './format';
+import * as Request from '@/Request';
 
-export default class {
-  static Struct: typeof Struct = Struct;
-  static Lang: typeof Lang = Lang;
-  static Model: typeof Model = Model;
-}
+export default {
+  Lang, Model, Struct, Dom, Format, Request,
+};

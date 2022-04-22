@@ -1,8 +1,7 @@
 import React from 'react';
 import { Badge, Tooltip } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const NotificationIndicator: React.FC<{
   prefixCls?: string;

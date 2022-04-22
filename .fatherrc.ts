@@ -6,6 +6,7 @@ export default {
   esm: 'babel',
   cjs: 'babel',
   umd: {
+    name: '@hocgin/ui',
     globals: {
       react: 'React',
       antd: 'antd',
@@ -13,11 +14,6 @@ export default {
   },
   runtimeHelpers: true,
   extractCSS: true,
-  lessInBabelMode: {
-    paths: [resolve(__dirname, 'node_modules')],
-    // @ts-ignore
-    javascriptEnabled: true,
-  },
   extraBabelPlugins: [
     [
       'import',
@@ -32,10 +28,10 @@ export default {
     [
       'module-resolver',
       {
+        root: ['.'],
         alias: {
           '@': './src',
           '@@': './src/.umi',
-          '@hocgin/ui': './src',
         },
       },
     ],

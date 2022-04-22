@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import { Dom } from '@/index';
+import Dom from '@/Utils/dom';
 import TbButton from '@/Editor/components/Common/TbButton';
 import { Upload } from 'antd';
 import { PictureOutlined } from '@ant-design/icons';

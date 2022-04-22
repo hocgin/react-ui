@@ -6,8 +6,7 @@ import { InsertVideo } from './InsertVideo';
 import { Dropdown, Menu, Button } from 'antd';
 import { PlusCircleFilled } from '@ant-design/icons';
 import classnames from 'classnames';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const InsertCard: React.FC<{
   prefixCls?: string;
@@ -34,7 +33,7 @@ export const InsertCard: React.FC<{
 
   return (
     <Button
-      type='text'
+      type="text"
       title={'插入卡片'}
       className={classnames(prefixCls, className)}
     >

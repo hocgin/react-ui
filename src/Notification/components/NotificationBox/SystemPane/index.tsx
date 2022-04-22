@@ -5,8 +5,7 @@ import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll } from 'ahooks';
 import { Empty, Loading, Utils } from '@/index';
 import { Struct } from '@/Utils/result';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const SystemPane: React.FC<{
   prefixCls?: string;

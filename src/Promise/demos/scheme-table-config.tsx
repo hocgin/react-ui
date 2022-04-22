@@ -3,7 +3,7 @@ import { TableDropdown } from '@ant-design/pro-table';
 import { Space, Divider } from 'antd';
 import { config as addConfig } from './scheme-archive-config';
 import { config as viewConfig } from './scheme-exhibit-config';
-import { Dom, Promise } from '@hocgin/ui';
+import { Promise } from '@hocgin/ui';
 import data from './table-config';
 
 let deleteConfig = {
@@ -58,7 +58,7 @@ export const config: any = {
         let viewConfigs = {
           ...viewConfig,
           trigger: (
-            <a key='view' rel='noopener noreferrer'>
+            <a key="view" rel="noopener noreferrer">
               详情
             </a>
           ),
@@ -67,7 +67,7 @@ export const config: any = {
           ...addConfig,
           id: id,
           trigger: (
-            <a key='update' rel='noopener noreferrer'>
+            <a key="update" rel="noopener noreferrer">
               修改
             </a>
           ),
@@ -76,14 +76,14 @@ export const config: any = {
         return (
           <div key={id}>
             <Promise.ExhibitSchemaConfig key={1} config={viewConfigs} />
-            <Divider key={2} type='vertical' />
+            <Divider key={2} type="vertical" />
             <Promise.ArchiveSchemaConfig
               key={'scheme-table-config.tsx@columns'}
               config={addConfigs}
             />
-            <Divider key={4} type='vertical' />
+            <Divider key={4} type="vertical" />
             <TableDropdown
-              key='actionGroup'
+              key="actionGroup"
               onSelect={() => action?.reload()}
               menus={[
                 {

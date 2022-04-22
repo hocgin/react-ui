@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import { Dom } from '@hocgin/ui';
+import Dom from '@/Utils/dom';
 import { FileInfo, HttpRequestHeader } from '@/Utils/interface';
 
 function getBase64(file: any) {

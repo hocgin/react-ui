@@ -1,1 +1,3 @@
-export { default } from './components';
+import Promise from './components';
+
+export default Promise;

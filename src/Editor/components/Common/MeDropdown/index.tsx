@@ -1,11 +1,11 @@
 import React from 'react';
-import './index.less';
+
 import { Button, Dropdown, Menu } from 'antd';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { useState } from 'react';
 import { useInterval } from 'ahooks';
 import classnames from 'classnames';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 interface MenuInfo {
   key: string;

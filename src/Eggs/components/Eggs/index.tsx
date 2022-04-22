@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Utils, Snow } from '@hocgin/ui';
+import { Utils, Snow } from '@/index';
 import { useMount, useUpdateEffect, useDocumentVisibility } from 'ahooks';
 
 const failure: string = 'http://cdn.hocgin.top/file/failure.ico';

@@ -4,7 +4,6 @@
  */
 import React from 'react';
 import { Code } from '@hocgin/ui';
-import styles from './index.less';
 
 export default () => {
   let html = `export default () => {

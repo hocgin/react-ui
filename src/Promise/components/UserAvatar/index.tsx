@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Dropdown, Menu } from 'antd';
-import './index.less';
+
 import {
   UserOutlined,
   ExportOutlined,
@@ -8,7 +8,7 @@ import {
   SettingOutlined,
   AccountBookOutlined,
 } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
+import { ConfigContext } from '@/ConfigProvider';
 
 const UserInfo: React.FC<{
   prefixCls?: string;
@@ -21,7 +21,7 @@ const UserInfo: React.FC<{
     <div className={prefixCls}>
       <div>
         <Avatar
-          shape='circle'
+          shape="circle"
           size={64}
           icon={<UserOutlined />}
           src={avatarSrc}
@@ -51,11 +51,13 @@ const Index: React.FC<{
       <Menu.Item icon={<ExportOutlined />}>退出</Menu.Item>
     </Menu>
   );
-  return <div className={prefixCls}>
-    <Dropdown overlay={menu} trigger={['click']}>
-      <Avatar shape='circle' size={36} icon={<UserOutlined />} />
-    </Dropdown>
-  </div>;
+  return (
+    <div className={prefixCls}>
+      <Dropdown overlay={menu} trigger={['click']}>
+        <Avatar shape="circle" size={36} icon={<UserOutlined />} />
+      </Dropdown>
+    </div>
+  );
 };
 
 export default Index;

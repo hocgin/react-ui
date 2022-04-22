@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
-import { Utils } from '@hocgin/ui';
+import { Utils } from '@/index';
 import { Option } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
-import './index.less';
-import { ConfigContext } from '@/config-provider';
+
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   /**
@@ -32,18 +32,22 @@ const Index: React.FC<{
   useMount(() => run());
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('promise--Select', props.prefixCls);
-  return <Select className={prefixCls}
-                 loading={loading}
-                 allowClear
-                 mode={multiple ? 'multiple' : undefined}
-                 placeholder={placeholder}
-                 {...props}>
-    {data.map(({ key, value }: Option) => (
-      <Select.Option key={`${value}`} value={value}>
-        {key}
-      </Select.Option>
-    ))}
-  </Select>;
+  return (
+    <Select
+      className={prefixCls}
+      loading={loading}
+      allowClear
+      mode={multiple ? 'multiple' : undefined}
+      placeholder={placeholder}
+      {...props}
+    >
+      {data.map(({ key, value }: Option) => (
+        <Select.Option key={`${value}`} value={value}>
+          {key}
+        </Select.Option>
+      ))}
+    </Select>
+  );
 };
 
 export default Index;

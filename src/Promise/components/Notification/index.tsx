@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Notification, Utils } from '@hocgin/ui';
+import Utils from '@/Utils';
+import Notification from '@/Notification';
 import useAction from './use_action';
 import { useMount, useRequest, useTimeout } from 'ahooks';
 import { MessageStat } from '@/Notification/components/types';
@@ -8,7 +9,9 @@ export const NotificationBox: React.FC<{}> = () => {
   return <Notification.Box useAction={useAction()} />;
 };
 
-export const NotificationIndicator: React.FC<{ timeout?: number }> = ({ timeout = -1 }) => {
+export const NotificationIndicator: React.FC<{ timeout?: number }> = ({
+                                                                        timeout = -1,
+                                                                      }) => {
   let [count, setCount] = useState<number | undefined>();
   let statRequest = useRequest(Utils.Lang.nilService(useAction()?.stat, {}), {
     manual: true,
@@ -22,4 +25,3 @@ export const NotificationIndicator: React.FC<{ timeout?: number }> = ({ timeout 
 
   return <Notification.Indicator count={count} />;
 };
-

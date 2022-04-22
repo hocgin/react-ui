@@ -1,7 +1,6 @@
 import React from 'react';
 import { Statistic } from 'antd';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   prefixCls?: string;

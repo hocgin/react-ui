@@ -10,8 +10,7 @@ import {
   CopyOutlined,
   CheckOutlined,
 } from '@ant-design/icons';
-import { ConfigContext } from '@/config-provider';
-import './index.less';
+import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   prefixCls?: string;
@@ -21,13 +20,13 @@ const Index: React.FC<{
   fullSize?: boolean;
   bordered?: boolean;
 }> = ({
-  children,
-  fullSize = false,
-  className,
-  maxRow,
-  bordered = false,
-  ...props
-}) => {
+        children,
+        fullSize = false,
+        className,
+        maxRow,
+        bordered = false,
+        ...props
+      }) => {
   let [fsize, setFullSize] = useState(fullSize);
   let [copied, setCopied] = useState(false);
 
@@ -49,13 +48,13 @@ const Index: React.FC<{
         [`${prefixCls}-bordered`]: bordered,
       })}
     >
-      <div className={'content'}>
+      <div className={`${prefixCls}--content`}>
         <Truncate lines={!fsize && maxRow} ellipsis={'...'}>
           {children}
         </Truncate>
       </div>
-      <div className={'toolbar'}>
-        <span className={'copy'}>
+      <div className={`${prefixCls}--toolbar`}>
+        <span className={`${prefixCls}--copy`}>
           {copied ? (
             <CheckOutlined style={{ color: '#00B06D' } as any} />
           ) : (
@@ -64,7 +63,7 @@ const Index: React.FC<{
             </CopyToClipboard>
           )}
         </span>
-        <span onClick={() => setFullSize(!fsize)} className={'resize'}>
+        <span onClick={() => setFullSize(!fsize)} className={`${prefixCls}--resize`}>
           {sizeIcon}
         </span>
       </div>

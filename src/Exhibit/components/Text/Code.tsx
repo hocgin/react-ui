@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code as HCode } from '@hocgin/ui';
+import { Code as HCode } from '@/index';
 
 export interface CodeProps {
   /**

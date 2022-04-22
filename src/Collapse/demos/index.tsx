@@ -4,7 +4,6 @@
  */
 import React from 'react';
 import { Collapse, TextRow, Exhibit } from '@hocgin/ui';
-import styles from './index.less';
 
 export default () => {
   return (
