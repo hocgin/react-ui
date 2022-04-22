@@ -19,7 +19,7 @@ import PageLayout from './PageLayout';
 import PageContainer from './PageContainer';
 import UserAvatar from './UserAvatar';
 
-export default class Promise {
+export default class {
   static FileUpload: typeof FileUpload = FileUpload;
   static Select: typeof Select = Select;
   static Encoding: typeof Encoding = Encoding;
