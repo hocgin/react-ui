@@ -1,6 +1,7 @@
 import {
   DislikeParamsType,
-  LikeParamsType, MentionsParamsType,
+  LikeParamsType,
+  MentionsParamsType,
   PagingDataType,
   PagingParamsType,
   ReplyDataType,
@@ -12,7 +13,7 @@ import {
 } from '@/Comment/components/type';
 
 import service from './service';
-import { UmsService } from '@/Utils/request/protocol';
+import { UmsService } from '@/Request/protocol';
 
 export default (refType: any, refId: any) => ({
   reply: async (args: ReplyParamsType) => {
@@ -46,9 +47,9 @@ export default (refType: any, refId: any) => ({
     return asUser(await UmsService.getCurrentUser(args?.force)) as UserDataType;
   },
   // 提及用户
-  mentionUser: async (args: MentionsParamsType) => ((await UmsService.searchUser(args)) || []).map(asUser),
+  mentionUser: async (args: MentionsParamsType) =>
+    ((await UmsService.searchUser(args)) || []).map(asUser),
 });
-
 
 let asUser = (user: any) => {
   if (!user) {

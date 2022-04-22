@@ -27,7 +27,4 @@ export { default as Beta } from './Beta';
 export { default as Exhibit } from './Exhibit';
 // Utils
 export { default as ConfigProvider } from './ConfigProvider';
-export { request, usePost, useDelete, useGet, usePut } from './Utils/request';
-export { default as Format } from './Utils/format';
-export { default as Dom } from './Utils/dom';
 export { default as Utils } from './Utils';

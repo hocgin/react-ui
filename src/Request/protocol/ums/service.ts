@@ -1,4 +1,4 @@
-import { useGet, usePost } from '@/index';
+import { useGet, usePost } from '@/Request';
 import Dom from '@/Utils/dom';
 import { UserInfo } from './type';
 import { stringify } from 'querystring';

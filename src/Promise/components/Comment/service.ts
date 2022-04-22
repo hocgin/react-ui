@@ -1,4 +1,4 @@
-import { usePost } from '@/index';
+import { usePost } from '@/Request';
 import Dom from '@/Utils/dom';
 import { ID } from '@/Utils/interface';
 

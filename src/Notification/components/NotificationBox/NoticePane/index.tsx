@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll } from 'ahooks';
 import { Empty, Loading } from '@/index';
-import { Utils, Format } from '@/index';
+import { Utils } from '@/index';
 import { Struct } from '@/Utils/result';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -35,9 +35,9 @@ export const NoticePane: React.FC<{
       <div ref={ref} className={classnames('container')}>
         {(data?.list || []).map(
           ({ sendAt, title, description, noticeMessage }: MessageDataType) => {
-            let ymd: string = Format.DateTime.useDefLocalDatetime(
+            let ymd: string = Utils?.Format.DateTime.useDefLocalDatetime(
               sendAt,
-              Format.DateTime.FORMAT_3,
+              Utils?.Format.DateTime.FORMAT_3,
             );
             let needAddDay = !set.includes(ymd);
             if (needAddDay) {

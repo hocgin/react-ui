@@ -15,7 +15,9 @@ if (umiRequest) {
   };
 
   const extendRequest = (url: string, options: any) => {
-    return umiRequest(url, { ...defaultOptions, ...options }).catch(console.debug);
+    return umiRequest(url, { ...defaultOptions, ...options }).catch(
+      console.debug,
+    );
   };
 
   requestFun = function request(url: string, options?: any): Promise<any> {
