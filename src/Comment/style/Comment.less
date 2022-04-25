@@ -44,4 +44,36 @@
       font-size: 15px;
     }
   }
+
+  &-goto {
+    position: fixed;
+    background-color: @back-top-bg;
+    color: @back-top-color;
+    padding: 1px;
+    border-radius: 50%;
+    right: 100px;
+    bottom: 100px;
+
+    &-icon {
+      cursor: pointer;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      width: 40px;
+      background-color: @back-top-bg;
+      border: solid 2px #fff;
+    }
+
+    transition: all 0.3s;
+
+    &:hover {
+      color: @back-top-color;
+      background-color: @back-top-hover-bg;
+      transition: all 0.3s;
+    }
+  }
 }
+
+@import './responsive.less';

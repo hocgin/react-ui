@@ -10,6 +10,7 @@ import {
   ReplyParamsType, ScrollDataType, ScrollParamsType,
   UserDataType, UserParamsType,
 } from '@/Comment/components/type';
+import { BackTop } from 'antd';
 
 let currentUser = {
   id: 1,
@@ -133,7 +134,9 @@ let useAction = {
 };
 
 export default () => {
-  return (
+  return (<div style={{ height: '200vh', display: 'flex', flexDirection: 'column' } as any}>
+    <div style={{ flex: '1' } as any} />
     <Comment total={10} useAction={useAction} />
-  );
+    <BackTop/>
+  </div>);
 };
