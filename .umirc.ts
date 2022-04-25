@@ -87,11 +87,11 @@ export default defineConfig({
 
           if (!hasFile) {
             console.info(
-              `[X]组件 ${packageName} 加载样式失败，样式文件不存在`,
+              `[✖] ${packageName} 加载组件样式失败(文件不存在)`,
             );
             return false;
           }
-          console.info(`[V]组件 ${packageName} 自动加载样式`);
+          console.info(`[✔] ${packageName} 加载组件样式成功`);
           // 注意：这里 ./ 表示的是演示的 .md 文件目录
           return stylePath;
         },
