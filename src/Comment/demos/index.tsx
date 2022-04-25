@@ -7,10 +7,14 @@ import {
   PagingDataType,
   PagingParamsType,
   ReplyDataType,
-  ReplyParamsType, ScrollDataType, ScrollParamsType,
-  UserDataType, UserParamsType,
+  ReplyParamsType,
+  ScrollDataType,
+  ScrollParamsType,
+  UserDataType,
+  UserParamsType,
 } from '@/Comment/components/type';
 import { BackTop } from 'antd';
+import Utils from '@/Utils';
 
 let currentUser = {
   id: 1,
@@ -77,7 +81,7 @@ let showResult = {
 };
 
 let reply = (replyId?: any, replyContent?: any) => {
-  return ({
+  return {
     replyId: replyId,
     id: 2,
     likes: 10,
@@ -90,15 +94,18 @@ let reply = (replyId?: any, replyContent?: any) => {
       avatarUrl: '',
       href: '',
     },
-    replier: replyId !== null ? {
-      id: 1,
-      title: 'hocgin',
-      avatarUrl: '',
-      href: '',
-    } : null,
+    replier:
+      replyId !== null
+        ? {
+            id: 1,
+            title: 'hocgin',
+            avatarUrl: '',
+            href: '',
+          }
+        : null,
     hasReply: false,
     datetime: '1 分钟前',
-  });
+  };
 };
 let useAction = {
   reply: async (args: ReplyParamsType) => {
@@ -112,11 +119,13 @@ let useAction = {
     return {
       hasMore: false,
       nextId: undefined,
-      records: (records || []).map(({ replyId, replier, ...record }: CommentType) => {
-        return {
-          ...record,
-        };
-      }),
+      records: (records || []).map(
+        ({ replyId, replier, ...record }: CommentType) => {
+          return {
+            ...record,
+          };
+        },
+      ),
     } as ScrollDataType;
   },
   // 查询子评论
@@ -134,9 +143,15 @@ let useAction = {
 };
 
 export default () => {
-  return (<div style={{ height: '200vh', display: 'flex', flexDirection: 'column' } as any}>
-    <div style={{ flex: '1' } as any} />
-    <Comment total={10} useAction={useAction} />
-    <BackTop/>
-  </div>);
+  return (
+    <div
+      style={
+        { height: '200vh', display: 'flex', flexDirection: 'column' } as any
+      }
+    >
+      <div style={{ flex: '1' } as any} />
+      <Comment total={10} useAction={useAction} />
+      <BackTop />
+    </div>
+  );
 };

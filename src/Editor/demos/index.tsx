@@ -8,6 +8,7 @@ import styles from './index.less';
 import { Button, Divider } from 'antd';
 import { useToggle } from 'ahooks';
 import classnames from 'classnames';
+import Utils from '@/Utils';
 
 const content = `
       <a href='https://www.baidu.com'>ksjdkHi</a>
@@ -104,6 +105,10 @@ export default () => {
   let [fullscreen, setFullscreen] = useState<boolean>(false);
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
+  console.log(
+    "Utils.Lang.matchHtmlTag(content, 'h[1-6]')",
+    Utils.Lang.matchHtmlTag(content, 'h[1-6]'),
+  );
   return (
     <>
       <Editor

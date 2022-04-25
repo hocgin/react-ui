@@ -182,7 +182,10 @@ export default class Lang {
    * @param service
    * @param defResult
    */
-  static nilService(service: any, defResult: any = {}): (...args: any | any[]) => Promise<any> {
+  static nilService(
+    service: any,
+    defResult: any = {},
+  ): (...args: any | any[]) => Promise<any> {
     return service ? service : async (...args: any[]) => defResult;
   }
 
@@ -205,7 +208,67 @@ export default class Lang {
    */
   static toMap(items: any[] = [], fieldKey: string): Record<string, any> {
     let result: Record<string, any> = {};
-    items.forEach(item => result[item[`${fieldKey}`]] = item);
+    items.forEach((item) => (result[item[`${fieldKey}`]] = item));
     return result;
+  }
+
+  /**
+   * 匹配html标签
+   * @param content
+   * @param tagRegex
+   */
+  static matchHtmlTag(
+    content: string = '',
+    tagRegex: string,
+  ): { html: string; name: string; text: string; attr: Record<string, any> }[] {
+    // tagRegex = h[1-6]
+
+    // 1. 匹配标签
+    let matchTagRegex = new RegExp(
+      `<\\s*(${tagRegex})[^>]*>(.*?)<\\s*/\\s*\\1>`,
+      'ig',
+    );
+    let htmlTag = content.match(matchTagRegex) ?? [];
+
+    // 2. 提取标签、文本、属性
+    return htmlTag.map((html: string) => {
+      // 2.1 提取标签
+      let nameRegex = new RegExp(`<\\s*(${tagRegex})(\\s|>)`, 'ig');
+      let nameResult = html.match(nameRegex);
+      let name;
+      if (nameResult && nameResult.length >= 0) {
+        name = `${nameResult[0]}`.replaceAll('<', '').replaceAll('s', '');
+      }
+
+      // 2.1 提取文本
+      let textRegex = new RegExp(`>(.*?)</`, 'ig');
+      let textResult = html.match(textRegex);
+      let text;
+      if (textResult && textResult.length >= 0) {
+        text = textResult[0];
+      }
+
+      // 2.2 提取属性
+      let attr: Record<string, any> = {};
+      let attrNameRegex = new RegExp(`\\s(\\S*?)=`, 'ig');
+      let attrNameResult = html.match(attrNameRegex);
+      if (attrNameResult && attrNameResult.length >= 0) {
+        (attrNameResult || [])
+          .map((item) => item.trim().replaceAll('=', '').replaceAll('s', ''))
+          .forEach((name) => {
+            let attrValueRegex = new RegExp(`\s${name}="(\S*?)"`, 'ig');
+            let attrValueResult = html.match(attrValueRegex);
+            let attrValue;
+            if (attrValueResult && attrValueResult.length >= 0) {
+              attrValue = attrValueResult[0]
+                .trim()
+                .replaceAll(`${name}=`, '')
+                .replaceAll(`"`, '');
+            }
+            attr[`${name}`] = attrValue;
+          });
+      }
+      return { html, name, text, attr } as any;
+    });
   }
 }
