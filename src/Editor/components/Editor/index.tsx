@@ -76,6 +76,7 @@ import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 import { ConfigContext } from '@/ConfigProvider';
+import { generateHTML } from '@tiptap/html';
 
 export interface EditorFn {
   getHTML: () => string;
@@ -166,17 +167,19 @@ const Index: React.FC<{
     useToggle<boolean>(fullscreen);
   let [editorEditable, setEditorEditable] = useState<boolean>(editable);
   useUpdateEffect(() => onChangeFullscreen?.(isFullscreen), [isFullscreen]);
+  let extensions = getExtensions(placeholder, onSearchMention);
   const editor = useEditor({
-    onUpdate({ editor }) {
-      onChange?.(editor.getHTML());
+    onUpdate: ({ editor }) => {
+      onChange?.(editor?.getHTML());
     },
-    extensions: getExtensions(placeholder, onSearchMention),
+    extensions: extensions,
     content: value,
     editable: editorEditable,
   });
-  useUpdateEffect(() => {
-    editor?.commands?.setContent?.(value);
-  }, [value]);
+  // fixbug: 不能开启，否则无法使用拼音输入
+  // useUpdateEffect(() => {
+  //   editor?.commands?.setContent?.(value);
+  // }, [value]);
 
   useEffect(() => editor?.setEditable?.(editorEditable), [editor]);
   useImperativeHandle(
