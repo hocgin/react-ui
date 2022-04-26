@@ -1,6 +1,12 @@
 import { LocalRoute } from '@/Utils/interface';
 
-export type HtmlTagType = { html: string; name: string; text: string; attr: Record<string, any> };
+export type HtmlTagType = {
+  key: string;
+  html: string;
+  name: string;
+  text: string;
+  attr: Record<string, any>;
+};
 export default class Lang {
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
@@ -218,10 +224,7 @@ export default class Lang {
    * @param content
    * @param tagRegex
    */
-  static matchHtmlTag(
-    content: string = '',
-    tagRegex: string,
-  ): HtmlTagType[] {
+  static matchHtmlTag(content: string = '', tagRegex: string): HtmlTagType[] {
     // tagRegex = h[1-6]
 
     // 1. 匹配标签
@@ -257,6 +260,11 @@ export default class Lang {
         text = text.replaceAll('>', '').replaceAll('</', '');
       }
 
+      let key;
+      if (text !== undefined) {
+        key = text.replaceAll(' ', '-');
+      }
+
       // 2.2 提取属性
       let attr: Record<string, any> = {};
       let attrNameRegex = new RegExp(`\\s(\\S*?)=`, 'ig');
@@ -270,14 +278,15 @@ export default class Lang {
             let attrValueResult = html.match(attrValueRegex);
             let attrValue;
             if (attrValueResult && attrValueResult.length > 0) {
-              attrValue = attrValueResult[0].trim()
+              attrValue = attrValueResult[0]
+                .trim()
                 .replaceAll(`${name}=`, '')
                 .replaceAll(`"`, '');
             }
             attr[`${name}`] = attrValue;
           });
       }
-      return { html, name, text, attr } as any;
+      return { key, html, name, text, attr } as HtmlTagType;
     });
   }
 }

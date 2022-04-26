@@ -4,10 +4,10 @@
 
 @hover-before-color: @primary-3;
 @hover-after-color: @primary-color;
-@init-opacity: 0;
-
+@init-opacity: 0.25;
 
 .@{directory-prefix-cls} {
+  width: 200px;
 
   .ant-anchor-wrapper {
     overflow: unset;
@@ -28,11 +28,10 @@
     padding-bottom: 0;
     padding-top: 0;
 
-
     // 悬停和点击 start
     .ant-anchor-link-title:hover,
     .ant-anchor-link-title-active {
-      left: -4px;
+      left: -2px;
 
       & .anchor-link-title {
         color: @hover-after-color !important;
@@ -50,14 +49,14 @@
       opacity: @init-opacity;
       font-weight: 600;
       font-size: 12px;
-      transition: all .5s;
+      transition: all 0.5s;
       margin-bottom: 10px;
-    }
-
-    .ant-anchor-link-title {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+    }
+
+    .ant-anchor-link-title {
       overflow: unset;
       padding-bottom: 0;
       color: @hover-before-color;
@@ -76,13 +75,12 @@
         display: inline-block;
         vertical-align: middle;
         cursor: pointer;
-        transition: background .5s;
+        transition: background 0.5s;
         top: 4.5px;
         left: -@left-width;
       }
     }
   }
-
 
   &:hover {
     .anchor-link-title {
