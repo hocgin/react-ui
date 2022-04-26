@@ -1,5 +1,6 @@
 import { LocalRoute } from '@/Utils/interface';
 
+export type HtmlTagType = { html: string; name: string; text: string; attr: Record<string, any> };
 export default class Lang {
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
@@ -220,7 +221,7 @@ export default class Lang {
   static matchHtmlTag(
     content: string = '',
     tagRegex: string,
-  ): { html: string; name: string; text: string; attr: Record<string, any> }[] {
+  ): HtmlTagType[] {
     // tagRegex = h[1-6]
 
     // 1. 匹配标签
@@ -237,31 +238,39 @@ export default class Lang {
       let nameResult = html.match(nameRegex);
       let name;
       if (nameResult && nameResult.length >= 0) {
-        name = `${nameResult[0]}`.replaceAll('<', '').replaceAll('s', '');
+        name = `${nameResult[0]}`;
+        if (name.startsWith('<')) {
+          name = name.replace('<', '');
+        }
+        if (name.endsWith('>')) {
+          name = name.replace('>', '');
+        }
+        name = name.trim();
       }
 
       // 2.1 提取文本
       let textRegex = new RegExp(`>(.*?)</`, 'ig');
       let textResult = html.match(textRegex);
       let text;
-      if (textResult && textResult.length >= 0) {
+      if (textResult && textResult.length > 0) {
         text = textResult[0];
+        text = text.replaceAll('>', '').replaceAll('</', '');
       }
 
       // 2.2 提取属性
       let attr: Record<string, any> = {};
       let attrNameRegex = new RegExp(`\\s(\\S*?)=`, 'ig');
       let attrNameResult = html.match(attrNameRegex);
-      if (attrNameResult && attrNameResult.length >= 0) {
+      if (attrNameResult && attrNameResult.length > 0) {
         (attrNameResult || [])
-          .map((item) => item.trim().replaceAll('=', '').replaceAll('s', ''))
+          .map((item) => item.trim().replaceAll('=', '').replaceAll('\\s', ''))
           .forEach((name) => {
-            let attrValueRegex = new RegExp(`\s${name}="(\S*?)"`, 'ig');
+            let attrValueRegex = new RegExp(`${name}="(\\S*?)"`, 'ig');
+            console.log('html', html, attrValueRegex);
             let attrValueResult = html.match(attrValueRegex);
             let attrValue;
-            if (attrValueResult && attrValueResult.length >= 0) {
-              attrValue = attrValueResult[0]
-                .trim()
+            if (attrValueResult && attrValueResult.length > 0) {
+              attrValue = attrValueResult[0].trim()
                 .replaceAll(`${name}=`, '')
                 .replaceAll(`"`, '');
             }
