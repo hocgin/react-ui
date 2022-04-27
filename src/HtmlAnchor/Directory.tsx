@@ -23,8 +23,7 @@ export const treeDirectory = (content?: string) => {
   let directoryList: TreeDirectory[] = [];
 
   // 1. 补充层级关系
-  directory
-    .map((item, index) => {
+  directory.map((item, index) => {
       let name = item.name;
       let level = parseInt(name.replace('h', '').replace('H', ''));
       return {
@@ -73,8 +72,8 @@ export const treeDirectory = (content?: string) => {
 
 const renderAnchorLink = (data: TreeDirectory[] = []) => {
   return (data || []).map((item: TreeDirectory) => {
-    let title = `${item.text}`;
-    let href = `#${title}`;
+    let title = `${item.text}`.trim().replace(/(\n)/g, ' ');
+    let href = `#${item.key}`;
     if (item.children && item.children.length > 0) {
       return (
         <Anchor.Link

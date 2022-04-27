@@ -262,7 +262,7 @@ export default class Lang {
 
       let key;
       if (text !== undefined) {
-        key = text.replace(/ /g, '-');
+        key = `${text}`.trim().replace(/(\n|\s)/g, '-');
       }
 
       // 2.2 提取属性
