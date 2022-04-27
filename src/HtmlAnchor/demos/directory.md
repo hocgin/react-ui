@@ -1,4 +1,5 @@
 ---
+
 # @formatter:off
 title: HtmlAnchor - HTML 矛点
 nav:
@@ -21,7 +22,6 @@ group:
 import React from 'react';
 import { HtmlAnchor, ConfigProvider } from '@hocgin/ui';
 import { Affix } from 'antd';
-import { setDirectoryAnchor } from '@hocgin/ui/lib/HtmlAnchor';
 
 const content = `
       <h1 name='你好' data-name='h1' active>代码演示</h1>
@@ -88,7 +88,7 @@ export default () => {
     <div style={{ display: 'flex', 'flex-direction': 'row' }}>
       <div
         style={{ flex: '1' }}
-        dangerouslySetInnerHTML={{ __html: setDirectoryAnchor(content) }}
+        dangerouslySetInnerHTML={{ __html: HtmlAnchor.setDirectoryAnchor(content) }}
       />
       <div>
         <Affix offsetTop={200}>
