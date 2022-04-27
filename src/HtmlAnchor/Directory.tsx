@@ -78,6 +78,7 @@ const renderAnchorLink = (data: TreeDirectory[] = []) => {
     if (item.children && item.children.length > 0) {
       return (
         <Anchor.Link
+          key={item.id}
           href={href}
           title={<div className={'anchor-link-title'}>{title}</div>}
         >
@@ -87,6 +88,7 @@ const renderAnchorLink = (data: TreeDirectory[] = []) => {
     }
     return (
       <Anchor.Link
+        key={item.id}
         href={href}
         title={<div className={'anchor-link-title'}>{title}</div>}
       />

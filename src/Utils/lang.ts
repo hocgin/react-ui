@@ -109,9 +109,9 @@ export default class Lang {
       return val;
     }
     if (typeof val === 'string') {
-      val.replaceAll(' ', '');
+      val.replace(/ /g, '');
       if (val.includes(',')) {
-        return val.replaceAll(',', '');
+        return val.replace(/,/g, '');
       }
       return val;
     }
@@ -229,7 +229,7 @@ export default class Lang {
 
     // 1. 匹配标签
     let matchTagRegex = new RegExp(
-      `<\\s*(${tagRegex})[^>]*>(.*?)<\\s*/\\s*\\1>`,
+      `<\\s*(${tagRegex})[^>]*>([\\s|\\S]*?)<\\s*/\\s*\\1>`,
       'ig',
     );
     let htmlTag = content.match(matchTagRegex) ?? [];
@@ -252,17 +252,17 @@ export default class Lang {
       }
 
       // 2.1 提取文本
-      let textRegex = new RegExp(`>(.*?)</`, 'ig');
-      let textResult = html.match(textRegex);
+      let textRegex = new RegExp(`>([\\s|\\S]*?)</`, 'ig');
+      let textResult = html.match(textRegex) || [];
       let text;
-      if (textResult && textResult.length > 0) {
+      if (textResult.length > 0) {
         text = textResult[0];
-        text = text.replaceAll('>', '').replaceAll('</', '');
+        text = text.replace('>', '').replace('</', '');
       }
 
       let key;
       if (text !== undefined) {
-        key = text.replaceAll(' ', '-');
+        key = text.replace(/ /g, '-');
       }
 
       // 2.2 提取属性
@@ -271,7 +271,7 @@ export default class Lang {
       let attrNameResult = html.match(attrNameRegex);
       if (attrNameResult && attrNameResult.length > 0) {
         (attrNameResult || [])
-          .map((item) => item.trim().replaceAll('=', '').replaceAll('\\s', ''))
+          .map((item) => item.trim().replace('=', '').replace('\\s', ''))
           .forEach((name) => {
             let attrValueRegex = new RegExp(`${name}="(\\S*?)"`, 'ig');
             console.log('html', html, attrValueRegex);
@@ -280,8 +280,8 @@ export default class Lang {
             if (attrValueResult && attrValueResult.length > 0) {
               attrValue = attrValueResult[0]
                 .trim()
-                .replaceAll(`${name}=`, '')
-                .replaceAll(`"`, '');
+                .replace(`${name}=`, '')
+                .replace(`"`, '');
             }
             attr[`${name}`] = attrValue;
           });

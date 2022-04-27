@@ -9,7 +9,7 @@ const Image = TipTapImage.extend<any>({
     return {
       ...this.parent?.(),
       width: {
-        default: null,
+        default: '100%',
         parseHTML: (element) => element.style.width,
         renderHTML: (attributes) => {
           if (!attributes.width) {
