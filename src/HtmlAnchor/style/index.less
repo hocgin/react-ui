@@ -29,9 +29,15 @@
     padding-top: 0;
 
     // 悬停和点击 start
-    .ant-anchor-link-title:hover,
+    .ant-anchor-link-title:hover {
+      & .anchor-link-title {
+        color: @hover-after-color !important;
+        opacity: 1 !important;
+      }
+    }
+
     .ant-anchor-link-title-active {
-      left: -2px;
+      left: -4px;
 
       & .anchor-link-title {
         color: @hover-after-color !important;
