@@ -229,7 +229,7 @@ export default class Lang {
 
     // 1. 匹配标签
     let matchTagRegex = new RegExp(
-      `<\\s*(${tagRegex})[^>]*>(.*?)<\\s*/\\s*\\1>`,
+      `<\\s*(${tagRegex})[^>]*>([\\s|\\S]*?)<\\s*/\\s*\\1>`,
       'ig',
     );
     let htmlTag = content.match(matchTagRegex) ?? [];
@@ -252,7 +252,7 @@ export default class Lang {
       }
 
       // 2.1 提取文本
-      let textRegex = new RegExp(`>(.*?)</`, 'ig');
+      let textRegex = new RegExp(`>([\\s|\\S]*?)</`, 'ig');
       let textResult = html.match(textRegex) || [];
       let text;
       if (textResult.length > 0) {
@@ -278,7 +278,8 @@ export default class Lang {
             let attrValueResult = html.match(attrValueRegex);
             let attrValue;
             if (attrValueResult && attrValueResult.length > 0) {
-              attrValue = attrValueResult[0].trim()
+              attrValue = attrValueResult[0]
+                .trim()
                 .replace(`${name}=`, '')
                 .replace(`"`, '');
             }

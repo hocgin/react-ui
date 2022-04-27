@@ -23,6 +23,7 @@ import {
   MentionSuggestion,
   LineHeight as ExLineHeight,
   FontSize as ExFontSize,
+  Heading as ExHeading,
   TableCell as ExTableCell,
   Iframe as ExIframe,
   Image as ExImage,
@@ -76,7 +77,6 @@ import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 import { ConfigContext } from '@/ConfigProvider';
-import { generateHTML } from '@tiptap/html';
 
 export interface EditorFn {
   getHTML: () => string;
@@ -113,6 +113,7 @@ export let getExtensions = (
     ExIndent,
     ExPrint,
     ExIframe,
+    ExHeading,
     HexColorDecorator,
     ExTaskItem.configure({ nested: true }),
     ExMention.configure({
@@ -147,20 +148,20 @@ const Index: React.FC<{
   onSearchMention?: onSearchMentionFunction;
   onChangeFullscreen?: (fullscreen: boolean) => void;
 }> = ({
-        onChange,
-        className,
-        placeholder = '',
-        contentClassName,
-        header,
-        onChangeFullscreen,
-        editorRef,
-        fullscreen = false,
-        editable = true,
-        value,
-        onSearchMention,
-        uploadImageUrl = '/api/com/file/upload',
-        ...props
-      }) => {
+  onChange,
+  className,
+  placeholder = '',
+  contentClassName,
+  header,
+  onChangeFullscreen,
+  editorRef,
+  fullscreen = false,
+  editable = true,
+  value,
+  onSearchMention,
+  uploadImageUrl = '/api/com/file/upload',
+  ...props
+}) => {
   // 导入css
   useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
