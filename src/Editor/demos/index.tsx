@@ -3,13 +3,21 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React, { useRef, useState } from 'react';
-import { Editor, Header } from '@hocgin/ui';
+import { Editor, Header, Utils } from '@hocgin/ui';
 import styles from './index.less';
 import { Button, Divider } from 'antd';
 import { useToggle } from 'ahooks';
 import classnames from 'classnames';
 
 const content = `
+      <h1 name='你好' data-name='h1' active>你好h11</h1>
+        <h2 name='你好' data-name='h1' active>你好h22</h2>
+          <h3 name='你好' data-name='h1' active>你好h33</h3>
+        <h2 name='你好' data-name='h1' active>你好h24</h2>
+          <h3 name='你好' data-name='h1' active>你好h35</h3>
+      <h1 name='你好' data-name='h1' active>你好h16</h1>
+        <h4 name='你好' data-name='h1' active>你好h47</h4>
+
       <a href='https://www.baidu.com'>ksjdkHi</a>
       <iframe src='https://www.youtube.com/embed/XIMLoLxmTDw' frameborder='0' allowfullscreen></iframe>
       #FB5151
@@ -104,6 +112,10 @@ export default () => {
   let [fullscreen, setFullscreen] = useState<boolean>(false);
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
+  console.log(
+    'Utils.Lang.matchHtmlTag(content, \'h[1-6]\')',
+    Utils.Lang.matchHtmlTag(content, 'h[1-6]'),
+  );
   return (
     <>
       <Editor

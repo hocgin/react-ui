@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { CommentType, UseAction } from './type';
 import classNames from 'classnames';
-import { Button, List, Divider } from 'antd';
+import { Button, List, Divider, Anchor, Affix } from 'antd';
 import {
   useEventEmitter,
   useUpdateEffect,
   useToggle,
-  useInfiniteScroll,
+  useInfiniteScroll, useInViewport,
 } from 'ahooks';
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
@@ -20,11 +20,24 @@ export interface IndexProps {
   className?: string;
   prefixCls?: string;
   total?: number;
+  key?: string;
   useAction: UseAction;
 }
 
-const Index: React.FC<IndexProps> = ({ useAction, total, ...props }) => {
+let GoToComment: React.FC<{ href: string, visible?: boolean, className?: string }> = ({
+                                                                                        className,
+                                                                                        href,
+                                                                                        visible = false,
+                                                                                      }) => {
+  return <a href={href} className={className} style={{ display: (visible ? 'inline-block' : 'none') } as any}>
+    <div className={`${className}-icon`}>评论</div>
+  </a>;
+};
+
+const Index: React.FC<IndexProps> = ({ key = 'hui-comment', useAction, total, ...props }) => {
   let [orderDesc, { toggle: toggleOrderDesc }] = useToggle<boolean>(true);
+  const ref = useRef<any>();
+  const [inViewport] = useInViewport(ref);
 
   // 点击回复事件
   const reply$ = useEventEmitter<CommentType | undefined>();
@@ -57,26 +70,31 @@ const Index: React.FC<IndexProps> = ({ useAction, total, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment-group', props.prefixCls);
 
-  return (
-    <div className={classNames(prefixCls)}>
+  const [targetOffset, setTargetOffset] = useState<number | undefined>(undefined);
+  useEffect(() => {
+    setTargetOffset(window.innerHeight / 4);
+  }, []);
+
+  return <>
+    <div id={`${key}`} ref={ref} className={classNames(prefixCls)}>
       <List
         className={`${prefixCls}-comments`}
         locale={{ emptyText: '赶快来评论一下吧～' } as any}
-        itemLayout="horizontal"
+        itemLayout='horizontal'
         header={
           <div className={`${prefixCls}-header`}>
             <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
             <div>
               <Button
-                type="link"
+                type='link'
                 onClick={toggleOrderDesc}
                 disabled={orderDesc}
               >
                 倒序↓
               </Button>
-              <Divider type="vertical" />
+              <Divider type='vertical' />
               <Button
-                type="link"
+                type='link'
                 onClick={toggleOrderDesc}
                 disabled={!orderDesc}
               >
@@ -99,9 +117,11 @@ const Index: React.FC<IndexProps> = ({ useAction, total, ...props }) => {
         )}
       />
       {loading && <Loading />}
-      <AffixEditor reply$={reply$} replied$={replied$} useAction={useAction} />
+      <AffixEditor useAffix={inViewport} reply$={reply$} replied$={replied$} useAction={useAction} />
+      <GoToComment className={`${prefixCls}-goto`} href={`#${key}`} visible={!inViewport} />
     </div>
-  );
+  </>
+    ;
 };
 
 export default Index;

@@ -18,7 +18,7 @@ import {
   UseAction,
   UserDataType,
 } from '../type';
-import { useInterval, useMount, useRequest, useToggle } from 'ahooks';
+import { useInterval, useInViewport, useMount, useRequest, useToggle } from 'ahooks';
 import { Editor as GEditor, Utils } from '@/index';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';
@@ -27,10 +27,11 @@ export const AffixEditor: React.FC<{
   reply$: EventEmitter<CommentType | undefined>;
   replied$: EventEmitter<CommentType>;
   useAction: UseAction;
-}> = ({ reply$, replied$, useAction }) => {
+  useAffix?: Boolean;
+}> = ({ useAffix, reply$, replied$, useAction }) => {
   return (
     <div>
-      <Affix offsetBottom={0}>
+      <Affix offsetBottom={useAffix ? 0 : undefined}>
         <Editor reply$={reply$} replied$={replied$} useAction={useAction} />
       </Affix>
     </div>
@@ -46,7 +47,7 @@ const Editor: React.FC<{
 }> = (props) => {
   let {
     useAction,
-    placeholder = '写下尊重、理性、友好的评论，让彼此更友好地交流～',
+    placeholder = '用尊重、理性、友好的讨论，打破彼此的信息茧房～',
     reply$,
     replied$,
   } = props;
@@ -131,7 +132,7 @@ const Editor: React.FC<{
       </div>
       <div className={classnames(`${prefixCls}-bottom`)}>
         <div className={`${prefixCls}-bottom-header`}>
-          <Avatar size={28} icon={<UserOutlined />} src={user?.avatarUrl} />
+          <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
           <span
             className={`${prefixCls}-bottom-header-title`}
             onClick={() => !user && userRequest.runAsync({ force: true })}
@@ -145,10 +146,10 @@ const Editor: React.FC<{
                 &nbsp;@{replyUsername}
               </a>
               &nbsp;
-              <Tooltip title="取消回复">
+              <Tooltip title='取消回复'>
                 <Button
-                  size="small"
-                  shape="circle"
+                  size='small'
+                  shape='circle'
                   icon={<ClearOutlined />}
                   onClick={() => setReply(undefined)}
                 />

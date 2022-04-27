@@ -1,5 +1,12 @@
 import { LocalRoute } from '@/Utils/interface';
 
+export type HtmlTagType = {
+  key: string;
+  html: string;
+  name: string;
+  text: string;
+  attr: Record<string, any>;
+};
 export default class Lang {
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
@@ -182,7 +189,10 @@ export default class Lang {
    * @param service
    * @param defResult
    */
-  static nilService(service: any, defResult: any = {}): (...args: any | any[]) => Promise<any> {
+  static nilService(
+    service: any,
+    defResult: any = {},
+  ): (...args: any | any[]) => Promise<any> {
     return service ? service : async (...args: any[]) => defResult;
   }
 
@@ -205,7 +215,78 @@ export default class Lang {
    */
   static toMap(items: any[] = [], fieldKey: string): Record<string, any> {
     let result: Record<string, any> = {};
-    items.forEach(item => result[item[`${fieldKey}`]] = item);
+    items.forEach((item) => (result[item[`${fieldKey}`]] = item));
     return result;
+  }
+
+  /**
+   * 匹配html标签
+   * @param content
+   * @param tagRegex
+   */
+  static matchHtmlTag(content: string = '', tagRegex: string): HtmlTagType[] {
+    // tagRegex = h[1-6]
+
+    // 1. 匹配标签
+    let matchTagRegex = new RegExp(
+      `<\\s*(${tagRegex})[^>]*>(.*?)<\\s*/\\s*\\1>`,
+      'ig',
+    );
+    let htmlTag = content.match(matchTagRegex) ?? [];
+
+    // 2. 提取标签、文本、属性
+    return htmlTag.map((html: string) => {
+      // 2.1 提取标签
+      let nameRegex = new RegExp(`<\\s*(${tagRegex})(\\s|>)`, 'ig');
+      let nameResult = html.match(nameRegex);
+      let name;
+      if (nameResult && nameResult.length >= 0) {
+        name = `${nameResult[0]}`;
+        if (name.startsWith('<')) {
+          name = name.replace('<', '');
+        }
+        if (name.endsWith('>')) {
+          name = name.replace('>', '');
+        }
+        name = name.trim();
+      }
+
+      // 2.1 提取文本
+      let textRegex = new RegExp(`>(.*?)</`, 'ig');
+      let textResult = html.match(textRegex);
+      let text;
+      if (textResult && textResult.length > 0) {
+        text = textResult[0];
+        text = text.replaceAll('>', '').replaceAll('</', '');
+      }
+
+      let key;
+      if (text !== undefined) {
+        key = text.replaceAll(' ', '-');
+      }
+
+      // 2.2 提取属性
+      let attr: Record<string, any> = {};
+      let attrNameRegex = new RegExp(`\\s(\\S*?)=`, 'ig');
+      let attrNameResult = html.match(attrNameRegex);
+      if (attrNameResult && attrNameResult.length > 0) {
+        (attrNameResult || [])
+          .map((item) => item.trim().replaceAll('=', '').replaceAll('\\s', ''))
+          .forEach((name) => {
+            let attrValueRegex = new RegExp(`${name}="(\\S*?)"`, 'ig');
+            console.log('html', html, attrValueRegex);
+            let attrValueResult = html.match(attrValueRegex);
+            let attrValue;
+            if (attrValueResult && attrValueResult.length > 0) {
+              attrValue = attrValueResult[0]
+                .trim()
+                .replaceAll(`${name}=`, '')
+                .replaceAll(`"`, '');
+            }
+            attr[`${name}`] = attrValue;
+          });
+      }
+      return { key, html, name, text, attr } as HtmlTagType;
+    });
   }
 }

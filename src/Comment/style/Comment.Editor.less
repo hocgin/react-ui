@@ -1,5 +1,5 @@
-@import '../../mixin.less';
-@import '../../style/index.less';
+@import (reference) '../../mixin.less';
+@import (reference) '../../style/index.less';
 
 @comment-editor-prefix-cls: ~'@{hui-prefix}-comment-editor';
 
@@ -14,57 +14,6 @@
 
   &-mini {
     display: none;
-  }
-}
-
-.ant-affix {
-  margin-bottom: -50px;
-
-  .mobile({
-    margin-bottom: unset;
-    .content {
-      height: 120px !important;
-    }
-  });
-
-  .@{comment-editor-prefix-cls} {
-    padding: 6px 8px;
-    border-radius: 3px;
-    box-shadow: 1px -1px 4px rgba(0, 0, 0, 0.08);
-    border-bottom-right-radius: 0;
-    border-bottom-left-radius: 0;
-
-    .content {
-      height: 70px;
-    }
-
-    .mobile({
-      padding: 8px;
-      border-radius: 2px;
-    });
-
-    .mobile({
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      &.@{comment-editor-prefix-cls}-expand {
-        position: unset;
-        bottom: unset;
-        width: unset;
-
-        .@{comment-editor-prefix-cls}-bottom {
-          display: unset;
-        }
-      }
-      &-mini {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      &-bottom {
-        display: none;
-      }
-    });
   }
 }
 

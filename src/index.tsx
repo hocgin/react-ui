@@ -21,6 +21,7 @@ export { default as Promise } from './Promise';
 export { default as FileUpload } from './FileUpload';
 export { default as PhotoWall } from './PhotoWall';
 export { default as Editor } from './Editor';
+export { default as HtmlAnchor } from './HtmlAnchor';
 export { default as Empty } from './Empty';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
