@@ -5,6 +5,10 @@ export default class DateTimeFormat {
   public static FORMAT_1 = 'YYYY-MM-DD HH:mm:ss';
   public static FORMAT_2 = 'YYYY-MM-DD HH:mm';
   public static FORMAT_3 = 'YYYY-MM-DD';
+  public static FORMAT_4 = 'YYYY';
+  public static FORMAT_5 = 'MM-DD';
+  public static FORMAT_6 = 'HH:mm';
+  public static FORMAT_7 = 'HH:mm:ss';
 
   // 2021-06-01T00:30:30.159
   static DEFAULT_FORMAT = moment.HTML5_FMT.DATETIME_LOCAL_MS;
@@ -39,9 +43,11 @@ export default class DateTimeFormat {
     len = 10 * 24 * 60 * 60 * 1000,
     defFormat = DateTimeFormat.FORMAT_2,
   ): string {
+    console.info('moment.locale()', moment.version, moment.locale());
     if (timestamp < new Date().getTime() - len) {
       return this.timestampAs(timestamp, defFormat);
     }
+
     return moment(timestamp).fromNow();
   }
 
@@ -88,6 +94,7 @@ export default class DateTimeFormat {
     if (!formatter.isValid()) {
       return `${localDatetime}`;
     }
+
     return formatter.format(defFormat);
   }
 }

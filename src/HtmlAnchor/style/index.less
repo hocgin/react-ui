@@ -2,8 +2,8 @@
 
 @directory-prefix-cls: ~'@{hui-prefix}-directory';
 
-@hover-after-color: @primary-color;
-@hover-before-color: fade(@hover-after-color, 35%);
+@hover-after-color: var(@primary-color);
+@hover-before-color: fade(color(~`colorPalette('@{hover-after-color}')`), 30%);
 @init-opacity: 0.25;
 
 .@{directory-prefix-cls} {
