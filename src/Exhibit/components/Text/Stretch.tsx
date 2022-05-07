@@ -4,7 +4,7 @@ import React from 'react';
 export interface StretchProps {
   fullSize?: boolean;
   maxRow?: number;
-  children?: string | Node;
+  children?: any;
 }
 
 const Stretch: React.FC<StretchProps> = ({ children, ...rest }) => {

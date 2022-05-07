@@ -8,7 +8,7 @@ import { ConfigContext } from '@/ConfigProvider';
 interface SearchBarProps {
   prefixCls?: string;
   className?: string;
-  children?: React.ReactElement[];
+  children?: any[];
   onSubmit?: (values: any) => void;
 }
 

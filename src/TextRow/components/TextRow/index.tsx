@@ -4,7 +4,7 @@ import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   title?: string;
-  children?: React.ReactNode | string;
+  children?: any;
   bordered?: boolean;
 }> = ({ title, children, bordered }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
