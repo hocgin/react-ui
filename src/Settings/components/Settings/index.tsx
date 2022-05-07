@@ -98,7 +98,7 @@ const RightContent: React.FC<{
                       } as any
                     }
                   >
-                    {() => {
+                    {(() => {
                       let el: any = null;
                       if (['java.lang.Boolean'].includes(type)) {
                         return (
@@ -127,7 +127,7 @@ const RightContent: React.FC<{
                           </Form.Item>
                         </>
                       );
-                    }}
+                    })()}
                   </Form>
                   {!isLast && (
                     <Divider orientation="left" orientationMargin={0} />
