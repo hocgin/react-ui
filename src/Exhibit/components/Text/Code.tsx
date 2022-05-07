@@ -5,7 +5,7 @@ export interface CodeProps {
   /**
    * 内容
    */
-  children?: string | Node;
+  children?: any;
 }
 
 class Code extends React.Component<CodeProps, {}> {

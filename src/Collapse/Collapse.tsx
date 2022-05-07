@@ -4,7 +4,7 @@ import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{
   prefixCls?: string;
-  children?: React.ReactNode | string;
+  children?: any;
   defaultActiveKey?: Array<string | number> | string | number;
 }> = ({ defaultActiveKey, children, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);

@@ -6,7 +6,7 @@ import { ConfigContext } from '@/ConfigProvider';
 interface FeatbarProps {
   prefixCls?: string;
   title?: string;
-  children?: Node;
+  children?: any;
   feedbackUrl?: string;
   changeLogUrl?: string;
   linkMeUrl?: string;
@@ -27,51 +27,53 @@ const DefaultContent = (props: any) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('featbar', props.prefixCls);
 
-  return <div className={`${prefixCls}--dil`}>
-    {feedbackUrl && (
-      <div>
-        <a href={feedbackUrl}>建议反馈</a>
-      </div>
-    )}
-    {changeLogUrl && (
-      <div>
-        <a href={changeLogUrl}>更新日志</a>
-      </div>
-    )}
-    {helpUrl && (
-      <div>
-        <a href={helpUrl}>帮助文档</a>
-      </div>
-    )}
-    {projectUrl && (
-      <div>
-        <a href={projectUrl}>项目列表</a>
-      </div>
-    )}
-    {featureUrl && (
-      <div>
-        <a href={featureUrl}>新功能</a>
-      </div>
-    )}
-    {linkMeUrl && (
-      <div>
-        <a href={linkMeUrl}>联系我</a>
-      </div>
-    )}
-  </div>;
+  return (
+    <div className={`${prefixCls}--dil`}>
+      {feedbackUrl && (
+        <div>
+          <a href={feedbackUrl}>建议反馈</a>
+        </div>
+      )}
+      {changeLogUrl && (
+        <div>
+          <a href={changeLogUrl}>更新日志</a>
+        </div>
+      )}
+      {helpUrl && (
+        <div>
+          <a href={helpUrl}>帮助文档</a>
+        </div>
+      )}
+      {projectUrl && (
+        <div>
+          <a href={projectUrl}>项目列表</a>
+        </div>
+      )}
+      {featureUrl && (
+        <div>
+          <a href={featureUrl}>新功能</a>
+        </div>
+      )}
+      {linkMeUrl && (
+        <div>
+          <a href={linkMeUrl}>联系我</a>
+        </div>
+      )}
+    </div>
+  );
 };
 
 const Index: React.FC<FeatbarProps> = ({
-                                         title = 'Hi, 你好! 👏',
-                                         feedbackUrl = 'https://www.yuque.com/gin/topics?label_ids=13074',
-                                         changeLogUrl = 'https://www.yuque.com/gin/changelog',
-                                         helpUrl = 'https://www.yuque.com/gin/help',
-                                         featureUrl = 'https://www.yuque.com/gin/feature',
-                                         linkMeUrl = 'mailto:hocgin@gmail.com',
-                                         projectUrl = 'http://projects.hocg.in',
-                                         children,
-                                         ...props
-                                       }) => {
+  title = 'Hi, 你好! 👏',
+  feedbackUrl = 'https://www.yuque.com/gin/topics?label_ids=13074',
+  changeLogUrl = 'https://www.yuque.com/gin/changelog',
+  helpUrl = 'https://www.yuque.com/gin/help',
+  featureUrl = 'https://www.yuque.com/gin/feature',
+  linkMeUrl = 'mailto:hocgin@gmail.com',
+  projectUrl = 'http://projects.hocg.in',
+  children,
+  ...props
+}) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('featbar', props.prefixCls);
   let [visible, setVisible] = useState<boolean>(true);
@@ -94,8 +96,18 @@ const Index: React.FC<FeatbarProps> = ({
           <div className={`${prefixCls}--title`}>{title}</div>
           {
             <div className={`${prefixCls}--lbl`}>
-              {children ||
-                <DefaultContent {...{ feedbackUrl, changeLogUrl, helpUrl, featureUrl, linkMeUrl, projectUrl }} />}
+              {children || (
+                <DefaultContent
+                  {...{
+                    feedbackUrl,
+                    changeLogUrl,
+                    helpUrl,
+                    featureUrl,
+                    linkMeUrl,
+                    projectUrl,
+                  }}
+                />
+              )}
             </div>
           }
         </div>

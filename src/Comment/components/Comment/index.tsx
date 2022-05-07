@@ -176,7 +176,7 @@ const CiComment: React.FC<{
   type?: 'small' | 'none';
   className?: string;
   active?: boolean;
-  children?: React.ReactNode;
+  children?: any;
   actions?: React.ReactNode[];
 }> = ({
   id,
