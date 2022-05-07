@@ -1,7 +1,7 @@
 import { useGet, usePost } from '@/Request';
 import Dom from '@/Utils/dom';
 import { UserInfo } from './type';
-import { stringify } from 'querystring';
+import { stringify } from 'query-string';
 
 export default class {
   /**

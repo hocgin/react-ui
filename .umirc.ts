@@ -42,6 +42,7 @@ export default defineConfig({
   },
   // ssr: {},
   exportStatic: {},
+  ignoreMomentLocale: true,
   extraBabelPlugins: [
     [
       'import',
