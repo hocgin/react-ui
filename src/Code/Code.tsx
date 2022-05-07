@@ -11,7 +11,7 @@ const Index: React.FC<{
   /**
    * 内容
    */
-  children?: string | Node;
+  children?: any;
   /**
    * 编程语言
    */
