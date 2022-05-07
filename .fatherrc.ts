@@ -1,6 +1,6 @@
 import { IBundleOptions } from 'father-build/src/types';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
-import { resolve, join } from 'path';
+import path from 'path';
 
 export default {
   esm: 'babel',
@@ -36,5 +36,5 @@ export default {
       },
     ],
   ],
-  extraRollupPlugins: [typescriptPaths({ tsConfigPath: './tsconfig.json' })],
+  extraRollupPlugins: [typescriptPaths({ tsConfigPath: path.resolve(__dirname, './tsconfig.json') })],
 } as IBundleOptions;
