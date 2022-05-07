@@ -30,17 +30,6 @@
     "dist",
     "es"
   ],
-  "gitHooks": {
-    "pre-commit": "lint-staged"
-  },
-  "lint-staged": {
-    "*.{js,jsx,less,md,json}": [
-      "prettier --write"
-    ],
-    "*.ts?(x)": [
-      "prettier --parser=typescript --write"
-    ]
-  },
   "dependencies": {
     "@ant-design/icons": "^4.6.3",
     "@ant-design/pro-descriptions": "^1.9.13",
