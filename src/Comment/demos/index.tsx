@@ -139,7 +139,10 @@ let useAction = {
     return likeOrDislike('dislike') as any;
   },
   // 当前登陆用户
-  user: async (args: UserParamsType) => currentUser as UserDataType,
+  user: async (args: UserParamsType) => {
+    console.log('登陆--》');
+    return currentUser as UserDataType;
+  },
 };
 
 export default () => {
