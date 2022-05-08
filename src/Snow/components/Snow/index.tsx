@@ -19,8 +19,8 @@ class Index extends Component<SnowProps> {
     if (isShow) {
       this.getOrCreateSnowContainer();
       this.loadScript(
-        '//ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js',
-        () => this.loadScript('//cdn.hocgin.top/snowy.js'),
+        `https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.1.min.js`,
+        () => this.loadScript(`https://cdn.hocgin.top/snowy.js`),
       );
     }
   }

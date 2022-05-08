@@ -5,58 +5,95 @@
 
 .@{comment-editor-prefix-cls} {
   background-color: #fff;
-  padding: 14px;
+  padding: 8px;
   display: flex;
-  border: 1px solid #ebedf1;
   box-shadow: unset;
   border-radius: 2px;
-  flex-direction: column;
+  flex-direction: row;
 
-  &-mini {
-    display: none;
+  &-content {
+    flex: 1;
+    position: relative;
+    margin: 3px 0;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 2px;
   }
+
+  &-header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  &-mask {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: opacity 0.3s;
+    font-weight: 400;
+
+    a {
+      font-size: 1.3em;
+    }
+  }
+}
+
+.ant-affix {
+  .@{comment-editor-prefix-cls} {
+    border: 1px solid rgba(235, 237, 241, 0.85);
+  }
+}
+
+.@{comment-editor-prefix-cls}-author {
+  margin-right: 8px;
+  margin-top: 4px;
 }
 
 .@{comment-editor-prefix-cls}-bottom {
   flex: 1 1;
+  position: relative;
 
-  &-header {
-    display: flex;
-    align-items: center;
-    padding-bottom: 5px;
-    color: rgba(0, 0, 0, 0.85);
-
-    &-title {
-      margin-left: 4px;
-      margin-right: 2px;
-      font-weight: 400;
-      font-size: 14px;
-      cursor: pointer;
-    }
-  }
-
-  &-content {
-    height: 120px;
+  &:before {
+    position: absolute;
+    top: 15px;
+    right: 100%;
+    left: -5px;
+    width: 5px;
+    height: 10px;
+    pointer-events: none;
+    content: ' ';
+    clip-path: polygon(0 50%, 100% 0, 100% 100%);
+    background-color: #e8e8e8;
   }
 }
 
 .@{comment-editor-prefix-cls}-bottom-reply {
-  display: flex;
+  //display: flex;
   align-items: center;
   color: rgba(0, 0, 0, 0.45);
 }
 
-.@{comment-editor-prefix-cls}-bottom-replyButton {
+.@{comment-editor-prefix-cls}-footer {
   margin-top: 5px;
 
-  button {
+  &-replyButton {
     background-color: rgb(38, 38, 38, 85%);
     color: #fff;
-  }
 
-  .ant-btn:hover,
-  .ant-btn:focus {
-    border-color: rgb(38, 38, 38, 85%);
-    color: rgb(38, 38, 38, 85%);
+    &:hover,
+    &:focus {
+      border-color: rgb(38, 38, 38, 85%);
+      color: rgb(38, 38, 38, 85%);
+    }
   }
+}
+
+.@{comment-editor-prefix-cls}-reply-item {
+  display: inline-flex;
+  margin-left: 10px;
 }

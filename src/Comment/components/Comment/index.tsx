@@ -117,14 +117,14 @@ const UserOptions: React.FC<{
           <span className={`${prefixCls}-commentAction`}>{likesCount}</span>
         </span>
       </Tooltip>
-      <Tooltip title="Dislike">
-        <span onClick={onAction.bind(this, 'dislike', commentId)}>
-          {React.createElement(
-            userAction === 'dislike' ? DislikeFilled : DislikeOutlined,
-          )}
-          <span className={`${prefixCls}-commentAction`}>{dislikedCount}</span>
-        </span>
-      </Tooltip>
+      {/*<Tooltip title="Dislike">*/}
+      {/*  <span onClick={onAction.bind(this, 'dislike', commentId)}>*/}
+      {/*    {React.createElement(*/}
+      {/*      userAction === 'dislike' ? DislikeFilled : DislikeOutlined,*/}
+      {/*    )}*/}
+      {/*    <span className={`${prefixCls}-commentAction`}>{dislikedCount}</span>*/}
+      {/*  </span>*/}
+      {/*</Tooltip>*/}
     </>
   );
 };
@@ -209,29 +209,42 @@ const CiComment: React.FC<{
     >
       <Comment
         avatar={
-          <Avatar src={author?.avatarUrl} size={32} icon={<UserOutlined />} />
+          <Avatar
+            src={author?.avatarUrl}
+            // shape={'square'}
+            size={35}
+            icon={<UserOutlined />}
+          />
         }
-        author={author?.title}
-        datetime={
+        author={
           <div className={`${prefixCls}-tiptap`}>
-            {hasReply && (
-              <a
-                href={`#c_${replyId || ''}`}
-                className={`${prefixCls}-reply`}
-                onClick={() => {
-                  // onJump && onJump(replyId);
-                }}
-              >
-                <RetweetOutlined className={`${prefixCls}-replyFlag`} />
-                <Avatar
-                  size={15}
-                  src={replier?.avatarUrl}
-                  className={`${prefixCls}-replyAvatar`}
-                />
-                <span>{replier?.title}</span>
-              </a>
-            )}
-            <span>{DateTimeFormat.useDefRelativeFromNow(datetime)}</span>
+            <div className={`${prefixCls}-author`}>
+              <span className={`${prefixCls}-author-title`}>
+                {author?.title}
+              </span>
+              {hasReply && (
+                <a
+                  href={`#c_${replyId || ''}`}
+                  className={`${prefixCls}-reply`}
+                  onClick={() => {
+                    // onJump && onJump(replyId);
+                  }}
+                >
+                  <RetweetOutlined className={`${prefixCls}-replyFlag`} />
+                  <Avatar
+                    size={18}
+                    src={replier?.avatarUrl}
+                    className={`${prefixCls}-replyAvatar`}
+                  />
+                  <span className={`${prefixCls}-author-title`}>
+                    {replier?.title}
+                  </span>
+                </a>
+              )}
+            </div>
+            <div className={`${prefixCls}-datetime`}>
+              <span>{DateTimeFormat.useDefRelativeFromNow(datetime)}</span>
+            </div>
           </div>
         }
         content={content}

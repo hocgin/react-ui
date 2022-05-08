@@ -93,7 +93,6 @@
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.0.4",
     "react-countup": "^5.2.0",
-    "react-image": "^4.0.3",
     "react-truncate": "^2.4.0"
   },
   "peerDependencies": {

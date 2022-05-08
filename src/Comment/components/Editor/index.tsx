@@ -8,8 +8,6 @@ import {
   ClearOutlined,
   RetweetOutlined,
   UserOutlined,
-  CaretDownOutlined,
-  CaretUpOutlined,
 } from '@ant-design/icons';
 import {
   CommentType,
@@ -18,7 +16,7 @@ import {
   UseAction,
   UserDataType,
 } from '../type';
-import { useInterval, useInViewport, useMount, useRequest, useToggle } from 'ahooks';
+import { useInterval, useMount, useRequest } from 'ahooks';
 import { Editor as GEditor, Utils } from '@/index';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';
@@ -111,70 +109,81 @@ const Editor: React.FC<{
     userRequest.run({ force: false });
   });
 
-  let userName = user?.title;
   let hasBeReply = reply !== undefined;
-
   let replyUsername = reply?.author?.title;
   let replyId = reply?.id;
-
-  let [expand, { toggle: toggleExpand }] = useToggle<boolean>(false);
 
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment-editor', props.prefixCls);
   return (
-    <div
-      className={classNames(prefixCls, {
-        [`${prefixCls}-expand`]: expand,
-      })}
-    >
-      <div className={`${prefixCls}-mini`} onClick={toggleExpand}>
-        {expand ? <CaretDownOutlined /> : <CaretUpOutlined />}
+    <div className={classNames(prefixCls, {})}>
+      <div className={`${prefixCls}-author`}>
+        <Avatar
+          // shape={'square'}
+          size={35}
+          icon={<UserOutlined />}
+          src={user?.avatarUrl}
+        />
       </div>
       <div className={classnames(`${prefixCls}-bottom`)}>
-        <div className={`${prefixCls}-bottom-header`}>
-          <Avatar size={35} icon={<UserOutlined />} src={user?.avatarUrl} />
-          <span
-            className={`${prefixCls}-bottom-header-title`}
-            onClick={() => !user && userRequest.runAsync({ force: true })}
-          >
-            {userName ?? '点击登陆'}
-          </span>
-          {hasBeReply && (
-            <>
-              <a href={`#c_${replyId}`} className={`${prefixCls}-bottom-reply`}>
-                <RetweetOutlined />
-                &nbsp;@{replyUsername}
-              </a>
-              &nbsp;
-              <Tooltip title='取消回复'>
-                <Button
-                  size='small'
-                  shape='circle'
-                  icon={<ClearOutlined />}
-                  onClick={() => setReply(undefined)}
-                />
-              </Tooltip>
-            </>
-          )}
-        </div>
-        <div style={{ margin: '3px 0' } as any}>
+        <div className={`${prefixCls}-content`}>
           <GEditor
             editorRef={editorRef}
             placeholder={placeholder}
             className={`${prefixCls}-bottom-content`}
             onChange={() => setContent(editorRef.current.getHTML())}
           />
+          {landed ? (
+            <></>
+          ) : (
+            <div className={`${prefixCls}-mask`}>
+              点击{' '}
+              <a
+                rel="noopener noreferrer"
+                onClick={() => !landed && userRequest.runAsync({ force: true })}
+              >
+                登陆
+              </a>{' '}
+              后参与讨论~ 🕶️
+            </div>
+          )}
         </div>
-        <div className={`${prefixCls}-bottom-replyButton`}>
-          <Button disabled={!landed} onClick={onSubmitReply}>
+        <div className={`${prefixCls}-footer`}>
+          <Button
+            disabled={!landed}
+            className={`${prefixCls}-footer-replyButton`}
+            onClick={onSubmitReply}
+          >
             {replied ? (
               <>
                 <CheckOutlined style={{ color: '#00B06D' } as any} /> 评论成功
               </>
             ) : (
-              '评论'
+              <>评论</>
             )}
           </Button>
+          <div className={`${prefixCls}-reply-item`}>
+            {hasBeReply && (
+              <>
+                <a
+                  href={`#c_${replyId}`}
+                  className={`${prefixCls}-bottom-reply`}
+                >
+                  <RetweetOutlined />
+                  &nbsp;@{replyUsername}
+                </a>
+                &nbsp;
+                <Tooltip title="取消回复">
+                  <Button
+                    size="small"
+                    shape="circle"
+                    icon={<ClearOutlined size={8} />}
+                    onClick={() => setReply(undefined)}
+                  />
+                </Tooltip>
+              </>
+            )}
+          </div>
         </div>
       </div>
     </div>
