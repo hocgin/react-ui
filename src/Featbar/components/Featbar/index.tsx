@@ -64,16 +64,16 @@ const DefaultContent = (props: any) => {
 };
 
 const Index: React.FC<FeatbarProps> = ({
-  title = 'Hi, 你好! 👏',
-  feedbackUrl = 'https://www.yuque.com/gin/topics?label_ids=13074',
-  changeLogUrl = 'https://www.yuque.com/gin/changelog',
-  helpUrl = 'https://www.yuque.com/gin/help',
-  featureUrl = 'https://www.yuque.com/gin/feature',
-  linkMeUrl = 'mailto:hocgin@gmail.com',
-  projectUrl = 'http://projects.hocg.in',
-  children,
-  ...props
-}) => {
+                                         title = 'Hi, 你好! 👏',
+                                         feedbackUrl = 'https://www.yuque.com/gin/topics?label_ids=13074',
+                                         changeLogUrl = 'https://www.yuque.com/gin/changelog',
+                                         helpUrl = 'https://www.yuque.com/gin/help',
+                                         featureUrl = 'https://www.yuque.com/gin/feature',
+                                         linkMeUrl = 'mailto:hocgin@gmail.com',
+                                         projectUrl = 'http://projects.hocg.in',
+                                         children,
+                                         ...props
+                                       }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('featbar', props.prefixCls);
   let [visible, setVisible] = useState<boolean>(true);

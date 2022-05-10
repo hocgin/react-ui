@@ -11,7 +11,7 @@ export const NotificationIndicator: React.FC<{
 }> = ({ count, onClick, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('notification-indicator', props.prefixCls);
-  let visible = !!count;
+  let visible = !count;
   return (
     <div className={`${prefixCls}`} onClick={onClick}>
       <Tooltip title={visible ? '有未读的消息' : null}>

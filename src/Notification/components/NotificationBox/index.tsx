@@ -20,12 +20,12 @@ export const NotificationBox: React.FC<{
   type?: 'card' | 'line';
   useAction: UseAction;
 }> = ({
-  defaultActiveKey = 'system',
-  useAction,
-  tabPosition,
-  type,
-  ...props
-}) => {
+        defaultActiveKey = 'system',
+        useAction,
+        tabPosition,
+        type,
+        ...props
+      }) => {
   let [unready, setUnready] = useState<MessageType[] | undefined>(
     props?.unready,
   );
@@ -34,9 +34,9 @@ export const NotificationBox: React.FC<{
     manual: true,
     onSuccess: (data?: MessageStat) => {
       let unready: MessageType[] = [];
-      data?.unreadNoticeCount && unready.push('notice');
-      data?.unreadPersonCount && unready.push('personal');
-      data?.unreadSystemCount && unready.push('system');
+      !data?.unreadNoticeCount && unready.push('notice');
+      !data?.unreadPersonCount && unready.push('personal');
+      !data?.unreadSystemCount && unready.push('system');
       setUnready(unready);
     },
   });
@@ -54,21 +54,21 @@ export const NotificationBox: React.FC<{
     >
       <Tabs.TabPane
         tab={<Badge dot={(unready || []).includes('system')}>📢 公告</Badge>}
-        key="system"
+        key='system'
         className={'tabPane'}
       >
         <SystemPane useAction={useAction} />
       </Tabs.TabPane>
       <Tabs.TabPane
         tab={<Badge dot={(unready || []).includes('personal')}>📪 私信</Badge>}
-        key="personal"
+        key='personal'
         className={classnames('tabPane', 'personalPane')}
       >
         <PersonalPane useAction={useAction} />
       </Tabs.TabPane>
       <Tabs.TabPane
         tab={<Badge dot={(unready || []).includes('notice')}>🎉 通知</Badge>}
-        key="notice"
+        key='notice'
         className={'tabPane'}
       >
         <NoticePane useAction={useAction} />
