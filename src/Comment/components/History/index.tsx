@@ -7,7 +7,6 @@ export const ExpandHistoryButton: React.FC<{ id: ID }> = ({ id }) => {
   return (
     <Button
       size={'small'}
-      ghost
       onClick={() =>
         Modal.confirm({
           icon: null,
