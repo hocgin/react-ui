@@ -31,10 +31,12 @@ export default {
   'POST /api/com/comment/:refType/:refId/report': (req: any, res: any) =>
     res.json(success(mockData())),
   'POST /api/com/comment/:refType/:refId/reply': (req: any, res: any) => {
-    res.json(success({
-      ...mockData(),
-      replyId: !!req?.body?.commentId ? req?.body?.commentId : null,
-    }));
+    res.json(
+      success({
+        ...mockData(),
+        replyId: !!req?.body?.commentId ? req?.body?.commentId : null,
+      }),
+    );
   },
   'POST /api/com/comment/:refType/:refId/_scroll': (req: any, res: any) =>
     res.json(
@@ -64,6 +66,7 @@ let mockData = () => {
     action: 'none',
     content: '@cparagraph(1, 1000)',
     hasReply: '@bool()',
+    idx: '@integer(0, 3)',
     author: mockUser(),
     replier: mockUser(),
   });

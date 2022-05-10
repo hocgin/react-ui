@@ -8,6 +8,21 @@ export type HtmlTagType = {
   attr: Record<string, any>;
 };
 export default class Lang {
+
+  /**
+   * 转 long
+   * @param val
+   */
+  static asLong(val: undefined | null | number | string) {
+    if (val === undefined || val === null) {
+      return null;
+    } else if (typeof val === 'string') {
+      return parseInt(val);
+    } else {
+      return val;
+    }
+  }
+
   /**
    * /sd/sd/sd => ["/sd", "/sd/sd", "/sd/sd/sd"]
    * @param url

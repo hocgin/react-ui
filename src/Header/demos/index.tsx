@@ -12,15 +12,16 @@ export default () => {
       <Header
         style={{ padding: '0 10px 0' } as any}
         mode={'sticky'}
+        logo={<Header.TextLogo title={'你好'} />}
         prefix={
           <>
-            <Notification.Indicator />
+            <Notification.Indicator count={0}/>
           </>
         }
         // suffix={<><Notification.Indicator /></>}
         menus={[
-          { href: 'www.baidu.com', title: '🐰 标题' },
-          { href: 'www.baidu.com', title: '🖍️ 标题' },
+          { label: <a href={'www.baidu.com'}>🐰 标题</a> },
+          { label: <a href={'www.baidu.com'}>🖍️ 标题</a> },
         ]}
       />
       <div style={{ height: 500 } as any}>4</div>

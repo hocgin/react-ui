@@ -1,7 +1,7 @@
 ---
 
 # @formatter:off
-title: HtmlAnchor - HTML 矛点
+title: HtmlAnchor - HTML 锚点
 nav:
   title: 组件
   path: /components

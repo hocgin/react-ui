@@ -15,7 +15,7 @@ type Mode = 'none' | 'fixed' | 'sticky';
 
 const HeaderMenu: React.FC<{
   prefixCls?: string;
-  menus?: any[];
+  menus?: { label: any }[];
   suffix?: any;
   prefix?: any;
 }> = ({ menus, prefix, suffix, ...props }) => {
@@ -31,10 +31,8 @@ const HeaderMenu: React.FC<{
             [`active`]: isOpenMenu,
           })}
         >
-          {(menus || []).map(({ href, title }, index) => (
-            <li key={index}>
-              <a href={href}>{title}</a>
-            </li>
+          {(menus || []).map(({ label }, index) => (
+            <li key={index}>{label}</li>
           ))}
         </ul>
         {prefix && <PrefixMenu prefixCls={prefixCls}>{prefix}</PrefixMenu>}
@@ -65,8 +63,29 @@ const PrefixMenu: React.FC<{
   <div className={`${prefixCls}-prefixMenu`}>{children}</div>
 );
 
+
+export const TextLogo: React.FC<{
+  prefixCls?: string;
+  title?: string;
+  prefix?: string;
+  suffix?: string;
+}> = ({ prefix = 'HOCGIN', suffix = 'top', title, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
+  let prefixCls = getPrefixCls('header', props.prefixCls);
+  return <>
+    <div className={`${prefixCls}-logo`}>
+      <span>{prefix}</span>
+      <span className={`${prefixCls}-suffix`}>
+            <span className={`${prefixCls}-suffix-dot`}>.</span>
+            <span>{suffix}</span>
+          </span>
+      {title && <span className={`${prefixCls}-logo-title`}>{title}</span>}
+    </div>
+  </>;
+};
+
 const Index: React.FC<{
-  menus?: any[];
+  menus?: { label: any }[];
   mode?: Mode;
   className?: string | undefined;
   style?: any;
@@ -74,20 +93,20 @@ const Index: React.FC<{
   containerStyle?: any;
   suffix?: any;
   prefix?: any;
-  title?: React.ReactNode | string;
-  href?: string;
+  logo?: any;
 }> = ({
-  className,
-  style,
-  containerClassName,
-  containerStyle,
-  mode = 'none',
-  menus = [],
-  title,
-  suffix,
-  prefix,
-  href = '/',
-}) => {
+        className,
+        style,
+        containerClassName,
+        containerStyle,
+        mode = 'none',
+        menus = [],
+        suffix,
+        prefix,
+        logo = (<a href={'/'}>
+          <TextLogo />
+        </a>),
+      }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('header');
   return (
@@ -102,18 +121,9 @@ const Index: React.FC<{
       )}
       style={style}
     >
-      <div
-        className={classnames(`${prefixCls}-container`, containerClassName)}
-        style={containerStyle}
-      >
-        <a href={href} className={`${prefixCls}-logo`}>
-          <span>HOCGIN</span>
-          <span className={`${prefixCls}-suffix`}>
-            <span className={`${prefixCls}-suffix-dot`}>.</span>
-            <span>top</span>
-          </span>
-          {title && <span className={`${prefixCls}-logo-title`}>{title}</span>}
-        </a>
+      <div className={classnames(`${prefixCls}-container`, containerClassName)}
+           style={containerStyle}>
+        {logo}
         <HeaderMenu prefix={prefix} suffix={suffix} menus={menus} />
       </div>
     </header>

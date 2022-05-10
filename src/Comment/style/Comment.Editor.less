@@ -25,6 +25,10 @@
     flex-direction: row;
   }
 
+  &-bottom-content-mask {
+    filter: blur(5px);
+  }
+
   &-mask {
     position: absolute;
     inset: 0;
@@ -32,10 +36,10 @@
     align-items: center;
     justify-content: center;
     color: #fff;
-    background: rgba(0, 0, 0, 0.25);
     cursor: pointer;
     transition: opacity 0.3s;
     font-weight: 400;
+    background: rgba(0, 0, 0, 0.1);
 
     a {
       font-size: 1.3em;

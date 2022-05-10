@@ -61,7 +61,9 @@ const Editor: React.FC<{
   });
 
   let [user, setUser] = useState<UserDataType | undefined>(undefined);
-  let landed = user !== undefined;
+
+  // 是否登陆状态
+  let landed = !!user;
 
   let userRequest = useRequest<UserDataType, any>(useAction.user, {
     manual: true,
@@ -130,7 +132,9 @@ const Editor: React.FC<{
           <GEditor
             editorRef={editorRef}
             placeholder={placeholder}
-            className={`${prefixCls}-bottom-content`}
+            className={classnames(`${prefixCls}-bottom-content`, {
+              [`${prefixCls}-bottom-content-mask`]: !landed,
+            })}
             onChange={() => setContent(editorRef.current.getHTML())}
           />
           {landed ? (
@@ -139,7 +143,7 @@ const Editor: React.FC<{
             <div className={`${prefixCls}-mask`}>
               点击{' '}
               <a
-                rel="noopener noreferrer"
+                rel='noopener noreferrer'
                 onClick={() => !landed && userRequest.runAsync({ force: true })}
               >
                 登陆
@@ -173,10 +177,10 @@ const Editor: React.FC<{
                   &nbsp;@{replyUsername}
                 </a>
                 &nbsp;
-                <Tooltip title="取消回复">
+                <Tooltip title='取消回复'>
                   <Button
-                    size="small"
-                    shape="circle"
+                    size='small'
+                    shape='circle'
                     icon={<ClearOutlined size={8} />}
                     onClick={() => setReply(undefined)}
                   />
