@@ -63,8 +63,7 @@ const Editor: React.FC<{
   let [user, setUser] = useState<UserDataType | undefined>(undefined);
 
   // 是否登陆状态
-  let landed = !user;
-  landed = false;
+  let landed = !!user;
 
   let userRequest = useRequest<UserDataType, any>(useAction.user, {
     manual: true,

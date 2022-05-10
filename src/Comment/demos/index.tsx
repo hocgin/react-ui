@@ -33,6 +33,7 @@ let records = [
     id: 2,
     likes: 10,
     disliked: 20,
+    idx: 1,
     content: '<p>这是一条回复</p> <a href="https://hocgin.top">HOCGIN</a>',
     action: 'liked',
     author: {
@@ -54,6 +55,7 @@ let records = [
     replyId: 22,
     id: 2,
     likes: 10,
+    idx: 2,
     disliked: 20,
     content: '<p>这是一条回复</p> <a href="https://hocgin.top">HOCGIN</a>',
     action: 'liked',
@@ -116,6 +118,7 @@ let useAction = {
   },
   // 查询根评论
   scroll: async (args: ScrollParamsType) => {
+    console.log('查询根评论', args);
     return {
       hasMore: false,
       nextId: undefined,
@@ -130,6 +133,7 @@ let useAction = {
   },
   // 查询子评论
   paging: async (args: PagingParamsType) => {
+    console.log('查询子评论', args);
     return showResult as PagingDataType;
   },
   like: async (args: LikeParamsType) => {

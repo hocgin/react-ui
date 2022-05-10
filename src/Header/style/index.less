@@ -16,8 +16,8 @@
   justify-content: center;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
-    'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
   font-variant: tabular-nums;
   font-feature-settings: 'tnum', 'tnum';
 
@@ -42,7 +42,8 @@
   }
 
   &-suffix {
-    font-size: 6px;
+    font-size: .75rem;
+    zoom: .9;
 
     &-dot {
       color: #f1423c;
@@ -53,7 +54,7 @@
 
   &-logo {
     position: relative;
-    font-size: 20px;
+    font-size: 1.2rem;
     color: #111;
     text-decoration: none;
     text-transform: uppercase;
@@ -64,12 +65,13 @@
 
     &-title {
       opacity: 0.85;
-      font-size: 16px;
+      font-size: .75rem;
+      zoom: .7;
 
       &::before {
         content: '';
         margin: 0 5px;
-        border-left: 2px solid #e1e1e1;
+        border-left: 2px solid rgba(225, 225, 225, 0.3);
       }
 
       &:hover {

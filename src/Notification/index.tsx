@@ -7,4 +7,13 @@ import React from 'react';
 import { NotificationIndicator as Indicator } from './components/NotificationIndicator';
 import { NotificationBox as Box } from './components/NotificationBox';
 
-export default { Indicator, Box };
+
+type NotificationType = {
+  Indicator: typeof Indicator;
+  Box: typeof Box;
+};
+const Notification: NotificationType = {
+  Indicator, Box,
+};
+
+export default Notification;

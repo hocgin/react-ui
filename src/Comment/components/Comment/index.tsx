@@ -1,6 +1,6 @@
-import React, { useState, useRef, createElement } from 'react';
+import React, { useState, useRef, createElement, useEffect } from 'react';
 import { Utils, Editor as GEditor } from '@/index';
-import { useMount, useRequest, useToggle, useSize } from 'ahooks';
+import { useRequest, useToggle, useSize } from 'ahooks';
 import { UserType } from '@/Utils/interface';
 import {
   CommentType,
@@ -11,19 +11,30 @@ import {
   UseAction,
 } from '../type';
 import {
-  DislikeFilled,
-  DislikeOutlined,
   LikeFilled,
   LikeOutlined,
+  MoreOutlined,
+  NodeExpandOutlined,
   RetweetOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import { Avatar, Comment, Tooltip, List, Pagination, Skeleton } from 'antd';
+import {
+  Avatar,
+  Comment,
+  Tooltip,
+  List,
+  Pagination,
+  Dropdown,
+  Skeleton,
+  Button,
+  Menu,
+} from 'antd';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import DateTimeFormat from '@/Utils/format/datetime';
 import { ConfigContext } from '@/ConfigProvider';
+import { ExpandHistoryButton } from '@/Comment/components/History';
 
 const Content: React.FC<{
   prefixCls?: string;
@@ -141,6 +152,7 @@ const SubComment: React.FC<{
     content,
     replyId,
     datetime,
+    idx,
     action: userAction,
   } = comment;
   let id = comment.id;
@@ -148,6 +160,7 @@ const SubComment: React.FC<{
     <CiComment
       type={'small'}
       id={id}
+      idx={idx}
       replyId={replyId}
       author={author}
       replier={replier}
@@ -177,6 +190,7 @@ const CiComment: React.FC<{
   className?: string;
   active?: boolean;
   children?: any;
+  idx?: number;
   actions?: React.ReactNode[];
 }> = ({
   id,
@@ -190,6 +204,7 @@ const CiComment: React.FC<{
   children,
   actions = [],
   className,
+  idx,
   ...props
 }) => {
   let hasReply = replyId && replier;
@@ -209,12 +224,7 @@ const CiComment: React.FC<{
     >
       <Comment
         avatar={
-          <Avatar
-            src={author?.avatarUrl}
-            // shape={'square'}
-            size={35}
-            icon={<UserOutlined />}
-          />
+          <Avatar src={author?.avatarUrl} size={35} icon={<UserOutlined />} />
         }
         author={
           <div className={`${prefixCls}-tiptap`}>
@@ -249,6 +259,24 @@ const CiComment: React.FC<{
         }
         content={content}
         actions={actions}
+        datetime={
+          <div>
+            {idx && <span>#{idx}</span>}
+            <ExpandHistoryButton id={id} />
+            <Dropdown
+              overlay={
+                <Menu disabled items={[{ label: '举报', key: 'jubao' }]} />
+              }
+            >
+              <Button
+                size={'small'}
+                ghost
+                type="link"
+                icon={<MoreOutlined />}
+              />
+            </Dropdown>
+          </div>
+        }
       >
         {children}
       </Comment>
@@ -258,14 +286,16 @@ const CiComment: React.FC<{
 
 const Index: React.FC<{
   prefixCls?: string;
+  hasLoadChild: boolean;
   reply$: EventEmitter<CommentType | undefined>;
   replied$: EventEmitter<CommentType>;
   initialLoad: boolean;
   comment: CommentType;
   useAction: UseAction;
 }> = (props, ref) => {
-  let { comment, useAction, initialLoad, reply$, replied$ } = props;
-  let { author, replier, replyId, datetime, action: userAction } = comment;
+  let { comment, hasLoadChild, useAction, initialLoad, reply$, replied$ } =
+    props;
+  let { author, idx, replier, replyId, datetime, action: userAction } = comment;
   let id = comment.id;
   let hasReply = comment.hasReply;
   let content = comment?.content;
@@ -307,11 +337,15 @@ const Index: React.FC<{
     },
   );
 
-  useMount(() => {
-    if (hasReply && initialLoad) {
+  useEffect(() => {
+    if (hasLoadChild && hasReply && initialLoad) {
       run({ ...defaultParams, page: 1 } as PagingParamsType);
+    } else {
+      setCurrent(0);
+      setTotal(0);
+      setDataSource([]);
     }
-  });
+  }, [hasLoadChild]);
 
   let onPageChange = (page?: number, pageSize?: number) => {
     run({ ...defaultParams, page, size: pageSize });
@@ -322,6 +356,7 @@ const Index: React.FC<{
     <CiComment
       className={prefixCls}
       id={id}
+      idx={idx}
       replyId={replyId}
       datetime={datetime}
       author={author}

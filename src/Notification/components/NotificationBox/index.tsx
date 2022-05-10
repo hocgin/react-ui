@@ -34,9 +34,9 @@ export const NotificationBox: React.FC<{
     manual: true,
     onSuccess: (data?: MessageStat) => {
       let unready: MessageType[] = [];
-      !data?.unreadNoticeCount && unready.push('notice');
-      !data?.unreadPersonCount && unready.push('personal');
-      !data?.unreadSystemCount && unready.push('system');
+      !!Utils.Lang.asLong(data?.unreadNoticeCount) && unready.push('notice');
+      !!Utils.Lang.asLong(data?.unreadPersonCount) && unready.push('personal');
+      !!Utils.Lang.asLong(data?.unreadSystemCount) && unready.push('system');
       setUnready(unready);
     },
   });
