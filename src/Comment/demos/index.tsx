@@ -29,7 +29,7 @@ let likeOrDislike = (type?: string) => ({
   action: type,
 });
 
-let records = [
+let records:CommentType[] = [
   {
     replyId: 22,
     id: 2,
@@ -50,6 +50,8 @@ let records = [
       avatarUrl: '',
       href: '',
     },
+    isCommenter: Math.random() > 0.5,
+    isInitiator: Math.random() > 0.5,
     hasReply: true,
     datetime: '1 分钟前',
   },
@@ -73,6 +75,8 @@ let records = [
       avatarUrl: '',
       href: '',
     },
+    isCommenter: Math.random() > 0.5,
+    isInitiator: Math.random() > 0.5,
     hasReply: true,
     datetime: '1 分钟前',
   },
