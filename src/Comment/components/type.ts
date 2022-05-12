@@ -34,6 +34,8 @@ export interface UseAction {
   dislike: (args: DislikeParamsType) => Promise<DislikeDataType>;
   // 当前登陆用户
   user: (args: UserParamsType) => Promise<UserDataType>;
+  // 回溯
+  history?: (args: HistoryParamsType) => Promise<HistoryType>;
   // 提及用户
   mentionUser?: (args: MentionsParamsType) => Promise<UserDataType[]>;
 }
@@ -60,6 +62,10 @@ export interface CommentType {
   likes?: number;
   disliked?: number;
   hasReply: boolean;
+  // 当前用户是评论的作者(默认:false)
+  isCommenter: boolean;
+  // 当前用户是评论的发起人(默认:false)
+  isInitiator: boolean;
   action: 'liked' | 'disliked' | 'none';
   idx?: number;
 }
@@ -68,6 +74,13 @@ export interface CommentType {
 export interface ScrollParamsType extends ScrollRo {}
 
 export interface ScrollDataType extends IScroll<CommentType> {}
+
+// ========================================================
+export interface HistoryParamsType {
+  id: ID;
+}
+
+export type HistoryType = CommentType[];
 
 // ========================================================
 export interface UserParamsType {

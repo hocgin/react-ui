@@ -3,6 +3,8 @@ import { Comment } from '@hocgin/ui';
 import {
   CommentType,
   DislikeParamsType,
+  HistoryParamsType,
+  HistoryType,
   LikeParamsType,
   PagingDataType,
   PagingParamsType,
@@ -130,6 +132,10 @@ let useAction = {
         },
       ),
     } as ScrollDataType;
+  },
+  // 查询历史评论
+  history: async (args: HistoryParamsType) => {
+    return records as HistoryType;
   },
   // 查询子评论
   paging: async (args: PagingParamsType) => {
