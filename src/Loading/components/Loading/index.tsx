@@ -2,6 +2,7 @@ import React from 'react';
 import { Spin } from 'antd';
 
 import { ConfigContext } from '@/ConfigProvider';
+import classnames from 'classnames';
 
 const Index: React.FC<{
   prefixCls?: string;
@@ -10,7 +11,7 @@ const Index: React.FC<{
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('loading', props.prefixCls);
   return (
-    <div className={`${prefixCls}-loading`}>
+    <div className={classnames(`${prefixCls}`, props.className)}>
       <Spin delay={300} />
     </div>
   );

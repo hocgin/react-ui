@@ -3,6 +3,8 @@ import { Comment } from '@hocgin/ui';
 import {
   CommentType,
   DislikeParamsType,
+  HistoryParamsType,
+  HistoryType,
   LikeParamsType,
   PagingDataType,
   PagingParamsType,
@@ -27,7 +29,7 @@ let likeOrDislike = (type?: string) => ({
   action: type,
 });
 
-let records = [
+let records:CommentType[] = [
   {
     replyId: 22,
     id: 2,
@@ -48,6 +50,8 @@ let records = [
       avatarUrl: '',
       href: '',
     },
+    isCommenter: Math.random() > 0.5,
+    isInitiator: Math.random() > 0.5,
     hasReply: true,
     datetime: '1 分钟前',
   },
@@ -71,6 +75,8 @@ let records = [
       avatarUrl: '',
       href: '',
     },
+    isCommenter: Math.random() > 0.5,
+    isInitiator: Math.random() > 0.5,
     hasReply: true,
     datetime: '1 分钟前',
   },
@@ -130,6 +136,10 @@ let useAction = {
         },
       ),
     } as ScrollDataType;
+  },
+  // 查询历史评论
+  history: async (args: HistoryParamsType) => {
+    return records as HistoryType;
   },
   // 查询子评论
   paging: async (args: PagingParamsType) => {
