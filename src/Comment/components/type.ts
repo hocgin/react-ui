@@ -36,8 +36,16 @@ export interface UseAction {
   user: (args: UserParamsType) => Promise<UserDataType>;
   // 回溯
   history?: (args: HistoryParamsType) => Promise<HistoryType>;
+  // 反馈
+  report?: (args: ReportParamsType) => Promise<void>;
   // 提及用户
   mentionUser?: (args: MentionsParamsType) => Promise<UserDataType[]>;
+}
+
+// ========================================================
+export interface ReportParamsType {
+  commentId: ID;
+  reason: string;
 }
 
 // ========================================================
@@ -71,13 +79,15 @@ export interface CommentType {
 }
 
 // ========================================================
-export interface ScrollParamsType extends ScrollRo {}
+export interface ScrollParamsType extends ScrollRo {
+}
 
-export interface ScrollDataType extends IScroll<CommentType> {}
+export interface ScrollDataType extends IScroll<CommentType> {
+}
 
 // ========================================================
 export interface HistoryParamsType {
-  id: ID;
+  commentId: ID;
 }
 
 export type HistoryType = CommentType[];
@@ -87,7 +97,8 @@ export interface UserParamsType {
   force?: boolean;
 }
 
-export interface UserDataType extends UserType {}
+export interface UserDataType extends UserType {
+}
 
 // ========================================================
 export interface ReplyParamsType {
@@ -95,14 +106,16 @@ export interface ReplyParamsType {
   content?: string;
 }
 
-export interface ReplyDataType extends CommentType {}
+export interface ReplyDataType extends CommentType {
+}
 
 // ========================================================
 export interface PagingParamsType extends PageRo {
   parentId: ID;
 }
 
-export interface PagingDataType extends IPage<CommentType> {}
+export interface PagingDataType extends IPage<CommentType> {
+}
 
 // ========================================================
 export interface LikeParamsType {

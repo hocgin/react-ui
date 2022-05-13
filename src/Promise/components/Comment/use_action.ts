@@ -1,11 +1,11 @@
 import {
-  DislikeParamsType,
+  DislikeParamsType, HistoryParamsType,
   LikeParamsType,
   MentionsParamsType,
   PagingDataType,
   PagingParamsType,
   ReplyDataType,
-  ReplyParamsType,
+  ReplyParamsType, ReportParamsType,
   ScrollDataType,
   ScrollParamsType,
   UserDataType,
@@ -42,6 +42,10 @@ export default (refType: any, refId: any) => ({
     (await service.like(refType, refId, args?.commentId)) as any,
   dislike: async (args: DislikeParamsType) =>
     (await service.dislike(refType, refId, args?.commentId)) as any,
+  history: async (args: HistoryParamsType) =>
+    (await service.history(refType, refId, args?.commentId)) as any,
+  report: async (args: ReportParamsType) =>
+    (await service.report(refType, refId, args?.commentId, args?.reason)) as any,
   // 当前登陆用户
   user: async (args: UserParamsType) => {
     return asUser(await UmsService.getCurrentUser(args?.force)) as UserDataType;
