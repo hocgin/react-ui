@@ -126,6 +126,7 @@ const Index: React.FC<IndexProps> = ({
                 reply$={reply$}
                 replied$={replied$}
                 comment={item}
+                hasUserOptions={true}
                 useAction={useAction}
                 initialLoad={index < 3}
               />

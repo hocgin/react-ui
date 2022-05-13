@@ -1,4 +1,4 @@
-import { usePost } from '@/Request';
+import { usePost, useGet } from '@/Request';
 import Dom from '@/Utils/dom';
 import { ID } from '@/Utils/interface';
 
@@ -34,6 +34,13 @@ export default class {
     return usePost(`/api/com/comment/${refType}/${refId}/like`, {
       data: { commentId },
     })
+      .then(Dom.tryErrorIfExits)
+      .then(Dom.thenData)
+      .catch(Dom.showErrorMessage);
+  }
+
+  static history(refType: any, refId: any, commentId: ID) {
+    return useGet(`/api/com/comment/${refType}/${refId}/history/${commentId}`)
       .then(Dom.tryErrorIfExits)
       .then(Dom.thenData)
       .catch(Dom.showErrorMessage);
