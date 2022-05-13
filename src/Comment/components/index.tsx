@@ -43,11 +43,11 @@ let GoToComment: React.FC<{
 };
 
 const Index: React.FC<IndexProps> = ({
-                                       key = 'hui-comment',
-                                       useAction,
-                                       total,
-                                       ...props
-                                     }) => {
+  key = 'hui-comment',
+  useAction,
+  total,
+  ...props
+}) => {
   let [orderDesc, { set: setOrderDesc }] = useToggle<boolean>(true);
   let [showType, setShowType] = useState<'list' | 'kanban'>('list');
 
@@ -100,21 +100,29 @@ const Index: React.FC<IndexProps> = ({
         <List
           className={`${prefixCls}-comments`}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout='horizontal'
+          itemLayout="horizontal"
           header={
             <div className={`${prefixCls}-header`}>
               <span>{total !== undefined ? `${total} 评论` : '评论'}</span>
               <div>
-                <Button onClick={() => setShowType(isListModal ? 'kanban' : 'list')}
-                        icon={isListModal ? <BarsOutlined /> : <AppstoreOutlined />} />
-                <Segmented className={`${prefixCls}-order`} onChange={(order: any) => setOrderDesc(order === 'desc')}
-                           options={[{
-                             label: '正序',
-                             value: 'asc',
-                           }, {
-                             label: '倒序',
-                             value: 'desc',
-                           }]} />
+                <Button
+                  onClick={() => setShowType(isListModal ? 'kanban' : 'list')}
+                  icon={isListModal ? <BarsOutlined /> : <AppstoreOutlined />}
+                />
+                <Segmented
+                  className={`${prefixCls}-order`}
+                  onChange={(order: any) => setOrderDesc(order === 'desc')}
+                  options={[
+                    {
+                      label: '默认',
+                      value: 'asc',
+                    },
+                    {
+                      label: '最新',
+                      value: 'desc',
+                    },
+                  ]}
+                />
               </div>
             </div>
           }
