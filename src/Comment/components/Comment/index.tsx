@@ -344,6 +344,7 @@ const Index: React.FC<{
       retryCount: 3,
       debounceWait: 300,
       onSuccess: (data: PagingDataType) => {
+        console.log('数据加载成功', data);
         let tableData = Utils.Struct.getTableData(data);
         let pagination = tableData?.pagination;
         let total: number = pagination?.total || 0;
@@ -359,14 +360,15 @@ const Index: React.FC<{
   let hasHistory = props?.hasHistory ?? !!useAction.history;
 
   useEffect(() => {
-    if (hasLoadChild && hasReply && initialLoad) {
+    if (hasLoadChild && (hasReply && initialLoad)) {
+      console.debug('加载回复评论');
       run({ ...defaultParams, page: 1 } as PagingParamsType);
     } else {
       setCurrent(0);
       setTotal(0);
       setDataSource([]);
     }
-  }, [hasLoadChild]);
+  }, [hasLoadChild, hasReply, initialLoad]);
 
   let onPageChange = (page?: number, pageSize?: number) => {
     run({ ...defaultParams, page, size: pageSize });
@@ -404,41 +406,45 @@ const Index: React.FC<{
           : []
       }
     >
-      {dataSource.length > 0 ? (
-        <>
-          <List
-            loading={loading}
-            className={`${prefixCls}-subComments`}
-            loadMore={true}
-            renderItem={(item: CommentType, index: number) => {
-              return (
-                <List.Item key={index}>
-                  <Skeleton avatar loading={loading} active>
-                    <SubComment
-                      reply$={reply$}
-                      hasHistory={hasHistory}
-                      comment={item}
-                      useAction={useAction}
-                    />
-                  </Skeleton>
-                </List.Item>
-              );
-            }}
-            itemLayout='horizontal'
-            dataSource={dataSource}
-          />
-          <Pagination
-            hideOnSinglePage
-            className={`${prefixCls}-pagination`}
-            size='small'
-            total={total}
-            defaultCurrent={1}
-            current={current}
-            onChange={onPageChange}
-            showTotal={(total) => `共 ${total} 条`}
-          />
-        </>
-      ) : null}
+      {dataSource.length > 0 ? <>
+        <List
+          loading={loading}
+          className={`${prefixCls}-subComments`}
+          loadMore={true}
+          renderItem={(item: CommentType, index: number) => {
+            return (
+              <List.Item key={index}>
+                <Skeleton avatar loading={loading} active>
+                  <SubComment
+                    reply$={reply$}
+                    hasHistory={hasHistory}
+                    comment={item}
+                    useAction={useAction}
+                  />
+                </Skeleton>
+              </List.Item>
+            );
+          }}
+          itemLayout='horizontal'
+          dataSource={dataSource}
+        />
+        <Pagination
+          hideOnSinglePage
+          className={`${prefixCls}-pagination`}
+          size='small'
+          total={total}
+          defaultCurrent={1}
+          current={current}
+          onChange={onPageChange}
+          showTotal={(total) => `共 ${total} 条`}
+        />
+      </> : <>
+        {(hasReply && !initialLoad) ?
+          <Button size='small' type='link' onClick={() => run({
+            ...defaultParams,
+            page: 1,
+          } as PagingParamsType)}>查看回复</Button> : null}
+      </>}
     </CiComment>
   );
 };
