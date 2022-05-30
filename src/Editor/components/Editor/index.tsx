@@ -68,9 +68,10 @@ import {
 import { useUpdateEffect, useExternal, useToggle } from 'ahooks';
 
 // @ts-ignore
-import { lowlight } from 'lowlight/lib/core';
+// import { lowlight } from 'lowlight/lib/core';
+import Prism from 'prismjs';
 
-lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
+// lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/Common/TbButton';
@@ -95,7 +96,7 @@ export let getExtensions = (
     Link.configure({ openOnClick: false }),
     ExUnderline,
     ExTextStyle,
-    ExCodeBlockLowlight.configure({ lowlight }),
+    ExCodeBlockLowlight.configure({ defaultLanguage: 'javascript' }),
     ExTextAlign.configure({
       types: ['heading', 'paragraph'],
     }),
@@ -163,7 +164,7 @@ const Index: React.FC<{
   ...props
 }) => {
   // 导入css
-  useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
+  // useExternal('//highlightjs.org/static/demo/styles/base16/ia-dark.css');
   let [isFullscreen, { toggle: toggleFullscreen, set: setFullscreen }] =
     useToggle<boolean>(fullscreen);
   let [editorEditable, setEditorEditable] = useState<boolean>(editable);
@@ -177,6 +178,12 @@ const Index: React.FC<{
     content: value,
     editable: editorEditable,
   });
+
+  useEffect(() => {
+    Prism.highlightAll();
+    console.log('Prism.highlightA');
+  }, [editor]);
+
   // fixbug: 不能开启，否则无法使用拼音输入
   // useUpdateEffect(() => {
   //   editor?.commands?.setContent?.(value);

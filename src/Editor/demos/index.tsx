@@ -19,6 +19,18 @@ const content = `
         <h4 name='你好' data-name='h1' active>你好h47</h4>
 
       <a href='https://www.baidu.com'>ksjdkHi</a>
+              <pre><code class="language-javascript">for (var i=1; i <= 20; i++)
+{
+  if (i % 15 == 0)
+    console.log("FizzBuzz");
+  else if (i % 3 == 0)
+    console.log("Fizz");
+  else if (i % 5 == 0)
+    console.log("Buzz");
+  else
+    console.log(i);
+}</code></pre>
+
       <iframe src='https://www.youtube.com/embed/XIMLoLxmTDw' frameborder='0' allowfullscreen></iframe>
       #FB5151
       <p><img src='https://source.unsplash.com/8xznAGy4HcY/800x400' width='100' height='50'/></p>
@@ -113,7 +125,7 @@ export default () => {
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
   console.log(
-    'Utils.Lang.matchHtmlTag(content, \'h[1-6]\')',
+    "Utils.Lang.matchHtmlTag(content, 'h[1-6]')",
     Utils.Lang.matchHtmlTag(content, 'h[1-6]'),
   );
   return (
@@ -124,8 +136,8 @@ export default () => {
             <Header
               style={{ padding: '0 10px' } as any}
               menus={[
-                { href: 'www.baidu.com', title: '标题' },
-                { href: 'www.baidu.com', title: '标题' },
+                { label: <a href={'www.baidu.com'}>🐰 标题</a> },
+                { label: <a href={'www.baidu.com'}>🖍️ 标题</a> },
               ]}
             />
           ) : (
@@ -140,7 +152,7 @@ export default () => {
           [styles.unsetHeight]: unsetHeight,
         })}
         placeholder={'请输入内容'}
-        // value={content}
+        value={content}
         onChangeFullscreen={(fullscreen) => setFullscreen(fullscreen)}
       />
       <Divider />
