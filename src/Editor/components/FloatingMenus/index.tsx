@@ -21,7 +21,9 @@ const Index: React.FC<{
 }> = ({ editor, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('editor-e-floatingMenu', props.prefixCls);
+
   return (
+    // @ts-ignore
     <FloatingMenu
       editor={editor}
       pluginKey={'floatingMenu'}

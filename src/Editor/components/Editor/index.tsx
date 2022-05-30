@@ -179,10 +179,10 @@ const Index: React.FC<{
     editable: editorEditable,
   });
 
+  // 改成在 tiptap 渲染完執行
   useEffect(() => {
     Prism.highlightAll();
-    console.log('Prism.highlightA');
-  }, [editor]);
+  }, []);
 
   // fixbug: 不能开启，否则无法使用拼音输入
   // useUpdateEffect(() => {
