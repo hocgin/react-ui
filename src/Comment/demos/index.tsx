@@ -9,7 +9,7 @@ import {
   PagingDataType,
   PagingParamsType,
   ReplyDataType,
-  ReplyParamsType,
+  ReplyParamsType, ReportParamsType,
   ScrollDataType,
   ScrollParamsType,
   UserDataType,
@@ -29,7 +29,7 @@ let likeOrDislike = (type?: string) => ({
   action: type,
 });
 
-let records:CommentType[] = [
+let records: CommentType[] = [
   {
     replyId: 22,
     id: 2,
@@ -105,11 +105,11 @@ let reply = (replyId?: any, replyContent?: any) => {
     replier:
       replyId !== null
         ? {
-            id: 1,
-            title: 'hocgin',
-            avatarUrl: '',
-            href: '',
-          }
+          id: 1,
+          title: 'hocgin',
+          avatarUrl: '',
+          href: '',
+        }
         : null,
     hasReply: false,
     datetime: '1 分钟前',
@@ -151,6 +151,9 @@ let useAction = {
   },
   dislike: async (args: DislikeParamsType) => {
     return likeOrDislike('dislike') as any;
+  },
+  report: async (args: ReportParamsType) => {
+    console.log('举报', args);
   },
   // 当前登陆用户
   user: async (args: UserParamsType) => {

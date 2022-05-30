@@ -1,7 +1,7 @@
-import React, {useState, useRef, createElement, useEffect} from 'react';
-import {Utils, Editor as GEditor} from '@/index';
-import {useRequest, useToggle, useSize} from 'ahooks';
-import {UserType} from '@/Utils/interface';
+import React, { useState, useRef, createElement, useEffect } from 'react';
+import { Utils, Editor as GEditor } from '@/index';
+import { useRequest, useToggle, useSize } from 'ahooks';
+import { UserType } from '@/Utils/interface';
 import {
   CommentType,
   DislikeDataType,
@@ -27,32 +27,32 @@ import {
   Skeleton,
   Button,
   Menu,
-  Tag,
 } from 'antd';
-import {ID} from '@/Utils/interface';
+import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
-import {EventEmitter} from 'ahooks/lib/useEventEmitter';
+import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import DateTimeFormat from '@/Utils/format/datetime';
-import {ConfigContext} from '@/ConfigProvider';
-import {ExpandHistoryButton} from '@/Comment/components/History';
-import UserAvatar from '@/Comment/components/Comment/UserAvatar';
+import { ConfigContext } from '@/ConfigProvider';
+import { ExpandHistoryButton } from '@/Comment/components/History';
+import UserAvatar from './UserAvatar';
+import MoreOption from './Option';
 
 export const Content: React.FC<{
   prefixCls?: string;
   children?: any;
   expanded?: boolean;
   maxHeight?: number;
-}> = ({children, maxHeight = 100, ...props}) => {
-  let {getPrefixCls} = React.useContext(ConfigContext);
+}> = ({ children, maxHeight = 100, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   const ref = useRef<any>();
   const size = useSize(ref);
-  let [expanded, {toggle: toggleExpanded}] = useToggle<boolean>(
+  let [expanded, { toggle: toggleExpanded }] = useToggle<boolean>(
     props?.expanded ?? false,
   );
   let contentStyle = expanded
     ? {}
-    : {maxHeight: `${maxHeight}px`, overflow: 'hidden'};
+    : { maxHeight: `${maxHeight}px`, overflow: 'hidden' };
 
   return (
     <>
@@ -85,7 +85,7 @@ const UserOptions: React.FC<{
   userAction?: string;
   prefixCls?: string;
 }> = (props) => {
-  let {useAction, comment} = props;
+  let { useAction, comment } = props;
   let [userAction, setUserAction] = useState(props?.userAction);
   let [likesCount, setLikesCount] = useState(comment?.likes || 0);
   let [dislikedCount, setDislikedCount] = useState(comment?.disliked || 0);
@@ -93,7 +93,7 @@ const UserOptions: React.FC<{
   let commentId = comment.id;
   let options = {
     manual: true,
-    defaultParams: {commentId} as any,
+    defaultParams: { commentId } as any,
     onSuccess: ({
                   likes = 0,
                   disliked = 0,
@@ -109,16 +109,16 @@ const UserOptions: React.FC<{
   let dislikeRequest = useRequest(useAction.dislike, options);
   let onAction = (type: 'like' | 'dislike', commentId: ID) => {
     if (type === 'like') {
-      likeRequest.run({commentId});
+      likeRequest.run({ commentId });
     } else {
-      dislikeRequest.run({commentId});
+      dislikeRequest.run({ commentId });
     }
   };
   let onClickReply = () => {
     props.reply$?.emit(comment);
   };
 
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <>
@@ -147,7 +147,7 @@ const SubComment: React.FC<{
   comment: CommentType;
   useAction: UseAction;
 }> = (props) => {
-  let {comment, hasHistory, useAction, reply$} = props;
+  let { comment, hasHistory, useAction, reply$ } = props;
   let {
     author,
     replier,
@@ -167,7 +167,7 @@ const SubComment: React.FC<{
       idx={idx}
       history={
         hasHistory ? (
-          <ExpandHistoryButton useAction={useAction} id={id}/>
+          <ExpandHistoryButton useAction={useAction} id={id} />
         ) : null
       }
       isCommenter={isCommenter}
@@ -177,6 +177,7 @@ const SubComment: React.FC<{
       replier={replier}
       datetime={datetime}
       content={<Content>{content}</Content>}
+      more={<MoreOption id={id} useAction={useAction} />}
       actions={[
         <UserOptions
           reply$={reply$}
@@ -206,6 +207,7 @@ export const CiComment: React.FC<{
   idx?: number;
   history?: React.ReactNode;
   actions?: React.ReactNode[];
+  more?: React.ReactNode;
 }> = ({
         id,
         type = 'none',
@@ -222,10 +224,11 @@ export const CiComment: React.FC<{
         idx,
         isCommenter,
         isInitiator,
+        more,
         ...props
       }) => {
   let hasReply = replyId && replier;
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <div
@@ -243,7 +246,7 @@ export const CiComment: React.FC<{
         avatar={
           <UserAvatar isInitiator={isInitiator}
                       isCommenter={isCommenter} src={author?.avatarUrl} size={35}
-                      icon={<UserOutlined/>}/>
+                      icon={<UserOutlined />} />
         }
         author={
           <div className={`${prefixCls}-tiptap`}>
@@ -259,7 +262,7 @@ export const CiComment: React.FC<{
                     // onJump && onJump(replyId);
                   }}
                 >
-                  <RetweetOutlined className={`${prefixCls}-replyFlag`}/>
+                  <RetweetOutlined className={`${prefixCls}-replyFlag`} />
                   <Avatar
                     size={18}
                     src={replier?.avatarUrl}
@@ -282,17 +285,7 @@ export const CiComment: React.FC<{
           <div>
             {idx && <span>#{idx}</span>}
             {history}
-            <Dropdown
-              overlay={
-                <Menu disabled items={[{label: '举报', key: 'jubao'}]}/>
-              }
-            >
-              <Button
-                size={'small'}
-                type='link'
-                icon={<MoreOutlined/>}
-              />
-            </Dropdown>
+            {more}
           </div>
         }
       >
@@ -322,7 +315,7 @@ const Index: React.FC<{
     reply$,
     replied$,
   } = props;
-  let {author, isCommenter, isInitiator, idx, replier, replyId, datetime, action: userAction} = comment;
+  let { author, isCommenter, isInitiator, idx, replier, replyId, datetime, action: userAction } = comment;
   let id = comment.id;
   let hasReply = comment.hasReply;
   let content = comment?.content;
@@ -343,7 +336,7 @@ const Index: React.FC<{
     setDataSource([...dataSource, comment] as CommentType[]);
   });
 
-  let {loading, run} = useRequest<PagingDataType, [PagingParamsType]>(
+  let { loading, run } = useRequest<PagingDataType, [PagingParamsType]>(
     useAction.paging,
     {
       defaultParams,
@@ -351,6 +344,7 @@ const Index: React.FC<{
       retryCount: 3,
       debounceWait: 300,
       onSuccess: (data: PagingDataType) => {
+        console.log('数据加载成功', data);
         let tableData = Utils.Struct.getTableData(data);
         let pagination = tableData?.pagination;
         let total: number = pagination?.total || 0;
@@ -366,19 +360,20 @@ const Index: React.FC<{
   let hasHistory = props?.hasHistory ?? !!useAction.history;
 
   useEffect(() => {
-    if (hasLoadChild && hasReply && initialLoad) {
-      run({...defaultParams, page: 1} as PagingParamsType);
+    if (hasLoadChild && (hasReply && initialLoad)) {
+      console.debug('加载回复评论');
+      run({ ...defaultParams, page: 1 } as PagingParamsType);
     } else {
       setCurrent(0);
       setTotal(0);
       setDataSource([]);
     }
-  }, [hasLoadChild]);
+  }, [hasLoadChild, hasReply, initialLoad]);
 
   let onPageChange = (page?: number, pageSize?: number) => {
-    run({...defaultParams, page, size: pageSize});
+    run({ ...defaultParams, page, size: pageSize });
   };
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <CiComment
@@ -394,9 +389,10 @@ const Index: React.FC<{
       content={<Content>{content}</Content>}
       history={
         hasHistory ? (
-          <ExpandHistoryButton useAction={useAction} id={id}/>
+          <ExpandHistoryButton useAction={useAction} id={id} />
         ) : null
       }
+      more={<MoreOption id={id} useAction={useAction} />}
       actions={
         hasUserOptions
           ? [
@@ -410,41 +406,45 @@ const Index: React.FC<{
           : []
       }
     >
-      {dataSource.length > 0 ? (
-        <>
-          <List
-            loading={loading}
-            className={`${prefixCls}-subComments`}
-            loadMore={true}
-            renderItem={(item: CommentType, index: number) => {
-              return (
-                <List.Item key={index}>
-                  <Skeleton avatar loading={loading} active>
-                    <SubComment
-                      reply$={reply$}
-                      hasHistory={hasHistory}
-                      comment={item}
-                      useAction={useAction}
-                    />
-                  </Skeleton>
-                </List.Item>
-              );
-            }}
-            itemLayout='horizontal'
-            dataSource={dataSource}
-          />
-          <Pagination
-            hideOnSinglePage
-            className={`${prefixCls}-pagination`}
-            size='small'
-            total={total}
-            defaultCurrent={1}
-            current={current}
-            onChange={onPageChange}
-            showTotal={(total) => `共 ${total} 条`}
-          />
-        </>
-      ) : null}
+      {dataSource.length > 0 ? <>
+        <List
+          loading={loading}
+          className={`${prefixCls}-subComments`}
+          loadMore={true}
+          renderItem={(item: CommentType, index: number) => {
+            return (
+              <List.Item key={index}>
+                <Skeleton avatar loading={loading} active>
+                  <SubComment
+                    reply$={reply$}
+                    hasHistory={hasHistory}
+                    comment={item}
+                    useAction={useAction}
+                  />
+                </Skeleton>
+              </List.Item>
+            );
+          }}
+          itemLayout='horizontal'
+          dataSource={dataSource}
+        />
+        <Pagination
+          hideOnSinglePage
+          className={`${prefixCls}-pagination`}
+          size='small'
+          total={total}
+          defaultCurrent={1}
+          current={current}
+          onChange={onPageChange}
+          showTotal={(total) => `共 ${total} 条`}
+        />
+      </> : <>
+        {(hasReply && !initialLoad) ?
+          <Button size='small' type='link' onClick={() => run({
+            ...defaultParams,
+            page: 1,
+          } as PagingParamsType)}>查看回复</Button> : null}
+      </>}
     </CiComment>
   );
 };

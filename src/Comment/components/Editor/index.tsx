@@ -27,9 +27,11 @@ export const AffixEditor: React.FC<{
   useAction: UseAction;
   useAffix?: Boolean;
 }> = ({ useAffix, reply$, replied$, useAction }) => {
+  let [offsetBottom, setOffsetBottom] = useState<0 | undefined>(undefined);
+  reply$.useSubscription((comment?: CommentType) => setOffsetBottom(!!comment ? 0 : undefined));
   return (
     <div>
-      <Affix offsetBottom={useAffix ? 0 : undefined}>
+      <Affix offsetBottom={useAffix ? offsetBottom : undefined}>
         <Editor reply$={reply$} replied$={replied$} useAction={useAction} />
       </Affix>
     </div>
@@ -182,7 +184,10 @@ const Editor: React.FC<{
                     size='small'
                     shape='circle'
                     icon={<ClearOutlined size={8} />}
-                    onClick={() => setReply(undefined)}
+                    onClick={() => {
+                      reply$.emit(undefined);
+                      setReply(undefined);
+                    }}
                   />
                 </Tooltip>
               </>
