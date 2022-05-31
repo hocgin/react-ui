@@ -87,15 +87,22 @@ export default defineConfig({
           let hasFile = fs.existsSync(stylePath);
 
           if (!hasFile) {
-            console.info(
-              `[✖] ${packageName} 加载组件样式失败(文件不存在)`,
-            );
+            console.info(`[✖] ${packageName} 加载组件样式失败(文件不存在)`);
             return false;
           }
           console.info(`[✔] ${packageName} 加载组件样式成功`);
           // 注意：这里 ./ 表示的是演示的 .md 文件目录
           return stylePath;
         },
+      },
+    ],
+    [
+      'prismjs',
+      {
+        languages: ['javascript', 'css', 'markup'],
+        plugins: ['line-numbers'],
+        theme: 'twilight',
+        css: true,
       },
     ],
   ],

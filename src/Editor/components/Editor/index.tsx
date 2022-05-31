@@ -65,19 +65,16 @@ import {
   Outdent,
   Print,
 } from '../Action';
-import { useUpdateEffect, useExternal, useToggle } from 'ahooks';
+import { useUpdateEffect, useToggle } from 'ahooks';
 
-// @ts-ignore
-// import { lowlight } from 'lowlight/lib/core';
 import Prism from 'prismjs';
-
-// lowlight.registerLanguage('css', require('highlight.js/lib/languages/css'));
 
 import { FullscreenOutlined, FullscreenExitOutlined } from '@ant-design/icons';
 import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 import { ConfigContext } from '@/ConfigProvider';
+import { PrismjsLowlight } from '@/Editor/components/Extension/CodeBlockPrismjs/prismjs';
 
 export interface EditorFn {
   getHTML: () => string;
@@ -96,7 +93,13 @@ export let getExtensions = (
     Link.configure({ openOnClick: false }),
     ExUnderline,
     ExTextStyle,
-    ExCodeBlockLowlight.configure({ defaultLanguage: 'javascript' }),
+    ExCodeBlockLowlight.configure({
+      lowlight: new PrismjsLowlight(),
+      defaultLanguage: 'javascript',
+      HTMLAttributes: {
+        className: 'line-numbers',
+      },
+    }),
     ExTextAlign.configure({
       types: ['heading', 'paragraph'],
     }),

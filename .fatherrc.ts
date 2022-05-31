@@ -24,6 +24,15 @@ export default {
       },
       'antd',
     ],
+    [
+      'prismjs',
+      {
+        languages: ['javascript', 'css', 'markup'],
+        plugins: ['line-numbers'],
+        theme: 'twilight',
+        css: true,
+      },
+    ],
     ['transform-remove-console', { exclude: ['error', 'warn', 'info'] }],
     [
       'module-resolver',
@@ -36,5 +45,9 @@ export default {
       },
     ],
   ],
-  extraRollupPlugins: [typescriptPaths({ tsConfigPath: path.resolve(__dirname, './tsconfig.json') })],
+  extraRollupPlugins: [
+    typescriptPaths({
+      tsConfigPath: path.resolve(__dirname, './tsconfig.json'),
+    }),
+  ],
 } as IBundleOptions;

@@ -107,6 +107,7 @@
     "@types/react-color": "^3.0.6",
     "@types/react-copy-to-clipboard": "^5.0.1",
     "@umijs/test": "^3.0.5",
+    "babel-plugin-prismjs": "^2.1.0",
     "babel-plugin-import": "^1.13.5",
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",

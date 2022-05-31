@@ -10,16 +10,7 @@ import { useToggle } from 'ahooks';
 import classnames from 'classnames';
 
 const content = `
-      <h1 name='你好' data-name='h1' active>你好h11</h1>
-        <h2 name='你好' data-name='h1' active>你好h22</h2>
-          <h3 name='你好' data-name='h1' active>你好h33</h3>
-        <h2 name='你好' data-name='h1' active>你好h24</h2>
-          <h3 name='你好' data-name='h1' active>你好h35</h3>
-      <h1 name='你好' data-name='h1' active>你好h16</h1>
-        <h4 name='你好' data-name='h1' active>你好h47</h4>
-
-      <a href='https://www.baidu.com'>ksjdkHi</a>
-              <pre><code class="language-javascript">for (var i=1; i <= 20; i++)
+              <pre class="line-numbers"><code class="language-javascript">for (var i=1; i <= 20; i++)
 {
   if (i % 15 == 0)
     console.log("FizzBuzz");
@@ -30,6 +21,15 @@ const content = `
   else
     console.log(i);
 }</code></pre>
+      <h1 name='你好' data-name='h1' active>你好h11</h1>
+        <h2 name='你好' data-name='h1' active>你好h22</h2>
+          <h3 name='你好' data-name='h1' active>你好h33</h3>
+        <h2 name='你好' data-name='h1' active>你好h24</h2>
+          <h3 name='你好' data-name='h1' active>你好h35</h3>
+      <h1 name='你好' data-name='h1' active>你好h16</h1>
+        <h4 name='你好' data-name='h1' active>你好h47</h4>
+
+      <a href='https://www.baidu.com'>ksjdkHi</a>
 
       <iframe src='https://www.youtube.com/embed/XIMLoLxmTDw' frameborder='0' allowfullscreen></iframe>
       #FB5151
