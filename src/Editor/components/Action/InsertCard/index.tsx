@@ -3,6 +3,7 @@ import { Editor } from '@tiptap/react';
 import { InsertImage } from './InsertImage';
 import { InsertTable } from './InsertTable';
 import { InsertVideo } from './InsertVideo';
+import { InsertCodesandbox } from './InsertCodesandbox';
 import { Dropdown, Menu, Button } from 'antd';
 import { PlusCircleFilled } from '@ant-design/icons';
 import classnames from 'classnames';
@@ -27,6 +28,9 @@ export const InsertCard: React.FC<{
       </Menu.Item>
       <Menu.Item key={'InsertVideo'}>
         <InsertVideo editor={editor} />
+      </Menu.Item>
+      <Menu.Item key={'InsertCodesandbox'}>
+        <InsertCodesandbox editor={editor} />
       </Menu.Item>
     </Menu>
   );

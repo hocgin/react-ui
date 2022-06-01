@@ -9,7 +9,7 @@
 
 @borderColor: var(--border-color);
 @leftWidth: 250px;
-@reverseColor: @primary-color;
+@reverseColor: #1890ff;
 @userCardMarginWidth: 24px;
 
 .@{notification--Chat-prefix-cls} {
@@ -17,6 +17,13 @@
   flex-direction: row;
   height: 100%;
   min-height: 500px;
+  overflow: hidden;
+  position: relative;
+
+  .toggle {
+    position: absolute;
+    float: right;
+  }
 
   .left {
     width: @leftWidth;
@@ -25,6 +32,12 @@
     border-right: 1px solid @borderColor;
     display: flex;
     flex-direction: column;
+    position: relative;
+
+    &.hidden {
+      width: 0;
+      display: none;
+    }
 
     .userList {
       flex: 1;
@@ -32,10 +45,11 @@
     }
 
     .userHeader {
-      padding-right: @userCardMarginWidth;
-      padding-left: @userCardMarginWidth;
       padding-bottom: 10px;
       border-bottom: solid 1px @borderColor;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
     }
   }
 
@@ -43,6 +57,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-x: auto;
   }
 }
 

@@ -3,7 +3,6 @@ import TipTapImage from '@tiptap/extension-image';
 import { ReactNodeViewRenderer } from '@tiptap/react';
 import { Image as UiImage } from './Image';
 
-
 const Image = TipTapImage.extend<any>({
   addAttributes() {
     return {
@@ -15,9 +14,9 @@ const Image = TipTapImage.extend<any>({
           if (!attributes.width) {
             return {};
           }
-          return ({
+          return {
             style: `width: ${attributes.width}`,
-          });
+          };
         },
       },
       height: {
@@ -27,15 +26,16 @@ const Image = TipTapImage.extend<any>({
           if (!attributes.height) {
             return {};
           }
-          return ({
+          return {
             style: `height: ${attributes.height}`,
-          });
+          };
         },
       },
     };
   },
 
   addNodeView() {
+    console.log('image', this);
     return ReactNodeViewRenderer(UiImage);
   },
 });
