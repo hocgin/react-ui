@@ -16,7 +16,7 @@ import ExTaskItem from '@tiptap/extension-task-item';
 import ExTable from '@tiptap/extension-table';
 import ExTableRow from '@tiptap/extension-table-row';
 import ExTableHeader from '@tiptap/extension-table-header';
-import ExCodeBlockLowlight from '@tiptap/extension-code-block-lowlight';
+import ExCodeBlockLowlight from '../Extension/CodeBlock';
 import ExMention from '@tiptap/extension-mention';
 import {
   HexColorDecorator,
@@ -94,7 +94,7 @@ export let getExtensions = (
     ExUnderline,
     ExTextStyle,
     ExCodeBlockLowlight.configure({
-      lowlight: new PrismjsLowlight(),
+      // lowlight: new PrismjsLowlight(),
       defaultLanguage: 'javascript',
       HTMLAttributes: {
         className: 'line-numbers',

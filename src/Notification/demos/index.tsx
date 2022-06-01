@@ -46,7 +46,7 @@ let useAction = {
           messageType: 'personal_message',
           senderUserAvatarUrl: '万三',
           senderUserName: '万三',
-          senderUser: index + Math.random() * 100000,
+          senderUser: 11,
           description: '我是万三的私信',
           sendAt: '2021-06-01T00:30:30.159',
         },
@@ -77,6 +77,19 @@ let useAction = {
       hasMore: true,
       nextId: '1',
       records: [
+        {
+          id: --count,
+          messageType: 'personal_message',
+          senderUserAvatarUrl: '张三',
+          senderUserName: '张三',
+          senderUser: 11,
+          personalMessage: {
+            content:
+              count +
+              ' 我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信我是张三的私信',
+          },
+          sendAt: '2021-06-01T00:30:30.159',
+        },
         {
           id: --count,
           messageType: 'personal_message',
@@ -175,15 +188,15 @@ export default () => {
   let [count, setCount] = useState<number>(0);
   return (
     <>
-      <Divider type='horizontal' />
+      <Divider type="horizontal" />
       <Notification.Indicator
         count={count}
         onClick={() => setCount(Math.round(Math.random() * 10))}
         className={styles.ok}
       />
-      <Divider type='horizontal' />
+      <Divider type="horizontal" />
       <Notification.Box useAction={useAction} tabPosition={'top'} />
-      <Divider type='horizontal' />
+      <Divider type="horizontal" />
       <Notification.Box useAction={{}} tabPosition={'left'} />
     </>
   );

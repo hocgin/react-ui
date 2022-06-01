@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
-import { Avatar, Button, List, Input } from 'antd';
-import { SearchOutlined } from '@ant-design/icons';
+import { Avatar, Button, List, Input, Space } from 'antd';
+import {
+  SearchOutlined,
+  StepBackwardOutlined,
+  StepForwardOutlined,
+} from '@ant-design/icons';
 import { ID, LocalDateTime } from '@/Utils/interface';
 import { Editor as GEditor, Loading, Empty } from '@/index';
 import classnames from 'classnames';
@@ -9,7 +13,7 @@ import {
   sendPersonalParamsType,
   UseAction,
 } from '@/Notification/components/types';
-import { useInfiniteScroll, useRequest } from 'ahooks';
+import { useInfiniteScroll, useRequest, useToggle } from 'ahooks';
 import Utils from '@/Utils';
 import useInfiniteTopScroll from '@/Utils/scene/useInfiniteTopScroll';
 import { ConfigContext } from '@/ConfigProvider';
@@ -23,14 +27,14 @@ const UserCard: React.FC<{
   avatar?: any;
   onClick?: (id: any) => void;
 }> = ({
-        datetime,
-        nickname,
-        avatar,
-        onClick,
-        selected = false,
-        content = ' ',
-        ...props
-      }) => {
+  datetime,
+  nickname,
+  avatar,
+  onClick,
+  selected = false,
+  content = ' ',
+  ...props
+}) => {
   let fmtDatetime = Utils.Format.DateTime.useDefRelativeFromNow(datetime);
 
   let { getPrefixCls } = React.useContext(ConfigContext);
@@ -178,7 +182,7 @@ const Editor: React.FC<{
       />
       <div className={'editorToolbar'}>
         <div />
-        <Button type='primary' onClick={onSubmitSend}>
+        <Button type="primary" onClick={onSubmitSend}>
           发送
         </Button>
       </div>
@@ -191,7 +195,9 @@ const UserHeader: React.FC<{
 }> = ({ className }) => {
   return (
     <div className={className}>
-      <Input placeholder='搜索联系人' suffix={<SearchOutlined />} />
+      <Space>
+        <Input placeholder="搜索联系人" suffix={<SearchOutlined />} />
+      </Space>
     </div>
   );
 };
@@ -203,6 +209,7 @@ export const Chat: React.FC<{
   const ref = useRef<any>();
   // 与谁聊天
   let [chatUser, setChatUser] = useState<{ id: any; title: string }>();
+  let [openUserList, { toggle }] = useToggle<boolean>(false);
   const { data, loading } = useInfiniteScroll(
     (d?: any) =>
       Utils.Lang.nilService(
@@ -219,21 +226,21 @@ export const Chat: React.FC<{
   let prefixCls = getPrefixCls('notification--Chat', props.prefixCls);
   return (
     <div className={prefixCls}>
-      <div className={'left'}>
-        <UserHeader className={'userHeader'} />
+      <div className={classnames('left', { ['hidden']: openUserList })}>
+        <UserHeader className={classnames('userHeader')} />
         <div ref={ref} className={'userList'}>
           <List
             locale={{ emptyText: '暂无联系人' } as any}
-            rowKey='id'
-            itemLayout='horizontal'
+            rowKey="id"
+            itemLayout="horizontal"
             dataSource={data?.list || []}
             renderItem={({
-                           sendAt,
-                           senderUser,
-                           senderUserName,
-                           senderUserAvatarUrl,
-                           description,
-                         }: MessageDataType) => (
+              sendAt,
+              senderUser,
+              senderUserName,
+              senderUserAvatarUrl,
+              description,
+            }: MessageDataType) => (
               <UserCard
                 selected={chatUser?.id === senderUser}
                 avatar={senderUserAvatarUrl}
@@ -250,6 +257,14 @@ export const Chat: React.FC<{
         </div>
       </div>
       <div className={'right'}>
+        <Button
+          className={'toggle'}
+          type={'link'}
+          icon={
+            openUserList ? <StepForwardOutlined /> : <StepBackwardOutlined />
+          }
+          onClick={toggle}
+        />
         {chatUser ? (
           <>
             <ChatHeader>{chatUser?.title}</ChatHeader>

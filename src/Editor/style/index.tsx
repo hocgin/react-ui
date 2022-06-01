@@ -10,4 +10,5 @@ import './Editor.Extension.Mention.less';
 import './Editor.Extension.Image.less';
 import './Editor.FloatingMenus.less';
 import './Editor.prosemirror.less';
+import './Editor.codemirror.less';
 import './Editor.less';

@@ -11,7 +11,7 @@ const shouldShowLink = ({ editor, view, state, oldState }: any) => {
   let isLink = editor.isActive('link');
   let isEmpty = !text;
   // link or select text
-  return editable && (!isEmpty || isLink);
+  return editable && (!isEmpty || isLink) && !editor.isActive('codeBlock');
 };
 
 const Index: React.FC<{
