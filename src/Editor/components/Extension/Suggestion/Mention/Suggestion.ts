@@ -1,9 +1,11 @@
 import { ReactRenderer } from '@tiptap/react';
 import tippy, { Instance } from 'tippy.js';
 import MentionList from './MentionList';
-import { SuggestionOptions } from '@tiptap/suggestion';
-import { SuggestionProps } from '@tiptap/suggestion/src/suggestion';
-import { SuggestionKeyDownProps } from '@tiptap/suggestion/dist/packages/suggestion/src/suggestion';
+import {
+  SuggestionOptions,
+  SuggestionKeyDownProps,
+  SuggestionProps,
+} from '@tiptap/suggestion';
 
 export type Mention = string;
 
