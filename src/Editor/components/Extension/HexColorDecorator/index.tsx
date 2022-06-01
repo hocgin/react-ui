@@ -41,11 +41,14 @@ const HexColorDecorator = Extension.create({
             return findColors(doc);
           },
           apply(transaction, oldState) {
-            return transaction.docChanged ? findColors(transaction.doc) : oldState;
+            return transaction.docChanged
+              ? findColors(transaction.doc)
+              : oldState;
           },
         },
         props: {
           decorations(state) {
+            // @ts-ignore
             return this.getState(state);
           },
         },
