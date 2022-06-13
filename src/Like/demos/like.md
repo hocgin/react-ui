@@ -9,7 +9,7 @@ group:
 # @formatter:on
 ---
 
-# Tpl - 模版文件
+# Like - 赞
 
 这是一个组件的基础描述
 
