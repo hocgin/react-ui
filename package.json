@@ -81,12 +81,8 @@
     "classnames": "^2.3.1",
     "codemirror": "^5.65.5",
     "emoji-mart": "^3.0.1",
-    "lowlight": "^2.5.0",
     "memoize-one": "^5.2.1",
     "mockjs": "^1.1.0",
-    "overlayscrollbars": "^1.13.1",
-    "overlayscrollbars-react": "^0.2.3",
-    "prismjs": "^1.28.0",
     "query-string": "^7.0.1",
     "randexp": "^0.5.3",
     "rc-tween-one": "^3.0.6",
@@ -95,7 +91,8 @@
     "react-copy-to-clipboard": "^5.0.4",
     "react-countup": "^5.2.0",
     "react-truncate": "^2.4.0",
-    "tween-one": "^1.1.8"
+
+    "prismjs": "^1.28.0"
   },
   "peerDependencies": {
     "react": "^16.12.0"
