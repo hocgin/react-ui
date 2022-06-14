@@ -89,11 +89,13 @@
     "prismjs": "^1.28.0",
     "query-string": "^7.0.1",
     "randexp": "^0.5.3",
+    "rc-tween-one": "^3.0.6",
     "react-adsense": "^0.1.0",
     "react-color": "^2.19.3",
     "react-copy-to-clipboard": "^5.0.4",
     "react-countup": "^5.2.0",
-    "react-truncate": "^2.4.0"
+    "react-truncate": "^2.4.0",
+    "tween-one": "^1.1.8"
   },
   "peerDependencies": {
     "react": "^16.12.0"
