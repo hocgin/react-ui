@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { Statistic } from 'antd';
 import { ConfigContext } from '@/ConfigProvider';
 import TweenOne from 'rc-tween-one';
 import Children from 'rc-tween-one/lib/plugin/ChildrenPlugin';
