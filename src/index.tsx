@@ -25,6 +25,7 @@ export { default as HtmlAnchor } from './HtmlAnchor';
 export { default as Empty } from './Empty';
 export { default as Video } from './Video';
 export { default as Audio } from './Audio';
+export { default as Console } from './Console';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
 export { default as Exhibit } from './Exhibit';
