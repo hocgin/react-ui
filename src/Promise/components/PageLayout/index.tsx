@@ -7,6 +7,8 @@ import { fastGetAccess, fastGetMenuDataItem } from './utils';
 import { WithFalse } from '@ant-design/pro-layout/lib/typings';
 import { HeaderViewProps } from '@ant-design/pro-layout/lib/Header';
 import { BasicLayoutProps } from '@ant-design/pro-layout/lib/BasicLayout';
+import Lang from '@/Utils/lang';
+import { LocalRoute } from '@/Utils/interface';
 
 const DEFAULT_PATHNAME = '/welcome';
 
@@ -32,7 +34,7 @@ export interface PageLayoutProps extends BasicLayoutProps {
   /**
    * 路由
    */
-  route?: any;
+  route?: { routes: LocalRoute[] };
   /**
    * 右上角
    */
@@ -50,7 +52,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   logo,
   useAction,
   route,
-  isShowAll = false,
+  isShowAll = Lang.isDev(),
   location,
   children,
   ...rest
