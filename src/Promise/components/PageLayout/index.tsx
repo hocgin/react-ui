@@ -58,7 +58,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   ...rest
 }) => {
   // @formatter: on
-  const [pathname, setPathname] = useState(DEFAULT_PATHNAME);
+  const [pathname, setPathname] = useState(
+    location?.pathname ?? DEFAULT_PATHNAME,
+  );
 
   let { runAsync } = useRequest(useAction!.initialValues, {
     manual: true,
