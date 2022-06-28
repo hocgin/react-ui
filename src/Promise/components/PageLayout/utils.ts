@@ -19,9 +19,10 @@ function getMenuDataItem(
         routeMap[key].hasAccess = true;
       });
     });
+  console.log('routes', routes);
 
   // 构建树型菜单
-  return fastRoutesToMenuDataItems(routes[0]?.routes ?? [], accesss);
+  return fastRoutesToMenuDataItems(routes ?? [], accesss);
 }
 
 let fastRoutesToMenuDataItems = memoizeOne(routesToMenuDataItems);
@@ -47,11 +48,9 @@ function asRouteMap(routes: LocalRoute[]): Record<string, LocalRoute> {
       if (item.routes) {
         mergeMenuAndRouter(item.routes);
         item.routes.forEach((x: LocalRoute) => {
-          // @ts-ignore
-          x.parentKeys = [...(item.parentKeys || []), item.key];
+          x.parentKeys = [...(item.parentKeys || []), item.key!];
         });
       }
-
       routeMap[`${item.key}`] = item;
     });
   };
@@ -70,8 +69,8 @@ function asMenuDataItem({
   parentKeys,
 }: LocalRoute): MenuDataItem {
   return {
-    hideChildrenInMenu: hideChildrenInMenu,
-    hideInMenu: hideInMenu,
+    hideChildrenInMenu: hideChildrenInMenu ?? false,
+    hideInMenu: hideInMenu ?? false,
     name: title,
     key: key,
     icon: Dom.getIcon(icon),
