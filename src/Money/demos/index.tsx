@@ -7,5 +7,5 @@ import { Money } from '@hocgin/ui';
 import styles from './index.less';
 
 export default () => {
-  return <Money value={10} />;
+  return <Money value={1000} />;
 };

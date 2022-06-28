@@ -74,7 +74,6 @@ import TbButton from '@/Editor/components/Common/TbButton';
 import { useImperativeHandle } from 'react';
 import { Mention } from '@/Editor/components/Extension/Suggestion/Mention/Suggestion';
 import { ConfigContext } from '@/ConfigProvider';
-import { PrismjsLowlight } from '@/Editor/components/Extension/CodeBlockPrismjs/prismjs';
 
 export interface EditorFn {
   getHTML: () => string;

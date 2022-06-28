@@ -44,7 +44,7 @@ const Index: React.FC<{
   let prefixCls = getPrefixCls('logo', props.prefixCls);
   return (
     <div className={`${prefixCls}`}>
-      <HeartFilled />{' '}
+      <HeartFilled href="https://uptime.hocgin.top/status/ping" />{' '}
       <a
         className={`${prefixCls}-text`}
         href={href}

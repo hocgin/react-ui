@@ -1,5 +1,3 @@
-import { LocalRoute } from '@/Utils/interface';
-
 export type HtmlTagType = {
   key: string;
   html: string;
@@ -8,7 +6,6 @@ export type HtmlTagType = {
   attr: Record<string, any>;
 };
 export default class Lang {
-
   /**
    * 转 long
    * @param val
@@ -303,5 +300,9 @@ export default class Lang {
       }
       return { key, html, name, text, attr } as HtmlTagType;
     });
+  }
+
+  static isDev() {
+    return process.env.NODE_ENV === 'development';
   }
 }

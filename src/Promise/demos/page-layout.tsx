@@ -3,10 +3,8 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Promise, useGet } from '@hocgin/ui';
+import { Promise} from '@hocgin/ui';
 import localRoutes from './page-layout-config';
-import { Avatar } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
 
 let useAction = {
   initialValues: async () => {

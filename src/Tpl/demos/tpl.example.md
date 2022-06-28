@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Tpl - 模版文件
 nav:
@@ -18,7 +17,7 @@ group:
 
 ### 基础用法
 
-```jsx 
+```jsx
 import React from 'react';
 import { Tpl, ConfigProvider } from '@hocgin/ui';
 
@@ -29,14 +28,12 @@ export default () => {
     </>
   );
 };
-
 ```
 
 ```css
 .ok {
   color: red;
 }
-
 ```
 
 ## API

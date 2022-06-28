@@ -1,6 +1,6 @@
 ---
 # @formatter:off
-title: Tpl - 模版文件
+title: Icons - 图标
 nav:
   title: 组件
   path: /components
@@ -9,7 +9,7 @@ group:
 # @formatter:on
 ---
 
-# Tpl - 模版文件
+# Icons - 图标
 
 这是一个组件的基础描述
 
