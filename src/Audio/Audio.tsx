@@ -40,7 +40,7 @@ const Index: React.FC<{
   getInstance?: (_: any) => void;
 }> = ({ option, src, getInstance, ...props }) => {
   console.log('srcToAudio(src)', srcToAudio(src));
-  const playerRef = useRef<any>();
+  const playerRef = useRef<any>({});
   useEffect(() => {
     const art = new APlayer({
       theme: 'var(--video-color, #0000000f)',
