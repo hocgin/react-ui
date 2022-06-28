@@ -1,13 +1,25 @@
-import React, { MutableRefObject, useEffect, useImperativeHandle, useMemo, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  useEffect,
+  useImperativeHandle,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
+// @ts-ignore
 import Danmaku from 'danmaku';
 import { ConfigProvider } from '@/index';
 import classnames from 'classnames';
-import { useSize, useUpdateEffect } from 'ahooks';
+import { useSize } from 'ahooks';
 
 export type DanmakuOption = any;
 
 export interface DanmakuFn {
-  getHTML: () => string;
+  show: () => void;
+  resize: () => void;
+  hide: () => void;
+  clear: () => void;
+  danmaku: () => Danmaku;
 }
 
 const Index: React.FC<{
@@ -17,7 +29,14 @@ const Index: React.FC<{
   option?: DanmakuOption;
   children?: any;
   getInstance?: (_: any) => void;
-}> = ({ option, danmakuRef, className, getInstance, children = <div />, ...props }) => {
+}> = ({
+  option,
+  danmakuRef,
+  className,
+  getInstance,
+  children = <div />,
+  ...props
+}) => {
   let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
   let prefixCls = getPrefixCls('danmaku', props.prefixCls);
   let containerRef = useRef<HTMLDivElement>(null);
@@ -45,21 +64,34 @@ const Index: React.FC<{
   }, [_danmakuRef, size]);
 
   let danmaku = _danmakuRef?.current;
-  useImperativeHandle(danmakuRef, () => ({
-    show: danmaku?.show.bind(danmaku),
-    resize: danmaku?.resize.bind(danmaku),
-    hide: danmaku?.hide.bind(danmaku),
-    clear: danmaku?.clear.bind(danmaku),
-    danmaku: () => danmaku,
-  } as DanmakuFn), [_danmakuRef.current]);
+  useImperativeHandle(
+    danmakuRef,
+    () =>
+      ({
+        show: danmaku?.show.bind(danmaku),
+        resize: danmaku?.resize.bind(danmaku),
+        hide: danmaku?.hide.bind(danmaku),
+        clear: danmaku?.clear.bind(danmaku),
+        danmaku: () => danmaku,
+      } as DanmakuFn),
+    [_danmakuRef.current],
+  );
 
-  return <div className={classnames(`${prefixCls}`, className)}>
-    <div ref={beContainerRef} className={classnames(`${prefixCls}--container`)}>
-      {children}
+  return (
+    <div className={classnames(`${prefixCls}`, className)}>
+      <div
+        ref={beContainerRef}
+        className={classnames(`${prefixCls}--container`)}
+      >
+        {children}
+      </div>
+      <div
+        ref={containerRef}
+        className={classnames(`${prefixCls}--container-danmaku`)}
+        style={{ height: size?.height, width: size?.width } as any}
+      ></div>
     </div>
-    <div ref={containerRef} className={classnames(`${prefixCls}--container-danmaku`)}
-         style={{ height: size?.height, width: size?.width } as any}></div>
-  </div>;
+  );
 };
 
 export default Index;
