@@ -37,7 +37,7 @@ export let MentionSuggestion = (search?: onSearchMention) => {
             interactive: true,
             trigger: 'manual',
             placement: 'bottom-start',
-          });
+          } as any);
         },
 
         onUpdate(props: SuggestionProps) {
