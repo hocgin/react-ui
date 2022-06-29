@@ -3,7 +3,7 @@ import { ConfigProvider } from '@/index';
 import classnames from 'classnames';
 // @ts-ignore
 import APlayer from 'aplayer';
-import 'APlayer/dist/APlayer.min.css';
+import 'aplayer/dist/APlayer.min.css';
 
 export type AudioOption = any;
 
@@ -13,21 +13,23 @@ const getName4Url = (url: string): string | undefined => {
 
 const srcToAudio = (src: any): any[] => {
   if (Array.isArray(src) && src.length > 0) {
-    if (typeof (src[0]) === 'string') {
+    if (typeof src[0] === 'string') {
       return src.map((item: string) => {
         return {
           name: getName4Url(item),
           url: item,
         };
       });
-    } else if (typeof (src[0]) === 'object') {
+    } else if (typeof src[0] === 'object') {
       return src;
     }
-  } else if (typeof (src) === 'string') {
-    return [{
-      name: getName4Url(src as string),
-      url: src,
-    }];
+  } else if (typeof src === 'string') {
+    return [
+      {
+        name: getName4Url(src as string),
+        url: src,
+      },
+    ];
   }
   return [];
 };
@@ -65,7 +67,8 @@ const Index: React.FC<{
       <div
         ref={playerRef}
         className={classnames(`${prefixCls}-player`)}
-        {...props} />
+        {...props}
+      />
     </div>
   );
 };
