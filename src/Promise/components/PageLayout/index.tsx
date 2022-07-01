@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRequest } from 'ahooks';
 import { Footer } from '@/index';
 import ProLayout, { ProBreadcrumb } from '@ant-design/pro-layout';
@@ -9,6 +9,7 @@ import { HeaderViewProps } from '@ant-design/pro-layout/lib/Header';
 import { BasicLayoutProps } from '@ant-design/pro-layout/lib/BasicLayout';
 import Lang from '@/Utils/lang';
 import { LocalRoute } from '@/Utils/interface';
+import { useHistory } from 'react-router-dom';
 
 const DEFAULT_PATHNAME = '/welcome';
 
@@ -58,10 +59,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   ...rest
 }) => {
   // @formatter: on
-  const [pathname, setPathname] = useState(
-    location?.pathname ?? DEFAULT_PATHNAME,
-  );
-
+  let history = useHistory();
   let { runAsync } = useRequest(useAction!.initialValues, {
     manual: true,
   });
@@ -82,7 +80,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   return (
     <ProLayout
       menu={menu}
-      location={{ pathname }}
       fixSiderbar
       fixedHeader
       logo={logo}
@@ -90,7 +87,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       rightContentRender={rightContentRender}
       headerContentRender={() => <ProBreadcrumb />}
       menuItemRender={(item, dom) => (
-        <a onClick={() => setPathname(item.path || DEFAULT_PATHNAME)}>{dom}</a>
+        <a onClick={() => history.push(item.path || DEFAULT_PATHNAME)}>{dom}</a>
       )}
       footerRender={() => <Footer />}
       {...rest}
