@@ -1,7 +1,7 @@
 export { default as Icon } from './Icon';
 export { default as TextRow } from './TextRow';
 export { default as Header } from './Header';
-export { default as Tpl } from './Tpl';
+export { default as _Tpl } from './_Tpl';
 export { default as Snow } from './Snow';
 export { default as Sponsor } from './Sponsor';
 export { default as Comment } from './Comment';

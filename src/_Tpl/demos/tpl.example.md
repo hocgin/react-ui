@@ -19,12 +19,12 @@ group:
 
 ```jsx
 import React from 'react';
-import { Tpl, ConfigProvider } from '@hocgin/ui';
+import { _Tpl, ConfigProvider } from '@hocgin/ui';
 
 export default () => {
   return (
     <>
-      <Tpl className="ok" />
+      <_Tpl className="ok" />
     </>
   );
 };
