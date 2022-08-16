@@ -1,16 +1,18 @@
 import React from 'react';
-import { Editor } from '@tiptap/react';
+import type {Editor} from '@tiptap/react';
 import TbButton from '@/Editor/components/Common/TbButton';
-import { SmileOutlined } from '@ant-design/icons';
-import { Popover } from 'antd';
-// @ts-ignore
-import { Picker } from 'emoji-mart';
-import 'emoji-mart/css/emoji-mart.css';
+import {SmileOutlined} from '@ant-design/icons';
+import {Popover} from 'antd';
+
+let Picker = React.lazy(() => {
+  require('emoji-mart/css/emoji-mart.css')
+  return require('emoji-mart').Picker;
+});
 
 export const Emoji: React.FC<{
   editor?: Editor | null;
   placement?: 'top' | 'bottom';
-}> = ({ editor, placement = 'top' }) => (
+}> = ({editor, placement = 'top'}) => (
   <TbButton>
     <Popover
       placement={placement}

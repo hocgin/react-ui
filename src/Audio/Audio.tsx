@@ -1,9 +1,11 @@
 import React, {useEffect, useRef} from 'react';
 import {ConfigProvider, Utils} from '@hocgin/ui';
 import classnames from 'classnames';
-import 'aplayer/dist/APlayer.min.css';
 
-let aplayer = Utils.Lang.dynamicImport(() => require('aplayer'));
+let aplayer = Utils.Lang.dynamicImport(() => {
+  require('aplayer/dist/APlayer.min.css');
+  return require('aplayer');
+});
 
 
 export type AudioOption = any;
