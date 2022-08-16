@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { ConfigProvider } from '@/index';
+import React, {useEffect, useRef} from 'react';
+import {ConfigProvider, Utils} from '@hocgin/ui';
 import classnames from 'classnames';
-// @ts-ignore
-import APlayer from 'aplayer';
 import 'aplayer/dist/APlayer.min.css';
+
+let aplayer = Utils.Lang.dynamicImport(() => require('aplayer'));
+
 
 export type AudioOption = any;
 
@@ -40,10 +41,10 @@ const Index: React.FC<{
   src: string | string[] | any[];
   option?: AudioOption;
   getInstance?: (_: any) => void;
-}> = ({ option, src, getInstance, ...props }) => {
-  console.log('srcToAudio(src)', srcToAudio(src));
+}> = ({option, src, getInstance, ...props}) => {
   const playerRef = useRef<any>({});
   useEffect(() => {
+    let APlayer = aplayer.get();
     const art = new APlayer({
       theme: 'var(--video-color, #0000000f)',
       ...option,
@@ -60,7 +61,7 @@ const Index: React.FC<{
     };
   }, []);
 
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let {getPrefixCls} = React.useContext(ConfigProvider.ConfigContext);
   let prefixCls = getPrefixCls('audio', props.prefixCls);
   return (
     <div className={classnames(`${prefixCls}`)}>

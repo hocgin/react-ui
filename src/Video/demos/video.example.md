@@ -22,7 +22,7 @@ group:
 
 ```jsx
 import React from 'react';
-import { Video, ConfigProvider } from '@hocgin/ui';
+import { Video } from '@hocgin/ui';
 
 export default () => {
   return (

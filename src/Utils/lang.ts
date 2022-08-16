@@ -298,11 +298,17 @@ export default class Lang {
             attr[`${name}`] = attrValue;
           });
       }
-      return { key, html, name, text, attr } as HtmlTagType;
+      return {key, html, name, text, attr} as HtmlTagType;
     });
   }
 
   static isDev() {
     return process.env.NODE_ENV === 'development';
+  }
+
+  static dynamicImport<T>(importFunc: () => T): { get: () => T } {
+    return {
+      get: importFunc,
+    }
   }
 }
