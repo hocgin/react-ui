@@ -2,15 +2,14 @@ import React, {
   MutableRefObject,
   useEffect,
   useImperativeHandle,
-  useMemo,
   useRef,
-  useState,
 } from 'react';
-// @ts-ignore
-import Danmaku from 'danmaku';
-import { ConfigProvider } from '@/index';
+import type Danmaku from 'danmaku';
+import {ConfigProvider, Utils} from '@hocgin/ui';
 import classnames from 'classnames';
-import { useSize } from 'ahooks';
+import {useSize} from 'ahooks';
+
+let danmakuGet = Utils.Lang.dynamicImport(() => require('danmaku').default);
 
 export type DanmakuOption = any;
 
@@ -30,14 +29,14 @@ const Index: React.FC<{
   children?: any;
   getInstance?: (_: any) => void;
 }> = ({
-  option,
-  danmakuRef,
-  className,
-  getInstance,
-  children = <div />,
-  ...props
-}) => {
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+        option,
+        danmakuRef,
+        className,
+        getInstance,
+        children = <div />,
+        ...props
+      }) => {
+  let {getPrefixCls} = React.useContext(ConfigProvider.ConfigContext);
   let prefixCls = getPrefixCls('danmaku', props.prefixCls);
   let containerRef = useRef<HTMLDivElement>(null);
   let beContainerRef = useRef<HTMLDivElement>(null);
@@ -45,6 +44,7 @@ const Index: React.FC<{
   let size = useSize(beContainerRef);
 
   useEffect(() => {
+    let Danmaku = danmakuGet.get();
     _danmakuRef.current = new Danmaku({
       container: containerRef.current,
       ...option,
@@ -88,7 +88,7 @@ const Index: React.FC<{
       <div
         ref={containerRef}
         className={classnames(`${prefixCls}--container-danmaku`)}
-        style={{ height: size?.height, width: size?.width } as any}
+        style={{height: size?.height, width: size?.width} as any}
       ></div>
     </div>
   );

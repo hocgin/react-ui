@@ -1,3 +1,4 @@
+export { default as Icon } from './Icon';
 export { default as TextRow } from './TextRow';
 export { default as Header } from './Header';
 export { default as Tpl } from './Tpl';
