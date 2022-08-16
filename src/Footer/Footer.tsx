@@ -4,7 +4,7 @@ import {Logo as GinLogo} from '@hocgin/ui';
 import {ConfigContext} from '@/ConfigProvider';
 import {Icon} from '@hocgin/ui'
 
-const SocialLinks = (props: any) => {
+const SocialLinks: React.FC<{ className?: string }> = (props) => {
   let className = props.className;
   return (
     <ul className={className}>
@@ -30,31 +30,48 @@ const SocialLinks = (props: any) => {
   );
 };
 
+const DefaultCopyTitle: React.FC<{}> = () => {
+  return <>
+    © 2013-2021 |{' '}
+    <a href="http://www.hocgin.top/" target="_blank">
+      🧱 红土立方
+    </a>{' | '}
+    <a href="https://beian.miit.gov.cn/" target="_blank">
+      闽ICP备20004537号
+    </a>
+  </>
+}
+
+const DefaultFooterInfo: React.FC<{
+  prefixCls?: string;
+}> = ({prefixCls}) => {
+  return <>
+    <GinLogo />
+    <span className={`${prefixCls}-footerInfo-year`}>
+          2022<sup>&copy;</sup>
+        </span>
+    <SocialLinks className={`${prefixCls}-footerInfo-links`} />
+  </>
+}
+
 const Index: React.FC<{
   prefixCls?: string;
   className?: string;
-  defaultParams?: any;
+  copyTitle?: React.ReactElement | string;
+  footerInfo?: React.ReactElement | string;
 }> = (props) => {
   let {getPrefixCls} = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('footer', props.prefixCls);
+  let copyTitle = props.copyTitle || <DefaultCopyTitle />;
+  let footerInfo = props.footerInfo || <DefaultFooterInfo prefixCls={prefixCls} />;
+
   return (
     <div className={`${prefixCls}`}>
       <div className={`${prefixCls}-footerInfo`}>
-        <GinLogo />
-        <span className={`${prefixCls}-footerInfo-year`}>
-          2020<sup>&copy;</sup>
-        </span>
-        <SocialLinks className={`${prefixCls}-footerInfo-links`} />
+        {footerInfo}
       </div>
       <div className={`${prefixCls}-copytitle`}>
-        © 2013-2021 |{' '}
-        <a href="http://www.hocgin.top/" target="_blank">
-          🧱 红土立方
-        </a>{' '}
-        |{' '}
-        <a href="https://beian.miit.gov.cn/" target="_blank">
-          闽ICP备20004537号
-        </a>
+        {copyTitle}
       </div>
     </div>
   );

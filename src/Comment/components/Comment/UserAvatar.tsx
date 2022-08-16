@@ -1,7 +1,7 @@
 import React from 'react';
 import { ConfigProvider } from '@/index';
 import classnames from 'classnames';
-import { Avatar, Tag } from 'antd';
+import { Avatar} from 'antd';
 
 const Index: React.FC<{
   prefixCls?: string;

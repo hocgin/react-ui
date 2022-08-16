@@ -1,0 +1,30 @@
+@import (reference) '../../style/index.less';
+
+@changelog-prefix-cls: ~'@{hui-prefix}-changelog';
+
+.@{changelog-prefix-cls} {
+  &-collapse {
+    margin: 0 5px;
+  }
+
+  &-panel {
+    :global {
+      .ant-collapse-header {
+        padding: 0 !important;
+      }
+
+      .ant-collapse-arrow {
+        margin-right: 5px !important;
+      }
+
+      .ant-collapse-content-box {
+        padding-top: 5px !important;
+        padding-bottom: 5px !important;
+        font-size: 12px;
+      }
+    }
+  }
+
+  &-current {
+  }
+}
