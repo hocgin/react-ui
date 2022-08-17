@@ -298,7 +298,7 @@ export default class Lang {
             attr[`${name}`] = attrValue;
           });
       }
-      return {key, html, name, text, attr} as HtmlTagType;
+      return { key, html, name, text, attr } as HtmlTagType;
     });
   }
 
@@ -307,8 +307,9 @@ export default class Lang {
   }
 
   static dynamicImport<T>(importFunc: () => T): { get: () => T } {
+    let instance: (T | undefined) = undefined;
     return {
-      get: importFunc,
-    }
+      get: () => instance !== undefined ? instance : (() => instance = importFunc())(),
+    };
   }
 }

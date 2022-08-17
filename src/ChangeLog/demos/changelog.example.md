@@ -10,7 +10,7 @@ group:
 # @formatter:on
 ---
 
-# Tpl - 模版文件
+# ChangeLog - 变更日志
 
 这是一个组件的基础描述
 
@@ -20,7 +20,7 @@ group:
 
 ```jsx
 import React from 'react';
-import {ChangeLog} from '@hocgin/ui';
+import { ChangeLog } from '@hocgin/ui';
 
 let changelog = [
   {

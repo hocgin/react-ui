@@ -1,8 +1,8 @@
-import React, {useEffect, useRef} from 'react';
-import {ConfigProvider, Utils} from '@hocgin/ui';
+import React, { useEffect, useRef } from 'react';
+import { ConfigProvider, Utils } from '@hocgin/ui';
 import classnames from 'classnames';
 
-let artplayer = Utils.Lang.dynamicImport(() => require('artplayer').default);
+let ArtplayerImport = Utils.Lang.dynamicImport(() => require('artplayer').default);
 
 export type VideoOption = any;
 
@@ -12,11 +12,11 @@ const Index: React.FC<{
   className?: string;
   option?: VideoOption;
   getInstance?: (_: any) => void;
-}> = ({src, className, option = {}, getInstance, ...props}) => {
+}> = ({ src, className, option = {}, getInstance, ...props }) => {
   const artRef = useRef<any>();
 
   useEffect(() => {
-    let Artplayer = artplayer.get();
+    let Artplayer = ArtplayerImport.get();
     const art = new Artplayer({
       theme: 'var(--video-color, red)',
       ...option,
@@ -33,7 +33,7 @@ const Index: React.FC<{
     };
   }, []);
 
-  let {getPrefixCls} = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
   let prefixCls = getPrefixCls('video', props.prefixCls);
 
   return (

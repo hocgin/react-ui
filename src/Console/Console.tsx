@@ -1,27 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { ConfigProvider } from '@/index';
+import { ConfigProvider, Utils } from '@hocgin/ui';
 import classnames from 'classnames';
-import { Console, Hook, Unhook } from 'console-feed';
+
+let ConsoleFeedImport = Utils.Lang.dynamicImport(() => require('console-feed'));
 
 const LogsContainer: React.FC<{
   prefixCls?: string;
   className?: string;
 }> = ({ ...props }) => {
+  let ConsoleFeed = ConsoleFeedImport.get();
   let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
   let prefixCls = getPrefixCls('console', props.prefixCls);
-
   const [logs, setLogs] = useState<any>([]);
+  console.log('ConsoleFeed', ConsoleFeed);
 
   // run once!
   useEffect(() => {
-    let hookedConsole = Hook(window.console, (log) => setLogs((currLogs: any) => [...currLogs, log]), false);
-    return () => {
-      Unhook(hookedConsole);
-    };
+    let hookedConsole = ConsoleFeed.Hook(window.console, (log: any) => (setLogs((currLogs: any) => [...currLogs, log])), false);
+    return () => ConsoleFeed.Unhook(hookedConsole);
   }, []);
 
   return <div className={classnames(`${prefixCls}--content`, props.className)}>
-    <Console logs={logs} variant='light' />
+    <ConsoleFeed.Console logs={logs} variant='light' />
   </div>;
 };
 
