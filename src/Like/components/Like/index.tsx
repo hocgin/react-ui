@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import classnames from 'classnames';
-import {Icon} from '@hocgin/ui';
+import { Icon } from '@/index';
 
-import {ConfigContext} from '@/ConfigProvider';
+import { ConfigContext } from '@/ConfigProvider';
 
 export const Like: React.FC<{
   prefixCls?: string;
@@ -10,8 +10,8 @@ export const Like: React.FC<{
   checked?: boolean;
   disabled?: boolean;
   onChange?: (checked: boolean) => void;
-}> = ({className, checked = false, onChange, disabled, ...props}) => {
-  let {getPrefixCls} = React.useContext(ConfigContext);
+}> = ({ className, checked = false, onChange, disabled, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('like', props.prefixCls);
   let [liked, setLiked] = useState<boolean>(checked);
   return (

@@ -1,10 +1,10 @@
-import React, {useState} from 'react';
-import {Icon} from '@hocgin/ui';
-import {ConfigContext} from '@/ConfigProvider';
+import React, { useState } from 'react';
+import { Icon } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
 
 const QrCode = (props: any) => {
-  let {url, text = ''} = props;
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { url, text = '' } = props;
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('sponsor--qrcode', props.prefixCls);
   return (
     <div className={prefixCls}>
@@ -19,12 +19,12 @@ const Index: React.FC<{
   alipay?: string;
   wechat?: string;
 }> = ({
-        alipay = 'https://via.placeholder.com/125',
-        wechat = 'https://via.placeholder.com/125',
-        ...props
-      }) => {
+  alipay = 'https://via.placeholder.com/125',
+  wechat = 'https://via.placeholder.com/125',
+  ...props
+}) => {
   let [open, setOpen] = useState<boolean>(false);
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('sponsor', props.prefixCls);
   return (
     <div className={prefixCls}>
