@@ -307,7 +307,7 @@ export default class Lang {
   }
 
   static dynamicImport<T>(importFunc: () => T): { get: () => T } {
-    let instance: (T | undefined) = undefined;
+    let instance: (T | undefined);
     return {
       get: () => instance !== undefined ? instance : (() => instance = importFunc())(),
     };
