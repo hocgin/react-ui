@@ -20,7 +20,7 @@ export default defineConfig({
   title: 'HOCGIN x UI',
   mode: 'site',
   // more config: https://d.umijs.org/config
-  logo: 'http://cdn.hocgin.top/uPic/mp_logo.png',
+  logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
   navs: [
     null,
     {
