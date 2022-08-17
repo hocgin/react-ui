@@ -5,7 +5,7 @@ import { PersonalPane } from './PersonalPane';
 import { SystemPane } from './SystemPane';
 import { MessageStat, UseAction } from '../types';
 import classnames from 'classnames';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import { useMount, useRequest } from 'ahooks';
 
 import { ConfigContext } from '@/ConfigProvider';

@@ -5,7 +5,8 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Editor as GEditor, Utils } from '@/index';
+import { default as GEditor } from '@/Editor';
+import Utils from '@/Utils';
 import { Button, Skeleton } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';

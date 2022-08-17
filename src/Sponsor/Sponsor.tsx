@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Icon } from '@/index';
+import Icon from '@/Icon';
 import { ConfigContext } from '@/ConfigProvider';
 
 const QrCode = (props: any) => {

@@ -1,4 +1,5 @@
 export { default as Icon } from './Icon';
+export { default as Utils } from './Utils';
 export { default as TextRow } from './TextRow';
 export { default as Header } from './Header';
 export { default as _Tpl } from './_Tpl';
@@ -33,4 +34,3 @@ export { default as Beta } from './Beta';
 export { default as Exhibit } from './Exhibit';
 // Utils
 export { default as ConfigProvider } from './ConfigProvider';
-export { default as Utils } from './Utils';

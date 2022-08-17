@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classnames from 'classnames';
-import { Logo as GinLogo } from '@/index';
+import { default as GinLogo } from '@/Logo';
 import { ConfigContext } from '@/ConfigProvider';
 
 interface FeatbarProps {

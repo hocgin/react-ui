@@ -1,5 +1,7 @@
 import React from 'react';
-import { Promise, Exhibit, Editor } from '@/index';
+import Promise from '@/Promise';
+import Exhibit from '@/Exhibit';
+import Editor from '@/Editor';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input } from 'antd';

@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';
 

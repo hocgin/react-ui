@@ -6,7 +6,9 @@ import {
   StepForwardOutlined,
 } from '@ant-design/icons';
 import { ID, LocalDateTime } from '@/Utils/interface';
-import { Editor as GEditor, Loading, Empty } from '@/index';
+import { default as GEditor } from '@/Editor';
+import Loading from '@/Loading';
+import Empty from '@/Empty';
 import classnames from 'classnames';
 import {
   MessageDataType,

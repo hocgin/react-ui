@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigProvider } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
 import classnames from 'classnames';
 
 const Index: React.FC<{
@@ -7,7 +7,7 @@ const Index: React.FC<{
   className?: string;
   defaultParams?: any;
 }> = ({ ...props }) => {
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('tpl', props.prefixCls);
   return (
     <div className={classnames(`${prefixCls}`)}>

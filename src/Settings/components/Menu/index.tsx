@@ -1,7 +1,7 @@
 import React from 'react';
 import { Menu as AnMenu } from 'antd';
 import classnames from 'classnames';
-import { Empty } from '@/index';
+import Empty from '@/Empty';
 import { ConfigContext } from '@/ConfigProvider';
 
 interface MenuItem {

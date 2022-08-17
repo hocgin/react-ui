@@ -3,7 +3,7 @@ import { Checkbox as AntdCheckbox } from 'antd';
 import { Option } from '@/Utils/types/rt-grass';
 import { useMount, useRequest } from 'ahooks';
 import { UseAction } from './type';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 
 // @formatter: off
 const Checkbox: React.FC<{

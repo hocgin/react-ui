@@ -1,5 +1,5 @@
 import Utils from '@/Utils';
-import { ConfigProvider } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
 import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
 import { HtmlTagType } from '@/Utils/lang';
@@ -100,7 +100,7 @@ const Index: React.FC<{
   className?: string;
   content?: string;
 }> = ({ ...props }) => {
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('directory', props.prefixCls);
   const [targetOffset, setTargetOffset] = useState<number | undefined>(
     undefined,

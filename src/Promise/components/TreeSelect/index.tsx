@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import Dom from '@/Utils/dom';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';

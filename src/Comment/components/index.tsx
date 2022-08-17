@@ -11,7 +11,8 @@ import {
 } from 'ahooks';
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
-import { Loading, Utils } from '@/index';
+import Loading from '@/Loading';
+import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons';
 
