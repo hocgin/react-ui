@@ -1,6 +1,7 @@
 ---
+
 # @formatter:off
-title: Icons - 图标
+title: Icon - 图标
 nav:
   title: 组件
   path: /components
@@ -9,7 +10,7 @@ group:
 # @formatter:on
 ---
 
-# Icons - 图标
+# Icon - 图标
 
 这是一个组件的基础描述
 
