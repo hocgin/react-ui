@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
-import {Logo as GinLogo} from '@hocgin/ui';
-import {ConfigContext} from '@/ConfigProvider';
-import {Icon} from '@hocgin/ui'
+import { Logo as GinLogo } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
+import { Icon } from '@hocgin/ui';
 
 const SocialLinks: React.FC<{ className?: string }> = (props) => {
   let className = props.className;
@@ -31,28 +31,33 @@ const SocialLinks: React.FC<{ className?: string }> = (props) => {
 };
 
 const DefaultCopyTitle: React.FC<{}> = () => {
-  return <>
-    © 2013-2021 |{' '}
-    <a href="http://www.hocgin.top/" target="_blank">
-      🧱 红土立方
-    </a>{' | '}
-    <a href="https://beian.miit.gov.cn/" target="_blank">
-      闽ICP备20004537号
-    </a>
-  </>
-}
+  return (
+    <>
+      © 2013-2021 |{' '}
+      <a href="http://www.hocgin.top/" target="_blank">
+        🧱 红土立方
+      </a>
+      {' | '}
+      <a href="https://beian.miit.gov.cn/" target="_blank">
+        闽ICP备20004537号
+      </a>
+    </>
+  );
+};
 
 const DefaultFooterInfo: React.FC<{
   prefixCls?: string;
-}> = ({prefixCls}) => {
-  return <>
-    <GinLogo />
-    <span className={`${prefixCls}-footerInfo-year`}>
-          2022<sup>&copy;</sup>
-        </span>
-    <SocialLinks className={`${prefixCls}-footerInfo-links`} />
-  </>
-}
+}> = ({ prefixCls }) => {
+  return (
+    <>
+      <GinLogo />
+      <span className={`${prefixCls}-footerInfo-year`}>
+        2022<sup>&copy;</sup>
+      </span>
+      <SocialLinks className={`${prefixCls}-footerInfo-links`} />
+    </>
+  );
+};
 
 const Index: React.FC<{
   prefixCls?: string;
@@ -60,19 +65,17 @@ const Index: React.FC<{
   copyTitle?: React.ReactElement | string;
   footerInfo?: React.ReactElement | string;
 }> = (props) => {
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('footer', props.prefixCls);
   let copyTitle = props.copyTitle || <DefaultCopyTitle />;
-  let footerInfo = props.footerInfo || <DefaultFooterInfo prefixCls={prefixCls} />;
+  let footerInfo = props.footerInfo || (
+    <DefaultFooterInfo prefixCls={prefixCls} />
+  );
 
   return (
     <div className={`${prefixCls}`}>
-      <div className={`${prefixCls}-footerInfo`}>
-        {footerInfo}
-      </div>
-      <div className={`${prefixCls}-copytitle`}>
-        {copyTitle}
-      </div>
+      <div className={`${prefixCls}-footerInfo`}>{footerInfo}</div>
+      <div className={`${prefixCls}-copytitle`}>{copyTitle}</div>
     </div>
   );
 };

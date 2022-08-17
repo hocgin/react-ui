@@ -1,8 +1,10 @@
 import React, { useEffect, useRef } from 'react';
-import { ConfigProvider, Utils } from '@hocgin/ui';
+import { ConfigProvider, Utils } from '@/index';
 import classnames from 'classnames';
 
-let ArtplayerImport = Utils.Lang.dynamicImport(() => require('artplayer').default);
+let ArtplayerImport = Utils.Lang.dynamicImport(
+  () => require('artplayer').default,
+);
 
 export type VideoOption = any;
 

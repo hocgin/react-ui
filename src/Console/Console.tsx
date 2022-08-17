@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { ConfigProvider, Utils } from '@hocgin/ui';
+import { ConfigProvider, Utils } from '@/index';
 import classnames from 'classnames';
 
 let ConsoleFeedImport = Utils.Lang.dynamicImport(() => require('console-feed'));
@@ -16,15 +16,20 @@ const LogsContainer: React.FC<{
 
   // run once!
   useEffect(() => {
-    let hookedConsole = ConsoleFeed.Hook(window.console, (log: any) => (setLogs((currLogs: any) => [...currLogs, log])), false);
+    let hookedConsole = ConsoleFeed.Hook(
+      window.console,
+      (log: any) => setLogs((currLogs: any) => [...currLogs, log]),
+      false,
+    );
     return () => ConsoleFeed.Unhook(hookedConsole);
   }, []);
 
-  return <div className={classnames(`${prefixCls}--content`, props.className)}>
-    <ConsoleFeed.Console logs={logs} variant='light' />
-  </div>;
+  return (
+    <div className={classnames(`${prefixCls}--content`, props.className)}>
+      <ConsoleFeed.Console logs={logs} variant="light" />
+    </div>
+  );
 };
-
 
 const Index: React.FC<{
   prefixCls?: string;
@@ -35,9 +40,11 @@ const Index: React.FC<{
   let [visible, setVisible] = useState<boolean>(false);
 
   return (
-    <div className={classnames(`${prefixCls}`, {
-      [`${prefixCls}--visible`]: visible,
-    })}>
+    <div
+      className={classnames(`${prefixCls}`, {
+        [`${prefixCls}--visible`]: visible,
+      })}
+    >
       <button
         className={classnames(`${prefixCls}--toggle`)}
         onClick={() => setVisible(!visible)}
