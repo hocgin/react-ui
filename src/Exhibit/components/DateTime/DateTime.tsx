@@ -1,6 +1,6 @@
 import React from 'react';
 import { ClockCircleOutlined } from '@ant-design/icons';
-import { ConfigProvider, Utils } from '@/index';
+import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';
 
 const Index: React.FC<{

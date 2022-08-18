@@ -1,5 +1,6 @@
-import React, { useEffect, useRef } from 'react';
-import { ConfigProvider, Utils } from '@/index';
+import React, {useEffect, useRef} from 'react';
+import Utils from '@/Utils';
+import {ConfigContext} from '@/ConfigProvider';
 import classnames from 'classnames';
 
 let ArtplayerImport = Utils.Lang.dynamicImport(
@@ -14,7 +15,7 @@ const Index: React.FC<{
   className?: string;
   option?: VideoOption;
   getInstance?: (_: any) => void;
-}> = ({ src, className, option = {}, getInstance, ...props }) => {
+}> = ({src, className, option = {}, getInstance, ...props}) => {
   const artRef = useRef<any>();
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const Index: React.FC<{
     };
   }, []);
 
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let {getPrefixCls} = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('video', props.prefixCls);
 
   return (

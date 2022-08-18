@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import {Icon} from "@hocgin/ui";
+import {Icon} from "@/index";
 
 import {ConfigContext} from '@/ConfigProvider';
 

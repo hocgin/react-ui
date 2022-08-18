@@ -2,7 +2,7 @@ import React from 'react';
 import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { FileInfo } from '@/Utils/interface';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import 'antd/es/upload/style';
 
 let defaultChildren = (

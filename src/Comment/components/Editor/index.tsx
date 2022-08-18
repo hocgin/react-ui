@@ -17,7 +17,8 @@ import {
   UserDataType,
 } from '../type';
 import { useInterval, useMount, useRequest } from 'ahooks';
-import { Editor as GEditor, Utils } from '@/index';
+import { default as GEditor } from '@/Editor';
+import Utils from '@/Utils';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';
 

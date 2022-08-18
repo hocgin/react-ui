@@ -2,7 +2,7 @@ import React from 'react';
 
 import { LocalDateTime } from '@/Utils/interface';
 import { Avatar, Modal } from 'antd';
-import { Editor } from '@/index';
+import Editor from '@/Editor';
 import { NotificationOutlined } from '@ant-design/icons';
 import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';

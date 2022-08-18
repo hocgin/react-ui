@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ConfigProvider, Utils } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
+import Utils from '@/Utils';
 import classnames from 'classnames';
 
 let ConsoleFeedImport = Utils.Lang.dynamicImport(() => require('console-feed'));
@@ -9,7 +10,7 @@ const LogsContainer: React.FC<{
   className?: string;
 }> = ({ ...props }) => {
   let ConsoleFeed = ConsoleFeedImport.get();
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('console', props.prefixCls);
   const [logs, setLogs] = useState<any>([]);
   console.log('ConsoleFeed', ConsoleFeed);
@@ -35,7 +36,7 @@ const Index: React.FC<{
   prefixCls?: string;
   className?: string;
 }> = ({ ...props }) => {
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('console', props.prefixCls);
   let [visible, setVisible] = useState<boolean>(false);
 

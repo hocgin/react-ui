@@ -1,15 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Utils, Snow } from '@/index';
-import { useMount, useUpdateEffect, useDocumentVisibility } from 'ahooks';
+import React, {useEffect, useRef, useState} from 'react';
+import Snow from '@/Snow';
+import Utils from '@/Utils';
+import {useMount, useUpdateEffect, useDocumentVisibility} from 'ahooks';
 
-const failure: string = 'http://cdn.hocgin.top/file/failure.ico';
-const favicon: string = 'http://cdn.hocgin.top/file/favicon.ico';
+const failure: string = 'https://cdn.hocgin.top/file/failure.ico';
+const favicon: string = 'https://cdn.hocgin.top/file/favicon.ico';
 
 const Index: React.FC<{
   children?: string;
   csl?: boolean;
   doc?: boolean;
-}> = ({ csl = true, doc = true, children }, ref) => {
+}> = ({csl = true, doc = true, children}, ref) => {
   if (Utils.Lang.isServer()) {
     return <></>;
   }
