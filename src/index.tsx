@@ -29,6 +29,8 @@ export { default as Video } from './Video';
 export { default as Audio } from './Audio';
 export { default as Console } from './Console';
 export { default as Danmaku } from './Danmaku';
+export { default as ChangeLog } from './ChangeLog';
+export { default as SpaceBetween } from './SpaceBetween';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
 export { default as Exhibit } from './Exhibit';

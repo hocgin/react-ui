@@ -1,0 +1,15 @@
+@import (reference) '../../style/index.less';
+
+@SpaceBetween-prefix-cls: ~'@{hui-prefix}-SpaceBetween';
+
+.@{SpaceBetween-prefix-cls} {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  &-content {
+    margin-right: 5px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+}
