@@ -1,4 +1,4 @@
-import { Stretch as HStretch } from '@/index';
+import { default as HStretch } from '@/Stretch';
 import React from 'react';
 
 export interface StretchProps {

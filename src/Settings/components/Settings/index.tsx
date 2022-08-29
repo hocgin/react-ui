@@ -16,7 +16,8 @@ import {
   UseAction,
 } from '@/Settings/components/types';
 import memoizeOne from 'memoize-one';
-import { Empty, Utils } from '@/index';
+import Empty from '@/Empty';
+import Utils from '@/Utils';
 import { useMount, useRequest } from 'ahooks';
 import classnames from 'classnames';
 

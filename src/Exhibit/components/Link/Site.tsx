@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import { LinkOutlined } from '@ant-design/icons';
 import { ConfigContext } from '@/ConfigProvider';
 

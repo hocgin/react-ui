@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment } from '@/index';
+import Comment from '@/Comment';
 import useAction from './use_action';
 
 const Index: React.FC<{

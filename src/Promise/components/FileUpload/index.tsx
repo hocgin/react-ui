@@ -1,5 +1,5 @@
 import React from 'react';
-import { FileUpload } from '@/index';
+import FileUpload from '@/FileUpload';
 import { FileInfo } from '@/Utils/interface';
 
 const Index: React.FC<{

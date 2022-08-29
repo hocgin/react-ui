@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popover, Avatar } from 'antd';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import { FileImageOutlined, FileUnknownOutlined } from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';

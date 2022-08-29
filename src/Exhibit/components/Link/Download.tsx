@@ -1,5 +1,5 @@
 import React from 'react';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import { CloudDownloadOutlined } from '@ant-design/icons';
 import { ConfigContext } from '@/ConfigProvider';
 

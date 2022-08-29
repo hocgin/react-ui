@@ -1,8 +1,8 @@
 import React from 'react';
 import classnames from 'classnames';
-import { Logo as GinLogo } from '@/index';
+import { default as GinLogo } from '@/Logo';
 import { ConfigContext } from '@/ConfigProvider';
-import { Icon } from '@hocgin/ui';
+import Icon from '@/Icon';
 
 const SocialLinks: React.FC<{ className?: string }> = (props) => {
   let className = props.className;

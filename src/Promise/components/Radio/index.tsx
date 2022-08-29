@@ -3,7 +3,7 @@ import { Radio as AntdRadio } from 'antd';
 import { Option } from '@/Utils/types/rt-grass';
 import { useMount, useRequest } from 'ahooks';
 import { UseAction } from '@/Promise/components/Select/type';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 
 // @formatter: off
 const Radio: React.FC<{

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Spin, Avatar } from 'antd';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import { SearchOption } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import { UserOutlined } from '@ant-design/icons';

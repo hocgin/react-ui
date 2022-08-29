@@ -1,5 +1,5 @@
 import React from 'react';
-import { ConfigProvider } from '@/index';
+import {ConfigContext} from '@/ConfigProvider';
 import classnames from 'classnames';
 import { Avatar} from 'antd';
 
@@ -12,7 +12,7 @@ const Index: React.FC<{
   isCommenter?: boolean;
   isInitiator?: boolean;
 }> = ({ isCommenter = false, isInitiator = false, ...props }) => {
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment-avatar', props.prefixCls);
   return (
     <div className={classnames(`${prefixCls}`, props.className)}>

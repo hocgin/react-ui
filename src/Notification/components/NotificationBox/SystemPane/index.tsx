@@ -3,7 +3,9 @@ import classnames from 'classnames';
 import { MessageSmallCard, Title } from '../Common';
 import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll } from 'ahooks';
-import { Empty, Loading, Utils } from '@/index';
+import Empty from '@/Empty';
+import Loading from '@/Loading';
+import Utils from '@/Utils';
 import { Struct } from '@/Utils/result';
 import { ConfigContext } from '@/ConfigProvider';
 

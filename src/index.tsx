@@ -1,4 +1,5 @@
 export { default as Icon } from './Icon';
+export { default as Utils } from './Utils';
 export { default as TextRow } from './TextRow';
 export { default as Header } from './Header';
 export { default as _Tpl } from './_Tpl';
@@ -29,9 +30,10 @@ export { default as Video } from './Video';
 export { default as Audio } from './Audio';
 export { default as Console } from './Console';
 export { default as Danmaku } from './Danmaku';
+export { default as ChangeLog } from './ChangeLog';
+export { default as SpaceBetween } from './SpaceBetween';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
 export { default as Exhibit } from './Exhibit';
 // Utils
 export { default as ConfigProvider } from './ConfigProvider';
-export { default as Utils } from './Utils';

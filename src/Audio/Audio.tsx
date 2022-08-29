@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { ConfigProvider, Utils } from '@/index';
+import {ConfigContext} from '@/ConfigProvider';
+import Utils from '@/Utils';
 import classnames from 'classnames';
 
 let AplayerImport = Utils.Lang.dynamicImport(() => {
@@ -62,7 +63,7 @@ const Index: React.FC<{
     };
   }, []);
 
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('audio', props.prefixCls);
   return (
     <div className={classnames(`${prefixCls}`)}>

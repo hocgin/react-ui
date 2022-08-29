@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRequest } from 'ahooks';
-import { Footer } from '@/index';
+import Footer from '@/Footer';
 import ProLayout, { ProBreadcrumb } from '@ant-design/pro-layout';
 import { MenuDataItem } from '@umijs/route-utils';
 import { fastGetAccess, fastGetMenuDataItem } from './utils';

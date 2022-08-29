@@ -2,7 +2,7 @@ import React from 'react';
 import {Badge, Collapse} from 'antd';
 import classnames from 'classnames';
 import {PlusSquareOutlined, MinusSquareOutlined} from '@ant-design/icons';
-import {ConfigProvider} from "@/index";
+import {ConfigContext} from '@/ConfigProvider';
 
 const Panel = Collapse.Panel;
 export type ChangeLog = {
@@ -21,7 +21,7 @@ const Index: React.FC<{
   prefixCls?: string;
   items?: ChangeLog[];
 }> = ({items, ...props}) => {
-  let {getPrefixCls} = React.useContext(ConfigProvider.ConfigContext);
+  let {getPrefixCls} = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('changelog', props.prefixCls);
   return (
     <Collapse

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Code as HCode } from '@/index';
+import { default as HCode } from '@/Code';
 
 export interface CodeProps {
   /**

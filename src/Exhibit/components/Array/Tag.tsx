@@ -1,5 +1,5 @@
 import React from 'react';
-import { Exhibit } from '@/index';
+import Exhibit from '@/Exhibit';
 
 export interface TagProps {
   /**

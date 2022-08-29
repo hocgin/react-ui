@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import { Option } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';

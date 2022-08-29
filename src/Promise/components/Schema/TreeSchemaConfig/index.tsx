@@ -13,7 +13,7 @@ import {
   SchemeColumns,
 } from '@/Promise/components/Schema/scheme';
 import { ConfigContext } from '@/ConfigProvider';
-import { Utils } from '@/index';
+import Utils from '@/Utils';
 import Dom from '@/Utils/dom';
 
 const SearchBar: React.FC<{

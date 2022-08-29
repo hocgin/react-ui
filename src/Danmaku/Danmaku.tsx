@@ -4,7 +4,8 @@ import React, {
   useImperativeHandle,
   useRef,
 } from 'react';
-import { ConfigProvider, Utils } from '@/index';
+import { ConfigContext } from '@/ConfigProvider';
+import Utils from '@/Utils';
 import classnames from 'classnames';
 import { useSize } from 'ahooks';
 
@@ -35,7 +36,7 @@ const Index: React.FC<{
   children = <div />,
   ...props
 }) => {
-  let { getPrefixCls } = React.useContext(ConfigProvider.ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('danmaku', props.prefixCls);
   let containerRef = useRef<HTMLDivElement>(null);
   let beContainerRef = useRef<HTMLDivElement>(null);
