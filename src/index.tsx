@@ -11,6 +11,7 @@ export { default as Like } from './Like';
 export { default as Notification } from './Notification';
 export { default as Featbar } from './Featbar';
 export { default as Settings } from './Settings';
+export { default as AsReact } from './AsReact';
 export { default as Eggs } from './Eggs';
 export { default as Footer } from './Footer';
 export { default as Money } from './Money';
