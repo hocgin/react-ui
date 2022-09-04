@@ -20,12 +20,14 @@ group:
 
 ```jsx
 import React from 'react';
-import { AsReact } from '@hocgin/ui';
+import {AsReact} from '@hocgin/ui';
 
 export default () => {
+  let element = document.createElement('b');
+  element.textContent = "这是Element标签";
   return (
     <>
-      <AsReact children={<div>Hi</div>} />
+      <AsReact children={element} />
     </>
   );
 };
