@@ -97,12 +97,12 @@
     "react": "^16.12.0"
   },
   "optionalDependencies": {
+    "@hocgin/hkit": "^1.0.51",
     "danmaku": "^2.0.4",
     "console-feed": "^3.3.0",
     "emoji-mart": "^3.0.1",
     "aplayer": "^1.10.1",
     "artplayer": "^4.4.7",
-    "@umijs/plugin-request": "^2.7.0",
     "draft-js-prism": "^1.0.6"
   },
   "devDependencies": {

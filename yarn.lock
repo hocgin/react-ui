@@ -2,14 +2,6 @@
 # yarn lockfile v1
 
 
-"@ahooksjs/use-request@^2.0.0":
-  version "2.8.15"
-  resolved "https://registry.npmmirror.com/@ahooksjs/use-request/-/use-request-2.8.15.tgz#daa32a8395ba75e8deb9f4fde4e221a4a8f525db"
-  integrity sha512-xhVaM4fyIiAMdVFuuU5i3CFUdFa/IblF+fvITVMFaUEO3w/V5tVCAF6WIA3T03n1/RPuzRkA7Ao1PFtSGtGelw==
-  dependencies:
-    lodash.debounce "^4.0.8"
-    lodash.throttle "^4.1.1"
-
 "@ampproject/remapping@^2.1.0":
   version "2.1.2"
   resolved "https://registry.npmmirror.com/@ampproject/remapping/-/remapping-2.1.2.tgz#4edca94973ded9630d20101cd8559cedb8d8bd34"
@@ -1629,6 +1621,14 @@
   resolved "https://registry.npmmirror.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
+"@hocgin/hkit@^1.0.51":
+  version "1.0.51"
+  resolved "https://registry.npmjs.org/@hocgin/hkit/-/hkit-1.0.51.tgz#dccf3ef5f88e2cc2a52099dda270d34b91c4b8f1"
+  integrity sha512-qzvX4cmpvgSRMdojo1DZeiAIySR9GGRaY1IGv2Dr2E85XcCPS9m1g4nXm4tbnzVxeqioi8V60YOIbZvSTi8dbQ==
+  dependencies:
+    memoize-one "^6.0.0"
+    umi-request "^1.4.0"
+
 "@icons/material@^0.2.4":
   version "0.2.4"
   resolved "https://registry.npmmirror.com/@icons/material/-/material-0.2.4.tgz#e90c9f71768b3736e76d7dd6783fc6c2afa88bc8"
@@ -3078,14 +3078,6 @@
   version "0.2.2"
   resolved "https://registry.npmmirror.com/@umijs/plugin-analytics/-/plugin-analytics-0.2.2.tgz#575fd231d4327ea13413217aa1b5fc6bdd89465e"
   integrity sha512-dVDzUfgIdEwdCC6a5IsMYpIPI+bEZjBEqIhAvw9dic6Vk77w9RxQxyRfW11dDmdXLAwWphp22NntQNt1ejZPtg==
-
-"@umijs/plugin-request@^2.7.0":
-  version "2.8.1"
-  resolved "https://registry.npmmirror.com/@umijs/plugin-request/-/plugin-request-2.8.1.tgz#82f076895eda2f67f0e4677f2984e18a6d0307f5"
-  integrity sha512-W8lA+d7OZRy96IhA0HK29b4Er691cxOyjlOOYEcuey0MWDd83dnQgZ6iyJD1RxMOmdfkj1aJffE2MN1PS1+2cw==
-  dependencies:
-    "@ahooksjs/use-request" "^2.0.0"
-    umi-request "^1.2.14"
 
 "@umijs/preset-built-in@3.5.21":
   version "3.5.21"
@@ -13299,9 +13291,9 @@ uglify-to-browserify@~1.0.0:
   resolved "https://registry.npmmirror.com/uglify-to-browserify/-/uglify-to-browserify-1.0.2.tgz#6e0924d6bda6b5afe349e39a6d632850a0f882b7"
   integrity sha512-vb2s1lYx2xBtUgy+ta+b2J/GLVUR+wmpINwHePmPRhOsIVCG2wDzKJ0n14GslH1BifsqVzSOwQhRaCAsZ/nI4Q==
 
-umi-request@^1.2.14:
+umi-request@^1.4.0:
   version "1.4.0"
-  resolved "https://registry.npmmirror.com/umi-request/-/umi-request-1.4.0.tgz#ed0e54e47f043d2be06e691477f0890383f9dd8a"
+  resolved "https://registry.npmjs.org/umi-request/-/umi-request-1.4.0.tgz#ed0e54e47f043d2be06e691477f0890383f9dd8a"
   integrity sha512-OknwtQZddZHi0Ggi+Vr/olJ7HNMx4AzlywyK0W3NZBT7B0stjeZ9lcztA85dBgdAj3KVk8uPJPZSnGaDjELhrA==
   dependencies:
     isomorphic-fetch "^2.2.1"
