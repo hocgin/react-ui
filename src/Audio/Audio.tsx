@@ -64,7 +64,7 @@ const Index: React.FC<{
     return () => {
       art?.destroy?.(false);
     };
-  }, []);
+  });
 
   let {getPrefixCls} = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('audio', props.prefixCls);
