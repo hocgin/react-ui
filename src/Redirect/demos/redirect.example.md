@@ -1,7 +1,7 @@
 ---
 
 # @formatter:off
-title: Tpl - 模版文件
+title: Redirect - 页面重定向
 nav:
   title: 组件
   path: /components
@@ -10,9 +10,9 @@ group:
 # @formatter:on
 ---
 
-# Tpl - 模版文件
+# Redirect - 页面重定向
 
-这是一个组件的基础描述
+页面重定向
 
 ## 代码演示
 
