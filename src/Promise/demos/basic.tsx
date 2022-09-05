@@ -3,9 +3,9 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Divider } from 'antd';
-import { Promise } from '@hocgin/ui';
-import { SearchOption } from '@/Utils/types/rt-grass';
+import {Divider} from 'antd';
+import {Promise} from '@hocgin/ui';
+import {SearchOption} from '@/Utils/types/rt-grass';
 
 export default () => {
   let useAction = {
@@ -59,6 +59,7 @@ export default () => {
       <Divider>搜索选择器</Divider>
       <Promise.Search useAction={searchUseAction} defaultValue={'默认'} />
       <Promise.Search useAction={searchUseAction} multiple={true} />
+      <Promise.SearchLbs />
       <Divider>单选按钮</Divider>
       <Promise.RadioButton useAction={useAction} />
       <Divider>单选</Divider>

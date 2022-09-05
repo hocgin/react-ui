@@ -2,6 +2,7 @@ import FileUpload from './FileUpload';
 import TreeSelect from './TreeSelect';
 import Select from './Select';
 import Search from './Search';
+import SearchLbs from './SearchLbs';
 import Encoding from './Encoding';
 import RadioButton from './RadioButton';
 import Radio from './Radio';
@@ -22,6 +23,7 @@ import UserAvatar from './UserAvatar';
 export default class {
   static FileUpload: typeof FileUpload = FileUpload;
   static Select: typeof Select = Select;
+  static SearchLbs: typeof SearchLbs = SearchLbs;
   static Encoding: typeof Encoding = Encoding;
   static Search: typeof Search = Search;
   static TreeSelect: typeof TreeSelect = TreeSelect;
