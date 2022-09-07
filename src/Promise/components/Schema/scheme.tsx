@@ -5,6 +5,7 @@ import Editor from '@/Editor';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input } from 'antd';
+import { SearchLbsData } from '@/Promise/components/SearchLbs/LbsSearch';
 
 let boxStyle = {
   width: '100%',
@@ -80,6 +81,10 @@ export interface RadioParam {
 
 export interface RadioButtonParam {
   useAction: any;
+}
+
+export interface SearchLbsParam {
+  akay: string;
 }
 
 export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
@@ -251,6 +256,21 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
           useAction={params?.useAction}
           {...props?.fieldProps}
         />
+      );
+    },
+  },
+  // 地址选择框
+  [prefix('searchLbs')]: {
+    render: (value: SearchLbsData) => {
+      if (!value) {
+        return <span>-</span>;
+      }
+      return <div>{value.name}(${value.location})</div>;
+    },
+    renderFormItem: (text: any, props: any) => {
+      let params: SearchLbsParam = props?.params || {};
+      return (
+        <Promise.SearchLbs akay={params?.akay} {...props?.fieldProps} />
       );
     },
   },

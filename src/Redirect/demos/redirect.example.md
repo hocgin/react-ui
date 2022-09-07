@@ -1,7 +1,7 @@
 ---
 
 # @formatter:off
-title: AsReact - AsReact
+title: Redirect - 页面重定向
 nav:
   title: 组件
   path: /components
@@ -10,9 +10,9 @@ group:
 # @formatter:on
 ---
 
-# AsReact - AsReact
+# Redirect - 页面重定向
 
-这是一个组件的基础描述
+页面重定向
 
 ## 代码演示
 
@@ -20,14 +20,12 @@ group:
 
 ```jsx
 import React from 'react';
-import {AsReact} from '@hocgin/ui';
+import {Redirect, ConfigProvider} from '@hocgin/ui';
 
 export default () => {
-  let element = document.createElement('b');
-  element.textContent = "这是Element标签";
   return (
     <>
-      <AsReact children={element} />
+      <Redirect className="ok" redirectUrl={'https://www.baidu.com'} />
     </>
   );
 };

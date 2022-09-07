@@ -53,6 +53,13 @@ export default () => {
     <>
       <Divider>编号</Divider>
       <Promise.Encoding prefix={'66'} />
+      <Divider>地址</Divider>
+      <Promise.SearchLbs value={{
+        adcode: '350203',
+        address: '福建省厦门市思明区筼筜街道体育路95号厦门文化艺术中心',
+        location: { lat: 24.490474, lng: 118.11022 },
+        name: '厦门文化艺术中心',
+      }} onChange={console.log} />
       <Divider>普通选择器</Divider>
       <Promise.Select useAction={useAction} />
       <Promise.Select multiple={true} useAction={useAction} />

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, {useEffect, useRef} from 'react';
 import {ConfigContext} from '@/ConfigProvider';
 import Utils from '@/Utils';
 import classnames from 'classnames';
@@ -43,27 +43,30 @@ const Index: React.FC<{
   src: string | string[] | any[];
   option?: AudioOption;
   getInstance?: (_: any) => void;
-}> = ({ option, src, getInstance, ...props }) => {
+}> = ({option, src, getInstance, ...props}) => {
   const playerRef = useRef<any>({});
   useEffect(() => {
-    let APlayer = AplayerImport.get();
-    const art = new APlayer({
-      theme: 'var(--video-color, #0000000f)',
-      ...option,
-      audio: option.audio ?? srcToAudio(src),
-      container: playerRef.current,
-    });
+    let art: any;
+    try {
+      let APlayer = AplayerImport.get();
+      art = new APlayer({
+        theme: 'var(--video-color, #0000000f)',
+        ...option,
+        audio: option.audio ?? srcToAudio(src),
+        container: playerRef.current,
+      });
+    }catch (e) {
+      console.error(e);
+    }
     if (getInstance && typeof getInstance === 'function') {
       getInstance(art);
     }
     return () => {
-      if (art && art.destroy) {
-        art.destroy(false);
-      }
+      art?.destroy?.(false);
     };
-  }, []);
+  });
 
-  let { getPrefixCls } = React.useContext(ConfigContext);
+  let {getPrefixCls} = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('audio', props.prefixCls);
   return (
     <div className={classnames(`${prefixCls}`)}>
