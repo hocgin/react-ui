@@ -4,7 +4,7 @@ import Exhibit from '@/Exhibit';
 import Editor from '@/Editor';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
-import { Input } from 'antd';
+import { Input, Tooltip } from 'antd';
 import { SearchLbsData } from '@/Promise/components/SearchLbs/LbsSearch';
 
 let boxStyle = {
@@ -265,7 +265,13 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
       if (!value) {
         return <span>-</span>;
       }
-      return <div>{value.name}(${value.location})</div>;
+      let location = value?.location;
+      return <Tooltip title={<>
+        <div>地址: {value.address}</div>
+        <div>经纬度: {location?.lng}, {location?.lat}</div>
+      </>}>
+        <div>{`${value.name}`}</div>
+      </Tooltip>;
     },
     renderFormItem: (text: any, props: any) => {
       let params: SearchLbsParam = props?.params || {};

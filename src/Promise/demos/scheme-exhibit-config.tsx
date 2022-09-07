@@ -10,6 +10,12 @@ export const config: any = {
       return {
         title: '这是标题',
         state: 'vx',
+        searchLbs: {
+          adcode: '350203',
+          address: '福建省厦门市思明区筼筜街道体育路95号厦门文化艺术中心',
+          location: { lat: 24.490474, lng: 118.11022 },
+          name: '厦门文化艺术中心',
+        },
         html: '<p>666 <strong>777</strong></p>',
         rich: '<p>666 <strong>777</strong></p>',
         markdown: `# 这是标题1 \n ## 这是标题2 \n ### 这是标题3 \n`,
@@ -31,6 +37,11 @@ export const config: any = {
         ],
       },
       width: 'm',
+    },
+    {
+      title: '地址选择器',
+      dataIndex: 'searchLbs',
+      valueType: Utils.Dom.columnPrefix('searchLbs'),
     },
     {
       title: '状态',
