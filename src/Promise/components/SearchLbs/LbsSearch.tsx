@@ -1,48 +1,55 @@
-import {Input} from "antd";
-import {APILoader, AutoComplete} from "@uiw/react-amap";
-import React, {useEffect, useRef, useState} from "react";
+import { Input } from 'antd';
+import { AutoComplete } from '@uiw/react-amap';
+import React, { useEffect, useRef, useState } from 'react';
 
-export interface AutoCompleteEventsCallback {
-  /**POI唯一标识 */
-  id: string;
-  /**名称 */
+/**
+ * adcode: "350200"
+ * address: []
+ * city: []
+ * district: "福建省厦门市"
+ * id: "900000108751"
+ * location: undefined
+ * name: "厦门旅游客运码头-新港城客运站"
+ * typecode: "999912"
+ */
+
+export interface SearchLbsData {
   name: string;
-  /**区域编码 */
   adcode: string;
-  /**所属区域 */
-  district: string;
-  /**位置 */
+  address: string;
   location: { lng?: number, lat?: number };
-  /**类型 */
-  type: string;
 }
 
 
 const Index: React.FC<{
   prefixCls?: string;
   className?: string;
-  onSelect?: (event: AutoCompleteEventsCallback) => void;
+  value?: string;
+  onSelect?: (event: SearchLbsData) => void;
+  onChange?: (v: any) => void;
   akay?: string;
-}> = ({...props}) => {
+}> = ({ ...props }) => {
   const inputRef = useRef<any>();
   const [input, setInput] = useState<string>();
   useEffect(() => {
-    console.log('inputref', inputRef);
     setInput(inputRef?.current?.input);
   }, [inputRef?.current]);
-  return <Input.Group className={props.className} style={{display: 'flex'} as any} compact>
-    <div style={{flex: '1 1'}}>
-        <Input ref={inputRef} style={{flex: '1 1'} as any} />
-        <div style={{width: '100%'}}>
-          {input && (
-            <AutoComplete
-              input={input}
-              onSelect={props?.onSelect}
-            />
-          )}
-        </div>
+  return <Input.Group className={props.className} style={{ display: 'flex' } as any} compact>
+    <div style={{ flex: '1 1' }}>
+      <Input ref={inputRef} style={{ flex: '1 1' } as any}
+             onChange={(e) => props?.onChange?.(e.target?.value)}
+             value={props?.value} />
+      <div style={{ width: '100%' }}>
+        {input && (
+          <AutoComplete
+            datatype={'poi'}
+            input={input}
+            onSelect={({ poi }: any) => props?.onSelect?.(poi)}
+          />
+        )}
+      </div>
     </div>
-  </Input.Group>
-}
+  </Input.Group>;
+};
 
 export default Index;
