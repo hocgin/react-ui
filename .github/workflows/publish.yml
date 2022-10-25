@@ -21,7 +21,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-
       - name: Get version from Tags
         id: prep
         run: |
@@ -38,6 +37,19 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node_version }}
+      - name: Get yarn cache directory path
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Cache node modules
+        if: ${{ github.event.inputs.use_cache != 'false' }}
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
 
       - name: Authenticate with Registry
         run: |
@@ -48,14 +60,15 @@ jobs:
           npm whoami
         env:
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Rename Version
         run: |
           sed -i "s/\"4.0.45\"/\"${VERSION}\"/" package.json
         env:
           VERSION: ${{ steps.prep.outputs.version }}
-
-      - name: Publish package
+      - name: Publish Package
         run: |
-          npm install
-          npm run release
+          yarn
+          yarn patchpackage
+          yarn release
+        env:
+          NODE_OPTIONS: '--max_old_space_size=4096'
