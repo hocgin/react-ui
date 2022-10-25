@@ -1,0 +1,26 @@
+diff --git a/node_modules/antd/es/style/core/index.less b/node_modules/antd/es/style/core/index.less
+index c493947..671e5b9 100644
+--- a/node_modules/antd/es/style/core/index.less
++++ b/node_modules/antd/es/style/core/index.less
+@@ -1,5 +1,7 @@
+ @import '../mixins/index';
+ @import 'base';
+-@import 'global';
++*[class*='ant-'] {
++  @import 'global';
++}
+ @import 'iconfont';
+ @import 'motion';
+diff --git a/node_modules/antd/lib/style/core/index.less b/node_modules/antd/lib/style/core/index.less
+index c493947..671e5b9 100644
+--- a/node_modules/antd/lib/style/core/index.less
++++ b/node_modules/antd/lib/style/core/index.less
+@@ -1,5 +1,7 @@
+ @import '../mixins/index';
+ @import 'base';
+-@import 'global';
++*[class*='ant-'] {
++  @import 'global';
++}
+ @import 'iconfont';
+ @import 'motion';
