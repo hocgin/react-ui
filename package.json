@@ -16,7 +16,7 @@
     "build": "cross-env NODE_OPTIONS=\"--max_old_space_size=8192\" father-build",
     "link": "npm link",
     "unlink": "npm unlink",
-    "postinstall": "patch-package",
+    "patchpackage": "patch-package",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm publish --access public",
     "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",

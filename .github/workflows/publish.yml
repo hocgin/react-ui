@@ -68,7 +68,7 @@ jobs:
       - name: Publish Package
         run: |
           yarn
-          yarn postinstall
+          yarn patchpackage
           yarn release
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
