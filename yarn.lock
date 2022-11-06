@@ -1621,10 +1621,10 @@
   resolved "https://registry.npmmirror.com/@emotion/weak-memoize/-/weak-memoize-0.2.5.tgz#8eed982e2ee6f7f4e44c253e12962980791efd46"
   integrity sha512-6U71C2Wp7r5XtFtQzYrW5iKFT67OixrSxjI4MptCHzdSVlgabczzqLe0ZSgnub/5Kp4hSbpDB1tMytZY9pwxxA==
 
-"@hocgin/hkit@^1.0.51":
-  version "1.0.51"
-  resolved "https://registry.npmjs.org/@hocgin/hkit/-/hkit-1.0.51.tgz#dccf3ef5f88e2cc2a52099dda270d34b91c4b8f1"
-  integrity sha512-qzvX4cmpvgSRMdojo1DZeiAIySR9GGRaY1IGv2Dr2E85XcCPS9m1g4nXm4tbnzVxeqioi8V60YOIbZvSTi8dbQ==
+"@hocgin/hkit@^1.0.83":
+  version "1.0.83"
+  resolved "https://registry.npmjs.org/@hocgin/hkit/-/hkit-1.0.83.tgz#be299da19720a2e9faf504eaa22144ffdf16dac9"
+  integrity sha512-5sqY/tbp7cbiGqXG2zpBQJ+ZhyBYY4QrXPUWgz1ChVS9HhwsBU94//Q6mQlAWY0/DMhAV4r3TVGGtKO/VhBSzg==
   dependencies:
     memoize-one "^6.0.0"
     umi-request "^1.4.0"
@@ -3741,7 +3741,7 @@ ansi-wrap@0.1.0, ansi-wrap@^0.1.0:
   resolved "https://registry.npmmirror.com/ansi-wrap/-/ansi-wrap-0.1.0.tgz#a82250ddb0015e9a27ca82e82ea603bbfa45efaf"
   integrity sha512-ZyznvL8k/FZeQHr2T6LzcJ/+vBApDnMNZvfVFy3At0knswWd6rJ3/0Hhmpu8oqa6C92npmozs890sX9Dl6q+Qw==
 
-antd@^4.21.0:
+antd@4.22.5:
   version "4.22.5"
   resolved "https://registry.npmjs.org/antd/-/antd-4.22.5.tgz#4617a12dee3a427fc82e5d15bfb9232025622e05"
   integrity sha512-+qIEyzsenM9bllZHfE6ueZbI9EWulCIWeQhUeiIC6p8J2+M8w2tG2t6anbxxsOb5FnmML60ipVLL/rbm+oFKyw==
