@@ -3,19 +3,19 @@
 @collapse-prefix-cls: ~'@{hui-prefix}-collapse';
 
 .@{collapse-prefix-cls} {
-  .ant-collapse {
+  .@{ant-prefix}-collapse {
     background-color: unset !important;
 
-    .ant-collapse-item {
+    .@{ant-prefix}-collapse-item {
       border: unset;
 
-      .ant-collapse-header {
+      .@{ant-prefix}-collapse-header {
         padding-left: 0;
         padding-right: 0;
       }
     }
 
-    .ant-collapse-content > .ant-collapse-content-box {
+    .@{ant-prefix}-collapse-content > .@{ant-prefix}-collapse-content-box {
       padding: 0 !important;
     }
   }

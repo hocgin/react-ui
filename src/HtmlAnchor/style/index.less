@@ -9,34 +9,34 @@
 .@{directory-prefix-cls} {
   width: 200px;
 
-  .ant-anchor-wrapper {
+  .@{ant-prefix}-anchor-wrapper {
     overflow: unset;
   }
 
   @left-width: 25px;
 
-  .ant-anchor > .ant-anchor-link {
+  .@{ant-prefix}-anchor > .@{ant-prefix}-anchor-link {
     margin-left: @left-width;
   }
 
-  .ant-anchor-ink {
+  .@{ant-prefix}-anchor-ink {
     display: none;
   }
 
-  .ant-anchor-link {
+  .@{ant-prefix}-anchor-link {
     padding-left: 0;
     padding-bottom: 0;
     padding-top: 0;
 
     // 悬停和点击 start
-    .ant-anchor-link-title:hover {
+    .@{ant-prefix}-anchor-link-title:hover {
       & .anchor-link-title {
         color: @hover-after-color !important;
         opacity: 1 !important;
       }
     }
 
-    .ant-anchor-link-title-active {
+    .@{ant-prefix}-anchor-link-title-active {
       left: -4px;
 
       & .anchor-link-title {
@@ -45,8 +45,8 @@
       }
     }
 
-    .ant-anchor-link-title:hover:before,
-    .ant-anchor-link-title-active:before {
+    .@{ant-prefix}-anchor-link-title:hover:before,
+    .@{ant-prefix}-anchor-link-title-active:before {
       background: @hover-after-color !important;
     }
 
@@ -62,7 +62,7 @@
       text-overflow: ellipsis;
     }
 
-    .ant-anchor-link-title {
+    .@{ant-prefix}-anchor-link-title {
       overflow: unset;
       padding-bottom: 0;
       color: @hover-before-color;
