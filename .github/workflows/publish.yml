@@ -21,13 +21,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v1
-      - name: Get version from Tags
-        id: prep
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/}
-          VERSION=$(echo "${VERSION}" | sed 's/v//')
-          echo ::set-output name=version::${VERSION}
-
+      - id: prep
+        uses: hocgin/action-env@main
       - name: Git Identity
         run: |
           git config --global user.name 'github-actions[bot]'
@@ -39,7 +34,7 @@ jobs:
           node-version: ${{ matrix.node_version }}
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+        run: echo "name=dir::$(yarn cache dir)" >> $GITHUB_OUTPUT
       - name: Cache node modules
         if: ${{ github.event.inputs.use_cache != 'false' }}
         uses: actions/cache@v2
@@ -64,7 +59,7 @@ jobs:
         run: |
           sed -i "s/\"4.0.45\"/\"${VERSION}\"/" package.json
         env:
-          VERSION: ${{ steps.prep.outputs.version }}
+          VERSION: ${{ steps.prep.outputs.version_number }}
       - name: Publish Package
         run: |
           yarn
@@ -72,3 +67,4 @@ jobs:
           npm run release
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
+          USE_LOG: false

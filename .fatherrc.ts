@@ -2,6 +2,19 @@ import { IBundleOptions } from 'father-build/src/types';
 import { typescriptPaths } from 'rollup-plugin-typescript-paths';
 import path from 'path';
 
+export const useLogger = () => {
+  let result: any = [];
+  let offLogger = process.env.USE_LOG !== 'true';
+  console.debug(`[${offLogger ? '禁用' : '启用'}]日志打印`);
+  if (offLogger) {
+    result.push([
+      'transform-remove-console',
+      { exclude: ['error', 'warn', 'info'] },
+    ]);
+  }
+  return result;
+};
+
 export default {
   esm: 'babel',
   cjs: 'babel',
@@ -24,7 +37,6 @@ export default {
       },
       'antd',
     ],
-    ['transform-remove-console', { exclude: ['error', 'warn', 'info'] }],
     [
       'module-resolver',
       {
@@ -35,6 +47,7 @@ export default {
         },
       },
     ],
+    ...useLogger(),
   ],
   extraRollupPlugins: [
     typescriptPaths({
