@@ -3,6 +3,9 @@ import { message } from 'antd';
 import memoizeOne from 'memoize-one';
 import { Option } from '@/Utils/types/rt-grass';
 
+/**
+ * @deprecated
+ */
 export class Struct {
   /**
    * 响应是否失败

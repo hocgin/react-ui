@@ -5,6 +5,9 @@ export type HtmlTagType = {
   text: string;
   attr: Record<string, any>;
 };
+/**
+ * @deprecated
+ */
 export default class Lang {
   /**
    * 转 long
