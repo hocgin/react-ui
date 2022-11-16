@@ -5,6 +5,9 @@ export type HtmlTagType = {
   text: string;
   attr: Record<string, any>;
 };
+/**
+ * @deprecated
+ */
 export default class Lang {
   /**
    * 转 long
@@ -73,7 +76,7 @@ export default class Lang {
    * @param array
    * @return {*[]}
    */
-  static distinct(array: any[] = []) {
+  static distinct<T>(array: T[] = []): T[] {
     return Array.from(new Set(array));
   }
 
@@ -82,7 +85,7 @@ export default class Lang {
    * @param array
    * @param index
    */
-  static delete(array: any[] = [], index: number) {
+  static delete<T>(array: T[] = [], index: number): T[] {
     array.splice(index, 1);
     return array;
   }
@@ -307,9 +310,10 @@ export default class Lang {
   }
 
   static dynamicImport<T>(importFunc: () => T): { get: () => T } {
-    let instance: (T | undefined);
+    let instance: T | undefined;
     return {
-      get: () => instance !== undefined ? instance : (() => instance = importFunc())(),
+      get: () =>
+        instance !== undefined ? instance : (() => (instance = importFunc()))(),
     };
   }
 }

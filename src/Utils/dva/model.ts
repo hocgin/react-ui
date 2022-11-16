@@ -1,3 +1,6 @@
+/**
+ * @deprecated
+ */
 export class Model {
   /**
    * umi 函数
