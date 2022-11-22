@@ -10,30 +10,13 @@ export interface AdvertItemType {
   url: string;
 }
 
-export let defaultAdver = [{
-  title: '随机',
-  flag: '推荐',
-  imageUrl: 'https://cdn.hocgin.top/uPic/favicon.ico',
-  url: 'http://www.baidu.com',
-}, {
-  title: '随机',
-  flag: '作者推荐',
-  imageUrl: 'https://cdn.hocgin.top/file/addone-bookmarking_nav-background.png',
-  url: 'http://www.baidu.com',
-}, {
-  title: '随机',
-  flag: '作者推荐',
-  imageUrl: 'https://cdn.hocgin.top/file/20221116_tuijian.png',
-  url: 'http://www.baidu.com',
-}];
-
 const Index: React.FC<{
   prefixCls?: string;
   className?: string;
   height?: string | number;
   width?: string | number;
   items: AdvertItemType[];
-}> = ({ height = 80, width = '100%', items = defaultAdver, ...props }) => {
+}> = ({ height = 80, width = '100%', items, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('adverts', props.prefixCls);
   return (
