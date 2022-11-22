@@ -10,18 +10,18 @@ const SocialLinks: React.FC<{ className?: string }> = (props) => {
     <ul className={className}>
       <li>
         <a
-          href="https://github.com/hocgin"
-          target="_blank"
-          rel="noopener noreferrer"
+          href='https://github.com/hocgin'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <Icon.GitHubFilled className={`${className}-github`} />
         </a>
       </li>
       <li>
         <a
-          href="https://weibo.com/hocgin"
-          target="_blank"
-          rel="noopener noreferrer"
+          href='https://weibo.com/hocgin'
+          target='_blank'
+          rel='noopener noreferrer'
         >
           <Icon.WeiboFilled className={`${className}-weibo`} />
         </a>
@@ -34,11 +34,11 @@ const DefaultCopyTitle: React.FC<{}> = () => {
   return (
     <>
       © 2013-2021 |{' '}
-      <a href="http://www.hocgin.top/" target="_blank">
+      <a href='http://www.hocgin.top/' target='_blank'>
         🧱 红土立方
       </a>
       {' | '}
-      <a href="https://beian.miit.gov.cn/" target="_blank">
+      <a href='https://beian.miit.gov.cn/' target='_blank'>
         闽ICP备20004537号
       </a>
     </>
@@ -51,10 +51,6 @@ const DefaultFooterInfo: React.FC<{
   return (
     <>
       <GinLogo />
-      <span className={`${prefixCls}-footerInfo-year`}>
-        2022<sup>&copy;</sup>
-      </span>
-      <SocialLinks className={`${prefixCls}-footerInfo-links`} />
     </>
   );
 };
@@ -75,7 +71,7 @@ const Index: React.FC<{
   return (
     <div className={`${prefixCls}`}>
       <div className={`${prefixCls}-footerInfo`}>{footerInfo}</div>
-      <div className={`${prefixCls}-copytitle`}>{copyTitle}</div>
+      {copyTitle && <div className={`${prefixCls}-copytitle`}>{copyTitle}</div>}
     </div>
   );
 };
