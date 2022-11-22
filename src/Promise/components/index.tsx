@@ -8,6 +8,7 @@ import RadioButton from './RadioButton';
 import Radio from './Radio';
 import Checkbox from './Checkbox';
 import Comment from './Comment';
+import Adverts from './Adverts';
 import { NotificationBox, NotificationIndicator } from './Notification';
 import { Editor, HtmlPreview, Preview as EditorPreview } from './Editor';
 import ExhibitSchemaConfig from './Schema/ExhibitSchemaConfig';
@@ -41,6 +42,7 @@ export default class {
   static PageLayout: typeof PageLayout = PageLayout;
   static PageContainer: typeof PageContainer = PageContainer;
   static UserAvatar: typeof UserAvatar = UserAvatar;
+  static Adverts: typeof Adverts = Adverts;
 
   static Editor: typeof Editor = Editor;
   static EditorPreview: typeof EditorPreview = EditorPreview;

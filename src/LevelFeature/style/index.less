@@ -1,0 +1,101 @@
+@import (reference) '../../style/index.less';
+
+@LevelFeature-prefix-cls: ~'@{hui-prefix}-LevelFeature';
+
+.@{LevelFeature-prefix-cls} {
+  @fontColor: rgba(255, 255, 255, 0.9);
+  margin: 5px;
+  padding: 2em;
+  border-radius: 8px;
+  color: @fontColor;
+  display: flex;
+  flex-direction: column;
+
+  &-title {
+    color: @fontColor;
+    font-weight: 500;
+    font-size: 2.25rem;
+    margin-bottom: 0;
+  }
+
+  &-badge {
+    display: flex;
+  }
+
+  &-badge-item {
+    background-color: rgba(255, 255, 255, 0.3);
+    display: inline-block;
+    border-radius: 6px;
+    margin-right: 4px;
+  }
+
+  &-badge-text {
+    font-size: 8px;
+    transform: scale(0.9);
+    display: inline-flex;
+    align-items: center;
+  }
+
+  &-features {
+    padding: 0;
+    margin-bottom: 20px;
+    flex: 1 0;
+  }
+
+  &-feature {
+    padding: 0;
+    opacity: 0.4;
+    font-size: 15px;
+
+    &.checked {
+      opacity: 1;
+    }
+
+    cursor: pointer;
+
+    &:hover {
+      //transform: scale(1.01);
+      // font-weight: 500;
+      animation: all 1s ease;
+    }
+  }
+
+  &-price {
+    margin-top: 10px;
+    margin-bottom: 15px;
+
+    small {
+      font-size: 8px;
+    }
+  }
+
+  &-price-item {
+    font-size: 2.25rem;
+    font-weight: 700;
+  }
+
+  &-price-arrayitem {
+    border: solid 2px @fontColor;
+    border-radius: 10px;
+    text-align: center;
+    margin: 0 2px;
+  }
+
+  // ===
+  &-link-item {
+    text-align: center;
+    color: @fontColor;
+    padding: 10px 0;
+    font-weight: 700;
+    border-radius: 8px;
+    margin: 0 10px;
+    font-size: 1.1em;
+    box-shadow: 0 0 1px fade(@fontColor, 95%);
+    background-color: fade(@fontColor, 10%);
+
+    &:hover {
+      background-color: fade(@fontColor, 15%);
+      color: @fontColor;
+    }
+  }
+}

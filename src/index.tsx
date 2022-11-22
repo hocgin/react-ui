@@ -34,6 +34,7 @@ export { default as ChangeLog } from './ChangeLog';
 export { default as Redirect } from './Redirect';
 export { default as SpaceBetween } from './SpaceBetween';
 export { default as Adverts } from './Adverts';
+export { default as LevelFeature } from './LevelFeature';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
 export { default as Exhibit } from './Exhibit';
