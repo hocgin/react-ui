@@ -45,7 +45,7 @@ const Index: React.FC<{
           <h3 className={classnames(`${prefixCls}-title`)}>{item?.title}</h3>
         )}
         {/*徽章*/}
-        {item?.badge?.length > 0 && (
+        {(item?.badge?.length ?? 0) > 0 && (
           <div className={`${prefixCls}-badge`}>
             {(item?.badge || []).map((name) => (
               <span className={classnames(`${prefixCls}-badge-item`)}>
@@ -72,7 +72,7 @@ const Index: React.FC<{
               gridTemplateColumns: `repeat(${item?.price.length}, minmax(0, 1fr))`,
             }}
           >
-            {(item?.price || []).map((title) => (
+            {(item?.price || []).map((title: any) => (
               <span
                 className={classnames(
                   `${prefixCls}-price-item`,
@@ -111,7 +111,7 @@ const Index: React.FC<{
         >
           {(linkList || []).map(({ title, href }) => (
             <a
-              target="_blank"
+              target='_blank'
               className={classnames(`${prefixCls}-link-item`)}
               href={href}
             >
