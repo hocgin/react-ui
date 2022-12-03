@@ -14,8 +14,12 @@ title: AsReact
 ```jsx
 import React from 'react';
 import { AsReact } from '@hocgin/ui';
+import { LangKit } from '@hocgin/hkit';
 
 export default () => {
+  if (!LangKit.isBrowser()) {
+    return <></>;
+  }
   let element = document.createElement('b');
   element.textContent = '这是Element标签';
   return (
@@ -36,6 +40,6 @@ export default () => {
 
 ### 组件
 
-| 参数  | 说明  | 类型  | 默认值 | 版本  |
-|-----|-----|-----|-----|-----|
-| -   | -   | -   | -   | -   |
+| 参数 | 说明 | 类型 | 默认值 | 版本 |
+| ---- | ---- | ---- | ------ | ---- |
+| -    | -    | -    | -      | -    |

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Utils } from '@hocgin/ui';
 import treedata from './config.data-tree';
-
-console.log('Utils', Utils);
+import { LangKit } from '@hocgin/hkit';
 
 export const config: any = {
   useAction: {
@@ -188,7 +187,9 @@ export const config: any = {
       dataIndex: 'gin_upload_name',
       valueType: Utils.Dom.columnPrefix('upload'),
       params: {
-        action: `${window.location.origin}/api/com/file/upload`,
+        action: `${
+          LangKit.isBrowser() ? window.location.origin : ''
+        }/api/com/file/upload`,
         maxCount: 2,
       },
     },

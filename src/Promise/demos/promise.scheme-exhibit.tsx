@@ -7,15 +7,11 @@ import { config as exhibitConfig } from './config.scheme-exhibit';
 import { Promise } from '@hocgin/ui';
 import { Divider } from 'antd';
 
-export default class Index extends React.PureComponent<{}> {
-  state = {};
-
-  render() {
-    return (
-      <>
-        <Promise.ExhibitSchemaConfig config={{ ...exhibitConfig }} />
-        <Divider />
-      </>
-    );
-  }
-}
+export default () => {
+  return (
+    <>
+      <Promise.ExhibitSchemaConfig config={{ ...exhibitConfig }} />
+      <Divider />
+    </>
+  );
+};

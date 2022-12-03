@@ -3,7 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Promise} from '@hocgin/ui';
+import { Promise } from '@hocgin/ui';
 import localRoutes from './config.page-layout';
 
 let useAction = {
@@ -39,25 +39,20 @@ let useAction = {
   },
 };
 
-export default class Index extends React.PureComponent<{}> {
-  state = {};
-
-  render() {
-    let style = { height: '100vh' };
-    let waterMark = { content: 'HOCGIN' };
-
-    return (
-      <div style={style}>
-        <Promise.PageLayout
-          {...localRoutes}
-          useAction={useAction}
-          rightContentRender={() => <Promise.UserAvatar />}
-        >
-          <Promise.PageContainer waterMarkProps={waterMark}>
-            <div style={style}>内容</div>
-          </Promise.PageContainer>
-        </Promise.PageLayout>
-      </div>
-    );
-  }
-}
+export default () => {
+  let style = { height: '100vh' };
+  let waterMark = { content: 'HOCGIN' };
+  return (
+    <div style={style}>
+      <Promise.PageLayout
+        {...localRoutes}
+        useAction={useAction}
+        rightContentRender={() => <Promise.UserAvatar />}
+      >
+        <Promise.PageContainer waterMarkProps={waterMark}>
+          <div style={style}>内容</div>
+        </Promise.PageContainer>
+      </Promise.PageLayout>
+    </div>
+  );
+};

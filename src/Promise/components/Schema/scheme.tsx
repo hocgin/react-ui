@@ -5,7 +5,7 @@ import Editor from '@/Editor';
 import Dom from '@/Utils/dom';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input, Tooltip } from 'antd';
-import { SearchLbsData } from '@/Promise/components/SearchLbs/LbsSearch';
+import { SearchLbsData } from '@/Promise/components/SearchLbs/types';
 
 let boxStyle = {
   width: '100%',
@@ -266,18 +266,24 @@ export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
         return <span>-</span>;
       }
       let location = value?.location;
-      return <Tooltip title={<>
-        <div>地址: {value.address}</div>
-        <div>经纬度: {location?.lng}, {location?.lat}</div>
-      </>}>
-        <div>{`${value.name}`}</div>
-      </Tooltip>;
+      return (
+        <Tooltip
+          title={
+            <>
+              <div>地址: {value.address}</div>
+              <div>
+                经纬度: {location?.lng}, {location?.lat}
+              </div>
+            </>
+          }
+        >
+          <div>{`${value.name}`}</div>
+        </Tooltip>
+      );
     },
     renderFormItem: (text: any, props: any) => {
       let params: SearchLbsParam = props?.params || {};
-      return (
-        <Promise.SearchLbs akay={params?.akay} {...props?.fieldProps} />
-      );
+      return <Promise.SearchLbs akay={params?.akay} {...props?.fieldProps} />;
     },
   },
   // 多行文本

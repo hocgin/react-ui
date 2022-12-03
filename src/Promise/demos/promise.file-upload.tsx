@@ -4,8 +4,12 @@
  */
 import React from 'react';
 import { Promise } from '@hocgin/ui';
+import { LangKit } from '@hocgin/hkit';
 
 export default () => {
+  if (!LangKit.isBrowser()) {
+    return <></>;
+  }
   return (
     <>
       <Promise.FileUpload

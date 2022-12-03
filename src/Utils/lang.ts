@@ -306,6 +306,7 @@ export default class Lang {
   }
 
   static isDev() {
+    // @ts-ignore
     return process.env.NODE_ENV === 'development';
   }
 
