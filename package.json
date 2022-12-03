@@ -19,9 +19,7 @@
     "patchpackage": "patch-package",
     "deploy": "npm run docs:build && npm run docs:deploy",
     "release": "npm run build && npm publish --access public",
-    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\"",
-    "test": "umi-test",
-    "test:coverage": "umi-test --coverage"
+    "prettier": "prettier --write \"**/*.{js,jsx,tsx,ts,less,md,json}\""
   },
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",

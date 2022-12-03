@@ -1,6 +1,5 @@
 import { defineConfig } from 'dumi';
 import { join, resolve } from 'path';
-import * as fs from 'fs';
 
 export const useLogger = () => {
   let result: any = [];
