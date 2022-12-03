@@ -64,7 +64,7 @@ jobs:
           VERSION: ${{ steps.prep.outputs.version_number }}
       - name: Publish Package
         run: |
-          pnpm install
+          pnpm install --no-frozen-lockfile
           pnpm patchpackage
           pnpm run release
         env:
