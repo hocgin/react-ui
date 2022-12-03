@@ -2,14 +2,24 @@
 category: Components
 group: 组件
 noinstant: true
-title: Tpl - 模版文件
+title: Settings - 配置
 ---
 
 这是一个组件的基础描述
 
+- Group
+  - Scope
+    - Item
+    - Item
+    - Item
+  - Scope
+    - Item
+  - Scope
+    - Item
+
 ## 代码演示
 
-<code src="./demos/hi.tsx" >属性</code>
+<code src="./demos/index.tsx"  background="#f0f2f5" >属性</code>
 
 ## API
 

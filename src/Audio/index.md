@@ -1,19 +1,12 @@
 ---
-# @formatter:off
+category: Components
+group: 组件
+noinstant: true
 title: Audio - 音频播放器
-nav:
-  title: 组件
-  path: /components
-group:
-  path: /
-# @formatter:on
 ---
-
-# Audio - 音频播放器
+这是一个组件的基础描述
 
 > [APlayer](https://aplayer.js.org/#/zh-Hans/)
-
-这是一个组件的基础描述
 
 ## 代码演示
 
@@ -50,6 +43,6 @@ export default () => {
 
 ### 组件
 
-| 参数 | 说明 | 类型 | 默认值 | 版本 |
-| ---- | ---- | ---- | ------ | ---- |
-| -    | -    | -    | -      | -    |
+| 参数  | 说明  | 类型  | 默认值 | 版本  |
+|-----|-----|-----|-----|-----|
+| -   | -   | -   | -   | -   |

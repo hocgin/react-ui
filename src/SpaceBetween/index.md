@@ -2,7 +2,7 @@
 category: Components
 group: 组件
 noinstant: true
-title: AsReact
+title: SpaceBetween
 ---
 
 这是一个组件的基础描述
@@ -13,14 +13,14 @@ title: AsReact
 
 ```jsx
 import React from 'react';
-import { AsReact } from '@hocgin/ui';
+import { SpaceBetween } from '@hocgin/ui';
 
 export default () => {
-  let element = document.createElement('b');
-  element.textContent = '这是Element标签';
   return (
     <>
-      <AsReact children={element} />
+      <SpaceBetween label="标题">
+        <div>内容</div>
+      </SpaceBetween>
     </>
   );
 };

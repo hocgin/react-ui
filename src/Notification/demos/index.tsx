@@ -4,7 +4,6 @@
  */
 import React, { useState } from 'react';
 import { Notification } from '@hocgin/ui';
-import styles from './index.less';
 import { Divider } from 'antd';
 import {
   ScrollParamsType,
@@ -188,15 +187,14 @@ export default () => {
   let [count, setCount] = useState<number>(0);
   return (
     <>
-      <Divider type="horizontal" />
+      <Divider type='horizontal' />
       <Notification.Indicator
         count={count}
         onClick={() => setCount(Math.round(Math.random() * 10))}
-        className={styles.ok}
       />
-      <Divider type="horizontal" />
+      <Divider type='horizontal' />
       <Notification.Box useAction={useAction} tabPosition={'top'} />
-      <Divider type="horizontal" />
+      <Divider type='horizontal' />
       <Notification.Box useAction={{}} tabPosition={'left'} />
     </>
   );

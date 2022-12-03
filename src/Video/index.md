@@ -2,25 +2,30 @@
 category: Components
 group: 组件
 noinstant: true
-title: AsReact
+title: Video - 视频播放器
 ---
 
 这是一个组件的基础描述
 
 ## 代码演示
 
+> Use [ArtPlayer](https://artplayer.org/document/)
+
 ### 基础用法
 
 ```jsx
 import React from 'react';
-import { AsReact } from '@hocgin/ui';
+import { Video } from '@hocgin/ui';
 
 export default () => {
-  let element = document.createElement('b');
-  element.textContent = '这是Element标签';
   return (
     <>
-      <AsReact children={element} />
+      <Video
+        className="ok"
+        getInstance={(art) => console.log(art)}
+        src={'https://artplayer.org/assets/sample/video.mp4'}
+        option={Video.defaultOption}
+      />
     </>
   );
 };
@@ -28,7 +33,7 @@ export default () => {
 
 ```css
 .ok {
-  color: red;
+  /*color: red;*/
 }
 ```
 

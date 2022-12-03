@@ -2,10 +2,10 @@
 category: Components
 group: 组件
 noinstant: true
-title: AsReact
+title: Redirect - 页面重定向
 ---
 
-这是一个组件的基础描述
+页面重定向
 
 ## 代码演示
 
@@ -13,14 +13,12 @@ title: AsReact
 
 ```jsx
 import React from 'react';
-import { AsReact } from '@hocgin/ui';
+import { Redirect, ConfigProvider } from '@hocgin/ui';
 
 export default () => {
-  let element = document.createElement('b');
-  element.textContent = '这是Element标签';
   return (
     <>
-      <AsReact children={element} />
+      <Redirect className="ok" redirectUrl={'https://www.baidu.com'} />
     </>
   );
 };
