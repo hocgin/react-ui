@@ -9,7 +9,7 @@ import { HeaderViewProps } from '@ant-design/pro-layout/lib/Header';
 import { BasicLayoutProps } from '@ant-design/pro-layout/lib/BasicLayout';
 import Lang from '@/Utils/lang';
 import { LocalRoute } from '@/Utils/interface';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_PATHNAME = '/welcome';
 
@@ -59,7 +59,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   ...rest
 }) => {
   // @formatter: on
-  let history = useHistory();
+  let history = useNavigate();
   let { runAsync } = useRequest(useAction!.initialValues, {
     manual: true,
   });
@@ -87,7 +87,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       rightContentRender={rightContentRender}
       headerContentRender={() => <ProBreadcrumb />}
       menuItemRender={(item, dom) => (
-        <a onClick={() => history.push(item.path || DEFAULT_PATHNAME)}>{dom}</a>
+        <a onClick={() => history(item.path || DEFAULT_PATHNAME)}>{dom}</a>
       )}
       footerRender={() => <Footer />}
       {...rest}

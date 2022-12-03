@@ -1,49 +1,33 @@
 import { defineConfig } from 'dumi';
-import { readdirSync } from 'fs';
 import { join, resolve } from 'path';
 import * as fs from 'fs';
 
-const ignorePkgList: any[] = ['index.tsx'];
-const pkgList = readdirSync(join(__dirname, 'src')).filter(
-  (pkg: string) => pkg.charAt(0) !== '.' && !ignorePkgList.includes(pkg),
-);
-let path = join(__dirname, 'src', 'index.tsx');
-
-const tailPkgList = pkgList
-  .filter(
-    (pkg: string) => pkg.charAt(0) !== '.' && !ignorePkgList.includes(pkg),
-  )
-  .map((path) => [join('src', path)])
-  .reduce((acc, val) => acc.concat(val), []);
+export const useLogger = () => {
+  let result: any = [];
+  let offLogger = process.env.USE_LOG !== 'true';
+  console.debug(`[${offLogger ? '禁用' : '启用'}]日志打印`);
+  if (offLogger) {
+    result.push([
+      'transform-remove-console',
+      { exclude: ['error', 'warn', 'info'] },
+    ]);
+  }
+  return result;
+};
 
 export default defineConfig({
-  title: 'HOCGIN x UI',
-  mode: 'site',
   // more config: https://d.umijs.org/config
-  logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
-  navs: [
-    null,
-    {
-      title: 'GitHub',
-      path: 'https://github.com/hocgin/react-ui',
-    },
-  ],
-  resolve: { includes: ['docs', ...tailPkgList] },
-  apiParser: {
-    // 自定义属性过滤配置，也可以是一个函数，用法参考：https://github.com/styleguidist/react-docgen-typescript/#propfilter
-    propFilter: {
-      // 是否忽略从 node_modules 继承的属性，默认值为 false
-      skipNodeModules: false,
-      // 需要忽略的属性名列表，默认为空数组
-      skipPropsWithName: ['title'],
-      // 是否忽略没有文档说明的属性，默认值为 false
-      skipPropsWithoutDoc: false,
-    },
+  themeConfig: {
+    name: '@hocgin/ui',
+    logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
   },
-  // ssr: {},
   exportStatic: {},
   ignoreMomentLocale: true,
+  alias: {
+    '@': `${resolve(__dirname, 'src')}`,
+  },
   extraBabelPlugins: [
+    ...useLogger(),
     [
       'import',
       {
@@ -97,4 +81,5 @@ export default defineConfig({
       },
     ],
   ],
+  ssr: process.env.NODE_ENV !== 'development',
 });

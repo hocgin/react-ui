@@ -14,7 +14,7 @@
     "strict": true,
     "paths": {
       "@/*": ["src/*"],
-      "@@/*": ["src/.umi/*"],
+      "@@/*": [".dumi/tmp/*"],
       "@hocgin/ui": ["src/index.tsx"]
     },
     "typeRoots": ["./typings", "./node_modules/@types"],

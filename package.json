@@ -13,7 +13,7 @@
     "analyze": "cross-env ANALYZE=1 dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "build": "cross-env NODE_OPTIONS=\"--max_old_space_size=8192\" father-build",
+    "build": "cross-env NODE_OPTIONS=\"--max_old_space_size=8192\" father build",
     "link": "npm link",
     "unlink": "npm unlink",
     "patchpackage": "patch-package",
@@ -23,14 +23,12 @@
     "test": "umi-test",
     "test:coverage": "umi-test --coverage"
   },
-  "main": "lib/index.js",
-  "module": "es/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
   "unpkg": "dist/index.umd.min.js",
-  "typings": "lib/index.d.ts",
   "files": [
-    "lib",
-    "dist",
-    "es"
+    "dist"
   ],
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -120,8 +118,8 @@
     "babel-plugin-module-resolver": "^4.1.0",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "cross-env": "^7.0.3",
-    "dumi": "^1.1.40",
-    "father-build": "^1.17.2",
+    "dumi": "^2.0.10",
+    "father": "^4.0.0",
     "gh-pages": "^3.0.0",
     "lint-staged": "^10.0.7",
     "patch-package": "^6.4.7",
