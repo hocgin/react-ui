@@ -16,6 +16,7 @@ export const useLogger = () => {
 };
 
 export default defineConfig({
+  outputPath: 'docs-dist',
   // more config: https://d.umijs.org/config
   locales: [
     { id: 'zh-CN', name: '中文' },
