@@ -1,4 +1,4 @@
-import { APILoaderConfig, APILoaderProps } from '@uiw/react-amap';
+import type { APILoaderConfig, APILoaderProps } from '@uiw/react-amap';
 import React, { Component } from 'react';
 import { requireScript } from '@uiw/react-amap-require-script';
 
@@ -12,7 +12,11 @@ declare global {
 
 export function delay(time: number): Promise<undefined> {
   return new Promise((resolve, reject) => {
-    window.setTimeout(resolve, time);
+    if (typeof window !== 'undefined') {
+      window.setTimeout(resolve, time);
+    } else {
+      resolve(undefined);
+    }
   });
 }
 
@@ -36,7 +40,7 @@ const DEFAULT_RETRY_TIME = 3;
  */
 export class UAPILoader extends Component<UAPILoaderProps> {
   public static defaultProps = {
-    protocol: /^file:/.test(window.location.protocol) ? 'https' : window.location.protocol,
+    protocol: /^file:/.test(typeof window !== 'undefined' ? window.location.protocol : '') ? 'https' : window.location.protocol,
     akay: '',
     hostAndPath: 'webapi.amap.com/maps',
     version: '2.0',

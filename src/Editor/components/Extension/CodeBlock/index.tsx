@@ -1,5 +1,4 @@
 import CodeBlock, { CodeBlockOptions } from '@tiptap/extension-code-block';
-import CodeBlockView from './CodeBlockView';
 
 export interface CodeBlockLowlightOptions extends CodeBlockOptions {
   defaultLanguage: string | null | undefined;
@@ -14,7 +13,10 @@ export default CodeBlock.extend<CodeBlockLowlightOptions>({
   },
 
   addNodeView() {
-    return ({ node, editor, getPos }) => {
+    return async ({ node, editor, getPos }) => {
+      // 先异步处理，内部使用了 window 对象
+      let { default: CodeBlockView } = await import('./CodeBlockView');
+
       return new CodeBlockView(
         node,
         editor.view,
