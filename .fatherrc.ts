@@ -1,5 +1,6 @@
 import { defineConfig } from 'father';
-import path from 'path';
+import { resolve } from 'path';
+import { IFatherConfig } from 'father/dist/types';
 
 export const useLogger = () => {
   let result: any = [];
@@ -19,7 +20,8 @@ export default defineConfig({
   esm: {},
   cjs: {},
   alias: {
-    '@': path.resolve(__dirname, './src'),
+    '@': resolve(__dirname, './src'),
+    '@@': resolve(__dirname, './src/.dumi/tmp'),
   },
   extraBabelPlugins: [
     ...useLogger(),
@@ -31,16 +33,6 @@ export default defineConfig({
         style: true,
       },
       'antd',
-    ],
-    [
-      'module-resolver',
-      {
-        root: ['.'],
-        alias: {
-          '@': './src',
-          '@@': './src/.dumi/tmp',
-        },
-      },
     ],
   ],
 });
