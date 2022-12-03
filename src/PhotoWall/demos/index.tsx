@@ -4,7 +4,6 @@
  */
 import React from 'react';
 import { PhotoWall, Utils } from '@hocgin/ui';
-import styles from './index.less';
 
 export default () => {
   return (

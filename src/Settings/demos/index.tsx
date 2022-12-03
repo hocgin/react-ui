@@ -4,7 +4,6 @@
  */
 import React from 'react';
 import { Settings } from '@hocgin/ui';
-import styles from './index.less';
 
 let groups = [{
   title: '授权',
@@ -105,7 +104,7 @@ let useAction = {
 export default () => {
   return (
     <>
-      <Settings useAction={useAction} className={styles.ok} />
+      <Settings useAction={useAction} />
     </>
   );
 };

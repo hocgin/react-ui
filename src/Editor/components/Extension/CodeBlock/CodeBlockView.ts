@@ -117,7 +117,11 @@ class CodeBlockView implements NodeView {
   // which, in ProseMirror's base keymap, creates a new paragraph after a code block.
   codeMirrorKeymap() {
     const view = this.view;
-    const mod = /Mac/.test(navigator.platform) ? 'Cmd' : 'Ctrl';
+    let platform =
+      typeof window !== 'undefined' && typeof navigator !== 'undefined'
+        ? navigator?.platform
+        : '';
+    const mod = /Mac/.test(platform) ? 'Cmd' : 'Ctrl';
     return CodeMirror.normalizeKeyMap({
       Up: () => this.maybeEscape('line', -1),
       Left: () => this.maybeEscape('char', -1),

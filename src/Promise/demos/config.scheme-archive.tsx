@@ -1,6 +1,6 @@
 import React from 'react';
 import { Utils } from '@hocgin/ui';
-import treedata from './data-tree';
+import treedata from './config.data-tree';
 
 console.log('Utils', Utils);
 

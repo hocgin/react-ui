@@ -1,7 +1,7 @@
 ---
 # @formatter:off
 title: 快速上手
-order: 2
+order: 1
 # @formatter:on
 ---
 

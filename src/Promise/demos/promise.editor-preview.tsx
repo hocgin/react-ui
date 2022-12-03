@@ -4,9 +4,16 @@
  */
 import React from 'react';
 import { Promise, Footer } from '@hocgin/ui';
-import styles from './index.less';
 import { Divider } from 'antd';
 
+const previewStyles: React.CSSProperties = {
+  border: 'unset',
+  backgroundColor: '#fff',
+  minHeight: '200px',
+  maxWidth: '800px',
+  margin: '0 auto',
+  padding: '0 10px 10px',
+};
 export const html = `
     <h1>这是一份报告 H1</h1>
     <h2>👋系统分析 H2</h2>
@@ -83,15 +90,15 @@ export const html = `
 export default () => {
   return (<>
       <div style={{ border: '1px solid rgb(242 242 242)' } as any}>
-        <article className={styles.preview}>
-          <h1 className={styles.title}>你好👋</h1>
+        <article style={previewStyles}>
+          <h1>你好👋</h1>
           <Promise.EditorPreview id={666} />
         </article>
       </div>
       <Divider />
       <div style={{ border: '1px solid rgb(242 242 242)' } as any}>
-        <article className={styles.preview}>
-          <h1 className={styles.title}>你好2👋</h1>
+        <article style={previewStyles}>
+          <h1>你好2👋</h1>
           <Promise.EditorHtmlPreview value={html} />
         </article>
       </div>

@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { Promise} from '@hocgin/ui';
-import localRoutes from './page-layout-config';
+import localRoutes from './config.page-layout';
 
 let useAction = {
   initialValues: async () => {

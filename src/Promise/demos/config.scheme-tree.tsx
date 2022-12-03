@@ -1,8 +1,8 @@
 import React from 'react';
 import { Space } from 'antd';
-import { config as addConfig } from './scheme-archive-config';
+import { config as addConfig } from './config.scheme-archive';
 import { Promise } from '@hocgin/ui';
-import data from './tree-data';
+import data from './config.tree-data';
 
 /// <reference types="react" />
 export const config: any = {

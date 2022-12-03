@@ -128,6 +128,11 @@ export default () => {
     'Utils.Lang.matchHtmlTag(content, \'h[1-6]\')',
     Utils.Lang.matchHtmlTag(content, 'h[1-6]'),
   );
+  const unsetHeightStyles: React.CSSProperties = {
+    height: unsetHeight ? 'unset' : undefined,
+  };
+
+
   return (
     <>
       <Editor
@@ -148,9 +153,6 @@ export default () => {
         editorRef={editorRef}
         editable={editable}
         fullscreen={fullscreen}
-        className={classnames(styles.ok, {
-          [styles.unsetHeight]: unsetHeight,
-        })}
         placeholder={'请输入内容'}
         value={content}
         onChangeFullscreen={(fullscreen: any) => setFullscreen(fullscreen)}

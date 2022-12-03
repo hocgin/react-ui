@@ -1,8 +1,12 @@
 ---
-category: Components
-group: 组件
-noinstant: true
+
+# @formatter:off
 title: Promise - 约定式组件
+nav:
+  title: 组件
+group:
+  title: 高级组件
+# @formatter:on
 ---
 
 > 新增、修改、删除、分页查询、详情
@@ -32,7 +36,7 @@ title: Promise - 约定式组件
 
 ### 评论组件(Promise.Comment)
 
-<code src="./demos/promise.comment.tsx"  background="#f0f2f5" inline>属性</code>
+<code src="./demos/promise.comment.tsx"  background="#f0f2f5" transform="true" iframe>属性</code>
 
 ### 菜单(Promise.Editor/Promise.EditorPreview):
 
@@ -41,7 +45,7 @@ title: Promise - 约定式组件
 
 ### 评论组件(Promise.NotificationIndicator/Promise.NotificationBox)
 
-<code src="./demos/promise.notification.tsx"  background="#f0f2f5" >属性</code>
+<code src="./demos/promise.notification.tsx"  background="#f0f2f5">属性</code>
 
 ### JSON 存档方案 (Promise.SchemeArchive)
 

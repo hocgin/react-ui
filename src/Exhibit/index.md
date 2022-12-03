@@ -1,8 +1,12 @@
 ---
-category: Complex
-group: 高级组件
-noinstant: true
+
+# @formatter:off
 title: Exhibit - 展览
+nav:
+  title: 组件
+group:
+  title: 高级组件
+# @formatter:on
 ---
 
 

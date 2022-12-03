@@ -13,9 +13,9 @@
     "baseUrl": "./",
     "strict": true,
     "paths": {
+      "@hocgin/ui": ["src/index.tsx"],
       "@/*": ["src/*"],
-      "@@/*": [".dumi/tmp/*"],
-      "@hocgin/ui": ["src/index.tsx"]
+      "@@/*": [".dumi/tmp/*"]
     },
     "typeRoots": ["./typings", "./node_modules/@types"],
     "allowSyntheticDefaultImports": true

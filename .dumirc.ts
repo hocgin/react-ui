@@ -42,6 +42,6 @@ export default defineConfig({
       'antd',
     ],
   ],
-  resolve: { entryFile: './src/index.ts' },
-  ssr: process.env.NODE_ENV !== 'development',
+  resolve: { entryFile: './src/index.tsx' },
+  ssr: process.env.NODE_ENV === 'development' ? false : {},
 });

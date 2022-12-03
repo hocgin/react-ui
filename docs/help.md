@@ -1,7 +1,10 @@
 ---
+
 # @formatter:off
 title: 帮助
-order: 1
+nav:
+  title: 帮助
+  order: 4
 # @formatter:on
 ---
 
