@@ -3,7 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import OriginAudio, { AudioOption } from './Audio';
-
+import './style';
 
 type AudioType = typeof OriginAudio & {
   defaultOption: AudioOption;

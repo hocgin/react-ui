@@ -1,18 +1,21 @@
-import { APILoaderConfig, APILoaderProps } from '@uiw/react-amap';
-import React, { Component } from 'react';
+import React, { Component, PropsWithChildren } from 'react';
 import { requireScript } from '@uiw/react-amap-require-script';
+import { LangKit } from '@hocgin/hkit';
 
 declare global {
   interface Window {
     AMapUI: any;
     initAMapUI: any;
   }
-
 }
 
 export function delay(time: number): Promise<undefined> {
   return new Promise((resolve, reject) => {
-    window.setTimeout(resolve, time);
+    if (typeof window !== 'undefined') {
+      window.setTimeout(resolve, time);
+    } else {
+      resolve(undefined);
+    }
   });
 }
 
@@ -20,9 +23,47 @@ export interface AMapUIConfig {
   version?: string;
 }
 
-export interface UAPILoaderProps extends APILoaderProps {
+export type UAPILoaderProps = PropsWithChildren<{
+  /**
+   * akay 密钥
+   * 您需先[申请密钥(ak)](https://lbs.amap.com/dev/key/app)。开发文档说明地址：https://lbs.amap.com/api/javascript-api/guide/abc/prepare
+   *
+   * 1. 首先，[注册开发者账号](https://lbs.amap.com/dev/id/newuser)，成为高德开放平台开发者
+   * 2. 登陆之后，在进入「应用管理」 页面「创建新应用」
+   * 3. 为应用[添加 Key](https://lbs.amap.com/dev/key/app)，「服务平台」一项请选择「 Web 端 ( JSAPI ) 」
+   *
+   */
+  akay: string;
+  /**
+   * SDK 包版本
+   * @default 1.4.15
+   */
+  version?: string;
+  /**
+   * 协议，默认是根据当前网站协议的
+   */
+  protocol?: 'http' | 'https';
+  /**
+   * 请求 SDK 的前半部分
+   * https://webapi.amap.com/maps?v=1.4.15&key=您申请的key值
+   * @default webapi.amap.com/maps
+   */
+  hostAndPath?: string;
+  /**
+   * JSONP 回调函数
+   */
+  callbackName?: string;
+  /**
+   * 加载一个或者多个插件
+   * @example `AMap.ToolBar,AMap.Driving`
+   */
+  plugin?: string;
   useAMapUI?: boolean | AMapUIConfig;
-}
+  /**
+   * 用于展示加载中或错误状态
+   */
+  fallback?: (error?: Error) => React.ReactNode;
+}>;
 
 interface State {
   loaded: boolean;
@@ -36,7 +77,11 @@ const DEFAULT_RETRY_TIME = 3;
  */
 export class UAPILoader extends Component<UAPILoaderProps> {
   public static defaultProps = {
-    protocol: /^file:/.test(window.location.protocol) ? 'https' : window.location.protocol,
+    protocol: /^file:/.test(
+      LangKit.isBrowser() ? window.location.protocol : 'file:',
+    )
+      ? 'https'
+      : window.location.protocol,
     akay: '',
     hostAndPath: 'webapi.amap.com/maps',
     version: '2.0',
@@ -54,7 +99,7 @@ export class UAPILoader extends Component<UAPILoaderProps> {
     loaded: !!window.AMap,
   };
 
-  public constructor(props: APILoaderProps) {
+  public constructor(props: UAPILoaderProps) {
     super(props);
     if (props.akay === null) {
       throw new TypeError('AMap: akay is required');
@@ -79,7 +124,7 @@ export class UAPILoader extends Component<UAPILoaderProps> {
 
   public render() {
     if (this.state.loaded) {
-      return this.props.children;
+      return (this.props as any)?.children as any;
     }
     if (this.props.fallback) {
       return this.props.fallback(this.state.error);
@@ -92,7 +137,7 @@ export class UAPILoader extends Component<UAPILoaderProps> {
 
   private getScriptSrc() {
     const cfg = this.props;
-    let protocol = (cfg.protocol || window.location.protocol) as APILoaderConfig['protocol'];
+    let protocol = cfg.protocol || window.location.protocol;
     if (protocol!.indexOf(':') === -1) {
       protocol += ':';
     }
@@ -144,8 +189,11 @@ export class UAPILoader extends Component<UAPILoaderProps> {
     if (useAMapUI === false || window.AMapUI != null) {
       return;
     }
-    let config = (typeof useAMapUI === 'boolean') ? {} : useAMapUI!;
-    await requireScript(this.getMapUIScriptSrc(config.version), '_react_amapui_plugin');
+    let config = typeof useAMapUI === 'boolean' ? {} : useAMapUI!;
+    await requireScript(
+      this.getMapUIScriptSrc(config.version),
+      '_react_amapui_plugin',
+    );
     if (window.AMap && window.initAMapUI && !window.AMapUI) {
       window.initAMapUI();
     }
@@ -153,7 +201,7 @@ export class UAPILoader extends Component<UAPILoaderProps> {
 
   private getMapUIScriptSrc(version: string = '1.1'): string {
     const cfg = this.props;
-    let protocol = (cfg.protocol || window.location.protocol) as APILoaderConfig['protocol'];
+    let protocol = cfg.protocol || window.location.protocol;
     if (protocol!.indexOf(':') === -1) {
       protocol += ':';
     }
@@ -175,4 +223,3 @@ export class UAPILoader extends Component<UAPILoaderProps> {
     }
   };
 }
-

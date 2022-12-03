@@ -1,6 +1,5 @@
 import React from 'react';
 import ExhibitSchema from './exhibit-schema';
-import styles from './index.less';
 import { UseAction } from './type';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';

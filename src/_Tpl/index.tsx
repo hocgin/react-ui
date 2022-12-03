@@ -4,5 +4,6 @@
  */
 export { default as Tpl } from './Tpl';
 import Tpl from './Tpl';
+import './style';
 
 export default Tpl;

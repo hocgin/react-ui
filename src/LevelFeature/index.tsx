@@ -4,5 +4,6 @@
  */
 export { default as LevelFeature } from './LevelFeature';
 import LevelFeature from './LevelFeature';
+import './style';
 
 export default LevelFeature;

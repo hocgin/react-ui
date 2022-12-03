@@ -5,5 +5,6 @@
 import React from 'react';
 
 import { Like } from './components/Like';
+import './style';
 
 export default Like;

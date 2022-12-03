@@ -3,6 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import OriginVideo, { VideoOption } from './Video';
+import './style';
 
 type VideoType = typeof OriginVideo & {
   defaultOption: VideoOption;

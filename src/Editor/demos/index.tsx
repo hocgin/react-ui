@@ -10,7 +10,7 @@ import { useToggle } from 'ahooks';
 import classnames from 'classnames';
 
 const content = `
-              <pre class="line-numbers"><code class="language-javascript">for (var i=1; i <= 20; i++)
+              <pre class='line-numbers'><code class='language-javascript'>for (var i=1; i <= 20; i++)
 {
   if (i % 15 == 0)
     console.log("FizzBuzz");
@@ -125,9 +125,14 @@ export default () => {
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
   console.log(
-    "Utils.Lang.matchHtmlTag(content, 'h[1-6]')",
+    'Utils.Lang.matchHtmlTag(content, \'h[1-6]\')',
     Utils.Lang.matchHtmlTag(content, 'h[1-6]'),
   );
+  const unsetHeightStyles: React.CSSProperties = {
+    height: unsetHeight ? 'unset' : undefined,
+  };
+
+
   return (
     <>
       <Editor
@@ -148,12 +153,9 @@ export default () => {
         editorRef={editorRef}
         editable={editable}
         fullscreen={fullscreen}
-        className={classnames(styles.ok, {
-          [styles.unsetHeight]: unsetHeight,
-        })}
         placeholder={'请输入内容'}
         value={content}
-        onChangeFullscreen={(fullscreen) => setFullscreen(fullscreen)}
+        onChangeFullscreen={(fullscreen: any) => setFullscreen(fullscreen)}
       />
       <Divider />
       <Button

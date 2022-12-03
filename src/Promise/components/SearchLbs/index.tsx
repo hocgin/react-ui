@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input } from 'antd';
-import LbsButton from './LbsButton';
-import LbsSearch, { SearchLbsData } from '@/Promise/components/SearchLbs/LbsSearch';
 import { ConfigContext } from '@/ConfigProvider';
 import { UAPILoader } from '@/Utils/map';
 import { ClearOutlined } from '@ant-design/icons';
-
+import { SearchLbsData } from '@/Promise/components/SearchLbs/types';
+import { LangKit } from '@hocgin/hkit';
 
 /**
  * 地图选点
@@ -36,14 +35,40 @@ const Index: React.FC<{
     props?.onChange?.(data);
     console.log('目标位置调整', data);
   }, [data]);
-  return <Input.Group style={{ display: 'flex' } as any} compact>
-    <UAPILoader useAMapUI={true} akay={akay}>
-      <LbsSearch value={input} onChange={setInput} akay={akay} onSelect={setData} />
-      <Button icon={<ClearOutlined />} onClick={setData.bind(this, undefined)} />
-      <LbsButton prefixCls={`${prefixCls}-LbsButton`} data={data}
-                 onOk={setData} className={`${prefixCls}-LbsButton`} akay={akay} />
-    </UAPILoader>
-  </Input.Group>;
+  let LbsButton = React.lazy<any>(() =>
+    LangKit.isBrowser()
+      ? import('./LbsButton')
+      : new Promise((resolve) => resolve({ default: <></> })),
+  );
+  let LbsSearch = React.lazy<any>(() =>
+    LangKit.isBrowser()
+      ? import('./LbsSearch')
+      : new Promise((resolve) => resolve({ default: <></> })),
+  );
+
+  return (
+    <Input.Group style={{ display: 'flex' } as any} compact>
+      <UAPILoader useAMapUI={true} akay={akay}>
+        <LbsSearch
+          value={input}
+          onChange={setInput}
+          akay={akay}
+          onSelect={setData}
+        />
+        <Button
+          icon={<ClearOutlined />}
+          onClick={setData.bind(this, undefined)}
+        />
+        <LbsButton
+          prefixCls={`${prefixCls}-LbsButton`}
+          data={data}
+          onOk={setData}
+          className={`${prefixCls}-LbsButton`}
+          akay={akay}
+        />
+      </UAPILoader>
+    </Input.Group>
+  );
 };
 
 export default Index;

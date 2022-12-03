@@ -1,5 +1,4 @@
-import { IBundleOptions } from 'father-build/src/types';
-import { typescriptPaths } from 'rollup-plugin-typescript-paths';
+import { defineConfig } from 'father';
 import path from 'path';
 
 export const useLogger = () => {
@@ -15,19 +14,15 @@ export const useLogger = () => {
   return result;
 };
 
-export default {
-  esm: 'babel',
-  cjs: 'babel',
-  umd: {
-    name: '@hocgin/ui',
-    globals: {
-      react: 'React',
-      antd: 'antd',
-    },
+export default defineConfig({
+  platform: 'browser',
+  esm: {},
+  cjs: {},
+  alias: {
+    '@': path.resolve(__dirname, './src'),
   },
-  runtimeHelpers: true,
-  extractCSS: true,
   extraBabelPlugins: [
+    ...useLogger(),
     [
       'import',
       {
@@ -43,15 +38,9 @@ export default {
         root: ['.'],
         alias: {
           '@': './src',
-          '@@': './src/.umi',
+          '@@': './src/.dumi/tmp',
         },
       },
     ],
-    ...useLogger(),
   ],
-  extraRollupPlugins: [
-    typescriptPaths({
-      tsConfigPath: path.resolve(__dirname, './tsconfig.json'),
-    }),
-  ],
-} as IBundleOptions;
+});

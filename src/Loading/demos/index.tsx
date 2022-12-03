@@ -4,12 +4,11 @@
  */
 import React from 'react';
 import { Loading } from '@hocgin/ui';
-import styles from './index.less';
 
 export default () => {
   return (
     <>
-      <Loading className={styles.ok} />
+      <Loading />
     </>
   );
 };
