@@ -7,6 +7,7 @@ import memoizeOne from 'memoize-one';
 export { default as Directory } from './Directory';
 import OriginHtmlAnchor from './HtmlAnchor';
 import { setDirectoryAnchor } from './HtmlAnchor';
+import './style';
 
 type HtmlAnchorType = typeof OriginHtmlAnchor & {
   setDirectoryAnchor: typeof setDirectoryAnchor;

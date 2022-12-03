@@ -32,6 +32,8 @@ const Index: React.FC<{
   let featureList = item?.feature ?? [];
   let linkList = item?.link ?? [];
 
+  console.log('加载 LevelFeature');
+
   return (
     <div
       className={classnames(`${prefixCls}`, className)}
@@ -111,7 +113,7 @@ const Index: React.FC<{
         >
           {(linkList || []).map(({ title, href }) => (
             <a
-              target='_blank'
+              target="_blank"
               className={classnames(`${prefixCls}-link-item`)}
               href={href}
             >

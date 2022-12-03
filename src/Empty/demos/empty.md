@@ -19,7 +19,7 @@ group:
 
 Demo:
 
-<code src="./index.tsx"  background="#f0f2f5" />
+<code src="./index.ts"  background="#f0f2f5" />
 
 ## API
 

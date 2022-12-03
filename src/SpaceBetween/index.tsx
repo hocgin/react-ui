@@ -4,6 +4,7 @@
  */
 import React from 'react';
 
-import {SpaceBetween} from './components/SpaceBetween';
+import { SpaceBetween } from './components/SpaceBetween';
+import './style';
 
 export default SpaceBetween;

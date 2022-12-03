@@ -1,4 +1,5 @@
 import { defineConfig } from 'father';
+import path from 'path';
 
 export const useLogger = () => {
   let result: any = [];
@@ -17,6 +18,9 @@ export default defineConfig({
   platform: 'browser',
   esm: {},
   cjs: {},
+  alias: {
+    '@': path.resolve(__dirname, './src'),
+  },
   extraBabelPlugins: [
     ...useLogger(),
     [

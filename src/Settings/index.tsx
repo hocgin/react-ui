@@ -4,6 +4,6 @@
  */
 import React from 'react';
 import { Settings } from './components/Settings';
-
+import './style';
 
 export default Settings;

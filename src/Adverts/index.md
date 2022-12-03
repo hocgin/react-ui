@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Adverts - 广告组件
 nav:
@@ -22,23 +21,27 @@ group:
 import React from 'react';
 import { Adverts } from '@hocgin/ui';
 
-
-let defaultAdver = [{
-  title: '随机',
-  flag: '作者自荐',
-  imageUrl: 'https://cdn.hocgin.top/uPic/favicon.ico',
-  url: 'http://www.baidu.com',
-}, {
-  title: '随机',
-  flag: '作者自荐',
-  imageUrl: 'https://cdn.hocgin.top/file/addone-bookmarking_nav-background.png',
-  url: 'http://www.baidu.com',
-}, {
-  title: '随机',
-  flag: '作者自荐',
-  imageUrl: 'https://cdn.hocgin.top/file/20221116_tuijian.png',
-  url: 'http://www.baidu.com',
-}];
+let defaultAdver = [
+  {
+    title: '随机',
+    flag: '作者自荐',
+    imageUrl: 'https://cdn.hocgin.top/uPic/favicon.ico',
+    url: 'http://www.baidu.com',
+  },
+  {
+    title: '随机',
+    flag: '作者自荐',
+    imageUrl:
+      'https://cdn.hocgin.top/file/addone-bookmarking_nav-background.png',
+    url: 'http://www.baidu.com',
+  },
+  {
+    title: '随机',
+    flag: '作者自荐',
+    imageUrl: 'https://cdn.hocgin.top/file/20221116_tuijian.png',
+    url: 'http://www.baidu.com',
+  },
+];
 
 export default () => {
   return (

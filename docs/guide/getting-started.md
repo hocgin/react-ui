@@ -1,7 +1,8 @@
 ---
-nav:
-  title: 快速上手
-  order: 1
+# @formatter:off
+title: 快速上手
+order: 2
+# @formatter:on
 ---
 
 # 快速上手
@@ -32,7 +33,7 @@ yarn add @hocgin/ui
       },
       '@hocgin/ui',
     ],
-  ]
+  ];
 }
 ```
 
@@ -47,9 +48,9 @@ yarn add @hocgin/ui
 - Promise [契约组件] => 契约数据结构快捷使用的构件。
   - Promise.Schema [配置化契约构件]
     - Schema.ArchiveSchemaConfig [存档构件] 新增、修改
-    - Schema.DeleteSchemaConfig  [删除构件] 删除
+    - Schema.DeleteSchemaConfig [删除构件] 删除
     - Schema.ExhibitSchemaConfig [展览构件] 详情
-    - Schema.TableSchemaConfig   [表单构件] 表单查询
+    - Schema.TableSchemaConfig [表单构件] 表单查询
 
 ## 查看文档
 

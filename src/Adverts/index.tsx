@@ -4,5 +4,6 @@
  */
 export { default as Adverts } from './Adverts';
 import Adverts from './Adverts';
+import './style';
 
 export default Adverts;

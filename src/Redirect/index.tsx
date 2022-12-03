@@ -4,5 +4,6 @@
  */
 export { default as Redirect } from './Redirect';
 import Redirect from './Redirect';
+import './style';
 
 export default Redirect;

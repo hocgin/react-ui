@@ -4,5 +4,6 @@
  */
 import React from 'react';
 import { Empty } from './components/Empty';
+import './style';
 
 export default Empty;

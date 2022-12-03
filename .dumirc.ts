@@ -17,8 +17,12 @@ export const useLogger = () => {
 
 export default defineConfig({
   // more config: https://d.umijs.org/config
+  locales: [
+    { id: 'zh-CN', name: '中文' },
+    { id: 'en-US', name: 'EN' },
+  ],
   themeConfig: {
-    name: '@hocgin/ui',
+    name: 'HUI',
     logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
   },
   exportStatic: {},
@@ -44,21 +48,10 @@ export default defineConfig({
         libraryName: '@hocgin/ui',
         camel2DashComponentName: false,
         style: (name: string, file: Object) => {
-          let packageName = name.replace('@hocgin/ui/lib/', '');
-          if (
-            [
-              'Dom',
-              'ConfigProvider',
-              'Utils',
-              'Format',
-              'request',
-              'usePost',
-              'useDelete',
-              'useGet',
-              'usePut',
-              'Types',
-            ].includes(name)
-          ) {
+          console.log('===>', name);
+          let packageName = name.replace('@hocgin/ui/dist/cjs', '');
+          let noLoadStyle = ['ConfigProvider', 'Utils'].includes(name);
+          if (noLoadStyle) {
             console.info(`组件 ${name} 无需加载样式`);
             return false;
           }
@@ -81,5 +74,6 @@ export default defineConfig({
       },
     ],
   ],
+  resolve: { entryFile: './src/index.ts' },
   ssr: process.env.NODE_ENV !== 'development',
 });

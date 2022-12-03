@@ -52,4 +52,4 @@ group:
 
 ## API
 
-<API src="../components/Text/index.tsx"></API>
+<API src="../components/Text/index.ts"></API>

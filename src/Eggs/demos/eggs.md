@@ -19,4 +19,4 @@ group:
 
 Demo:
 
-<code src="./index.tsx"  />
+<code src="./index.ts"  />

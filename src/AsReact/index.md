@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: AsReact - AsReact
 nav:
@@ -20,11 +19,11 @@ group:
 
 ```jsx
 import React from 'react';
-import {AsReact} from '@hocgin/ui';
+import { AsReact } from '@hocgin/ui';
 
 export default () => {
   let element = document.createElement('b');
-  element.textContent = "这是Element标签";
+  element.textContent = '这是Element标签';
   return (
     <>
       <AsReact children={element} />

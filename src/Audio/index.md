@@ -1,5 +1,4 @@
 ---
-
 # @formatter:off
 title: Audio - 音频播放器
 nav:
@@ -11,6 +10,7 @@ group:
 ---
 
 # Audio - 音频播放器
+
 > [APlayer](https://aplayer.js.org/#/zh-Hans/)
 
 这是一个组件的基础描述
@@ -28,10 +28,13 @@ export default () => {
     <>
       <Audio
         getInstance={(audio) => console.log(audio)}
-        src={['http://cdn.hocgin.top/file/obj_w5rDlsOJwrLDjj7CmsOj_8954991913_e1af_5c28_d2de_1962f4d1c90ceae1463ca2767ea821ae.m4a',
-          'http://cdn.hocgin.top/file/obj_w5rDlsOJwrLDjj7CmsOj_8954991913_e1af_5c28_d2de_1962f4d1c90ceae1463ca2767ea821ae.m4a']}
+        src={[
+          'http://cdn.hocgin.top/file/obj_w5rDlsOJwrLDjj7CmsOj_8954991913_e1af_5c28_d2de_1962f4d1c90ceae1463ca2767ea821ae.m4a',
+          'http://cdn.hocgin.top/file/obj_w5rDlsOJwrLDjj7CmsOj_8954991913_e1af_5c28_d2de_1962f4d1c90ceae1463ca2767ea821ae.m4a',
+        ]}
         option={Audio.defaultOption}
-        className="ok" />
+        className="ok"
+      />
     </>
   );
 };

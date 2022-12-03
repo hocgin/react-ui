@@ -19,7 +19,7 @@ group:
 
 同一个 div 的场景:
 
-<code src="./index.tsx"  background="#f0f2f5" iframe/>
+<code src="./index.ts"  background="#f0f2f5" iframe/>
 
 不在同一个 div 的场景:
 
