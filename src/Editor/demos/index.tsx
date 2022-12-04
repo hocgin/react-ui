@@ -3,11 +3,9 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React, { useRef, useState } from 'react';
-import { Editor, Header, Utils } from '@hocgin/ui';
-import styles from './index.less';
+import { Editor, Header, LangKit } from '@hocgin/ui';
 import { Button, Divider } from 'antd';
 import { useToggle } from 'ahooks';
-import classnames from 'classnames';
 
 const content = `
               <pre class='line-numbers'><code class='language-javascript'>for (var i=1; i <= 20; i++)
@@ -125,13 +123,12 @@ export default () => {
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
   console.log(
-    'LangKit.matchHtmlTag(content, \'h[1-6]\')',
+    "LangKit.matchHtmlTag(content, 'h[1-6]')",
     LangKit.matchHtmlTag(content, 'h[1-6]'),
   );
   const unsetHeightStyles: React.CSSProperties = {
     height: unsetHeight ? 'unset' : undefined,
   };
-
 
   return (
     <>
