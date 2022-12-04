@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
-import Dom from '@/Utils/dom';
+import { UIKit } from '@/_utils';
 import { FileInfo, HttpRequestHeader } from '@/Utils/interface';
 
 function getBase64(file: any) {
@@ -49,7 +49,7 @@ const Index: React.FC<{
       let result = file?.response;
       if (result) {
         // Component will show file.url as link
-        if (Dom.showErrorMessageIfExits(result)) {
+        if (UIKit.showErrorMessageIfExits(result)) {
           file.url = result.data;
         } else {
           file.status = 'error';
@@ -59,7 +59,7 @@ const Index: React.FC<{
     });
     let newFileList = fileList
       .filter(({ url }: any) => url)
-      .map(Dom.asServerFile);
+      .map(UIKit.asServerFile);
     setFileList(newFileList);
     onChange?.(newFileList);
   };
@@ -72,7 +72,7 @@ const Index: React.FC<{
         action={action}
         headers={headers}
         beforeUpload={beforeUpload}
-        defaultFileList={(value || []).map(Dom.asFile) as any}
+        defaultFileList={(value || []).map(UIKit.asFile) as any}
         listType='picture-card'
         onPreview={handlePreview}
         maxCount={maxCount}

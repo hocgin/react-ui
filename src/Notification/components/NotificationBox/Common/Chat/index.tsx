@@ -16,10 +16,10 @@ import {
   UseAction,
 } from '@/Notification/components/types';
 import { useInfiniteScroll, useRequest, useToggle } from 'ahooks';
-import Utils from '@/Utils';
 import useInfiniteTopScroll from '@/Utils/scene/useInfiniteTopScroll';
 import { ConfigContext } from '@/ConfigProvider';
-import { FormatKit } from '@hocgin/hkit';
+import { FormatKit } from '@/_utils';
+import { LangKit, StructKit } from '@/_utils';
 
 const UserCard: React.FC<{
   datetime?: LocalDateTime;
@@ -30,14 +30,14 @@ const UserCard: React.FC<{
   avatar?: any;
   onClick?: (id: any) => void;
 }> = ({
-  datetime,
-  nickname,
-  avatar,
-  onClick,
-  selected = false,
-  content = ' ',
-  ...props
-}) => {
+        datetime,
+        nickname,
+        avatar,
+        onClick,
+        selected = false,
+        content = ' ',
+        ...props
+      }) => {
   let fmtDatetime = FormatKit.parseLocalDatetime(datetime);
 
   let { getPrefixCls } = React.useContext(ConfigContext);
@@ -112,13 +112,13 @@ const ChatBody: React.FC<{
   const ref = useRef<any>();
   const { data, loading, loadMore, loadingMore, noMore } = useInfiniteTopScroll(
     (d?: any) =>
-      Utils.Lang.nilService(
+      LangKit.nilService(
         useAction?.scrollWithPersonalMessage?.bind(this, {
           nextId: d?.nextId,
           chatUserId,
         }),
         {},
-      )().then(Utils.Struct.getScrollData),
+      )().then(StructKit.getScrollData),
     {
       target: ref,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
@@ -152,7 +152,7 @@ const Editor: React.FC<{
   let editorRef = useRef<any>();
   let [content, setContent] = useState<string | undefined>('');
   let sendRequest = useRequest(
-    Utils.Lang.nilService(useAction.sendWithPersonalMessage, {}),
+    LangKit.nilService(useAction.sendWithPersonalMessage, {}),
     {
       manual: true,
       retryCount: 3,
@@ -185,7 +185,7 @@ const Editor: React.FC<{
       />
       <div className={'editorToolbar'}>
         <div />
-        <Button type="primary" onClick={onSubmitSend}>
+        <Button type='primary' onClick={onSubmitSend}>
           发送
         </Button>
       </div>
@@ -199,7 +199,7 @@ const UserHeader: React.FC<{
   return (
     <div className={className}>
       <Space>
-        <Input placeholder="搜索联系人" suffix={<SearchOutlined />} />
+        <Input placeholder='搜索联系人' suffix={<SearchOutlined />} />
       </Space>
     </div>
   );
@@ -215,10 +215,10 @@ export const Chat: React.FC<{
   let [openUserList, { toggle }] = useToggle<boolean>(false);
   const { data, loading } = useInfiniteScroll(
     (d?: any) =>
-      Utils.Lang.nilService(
+      LangKit.nilService(
         useAction?.scrollLastChatWithPersonalMessage,
         {},
-      )({ nextId: d?.nextId }).then(Utils.Struct.getScrollData),
+      )({ nextId: d?.nextId }).then(StructKit.getScrollData),
     {
       target: ref,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
@@ -234,16 +234,16 @@ export const Chat: React.FC<{
         <div ref={ref} className={'userList'}>
           <List
             locale={{ emptyText: '暂无联系人' } as any}
-            rowKey="id"
-            itemLayout="horizontal"
+            rowKey='id'
+            itemLayout='horizontal'
             dataSource={data?.list || []}
             renderItem={({
-              sendAt,
-              senderUser,
-              senderUserName,
-              senderUserAvatarUrl,
-              description,
-            }: MessageDataType) => (
+                           sendAt,
+                           senderUser,
+                           senderUserName,
+                           senderUserAvatarUrl,
+                           description,
+                         }: MessageDataType) => (
               <UserCard
                 selected={chatUser?.id === senderUser}
                 avatar={senderUserAvatarUrl}

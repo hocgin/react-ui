@@ -1,24 +1,24 @@
 import React from 'react';
 import { message, Tree, TreeSelect, Upload } from 'antd';
-import { Struct } from '@/Utils/result';
+import { StructKit } from '@/_utils';
 import { FileInfo, TreeNode } from '@/Utils/interface';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
-export default class Dom {
-  static COLUMN_PREFIX = 'hui.';
+export default class UIKit {
+  public static COLUMN_PREFIX = 'hui.';
 
   /**
    * 自定义组件前缀
    * @param type
    */
-  static columnPrefix(type: string): string {
-    return Dom.COLUMN_PREFIX + `${type}`;
+  public static columnPrefix(type: string): string {
+    return UIKit.COLUMN_PREFIX + `${type}`;
   }
 
   /**
    * 获取 Window, 时刻提醒要进行 SSR 组件处理
    */
-  static getWindow(): (undefined | Window) {
+  public static getWindow(): (undefined | Window) {
     if (typeof window === 'undefined') {
       return undefined;
     }
@@ -29,7 +29,7 @@ export default class Dom {
    * 获取图标
    * @param name
    */
-  static getIcon(name?: string): JSX.Element {
+  public static getIcon(name?: string): JSX.Element {
     const IconMap: Record<string, any> = {
       SmileOutlined: <SmileOutlined />,
       HeartOutlined: <HeartOutlined />,
@@ -44,7 +44,7 @@ export default class Dom {
    * @param filename
    * @param index
    */
-  static asFile({ url, filename }: FileInfo, index: number) {
+  public static asFile({ url, filename }: FileInfo, index: number) {
     return {
       uid: index,
       url,
@@ -56,7 +56,7 @@ export default class Dom {
   /**
    * 转为远程文件
    */
-  static asServerFile({ url, name }: any): FileInfo {
+  public static asServerFile({ url, name }: any): FileInfo {
     return { url, filename: name };
   }
 
@@ -66,7 +66,7 @@ export default class Dom {
    * @param data
    * @return {unknown[]}
    */
-  static renderTreeSelectNodes(data: TreeNode[]) {
+  public static renderTreeSelectNodes(data: TreeNode[]) {
     return (data || []).map((item: TreeNode) => {
       if (item.children && item.children.length > 0) {
         return (
@@ -97,7 +97,7 @@ export default class Dom {
    * @param data
    * @return {unknown[]}
    */
-  static renderTreeNodes(data: TreeNode[]) {
+  public static renderTreeNodes(data: TreeNode[]) {
     return (data || []).map((item: TreeNode) => {
       if (item.children && item.children.length > 0) {
         return (
@@ -124,35 +124,11 @@ export default class Dom {
     });
   }
 
-  static isSuccess = Struct.isSuccess;
-  static showErrorMessageIfExits = Struct.showErrorMessageIfExits;
-  static getErrorMessage = Struct.getErrorMessage;
-  static getPagingList = Struct.getPagingList;
-  static fastGetPagingList = Struct.fastGetPagingList;
-  static getPagingPagination = Struct.getPagingPagination;
-  static fastPagingPagination = Struct.fastPagingPagination;
-  static getTableData = Struct.getTableData;
+  public static showErrorMessageIfExits = StructKit.showErrorMessageIfExits;
 
-  // 获取分页数据(表格形式)
-  static fastGetTableData = Struct.fastGetTableData;
 
   // 解析错误信息
-  static showErrorMessage = (e: Error) => message.error(e.message);
-
-  // 检测到错误，直接抛出
-  static tryErrorIfExits = Struct.thenTryErrorIfExits;
-  // 直接获取数据
-  static thenData = Struct.thenData;
-
-  /**
-   * 获取域名
-   */
-  static getDomain() {
-    if (typeof window === 'undefined') {
-      return '/';
-    }
-    return `${window.location.protocol}//${window.location.host}`;
-  }
+  public static showErrorMessage = (e: Error) => message.error(e.message);
 
   /**
    * 下载文件
@@ -160,7 +136,7 @@ export default class Dom {
    * @param url
    * @param filename
    */
-  static downloadUrl(event: MouseEvent, { url, filename = 'unknown' }: any) {
+  public static downloadUrl(event: MouseEvent, { url, filename = 'unknown' }: any) {
     event.preventDefault();
     event.stopPropagation();
     const aElement = document.createElement('a');
@@ -179,7 +155,7 @@ export default class Dom {
    * @param maxSize 文件大小, 2 * 1024 * 1024
    * @param file 待校验的文件
    */
-  static validFile = (types = '', maxSize: number, file: any): any => {
+  public static validFile = (types = '', maxSize: number, file: any): any => {
     let meetType = types.split(',').includes(file.type);
     if (!meetType) {
       message.error('请上传正确的文件格式!');

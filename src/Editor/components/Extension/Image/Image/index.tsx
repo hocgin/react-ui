@@ -3,7 +3,7 @@ import { NodeViewWrapper } from '@tiptap/react';
 import { NodeSelection } from 'prosemirror-state';
 import classnames from 'classnames';
 import { useMount } from 'ahooks';
-import Lang from '@/Utils/lang';
+import { LangKit } from '@hocgin/hkit';
 import { resolveImg } from './image';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -111,7 +111,7 @@ const Image: React.FC<{
       const { x, y, w, h, dir } = resizerState;
       const dx = (e.clientX - x) * (/l/.test(dir) ? -1 : 1);
       const dy = (e.clientY - y) * (/t/.test(dir) ? -1 : 1);
-      let width = Lang.clamp(w + dx, MIN_SIZE, maxSize.width);
+      let width = LangKit.clamp(w + dx, MIN_SIZE, maxSize.width);
       let height = Math.max(h + dy, MIN_SIZE);
       updateAttributes({
         width: width,

@@ -4,16 +4,14 @@ import Footer from '@/Footer';
 import ProLayout, { ProBreadcrumb } from '@ant-design/pro-layout';
 import { MenuDataItem } from '@umijs/route-utils';
 import { fastGetAccess, fastGetMenuDataItem } from './utils';
-import { WithFalse } from '@ant-design/pro-layout/lib/typings';
-import { HeaderViewProps } from '@ant-design/pro-layout/lib/Header';
-import { BasicLayoutProps } from '@ant-design/pro-layout/lib/BasicLayout';
-import Lang from '@/Utils/lang';
+import { WithFalse } from '@ant-design/pro-layout/es/typing';
+import { HeaderViewProps } from '@ant-design/pro-layout/es/components/Header';
 import { LocalRoute } from '@/Utils/interface';
 import { useNavigate } from 'react-router-dom';
 
 const DEFAULT_PATHNAME = '/welcome';
 
-export interface PageLayoutProps extends BasicLayoutProps {
+export interface PageLayoutProps {
   /**
    * 请求
    */
@@ -44,20 +42,21 @@ export interface PageLayoutProps extends BasicLayoutProps {
    * 显示所有(拥有所有菜单)
    */
   isShowAll?: boolean;
+  location?: any;
 }
 
 // @formatter: off
 const PageLayout: React.FC<PageLayoutProps> = ({
-  rightContentRender,
-  title,
-  logo,
-  useAction,
-  route,
-  isShowAll = Lang.isDev(),
-  location,
-  children,
-  ...rest
-}) => {
+                                                 rightContentRender,
+                                                 title,
+                                                 logo,
+                                                 useAction,
+                                                 route,
+                                                 isShowAll = false,
+                                                 location,
+                                                 children,
+                                                 ...rest
+                                               }) => {
   // @formatter: on
   let history = useNavigate();
   let { runAsync } = useRequest(useAction!.initialValues, {

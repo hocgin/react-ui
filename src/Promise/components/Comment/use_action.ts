@@ -13,7 +13,7 @@ import {
 } from '@/Comment/components/type';
 
 import service from './service';
-import { UmsService } from '@/Request/promise';
+import { UmsService } from '@/Request';
 
 export default (refType: any, refId: any) => ({
   reply: async (args: ReplyParamsType) => {

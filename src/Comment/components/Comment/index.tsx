@@ -27,10 +27,9 @@ import { Comment } from '@ant-design/compatible';
 import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
-import { FormatKit } from '@hocgin/hkit';
+import { FormatKit, StructKit } from '@/_utils';
 import { ConfigContext } from '@/ConfigProvider';
 import { default as GEditor } from '@/Editor';
-import Utils from '@/Utils';
 import { ExpandHistoryButton } from '@/Comment/components/History';
 import UserAvatar from './UserAvatar';
 import MoreOption from './Option';
@@ -343,7 +342,7 @@ const Index: React.FC<{
       debounceWait: 300,
       onSuccess: (data: PagingDataType) => {
         console.log('数据加载成功', data);
-        let tableData = Utils.Struct.getTableData(data);
+        let tableData = StructKit.getTableData(data);
         let pagination = tableData?.pagination;
         let total: number = pagination?.total || 0;
         let current: number = pagination?.current || 0;

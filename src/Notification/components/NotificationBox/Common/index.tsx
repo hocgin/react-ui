@@ -4,9 +4,8 @@ import { LocalDateTime } from '@/Utils/interface';
 import { Avatar, Modal } from 'antd';
 import Editor from '@/Editor';
 import { NotificationOutlined } from '@ant-design/icons';
-import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';
-import { FormatKit } from '@hocgin/hkit';
+import { FormatKit } from '@/_utils';
 
 export { Chat } from './Chat';
 
@@ -55,7 +54,7 @@ export const MessageSmallCard: React.FC<{
           <div className={'more'}>
             {content && (
               <a
-                rel="noopener noreferrer"
+                rel='noopener noreferrer'
                 onClick={() =>
                   Modal.confirm({
                     icon: null,

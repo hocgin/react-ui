@@ -1,6 +1,6 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import Dom from '@/Utils/dom';
+import { UIKit } from '@/_utils';
 import TbButton from '@/Editor/components/Common/TbButton';
 import { Upload } from 'antd';
 import { PictureOutlined } from '@ant-design/icons';
@@ -14,7 +14,7 @@ export const InsertImage: React.FC<{
       let result = file.response;
       if (result) {
         // Component will show file.url as link
-        if (Dom.showErrorMessageIfExits(result)) {
+        if (UIKit.showErrorMessageIfExits(result)) {
           file.url = result?.data;
         } else {
           file.status = 'error';

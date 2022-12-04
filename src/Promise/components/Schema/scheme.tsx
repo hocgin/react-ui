@@ -2,7 +2,7 @@ import React from 'react';
 import Promise from '@/Promise';
 import Exhibit from '@/Exhibit';
 import Editor from '@/Editor';
-import Dom from '@/Utils/dom';
+import { UIKit } from '@/_utils';
 import { ProRenderFieldPropsType } from '@ant-design/pro-provider';
 import { Input, Tooltip } from 'antd';
 import { SearchLbsData } from '@/Promise/components/SearchLbs/types';
@@ -21,7 +21,7 @@ export const handleSchemeColumns = (columns: any[]): any[] => {
 const handleSchemeColumn = (column: any): any => {
   // fixme 20211209: 这边是用来兼容 antd pro 组件 valueTypeMaps 不生效的问题
   let valueType = `${column?.valueType}`;
-  let isCustom = valueType.startsWith(Dom.COLUMN_PREFIX);
+  let isCustom = valueType.startsWith(UIKit.COLUMN_PREFIX);
   if (!isCustom) {
     let columnsField = column?.columns;
 
@@ -58,7 +58,7 @@ const handleSchemeColumn = (column: any): any => {
 };
 
 function prefix(type: string): string {
-  return Dom.columnPrefix(type);
+  return UIKit.columnPrefix(type);
 }
 
 export interface UploadParam {

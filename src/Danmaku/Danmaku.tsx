@@ -5,11 +5,11 @@ import React, {
   useRef,
 } from 'react';
 import { ConfigContext } from '@/ConfigProvider';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import classnames from 'classnames';
 import { useSize } from 'ahooks';
 
-let DanmakuImport = Utils.Lang.dynamicImport(() => require('danmaku').default);
+let DanmakuImport = LangKit.dynamicImport(() => require('danmaku').default);
 
 export type DanmakuOption = any;
 

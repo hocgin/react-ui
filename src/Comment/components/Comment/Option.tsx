@@ -3,7 +3,7 @@ import { Button, Dropdown, Input, Menu, Modal } from 'antd';
 import { MoreOutlined } from '@ant-design/icons';
 import { ReportParamsType, UseAction } from '@/Comment/components/type';
 import { useRequest } from 'ahooks';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { ID } from '@/Utils/interface';
 
 const Index: React.FC<{
@@ -41,7 +41,7 @@ let ReportModal: React.FC<{
 }> = ({ id, useAction, ...props }: any) => {
   let [reason, setReason] = useState<string>();
   let [visible, setVisible] = useState<boolean>(false);
-  let { loading, run } = useRequest<any, [ReportParamsType]>(Utils.Lang.nilService(useAction.report), {
+  let { loading, run } = useRequest<any, [ReportParamsType]>(LangKit.nilService(useAction.report), {
     manual: true,
     onSuccess: (res) => Modal.success({
       title: '举报成功',

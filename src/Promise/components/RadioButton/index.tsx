@@ -3,7 +3,7 @@ import { Radio } from 'antd';
 import { Option } from '@/Utils/types/rt-grass';
 import { useRequest, useMount } from 'ahooks';
 import { UseAction } from './type';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 
 // @formatter: off
 const RadioButton: React.FC<{
@@ -15,7 +15,7 @@ const RadioButton: React.FC<{
   // @formatter: on
   let [data, setData] = useState<Option[]>([]);
 
-  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let service = LangKit.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: Option[]) => setData(data),

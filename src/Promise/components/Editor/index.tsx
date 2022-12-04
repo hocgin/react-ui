@@ -6,7 +6,7 @@ import React, {
   useState,
 } from 'react';
 import { default as GEditor } from '@/Editor';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { Button, Skeleton } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';
@@ -71,7 +71,7 @@ export const Editor: React.FC<{
   let [draft, setDraft] = useState<DraftDoc | undefined>();
   let [fullscreen, setFullscreen] = useState<boolean>(false);
 
-  let getDrafted = useRequest(Utils.Lang.nilService(action?.getDrafted, {}), {
+  let getDrafted = useRequest(LangKit.nilService(action?.getDrafted, {}), {
     manual: true,
     onSuccess: setDraft,
   });
@@ -133,7 +133,7 @@ export const Preview: React.FC<
   );
 
   let getPublished = useRequest(
-    Utils.Lang.nilService(id ? useAction?.(id)?.getPublished : undefined, {}),
+    LangKit.nilService(id ? useAction?.(id)?.getPublished : undefined, {}),
     {
       manual: true,
       onSuccess: setPublished,

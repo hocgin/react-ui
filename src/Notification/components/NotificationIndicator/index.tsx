@@ -2,7 +2,7 @@ import React from 'react';
 import { Badge, Tooltip } from 'antd';
 import { BellOutlined } from '@ant-design/icons';
 import { ConfigContext } from '@/ConfigProvider';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 
 export const NotificationIndicator: React.FC<{
   prefixCls?: string;
@@ -12,7 +12,7 @@ export const NotificationIndicator: React.FC<{
 }> = ({ count, onClick, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('notification-indicator', props.prefixCls);
-  let visible = !!Utils.Lang.asLong(count);
+  let visible = !!LangKit.asLong(count);
   return (
     <div className={`${prefixCls}`} onClick={onClick}>
       <Tooltip title={visible ? '有未读的消息' : null}>

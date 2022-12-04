@@ -1,6 +1,6 @@
 import React from 'react';
 import { UseAction } from '@/Promise/components/Schema/ExhibitSchemaConfig/type';
-import { Utils } from '@hocgin/ui';
+import { UIKit } from '@hocgin/ui';
 
 export const config: any = {
   layoutType: 'ModalForm',
@@ -41,7 +41,7 @@ export const config: any = {
     {
       title: '地址选择器',
       dataIndex: 'searchLbs',
-      valueType: Utils.Dom.columnPrefix('searchLbs'),
+      valueType: UIKit.columnPrefix('searchLbs'),
     },
     {
       title: '状态',
@@ -60,57 +60,57 @@ export const config: any = {
     {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
-      valueType: Utils.Dom.columnPrefix('select'),
+      valueType: UIKit.columnPrefix('select'),
     },
     {
       title: '树型选择',
       dataIndex: 'gin_tree_select_name',
-      valueType: Utils.Dom.columnPrefix('gin.treeSelect'),
+      valueType: UIKit.columnPrefix('gin.treeSelect'),
     },
     {
       title: 'radioButton',
       dataIndex: 'gin_radioButton_name',
-      valueType: Utils.Dom.columnPrefix('radioButton'),
+      valueType: UIKit.columnPrefix('radioButton'),
     },
     {
       title: 'radio',
       dataIndex: 'gin_radio_name',
-      valueType: Utils.Dom.columnPrefix('radio'),
+      valueType: UIKit.columnPrefix('radio'),
     },
     {
       title: 'checkbox',
       dataIndex: 'gin_checkbox_name',
-      valueType: Utils.Dom.columnPrefix('checkbox'),
+      valueType: UIKit.columnPrefix('checkbox'),
     },
     {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
-      valueType: Utils.Dom.columnPrefix('upload'),
+      valueType: UIKit.columnPrefix('upload'),
     },
     {
       title: '链接',
       dataIndex: 'link',
-      valueType: Utils.Dom.columnPrefix('link'),
+      valueType: UIKit.columnPrefix('link'),
     },
     {
       title: '文本',
       dataIndex: 'stretch',
-      valueType: Utils.Dom.columnPrefix('stretch'),
+      valueType: UIKit.columnPrefix('stretch'),
     },
     {
       title: '富文本 html',
       dataIndex: 'html',
-      valueType: Utils.Dom.columnPrefix('html'),
+      valueType: UIKit.columnPrefix('html'),
     },
     {
       title: '富文本',
       dataIndex: 'rich',
-      valueType: Utils.Dom.columnPrefix('rich'),
+      valueType: UIKit.columnPrefix('rich'),
     },
     {
       title: 'Markdown',
       dataIndex: 'markdown',
-      valueType: Utils.Dom.columnPrefix('markdown'),
+      valueType: UIKit.columnPrefix('markdown'),
     },
   ],
 };

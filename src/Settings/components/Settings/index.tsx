@@ -17,7 +17,7 @@ import {
 import { PageHeader } from '@ant-design/pro-layout';
 import memoizeOne from 'memoize-one';
 import Empty from '@/Empty';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { useMount, useRequest } from 'ahooks';
 import classnames from 'classnames';
 
@@ -61,7 +61,7 @@ const RightContent: React.FC<{
   children?: any;
   result?: any;
 }> = ({ result, scope, ...props }) => {
-  let map: Record<string, ConfigScopeStructType> = Utils.Lang.toMap(
+  let map: Record<string, ConfigScopeStructType> = LangKit.toMap2(
     fastToMenu(result),
     'scope',
   );
@@ -158,7 +158,7 @@ export const Settings: React.FC<{
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('settings', props.prefixCls);
 
-  let getConfig = useRequest(Utils.Lang.nilService(useAction?.getConfig, {}), {
+  let getConfig = useRequest(LangKit.nilService(useAction?.getConfig, {}), {
     manual: true,
     onSuccess: setResult,
   });

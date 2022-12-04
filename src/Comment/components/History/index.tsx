@@ -5,14 +5,14 @@ import { ID } from '@/Utils/interface';
 import { CommentType, HistoryType, HistoryParamsType, UseAction } from '@/Comment/components/type';
 import { useRequest } from 'ahooks';
 import Comment from '../Comment/index';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 
 export const ExpandHistoryButton: React.FC<{
   id: ID;
   useAction: UseAction;
 }> = ({ useAction, id }) => {
   let { loading, runAsync } = useRequest<HistoryType, [HistoryParamsType]>(
-    Utils.Lang.nilService(useAction.history, []),
+    LangKit.nilService(useAction.history, []),
     {
       manual: true,
       onSuccess: (data: HistoryType) => {

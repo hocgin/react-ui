@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select, Spin, Avatar } from 'antd';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { SearchOption } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import { UserOutlined } from '@ant-design/icons';
@@ -46,7 +46,7 @@ const Index: React.FC<{
 }) => {
   let [data, setData] = useState<SearchOption[]>(options);
   let [keyword, setKeyword] = useState<string>();
-  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let service = LangKit.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: SearchOption[]) => setData(data || []),

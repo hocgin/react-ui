@@ -16,7 +16,6 @@ export const useLogger = () => {
 
 export default defineConfig({
   outputPath: 'docs-dist',
-  footer: false,
   favicons: ['https://cdn.hocgin.top/uPic/mp_logo.png'],
   themeConfig: {
     name: 'HUI',

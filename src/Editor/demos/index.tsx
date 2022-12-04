@@ -125,8 +125,8 @@ export default () => {
   let [unsetHeight, { toggle: toggleUnsetHeight }] = useToggle(false);
   let [text, setText] = useState<string>('');
   console.log(
-    'Utils.Lang.matchHtmlTag(content, \'h[1-6]\')',
-    Utils.Lang.matchHtmlTag(content, 'h[1-6]'),
+    'LangKit.matchHtmlTag(content, \'h[1-6]\')',
+    LangKit.matchHtmlTag(content, 'h[1-6]'),
   );
   const unsetHeightStyles: React.CSSProperties = {
     height: unsetHeight ? 'unset' : undefined,

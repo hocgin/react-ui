@@ -1,12 +1,12 @@
-import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';
 import classnames from 'classnames';
 import React, { useEffect, useState } from 'react';
-import { HtmlTagType } from '@/Utils/lang';
 import { Anchor } from 'antd';
+import { HtmlTagType } from '@/_utils/types';
+import { LangKit } from '@/_utils';
 
 const listDirectory = (content?: string) => {
-  return Utils.Lang.matchHtmlTag(content, 'h[1-6]');
+  return LangKit.matchHtmlTag(content, 'h[1-6]');
 };
 
 type TreeDirectory = HtmlTagType & {
@@ -24,15 +24,15 @@ export const treeDirectory = (content?: string) => {
 
   // 1. 补充层级关系
   directory.map((item, index) => {
-      let name = item.name;
-      let level = parseInt(name.replace('h', '').replace('H', ''));
-      return {
-        ...item,
-        id: index + 1,
-        level,
-        parentId: undefined,
-      };
-    })
+    let name = item.name;
+    let level = parseInt(name.replace('h', '').replace('H', ''));
+    return {
+      ...item,
+      id: index + 1,
+      level,
+      parentId: undefined,
+    };
+  })
     .forEach((item, index) => {
       if (index === 0) {
         directoryList.push({ ...item });

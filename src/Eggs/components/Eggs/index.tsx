@@ -1,6 +1,6 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
 import Snow from '@/Snow';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import {useMount, useUpdateEffect, useDocumentVisibility} from 'ahooks';
 
 const failure: string = 'https://cdn.hocgin.top/file/failure.ico';
@@ -11,7 +11,7 @@ const Index: React.FC<{
   csl?: boolean;
   doc?: boolean;
 }> = ({csl = true, doc = true, children}, ref) => {
-  if (Utils.Lang.isServer()) {
+  if (LangKit.isServer()) {
     return <></>;
   }
   let documentVisibility = useDocumentVisibility();
