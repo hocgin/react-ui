@@ -1,6 +1,6 @@
-import React, {useState, useRef, createElement, useEffect} from 'react';
-import {useRequest, useToggle, useSize} from 'ahooks';
-import {UserType} from '@/Utils/interface';
+import React, { useState, useRef, createElement, useEffect } from 'react';
+import { useRequest, useToggle, useSize } from 'ahooks';
+import { UserType } from '@/Utils/interface';
 import {
   CommentType,
   DislikeDataType,
@@ -12,29 +12,26 @@ import {
 import {
   LikeFilled,
   LikeOutlined,
-  MoreOutlined,
   RetweetOutlined,
   UserOutlined,
 } from '@ant-design/icons';
 import {
   Avatar,
-  Comment,
   Tooltip,
   List,
   Pagination,
-  Dropdown,
   Skeleton,
   Button,
-  Menu,
 } from 'antd';
-import {ID} from '@/Utils/interface';
+import { Comment } from '@ant-design/compatible';
+import { ID } from '@/Utils/interface';
 import classnames from 'classnames';
-import {EventEmitter} from 'ahooks/lib/useEventEmitter';
-import DateTimeFormat from '@/Utils/format/datetime';
-import {ConfigContext} from '@/ConfigProvider';
-import {default as GEditor} from '@/Editor';
+import { EventEmitter } from 'ahooks/lib/useEventEmitter';
+import { FormatKit } from '@hocgin/hkit';
+import { ConfigContext } from '@/ConfigProvider';
+import { default as GEditor } from '@/Editor';
 import Utils from '@/Utils';
-import {ExpandHistoryButton} from '@/Comment/components/History';
+import { ExpandHistoryButton } from '@/Comment/components/History';
 import UserAvatar from './UserAvatar';
 import MoreOption from './Option';
 
@@ -43,17 +40,17 @@ export const Content: React.FC<{
   children?: any;
   expanded?: boolean;
   maxHeight?: number;
-}> = ({children, maxHeight = 100, ...props}) => {
-  let {getPrefixCls} = React.useContext(ConfigContext);
+}> = ({ children, maxHeight = 100, ...props }) => {
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   const ref = useRef<any>();
   const size = useSize(ref);
-  let [expanded, {toggle: toggleExpanded}] = useToggle<boolean>(
+  let [expanded, { toggle: toggleExpanded }] = useToggle<boolean>(
     props?.expanded ?? false,
   );
   let contentStyle = expanded
     ? {}
-    : {maxHeight: `${maxHeight}px`, overflow: 'hidden'};
+    : { maxHeight: `${maxHeight}px`, overflow: 'hidden' };
 
   return (
     <>
@@ -86,7 +83,7 @@ const UserOptions: React.FC<{
   userAction?: string;
   prefixCls?: string;
 }> = (props) => {
-  let {useAction, comment} = props;
+  let { useAction, comment } = props;
   let [userAction, setUserAction] = useState(props?.userAction);
   let [likesCount, setLikesCount] = useState(comment?.likes || 0);
   let [dislikedCount, setDislikedCount] = useState(comment?.disliked || 0);
@@ -94,7 +91,7 @@ const UserOptions: React.FC<{
   let commentId = comment.id;
   let options = {
     manual: true,
-    defaultParams: {commentId} as any,
+    defaultParams: { commentId } as any,
     onSuccess: ({
                   likes = 0,
                   disliked = 0,
@@ -110,16 +107,16 @@ const UserOptions: React.FC<{
   let dislikeRequest = useRequest(useAction.dislike, options);
   let onAction = (type: 'like' | 'dislike', commentId: ID) => {
     if (type === 'like') {
-      likeRequest.run({commentId});
+      likeRequest.run({ commentId });
     } else {
-      dislikeRequest.run({commentId});
+      dislikeRequest.run({ commentId });
     }
   };
   let onClickReply = () => {
     props.reply$?.emit(comment);
   };
 
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <>
@@ -148,7 +145,7 @@ const SubComment: React.FC<{
   comment: CommentType;
   useAction: UseAction;
 }> = (props) => {
-  let {comment, hasHistory, useAction, reply$} = props;
+  let { comment, hasHistory, useAction, reply$ } = props;
   let {
     author,
     replier,
@@ -229,7 +226,7 @@ export const CiComment: React.FC<{
         ...props
       }) => {
   let hasReply = replyId && replier;
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <div
@@ -276,7 +273,7 @@ export const CiComment: React.FC<{
               )}
             </div>
             <div className={`${prefixCls}-datetime`}>
-              <span>{DateTimeFormat.useDefRelativeFromNow(datetime)}</span>
+              <span>{FormatKit.parseLocalDatetime(datetime)}</span>
             </div>
           </div>
         }
@@ -316,7 +313,7 @@ const Index: React.FC<{
     reply$,
     replied$,
   } = props;
-  let {author, isCommenter, isInitiator, idx, replier, replyId, datetime, action: userAction} = comment;
+  let { author, isCommenter, isInitiator, idx, replier, replyId, datetime, action: userAction } = comment;
   let id = comment.id;
   let hasReply = comment.hasReply;
   let content = comment?.content;
@@ -337,7 +334,7 @@ const Index: React.FC<{
     setDataSource([...dataSource, comment] as CommentType[]);
   });
 
-  let {loading, run} = useRequest<PagingDataType, [PagingParamsType]>(
+  let { loading, run } = useRequest<PagingDataType, [PagingParamsType]>(
     useAction.paging,
     {
       defaultParams,
@@ -363,7 +360,7 @@ const Index: React.FC<{
   useEffect(() => {
     if (hasLoadChild && (hasReply && initialLoad)) {
       console.debug('加载回复评论');
-      run({...defaultParams, page: 1} as PagingParamsType);
+      run({ ...defaultParams, page: 1 } as PagingParamsType);
     } else {
       setCurrent(0);
       setTotal(0);
@@ -372,9 +369,9 @@ const Index: React.FC<{
   }, [hasLoadChild, hasReply, initialLoad]);
 
   let onPageChange = (page?: number, pageSize?: number) => {
-    run({...defaultParams, page, size: pageSize});
+    run({ ...defaultParams, page, size: pageSize });
   };
-  let {getPrefixCls} = React.useContext(ConfigContext);
+  let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
   return (
     <CiComment

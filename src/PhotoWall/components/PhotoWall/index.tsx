@@ -23,15 +23,15 @@ const Index: React.FC<{
   value?: FileInfo[];
   onChange?: (values: FileInfo[]) => void;
 }> = ({
-  action = '/api/com/file/upload',
-  beforeUpload,
-  name,
-  accept,
-  value,
-  headers,
-  maxCount = 100,
-  onChange,
-}) => {
+        action = '/api/com/file/upload',
+        beforeUpload,
+        name,
+        accept,
+        value,
+        headers,
+        maxCount = 100,
+        onChange,
+      }) => {
   let [previewVisible, setPreviewVisible] = useState<boolean>(false);
   let [fileList, setFileList] = useState<FileInfo[]>(value || []);
   let [previewImage, setPreviewImage] = useState<string | undefined>(undefined);
@@ -73,7 +73,7 @@ const Index: React.FC<{
         headers={headers}
         beforeUpload={beforeUpload}
         defaultFileList={(value || []).map(Dom.asFile) as any}
-        listType="picture-card"
+        listType='picture-card'
         onPreview={handlePreview}
         maxCount={maxCount}
         onChange={handleChange}
@@ -86,7 +86,7 @@ const Index: React.FC<{
         )}
       </Upload>
       <Modal
-        visible={previewVisible}
+        open={previewVisible}
         footer={null}
         onCancel={setPreviewVisible.bind(this, false)}
       >

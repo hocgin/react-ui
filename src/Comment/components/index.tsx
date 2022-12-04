@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { CommentType, UseAction } from './type';
 import classNames from 'classnames';
-import { Button, List, Divider, Segmented } from 'antd';
+import { Button, List, Segmented } from 'antd';
 import {
   useEventEmitter,
   useUpdateEffect,
@@ -44,11 +44,11 @@ let GoToComment: React.FC<{
 };
 
 const Index: React.FC<IndexProps> = ({
-  key = 'hui-comment',
-  useAction,
-  total,
-  ...props
-}) => {
+                                       key = 'hui-comment',
+                                       useAction,
+                                       total,
+                                       ...props
+                                     }) => {
   let [orderDesc, { set: setOrderDesc }] = useToggle<boolean>(true);
   let [showType, setShowType] = useState<'list' | 'kanban'>('list');
 
@@ -101,7 +101,7 @@ const Index: React.FC<IndexProps> = ({
         <List
           className={`${prefixCls}-comments`}
           locale={{ emptyText: '赶快来评论一下吧～' } as any}
-          itemLayout="horizontal"
+          itemLayout='horizontal'
           header={
             <div className={`${prefixCls}-header`}>
               <span>{total !== undefined ? `${total} 评论` : '评论'}</span>

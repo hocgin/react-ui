@@ -19,6 +19,7 @@ import { useInfiniteScroll, useRequest, useToggle } from 'ahooks';
 import Utils from '@/Utils';
 import useInfiniteTopScroll from '@/Utils/scene/useInfiniteTopScroll';
 import { ConfigContext } from '@/ConfigProvider';
+import { FormatKit } from '@hocgin/hkit';
 
 const UserCard: React.FC<{
   datetime?: LocalDateTime;
@@ -37,7 +38,7 @@ const UserCard: React.FC<{
   content = ' ',
   ...props
 }) => {
-  let fmtDatetime = Utils.Format.DateTime.useDefRelativeFromNow(datetime);
+  let fmtDatetime = FormatKit.parseLocalDatetime(datetime);
 
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('notification--Chat-UserCard', props.prefixCls);
@@ -79,7 +80,7 @@ const ChatRecord: React.FC<{
   datetime?: LocalDateTime;
   content?: string;
 }> = ({ reverse = false, datetime, content, avatar }) => {
-  let fmtDatetime = Utils.Format.DateTime.useDefRelativeFromNow(datetime);
+  let fmtDatetime = FormatKit.parseLocalDatetime(datetime);
   return (
     <div
       className={classnames('record', {

@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 
 import { Title, MessageSmallCard } from '../Common';
 import classnames from 'classnames';
@@ -9,6 +9,7 @@ import Loading from '@/Loading';
 import Utils from '@/Utils';
 import { Struct } from '@/Utils/result';
 import { ConfigContext } from '@/ConfigProvider';
+import { FormatKit } from '@hocgin/hkit';
 
 export const NoticePane: React.FC<{
   prefixCls?: string;
@@ -36,7 +37,7 @@ export const NoticePane: React.FC<{
       <div ref={ref} className={classnames('container')}>
         {(data?.list || []).map(
           ({ sendAt, title, description, noticeMessage }: MessageDataType) => {
-            let ymd: string = Utils?.Format.DateTime.useDefLocalDatetime(
+            let ymd: string = FormatKit.parseLocalDatetime2(
               sendAt,
               Utils?.Format.DateTime.FORMAT_3,
             );

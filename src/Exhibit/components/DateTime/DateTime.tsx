@@ -2,6 +2,7 @@ import React from 'react';
 import { ClockCircleOutlined } from '@ant-design/icons';
 import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';
+import { FormatKit } from '@hocgin/hkit';
 
 const Index: React.FC<{
   prefixCls?: string;
@@ -16,7 +17,7 @@ const Index: React.FC<{
     if (valueType === 'string') {
       text = value;
     } else if (valueType === 'number') {
-      text = Utils.Format.DateTime.timestampAs(value as number);
+      text = FormatKit.toDateStr(value as number);
     }
     return text;
   };

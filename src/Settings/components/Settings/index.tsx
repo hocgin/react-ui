@@ -3,7 +3,6 @@ import Menu, { Group } from '../Menu';
 import {
   Avatar,
   Divider,
-  PageHeader,
   Input,
   Button,
   Form,
@@ -15,6 +14,7 @@ import {
   ConfigScopeType,
   UseAction,
 } from '@/Settings/components/types';
+import { PageHeader } from '@ant-design/pro-layout';
 import memoizeOne from 'memoize-one';
 import Empty from '@/Empty';
 import Utils from '@/Utils';
@@ -92,7 +92,7 @@ const RightContent: React.FC<{
                   {item?.remark && <p className={'remark'}>{item?.remark}</p>}
                   <Form
                     requiredMark={false}
-                    layout="inline"
+                    layout='inline'
                     initialValues={
                       {
                         [`${itemId}`]: item?.value || item?.defaultValue,
@@ -106,7 +106,7 @@ const RightContent: React.FC<{
                           <Form.Item
                             name={`${itemId}`}
                             rules={rules}
-                            valuePropName="checked"
+                            valuePropName='checked'
                           >
                             <Switch disabled={disabled} />
                           </Form.Item>
@@ -122,7 +122,7 @@ const RightContent: React.FC<{
                             {el}
                           </Form.Item>
                           <Form.Item>
-                            <Button disabled={disabled} htmlType="submit">
+                            <Button disabled={disabled} htmlType='submit'>
                               保存
                             </Button>
                           </Form.Item>
@@ -131,7 +131,7 @@ const RightContent: React.FC<{
                     })()}
                   </Form>
                   {!isLast && (
-                    <Divider orientation="left" orientationMargin={0} />
+                    <Divider orientation='left' orientationMargin={0} />
                   )}
                 </>
               );

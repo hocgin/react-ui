@@ -15,8 +15,7 @@ import {
   UserDataType,
   UserParamsType,
 } from '@/Comment/components/type';
-import { BackTop } from 'antd';
-import Utils from '@/Utils';
+import { FloatButton } from 'antd';
 
 let currentUser = {
   id: 1,
@@ -171,7 +170,7 @@ export default () => {
     >
       <div style={{ flex: '1' } as any} />
       <Comment total={10} useAction={useAction} />
-      <BackTop />
+      <FloatButton.BackTop />
     </div>
   );
 };
