@@ -44,7 +44,6 @@
     "@ant-design/icons": "^4.6.3",
     "@ant-design/pro-components": "^2.3.37",
     "@babel/runtime": "^7.17.9",
-    "@hocgin/umijs-plugin-browser-addone": "^2.0.3",
     "@tiptap/core": "^2.0.0-beta.204",
     "@tiptap/extension-blockquote": "^2.0.0-beta.204",
     "@tiptap/extension-bold": "^2.0.0-beta.204",
@@ -115,7 +114,7 @@
     "react-dom": "17.x"
   },
   "optionalDependencies": {
-    "@hocgin/hkit": "^2.0.3",
+    "@hocgin/hkit": "^2.0.12",
     "aplayer": "^1.10.1",
     "artplayer": "^4.4.7",
     "console-feed": "^3.3.0",
