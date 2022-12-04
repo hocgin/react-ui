@@ -35,4 +35,4 @@ export default defineConfig({
       'antd',
     ],
   ],
-});
+} as IFatherConfig);

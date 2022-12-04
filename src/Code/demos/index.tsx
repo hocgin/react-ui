@@ -4,6 +4,7 @@
  */
 import React from 'react';
 import { Code, Utils } from '@hocgin/ui';
+import { FormatKit } from '@hocgin/hkit';
 
 export default () => {
   let html = `export default () => {
@@ -16,7 +17,7 @@ export default () => {
   // moment
   return (
     <>
-      <div>{Utils.Format.DateTime.relativeFromNow(new Date().getTime())}</div>
+      <div>{FormatKit.toRelativeDateStr(new Date().getTime())}</div>
       <Code lang={'html'}>{html}</Code>
     </>
   );

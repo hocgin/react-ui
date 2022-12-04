@@ -6,6 +6,7 @@ import Editor from '@/Editor';
 import { NotificationOutlined } from '@ant-design/icons';
 import Utils from '@/Utils';
 import { ConfigContext } from '@/ConfigProvider';
+import { FormatKit } from '@hocgin/hkit';
 
 export { Chat } from './Chat';
 
@@ -35,7 +36,7 @@ export const MessageSmallCard: React.FC<{
   datetime?: LocalDateTime;
   prefixCls?: string;
 }> = ({ title, datetime, content, description, ...props }) => {
-  let fmtDatetime = Utils.Format.DateTime.useDefRelativeFromNow(datetime);
+  let fmtDatetime = FormatKit.parseLocalDatetime(datetime);
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls(
     'notification--Common-MessageSmallCard',
