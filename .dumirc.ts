@@ -16,15 +16,16 @@ export const useLogger = () => {
 
 export default defineConfig({
   outputPath: 'docs-dist',
-  // more config: https://d.umijs.org/config
-  locales: [
-    { id: 'zh-CN', name: '中文' },
-    { id: 'en-US', name: 'EN' },
-  ],
+  footer: false,
+  favicons: ['https://cdn.hocgin.top/uPic/mp_logo.png'],
   themeConfig: {
     name: 'HUI',
     logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
   },
+  locales: [
+    { id: 'zh-CN', name: '中文' },
+    { id: 'en-US', name: 'EN' },
+  ],
   exportStatic: {},
   ignoreMomentLocale: true,
   alias: {
