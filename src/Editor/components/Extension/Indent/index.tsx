@@ -1,7 +1,7 @@
 import React from 'react';
 import { TextSelection, Transaction } from 'prosemirror-state';
 import { Extension } from '@tiptap/core';
-import Lang from '@/Utils/lang';
+import { LangKit } from '@hocgin/hkit';
 import { isListNode } from './utils';
 
 
@@ -11,7 +11,7 @@ function setNodeIndentMarkup(tr: Transaction, pos: number, options: IndentOption
   const node = tr.doc.nodeAt(pos);
   if (!node) return tr;
 
-  const indent = Lang.clamp(
+  const indent = LangKit.clamp(
     (node.attrs.indent || 0) + (options.stepValue * delta),
     options.minIndent,
     options.maxIndent,

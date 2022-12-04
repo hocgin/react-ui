@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { Option } from '@/Utils/types/rt-grass';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
@@ -23,7 +23,7 @@ const Index: React.FC<{
   prefixCls?: string;
 }> = ({ multiple = false, placeholder = '请选择..', useAction, ...props }) => {
   let [data, setData] = useState<Option[]>([]);
-  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let service = LangKit.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: Option[]) => setData(data || []),

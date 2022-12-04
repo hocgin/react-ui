@@ -1,7 +1,7 @@
 import React, { ReactNode, useState } from 'react';
 import { DownOutlined, UpOutlined } from '@ant-design/icons';
 import { Button, Col, Form, Row } from 'antd';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -35,7 +35,7 @@ const Index: React.FC<SearchBarProps> = ({
         layout="inline"
       >
         {isExpand ? (
-          Utils.Lang.chunk(children, 3)
+          LangKit.chunk(children, 3)
             .map((el: ReactNode[], index: number) => (
               <Row
                 key={index}
@@ -80,7 +80,7 @@ const Index: React.FC<SearchBarProps> = ({
             )
         ) : (
           <Row style={rowStyle} gutter={{ md: 24, lg: 24, xl: 24 } as any}>
-            {Utils.Lang.slice(children, 2)
+            {LangKit.slice(children, 2)
               .map((item: ReactNode, index: number) => (
                 <Col key={index} md={8} sm={24}>
                   {item}

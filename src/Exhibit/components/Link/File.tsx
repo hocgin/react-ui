@@ -1,6 +1,6 @@
 import React from 'react';
 import { Popover, Avatar } from 'antd';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { FileImageOutlined, FileUnknownOutlined } from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';
@@ -29,7 +29,7 @@ const Index: React.FC<FileProps> = ({
 }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('link', props.prefixCls);
-  let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
+  let fullUrl = LangKit.suppleUrlPrefix(url) || '#';
   return (
     <div>
       <a href={fullUrl} className={prefixCls} target="_blank">

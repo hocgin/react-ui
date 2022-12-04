@@ -12,7 +12,7 @@ import {
 import Comment from './Comment';
 import { AffixEditor } from './Editor';
 import Loading from '@/Loading';
-import Utils from '@/Utils';
+import { LangKit, StructKit } from '@/_utils';
 import { ConfigContext } from '@/ConfigProvider';
 import { AppstoreOutlined, BarsOutlined } from '@ant-design/icons';
 
@@ -61,15 +61,15 @@ const Index: React.FC<IndexProps> = ({
   // 提交回复事件
   const replied$ = useEventEmitter<CommentType>();
 
-  const { data, loading, reload, mutate } = useInfiniteScroll(
+  const { data = {} as any, loading, reload, mutate } = useInfiniteScroll(
     (d?: any) =>
-      Utils.Lang.nilService(useAction?.scroll)({
+      LangKit.nilService(useAction?.scroll)({
         orderDesc,
         showType,
         nextId: d?.nextId,
-      }).then(Utils.Struct.getScrollData),
+      }).then(StructKit.getScrollData),
     {
-      target: Utils.Lang.isBrowser() ? document : null,
+      target: LangKit.isBrowser() ? document : null,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,
     },
   );

@@ -3,7 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Code, Utils } from '@hocgin/ui';
+import { Code } from '@hocgin/ui';
 import { FormatKit } from '@hocgin/hkit';
 
 export default () => {

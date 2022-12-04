@@ -13,8 +13,7 @@ import {
   SchemeColumns,
 } from '@/Promise/components/Schema/scheme';
 import { ConfigContext } from '@/ConfigProvider';
-import Utils from '@/Utils';
-import Dom from '@/Utils/dom';
+import { LangKit, UIKit } from '@/_utils';
 
 const SearchBar: React.FC<{
   config: ConfigType;
@@ -64,7 +63,7 @@ const Index: React.FC<{
   let [data, setData] = useState<TreeNode[]>([]);
   let [params, setParams] = useState<any>({});
 
-  let service = Utils.Lang.nilService(useAction?.tree, []);
+  let service = LangKit.nilService(useAction?.tree, []);
   let tree = useRequest(service, {
     manual: true,
     onSuccess: (data: TreeNode[]) => setData(data),
@@ -151,7 +150,7 @@ const Index: React.FC<{
             setSelectedRows(selectedRows);
           }}
         >
-          {Dom.renderTreeNodes(data)}
+          {UIKit.renderTreeNodes(data)}
         </Tree>
       </Card>
     </Space>

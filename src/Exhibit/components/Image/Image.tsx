@@ -1,5 +1,5 @@
 import React from 'react';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { Image } from 'antd';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -16,7 +16,7 @@ export interface ImageProps {
 }
 
 let Index: React.FC<ImageProps> = ({ src, alt, ...props }) => {
-  let suffix = Utils.Lang.getSuffix(src) || 'N/A';
+  let suffix = LangKit.getSuffix(src) || 'N/A';
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('exhibit--Image', props.prefixCls);
   return (

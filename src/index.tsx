@@ -1,5 +1,5 @@
 export { default as Icon } from './Icon';
-export { default as Utils } from './Utils';
+export * from './_utils';
 export { default as TextRow } from './TextRow';
 export { default as Header } from './Header';
 export { default as _Tpl } from './_Tpl';

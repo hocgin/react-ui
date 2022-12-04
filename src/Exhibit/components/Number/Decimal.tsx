@@ -1,6 +1,5 @@
 import React from 'react';
 import CountUp from 'react-countup';
-import Lang from '@/Utils/lang';
 
 export interface DecimalProps {
   /**
@@ -49,7 +48,7 @@ class Index extends React.Component<DecimalProps, DecimalState> {
 
   get value() {
     let { value } = this.props;
-    let toNumber = Lang.toNumber(value);
+    let toNumber = parseInt(value as any);
     console.log('to', toNumber);
     return toNumber;
   }

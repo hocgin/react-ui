@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from 'antd';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { LinkOutlined } from '@ant-design/icons';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -19,7 +19,7 @@ export interface SiteProps {
 const Index: React.FC<SiteProps> = ({ url, title, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('link', props.prefixCls);
-  let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
+  let fullUrl = LangKit.suppleUrlPrefix(url) || '#';
   return (
     <div>
       <a href={fullUrl} className={prefixCls} target="_blank">

@@ -2,7 +2,7 @@ import React from 'react';
 import { ConfigContext } from '@/ConfigProvider';
 import classnames from 'classnames';
 import Directory from './Directory';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 
 /**
  * <pre>
@@ -16,7 +16,7 @@ export const setDirectoryAnchor = (content?: string) => {
     return content;
   }
 
-  let head = Utils.Lang.matchHtmlTag(content, 'h[1-6]');
+  let head = LangKit.matchHtmlTag(content, 'h[1-6]');
   head.forEach((item) => {
     let newHtml = item.html.replace(
       `<${item.name}`,

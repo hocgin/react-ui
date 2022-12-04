@@ -18,7 +18,7 @@ import {
 } from '../type';
 import { useInterval, useMount, useRequest } from 'ahooks';
 import { default as GEditor } from '@/Editor';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import classnames from 'classnames';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -76,7 +76,7 @@ const Editor: React.FC<{
   });
 
   let mentionUserRequest = useRequest<UserDataType[], any>(
-    Utils.Lang.nilService(useAction.mentionUser, []),
+    LangKit.nilService(useAction.mentionUser, []),
     {
       manual: true,
       retryCount: 3,

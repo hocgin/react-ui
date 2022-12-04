@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { TreeSelect } from 'antd';
-import Utils from '@/Utils';
-import Dom from '@/Utils/dom';
+import { LangKit } from '@/_utils';
+import { UIKit } from '@/_utils';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
 import { TreeNode } from '@/Utils/interface';
@@ -22,7 +22,7 @@ const Index: React.FC<{
 }> = ({ multiple = true, placeholder = '请选择..', useAction, ...rest }) => {
   let [data, setData] = useState<TreeNode[]>([]);
 
-  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let service = LangKit.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: TreeNode[]) => setData(data),
@@ -39,7 +39,7 @@ const Index: React.FC<{
       placeholder={placeholder}
       {...rest}
     >
-      {Dom.renderTreeSelectNodes(data)}
+      {UIKit.renderTreeSelectNodes(data)}
     </TreeSelect>
   );
 };

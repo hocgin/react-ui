@@ -1,9 +1,9 @@
 import React, {useEffect, useRef} from 'react';
 import {ConfigContext} from '@/ConfigProvider';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import classnames from 'classnames';
 
-let AplayerImport = Utils.Lang.dynamicImport(() => {
+let AplayerImport = LangKit.dynamicImport(() => {
   require('aplayer/dist/APlayer.min.css');
   return require('aplayer');
 });

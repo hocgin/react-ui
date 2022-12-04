@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import Notification from '@/Notification';
 import useAction from './use_action';
 import { useMount, useRequest, useTimeout } from 'ahooks';
@@ -13,7 +13,7 @@ export const NotificationIndicator: React.FC<{ timeout?: number }> = ({
                                                                         timeout = -1,
                                                                       }) => {
   let [count, setCount] = useState<number | undefined>();
-  let statRequest = useRequest(Utils.Lang.nilService(useAction()?.stat, {}), {
+  let statRequest = useRequest(LangKit.nilService(useAction()?.stat, {}), {
     manual: true,
     onSuccess: (data: MessageStat) => setCount(data.unreadTotalCount),
   });

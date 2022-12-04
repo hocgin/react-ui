@@ -6,10 +6,9 @@ import { MessageDataType, UseAction } from '@/Notification/components/types';
 import { useInfiniteScroll } from 'ahooks';
 import Empty from '@/Empty';
 import Loading from '@/Loading';
-import Utils from '@/Utils';
-import { Struct } from '@/Utils/result';
 import { ConfigContext } from '@/ConfigProvider';
-import { FormatKit } from '@hocgin/hkit';
+import { FormatKit } from '@/_utils';
+import { StructKit, LangKit } from '@/_utils';
 
 export const NoticePane: React.FC<{
   prefixCls?: string;
@@ -20,10 +19,10 @@ export const NoticePane: React.FC<{
   const ref = useRef<any>();
   const { data, loading, noMore } = useInfiniteScroll(
     (d?: any) =>
-      Utils.Lang.nilService(
+      LangKit.nilService(
         useAction?.scrollWithNoticeMessage,
         {},
-      )({ nextId: d?.nextId }).then(Struct.getScrollData),
+      )({ nextId: d?.nextId }).then(StructKit.getScrollData),
     {
       target: ref,
       isNoMore: (d) => !d?.hasMore || !d?.nextId,

@@ -2,14 +2,14 @@ import React from 'react';
 import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
 import { FileInfo } from '@/Utils/interface';
-import Utils from '@/Utils';
+import { LangKit, UIKit } from '@/_utils';
 import 'antd/es/upload/style';
 
 let defaultChildren = (
   <>
     <Button
-      type="primary"
-      shape="round"
+      type='primary'
+      shape='round'
       icon={<UploadOutlined />}
       size={'middle'}
     >
@@ -26,21 +26,21 @@ const Index: React.FC<{
   value?: FileInfo | FileInfo[];
   onChange?: (info: FileInfo | FileInfo[]) => void;
 }> = ({
-  children = defaultChildren,
-  beforeUpload,
-  headers,
-  action = `/api/com/file/upload`,
-  maxCount,
-  value,
-  onChange,
-  ...rest
-}) => {
+        children = defaultChildren,
+        beforeUpload,
+        headers,
+        action = `/api/com/file/upload`,
+        maxCount,
+        value,
+        onChange,
+        ...rest
+      }) => {
   let handleChange = ({ fileList }: any) => {
     fileList = fileList.map((file: any) => {
       let result = file?.response;
       if (result) {
         // Component will show file.url as link
-        if (Utils.Dom.showErrorMessageIfExits(result)) {
+        if (UIKit.showErrorMessageIfExits(result)) {
           file.url = result.data;
         } else {
           file.status = 'error';
@@ -50,17 +50,17 @@ const Index: React.FC<{
     });
     let newFileList = fileList
       .filter(({ url }: any) => url)
-      .map(Utils.Dom.asServerFile);
+      .map(UIKit.asServerFile);
     onChange?.(maxCount === 1 ? newFileList[0] : newFileList);
   };
   let handleFileList = (values: any): any => {
-    if (Utils.Lang.isNull(values)) {
+    if (LangKit.isNull(values)) {
       return [];
     }
     if (values instanceof Array) {
-      return (values || []).map(Utils.Dom.asFile);
+      return (values || []).map(UIKit.asFile);
     }
-    return [Utils.Dom.asFile(values, 0)];
+    return [UIKit.asFile(values, 0)];
   };
 
   let progress = {
@@ -73,7 +73,7 @@ const Index: React.FC<{
   };
   return (
     <Upload
-      name="file"
+      name='file'
       beforeUpload={beforeUpload}
       progress={progress}
       defaultFileList={handleFileList(value)}

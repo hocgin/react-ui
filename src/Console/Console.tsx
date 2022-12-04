@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { ConfigContext } from '@/ConfigProvider';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import classnames from 'classnames';
 
-let ConsoleFeedImport = Utils.Lang.dynamicImport(() => require('console-feed'));
+let ConsoleFeedImport = LangKit.dynamicImport(() => require('console-feed'));
 
 const LogsContainer: React.FC<{
   prefixCls?: string;

@@ -1,5 +1,5 @@
 import React from 'react';
-import Utils from '@/Utils';
+import { LangKit, UIKit } from '@/_utils';
 import { CloudDownloadOutlined } from '@ant-design/icons';
 import { ConfigContext } from '@/ConfigProvider';
 
@@ -18,11 +18,11 @@ export interface DownloadProps {
 const Index: React.FC<DownloadProps> = ({ url, title, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('link', props.prefixCls);
-  let fullUrl = Utils.Lang.suppleUrlPrefix(url) || '#';
+  let fullUrl = LangKit.suppleUrlPrefix(url) || '#';
   return (
     <div>
       <a
-        onClick={(e: any) => Utils.Dom.downloadUrl(e, { url: fullUrl })}
+        onClick={(e: any) => UIKit.downloadUrl(e, { url: fullUrl })}
         className={prefixCls}
       >
         <CloudDownloadOutlined />

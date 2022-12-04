@@ -1,7 +1,6 @@
 import React from 'react';
-import { Utils } from '@hocgin/ui';
+import { UIKit, LangKit } from '@hocgin/ui';
 import treedata from './config.data-tree';
-import { LangKit } from '@hocgin/hkit';
 
 export const config: any = {
   useAction: {
@@ -49,7 +48,7 @@ export const config: any = {
           {
             title: 'search',
             dataIndex: 'search',
-            valueType: Utils.Dom.columnPrefix('search'),
+            valueType: UIKit.columnPrefix('search'),
             hideInTable: true,
             valueEnum: {
               [search]: searchName,
@@ -57,7 +56,7 @@ export const config: any = {
             params: {
               useAction: {
                 initialValues: async (params: Record<string, any>) =>
-                  Utils.Lang.sleep(1000).then(() => [
+                  LangKit.sleep(1000).then(() => [
                     {
                       key: '这是key字段',
                       value: 'vx',
@@ -80,13 +79,13 @@ export const config: any = {
             key: '22',
             title: 'search sleep',
             dataIndex: 'search2',
-            valueType: Utils.Dom.columnPrefix('search'),
+            valueType: UIKit.columnPrefix('search'),
             hideInTable: true,
             valueEnum: { [search2]: search2Name },
             params: {
               useAction: {
                 initialValues: async (params: Record<string, any>) =>
-                  Utils.Lang.sleep(1000).then(() => [
+                  LangKit.sleep(1000).then(() => [
                     {
                       key: '这是key字段',
                       value: 'vx',
@@ -115,7 +114,7 @@ export const config: any = {
     {
       title: '下拉选择',
       dataIndex: 'gin_select_name',
-      valueType: Utils.Dom.columnPrefix('select'),
+      valueType: UIKit.columnPrefix('select'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -130,7 +129,7 @@ export const config: any = {
     {
       title: '树型选择',
       dataIndex: 'gin_tree_select_name',
-      valueType: Utils.Dom.columnPrefix('treeSelect'),
+      valueType: UIKit.columnPrefix('treeSelect'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => treedata,
@@ -140,7 +139,7 @@ export const config: any = {
     {
       title: 'radioButton',
       dataIndex: 'gin_radioButton_name',
-      valueType: Utils.Dom.columnPrefix('radioButton'),
+      valueType: UIKit.columnPrefix('radioButton'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -155,7 +154,7 @@ export const config: any = {
     {
       title: 'radio',
       dataIndex: 'gin_radio_name',
-      valueType: Utils.Dom.columnPrefix('radio'),
+      valueType: UIKit.columnPrefix('radio'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -170,7 +169,7 @@ export const config: any = {
     {
       title: 'checkbox',
       dataIndex: 'gin_checkbox_name',
-      valueType: Utils.Dom.columnPrefix('checkbox'),
+      valueType: UIKit.columnPrefix('checkbox'),
       params: {
         useAction: {
           initialValues: async (params: Record<string, any>) => [
@@ -185,7 +184,7 @@ export const config: any = {
     {
       title: '文件上传',
       dataIndex: 'gin_upload_name',
-      valueType: Utils.Dom.columnPrefix('upload'),
+      valueType: UIKit.columnPrefix('upload'),
       params: {
         action: `${
           LangKit.isBrowser() ? window.location.origin : ''
@@ -196,22 +195,22 @@ export const config: any = {
     {
       title: '编号',
       dataIndex: 'encoding',
-      valueType: Utils.Dom.columnPrefix('encoding'),
+      valueType: UIKit.columnPrefix('encoding'),
     },
     {
       title: '富文本 html',
       dataIndex: 'html',
-      valueType: Utils.Dom.columnPrefix('html'),
+      valueType: UIKit.columnPrefix('html'),
     },
     {
       title: '富文本',
       dataIndex: 'rich',
-      valueType: Utils.Dom.columnPrefix('rich'),
+      valueType: UIKit.columnPrefix('rich'),
     },
     {
       title: 'Markdown',
       dataIndex: 'markdown',
-      valueType: Utils.Dom.columnPrefix('markdown'),
+      valueType: UIKit.columnPrefix('markdown'),
     },
   ],
 };

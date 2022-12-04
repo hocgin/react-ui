@@ -1,7 +1,7 @@
 import { MenuDataItem } from '@umijs/route-utils';
 import { LocalRoute } from '@/Utils/interface';
 import memoizeOne from 'memoize-one';
-import Dom from '@/Utils/dom';
+import { UIKit } from '@/_utils';
 
 export let fastGetMenuDataItem = memoizeOne(getMenuDataItem);
 
@@ -73,7 +73,7 @@ function asMenuDataItem({
     hideInMenu: hideInMenu ?? false,
     name: title,
     key: key,
-    icon: Dom.getIcon(icon),
+    icon: UIKit.getIcon(icon),
     path: path,
     access: access,
     parentKeys: parentKeys,

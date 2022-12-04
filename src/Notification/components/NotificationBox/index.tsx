@@ -5,7 +5,7 @@ import { PersonalPane } from './PersonalPane';
 import { SystemPane } from './SystemPane';
 import { MessageStat, UseAction } from '../types';
 import classnames from 'classnames';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 import { useMount, useRequest } from 'ahooks';
 
 import { ConfigContext } from '@/ConfigProvider';
@@ -30,13 +30,13 @@ export const NotificationBox: React.FC<{
     props?.unready,
   );
 
-  let statRequest = useRequest(Utils.Lang.nilService(useAction?.stat, {}), {
+  let statRequest = useRequest(LangKit.nilService(useAction?.stat, {}), {
     manual: true,
     onSuccess: (data?: MessageStat) => {
       let unready: MessageType[] = [];
-      !!Utils.Lang.asLong(data?.unreadNoticeCount) && unready.push('notice');
-      !!Utils.Lang.asLong(data?.unreadPersonCount) && unready.push('personal');
-      !!Utils.Lang.asLong(data?.unreadSystemCount) && unready.push('system');
+      !!LangKit.asLong(data?.unreadNoticeCount) && unready.push('notice');
+      !!LangKit.asLong(data?.unreadPersonCount) && unready.push('personal');
+      !!LangKit.asLong(data?.unreadSystemCount) && unready.push('system');
       setUnready(unready);
     },
   });

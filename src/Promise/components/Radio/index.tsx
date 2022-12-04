@@ -3,7 +3,7 @@ import { Radio as AntdRadio } from 'antd';
 import { Option } from '@/Utils/types/rt-grass';
 import { useMount, useRequest } from 'ahooks';
 import { UseAction } from '@/Promise/components/Select/type';
-import Utils from '@/Utils';
+import { LangKit } from '@/_utils';
 
 // @formatter: off
 const Radio: React.FC<{
@@ -15,7 +15,7 @@ const Radio: React.FC<{
   // @formatter: on
   let [options, setOptions] = useState<{ label: string; value: string }[]>([]);
 
-  let service = Utils.Lang.nilService(useAction?.initialValues, []);
+  let service = LangKit.nilService(useAction?.initialValues, []);
   let { run, loading } = useRequest(service, {
     manual: true,
     onSuccess: (data: Option[]) => {

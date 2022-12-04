@@ -1,19 +1,12 @@
-export type HtmlTagType = {
-  key: string;
-  html: string;
-  name: string;
-  text: string;
-  attr: Record<string, any>;
-};
-/**
- * @deprecated
- */
-export default class Lang {
+import { LangKit as _LangKit } from '@hocgin/hkit';
+import { HtmlTagType } from './types';
+
+export default class LangKit extends _LangKit {
   /**
    * 转 long
    * @param val
    */
-  static asLong(val: undefined | null | number | string) {
+  public static asLong(val: undefined | null | number | string) {
     if (val === undefined || val === null) {
       return null;
     } else if (typeof val === 'string') {
@@ -28,7 +21,7 @@ export default class Lang {
    * @param url
    * @return {string[]}
    */
-  static urlToList(url: string) {
+  public static urlToList(url: string) {
     const urllist = url.split('/').filter((i) => i);
     return urllist.map(
       (urlItem, index) => `/${urllist.slice(0, index + 1).join('/')}`,
@@ -36,74 +29,19 @@ export default class Lang {
   }
 
   /**
-   * 拆分数组
-   * chunk([1,2,3,4,5], 2) => [[1,2], [3, 4], [5]]
-   * @param array
-   * @param length
-   * @returns {Array}
-   */
-  static chunk(array: any[], length: number) {
-    let index = 0;
-    let newArray = [];
-
-    while (index < array.length) {
-      newArray.push(array.slice(index, (index += length)));
-    }
-    return newArray;
-  }
-
-  /**
-   * 切割数据
-   * - 情况1
-   * slice([1,2,3,4], 2)
-   * [1,2]
-   * - 情况2
-   * slice([1], 2)
-   * [1]
-   * @param array
-   * @param max
-   * @returns {*}
-   */
-  static slice(array: any[], max: number) {
-    if (array.length < max) {
-      max = array.length;
-    }
-    return array.slice(0, max);
-  }
-
-  /**
-   * 去重
-   * @param array
-   * @return {*[]}
-   */
-  static distinct<T>(array: T[] = []): T[] {
-    return Array.from(new Set(array));
-  }
-
-  /**
-   * 删除指定位置
-   * @param array
-   * @param index
-   */
-  static delete<T>(array: T[] = [], index: number): T[] {
-    array.splice(index, 1);
-    return array;
-  }
-
-  /**
    * 调整默认值
    * @param o
    * @param def
    */
-  static nullToDefault(o: any, def: any) {
-    return Lang.isNull(o) ? def : o;
+  public static nullToDefault(o: any, def: any) {
+    return LangKit.isNull(o) ? def : o;
   }
 
   /**
    * 是否为null
    * @param o
    */
-  static isNull(o: any) {
+  public static isNull(o: any) {
     return o === null || o === undefined;
   }
 
@@ -111,16 +49,16 @@ export default class Lang {
    * 是否非null
    * @param o
    */
-  static isNotNull(o: any) {
-    return !Lang.isNull(o);
+  public static isNotNull(o: any) {
+    return !LangKit.isNull(o);
   }
 
   /**
    * 转为数值
    * @param val
    */
-  static toNumber(val?: any) {
-    if (Lang.isNull(val)) {
+  public static toNumber(val?: any) {
+    if (LangKit.isNull(val)) {
       return val;
     }
     if (typeof val === 'string') {
@@ -137,7 +75,7 @@ export default class Lang {
    * 是否图片的url
    * @param url
    */
-  static isImgUrl(url?: string) {
+  public static isImgUrl(url?: string) {
     return (
       `${url}`.endsWith('.png') ||
       `${url}`.endsWith('.jpeg') ||
@@ -149,8 +87,8 @@ export default class Lang {
    * 补充协议
    * @param url
    */
-  static suppleUrlPrefix(url?: string) {
-    if (Lang.nullToDefault(url, '').trim() === '') {
+  public static suppleUrlPrefix(url?: string) {
+    if (LangKit.nullToDefault(url, '').trim() === '') {
       return null;
     }
     if (url?.startsWith('http://') || url?.startsWith('https://')) {
@@ -163,7 +101,7 @@ export default class Lang {
    * 获取图片后缀
    * @param url
    */
-  static getSuffix(url?: string) {
+  public static getSuffix(url?: string) {
     let suffix = `${url}`;
     if (suffix.includes('.')) {
       let lastIndex = suffix.lastIndexOf('.');
@@ -175,27 +113,11 @@ export default class Lang {
     return suffix.toUpperCase();
   }
 
-  /**
-   * await sleep(5000)
-   * @param time
-   */
-  static sleep(time: number = 3 * 1000) {
-    return new Promise((resolve) => {
-      setTimeout(() => resolve(true), time);
-    });
-  }
-
-  /**
-   * 是否是浏览器端渲染
-   */
-  static isBrowser() {
-    return typeof window !== 'undefined';
-  }
 
   /**
    * 是否后端渲染
    */
-  static isServer() {
+  public static isServer() {
     return typeof window === 'undefined';
   }
 
@@ -204,7 +126,7 @@ export default class Lang {
    * @param service
    * @param defResult
    */
-  static nilService(
+  public static nilService(
     service: any,
     defResult: any = {},
   ): (...args: any | any[]) => Promise<any> {
@@ -212,34 +134,11 @@ export default class Lang {
   }
 
   /**
-   * 返回值在上下限范围内
-   * @param val 值
-   * @param min 下限
-   * @param max 上限
-   */
-  static clamp(val: number, min: number, max: number): number {
-    if (val < min) return min;
-    if (val > max) return max;
-    return val;
-  }
-
-  /**
-   * 转为map
-   * @param items
-   * @param fieldKey
-   */
-  static toMap(items: any[] = [], fieldKey: string): Record<string, any> {
-    let result: Record<string, any> = {};
-    items.forEach((item) => (result[item[`${fieldKey}`]] = item));
-    return result;
-  }
-
-  /**
    * 匹配html标签
    * @param content
    * @param tagRegex
    */
-  static matchHtmlTag(content: string = '', tagRegex: string): HtmlTagType[] {
+  public static matchHtmlTag(content: string = '', tagRegex: string): HtmlTagType[] {
     // tagRegex = h[1-6]
 
     // 1. 匹配标签
@@ -305,16 +204,19 @@ export default class Lang {
     });
   }
 
-  static isDev() {
+  public static isDev() {
     // @ts-ignore
     return process.env.NODE_ENV === 'development';
   }
 
-  static dynamicImport<T>(importFunc: () => T): { get: () => T } {
-    let instance: T | undefined;
-    return {
-      get: () =>
-        instance !== undefined ? instance : (() => (instance = importFunc()))(),
-    };
+  /**
+   * 转为map
+   * @param items
+   * @param fieldKey
+   */
+  static toMap2(items: any[] = [], fieldKey: string): Record<string, any> {
+    let result: Record<string, any> = {};
+    items.forEach(item => result[item[`${fieldKey}`]] = item);
+    return result;
   }
 }
