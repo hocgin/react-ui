@@ -2,8 +2,8 @@
   "name": "@hocgin/ui",
   "version": "4.0.45",
   "sideEffects": [
-    "es/**/style/*",
-    "lib/**/style/*",
+    "dist/esm/**/style/*",
+    "dist/cjs/**/style/*",
     "src/**/style/**",
     ".less",
     ".css"
@@ -109,12 +109,12 @@
     "zeed-dom": "0.9.19"
   },
   "peerDependencies": {
+    "@hocgin/hkit": "^2.0.14",
     "antd": "5.0.3",
     "react": "17.x",
     "react-dom": "17.x"
   },
   "optionalDependencies": {
-    "@hocgin/hkit": "^2.0.13",
     "aplayer": "^1.10.1",
     "artplayer": "^4.4.7",
     "console-feed": "^3.3.0",
