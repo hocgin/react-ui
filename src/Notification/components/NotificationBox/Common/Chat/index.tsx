@@ -16,7 +16,7 @@ import {
   UseAction,
 } from '@/Notification/components/types';
 import { useInfiniteScroll, useRequest, useToggle } from 'ahooks';
-import useInfiniteTopScroll from '@/Utils/scene/useInfiniteTopScroll';
+import { useInfiniteTopScroll } from '@hocgin/ahooks-kit';
 import { ConfigContext } from '@/ConfigProvider';
 import { FormatKit } from '@/_utils';
 import { LangKit, StructKit } from '@/_utils';
