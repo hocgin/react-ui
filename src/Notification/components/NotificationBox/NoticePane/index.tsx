@@ -38,7 +38,7 @@ export const NoticePane: React.FC<{
           ({ sendAt, title, description, noticeMessage }: MessageDataType) => {
             let ymd: string = FormatKit.parseLocalDatetime2(
               sendAt,
-              Utils?.Format.DateTime.FORMAT_3,
+              FormatKit.DATETIME_FORMAT_3,
             );
             let needAddDay = !set.includes(ymd);
             if (needAddDay) {
