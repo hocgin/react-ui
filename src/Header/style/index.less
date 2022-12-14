@@ -4,8 +4,8 @@
 @header-prefix-cls: ~'@{hui-prefix}-header';
 @header-menu-prefix-cls: ~'@{header-prefix-cls}-menu';
 
-@largeHeaderHeight: var(--large-header-height);
-@middleHeaderHeight: var(--small-header-height);
+@largeHeaderHeight: var(--large-header-height, 70px);
+@middleHeaderHeight: var(--small-header-height, 70px);
 
 .@{header-prefix-cls} {
   width: 100%;
@@ -23,6 +23,7 @@
 
   backdrop-filter: blur(12px);
   background-color: rgba(255, 255, 255, 0.7);
+  box-sizing: border-box;
 
   &.@{header-prefix-cls}-fixed {
     position: fixed;
