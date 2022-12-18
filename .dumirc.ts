@@ -20,6 +20,7 @@ export default defineConfig({
   themeConfig: {
     name: 'HUI',
     logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
+    footer: false
   },
   locales: [
     { id: 'zh-CN', name: '中文' },
