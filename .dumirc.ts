@@ -33,15 +33,6 @@ export default defineConfig({
   },
   extraBabelPlugins: [
     ...useLogger(),
-    [
-      'import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'lib',
-        style: true,
-      },
-      'antd',
-    ],
   ],
   resolve: { entryFile: './src/index.tsx' },
   ssr: process.env.NODE_ENV === 'development' ? false : {},

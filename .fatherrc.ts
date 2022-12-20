@@ -2,6 +2,8 @@ import { defineConfig } from 'father';
 import { resolve } from 'path';
 import { IFatherConfig } from 'father/dist/types';
 
+export const ANT_PREFIX_CLS = 'hui-';
+
 export const useLogger = () => {
   let result: any = [];
   let offLogger = process.env.USE_LOG !== 'true';
@@ -25,14 +27,5 @@ export default defineConfig({
   },
   extraBabelPlugins: [
     ...useLogger(),
-    [
-      'import',
-      {
-        libraryName: 'antd',
-        libraryDirectory: 'lib',
-        style: true,
-      },
-      'antd',
-    ],
   ],
 } as IFatherConfig);
