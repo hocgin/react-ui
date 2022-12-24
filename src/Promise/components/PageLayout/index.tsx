@@ -7,6 +7,7 @@ import { fastGetAccess, fastGetMenuDataItem } from './utils';
 import { WithFalse } from '@ant-design/pro-layout/es/typing';
 import { HeaderViewProps } from '@ant-design/pro-layout/es/components/Header';
 import { LocalRoute } from '@/Utils/interface';
+import { Link } from 'react-router-dom';
 
 const DEFAULT_PATHNAME = '/welcome';
 
@@ -83,9 +84,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       title={title}
       rightContentRender={rightContentRender}
       headerContentRender={() => <ProBreadcrumb />}
-      menuItemRender={(item, dom) => (
-        <a onClick={() => history.pushState({}, null as any, item.path || DEFAULT_PATHNAME)}>{dom}</a>
-      )}
+      menuItemRender={(item, dom) => <Link to={item.path || DEFAULT_PATHNAME}>{dom}</Link>}
       footerRender={() => <Footer />}
       {...rest}
     >
