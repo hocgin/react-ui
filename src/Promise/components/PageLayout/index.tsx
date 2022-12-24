@@ -58,8 +58,8 @@ const PageLayout: React.FC<PageLayoutProps> = ({
                                                  ...rest
                                                }) => {
   // @formatter: on
-  let history = useNavigate();
-  let { runAsync } = useRequest(useAction!.initialValues, {
+  let navigate = useNavigate();
+  let { runAsync } = useRequest(useAction.initialValues, {
     manual: true,
   });
 
@@ -86,7 +86,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       rightContentRender={rightContentRender}
       headerContentRender={() => <ProBreadcrumb />}
       menuItemRender={(item, dom) => (
-        <a onClick={() => history(item.path || DEFAULT_PATHNAME)}>{dom}</a>
+        <a onClick={() => navigate(item.path || DEFAULT_PATHNAME)}>{dom}</a>
       )}
       footerRender={() => <Footer />}
       {...rest}
