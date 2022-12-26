@@ -58,9 +58,12 @@ const PageLayout: React.FC<PageLayoutProps> = ({
                                                  ...rest
                                                }) => {
   // @formatter: on
-  let { runAsync } = useRequest(useAction.initialValues, {
+  let { runAsync, loading } = useRequest(useAction.initialValues, {
     manual: true,
   });
+  if (loading) {
+    return <></>;
+  }
 
   let menu = {
     request: (params: Record<string, any>, defaultMenuData: MenuDataItem[]) => {
