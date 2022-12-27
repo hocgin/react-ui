@@ -61,10 +61,6 @@ const PageLayout: React.FC<PageLayoutProps> = ({
   let { runAsync, loading } = useRequest(useAction.initialValues, {
     manual: true,
   });
-  if (loading) {
-    return <></>;
-  }
-
   let menu = {
     request: (params: Record<string, any>, defaultMenuData: MenuDataItem[]) => {
       let routes = route?.routes ?? [];
@@ -78,6 +74,9 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       );
     },
   };
+  if (loading) {
+    return <></>;
+  }
   return (
     <ProLayout
       menu={menu}
