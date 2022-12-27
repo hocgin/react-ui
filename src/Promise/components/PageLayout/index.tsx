@@ -1,5 +1,5 @@
-import React from 'react';
-import { useRequest } from 'ahooks';
+import React, { useState } from 'react';
+import { useBoolean, useRequest } from 'ahooks';
 import Footer from '@/Footer';
 import ProLayout, { ProBreadcrumb } from '@ant-design/pro-layout';
 import { MenuDataItem } from '@umijs/route-utils';
@@ -58,24 +58,21 @@ const PageLayout: React.FC<PageLayoutProps> = ({
                                                  ...rest
                                                }) => {
   // @formatter: on
-  let { runAsync, loading } = useRequest(useAction.initialValues, {
-    manual: true,
-  });
-  let menu = {
-    request: (params: Record<string, any>, defaultMenuData: MenuDataItem[]) => {
-      let routes = route?.routes ?? [];
-      if (isShowAll) {
-        return Promise.resolve(
-          fastGetMenuDataItem(routes, fastGetAccess(routes)),
-        );
-      }
-      return runAsync().then(
-        (access = []) => fastGetMenuDataItem(routes, access) || defaultMenuData,
-      );
-    },
-  };
   return (<ProLayout
-    menu={menu}
+    menu={{
+      request: async (params: Record<string, any>, defaultMenuData: MenuDataItem[]) => {
+        let routes = route?.routes ?? [];
+        let result: any[];
+        if (isShowAll) {
+          result = fastGetMenuDataItem(routes, fastGetAccess(routes));
+        } else {
+          let access = (await useAction.initialValues()) ?? [];
+          result = fastGetMenuDataItem(routes, access) || defaultMenuData;
+        }
+        console.log('menu.result', result);
+        return result;
+      },
+    }}
     fixSiderbar
     fixedHeader
     logo={logo}
