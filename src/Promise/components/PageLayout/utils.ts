@@ -19,8 +19,6 @@ function getMenuDataItem(
         routeMap[key].hasAccess = true;
       });
     });
-  console.log('routes', routes);
-
   // 构建树型菜单
   return fastRoutesToMenuDataItems(routes ?? [], accesss);
 }
