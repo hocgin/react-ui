@@ -74,24 +74,18 @@ const PageLayout: React.FC<PageLayoutProps> = ({
       );
     },
   };
-  if (loading) {
-    return <></>;
-  }
-  return (
-    <ProLayout
-      menu={menu}
-      fixSiderbar
-      fixedHeader
-      logo={logo}
-      title={title}
-      rightContentRender={rightContentRender}
-      headerContentRender={() => <ProBreadcrumb />}
-      menuItemRender={(item, dom) => <Link to={item.path || DEFAULT_PATHNAME}>{dom}</Link>}
-      footerRender={() => <Footer />}
-      {...rest}
-    >
-      {children}
-    </ProLayout>
-  );
+  return (<ProLayout
+    menu={menu}
+    fixSiderbar
+    fixedHeader
+    logo={logo}
+    title={title}
+    rightContentRender={rightContentRender}
+    headerContentRender={() => <ProBreadcrumb />}
+    menuItemRender={(item, dom) => <Link to={item.path || DEFAULT_PATHNAME}>{dom}</Link>}
+    footerRender={() => <Footer />}
+    {...rest}>
+    {children}
+  </ProLayout>);
 };
 export default PageLayout;
