@@ -140,7 +140,7 @@ const Image: React.FC<{
           className={classnames(prefixCls, {
             [`${prefixCls}-imageViewSelected`]: selected,
           })}
-          style={{ display: 'inline-block' } as any}
+          style={{ display: 'inline-flex' } as any}
         >
           <img
             className={classnames({
