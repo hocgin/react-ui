@@ -54,7 +54,7 @@ const ArchiveSchemaModal: React.FC<ExhibitSchemaProps> = ({
     <>
       {triggerEl}
       <Modal
-        visible={visible}
+        open={visible}
         onCancel={() => setVisible(false)}
         onOk={() => setVisible(false)}
       >

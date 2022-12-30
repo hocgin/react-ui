@@ -39,11 +39,12 @@ let ReportModal: React.FC<{
   useAction: UseAction;
   id: ID;
 }> = ({ id, useAction, ...props }: any) => {
+  let [modal, contextHolder] = Modal.useModal();
   let [reason, setReason] = useState<string>();
   let [visible, setVisible] = useState<boolean>(false);
   let { loading, run } = useRequest<any, [ReportParamsType]>(LangKit.nilService(useAction.report), {
     manual: true,
-    onSuccess: (res) => Modal.success({
+    onSuccess: (res) => modal.success({
       title: '举报成功',
       content: '感谢您的举报，我们会尽快处理',
     }),
@@ -55,7 +56,7 @@ let ReportModal: React.FC<{
   let onOk = () => {
     let reasonStr = `${reason}`;
     if (reasonStr.trim().length === 0) {
-      Modal.error({
+      modal.error({
         title: '举报失败',
         content: '举报原因不能为空',
       });
@@ -67,13 +68,16 @@ let ReportModal: React.FC<{
     });
     setVisible(false);
   };
-  return <Modal title='举报' visible={visible}
-                onCancel={setVisible.bind(this, false)} onOk={onOk}
-                confirmLoading={loading}>
-    <Input.TextArea onChange={(e) => setReason(e?.target?.value)}
-                    autoSize={{ minRows: 4, maxRows: 6 } as any} showCount
-                    placeholder='👊 举报原因..' />
-  </Modal>;
+  return <>
+    {contextHolder}
+    <Modal title='举报' open={visible}
+           onCancel={setVisible.bind(this, false)} onOk={onOk}
+           confirmLoading={loading}>
+      <Input.TextArea onChange={(e) => setReason(e?.target?.value)}
+                      autoSize={{ minRows: 4, maxRows: 6 } as any}
+                      placeholder='👊 举报原因..' />
+    </Modal>
+  </>;
 };
 
 export default Index;

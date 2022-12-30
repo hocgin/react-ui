@@ -21,9 +21,9 @@ const Index: React.FC<SiteProps> = ({ url, title, ...props }) => {
   let prefixCls = getPrefixCls('link', props.prefixCls);
   let fullUrl = LangKit.suppleUrlPrefix(url) || '#';
   return (
-    <div>
-      <a href={fullUrl} className={prefixCls} target="_blank">
-        <Tooltip placement="top" color="#383838" title={fullUrl}>
+    <div style={{ display: 'flex' }}>
+      <a href={fullUrl} className={prefixCls} target='_blank'>
+        <Tooltip placement='top' color='#383838' title={fullUrl}>
           <LinkOutlined />
         </Tooltip>
         <span className={'linkText'}>{title || url}</span>

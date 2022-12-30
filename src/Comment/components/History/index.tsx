@@ -11,12 +11,13 @@ export const ExpandHistoryButton: React.FC<{
   id: ID;
   useAction: UseAction;
 }> = ({ useAction, id }) => {
+  let [modal, contextHolder] = Modal.useModal();
   let { loading, runAsync } = useRequest<HistoryType, [HistoryParamsType]>(
     LangKit.nilService(useAction.history, []),
     {
       manual: true,
       onSuccess: (data: HistoryType) => {
-        Modal.confirm({
+        modal.confirm({
           bodyStyle: {
             padding: '16px 16px 12px',
           },
@@ -48,7 +49,8 @@ export const ExpandHistoryButton: React.FC<{
     },
   );
 
-  return (
+  return <>
+    {contextHolder}
     <Button
       loading={loading}
       size={'small'}
@@ -56,5 +58,5 @@ export const ExpandHistoryButton: React.FC<{
       type='link'
       icon={<NodeExpandOutlined />}
     />
-  );
+  </>;
 };

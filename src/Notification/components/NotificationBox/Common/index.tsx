@@ -35,13 +35,15 @@ export const MessageSmallCard: React.FC<{
   datetime?: LocalDateTime;
   prefixCls?: string;
 }> = ({ title, datetime, content, description, ...props }) => {
+  let [modal, contextHolder] = Modal.useModal();
   let fmtDatetime = FormatKit.parseLocalDatetime(datetime);
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls(
     'notification--Common-MessageSmallCard',
     props.prefixCls,
   );
-  return (
+  return <>
+    {contextHolder}
     <div className={prefixCls}>
       <Avatar size={34} icon={<NotificationOutlined />} />
       <div className={'body'}>
@@ -56,13 +58,12 @@ export const MessageSmallCard: React.FC<{
               <a
                 rel='noopener noreferrer'
                 onClick={() =>
-                  Modal.confirm({
+                  modal.confirm({
                     icon: null,
                     cancelText: null,
                     content: <Editor editable={false} value={content} />,
                   })
-                }
-              >
+                }>
                 更多
               </a>
             )}
@@ -70,5 +71,5 @@ export const MessageSmallCard: React.FC<{
         </div>
       </div>
     </div>
-  );
+  </>;
 };

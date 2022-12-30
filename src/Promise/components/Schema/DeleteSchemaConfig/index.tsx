@@ -55,7 +55,7 @@ const DeleteSchemaConfig: React.FC<{
     <>
       {triggerEl}
       <Modal
-        visible={visible}
+        open={visible}
         width={400}
         confirmLoading={loading}
         closable={false}

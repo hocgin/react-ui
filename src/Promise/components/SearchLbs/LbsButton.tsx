@@ -49,7 +49,7 @@ const Index: React.FC<{
           setVisible(false);
         }}
         onCancel={setVisible.bind(this, false)}
-        visible={visible}
+        open={visible}
       >
         <div style={{ width: '100%', height: 300 }}>
           <LbsSearch
