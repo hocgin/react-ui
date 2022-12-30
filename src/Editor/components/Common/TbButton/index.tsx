@@ -16,7 +16,7 @@ const Index: React.FC<{
   return (
     <div className={classnames(prefixCls, className)}>
       <Tooltip placement='bottom' title={title}>
-        <Button type='text' onClick={onClick} disabled={disabled}>
+        <Button onClick={onClick} disabled={disabled}>
           <div onTouchStart={(e) => e.preventDefault()}>{children}</div>
         </Button>
       </Tooltip>
