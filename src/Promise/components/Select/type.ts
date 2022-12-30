@@ -1,4 +1,4 @@
-import { Option } from '@/Utils/types/rt-grass';
+import { Option } from '@/_types';
 
 export interface UseAction {
   initialValues: () => Promise<Option[]>;

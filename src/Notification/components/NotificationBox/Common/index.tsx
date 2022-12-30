@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LocalDateTime } from '@/Utils/interface';
+import { LocalDateTime } from '@/_types';
 import { Avatar, Modal } from 'antd';
 import Editor from '@/Editor';
 import { NotificationOutlined } from '@ant-design/icons';

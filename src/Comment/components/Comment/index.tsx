@@ -1,6 +1,6 @@
 import React, { useState, useRef, createElement, useEffect } from 'react';
 import { useRequest, useToggle, useSize } from 'ahooks';
-import { UserType } from '@/Utils/interface';
+import { UserType } from '@/_types';
 import {
   CommentType,
   DislikeDataType,
@@ -24,7 +24,7 @@ import {
   Button,
 } from 'antd';
 import { Comment } from '@ant-design/compatible';
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 import classnames from 'classnames';
 import { EventEmitter } from 'ahooks/lib/useEventEmitter';
 import { FormatKit, StructKit } from '@/_utils';

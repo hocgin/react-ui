@@ -10,7 +10,7 @@ import { LangKit } from '@/_utils';
 import { Button, Skeleton } from 'antd';
 import classnames from 'classnames';
 import useAction from './use_action';
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 import {
   DraftDoc,
   PublishedDoc,

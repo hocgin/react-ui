@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Radio } from 'antd';
-import { Option } from '@/Utils/types/rt-grass';
+import { Option } from '@/_types';
 import { useRequest, useMount } from 'ahooks';
 import { UseAction } from './type';
 import { LangKit } from '@/_utils';

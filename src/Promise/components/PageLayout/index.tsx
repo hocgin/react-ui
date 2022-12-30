@@ -6,7 +6,7 @@ import { MenuDataItem } from '@umijs/route-utils';
 import { fastGetAccess, fastGetMenuDataItem } from './utils';
 import { WithFalse } from '@ant-design/pro-layout/es/typing';
 import { HeaderViewProps } from '@ant-design/pro-layout/es/components/Header';
-import { LocalRoute } from '@/Utils/interface';
+import { LocalRoute } from '@/_types';
 import { Link } from 'react-router-dom';
 
 const DEFAULT_PATHNAME = '/welcome';

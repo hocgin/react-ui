@@ -1,6 +1,6 @@
 import React from 'react';
 import FileUpload from '@/FileUpload';
-import { FileInfo } from '@/Utils/interface';
+import { FileInfo } from '@/_types';
 
 const Index: React.FC<{
   children?: any;

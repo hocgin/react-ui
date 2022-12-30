@@ -5,7 +5,7 @@ import {
   StepBackwardOutlined,
   StepForwardOutlined,
 } from '@ant-design/icons';
-import { ID, LocalDateTime } from '@/Utils/interface';
+import { ID, LocalDateTime } from '@/_types';
 import { default as GEditor } from '@/Editor';
 import Loading from '@/Loading';
 import Empty from '@/Empty';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Upload, Button } from 'antd';
 import { UploadOutlined } from '@ant-design/icons';
-import { FileInfo } from '@/Utils/interface';
+import { FileInfo } from '@/_types';
 import { LangKit, UIKit } from '@/_utils';
 import 'antd/es/upload/style';
 

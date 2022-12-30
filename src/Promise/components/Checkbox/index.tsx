@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Checkbox as AntdCheckbox } from 'antd';
-import { Option } from '@/Utils/types/rt-grass';
+import { Option } from '@/_types';
 import { useMount, useRequest } from 'ahooks';
 import { UseAction } from './type';
 import { LangKit } from '@/_utils';

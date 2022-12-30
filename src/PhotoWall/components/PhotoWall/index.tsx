@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Upload } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import { UIKit } from '@/_utils';
-import { FileInfo, HttpRequestHeader } from '@/Utils/interface';
+import { FileInfo, HttpRequestHeader } from '@/_types';
 
 function getBase64(file: any) {
   return new Promise((resolve, reject) => {

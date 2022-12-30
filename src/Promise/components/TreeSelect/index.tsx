@@ -4,7 +4,7 @@ import { LangKit } from '@/_utils';
 import { UIKit } from '@/_utils';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
-import { TreeNode } from '@/Utils/interface';
+import { TreeNode } from '@/_types';
 
 const Index: React.FC<{
   /**

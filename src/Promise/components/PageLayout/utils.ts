@@ -1,5 +1,5 @@
 import { MenuDataItem } from '@umijs/route-utils';
-import { LocalRoute } from '@/Utils/interface';
+import { LocalRoute } from '@/_types';
 import memoizeOne from 'memoize-one';
 import { UIKit } from '@/_utils';
 

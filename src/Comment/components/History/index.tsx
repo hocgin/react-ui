@@ -1,7 +1,7 @@
 import React from 'react';
 import { NodeExpandOutlined } from '@ant-design/icons';
 import { Button, Modal, List } from 'antd';
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 import { CommentType, HistoryType, HistoryParamsType, UseAction } from '@/Comment/components/type';
 import { useRequest } from 'ahooks';
 import Comment from '../Comment/index';

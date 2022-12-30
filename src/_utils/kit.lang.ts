@@ -113,7 +113,6 @@ export default class LangKit extends _LangKit {
     return suffix.toUpperCase();
   }
 
-
   /**
    * 是否后端渲染
    */
@@ -138,7 +137,10 @@ export default class LangKit extends _LangKit {
    * @param content
    * @param tagRegex
    */
-  public static matchHtmlTag(content: string = '', tagRegex: string): HtmlTagType[] {
+  public static matchHtmlTag(
+    content: string = '',
+    tagRegex: string,
+  ): HtmlTagType[] {
     // tagRegex = h[1-6]
 
     // 1. 匹配标签
@@ -171,7 +173,7 @@ export default class LangKit extends _LangKit {
       let text;
       if (textResult.length > 0) {
         text = textResult[0];
-        text = text.replace('>', '').replace('</', '');
+        text = `${text}`.replace('>', '').replace('</', '');
       }
 
       let key;
@@ -216,7 +218,7 @@ export default class LangKit extends _LangKit {
    */
   static toMap2(items: any[] = [], fieldKey: string): Record<string, any> {
     let result: Record<string, any> = {};
-    items.forEach(item => result[item[`${fieldKey}`]] = item);
+    items.forEach((item) => (result[item[`${fieldKey}`]] = item));
     return result;
   }
 }

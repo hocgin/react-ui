@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Select } from 'antd';
 import { LangKit } from '@/_utils';
-import { Option } from '@/Utils/types/rt-grass';
+import { Option } from '@/_types';
 import { UseAction } from './type';
 import { useMount, useRequest } from 'ahooks';
 

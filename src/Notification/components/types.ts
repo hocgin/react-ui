@@ -1,4 +1,4 @@
-import { ID, IScroll, LocalDateTime, ScrollRo } from '@/Utils/interface';
+import { ID, IScroll, LocalDateTime, ScrollRo } from '@/_types';
 
 type MessageType = 'system_message' | 'personal_message' | 'notice_message';
 

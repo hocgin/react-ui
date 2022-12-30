@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Modal } from 'antd';
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { UseAction } from './type';
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 
 type ConfigType = {
   /**

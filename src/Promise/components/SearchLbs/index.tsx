@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Button, Input } from 'antd';
 import { ConfigContext } from '@/ConfigProvider';
-import { UAPILoader } from '@/Utils/map';
+import { UAPILoader } from '@/_utils/map';
 import { ClearOutlined } from '@ant-design/icons';
 import { SearchLbsData } from '@/Promise/components/SearchLbs/types';
 import { LangKit } from '@hocgin/hkit';

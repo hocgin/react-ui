@@ -1,5 +1,5 @@
 import { usePost, useGet } from '@hocgin/hkit';
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 import { StructKit, UIKit } from '@/_utils';
 
 export default class {

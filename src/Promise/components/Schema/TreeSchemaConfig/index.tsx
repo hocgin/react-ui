@@ -6,7 +6,7 @@ import { BetaSchemaForm } from '@ant-design/pro-form';
 import { ReloadOutlined } from '@ant-design/icons';
 import { useContext, useState } from 'react';
 import { useRequest, useMount } from 'ahooks';
-import { TreeNode } from '@/Utils/interface';
+import { TreeNode } from '@/_types';
 import ProProvider from '@ant-design/pro-provider';
 import {
   handleSchemeColumns,

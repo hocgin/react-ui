@@ -1,4 +1,4 @@
-import { ID, ScrollRo } from '@/Utils/interface';
+import { ID, ScrollRo } from '@/_types';
 
 export interface PublishedDoc {
   ownerUserId: ID;

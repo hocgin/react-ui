@@ -1,11 +1,4 @@
-import {
-  UserType,
-  ID,
-  PageRo,
-  ScrollRo,
-  IScroll,
-  IPage,
-} from '@/Utils/interface';
+import { UserType, ID, PageRo, ScrollRo, IScroll, IPage } from '@/_types';
 
 export type ParamsType =
   | [ReplyParamsType]
@@ -79,11 +72,9 @@ export interface CommentType {
 }
 
 // ========================================================
-export interface ScrollParamsType extends ScrollRo {
-}
+export interface ScrollParamsType extends ScrollRo {}
 
-export interface ScrollDataType extends IScroll<CommentType> {
-}
+export interface ScrollDataType extends IScroll<CommentType> {}
 
 // ========================================================
 export interface HistoryParamsType {
@@ -97,8 +88,7 @@ export interface UserParamsType {
   force?: boolean;
 }
 
-export interface UserDataType extends UserType {
-}
+export interface UserDataType extends UserType {}
 
 // ========================================================
 export interface ReplyParamsType {
@@ -106,16 +96,14 @@ export interface ReplyParamsType {
   content?: string;
 }
 
-export interface ReplyDataType extends CommentType {
-}
+export interface ReplyDataType extends CommentType {}
 
 // ========================================================
 export interface PagingParamsType extends PageRo {
   parentId: ID;
 }
 
-export interface PagingDataType extends IPage<CommentType> {
-}
+export interface PagingDataType extends IPage<CommentType> {}
 
 // ========================================================
 export interface LikeParamsType {

@@ -4,7 +4,7 @@ import { MoreOutlined } from '@ant-design/icons';
 import { ReportParamsType, UseAction } from '@/Comment/components/type';
 import { useRequest } from 'ahooks';
 import { LangKit } from '@/_utils';
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 
 const Index: React.FC<{
   id: ID;

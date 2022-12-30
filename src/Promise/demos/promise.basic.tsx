@@ -5,7 +5,7 @@
 import React from 'react';
 import { Divider } from 'antd';
 import { Promise } from '@hocgin/ui';
-import { SearchOption } from '@/Utils/types/rt-grass';
+import { SearchOption } from '@/_types';
 import { LangKit } from '@hocgin/hkit';
 
 let useAction = {

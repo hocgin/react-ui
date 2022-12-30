@@ -1,6 +1,6 @@
 import { success } from './_utils/result';
 import Mock from 'mockjs';
-import { UserType } from '@/Utils/interface';
+import { UserType } from '@/_types';
 
 // http://mockjs.com/examples.html
 export default {

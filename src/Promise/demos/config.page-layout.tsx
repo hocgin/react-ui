@@ -1,4 +1,4 @@
-import { LocalRoute } from '@/Utils/interface';
+import { LocalRoute } from '@/_types';
 
 export default {
   // 下面是每个项目配置的路由

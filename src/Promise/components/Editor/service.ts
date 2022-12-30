@@ -1,5 +1,5 @@
 import { useGet, usePost } from '@hocgin/hkit';
-import { ID, ScrollRo } from '@/Utils/interface';
+import { ID, ScrollRo } from '@/_types';
 import {
   DraftDoc,
   HistoryDocContent,

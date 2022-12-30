@@ -1,14 +1,11 @@
-import { ID } from '@/Utils/interface';
+import { ID } from '@/_types';
 
-export interface GetConfigParamsType {
-}
-
+export interface GetConfigParamsType {}
 
 export interface SetConfigParamsType {
   valueId: ID;
   value?: any;
 }
-
 
 export interface ConfigScopeStructType {
   id: ID;
@@ -52,9 +49,7 @@ interface ConfigScopeGroupType {
 
 export interface UseAction {
   // 获取配置
-  getConfig?: (
-    args: GetConfigParamsType,
-  ) => Promise<ConfigScopeType>;
+  getConfig?: (args: GetConfigParamsType) => Promise<ConfigScopeType>;
   // 更新配置
   setConfig?: (args: SetConfigParamsType) => Promise<any>;
 }

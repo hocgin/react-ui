@@ -4,7 +4,7 @@ import { Button, Modal, Tooltip } from 'antd';
 import { AimOutlined } from '@ant-design/icons';
 import { Map } from '@uiw/react-amap';
 import LbsSearch from './LbsSearch';
-import { UAPILoader } from '@/Utils/map';
+import { UAPILoader } from '@/_utils/map';
 import { SearchLbsData } from '@/Promise/components/SearchLbs/types';
 
 const Index: React.FC<{

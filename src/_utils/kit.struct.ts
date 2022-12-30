@@ -1,5 +1,5 @@
 import { RabbitKit } from '@hocgin/hkit';
-import { HttpResult } from '@/Utils/interface';
+import { HttpResult } from '@/_types';
 import { message } from 'antd';
 
 export default class StructKit extends RabbitKit {
@@ -17,5 +17,4 @@ export default class StructKit extends RabbitKit {
     }
     return false;
   }
-
 }

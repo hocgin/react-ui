@@ -1,7 +1,7 @@
 import React from 'react';
 import { message, Tree, TreeSelect, Upload } from 'antd';
 import { StructKit } from '@/_utils';
-import { FileInfo, TreeNode } from '@/Utils/interface';
+import { FileInfo, TreeNode } from '@/_types';
 import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
 
 export default class UIKit {
@@ -18,7 +18,7 @@ export default class UIKit {
   /**
    * 获取 Window, 时刻提醒要进行 SSR 组件处理
    */
-  public static getWindow(): (undefined | Window) {
+  public static getWindow(): undefined | Window {
     if (typeof window === 'undefined') {
       return undefined;
     }
@@ -126,7 +126,6 @@ export default class UIKit {
 
   public static showErrorMessageIfExits = StructKit.showErrorMessageIfExits;
 
-
   // 解析错误信息
   public static showErrorMessage = (e: Error) => message.error(e.message);
 
@@ -136,7 +135,10 @@ export default class UIKit {
    * @param url
    * @param filename
    */
-  public static downloadUrl(event: MouseEvent, { url, filename = 'unknown' }: any) {
+  public static downloadUrl(
+    event: MouseEvent,
+    { url, filename = 'unknown' }: any,
+  ) {
     event.preventDefault();
     event.stopPropagation();
     const aElement = document.createElement('a');
@@ -168,10 +170,10 @@ export default class UIKit {
     }
 
     let image = new Image();
-    image.onload = function() {
+    image.onload = function () {
       let width = image.width;
       let height = image.height;
-      // console.log(width + '======' + height);
+      console.log(width + '======' + height);
     };
     image.src = file;
     return meetType && meetSize;
