@@ -26,21 +26,17 @@ export const ExpandHistoryButton: React.FC<{
           title: '回溯评论',
           content: (
             <>
-              <List
-                loading={loading}
-                dataSource={data || []}
-                renderItem={(item: CommentType, index) => (
-                  <List.Item key={index}>
-                    <Comment
-                      hasUserOptions={false}
-                      hasHistory={false}
-                      hasLoadChild={false}
-                      initialLoad={false}
-                      comment={item}
-                      useAction={useAction}
-                    />
-                  </List.Item>
-                )}
+              <List dataSource={data || []}
+                    renderItem={(item: CommentType, index) => <List.Item key={index}>
+                      <Comment
+                        hasUserOptions={false}
+                        hasHistory={false}
+                        hasLoadChild={false}
+                        initialLoad={false}
+                        comment={item}
+                        useAction={useAction}
+                      />
+                    </List.Item>}
               />
             </>
           ),
