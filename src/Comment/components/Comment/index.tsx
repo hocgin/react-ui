@@ -15,14 +15,7 @@ import {
   RetweetOutlined,
   UserOutlined,
 } from '@ant-design/icons';
-import {
-  Avatar,
-  Tooltip,
-  List,
-  Pagination,
-  Skeleton,
-  Button,
-} from 'antd';
+import { Avatar, Tooltip, List, Pagination, Skeleton, Button } from 'antd';
 import { Comment } from '@ant-design/compatible';
 import { ID } from '@/_types';
 import classnames from 'classnames';
@@ -64,7 +57,7 @@ export const Content: React.FC<{
       </div>
       {(size?.height ?? 0) > maxHeight && (
         <a
-          rel='noopener noreferrer'
+          rel="noopener noreferrer"
           className={`${prefixCls}-expanded`}
           onClick={toggleExpanded}
         >
@@ -92,10 +85,10 @@ const UserOptions: React.FC<{
     manual: true,
     defaultParams: { commentId } as any,
     onSuccess: ({
-                  likes = 0,
-                  disliked = 0,
-                  action,
-                }: DislikeDataType | LikeDataType) => {
+      likes = 0,
+      disliked = 0,
+      action,
+    }: DislikeDataType | LikeDataType) => {
       setLikesCount(likes);
       setDislikedCount(disliked);
       setUserAction(action);
@@ -120,7 +113,7 @@ const UserOptions: React.FC<{
   return (
     <>
       <span onClick={onClickReply}>回复</span>
-      <Tooltip title='Like'>
+      <Tooltip title="Like">
         <span onClick={onAction.bind(this, 'like', commentId)}>
           {createElement(userAction === 'like' ? LikeFilled : LikeOutlined)}
           <span className={`${prefixCls}-commentAction`}>{likesCount}</span>
@@ -206,24 +199,24 @@ export const CiComment: React.FC<{
   actions?: React.ReactNode[];
   more?: React.ReactNode;
 }> = ({
-        id,
-        type = 'none',
-        active = false,
-        datetime,
-        content,
-        replyId,
-        author,
-        replier,
-        children,
-        history,
-        actions = [],
-        className,
-        idx,
-        isCommenter,
-        isInitiator,
-        more,
-        ...props
-      }) => {
+  id,
+  type = 'none',
+  active = false,
+  datetime,
+  content,
+  replyId,
+  author,
+  replier,
+  children,
+  history,
+  actions = [],
+  className,
+  idx,
+  isCommenter,
+  isInitiator,
+  more,
+  ...props
+}) => {
   let hasReply = replyId && replier;
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('comment', props.prefixCls);
@@ -241,9 +234,13 @@ export const CiComment: React.FC<{
     >
       <Comment
         avatar={
-          <UserAvatar isInitiator={isInitiator}
-                      isCommenter={isCommenter} src={author?.avatarUrl} size={35}
-                      icon={<UserOutlined />} />
+          <UserAvatar
+            isInitiator={isInitiator}
+            isCommenter={isCommenter}
+            src={author?.avatarUrl}
+            size={35}
+            icon={<UserOutlined />}
+          />
         }
         author={
           <div className={`${prefixCls}-tiptap`}>
@@ -312,7 +309,16 @@ const Index: React.FC<{
     reply$,
     replied$,
   } = props;
-  let { author, isCommenter, isInitiator, idx, replier, replyId, datetime, action: userAction } = comment;
+  let {
+    author,
+    isCommenter,
+    isInitiator,
+    idx,
+    replier,
+    replyId,
+    datetime,
+    action: userAction,
+  } = comment;
   let id = comment.id;
   let hasReply = comment.hasReply;
   let content = comment?.content;
@@ -357,7 +363,7 @@ const Index: React.FC<{
   let hasHistory = props?.hasHistory ?? !!useAction.history;
 
   useEffect(() => {
-    if (hasLoadChild && (hasReply && initialLoad)) {
+    if (hasLoadChild && hasReply && initialLoad) {
       console.debug('加载回复评论');
       run({ ...defaultParams, page: 1 } as PagingParamsType);
     } else {
@@ -393,55 +399,68 @@ const Index: React.FC<{
       actions={
         hasUserOptions
           ? [
-            <UserOptions
-              reply$={reply$}
-              useAction={useAction}
-              userAction={userAction}
-              comment={comment}
-            />,
-          ]
+              <UserOptions
+                reply$={reply$}
+                useAction={useAction}
+                userAction={userAction}
+                comment={comment}
+              />,
+            ]
           : []
       }
     >
-      {dataSource.length > 0 ? <>
-        <List
-          loading={loading}
-          className={`${prefixCls}-subComments`}
-          loadMore={true}
-          renderItem={(item: CommentType, index: number) => {
-            return (
-              <List.Item key={index}>
-                <Skeleton avatar loading={loading} active>
-                  <SubComment
-                    reply$={reply$}
-                    hasHistory={hasHistory}
-                    comment={item}
-                    useAction={useAction}
-                  />
-                </Skeleton>
-              </List.Item>
-            );
-          }}
-          itemLayout='horizontal'
-          dataSource={dataSource}
-        />
-        <Pagination
-          hideOnSinglePage
-          className={`${prefixCls}-pagination`}
-          size='small'
-          total={total}
-          defaultCurrent={1}
-          current={current}
-          onChange={onPageChange}
-          showTotal={(total) => `共 ${total} 条`}
-        />
-      </> : <>
-        {(hasReply && !initialLoad) ?
-          <Button size='small' type='link' onClick={() => run({
-            ...defaultParams,
-            page: 1,
-          } as PagingParamsType)}>查看回复</Button> : null}
-      </>}
+      {dataSource.length > 0 ? (
+        <>
+          <List
+            loading={loading}
+            className={`${prefixCls}-subComments`}
+            loadMore={true}
+            renderItem={(item: CommentType, index: number) => {
+              return (
+                <List.Item key={index}>
+                  <Skeleton avatar loading={loading} active>
+                    <SubComment
+                      reply$={reply$}
+                      hasHistory={hasHistory}
+                      comment={item}
+                      useAction={useAction}
+                    />
+                  </Skeleton>
+                </List.Item>
+              );
+            }}
+            itemLayout="horizontal"
+            dataSource={dataSource}
+          />
+          <Pagination
+            hideOnSinglePage
+            className={`${prefixCls}-pagination`}
+            size="small"
+            total={total}
+            defaultCurrent={1}
+            current={current}
+            onChange={onPageChange}
+            showTotal={(total) => `共 ${total} 条`}
+          />
+        </>
+      ) : (
+        <>
+          {hasReply && !initialLoad ? (
+            <Button
+              size="small"
+              type="link"
+              onClick={() =>
+                run({
+                  ...defaultParams,
+                  page: 1,
+                } as PagingParamsType)
+              }
+            >
+              {loading ? `加载中..` : `查看回复`}
+            </Button>
+          ) : null}
+        </>
+      )}
     </CiComment>
   );
 };
