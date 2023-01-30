@@ -1,5 +1,5 @@
 import React from 'react';
-import { Comment } from '@hocgin/ui';
+import { Comment, LangKit } from '@hocgin/ui';
 import {
   CommentType,
   DislikeParamsType,
@@ -9,7 +9,8 @@ import {
   PagingDataType,
   PagingParamsType,
   ReplyDataType,
-  ReplyParamsType, ReportParamsType,
+  ReplyParamsType,
+  ReportParamsType,
   ScrollDataType,
   ScrollParamsType,
   UserDataType,
@@ -104,11 +105,11 @@ let reply = (replyId?: any, replyContent?: any) => {
     replier:
       replyId !== null
         ? {
-          id: 1,
-          title: 'hocgin',
-          avatarUrl: '',
-          href: '',
-        }
+            id: 1,
+            title: 'hocgin',
+            avatarUrl: '',
+            href: '',
+          }
         : null,
     hasReply: false,
     datetime: '1 分钟前',
@@ -143,6 +144,7 @@ let useAction = {
   // 查询子评论
   paging: async (args: PagingParamsType) => {
     console.log('查询子评论', args);
+    await LangKit.sleep(2000);
     return showResult as PagingDataType;
   },
   like: async (args: LikeParamsType) => {
