@@ -9,9 +9,9 @@ $console-prefix-cls: $hui-prefix + '-console';
   width: 600px;
   max-width: 100%;
   right: 60px;
-  .mobile({
+  .mobile {
     width: 100%;
-  });
+  }
 
   &.#{$console-prefix-cls}--visible {
     bottom: 0;

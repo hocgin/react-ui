@@ -62,9 +62,9 @@ $editor-prefix-cls: $hui-prefix + '-editor';
 
 .#{$editor-prefix-cls}-heart {
   margin-right: 10px;
-  .mobile({
+  .mobile{
     display: none;
-  });
+  }
 }
 
 .#{$editor-prefix-cls}-btActions {

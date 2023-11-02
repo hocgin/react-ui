@@ -27,9 +27,7 @@ $footer-prefix-cls: $hui-prefix + '-footer';
     &-year {
       vertical-align: baseline;
 
-      .a
-
-    ();
+      @include a;
       border-bottom: none;
     }
 
@@ -49,11 +47,9 @@ $footer-prefix-cls: $hui-prefix + '-footer';
         border-right: 1px solid rgba(234, 234, 234, 0.7);
         padding-right: 10px;
 
-        .dark
-
-      ({
-        border-right: 1px solid rgba(234, 234, 234, 0.25);
-      });
+        .dark {
+          border-right: 1px solid rgba(234, 234, 234, 0.25);
+        }
 
         &:last-child {
           border-right: none;

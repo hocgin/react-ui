@@ -12,12 +12,10 @@ $featbar-prefix-cls: $hui-prefix + '-featbar';
   display: none;
   z-index: 2147483640;
 
-  .mobile
-
-({
-  right: 0;
-  width: 100%;
-});
+  .mobile{
+    right: 0;
+    width: 100%;
+  }
 
   &.#{$featbar-prefix-cls}--open {
     bottom: 0;
