@@ -27,6 +27,10 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   const responsive = useResponsive();
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
 
+  // 检查是否有 token
+  // 1. 有，获取用户信息，获取错误则删除 token
+  // 2. 没有，不处理
+
   return (
     <div className={classnames(`${prefixCls}`)}>
       <div className={`${prefixCls}-action`}>
