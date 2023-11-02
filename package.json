@@ -9,7 +9,7 @@
     ".css"
   ],
   "scripts": {
-    "start": "dumi dev",
+    "dev": "dumi dev",
     "analyze": "cross-env ANALYZE=1 dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
