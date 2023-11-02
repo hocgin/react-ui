@@ -14,7 +14,7 @@ export default () => {
         logo={<Header.TextLogo title={'你好'} />}
         prefix={
           <>
-            <Notification.Indicator count={0}/>
+            <Notification.Indicator count={0} />
           </>
         }
         // suffix={<><Notification.Indicator /></>}
@@ -22,6 +22,7 @@ export default () => {
           { label: <a href={'www.baidu.com'}>🐰 标题</a> },
           { label: <a href={'www.baidu.com'}>🖍️ 标题</a> },
         ]}
+        logined
       />
       <div style={{ height: 500 } as any}>4</div>
     </div>

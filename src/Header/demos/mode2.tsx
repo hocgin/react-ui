@@ -16,6 +16,7 @@ export default () => {
           { label: <a href={'www.baidu.com'}>🐰 标题</a> },
           { label: <a href={'www.baidu.com'}>🖍️ 标题</a> },
         ]}
+        logined
       />
       <div style={{ backgroundColor: 'black', height: 500 } as any}>你好</div>
     </div>

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import { configResponsive, useResponsive } from 'ahooks';
+import React, { useEffect, useState } from 'react';
+import { configResponsive, useResponsive, useRequest } from 'ahooks';
 import classnames from 'classnames';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';
-import { Button, Divider } from 'antd';
+import { Divider } from 'antd';
+import { DoveService } from '@/Request';
+import { PromiseKit } from '@hocgin/hkit';
 
 configResponsive({
   small: 0,
@@ -26,6 +28,17 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   let prefixCls = getPrefixCls('header-menu', props.prefixCls);
   const responsive = useResponsive();
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
+  let { run, data } = useRequest(DoveService.getCurrentUser, {
+    manual: true,
+    onSuccess: PromiseKit.CacheKit.setUser,
+  });
+  useEffect(() => {
+    let token = PromiseKit.CacheKit.getToken();
+    if (!token) return;
+    let user = PromiseKit.CacheKit.getUser();
+    if (user) return;
+    run();
+  }, []);
 
   // 检查是否有 token
   // 1. 有，获取用户信息，获取错误则删除 token
@@ -58,9 +71,13 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
         {props?.logined && (
           <>
             <Divider type="vertical" />
-            <a className={`${prefixCls}-login`} href="/login">
-              登陆
-            </a>
+            {!data ? (
+              <a className={`${prefixCls}-login`} href="/login">
+                登陆
+              </a>
+            ) : (
+              <>已经</>
+            )}
           </>
         )}
       </div>
@@ -113,6 +130,7 @@ const Index: React.FC<{
   suffix?: any;
   prefix?: any;
   logo?: any;
+  logined?: boolean;
 }> = ({
   className,
   style,
@@ -127,6 +145,7 @@ const Index: React.FC<{
       <TextLogo />
     </a>
   ),
+  logined,
 }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('header');
@@ -147,7 +166,12 @@ const Index: React.FC<{
         style={containerStyle}
       >
         {logo}
-        <HeaderMenu prefix={prefix} suffix={suffix} menus={menus} />
+        <HeaderMenu
+          prefix={prefix}
+          suffix={suffix}
+          menus={menus}
+          logined={logined}
+        />
       </div>
     </header>
   );
