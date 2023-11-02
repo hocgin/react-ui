@@ -1,4 +1,4 @@
-import './Menu.less';
-import './Settings.less';
+import './Menu.scss';
+import './Settings.scss';
 
 import '../../Empty/style';

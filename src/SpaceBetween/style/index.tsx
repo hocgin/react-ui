@@ -1,1 +1,1 @@
-import './SpaceBetween.less';
+import './SpaceBetween.scss';

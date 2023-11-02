@@ -1,7 +1,7 @@
-import './Comment.Comment.less';
-import './Comment.less';
-import './Comment.Editor.less';
-import './Comment.UserAvatar.less';
+import './Comment.Comment.scss';
+import './Comment.scss';
+import './Comment.Editor.scss';
+import './Comment.UserAvatar.scss';
 
 import '../../Editor/style';
 import '../../Loading/style';

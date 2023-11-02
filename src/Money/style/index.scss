@@ -1,0 +1,8 @@
+@import '../../style/index.scss';
+
+$money-prefix-cls: $hui-prefix + '-money';
+
+.#{$money-prefix-cls} {
+  display: inline-flex;
+  align-items: baseline;
+}

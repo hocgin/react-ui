@@ -1,0 +1,96 @@
+@import '../../mixin.scss';
+@import '../../style/index.scss';
+
+$footer-prefix-cls: $hui-prefix + '-footer';
+
+@font-face {
+  font-family: myfont;
+  src: url('../assets/font.woff.ttf');
+}
+
+.#{$footer-prefix-cls} {
+  font-size: 14px;
+  transition: all 0.2s ease;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
+  'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+
+  &-footerInfo {
+    display: flex;
+    align-items: center;
+
+    &-year {
+      vertical-align: baseline;
+
+      @include a;
+      border-bottom: none;
+    }
+
+    &-links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: inline-flex;
+      vertical-align: baseline;
+      position: relative;
+      left: 12px;
+      width: 0;
+
+      li {
+        display: inline-flex;
+        margin-right: 10px;
+        border-right: 1px solid rgba(234, 234, 234, 0.7);
+        padding-right: 10px;
+
+        .dark {
+          border-right: 1px solid rgba(234, 234, 234, 0.25);
+        }
+
+        &:last-child {
+          border-right: none;
+          padding-right: 0;
+          margin-right: 0;
+        }
+      }
+
+      &-github,
+      &-weibo {
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+      }
+
+      a {
+        color: rgba(102, 102, 102, 0.5);
+        text-decoration: none;
+        font-size: 1em;
+        display: inherit;
+
+        &:hover {
+          color: rgba(102, 102, 102, 0.75);
+        }
+      }
+    }
+  }
+
+  &-copytitle {
+    color: rgba(127, 127, 127, 0.6);
+    display: block;
+    text-align: center;
+    margin-top: 8px;
+    font-size: 0.78em;
+
+    a {
+      color: rgba(127, 127, 127, 0.6);
+
+      &:hover {
+        color: rgba(102, 102, 102, 0.75);
+      }
+    }
+  }
+}

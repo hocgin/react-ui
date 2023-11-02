@@ -1,0 +1,15 @@
+@import '../../style/index.scss';
+
+$video-prefix-cls: $hui-prefix + '-video';
+$video-color: $colorPrimary;
+
+.#{$video-prefix-cls} {
+  //color: @video-color;
+  --video-color: $video-color;
+
+  &-player {
+    width: 600px;
+    height: 400px;
+    margin: 60px auto 0;
+  }
+}

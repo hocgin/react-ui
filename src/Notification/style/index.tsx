@@ -1,10 +1,10 @@
-import './NotificationIndicator.less';
-import './NotificationBox.Common.Chat.less';
-import './NotificationBox.Common.less';
-import './NotificationBox.less';
-import './NotificationBox.NoticePane.less';
-import './NotificationBox.PersonalPane.less';
-import './NotificationBox.SystemPane.less';
+import './NotificationIndicator.scss';
+import './NotificationBox.Common.Chat.scss';
+import './NotificationBox.Common.scss';
+import './NotificationBox.scss';
+import './NotificationBox.NoticePane.scss';
+import './NotificationBox.PersonalPane.scss';
+import './NotificationBox.SystemPane.scss';
 
 import '../../Editor/style';
 import '../../Loading/style';

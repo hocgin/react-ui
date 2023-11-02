@@ -1,0 +1,16 @@
+@import '../../style/index.scss';
+
+$SearchLbs-prefix-cls: $hui-prefix + '-SearchLbs';
+
+.#{$SearchLbs-prefix-cls} {
+  &-LbsButton {
+    position: relative;
+  }
+
+  &-LbsButton-LbsSearch {
+    position: absolute;
+    width: 380px;
+    z-index: 1000;
+    margin: 10px;
+  }
+}

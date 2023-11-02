@@ -1,2 +1,2 @@
-import './index.less';
-import './HtmlAnchor.less';
+import './index.scss';
+import './HtmlAnchor.scss';

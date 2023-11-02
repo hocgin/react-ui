@@ -1,0 +1,98 @@
+@import '../../style/index.scss';
+
+$directory-prefix-cls: $hui-prefix + '-directory';
+
+$hover-after-color: $colorPrimary;
+$hover-before-color: fade($colorPrimary, 30%);
+$init-opacity: 0.25;
+
+.#{$directory-prefix-cls} {
+  width: 200px;
+
+  .#{$ant-prefix}-anchor-wrapper {
+    overflow: unset;
+  }
+
+  $left-width: 25px;
+
+  .#{$ant-prefix}-anchor > .#{$ant-prefix}-anchor-link {
+    margin-left: $left-width;
+  }
+
+  .#{$ant-prefix}-anchor-ink {
+    display: none;
+  }
+
+  .#{$ant-prefix}-anchor-link {
+    padding-left: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+
+    // 悬停和点击 start
+    .#{$ant-prefix}-anchor-link-title:hover {
+      & .anchor-link-title {
+        color: $hover-after-color !important;
+        opacity: 1 !important;
+      }
+    }
+
+    .#{$ant-prefix}-anchor-link-title-active {
+      left: -4px;
+
+      & .anchor-link-title {
+        color: $hover-after-color !important;
+        opacity: 1 !important;
+      }
+    }
+
+    .#{$ant-prefix}-anchor-link-title:hover:before,
+    .#{$ant-prefix}-anchor-link-title-active:before {
+      background: $hover-after-color !important;
+    }
+
+    // 悬停和点击 end
+    .anchor-link-title {
+      opacity: $init-opacity;
+      font-weight: 600;
+      font-size: 12px;
+      transition: all 0.5s;
+      margin-bottom: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .#{$ant-prefix}-anchor-link-title {
+      overflow: unset;
+      padding-bottom: 0;
+      color: $hover-before-color;
+
+      &:hover .anchor-link-title {
+        opacity: 1;
+      }
+
+      &:before {
+        background: $hover-before-color;
+        content: '';
+        position: absolute;
+        width: 14px;
+        height: 4px;
+        border-radius: 24px;
+        display: inline-block;
+        vertical-align: middle;
+        cursor: pointer;
+        transition: background 0.5s;
+        top: 4.5px;
+        left: -$left-width;
+      }
+    }
+  }
+
+  &:hover {
+    .anchor-link-title {
+      opacity: 1;
+    }
+  }
+
+  //color: unset;
+}

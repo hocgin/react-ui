@@ -4,7 +4,6 @@
  */
 import React from 'react';
 import { Money } from '@hocgin/ui';
-import styles from './index.less';
 
 export default () => {
   return <Money value={1000} />;

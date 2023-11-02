@@ -1,0 +1,40 @@
+@import '../../style/index.scss';
+
+$promise-schema--TreeSchemaConfig-prefix-cls: $hui-prefix + '-promise-schema--TreeSchemaConfig';
+
+.#{$promise-schema--TreeSchemaConfig-prefix-cls} {
+  width: 100%;
+
+  .searchBar {
+    padding: 24px 0 0 0;
+  }
+
+  .toolbar {
+    display: flex;
+    justify-content: space-between;
+    height: 64px;
+    line-height: 64px;
+
+    .toolbarTitle {
+      flex: 1 1;
+      color: #000;
+      font-size: 22px;
+      font-weight: unset;
+      opacity: 0.85;
+    }
+  }
+
+  .toolbarExt {
+    //border-bottom: 1px dashed #ebedf0;
+    margin-bottom: 5px;
+  }
+
+  .tableAlertOption {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .alert {
+    margin-bottom: 16px;
+  }
+}

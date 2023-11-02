@@ -1,0 +1,20 @@
+@import '../../style/index.scss';
+
+$settings--Menu-prefix-cls: $hui-prefix + '-settings--Menu';
+
+.#{$settings--Menu-prefix-cls} {
+  .#{$ant-prefix}-menu-item-group-title {
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .#{$ant-prefix}-menu-item-group-list .#{$ant-prefix}-menu-item {
+    padding-left: 16px !important;
+    border-radius: 4px;
+  }
+
+  .#{$ant-prefix}-menu-inline,
+  .#{$ant-prefix}-menu-vertical {
+    border-right: unset;
+  }
+}
