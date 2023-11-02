@@ -29,11 +29,21 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   let prefixCls = getPrefixCls('header-menu', props.prefixCls);
   const responsive = useResponsive();
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
-  let { run, data } = useRequest(DoveService.getCurrentUser, {
-    manual: true,
-    onSuccess: PromiseKit.CacheKit.setUser,
-  });
+  let { run, data } = useRequest(
+    async () => {
+      let user = PromiseKit.CacheKit.getUser();
+      if (user) return user;
+      return await DoveService.getCurrentUser(false);
+    },
+    {
+      manual: true,
+      onSuccess: PromiseKit.CacheKit.setUser,
+    },
+  );
   useEffect(() => {
+    PromiseKit.CacheKit.setToken(
+      `eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..-Bpu3TIOXLDKcuJd.G-LOpFCcY3E1tcC95W7PbGGqgu1VKjTRctYXxsqz9z6WZ7Rgn8LxWcyVv8WCRJhtI0LdiMKD-J5ryYnurwDYxuuqbInWoZ_66VO7hZSR2KHBkyvfBDmjAoN0nlJhgcSZM36fqFFewxChXNGv9GfGNZ1NnD4VzyT_89cWeeaCq115uWkkJDOimgKbjvZ6joWc9irp9UNT4UMO2AbyRVJXDlcqWPN_AcUJ6OZ0ZPj0juKq-AMGYBkGAkhi1_xNVJhT0_JThfZEXdUOw0Z5R2PywcOuXhwDG46NzM_M10u0BaTcHKIIbk0KBxWuNLfc0H21HipjT_ZKsS-NKNC7JLxAZ3WxOBtSfzO_DCHiWXyNZykaaf3a9fmQy6-l-KjUF75-_X_-FaoDDSkc5bM.KJfpzO8RTGwp8DCvgpCCQg`,
+    );
     let token = PromiseKit.CacheKit.getToken();
     if (!token) return;
     let user = PromiseKit.CacheKit.getUser();

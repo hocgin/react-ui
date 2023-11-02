@@ -32,7 +32,7 @@ const UserInfo: React.FC<{
   );
 };
 
-const Index: React.FC<{
+const UserAvatar: React.FC<{
   prefixCls?: string;
   className?: string;
   defaultParams?: any;
@@ -60,4 +60,4 @@ const Index: React.FC<{
   );
 };
 
-export default Index;
+export default UserAvatar;
