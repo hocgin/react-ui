@@ -4,6 +4,7 @@ import classnames from 'classnames';
 import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';
+import { Button, Divider } from 'antd';
 
 configResponsive({
   small: 0,
@@ -13,16 +14,18 @@ configResponsive({
 
 type Mode = 'none' | 'fixed' | 'sticky';
 
-const HeaderMenu: React.FC<{
+type Props = {
   prefixCls?: string;
   menus?: { label: any }[];
   suffix?: any;
   prefix?: any;
-}> = ({ menus, prefix, suffix, ...props }) => {
+};
+const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('header-menu', props.prefixCls);
   const responsive = useResponsive();
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
+
   return (
     <div className={classnames(`${prefixCls}`)}>
       <div className={`${prefixCls}-action`}>
@@ -36,15 +39,21 @@ const HeaderMenu: React.FC<{
           ))}
         </ul>
         {prefix && <PrefixMenu prefixCls={prefixCls}>{prefix}</PrefixMenu>}
-        <div
-          className={classnames(`${prefixCls}-toggle`, {
-            [`active`]: isOpenMenu,
-          })}
-          onClick={() => setIsOpenMenu(!isOpenMenu)}
-        >
-          {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
-        </div>
+        {!responsive?.middle && (
+          <div
+            className={classnames(`${prefixCls}-toggle`, {
+              [`active`]: isOpenMenu,
+            })}
+            onClick={() => setIsOpenMenu(!isOpenMenu)}
+          >
+            {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
+          </div>
+        )}
         {suffix && <SuffixMenu prefixCls={prefixCls}>{suffix}</SuffixMenu>}
+        <Divider type="vertical" />
+        <a className={`${prefixCls}-login`} href="/login">
+          登陆
+        </a>
       </div>
     </div>
   );
@@ -63,7 +72,6 @@ const PrefixMenu: React.FC<{
   <div className={`${prefixCls}-prefixMenu`}>{children}</div>
 );
 
-
 export const TextLogo: React.FC<{
   prefixCls?: string;
   title?: string;
@@ -72,16 +80,18 @@ export const TextLogo: React.FC<{
 }> = ({ prefix = 'HOCGIN', suffix = 'top', title, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('header', props.prefixCls);
-  return <>
-    <div className={`${prefixCls}-logo`}>
-      <span>{prefix}</span>
-      <span className={`${prefixCls}-suffix`}>
-            <span className={`${prefixCls}-suffix-dot`}>.</span>
-            <span>{suffix}</span>
-          </span>
-      {title && <span className={`${prefixCls}-logo-title`}>{title}</span>}
-    </div>
-  </>;
+  return (
+    <>
+      <div className={`${prefixCls}-logo`}>
+        <span>{prefix}</span>
+        <span className={`${prefixCls}-suffix`}>
+          <span className={`${prefixCls}-suffix-dot`}>.</span>
+          <span>{suffix}</span>
+        </span>
+        {title && <span className={`${prefixCls}-logo-title`}>{title}</span>}
+      </div>
+    </>
+  );
 };
 
 const Index: React.FC<{
@@ -95,18 +105,20 @@ const Index: React.FC<{
   prefix?: any;
   logo?: any;
 }> = ({
-        className,
-        style,
-        containerClassName,
-        containerStyle,
-        mode = 'none',
-        menus = [],
-        suffix,
-        prefix,
-        logo = (<a href={'/'}>
-          <TextLogo />
-        </a>),
-      }) => {
+  className,
+  style,
+  containerClassName,
+  containerStyle,
+  mode = 'none',
+  menus = [],
+  suffix,
+  prefix,
+  logo = (
+    <a href={'/'}>
+      <TextLogo />
+    </a>
+  ),
+}) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('header');
   return (
@@ -121,8 +133,10 @@ const Index: React.FC<{
       )}
       style={style}
     >
-      <div className={classnames(`${prefixCls}-container`, containerClassName)}
-           style={containerStyle}>
+      <div
+        className={classnames(`${prefixCls}-container`, containerClassName)}
+        style={containerStyle}
+      >
         {logo}
         <HeaderMenu prefix={prefix} suffix={suffix} menus={menus} />
       </div>

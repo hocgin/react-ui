@@ -45,6 +45,8 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
+    max-width: 1024px;
+    width: 100%;
   }
 
   &-suffix {
@@ -91,6 +93,7 @@
   &-action {
     display: flex;
     align-items: center;
+    gap: 10px;
   }
 
   &-navigation {
@@ -113,7 +116,7 @@
         text-decoration: none;
         font-size: 16px;
         margin: 0 10px;
-        font-weight: 600;
+        font-weight: 500;
         display: inline-block;
         padding: 2px 4px;
         border-radius: 2px;
@@ -177,6 +180,14 @@
     }
   }
 
+  &-login {
+    color: inherit;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
   &-suffixMenu {
     margin-left: 10px;
     display: flex;
@@ -184,7 +195,6 @@
   }
 
   &-prefixMenu {
-    margin-right: 10px;
     display: flex;
     align-items: center;
   }
