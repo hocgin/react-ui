@@ -11,7 +11,7 @@
     "esModuleInterop": true,
     "sourceMap": true,
     "baseUrl": "./",
-    "strict": true,
+    "strict": false,
     "paths": {
       "@hocgin/ui": ["src/index.tsx"],
       "@/*": ["src/*"],
