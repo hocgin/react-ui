@@ -7,6 +7,7 @@ import { ConfigContext } from '@/ConfigProvider';
 import { Divider } from 'antd';
 import { DoveService } from '@/Request';
 import { PromiseKit } from '@hocgin/hkit';
+import Promise from '../../../Promise';
 
 configResponsive({
   small: 0,
@@ -76,7 +77,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
                 登陆
               </a>
             ) : (
-              <>已经</>
+              <Promise.UserAvatar />
             )}
           </>
         )}
