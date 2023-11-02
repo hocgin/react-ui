@@ -1,0 +1,22 @@
+@import '../../style/index.scss';
+
+$exhibit--DateTime-prefix-cls: $hui-prefix + '-exhibit--DateTime';
+
+.#{$exhibit--DateTime-prefix-cls} {
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
+  margin: 1px 5px;
+  padding: 0 2px;
+  background: #c1a3a31f;
+  border: 1px dashed #ebedf1;
+
+  &:hover {
+    opacity: 0.85;
+    cursor: pointer;
+  }
+
+  .#{$exhibit--DateTime-prefix-cls}-text {
+    margin-left: 4px;
+  }
+}

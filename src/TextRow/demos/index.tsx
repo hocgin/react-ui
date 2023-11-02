@@ -4,7 +4,6 @@
  */
 import React from 'react';
 import { TextRow } from '@hocgin/ui';
-import styles from './index.less';
 
 export default () => {
   return <TextRow title="Demo">你好</TextRow>;

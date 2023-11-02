@@ -1,0 +1,11 @@
+@import '../../style/index.scss';
+
+$loading-prefix-cls: $hui-prefix + '-loading';
+
+.#{$loading-prefix-cls} {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 0;
+}

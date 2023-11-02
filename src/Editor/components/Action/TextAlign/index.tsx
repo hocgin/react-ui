@@ -1,6 +1,5 @@
 import React from 'react';
 import { Editor } from '@tiptap/react';
-import styles from './index.less';
 import {
   AlignCenterOutlined,
   AlignLeftOutlined,

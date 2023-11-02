@@ -1,0 +1,14 @@
+@import '../../style/index.scss';
+
+$notification-e-systemPane-prefix-cls: $hui-prefix + '-notification--systemPane';
+
+.#{$notification-e-systemPane-prefix-cls} {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  .container {
+    overflow-y: auto;
+    flex: 1;
+  }
+}

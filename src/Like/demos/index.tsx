@@ -4,7 +4,7 @@
  */
 import React from 'react';
 import { Like } from '@hocgin/ui';
-import styles from './index.less';
+import styles from './index.scss';
 
 export default () => {
   return (

@@ -1,10 +1,10 @@
-import './UserAvatar.less';
-import './Select.less';
-import './Search.less';
-import './SearchLbs.less';
-import './ExhibitSchemaConfig.less';
-import './TreeSchemaConfig.less';
-import './Editor.less';
+import './UserAvatar.scss';
+import './Select.scss';
+import './Search.scss';
+import './SearchLbs.scss';
+import './ExhibitSchemaConfig.scss';
+import './TreeSchemaConfig.scss';
+import './Editor.scss';
 
 import '../../Comment/style';
 import '../../Editor/style';

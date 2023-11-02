@@ -1,0 +1,26 @@
+@import '../../style/index.scss';
+
+$changelog-prefix-cls: $hui-prefix + '-changelog';
+
+.#{$changelog-prefix-cls} {
+  margin: 0 5px;
+
+  &-panel {
+    .#{$ant-prefix}-collapse-header {
+      padding: 0 !important;
+    }
+
+    .#{$ant-prefix}-collapse-arrow {
+      margin-right: 5px !important;
+    }
+
+    .#{$ant-prefix}-collapse-content-box {
+      padding-top: 5px !important;
+      padding-bottom: 5px !important;
+      font-size: 12px;
+    }
+  }
+
+  &-current {
+  }
+}

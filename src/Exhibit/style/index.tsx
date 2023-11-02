@@ -1,6 +1,6 @@
-import './DateTime.less';
-import './Avatar.less';
-import './Image.less';
-import './Link.less';
+import './DateTime.scss';
+import './Avatar.scss';
+import './Image.scss';
+import './Link.scss';
 
 import '../../Stretch/style';

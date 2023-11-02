@@ -1,0 +1,41 @@
+@import '../../style/index.scss';
+
+$stretch-prefix-cls: $hui-prefix + '-stretch';
+
+.#{$stretch-prefix-cls} {
+  padding: 2px;
+  width: 100%;
+
+  &--content {
+    //display: -webkit-box;
+    //-webkit-box-orient: vertical;
+    //text-overflow: ellipsis;
+    //overflow: hidden;
+    //word-wrap: break-word;
+    //word-break: break-all;
+    transition: all 1s ease;
+  }
+
+  &--toolbar {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 2px;
+  }
+
+  &--resize,
+  &--copy {
+    cursor: pointer;
+    margin-right: 6px;
+    opacity: 0.5;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  &.#{$stretch-prefix-cls}-bordered {
+    border: 1px solid #ebedf1;
+    margin: 2px 0;
+    box-sizing: content-box;
+  }
+}

@@ -1,3 +1,3 @@
-import './index.less';
+import './index.scss';
 
 import '../../Logo/style';

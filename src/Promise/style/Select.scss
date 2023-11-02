@@ -1,0 +1,13 @@
+@import '../../style/index.scss';
+
+$promise--Select-prefix-cls: $hui-prefix + '-promise--Select';
+
+.#{$ant-prefix}-modal-body {
+  .#{$promise--Select-prefix-cls} {
+    width: 100% !important;
+  }
+}
+
+.#{$promise--Select-prefix-cls} {
+  min-width: 10em;
+}
