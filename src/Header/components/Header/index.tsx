@@ -17,8 +17,9 @@ type Mode = 'none' | 'fixed' | 'sticky';
 type Props = {
   prefixCls?: string;
   menus?: { label: any }[];
-  suffix?: any;
-  prefix?: any;
+  suffix?: JSX.Element;
+  prefix?: JSX.Element;
+  logined?: boolean;
 };
 const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
@@ -50,10 +51,14 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           </div>
         )}
         {suffix && <SuffixMenu prefixCls={prefixCls}>{suffix}</SuffixMenu>}
-        <Divider type="vertical" />
-        <a className={`${prefixCls}-login`} href="/login">
-          登陆
-        </a>
+        {props?.logined && (
+          <>
+            <Divider type="vertical" />
+            <a className={`${prefixCls}-login`} href="/login">
+              登陆
+            </a>
+          </>
+        )}
       </div>
     </div>
   );
