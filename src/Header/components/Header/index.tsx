@@ -29,9 +29,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
   let [user, setUser] = useState<any>(PromiseKit.CacheKit.getUser());
   let { run, loading } = useRequest(
-    async () => {
-      return await DoveService.getCurrentUser(false);
-    },
+    async () => await DoveService.getCurrentUser(false),
     {
       manual: true,
       onSuccess: (data) => {
