@@ -1,19 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { configResponsive, useResponsive, useRequest } from 'ahooks';
+import { useResponsive, useRequest } from 'ahooks';
 import classnames from 'classnames';
-import { MenuOutlined, CloseOutlined } from '@ant-design/icons';
+import {
+  MenuOutlined,
+  CloseOutlined,
+  LoadingOutlined,
+} from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';
 import { Divider } from 'antd';
 import { DoveService } from '@/Request';
 import { PromiseKit } from '@hocgin/hkit';
 import Promise from '../../../Promise';
-
-configResponsive({
-  small: 0,
-  middle: 800,
-  large: 1200,
-});
 
 type Mode = 'none' | 'fixed' | 'sticky';
 
@@ -30,7 +28,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
   const responsive = useResponsive();
   let [isOpenMenu, setIsOpenMenu] = useState(responsive?.middle);
   let [user, setUser] = useState<any>(PromiseKit.CacheKit.getUser());
-  let { run } = useRequest(
+  let { run, loading } = useRequest(
     async () => {
       return await DoveService.getCurrentUser(false);
     },
@@ -65,7 +63,9 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           })}
         >
           {(menus || []).map(({ label }, index) => (
-            <li key={index}>{label}</li>
+            <li className={`${prefixCls}-navigation-item`} key={index}>
+              {label}
+            </li>
           ))}
         </ul>
         {prefix && <PrefixMenu prefixCls={prefixCls}>{prefix}</PrefixMenu>}
@@ -84,9 +84,15 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           <>
             <Divider type="vertical" />
             {!user ? (
-              <a className={`${prefixCls}-login`} href="/login">
-                登陆
-              </a>
+              loading ? (
+                <>
+                  <LoadingOutlined />
+                </>
+              ) : (
+                <a className={`${prefixCls}-login`} href="/login">
+                  登陆
+                </a>
+              )
             ) : (
               <Promise.UserAvatar defaultParams={user} />
             )}
