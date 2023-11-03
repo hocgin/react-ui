@@ -60,7 +60,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
       <div className={`${prefixCls}-action`}>
         <ul
           className={classnames(`${prefixCls}-navigation`, {
-            [`active`]: isOpenMenu,
+            [`active`]: menus?.length && isOpenMenu,
           })}
         >
           {(menus || []).map(({ label }, index) => (
@@ -70,7 +70,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           ))}
         </ul>
         {prefix && <PrefixMenu prefixCls={prefixCls}>{prefix}</PrefixMenu>}
-        {!responsive?.middle && (
+        {menus?.length && !responsive?.middle ? (
           <div
             className={classnames(`${prefixCls}-toggle`, {
               [`active`]: isOpenMenu,
@@ -79,6 +79,8 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           >
             {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
           </div>
+        ) : (
+          <></>
         )}
         {suffix && <SuffixMenu prefixCls={prefixCls}>{suffix}</SuffixMenu>}
         {props?.logined && (
