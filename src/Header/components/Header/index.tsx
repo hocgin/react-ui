@@ -90,12 +90,17 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
               ) : (
                 <a
                   className={`${prefixCls}-login`}
-                  href={`/login?${qs.stringify({
-                    redirectUrl:
-                      typeof window !== 'undefined'
-                        ? window?.location?.href
-                        : '',
-                  })}`}
+                  onClick={() => {
+                    window.open(
+                      `/login?${qs.stringify({
+                        redirectUrl:
+                          typeof window !== 'undefined'
+                            ? window?.location?.href
+                            : '',
+                      })}`,
+                      `_self`,
+                    );
+                  }}
                 >
                   登陆
                 </a>
