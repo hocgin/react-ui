@@ -5,7 +5,7 @@ import { IFatherConfig } from 'father/dist/types';
 export const ANT_PREFIX_CLS = 'hui-';
 
 export const useLogger = () => {
-  let result: any = [];
+  let result = [];
   let offLogger = process.env.USE_LOG !== 'true';
   console.debug(`[${offLogger ? '禁用' : '启用'}]日志打印`);
   if (offLogger) {
@@ -25,7 +25,5 @@ export default defineConfig({
     '@': resolve(__dirname, './src'),
     '@@': resolve(__dirname, './src/.dumi/tmp'),
   },
-  extraBabelPlugins: [
-    ...useLogger(),
-  ],
+  extraBabelPlugins: [...useLogger()],
 } as IFatherConfig);

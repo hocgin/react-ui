@@ -2,7 +2,7 @@ import { defineConfig } from 'dumi';
 import { resolve } from 'path';
 
 export const useLogger = () => {
-  let result: any = [];
+  let result = [];
   let offLogger = process.env.USE_LOG !== 'true';
   console.debug(`[${offLogger ? '禁用' : '启用'}]日志打印`);
   if (offLogger) {
@@ -20,7 +20,7 @@ export default defineConfig({
   themeConfig: {
     name: 'HUI',
     logo: 'https://cdn.hocgin.top/uPic/mp_logo.png',
-    footer: false
+    footer: false,
   },
   locales: [
     { id: 'zh-CN', name: '中文' },
@@ -31,9 +31,7 @@ export default defineConfig({
   alias: {
     '@': `${resolve(__dirname, 'src')}`,
   },
-  extraBabelPlugins: [
-    ...useLogger(),
-  ],
+  extraBabelPlugins: [...useLogger()],
   resolve: { entryFile: './src/index.tsx' },
   ssr: process.env.NODE_ENV === 'development' ? false : {},
 });
