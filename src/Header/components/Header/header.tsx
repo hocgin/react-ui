@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useResponsive, useRequest } from 'ahooks';
+import { useResponsive, useRequest, configResponsive } from 'ahooks';
 import classnames from 'classnames';
 import {
   MenuOutlined,
@@ -15,6 +15,8 @@ import Promise from '../../../Promise';
 import qs from 'query-string';
 
 type Mode = 'none' | 'fixed' | 'sticky';
+
+configResponsive({ small: 0, middle: 800, large: 1200 });
 
 type Props = {
   prefixCls?: string;
@@ -150,7 +152,7 @@ export const TextLogo: React.FC<{
   );
 };
 
-const Index: React.FC<{
+type HeaderProps = {
   menus?: { label: any }[];
   mode?: Mode;
   className?: string | undefined;
@@ -161,7 +163,9 @@ const Index: React.FC<{
   prefix?: any;
   logo?: any;
   logined?: boolean;
-}> = ({
+  maxWidth?: number;
+};
+const Header: React.FC<HeaderProps> = ({
   className,
   style,
   containerClassName,
@@ -176,6 +180,7 @@ const Index: React.FC<{
     </a>
   ),
   logined,
+  maxWidth = 1024,
 }) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('header');
@@ -193,7 +198,7 @@ const Index: React.FC<{
     >
       <div
         className={classnames(`${prefixCls}-container`, containerClassName)}
-        style={containerStyle}
+        style={{ maxWidth, ...containerStyle }}
       >
         {logo}
         <HeaderMenu
@@ -207,4 +212,4 @@ const Index: React.FC<{
   );
 };
 
-export default Index;
+export default Header;

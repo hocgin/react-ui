@@ -12,6 +12,8 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   align-items: center;
   justify-content: center;
   position: relative;
+  padding-left: 1rem;
+  padding-right: 1rem;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
   'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji',
@@ -42,7 +44,6 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
     align-items: center;
     justify-content: space-between;
     position: relative;
-    max-width: 1024px;
     width: 100%;
   }
 

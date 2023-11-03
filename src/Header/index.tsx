@@ -1,5 +1,5 @@
-import OriginHeader from './components/Header';
-import { TextLogo } from './components/Header';
+import OriginHeader from './components/Header/header';
+import { TextLogo } from './components/Header/header';
 import './style';
 
 type HtmlType = typeof OriginHeader & {
