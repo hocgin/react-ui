@@ -2,14 +2,11 @@
 @import '../../mixin.scss';
 
 $header-prefix-cls: $hui-prefix + '-header';
-$header-menu-prefix-cls: $hui-prefix + '-menu';
-
-$largeHeaderHeight: var(--large-header-height, 70px);
-$middleHeaderHeight: var(--small-header-height, 70px);
+$header-menu-prefix-cls: $header-prefix-cls + '-menu';
 
 .#{$header-prefix-cls} {
   width: 100%;
-  height: $largeHeaderHeight;
+  height: var(--large-header-height, 70px);
   z-index: 1000;
   display: flex;
   align-items: center;
@@ -90,6 +87,8 @@ $middleHeaderHeight: var(--small-header-height, 70px);
 }
 
 .#{$header-menu-prefix-cls} {
+  display: flex;
+
   &-action {
     display: flex;
     align-items: center;
@@ -112,35 +111,36 @@ $middleHeaderHeight: var(--small-header-height, 70px);
       list-style: none;
       user-select: none;
 
-      a {
-        color: #111111;
-        text-decoration: none;
-        font-size: 16px;
-        //margin: 0 10px;
-        font-weight: 500;
-        display: inline-block;
-        padding: 2px 4px;
-        border-radius: 2px;
+    }
 
-        &:hover {
-          background-color: #11111108;
-        }
+    li a {
+      color: #111111;
+      text-decoration: none;
+      font-size: 16px;
+      //margin: 0 10px;
+      font-weight: 500;
+      display: inline-block;
+      padding: 2px 4px;
+      border-radius: 2px;
 
-        &:hover:before {
-          visibility: visible;
-          width: 100%;
-        }
+      &:hover {
+        background-color: #11111108;
+      }
 
-        &:before {
-          content: '';
-          position: absolute;
-          height: 3px;
-          width: 0;
-          bottom: 0;
-          left: 0;
-          visibility: hidden;
-          transition: all 0.3s ease-in-out 0s;
-        }
+      &:hover:before {
+        visibility: visible;
+        width: 100%;
+      }
+
+      &:before {
+        content: '';
+        position: absolute;
+        height: 3px;
+        width: 0;
+        bottom: 0;
+        left: 0;
+        visibility: hidden;
+        transition: all 0.3s ease-in-out 0s;
       }
     }
 
@@ -203,8 +203,9 @@ $middleHeaderHeight: var(--small-header-height, 70px);
 
 @include mobile {
   .#{$header-prefix-cls} {
-    height: $middleHeaderHeight;
+    height: var(--small-header-height, 70px);
   }
+
   .#{$header-menu-prefix-cls} {
     &-navigation {
       position: fixed;

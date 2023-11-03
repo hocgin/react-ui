@@ -63,7 +63,9 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           })}
         >
           {(menus || []).map(({ label }, index) => (
-            <li key={index}>{label}</li>
+            <li className={`${prefixCls}-navigation-item`} key={index}>
+              {label}
+            </li>
           ))}
         </ul>
         {prefix && <PrefixMenu prefixCls={prefixCls}>{prefix}</PrefixMenu>}
