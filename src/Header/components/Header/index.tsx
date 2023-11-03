@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useResponsive, useRequest } from 'ahooks';
+import { useResponsive, useRequest, configResponsive } from 'ahooks';
 import classnames from 'classnames';
 import {
   MenuOutlined,
@@ -15,6 +15,8 @@ import Promise from '../../../Promise';
 import qs from 'query-string';
 
 type Mode = 'none' | 'fixed' | 'sticky';
+
+configResponsive({ small: 0, middle: 800, large: 1200 });
 
 type Props = {
   prefixCls?: string;
