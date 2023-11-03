@@ -91,7 +91,9 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
               ) : (
                 <a
                   className={`${prefixCls}-login`}
-                  href={`/login?redirectUrl=${window?.location?.href}`}
+                  href={`/login?redirectUrl=${
+                    typeof window !== 'undefined' ? window?.location?.href : ''
+                  }`}
                 >
                   登陆
                 </a>
