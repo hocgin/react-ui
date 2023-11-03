@@ -89,7 +89,10 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
                   <LoadingOutlined />
                 </>
               ) : (
-                <a className={`${prefixCls}-login`} href="/login">
+                <a
+                  className={`${prefixCls}-login`}
+                  href={`/login?redirectUrl=${window?.location?.href}`}
+                >
                   登陆
                 </a>
               )
