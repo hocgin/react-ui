@@ -12,6 +12,7 @@ import { Divider } from 'antd';
 import { DoveService } from '@/Request';
 import { PromiseKit } from '@hocgin/hkit';
 import Promise from '../../../Promise';
+import qs from 'query-string';
 
 type Mode = 'none' | 'fixed' | 'sticky';
 
@@ -89,9 +90,12 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
               ) : (
                 <a
                   className={`${prefixCls}-login`}
-                  href={`/login?redirectUrl=${
-                    typeof window !== 'undefined' ? window?.location?.href : ''
-                  }`}
+                  href={`/login?${qs.stringify({
+                    redirectUrl:
+                      typeof window !== 'undefined'
+                        ? window?.location?.href
+                        : '',
+                  })}`}
                 >
                   登陆
                 </a>
