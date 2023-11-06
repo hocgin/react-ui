@@ -8,7 +8,7 @@ import {
 } from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';
-import { Divider } from 'antd';
+import { Button, Divider } from 'antd';
 import { DoveService } from '@/Request';
 import { PromiseKit } from '@hocgin/hkit';
 import Promise from '../../../Promise';
@@ -85,29 +85,47 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
         {suffix && <SuffixMenu prefixCls={prefixCls}>{suffix}</SuffixMenu>}
         {props?.logined && (
           <>
-            <Divider type="vertical" />
+            <Divider type="vertical" style={{ marginLeft: 14 }} />
             {!user ? (
               loading ? (
                 <>
                   <LoadingOutlined />
                 </>
               ) : (
-                <a
-                  className={`${prefixCls}-login`}
-                  onClick={() => {
-                    window.open(
-                      `/login?${qs.stringify({
-                        redirectUrl:
-                          typeof window !== 'undefined'
-                            ? window?.location?.href
-                            : '',
-                      })}`,
-                      `_self`,
-                    );
-                  }}
-                >
-                  登陆
-                </a>
+                <>
+                  <Button
+                    onClick={() =>
+                      window.open(
+                        `/login?${qs.stringify({
+                          redirectUrl:
+                            typeof window !== 'undefined'
+                              ? window?.location?.href
+                              : '',
+                        })}`,
+                        `_self`,
+                      )
+                    }
+                  >
+                    注册
+                  </Button>
+                  <Button
+                    type="primary"
+                    className={`${prefixCls}-login`}
+                    onClick={() =>
+                      window.open(
+                        `/login?${qs.stringify({
+                          redirectUrl:
+                            typeof window !== 'undefined'
+                              ? window?.location?.href
+                              : '',
+                        })}`,
+                        `_self`,
+                      )
+                    }
+                  >
+                    登陆
+                  </Button>
+                </>
               )
             ) : (
               <Promise.UserAvatar defaultParams={user} />

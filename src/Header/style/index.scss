@@ -91,7 +91,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-action {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 6px;
   }
 
   &-navigation {
@@ -153,7 +153,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   }
 
   &-login {
-    color: inherit;
+    //color: inherit;
 
     &:hover {
       opacity: 0.75;
