@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunk_hocgin_ui=self.webpackChunk_hocgin_ui||[]).push([[6495],{84202:function(h,u,n){n.r(u);var t=n(93236),i=n(35743),_=n(62086);u.default=function(){return(0,_.jsx)("div",{style:{height:"500px"},children:(0,_.jsx)(i.r,{children:"\u94FE\u63A5"})})}}}]);
