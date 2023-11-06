@@ -1,0 +1,30 @@
+@import '../../style/index.scss';
+@import '../../mixin.scss';
+
+$link-prefix-cls: $hui-prefix + '-alink';
+
+.#{$link-prefix-cls} {
+  color: #666;
+  font-size: 14px;
+  font-weight: unset;
+  text-decoration: none;
+  transition: color .15s ease;
+  border-radius: 2px;
+  position: relative;
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+
+  &-arrow {
+    position: absolute;
+    top: 2px;
+    right: -10px;
+    display: inline-flex;
+    vertical-align: middle;
+    color: #666;
+  }
+
+  &:hover {
+    color: #000;
+  }
+}

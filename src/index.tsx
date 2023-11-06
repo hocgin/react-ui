@@ -2,7 +2,7 @@ export { default as Icon } from './Icon';
 export * from './_utils';
 export { default as TextRow } from './TextRow';
 export { default as Header } from './Header';
-export { default as _Tpl } from './_Tpl';
+export { Link } from './Link';
 export { default as Snow } from './Snow';
 export { default as Sponsor } from './Sponsor';
 export { default as Comment } from './Comment';
