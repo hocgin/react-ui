@@ -61,7 +61,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-logo {
     position: relative;
     text-decoration: none;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
     user-select: none;
@@ -69,18 +69,27 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
 
     &-title {
       opacity: 0.85;
-      font-size: 0.75rem;
-      zoom: 0.7;
-
-      &::before {
-        content: '';
-        margin: 0 5px;
-        border-left: 2px solid rgba(225, 225, 225, 0.3);
-      }
+      font-size: 12px;
+      zoom: .9;
 
       &:hover {
         opacity: 1;
       }
+    }
+
+    &-title-wrapper {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      bottom: -3px;
+      position: relative;
+    }
+
+    &-title-icon {
+      color: rgba(0, 0, 0, .2);
+      padding: 0 4px;
+      bottom: -1.5px;
+      position: relative;
     }
   }
 }

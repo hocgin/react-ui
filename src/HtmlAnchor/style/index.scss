@@ -1,12 +1,10 @@
 @import '../../style/index.scss';
 
 $directory-prefix-cls: $hui-prefix + '-directory';
-
-$hover-after-color: $colorPrimary;
-$hover-before-color: fade($colorPrimary, 30%);
 $init-opacity: 0.25;
 
 .#{$directory-prefix-cls} {
+  --hover-after-color: var(--hui-colorPrimary);
   width: 200px;
 
   .#{$ant-prefix}-anchor-wrapper {
@@ -31,7 +29,7 @@ $init-opacity: 0.25;
     // 悬停和点击 start
     .#{$ant-prefix}-anchor-link-title:hover {
       & .anchor-link-title {
-        color: $hover-after-color !important;
+        color: rgb(var(--hover-after-color)) !important;
         opacity: 1 !important;
       }
     }
@@ -40,14 +38,14 @@ $init-opacity: 0.25;
       left: -4px;
 
       & .anchor-link-title {
-        color: $hover-after-color !important;
+        color: rgb(var(--hover-after-color)) !important;
         opacity: 1 !important;
       }
     }
 
     .#{$ant-prefix}-anchor-link-title:hover:before,
     .#{$ant-prefix}-anchor-link-title-active:before {
-      background: $hover-after-color !important;
+      background: rgb(var(--hover-after-color)) !important;
     }
 
     // 悬停和点击 end
@@ -65,14 +63,14 @@ $init-opacity: 0.25;
     .#{$ant-prefix}-anchor-link-title {
       overflow: unset;
       padding-bottom: 0;
-      color: $hover-before-color;
+      color: rgba(var(--hover-after-color), 30%);
 
       &:hover .anchor-link-title {
         opacity: 1;
       }
 
       &:before {
-        background: $hover-before-color;
+        background: rgba(var(--hover-after-color), 30%);
         content: '';
         position: absolute;
         width: 14px;

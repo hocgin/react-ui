@@ -13,6 +13,7 @@ import { DoveService } from '@/Request';
 import { PromiseKit } from '@hocgin/hkit';
 import Promise from '../../../Promise';
 import qs from 'query-string';
+import Icon from '@/Icon';
 
 type Mode = 'none' | 'fixed' | 'sticky';
 
@@ -166,7 +167,12 @@ export const TextLogo: React.FC<{
           <span className={`${prefixCls}-suffix-dot`}>.</span>
           <span>{suffix}</span>
         </span>
-        {title && <span className={`${prefixCls}-logo-title`}>{title}</span>}
+        {title && (
+          <div className={`${prefixCls}-logo-title-wrapper`}>
+            <Icon.Geist className={`${prefixCls}-logo-title-icon`} />
+            <span className={`${prefixCls}-logo-title`}>{title}</span>
+          </div>
+        )}
       </div>
     </>
   );

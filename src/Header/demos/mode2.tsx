@@ -10,6 +10,7 @@ export default () => {
     <div style={{ height: '500px' }}>
       <Header
         style={{ padding: '0 10px 0' }}
+        logo={<Header.TextLogo title={'Rabbit Pay'} />}
         mode={'sticky'}
         menus={[
           { label: <Link href={'www.baidu.com'}>标题</Link> },

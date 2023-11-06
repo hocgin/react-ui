@@ -1,11 +1,10 @@
 @import '../../style/index.scss';
 
 $video-prefix-cls: $hui-prefix + '-video';
-$video-color: $colorPrimary;
 
 .#{$video-prefix-cls} {
   //color: @video-color;
-  --video-color: $video-color;
+  --video-color: var(--hui-colorPrimary);
 
   &-player {
     width: 600px;
