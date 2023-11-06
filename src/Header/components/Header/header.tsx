@@ -8,11 +8,12 @@ import {
 } from '@ant-design/icons';
 
 import { ConfigContext } from '@/ConfigProvider';
-import { Divider } from 'antd';
+import { Button, Divider } from 'antd';
 import { DoveService } from '@/Request';
 import { PromiseKit } from '@hocgin/hkit';
 import Promise from '../../../Promise';
 import qs from 'query-string';
+import Icon from '@/Icon';
 
 type Mode = 'none' | 'fixed' | 'sticky';
 
@@ -60,7 +61,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
       <div className={`${prefixCls}-action`}>
         <ul
           className={classnames(`${prefixCls}-navigation`, {
-            [`active`]: isOpenMenu,
+            [`active`]: menus?.length && isOpenMenu,
           })}
         >
           {(menus || []).map(({ label }, index) => (
@@ -70,7 +71,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           ))}
         </ul>
         {prefix && <PrefixMenu prefixCls={prefixCls}>{prefix}</PrefixMenu>}
-        {!responsive?.middle && (
+        {menus?.length && !responsive?.middle ? (
           <div
             className={classnames(`${prefixCls}-toggle`, {
               [`active`]: isOpenMenu,
@@ -79,33 +80,53 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
           >
             {isOpenMenu ? <CloseOutlined /> : <MenuOutlined />}
           </div>
+        ) : (
+          <></>
         )}
         {suffix && <SuffixMenu prefixCls={prefixCls}>{suffix}</SuffixMenu>}
         {props?.logined && (
           <>
-            <Divider type="vertical" />
+            <Divider type="vertical" style={{ marginLeft: 14 }} />
             {!user ? (
               loading ? (
                 <>
                   <LoadingOutlined />
                 </>
               ) : (
-                <a
-                  className={`${prefixCls}-login`}
-                  onClick={() => {
-                    window.open(
-                      `/login?${qs.stringify({
-                        redirectUrl:
-                          typeof window !== 'undefined'
-                            ? window?.location?.href
-                            : '',
-                      })}`,
-                      `_self`,
-                    );
-                  }}
-                >
-                  登陆
-                </a>
+                <>
+                  <Button
+                    onClick={() =>
+                      window.open(
+                        `/login?${qs.stringify({
+                          redirectUrl:
+                            typeof window !== 'undefined'
+                              ? window?.location?.href
+                              : '',
+                        })}`,
+                        `_self`,
+                      )
+                    }
+                  >
+                    注册
+                  </Button>
+                  <Button
+                    type="primary"
+                    className={`${prefixCls}-login`}
+                    onClick={() =>
+                      window.open(
+                        `/login?${qs.stringify({
+                          redirectUrl:
+                            typeof window !== 'undefined'
+                              ? window?.location?.href
+                              : '',
+                        })}`,
+                        `_self`,
+                      )
+                    }
+                  >
+                    登陆
+                  </Button>
+                </>
               )
             ) : (
               <Promise.UserAvatar defaultParams={user} />
@@ -146,7 +167,12 @@ export const TextLogo: React.FC<{
           <span className={`${prefixCls}-suffix-dot`}>.</span>
           <span>{suffix}</span>
         </span>
-        {title && <span className={`${prefixCls}-logo-title`}>{title}</span>}
+        {title && (
+          <div className={`${prefixCls}-logo-title-wrapper`}>
+            <Icon.Geist className={`${prefixCls}-logo-title-icon`} />
+            <span className={`${prefixCls}-logo-title`}>{title}</span>
+          </div>
+        )}
       </div>
     </>
   );

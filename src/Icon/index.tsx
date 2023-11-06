@@ -3,6 +3,36 @@ import React from 'react';
 import './style';
 
 export default {
+  Geist: ({ className }) => {
+    return (
+      <i className={classnames(className)}>
+        <svg
+          fill="none"
+          shapeRendering="geometricPrecision"
+          stroke="currentColor"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth="1"
+          viewBox="0 0 24 24"
+          style={{ width: 15, height: 15 }}
+        >
+          <path d="M16.88 3.549L7.12 20.451"></path>
+        </svg>
+      </i>
+    );
+  },
+  Arrow: ({ className, fill }) => {
+    return (
+      <i className={classnames(className)}>
+        <svg aria-hidden="true" height="7" viewBox="0 0 6 6" width="7">
+          <path
+            d="M1.25215 5.54731L0.622742 4.9179L3.78169 1.75597H1.3834L1.38936 0.890915H5.27615V4.78069H4.40513L4.41109 2.38538L1.25215 5.54731Z"
+            fill={fill}
+          ></path>
+        </svg>
+      </i>
+    );
+  },
   WeiboFilled: ({ className }) => (
     <i className={classnames(className)}>
       <svg
@@ -123,4 +153,6 @@ export default {
   HeartFilled: React.FC<{ className?: string }>;
   LikeFilled: React.FC<{ className?: string }>;
   TplFilled: React.FC<{ className?: string }>;
+  Geist: React.FC<{ className?: string }>;
+  Arrow: React.FC<{ className?: string; fill?: string }>;
 };

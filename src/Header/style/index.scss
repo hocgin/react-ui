@@ -60,10 +60,8 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
 
   &-logo {
     position: relative;
-    font-size: 1.2rem;
-    color: #111;
     text-decoration: none;
-    text-transform: uppercase;
+    //text-transform: uppercase;
     letter-spacing: 2px;
     font-weight: 700;
     user-select: none;
@@ -71,18 +69,27 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
 
     &-title {
       opacity: 0.85;
-      font-size: 0.75rem;
-      zoom: 0.7;
-
-      &::before {
-        content: '';
-        margin: 0 5px;
-        border-left: 2px solid rgba(225, 225, 225, 0.3);
-      }
+      font-size: 12px;
+      zoom: .9;
 
       &:hover {
         opacity: 1;
       }
+    }
+
+    &-title-wrapper {
+      display: inline-flex;
+      align-items: center;
+      font-size: 12px;
+      bottom: -3px;
+      position: relative;
+    }
+
+    &-title-icon {
+      color: rgba(0, 0, 0, .2);
+      padding: 0 4px;
+      bottom: -1.5px;
+      position: relative;
     }
   }
 }
@@ -93,7 +100,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-action {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
   }
 
   &-navigation {
@@ -106,7 +113,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
     padding: 0;
     margin: 0;
     z-index: 999;
-    gap: 4px;
+    gap: 24px;
 
     li {
       list-style: none;
@@ -115,34 +122,6 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
     }
 
     li a {
-      color: #111111;
-      text-decoration: none;
-      font-size: 16px;
-      //margin: 0 10px;
-      font-weight: 500;
-      display: inline-block;
-      padding: 2px 4px;
-      border-radius: 2px;
-
-      &:hover {
-        background-color: #11111108;
-      }
-
-      &:hover:before {
-        visibility: visible;
-        width: 100%;
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        height: 3px;
-        width: 0;
-        bottom: 0;
-        left: 0;
-        visibility: hidden;
-        transition: all 0.3s ease-in-out 0s;
-      }
     }
 
     &.active {
@@ -183,7 +162,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   }
 
   &-login {
-    color: inherit;
+    //color: inherit;
 
     &:hover {
       opacity: 0.75;
@@ -199,6 +178,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-prefixMenu {
     display: flex;
     align-items: center;
+    padding-left: 20px;
   }
 }
 

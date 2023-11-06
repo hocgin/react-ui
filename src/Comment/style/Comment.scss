@@ -52,8 +52,8 @@ $comment-group-prefix-cls: $hui-prefix + '-comment-group';
   &-goto {
     text-decoration: none;
     position: fixed;
-    background-color: $back-top-bg;
-    color: $back-top-color;
+    background-color: rgba(255, 255, 255, 45%);
+    color: #fff;
     padding: 1px;
     border-radius: 50%;
     right: 100px;
@@ -67,15 +67,15 @@ $comment-group-prefix-cls: $hui-prefix + '-comment-group';
       justify-content: center;
       height: 40px;
       width: 40px;
-      background-color: $back-top-bg;
+      background-color: rgba(255, 255, 255, 45%);
       border: solid 2px #fff;
     }
 
     transition: all 0.3s;
 
     &:hover {
-      color: $back-top-color;
-      background-color: $back-top-hover-bg;
+      color: #fff;
+      background-color: rgba(255, 255, 255, 85%);
       transition: all 0.3s;
     }
   }

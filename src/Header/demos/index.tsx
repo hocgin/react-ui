@@ -3,7 +3,7 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Header, Notification } from '@hocgin/ui';
+import { Header, Notification, Link } from '@hocgin/ui';
 
 export default () => {
   return (
@@ -11,12 +11,12 @@ export default () => {
       <Header
         style={{ padding: '0 10px 0' }}
         mode={'sticky'}
-        logo={<Header.TextLogo title={'你好'} />}
+        logo={<Header.TextLogo title={'语音转文本'} />}
         prefix={<Notification.Indicator count={0} />}
         // suffix={<><Notification.Indicator /></>}
         menus={[
-          { label: <a href={'www.baidu.com'}>🐰 标题</a> },
-          { label: <a href={'www.baidu.com'}>🖍️ 标题</a> },
+          { label: <Link href={'www.baidu.com'}>🐰 标题</Link> },
+          { label: <Link href={'www.baidu.com'}>🖍️ 标题</Link> },
         ]}
         logined
       />
