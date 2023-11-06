@@ -3,21 +3,21 @@
  * desc: 我是简介，我可以用 `Markdown` 来编写
  */
 import React from 'react';
-import { Header } from '@hocgin/ui';
+import { Header, Link } from '@hocgin/ui';
 
 export default () => {
   return (
-    <div style={{ height: '500px' } as any}>
+    <div style={{ height: '500px' }}>
       <Header
-        style={{ padding: '0 10px 0' } as any}
+        style={{ padding: '0 10px 0' }}
         mode={'sticky'}
         menus={[
-          { label: <a href={'www.baidu.com'}>🐰 标题</a> },
-          { label: <a href={'www.baidu.com'}>🖍️ 标题</a> },
+          { label: <Link href={'www.baidu.com'}>标题</Link> },
+          { label: <Link href={'www.baidu.com'}>标题</Link> },
         ]}
         logined
       />
-      <div style={{ backgroundColor: 'black', height: 500 } as any}>你好</div>
+      <div style={{ backgroundColor: 'black', height: 500 }}>你好</div>
     </div>
   );
 };

@@ -91,7 +91,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-action {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 8px;
   }
 
   &-navigation {
@@ -104,7 +104,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
     padding: 0;
     margin: 0;
     z-index: 999;
-    gap: 4px;
+    gap: 24px;
 
     li {
       list-style: none;
@@ -113,34 +113,6 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
     }
 
     li a {
-      color: #111111;
-      text-decoration: none;
-      font-size: 16px;
-      //margin: 0 10px;
-      font-weight: 500;
-      display: inline-block;
-      padding: 2px 4px;
-      border-radius: 2px;
-
-      &:hover {
-        background-color: #11111108;
-      }
-
-      &:hover:before {
-        visibility: visible;
-        width: 100%;
-      }
-
-      &:before {
-        content: '';
-        position: absolute;
-        height: 3px;
-        width: 0;
-        bottom: 0;
-        left: 0;
-        visibility: hidden;
-        transition: all 0.3s ease-in-out 0s;
-      }
     }
 
     &.active {
@@ -197,6 +169,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-prefixMenu {
     display: flex;
     align-items: center;
+    padding-left: 20px;
   }
 }
 
