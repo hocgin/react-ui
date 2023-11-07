@@ -1,16 +1,16 @@
-@mixin mobile() {
+.mobile(@rules) {
   @media only screen and (max-width: 800px) {
-    @content;
+    @rules();
   }
 }
 
-@mixin dark() {
+.dark(@rules) {
   @media (prefers-color-scheme: dark) {
-    @content;
+    @rules();
   }
 }
 
-@mixin a() {
+.a() {
   border-bottom: 4px solid #e2e8f0;
   text-decoration: inherit;
   box-sizing: inherit;
@@ -18,7 +18,7 @@
   font-weight: 700;
 }
 
-@mixin heartbeat {
+.heartbeat {
   display: inline-block;
   animation: animation-heartbeat 1.3s ease 0s infinite normal;
 }

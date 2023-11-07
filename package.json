@@ -90,6 +90,7 @@
     "@uiw/react-amap": "^4.0.2",
     "@uiw/react-amap-require-script": "^4.0.2",
     "ahooks": "^3.3.8",
+    "antd-style": "^3.5.1",
     "classnames": "^2.3.1",
     "codemirror": "^5.65.5",
     "memoize-one": "^5.2.1",

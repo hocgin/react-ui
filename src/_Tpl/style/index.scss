@@ -1,9 +1,0 @@
-@import '../../style/index';
-
-$tpl-prefix-cls: $hui-prefix + '-tpl';
-
-.#{$tpl-prefix-cls} {
-  &-color {
-    color: red;
-  }
-}
