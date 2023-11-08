@@ -189,7 +189,7 @@ type HeaderProps = {
   prefix?: any;
   logo?: any;
   logined?: boolean;
-  maxWidth?: number;
+  maxWidth?: number | any;
 };
 const Header: React.FC<HeaderProps> = ({
   className,

@@ -79,17 +79,17 @@ $footer-prefix-cls: $hui-prefix + '-footer';
   }
 
   &-copytitle {
-    color: rgba(127, 127, 127, 0.6);
+    color: rgba(127, 127, 127, 0.6) !important;
     display: block;
     text-align: center;
     margin-top: 8px;
     font-size: 0.78em;
 
     a {
-      color: rgba(127, 127, 127, 0.6);
+      color: rgba(127, 127, 127, 0.6) !important;
 
       &:hover {
-        color: rgba(102, 102, 102, 0.75);
+        color: rgba(102, 102, 102, 0.75) !important;
       }
     }
   }
