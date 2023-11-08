@@ -16,7 +16,7 @@ $logo-heart-prefix-cls: $hui-prefix + '-logo-heart';
 
   &-text {
     margin-left: 1px;
-    color: #454d64;
+    color: #454d64 !important;
     display: inline-flex;
     align-items: center;
     justify-content: center;

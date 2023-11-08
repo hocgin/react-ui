@@ -25,6 +25,6 @@ $link-prefix-cls: $hui-prefix + '-alink';
   }
 
   &:hover {
-    color: #000;
+    color: #000 !important;
   }
 }
