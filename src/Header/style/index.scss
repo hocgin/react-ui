@@ -61,7 +61,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   &-logo {
     position: relative;
     text-decoration: none;
-    //text-transform: uppercase;
+    color: #000;
     letter-spacing: 2px;
     font-weight: 700;
     user-select: none;
