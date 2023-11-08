@@ -74,7 +74,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
         {menus?.length && !responsive?.middle ? (
           <div
             className={classnames(`${prefixCls}-toggle`, {
-              [`active`]: isOpenMenu,
+              [`active`]: menus?.length && isOpenMenu,
             })}
             onClick={() => setIsOpenMenu(!isOpenMenu)}
           >
