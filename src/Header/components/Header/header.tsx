@@ -86,7 +86,7 @@ const HeaderMenu: React.FC<Props> = ({ menus, prefix, suffix, ...props }) => {
         {suffix && <SuffixMenu prefixCls={prefixCls}>{suffix}</SuffixMenu>}
         {props?.logined && (
           <>
-            <Divider type="vertical" style={{ marginLeft: 14 }} />
+            <Divider type="vertical" />
             {!user ? (
               loading ? (
                 <>
