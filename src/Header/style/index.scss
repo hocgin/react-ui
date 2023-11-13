@@ -170,6 +170,7 @@ $header-menu-prefix-cls: $header-prefix-cls + '-menu';
   }
 
   &-suffixMenu {
+    margin-left: 10px;
     display: flex;
     align-items: center;
   }
