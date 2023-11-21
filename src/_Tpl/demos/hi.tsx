@@ -1,7 +1,8 @@
 import React from 'react';
+import { default as Tpl } from '../Tpl';
 
 const Index: React.FC<{}> = ({ ...props }) => {
-  return <>Hi</>;
+  return <Tpl />;
 };
 
 export default Index;
