@@ -46,6 +46,4 @@ export const XTranslate = () => {
   return <div id={elementId} />;
 };
 
-export const Translate = () => {
-  return <XTranslate />;
-};
+export const Translate = () => <XTranslate />;

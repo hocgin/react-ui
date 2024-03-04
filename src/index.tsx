@@ -35,6 +35,7 @@ export { default as Redirect } from './Redirect';
 export { default as SpaceBetween } from './SpaceBetween';
 export { default as Adverts } from './Adverts';
 export { default as LevelFeature } from './LevelFeature';
+export { Translate } from './Translate';
 export { ThemeStyle, withTheme, Theme } from './Theme';
 export { default as Beta } from './Beta';
 // 注意: 因为被替代暂时没用
