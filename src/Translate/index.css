@@ -1,0 +1,16 @@
+.goog-te-gadget-simple {
+  border: 1px solid var(--border-color, #fff) !important;
+  border-radius: 4px !important;
+  background: transparent !important;
+}
+
+.skiptranslate.goog-te-gadget,
+.skiptranslate.goog-te-gadget > span {
+  visibility: hidden;
+  overflow: hidden;
+  height: 27px;
+}
+
+.skiptranslate.goog-te-gadget > * {
+  visibility: visible;
+}
