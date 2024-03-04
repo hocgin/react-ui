@@ -39,7 +39,7 @@ export const XTranslate = () => {
       script.crossOrigin = 'anonymous';
       // https:/translate.google.com/translate_a/element.js?cb=loadGoogleTranslate
       // script.src = `//cdn.hocgin.top/icons/gtranslate.js?&cb=GoogleTranslateElementInit`;
-      script.src = `//translate.google.com/translate_a/element.js?&cb=GoogleTranslateElementInit`;
+      script.src = `//translate.google.com/translate_a/element.js?cb=GoogleTranslateElementInit`;
       script.onload = onload;
       script.onerror = console.warn;
       document.body.appendChild(script);
