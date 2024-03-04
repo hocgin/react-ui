@@ -2,10 +2,10 @@
   "assets": {
     "src/Footer/assets/font.woff.ttf": "/static/font.woff.2110a132.ttf",
     "public/CNAME": "/CNAME",
-    "umi.css": "/umi.a883e12f.css",
-    "umi.js": "/umi.fe0e523c.js",
+    "umi.css": "/umi.bf1506a7.css",
+    "umi.js": "/umi.152963f7.js",
     "nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__dist__client__pages__404.js": "/nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__dist__client__pages__404.4efb09de.async.js",
-    "dumi__tmp-production__dumi__theme__ContextWrapper.js": "/dumi__tmp-production__dumi__theme__ContextWrapper.4996c3a9.async.js",
+    "dumi__tmp-production__dumi__theme__ContextWrapper.js": "/dumi__tmp-production__dumi__theme__ContextWrapper.c96c6580.async.js",
     "nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__theme-default__layouts__DocLayout__index.js": "/nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__theme-default__layouts__DocLayout__index.d83a694c.async.js",
     "docs__getting-started.md.js": "/docs__getting-started.md.dcacde31.async.js",
     "docs__index.md.js": "/docs__index.md.e1f28b55.async.js",
@@ -49,6 +49,7 @@
     "Sponsor__index.md.js": "/Sponsor__index.md.24c29213.async.js",
     "Stretch__index.md.js": "/Stretch__index.md.77c92d5f.async.js",
     "TextRow__index.md.js": "/TextRow__index.md.f8871e9c.async.js",
+    "Translate__index.md.js": "/Translate__index.md.522b530a.async.js",
     "Video__index.md.js": "/Video__index.md.1b34c6b3.async.js",
     "nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__dist__client__pages__Demo__index.js": "/nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__dist__client__pages__Demo__index.34594970.async.js",
     "_Tpl__demos.js": "/_Tpl__demos.5994f350.async.js",
@@ -77,6 +78,7 @@
     "Snow__demos.js": "/Snow__demos.79cc6a2d.async.js",
     "Sponsor__demos.js": "/Sponsor__demos.6adeaad4.async.js",
     "Stretch__demos.js": "/Stretch__demos.86acc36b.async.js",
-    "TextRow__demos.js": "/TextRow__demos.74aa2afc.async.js"
+    "TextRow__demos.js": "/TextRow__demos.74aa2afc.async.js",
+    "Translate__demos.js": "/Translate__demos.a55eba89.async.js"
   }
 }
