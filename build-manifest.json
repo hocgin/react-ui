@@ -1,8 +1,7 @@
 {
   "assets": {
-    "src/Footer/assets/font.woff.ttf": "/static/font.woff.2110a132.ttf",
     "public/CNAME": "/CNAME",
-    "umi.css": "/umi.bf1506a7.css",
+    "umi.css": "/umi.42eff8e5.css",
     "umi.js": "/umi.f5435bfe.js",
     "nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__dist__client__pages__404.js": "/nm__.pnpm__dumi_2.0.10__babel+core_7.20.5__types+react_18.0.2_lse3mrvgxjzzhnphb4u3trlsga__node_modules__dumi__dist__client__pages__404.4efb09de.async.js",
     "dumi__tmp-production__dumi__theme__ContextWrapper.js": "/dumi__tmp-production__dumi__theme__ContextWrapper.c96c6580.async.js",
