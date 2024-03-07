@@ -3,11 +3,6 @@
 
 $footer-prefix-cls: $hui-prefix + '-footer';
 
-@font-face {
-  font-family: myfont;
-  src: url('../assets/font.woff.ttf');
-}
-
 .#{$footer-prefix-cls} {
   font-size: 14px;
   transition: all 0.2s ease;
