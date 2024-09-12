@@ -26,6 +26,7 @@ export interface PageLayoutProps {
    * logo
    */
   logo?: React.ReactNode;
+  footer?: React.ReactNode;
   /**
    * 内容
    */
@@ -80,7 +81,7 @@ const PageLayout: React.FC<PageLayoutProps> = ({
     rightContentRender={rightContentRender}
     headerContentRender={() => <ProBreadcrumb />}
     menuItemRender={(item, dom) => <Link to={item.path || DEFAULT_PATHNAME}>{dom}</Link>}
-    footerRender={() => <Footer />}
+    footerRender={() => rest?.footer || <Footer />}
     {...rest}>
     {children}
   </ProLayout>);
