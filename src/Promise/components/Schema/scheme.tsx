@@ -87,6 +87,8 @@ export interface SearchLbsParam {
   akay: string;
 }
 
+// https://procomponents.ant.design/components/schema
+// https://github.com/ant-design/pro-components/issues/6949
 export const SchemeColumns: Record<string, ProRenderFieldPropsType> = {
   // 上传按钮
   [prefix('upload')]: {

@@ -25,7 +25,7 @@ const Index: React.FC<{
   /**
    * 默认值
    */
-  defaultValue?: string;
+  defaultValue?: string | any;
   /**
    * 变更值
    * @param values
