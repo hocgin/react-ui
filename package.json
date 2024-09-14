@@ -96,6 +96,7 @@
   },
   "resolutions": {
     "zeed-dom": "0.9.19",
+    "father": "4.1.0",
     "umi": "4.0.34"
   },
   "peerDependencies": {
