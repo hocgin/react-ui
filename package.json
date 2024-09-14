@@ -95,7 +95,8 @@
     "zeed-dom": "0.9.19"
   },
   "resolutions": {
-    "zeed-dom": "0.9.19"
+    "zeed-dom": "0.9.19",
+    "umi": "4.0.34"
   },
   "peerDependencies": {
     "@hocgin/ahooks-kit": "^2.0.126",
