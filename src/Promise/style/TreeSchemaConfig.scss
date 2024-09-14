@@ -12,8 +12,6 @@ $promise-schema--TreeSchemaConfig-prefix-cls: $hui-prefix + '-promise-schema--Tr
   .toolbar {
     display: flex;
     justify-content: space-between;
-    height: 64px;
-    line-height: 64px;
 
     .toolbarTitle {
       flex: 1 1;
@@ -26,7 +24,7 @@ $promise-schema--TreeSchemaConfig-prefix-cls: $hui-prefix + '-promise-schema--Tr
 
   .toolbarExt {
     //border-bottom: 1px dashed #ebedf0;
-    margin-bottom: 5px;
+    padding-block: 16px;
   }
 
   .tableAlertOption {
