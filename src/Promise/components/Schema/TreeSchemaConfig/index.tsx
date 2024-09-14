@@ -97,7 +97,7 @@ const Index: React.FC<{
   );
   return (
     <Space direction={'vertical'} className={prefixCls}>
-      <Card>
+      <Card bodyStyle={{ padding: 0 }}>
         <ProProvider.Provider value={value}>
           <BetaSchemaForm
             layoutType={'QueryFilter'}
@@ -110,7 +110,7 @@ const Index: React.FC<{
           />
         </ProProvider.Provider>
       </Card>
-      <Card>
+      <Card bodyStyle={{ paddingTop: 0 }}>
         <div className={classnames('toolbar', 'toolbarExt')}>
           <div className={'toolbarTitle'}>{title}</div>
           <Space size={16}>
