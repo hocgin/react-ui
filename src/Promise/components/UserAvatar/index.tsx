@@ -43,6 +43,7 @@ const UserAvatar: React.FC<{
   prefixCls?: string;
   className?: string;
   defaultParams?: UserAvatarParams;
+  onLogout?: () => void;
 }> = (props, ref) => {
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls('promise--UserAvatar', props.prefixCls);
@@ -67,7 +68,7 @@ const UserAvatar: React.FC<{
       <Menu.Divider />
       <Menu.Item
         icon={<ExportOutlined />}
-        onClick={() => PromiseKit.DoveService.logout()}
+        onClick={props?.onLogout ?? PromiseKit.DoveService.logout}
       >
         退出
       </Menu.Item>
