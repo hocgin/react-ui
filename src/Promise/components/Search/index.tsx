@@ -93,7 +93,7 @@ const OptionView: React.FC<{
   return (
     <div className={prefixCls}>
       {image && (
-        <Avatar className={'image'} size={32} icon={<UserOutlined />} />
+        <Avatar shape={'square'} className={'image'} size={32} icon={<UserOutlined />} />
       )}
       <div className={'info'}>
         <div className={'title'}>{title}</div>
