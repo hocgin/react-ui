@@ -2,7 +2,8 @@ import React from 'react';
 import { message, Tree, TreeSelect, Upload } from 'antd';
 import { StructKit } from '@/_utils';
 import { FileInfo, TreeNode } from '@/_types';
-import * as ICONS from '@ant-design/icons';
+import * as Icons from '@ant-design/icons';
+import { BuildOutlined } from '@ant-design/icons';
 
 export default class UIKit {
   public static COLUMN_PREFIX = 'hui.';
@@ -32,10 +33,14 @@ export default class UIKit {
   public static getIcon(name?: string | JSX.Element): JSX.Element {
     if (!name || typeof name === 'object') return name as any;
     const IconMap: Record<string, any> = {
-      default: ICONS['BuildOutlined'],
+      // @ts-ignore
+      default: <BuildOutlined />,
     };
-    let Element = IconMap[name];
-    return React.createElement(Element ?? ICONS[name], {});
+    let element = IconMap[name];
+    if (element) {
+      return element;
+    }
+    return <Iconfont icon={name} />;
   }
 
   /**
@@ -179,3 +184,13 @@ export default class UIKit {
     return meetType && meetSize;
   };
 }
+
+const Iconfont = (props) => {
+  //这里传入的props是一个对象，里面有icon属性，值是antd图标的名字
+  const { icon } = props;
+  let iconObj = Icons[icon];
+  if (!iconObj) {
+    return <></>;
+  }
+  return React.createElement(iconObj);
+};
