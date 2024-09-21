@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useBoolean, useRequest } from 'ahooks';
 import Footer from '@/Footer';
 import ProLayout, { ProBreadcrumb } from '@ant-design/pro-layout';
 import { MenuDataItem } from '@umijs/route-utils';
@@ -48,42 +47,50 @@ export interface PageLayoutProps {
 
 // @formatter: off
 const PageLayout: React.FC<PageLayoutProps> = ({
-                                                 rightContentRender,
-                                                 title,
-                                                 logo,
-                                                 useAction,
-                                                 route,
-                                                 isShowAll = false,
-                                                 location,
-                                                 children,
-                                                 ...rest
-                                               }) => {
+  rightContentRender,
+  title,
+  logo,
+  useAction,
+  route,
+  isShowAll = false,
+  location,
+  children,
+  ...rest
+}) => {
   // @formatter: on
-  return (<ProLayout
-    menu={{
-      request: async (params: Record<string, any>, defaultMenuData: MenuDataItem[]) => {
-        let routes = route?.routes ?? [];
-        let result: any[];
-        if (isShowAll) {
-          result = fastGetMenuDataItem(routes, fastGetAccess(routes));
-        } else {
-          let access = (await useAction.initialValues()) ?? [];
-          result = fastGetMenuDataItem(routes, access) || defaultMenuData;
-        }
-        console.log('menu.result', result);
-        return result;
-      },
-    }}
-    fixSiderbar
-    fixedHeader
-    logo={logo}
-    title={title}
-    rightContentRender={rightContentRender}
-    headerContentRender={() => <ProBreadcrumb />}
-    menuItemRender={(item, dom) => <Link to={item.path || DEFAULT_PATHNAME}>{dom}</Link>}
-    footerRender={() => rest?.footer || <Footer />}
-    {...rest}>
-    {children}
-  </ProLayout>);
+  return (
+    <ProLayout
+      menu={{
+        request: async (
+          params: Record<string, any>,
+          defaultMenuData: MenuDataItem[],
+        ) => {
+          let routes = route?.routes ?? [];
+          let result: any[];
+          if (isShowAll) {
+            result = fastGetMenuDataItem(routes, fastGetAccess(routes));
+          } else {
+            let access = (await useAction.initialValues()) ?? [];
+            result = fastGetMenuDataItem(routes, access) || defaultMenuData;
+          }
+          console.log('menu.result', result);
+          return result;
+        },
+      }}
+      fixSiderbar
+      fixedHeader
+      logo={logo}
+      title={title}
+      rightContentRender={rightContentRender}
+      headerContentRender={() => <ProBreadcrumb />}
+      menuItemRender={(item, dom) => (
+        <Link to={item.path || DEFAULT_PATHNAME}>{dom}</Link>
+      )}
+      footerRender={() => rest?.footer || <Footer />}
+      {...rest}
+    >
+      {children}
+    </ProLayout>
+  );
 };
 export default PageLayout;
