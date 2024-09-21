@@ -29,8 +29,8 @@ export default class UIKit {
    * 获取图标
    * @param name
    */
-  public static getIcon(name?: string): JSX.Element {
-    if (!name) return;
+  public static getIcon(name?: string | JSX.Element): JSX.Element {
+    if (!name || typeof name === 'object') return name as any;
     const IconMap: Record<string, any> = {
       default: ICONS['BuildOutlined'],
     };
