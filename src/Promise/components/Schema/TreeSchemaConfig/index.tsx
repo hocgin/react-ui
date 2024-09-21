@@ -89,7 +89,7 @@ const Index: React.FC<{
       },
       selectedRowKeys,
       selectedRows,
-    });
+    }, {reload: tree?.refresh});
   let { getPrefixCls } = React.useContext(ConfigContext);
   let prefixCls = getPrefixCls(
     'promise-schema--TreeSchemaConfig',
