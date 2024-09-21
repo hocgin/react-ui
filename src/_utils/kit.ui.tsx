@@ -30,10 +30,11 @@ export default class UIKit {
    * @param name
    */
   public static getIcon(name?: string): JSX.Element {
+    if (!name) return;
     const IconMap: Record<string, any> = {
       default: ICONS['BuildOutlined'],
     };
-    let Element = IconMap[name || 'default'];
+    let Element = IconMap[name];
     return React.createElement(Element ?? ICONS[name], {});
   }
 
