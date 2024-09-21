@@ -2,7 +2,7 @@ import React from 'react';
 import { message, Tree, TreeSelect, Upload } from 'antd';
 import { StructKit } from '@/_utils';
 import { FileInfo, TreeNode } from '@/_types';
-import { SmileOutlined, HeartOutlined, HomeOutlined } from '@ant-design/icons';
+import * as ICONS from '@ant-design/icons';
 
 export default class UIKit {
   public static COLUMN_PREFIX = 'hui.';
@@ -31,11 +31,10 @@ export default class UIKit {
    */
   public static getIcon(name?: string): JSX.Element {
     const IconMap: Record<string, any> = {
-      SmileOutlined: <SmileOutlined />,
-      HeartOutlined: <HeartOutlined />,
-      HomeOutlined: <HomeOutlined />,
+      default: ICONS['BuildOutlined'],
     };
-    return IconMap[name || 'default'];
+    let Element = IconMap[name || 'default'];
+    return React.createElement(Element ?? ICONS[name], {});
   }
 
   /**
