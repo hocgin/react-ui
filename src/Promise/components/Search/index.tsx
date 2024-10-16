@@ -97,7 +97,8 @@ const OptionView: React.FC<{
           shape={'square'}
           className={'image'}
           size={32}
-          icon={image ?? <UserOutlined />}
+          src={image}
+          icon={<UserOutlined />}
         />
       )}
       <div className={'info'}>
